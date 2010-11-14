@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.IO.IsolatedStorage;
 using System.Windows.Navigation;
+using KeePass.IO;
 
 namespace KeePass
 {
@@ -28,6 +30,13 @@ namespace KeePass
                 {
                     this.NavigateTo("/Password.xaml");
                     return;
+                }
+
+                using (var fs = store.OpenFile(
+                    Consts.FILE_NAME, FileMode.Open))
+                {
+                    var reader = new DatabaseReader();
+                    reader.Load(fs, "my~Solution");
                 }
             }
         }
