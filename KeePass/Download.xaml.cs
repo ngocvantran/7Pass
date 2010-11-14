@@ -104,8 +104,7 @@ namespace KeePass
             }
 
             using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-            using (var fs = new IsolatedStorageFileStream(Consts.FILE_NAME,
-                FileMode.Create, FileAccess.Write, store))
+            using (var fs = store.CreateFile(Consts.FILE_NAME))
             {
                 CopyStream(result, fs);
             }

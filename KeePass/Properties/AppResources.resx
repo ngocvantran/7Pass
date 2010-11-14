@@ -131,4 +131,7 @@ Please try again.</value>
   <data name="Saving" xml:space="preserve">
     <value>Saving database...</value>
   </data>
+  <data name="WarningStorePassword" xml:space="preserve">
+    <value>Please ensure that you have PIN lock enabled.</value>
+  </data>
 </root>

@@ -97,5 +97,14 @@ namespace KeePass.Properties {
                 return ResourceManager.GetString("Saving", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please ensure that you have PIN lock enabled..
+        /// </summary>
+        internal static string WarningStorePassword {
+            get {
+                return ResourceManager.GetString("WarningStorePassword", resourceCulture);
+            }
+        }
     }
 }

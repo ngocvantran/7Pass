@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using KeePass.Properties;
 
 namespace KeePass
 {
@@ -17,14 +18,26 @@ namespace KeePass
         {
             base.OnNavigatedTo(e);
 
-            txtPassword.Focus();
+#if DEBUG
             txtPassword.Password = "my~Solution";
+#endif
         }
 
         private void OpenDatabase()
         {
             KeyCache.Password = txtPassword.Password;
+            KeyCache.StorePassword = chkStore.IsChecked == true;
+
             NavigationService.GoBack();
+        }
+
+        private void Image_ManipulationStarted(
+            object sender, ManipulationStartedEventArgs e)
+        {
+            e.Complete();
+            e.Handled = true;
+
+            MessageBox.Show(AppResources.WarningStorePassword);
         }
 
         private void OpenSettings(object sender, EventArgs e)

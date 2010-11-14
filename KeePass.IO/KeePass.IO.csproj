@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
+    <Compile Include="DatabaseReader.cs" />
     <Compile Include="HeaderFields.cs" />
     <Compile Include="Headers.cs" />
     <Compile Include="InvalidDataException.cs" />
