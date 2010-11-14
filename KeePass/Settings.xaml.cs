@@ -8,11 +8,19 @@ namespace KeePass
         public Settings()
         {
             InitializeComponent();
+
+            cmdClearPass.IsEnabled = KeyCache.StorePassword;
         }
 
         private void DownloadDatabase(object sender, RoutedEventArgs e)
         {
             this.OpenDownload();
+        }
+
+        private void cmdClearPass_Click(object sender, RoutedEventArgs e)
+        {
+            KeyCache.StorePassword = false;
+            cmdClearPass.IsEnabled = false;
         }
     }
 }

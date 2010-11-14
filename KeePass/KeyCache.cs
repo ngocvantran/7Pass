@@ -22,6 +22,12 @@ namespace KeePass
         public static string Password { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether the password should be stored..
+        /// </summary>
+        /// <value><c>true</c> if the password should be stored; otherwise, <c>false</c>.</value>
+        public static bool StorePassword { get; set; }
+
+        /// <summary>
         /// Clears password cache..
         /// </summary>
         public static void Clear()
