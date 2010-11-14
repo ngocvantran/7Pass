@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace KeePass
 {
@@ -10,6 +11,14 @@ namespace KeePass
         public Password()
         {
             InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            txtPassword.Focus();
+            txtPassword.Password = "my~Solution";
         }
 
         private void OpenDatabase()
