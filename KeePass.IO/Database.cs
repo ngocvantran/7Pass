@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
+using ICSharpCode.SharpZipLib.GZip;
 
 namespace KeePass.IO
 {
@@ -18,11 +20,7 @@ namespace KeePass.IO
             var headers = ReadHeaders(stream);
             headers.Verify();
 
-            var reader = new BinaryReader(
-                CreateStream(stream, headers, password));
-
-            VerifyStartBytes(headers, reader);
-            var compression = headers.Compression;
+            stream = Decrypt(stream, headers, password);
         }
 
         private static void CheckSignature(Stream stream)
@@ -34,7 +32,7 @@ namespace KeePass.IO
             }
         }
 
-        private static Stream CreateStream(Stream source,
+        private static Stream Decrypt(Stream source,
             Headers headers, string password)
         {
             var masterKey = new PasswordData(password)
@@ -58,9 +56,16 @@ namespace KeePass.IO
                 IV = BufferEx.Clone(headers.EncryptionIV)
             };
 
-            var transform = eas.CreateDecryptor();
-            return new CryptoStream(source,
-                transform, CryptoStreamMode.Read);
+            var stream = new CryptoStream(source,
+                eas.CreateDecryptor(),
+                CryptoStreamMode.Read);
+
+            VerifyStartBytes(headers, stream);
+
+            if (headers.Compression == PwCompressionAlgorithm.GZip)
+                return new GZipInputStream(stream);
+
+            return stream;
         }
 
         private static Headers ReadHeaders(Stream stream)
@@ -80,9 +85,10 @@ namespace KeePass.IO
         }
 
         private static void VerifyStartBytes(
-            Headers headers, BinaryReader reader)
+            Headers headers, Stream stream)
         {
-            var actual = reader.ReadBytes(32);
+            var actual = new BinaryReader(stream)
+                .ReadBytes(32);
             var expected = headers.StreamStartBytes;
 
             if (!BufferEx.Equals(actual, expected))

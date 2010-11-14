@@ -29,6 +29,9 @@ namespace KeePass.IO
 
             for (var i = 1; i <= rounds; i++)
             {
+                // ECB mode is not available in Silverlight
+                // Always use a new encrytor to emulate ECB mode.
+
                 aes.CreateEncryptor().TransformBlock(
                     block, 0, 16, block, 0);
                 aes.CreateEncryptor().TransformBlock(
