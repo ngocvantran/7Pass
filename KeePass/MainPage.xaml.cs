@@ -37,16 +37,29 @@ namespace KeePass
                     Consts.FILE_NAME, FileMode.Open))
                 {
                     var reader = new DatabaseReader();
-                    var root = reader.Load(fs, KeyCache.Password);
 
-                    foreach (var group in root.Groups)
-                    {
-                        var item = new ListBoxItem();
-                        item.Content = group.Name;
+                    var root = reader.Load(fs,
+                        KeyCache.Password);
 
-                        lstItems.Items.Add(item);
-                    }
+                    Display(root);
                 }
+            }
+        }
+
+        private void Display(Group root)
+        {
+            if (root == null)
+                throw new ArgumentNullException("root");
+
+            PageTitle.Text = root.Name;
+
+            lstItems.Items.Clear();
+            foreach (var group in root.Groups)
+            {
+                var item = new ListBoxItem();
+                item.Content = group.Name;
+
+                lstItems.Items.Add(item);
             }
         }
 
