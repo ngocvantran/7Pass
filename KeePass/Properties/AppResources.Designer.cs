@@ -61,7 +61,7 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading {0:P}....
+        ///   Looks up a localized string similar to Downloading {0:N0}% ....
         /// </summary>
         internal static string Downloading {
             get {

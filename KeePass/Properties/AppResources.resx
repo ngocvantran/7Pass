@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Downloading" xml:space="preserve">
-    <value>Downloading {0:P}...</value>
+    <value>Downloading {0:N0}% ...</value>
   </data>
   <data name="FileTooLarge" xml:space="preserve">
     <value>Database file too large.</value>

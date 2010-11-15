@@ -75,7 +75,6 @@ namespace KeePass
         private void client_DownloadProgressChanged(
             object sender, DownloadProgressChangedEventArgs e)
         {
-            progress.IsIndeterminate = false;
             progress.Value = e.ProgressPercentage;
 
             lblLoad.Text = string.Format(
