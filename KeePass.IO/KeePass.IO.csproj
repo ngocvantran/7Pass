@@ -61,6 +61,7 @@
     <Compile Include="FileFormat.cs" />
     <Compile Include="BufferEx.cs" />
     <Compile Include="PwCompressionAlgorithm.cs" />
+    <Compile Include="XmlParser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
