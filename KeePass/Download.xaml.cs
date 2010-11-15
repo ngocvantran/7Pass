@@ -39,6 +39,8 @@ namespace KeePass
             client.OpenReadCompleted += client_OpenReadCompleted;
             client.DownloadProgressChanged += client_DownloadProgressChanged;
             client.OpenReadAsync(new Uri(txtUrl.Text, UriKind.Absolute));
+
+            progress.Value = 0;
         }
 
         private static bool IncreaseStorage(long quotaSizeDemand)
@@ -64,6 +66,7 @@ namespace KeePass
 
             lblLoad.Visibility = visible;
             progress.Visibility = visible;
+            progress.IsIndeterminate = false;
 
             txtUrl.IsReadOnly = isDownloading;
             cmdDownload.IsEnabled = !isDownloading;
