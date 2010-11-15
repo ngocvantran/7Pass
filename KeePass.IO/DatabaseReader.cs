@@ -54,16 +54,15 @@ namespace KeePass.IO
                 IV = BufferEx.Clone(headers.EncryptionIV)
             };
 
-            var stream = new CryptoStream(source,
+            Stream stream = new CryptoStream(source,
                 eas.CreateDecryptor(),
                 CryptoStreamMode.Read);
 
             VerifyStartBytes(headers, stream);
 
-            if (headers.Compression == PwCompressionAlgorithm.GZip)
-                return new GZipInputStream(stream);
-
-            return stream;
+            stream = new HashedBlockStream(stream);
+            return headers.Compression == Compressions.GZip
+                ? new GZipInputStream(stream) : stream;
         }
 
         private static Headers ReadHeaders(Stream stream)
