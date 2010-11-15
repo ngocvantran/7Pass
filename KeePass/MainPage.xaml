@@ -25,6 +25,9 @@
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <ListBox Name="lstItems"
+                     VerticalAlignment="Stretch"
+                     HorizontalAlignment="Stretch" />
         </Grid>
     </Grid>
  

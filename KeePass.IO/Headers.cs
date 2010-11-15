@@ -11,11 +11,11 @@ namespace KeePass.IO
             0xBE, 0x58, 0x05, 0x21, 0x6A, 0xFC, 0x5A, 0xFF
         };
 
-        public PwCompressionAlgorithm Compression
+        public Compressions Compression
         {
             get
             {
-                return (PwCompressionAlgorithm)BitConverter.ToChar(
+                return (Compressions)BitConverter.ToChar(
                     this[HeaderFields.CompressionFlags], 0);
             }
         }
@@ -75,10 +75,10 @@ namespace KeePass.IO
             data = Verify(HeaderFields.CompressionFlags, 4,
                 "The length of compression format is invalid!");
 
-            var compression = (PwCompressionAlgorithm)
+            var compression = (Compressions)
                 BitConverter.ToChar(data, 0);
 
-            if (compression > PwCompressionAlgorithm.GZip)
+            if (compression > Compressions.GZip)
             {
                 throw new FormatException(
                     "Only no compression and GZip compression are supported!");

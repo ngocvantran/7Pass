@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.IO;
 
@@ -36,7 +37,15 @@ namespace KeePass
                     Consts.FILE_NAME, FileMode.Open))
                 {
                     var reader = new DatabaseReader();
-                    reader.Load(fs, "my~Solution");
+                    var root = reader.Load(fs, KeyCache.Password);
+
+                    foreach (var group in root.Groups)
+                    {
+                        var item = new ListBoxItem();
+                        item.Content = group.Name;
+
+                        lstItems.Items.Add(item);
+                    }
                 }
             }
         }
