@@ -52,7 +52,6 @@
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="Microsoft.Xna.Framework" />
     <Reference Include="Microsoft.Xna.Framework.Input.Touch" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -63,7 +62,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AppSettings.cs" />
     <Compile Include="AppSettingsService.cs" />
     <Compile Include="Consts.cs" />
     <Compile Include="Download.xaml.cs">

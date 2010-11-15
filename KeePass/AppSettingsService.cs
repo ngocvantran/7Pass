@@ -1,13 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.IO.IsolatedStorage;
-using System.Runtime.Serialization;
 
 namespace KeePass
 {
     public static class AppSettingsService
     {
-        private const string KEY = "Settings.xml";
+        private const string KEY = "Settings.bin";
 
         public static void Activated()
         {
@@ -40,14 +39,10 @@ namespace KeePass
                 using (var stream = store.OpenFile(
                     KEY, FileMode.Open, FileAccess.Read))
                 {
-                    var serializer = new DataContractSerializer(
-                        typeof(AppSettings));
+                    var reader = new BinaryReader(stream);
 
-                    var settings = (AppSettings)
-                        serializer.ReadObject(stream);
-
-                    KeyCache.Password = settings.Password;
-                    KeyCache.StorePassword = settings.StorePassword;
+                    KeyCache.StorePassword = reader.ReadBoolean();
+                    KeyCache.Password = reader.ReadString();
                 }
             }
         }
@@ -59,18 +54,16 @@ namespace KeePass
             {
                 using (var stream = store.CreateFile(KEY))
                 {
-                    var serializer = new DataContractSerializer(
-                        typeof(AppSettings));
+                    var writer = new BinaryWriter(stream);
 
-                    var settings = new AppSettings
-                    {
-                        StorePassword = KeyCache.StorePassword,
-                    };
+                    writer.Write(KeyCache.StorePassword);
 
                     if (KeyCache.StorePassword)
-                        settings.Password = KeyCache.Password;
+                        writer.Write(KeyCache.Password ?? string.Empty);
+                    else
+                        writer.Write(string.Empty);
 
-                    serializer.WriteObject(stream, settings);
+                    writer.Flush();
                 }
             }
         }
