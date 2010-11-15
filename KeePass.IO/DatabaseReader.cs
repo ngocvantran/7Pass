@@ -7,7 +7,7 @@ namespace KeePass.IO
 {
     public class DatabaseReader
     {
-        public void Load(Stream stream, string password)
+        public Group Load(Stream stream, string password)
         {
             if (stream == null)
                 throw new ArgumentNullException("stream");
@@ -17,7 +17,8 @@ namespace KeePass.IO
             var headers = ReadHeaders(stream);
             headers.Verify();
 
-            stream = Decrypt(stream, headers, password);
+            using (var decrypted = Decrypt(stream, headers, password))
+                return new XmlParser().Parse(decrypted);
         }
 
         private static void CheckSignature(Stream stream)
