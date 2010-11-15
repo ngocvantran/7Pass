@@ -39,9 +39,7 @@
                      Text="http://" InputScope="Url"
                      TextChanged="txtUrl_TextChanged" KeyDown="txtUrl_KeyDown" />
             
-            <ProgressBar Name="progress"
-                         Grid.Row="2"
-                         IsIndeterminate="True"
+            <ProgressBar Name="progress" Grid.Row="2"
                          Visibility="Collapsed"/>
             <TextBlock Name="lblLoad"
                        Grid.Row="3"
