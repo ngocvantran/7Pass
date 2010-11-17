@@ -62,12 +62,19 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AppSettingsService.cs" />
-    <Compile Include="Consts.cs" />
+    <Compile Include="Data\AppSettingsService.cs" />
+    <Compile Include="Data\Consts.cs" />
+    <Compile Include="Data\DatabaseCheckResults.cs" />
+    <Compile Include="Data\DatabaseItem.cs" />
+    <Compile Include="Data\DatabaseItems.cs" />
+    <Compile Include="Data\LifeCycle.cs" />
     <Compile Include="Download.xaml.cs">
       <DependentUpon>Download.xaml</DependentUpon>
     </Compile>
-    <Compile Include="KeyCache.cs" />
+    <Compile Include="Data\KeyCache.cs" />
+    <Compile Include="EntryPage.xaml.cs">
+      <DependentUpon>EntryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -90,7 +97,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <DesignData Include="Data\DesignData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
+    <DesignData Include="Data\EntryData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
     <Page Include="Download.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EntryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Navigation;
+using KeePass.Data;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -62,22 +63,22 @@ namespace KeePass
 
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
-            AppSettingsService.Activated();
+            LifeCycle.Activated();
         }
 
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            AppSettingsService.Closing();
+            LifeCycle.Closing();
         }
 
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
-            AppSettingsService.Deactivated();
+            LifeCycle.Deactivated();
         }
 
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            AppSettingsService.Launching();
+            LifeCycle.Launching();
         }
 
         private void Application_UnhandledException(

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using KeePass.Data;
 using KeePass.Properties;
 
 namespace KeePass
@@ -14,19 +15,11 @@ namespace KeePass
             InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-#if DEBUG
-            txtPassword.Password = "my~Solution";
-#endif
-        }
-
         private void OpenDatabase()
         {
-            KeyCache.Password = txtPassword.Password;
-            KeyCache.StorePassword = chkStore.IsChecked == true;
+            AppSettingsService.Open(
+                txtPassword.Password,
+                chkStore.IsChecked == true);
 
             NavigationService.GoBack();
         }
@@ -37,7 +30,8 @@ namespace KeePass
             e.Complete();
             e.Handled = true;
 
-            MessageBox.Show(AppResources.WarningStorePassword);
+            MessageBox.Show(AppResources
+                .WarningStorePassword);
         }
 
         private void OpenSettings(object sender, EventArgs e)
@@ -57,7 +51,8 @@ namespace KeePass
             OpenDatabase();
         }
 
-        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        private void txtPassword_KeyDown(
+            object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter && cmdOpen.IsEnabled)
                 OpenDatabase();

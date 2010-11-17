@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KeePass.IO
+namespace KeePass.IO.Utils
 {
     internal class Headers : Dictionary<HeaderFields, byte[]>
     {

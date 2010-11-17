@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace KeePass.IO
+namespace KeePass.IO.Utils
 {
     public static class FileFormat
     {

@@ -1,12 +1,28 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace KeePass.IO
+namespace KeePass.IO.Utils
 {
-    internal static class BufferEx
+    public static class BufferEx
     {
-        public static byte[] Clone(byte[] input)
+        public static void CopyStream(Stream input, Stream output)
+        {
+            var buffer = new byte[32768];
+            while (true)
+            {
+                var read = input.Read(buffer,
+                    0, buffer.Length);
+
+                if (read <= 0)
+                    return;
+
+                output.Write(buffer, 0, read);
+            }
+        }
+
+        internal static byte[] Clone(byte[] input)
         {
             if (input == null)
                 throw new ArgumentNullException("input");
@@ -22,7 +38,7 @@ namespace KeePass.IO
             return output;
         }
 
-        public static bool Equals(byte[] x, byte[] y)
+        internal static bool Equals(byte[] x, byte[] y)
         {
             if (x.Length != y.Length)
                 return false;
@@ -30,7 +46,7 @@ namespace KeePass.IO
             return !x.Where((t, i) => t != y[i]).Any();
         }
 
-        public static byte[] GetHash(byte[] bytes)
+        internal static byte[] GetHash(byte[] bytes)
         {
             if (bytes == null)
                 throw new ArgumentNullException("bytes");

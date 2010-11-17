@@ -1,13 +1,14 @@
-﻿using System;
+using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
 namespace KeePass.IO
 {
-    internal class XmlParser
+    internal static class XmlParser
     {
-        public Group Parse(Stream stream)
+        public static Group Parse(Stream stream)
         {
             if (stream == null)
                 throw new ArgumentNullException("stream");
@@ -59,6 +60,8 @@ namespace KeePass.IO
                         break;
                 }
             }
+
+            group.Sort();
         }
 
         private static Entry ParseEntry(XmlReader reader)
@@ -80,23 +83,29 @@ namespace KeePass.IO
             if (fields.Count == 0)
                 return null;
 
-            return new Entry(fields)
+            var entry = new Entry(fields)
             {
                 ID = id,
             };
+
+            return entry;
         }
 
         private static Group ParseGroup(XmlReader reader)
         {
-            var group = new Group
-            {
-                ID = ReadId(reader)
-            };
+            var id = ReadId(reader);
 
             if (reader.Name != "Name")
                 reader.ReadToNextSibling("Name");
 
-            group.Name = reader.ReadElementContentAsString();
+            var name = reader
+                .ReadElementContentAsString();
+
+            var group = new Group
+            {
+                ID = id,
+                Name = name,
+            };
 
             ParseChildren(reader, group);
 

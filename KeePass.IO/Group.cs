@@ -63,5 +63,11 @@ namespace KeePass.IO
         {
             _entries.Add(entry);
         }
+
+        public void Sort()
+        {
+            _groups.Sort(new GroupSorter());
+            _entries.Sort(new EntrySorter());
+        }
     }
 }

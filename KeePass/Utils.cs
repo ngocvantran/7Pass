@@ -6,8 +6,12 @@ namespace KeePass
     public static class Utils
     {
         public static void NavigateTo(
-            this PhoneApplicationPage page, string url)
+            this PhoneApplicationPage page,
+            string url, params object[] args)
         {
+            if (args != null && args.Length > 0)
+                url = string.Format(url, args);
+
             page.NavigationService.Navigate(
                 new Uri(url, UriKind.Relative));
         }

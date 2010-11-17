@@ -1,0 +1,8 @@
+<local:Entry 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:KeePass.IO; assembly=KeePass.IO"
+    ID="9E74357B-A11E-4F31-9460-AA889B603D15"
+    Title="Test entry 01"
+    UserName="me@localhost"
+    />

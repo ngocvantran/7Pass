@@ -51,18 +51,21 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database.cs" />
     <Compile Include="DatabaseReader.cs" />
     <Compile Include="Entry.cs" />
+    <Compile Include="EntrySorter.cs" />
     <Compile Include="Group.cs" />
-    <Compile Include="HeaderFields.cs" />
-    <Compile Include="Headers.cs" />
+    <Compile Include="GroupSorter.cs" />
+    <Compile Include="Utils\HeaderFields.cs" />
+    <Compile Include="Utils\Headers.cs" />
     <Compile Include="InvalidDataException.cs" />
-    <Compile Include="PasswordData.cs" />
+    <Compile Include="Utils\PasswordData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FileFormat.cs" />
-    <Compile Include="BufferEx.cs" />
-    <Compile Include="Compressions.cs" />
-    <Compile Include="HashedBlockStream.cs" />
+    <Compile Include="Utils\FileFormat.cs" />
+    <Compile Include="Utils\BufferEx.cs" />
+    <Compile Include="Utils\Compressions.cs" />
+    <Compile Include="Utils\HashedBlockStream.cs" />
     <Compile Include="XmlParser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />

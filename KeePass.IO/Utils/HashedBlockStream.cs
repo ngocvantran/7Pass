@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace KeePass.IO
+namespace KeePass.IO.Utils
 {
     internal class HashedBlockStream : Stream
     {
