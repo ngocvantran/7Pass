@@ -63,10 +63,10 @@ namespace KeePass.IO
 
         private static Entry ParseEntry(XmlReader reader)
         {
+            var id = ReadId(reader);
             var fields = new Dictionary<string, string>();
 
             reader.ReadToFollowing("String");
-
             while (reader.Name == "String")
             {
                 reader.Read();
@@ -80,19 +80,34 @@ namespace KeePass.IO
             if (fields.Count == 0)
                 return null;
 
-            return new Entry(fields);
+            return new Entry(fields)
+            {
+                ID = id,
+            };
         }
 
         private static Group ParseGroup(XmlReader reader)
         {
-            var group = new Group();
+            var group = new Group
+            {
+                ID = ReadId(reader)
+            };
 
-            reader.ReadToDescendant("Name");
+            if (reader.Name != "Name")
+                reader.ReadToNextSibling("Name");
+
             group.Name = reader.ReadElementContentAsString();
 
             ParseChildren(reader, group);
 
             return group;
+        }
+
+        private static Guid ReadId(XmlReader reader)
+        {
+            reader.ReadToDescendant("UUID");
+            var id = reader.ReadElementContentAsString();
+            return new Guid(Convert.FromBase64String(id));
         }
     }
 }

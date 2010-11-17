@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.IO;
@@ -33,6 +34,20 @@ namespace KeePass
                     return;
                 }
 
+                if (KeyCache.Database == null)
+                {
+                    using (var fs = store.OpenFile(
+                        Consts.FILE_NAME, FileMode.Open))
+                    {
+                        var reader = new DatabaseReader();
+
+                        var root = reader.Load(fs,
+                            KeyCache.Password);
+
+                        KeyCache.Database = root;
+                    }
+                }
+
                 using (var fs = store.OpenFile(
                     Consts.FILE_NAME, FileMode.Open))
                 {
@@ -43,6 +58,8 @@ namespace KeePass
 
                     Display(root);
                 }
+
+                Display(GetGroup());
             }
         }
 
@@ -61,6 +78,27 @@ namespace KeePass
 
                 lstItems.Items.Add(item);
             }
+        }
+
+        private Group GetGroup()
+        {
+            string groupId;
+            var root = KeyCache.Database;
+            var pars = NavigationContext.QueryString;
+
+            return !pars.TryGetValue("g", out groupId)
+                ? root : GetGroup(root, new Guid(groupId));
+        }
+
+        private static Group GetGroup(Group group, Guid id)
+        {
+            if (group.ID == id)
+                return group;
+
+            return group.Groups
+                .Select(x => GetGroup(x, id))
+                .Where(x => x != null)
+                .FirstOrDefault();
         }
 
         private void OpenSettings(object sender, EventArgs e)
