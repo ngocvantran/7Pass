@@ -1,9 +1,16 @@
 ﻿using System;
+using KeePass.IO;
 
 namespace KeePass
 {
     public static class KeyCache
     {
+        /// <summary>
+        /// Gets or sets the database.
+        /// </summary>
+        /// <value>The database.</value>
+        public static Group Database { get; set; }
+
         /// <summary>
         /// Gets a value indicating whether user has provide the password..
         /// </summary>

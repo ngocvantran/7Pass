@@ -18,6 +18,12 @@ namespace KeePass.IO
         private readonly IDictionary<string, string> _fields;
 
         /// <summary>
+        /// Gets or sets the ID.
+        /// </summary>
+        /// <value>The ID.</value>
+        public Guid ID { get; set; }
+
+        /// <summary>
         /// Gets the notes.
         /// </summary>
         /// <value>The notes.</value>
