@@ -5,6 +5,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using KeePass.Data;
 using KeePass.Properties;
 
 namespace KeePass
@@ -106,12 +107,12 @@ namespace KeePass
             }
 
             using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-            using (var fs = store.CreateFile(Consts.FILE_NAME))
+            using (var fs = store.CreateFile(Consts.DATABASE))
             {
                 CopyStream(result, fs);
             }
 
-            KeyCache.Clear();
+            AppSettingsService.Clear();
             NavigationService.GoBack();
         }
 

@@ -2,12 +2,13 @@
 using System.IO;
 using System.Security.Cryptography;
 using ICSharpCode.SharpZipLib.GZip;
+using KeePass.IO.Utils;
 
 namespace KeePass.IO
 {
-    public class DatabaseReader
+    public static class DatabaseReader
     {
-        public Group Load(Stream stream, string password)
+        public static byte[] GetXml(Stream stream, string password)
         {
             if (stream == null)
                 throw new ArgumentNullException("stream");
@@ -18,7 +19,20 @@ namespace KeePass.IO
             headers.Verify();
 
             using (var decrypted = Decrypt(stream, headers, password))
-                return new XmlParser().Parse(decrypted);
+            using (var buffer = new MemoryStream())
+            {
+                BufferEx.CopyStream(decrypted, buffer);
+                return buffer.ToArray();
+            }
+        }
+
+        public static Database Load(byte[] xml)
+        {
+            using (var buffer = new MemoryStream(xml))
+            {
+                var root = XmlParser.Parse(buffer);
+                return new Database(root);
+            }
         }
 
         private static void CheckSignature(Stream stream)

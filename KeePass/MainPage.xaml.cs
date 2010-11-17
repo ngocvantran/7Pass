@@ -1,66 +1,35 @@
 ﻿using System;
-using System.IO;
-using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using KeePass.Data;
 using KeePass.IO;
 
 namespace KeePass
 {
     public partial class MainPage
     {
+        private readonly DatabaseItems _items;
+
         public MainPage()
         {
             InitializeComponent();
+
+            DataContext = _items =
+                new DatabaseItems();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            using (var store = IsolatedStorageFile
-                .GetUserStoreForApplication())
+            if (LifeCycle.CheckDbState(this) ==
+                DatabaseCheckResults.Terminate)
             {
-                if (!store.FileExists(Consts.FILE_NAME))
-                {
-                    this.OpenDownload();
-                    return;
-                }
-
-                if (!KeyCache.HasPassword)
-                {
-                    this.NavigateTo("/Password.xaml");
-                    return;
-                }
-
-                if (KeyCache.Database == null)
-                {
-                    using (var fs = store.OpenFile(
-                        Consts.FILE_NAME, FileMode.Open))
-                    {
-                        var reader = new DatabaseReader();
-
-                        var root = reader.Load(fs,
-                            KeyCache.Password);
-
-                        KeyCache.Database = root;
-                    }
-                }
-
-                using (var fs = store.OpenFile(
-                    Consts.FILE_NAME, FileMode.Open))
-                {
-                    var reader = new DatabaseReader();
-
-                    var root = reader.Load(fs,
-                        KeyCache.Password);
-
-                    Display(root);
-                }
-
-                Display(GetGroup());
+                return;
             }
+
+            Display(GetGroup());
         }
 
         private void Display(Group root)
@@ -70,40 +39,56 @@ namespace KeePass
 
             PageTitle.Text = root.Name;
 
-            lstItems.Items.Clear();
-            foreach (var group in root.Groups)
-            {
-                var item = new ListBoxItem();
-                item.Content = group.Name;
-
-                lstItems.Items.Add(item);
-            }
+            _items.Items = root.Groups.Select(x =>
+                new DatabaseItem
+                {
+                    Source = x,
+                    Title = x.Name,
+                    Icon = "Images/warning.png",
+                })
+                .Union(root.Entries.Select(x =>
+                    new DatabaseItem
+                    {
+                        Source = x,
+                        Title = x.Title,
+                        Icon = "Images/warning.png",
+                    }))
+                .ToList();
         }
 
         private Group GetGroup()
         {
             string groupId;
-            var root = KeyCache.Database;
+            var db = KeyCache.Database;
             var pars = NavigationContext.QueryString;
 
-            return !pars.TryGetValue("g", out groupId)
-                ? root : GetGroup(root, new Guid(groupId));
-        }
-
-        private static Group GetGroup(Group group, Guid id)
-        {
-            if (group.ID == id)
-                return group;
-
-            return group.Groups
-                .Select(x => GetGroup(x, id))
-                .Where(x => x != null)
-                .FirstOrDefault();
+            return !pars.TryGetValue("id", out groupId)
+                ? db.Root : db.GetGroup(new Guid(groupId));
         }
 
         private void OpenSettings(object sender, EventArgs e)
         {
             this.OpenSettings();
+        }
+
+        private void lstItems_SelectionChanged(
+            object sender, SelectionChangedEventArgs e)
+        {
+            var index = lstItems.SelectedIndex;
+            if (index < 0)
+                return;
+
+            var item = _items.Items[index].Source;
+
+            var group = item as Group;
+            if (group != null)
+            {
+                this.NavigateTo("/MainPage.xaml?id={0}", group.ID);
+                return;
+            }
+
+            var entry = (Entry)item;
+            this.NavigateTo("/EntryPage.xaml?id={0}", entry.ID);
         }
     }
 }

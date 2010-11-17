@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace KeePass.IO
+namespace KeePass.IO.Utils
 {
     internal class PasswordData
     {

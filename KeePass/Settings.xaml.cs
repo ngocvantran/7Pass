@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using KeePass.Data;
 
 namespace KeePass
 {
@@ -9,7 +10,8 @@ namespace KeePass
         {
             InitializeComponent();
 
-            cmdClearPass.IsEnabled = KeyCache.StorePassword;
+            cmdClearPass.IsEnabled =
+                AppSettingsService.HasPassword();
         }
 
         private void DownloadDatabase(object sender, RoutedEventArgs e)
@@ -19,8 +21,8 @@ namespace KeePass
 
         private void cmdClearPass_Click(object sender, RoutedEventArgs e)
         {
-            KeyCache.StorePassword = false;
             cmdClearPass.IsEnabled = false;
+            AppSettingsService.ClearPassword();
         }
     }
 }

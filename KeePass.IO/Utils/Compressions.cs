@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KeePass.IO
+namespace KeePass.IO.Utils
 {
     public enum Compressions : uint
     {

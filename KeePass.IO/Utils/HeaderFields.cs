@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KeePass.IO
+namespace KeePass.IO.Utils
 {
     internal enum HeaderFields
     {
