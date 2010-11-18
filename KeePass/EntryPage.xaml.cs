@@ -74,7 +74,12 @@ namespace KeePass
             return db.GetEntry(new Guid(entryId));
         }
 
-        private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
+        private void Home_Click(object sender, EventArgs e)
+        {
+            this.OpenHome();
+        }
+
+        private void Settings_Click(object sender, EventArgs e)
         {
             this.OpenSettings();
         }

@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Data;
 using KeePass.IO;
+using Microsoft.Phone.Shell;
 
 namespace KeePass
 {
@@ -30,6 +31,12 @@ namespace KeePass
             }
 
             Display(GetGroup());
+
+            var home = ((ApplicationBarIconButton)
+                ApplicationBar.Buttons[0]);
+
+            home.IsEnabled = NavigationContext
+                .QueryString.Count != 0;
         }
 
         private void Display(Group root)
@@ -37,21 +44,33 @@ namespace KeePass
             if (root == null)
                 throw new ArgumentNullException("root");
 
+            DisplayItems(root);
             PageTitle.Text = root.Name;
+        }
+
+        private void DisplayItems(Group root)
+        {
+            var isDarkTheme = Utils.IsDarkTheme();
+            var groupIcon = isDarkTheme
+                ? "/Images/group.dark.png"
+                : "/Images/group.light.png";
+            var entryIcon = isDarkTheme
+                ? "/Images/entry.dark.png"
+                : "/Images/entry.light.png";
 
             _items.Items = root.Groups.Select(x =>
                 new DatabaseItem
                 {
                     Source = x,
                     Title = x.Name,
-                    Icon = "Images/warning.png",
+                    Icon = groupIcon,
                 })
                 .Union(root.Entries.Select(x =>
                     new DatabaseItem
                     {
                         Source = x,
                         Title = x.Title,
-                        Icon = "Images/warning.png",
+                        Icon = entryIcon,
                     }))
                 .ToList();
         }
@@ -66,7 +85,12 @@ namespace KeePass
                 ? db.Root : db.GetGroup(new Guid(groupId));
         }
 
-        private void OpenSettings(object sender, EventArgs e)
+        private void Home_Click(object sender, EventArgs e)
+        {
+            this.OpenHome();
+        }
+
+        private void Settings_Click(object sender, EventArgs e)
         {
             this.OpenSettings();
         }

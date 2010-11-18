@@ -91,6 +91,16 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No internet connection is available.
+        ///Please try again later..
+        /// </summary>
+        internal static string NoNetwork {
+            get {
+                return ResourceManager.GetString("NoNetwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 
         ///Error downloading the database.
         ///Please try again..

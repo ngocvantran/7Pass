@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using KeePass.Data;
 using KeePass.Properties;
+using Microsoft.Phone.Net.NetworkInformation;
+using NetworkInterface = System.Net.NetworkInformation.NetworkInterface;
 
 namespace KeePass
 {
@@ -34,6 +36,12 @@ namespace KeePass
 
         private void DownloadDatabase()
         {
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                MessageBox.Show(AppResources.NoNetwork);
+                return;
+            }
+            
             UpdateControls(true);
 
             var client = new WebClient();
