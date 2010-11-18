@@ -61,6 +61,18 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error downloading your database.
+        ///Please make sure that the url is correct.
+        ///
+        ///.
+        /// </summary>
+        internal static string DownloadError {
+            get {
+                return ResourceManager.GetString("DownloadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Downloading {0:N0}% ....
         /// </summary>
         internal static string Downloading {

@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Error downloading your database.
+Please make sure that the url is correct.
+
+</value>
+  </data>
   <data name="Downloading" xml:space="preserve">
     <value>Downloading {0:N0}% ...</value>
   </data>

@@ -25,21 +25,50 @@
             <TextBlock x:Name="PageTitle" Text="{Binding Title}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="gridMain" Grid.Row="1" Margin="12,0,12,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             
-            <TextBlock Grid.Column="0">User name:</TextBlock>
-            <TextBlock Grid.Column="1" Text="{Binding UserName}" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="160" />
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row ="0" Grid.Column="0"
+                       VerticalAlignment="Center">User name</TextBlock>
+            <TextBox Grid.Row ="0" Grid.Column="1"
+                     Text="{Binding UserName}"
+                     IsReadOnly="True" />
+
+            <TextBlock Grid.Row ="1" Grid.Column="0"
+                       VerticalAlignment="Center">Password</TextBlock>
+            <TextBox Grid.Row ="1" Grid.Column="1"
+                     Text="{Binding Password}"
+                     IsReadOnly="True" />
+
+            <TextBlock Grid.Row ="2" Grid.Column="0"
+                       VerticalAlignment="Center">Url</TextBlock>
+            <TextBox Grid.Row ="2" Grid.Column="1"
+                     Text="{Binding Url}"
+                     IsReadOnly="True" />
+
+            <TextBlock Grid.Row ="3" Grid.Column="0"
+                       VerticalAlignment="Center">Notes</TextBlock>
+            <TextBox Grid.Row ="3" Grid.Column="1"
+                     Text="{Binding Notes}"
+                     IsReadOnly="True" />
         </Grid>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="Settings" Click="ApplicationBarMenuItem_Click" />
+                <shell:ApplicationBarMenuItem Text="Settings"
+                                              Click="ApplicationBarMenuItem_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
