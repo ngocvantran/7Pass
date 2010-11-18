@@ -5,22 +5,22 @@
 
     <local:DatabaseItems.Items>
         <local:DatabaseItem Title="Group 01"
-                            Icon="Images/warning.png"
+                            Icon="Images/group.png"
                             Notes="Group notes" />
         <local:DatabaseItem Title="Group 01"
-                            Icon="Images/warning.png"
+                            Icon="Images/group.png"
                             Notes="Group notes" />
         <local:DatabaseItem Title="Entry 01"
-                            Icon="Images/warning.png"
+                            Icon="Images/entry.png"
                             Notes="Entry notes" />
         <local:DatabaseItem Title="Entry 01"
-                            Icon="Images/warning.png"
+                            Icon="Images/entry.png"
                             Notes="Entry notes" />
         <local:DatabaseItem Title="Entry 01"
-                            Icon="Images/warning.png"
+                            Icon="Images/entry.png"
                             Notes="Entry notes" />
         <local:DatabaseItem Title="Entry 01"
-                            Icon="Images/warning.png"
+                            Icon="Images/entry.png"
                             Notes="Entry notes" />
     </local:DatabaseItems.Items>
     

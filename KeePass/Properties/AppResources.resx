@@ -129,6 +129,10 @@ Please make sure that the url is correct.
   <data name="FileTooLarge" xml:space="preserve">
     <value>Database file too large.</value>
   </data>
+  <data name="NoNetwork" xml:space="preserve">
+    <value>No internet connection is available.
+Please try again later.</value>
+  </data>
   <data name="NullDownload" xml:space="preserve">
     <value>
 Error downloading the database.
