@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.0">
-  <App xmlns="" ProductID="{607307a5-bd5a-4d39-9150-5e016c231373}" Title="KeePass for Windows Phone 7" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="KeePass author" Description="Sample description" Publisher="KeePass">
+  <App xmlns="" ProductID="{607307a5-bd5a-4d39-9150-5e016c231373}"
+       Title="KeePass"
+       RuntimeType="Silverlight" Version="1.0.0.0"
+       Genre="apps.normal" Author="KeePass author"
+       Description="KeePass for Windows Phone 7"
+       Publisher="Tran Ngoc Van">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES" />

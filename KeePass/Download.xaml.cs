@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using KeePass.Data;
 using KeePass.Properties;
-using Microsoft.Phone.Net.NetworkInformation;
 using NetworkInterface = System.Net.NetworkInformation.NetworkInterface;
 
 namespace KeePass
