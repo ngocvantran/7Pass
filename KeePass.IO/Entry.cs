@@ -8,12 +8,16 @@ namespace KeePass.IO
     [DebuggerDisplay("Entry {Title}")]
     public class Entry
     {
-        private const string NOTES = "Notes";
-        private const string PASS = "Password";
-        private const string TITLE = "Title";
-        private const string USER = "UserName";
+        private const string KEY_NOTES = "Notes";
+        private const string KEY_PASS = "Password";
+        private const string KEY_TITLE = "Title";
+        private const string KEY_URL = "URL";
+        private const string KEY_USER = "UserName";
 
-        private static readonly string[] _known = new[] {USER, PASS, NOTES, TITLE};
+        private static readonly string[] _known = new[]
+        {
+            KEY_USER, KEY_PASS, KEY_NOTES, KEY_TITLE, KEY_URL
+        };
 
         private readonly IDictionary<string, string> _fields;
 
@@ -24,12 +28,21 @@ namespace KeePass.IO
         public Guid ID { get; set; }
 
         /// <summary>
+        /// Gets the value of the specified key.
+        /// </summary>
+        /// <value>Value of the specified key.</value>
+        public string this[string key]
+        {
+            get { return _fields[key]; }
+        }
+
+        /// <summary>
         /// Gets the notes.
         /// </summary>
         /// <value>The notes.</value>
         public string Notes
         {
-            get { return TryGet(NOTES); }
+            get { return TryGet(KEY_NOTES); }
         }
 
         /// <summary>
@@ -38,7 +51,7 @@ namespace KeePass.IO
         /// <value>The password.</value>
         public string Password
         {
-            get { return TryGet(PASS); }
+            get { return TryGet(KEY_PASS); }
         }
 
         /// <summary>
@@ -47,7 +60,16 @@ namespace KeePass.IO
         /// <value>The title.</value>
         public string Title
         {
-            get { return TryGet(TITLE); }
+            get { return TryGet(KEY_TITLE); }
+        }
+
+        /// <summary>
+        /// Gets the U rl.
+        /// </summary>
+        /// <value>The U rl.</value>
+        public string Url
+        {
+            get { return TryGet(KEY_URL); }
         }
 
         /// <summary>
@@ -56,7 +78,7 @@ namespace KeePass.IO
         /// <value>The name of the user.</value>
         public string UserName
         {
-            get { return TryGet(USER); }
+            get { return TryGet(KEY_USER); }
         }
 
         public Entry(IDictionary<string, string> fields)
@@ -77,7 +99,6 @@ namespace KeePass.IO
         {
             return _fields.Keys
                 .Except(_known)
-                .Select(x => _fields[x])
                 .ToArray();
         }
 

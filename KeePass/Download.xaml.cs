@@ -42,6 +42,7 @@ namespace KeePass
             client.OpenReadAsync(new Uri(txtUrl.Text, UriKind.Absolute));
 
             progress.Value = 0;
+            progress.IsIndeterminate = true;
         }
 
         private static bool IncreaseStorage(long quotaSizeDemand)
@@ -76,6 +77,7 @@ namespace KeePass
         private void client_DownloadProgressChanged(
             object sender, DownloadProgressChangedEventArgs e)
         {
+            progress.IsIndeterminate = false;
             progress.Value = e.ProgressPercentage;
 
             lblLoad.Text = string.Format(
@@ -86,14 +88,24 @@ namespace KeePass
         private void client_OpenReadCompleted(
             object sender, OpenReadCompletedEventArgs e)
         {
+            if (e.Error != null)
+            {
+                UpdateControls(false);
+                MessageBox.Show(
+                    AppResources.DownloadError +
+                    e.Error.Message);
+                
+                return;
+            }
+
             var result = e.Result;
             progress.IsIndeterminate = true;
             lblLoad.Text = AppResources.Saving;
 
             if (result == null || result.Length == 0)
             {
-                MessageBox.Show(AppResources.NullDownload);
                 UpdateControls(false);
+                MessageBox.Show(AppResources.NullDownload);
 
                 return;
             }
@@ -106,7 +118,8 @@ namespace KeePass
                 return;
             }
 
-            using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+            using (var store = IsolatedStorageFile
+                .GetUserStoreForApplication())
             using (var fs = store.CreateFile(Consts.DATABASE))
             {
                 CopyStream(result, fs);
