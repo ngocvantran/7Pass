@@ -10,6 +10,16 @@ namespace KeePass.IO
 
         private readonly Group _root;
 
+        public IEnumerable<Entry> Entries
+        {
+            get { return _entries.Values; }
+        }
+
+        public IEnumerable<Group> Groups
+        {
+            get { return _groups.Values; }
+        }
+
         public Group Root
         {
             get { return _root; }

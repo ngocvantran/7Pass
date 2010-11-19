@@ -50,28 +50,10 @@ namespace KeePass
 
         private void DisplayItems(Group root)
         {
-            var isDarkTheme = Utils.IsDarkTheme();
-            var groupIcon = isDarkTheme
-                ? "/Images/group.dark.png"
-                : "/Images/group.light.png";
-            var entryIcon = isDarkTheme
-                ? "/Images/entry.dark.png"
-                : "/Images/entry.light.png";
+            var converter = new ItemConverter();
 
-            _items.Items = root.Groups.Select(x =>
-                new DatabaseItem
-                {
-                    Source = x,
-                    Title = x.Name,
-                    Icon = groupIcon,
-                })
-                .Union(root.Entries.Select(x =>
-                    new DatabaseItem
-                    {
-                        Source = x,
-                        Title = x.Title,
-                        Icon = entryIcon,
-                    }))
+            _items.Items = converter.Convert(root.Groups)
+                .Union(converter.Convert(root.Entries))
                 .ToList();
         }
 
@@ -90,6 +72,11 @@ namespace KeePass
             this.OpenHome();
         }
 
+        private void Search_Click(object sender, EventArgs e)
+        {
+            this.OpenSearch();
+        }
+
         private void Settings_Click(object sender, EventArgs e)
         {
             this.OpenSettings();
@@ -102,17 +89,7 @@ namespace KeePass
             if (index < 0)
                 return;
 
-            var item = _items.Items[index].Source;
-
-            var group = item as Group;
-            if (group != null)
-            {
-                this.NavigateTo("/MainPage.xaml?id={0}", group.ID);
-                return;
-            }
-
-            var entry = (Entry)item;
-            this.NavigateTo("/EntryPage.xaml?id={0}", entry.ID);
+            this.NavigateTo(_items.Items[index]);
         }
     }
 }
