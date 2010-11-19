@@ -52,9 +52,11 @@
 
             <TextBlock Grid.Row ="2" Grid.Column="0"
                        VerticalAlignment="Center">Url</TextBlock>
-            <TextBox Grid.Row ="2" Grid.Column="1"
-                     Text="{Binding Url}"
-                     IsReadOnly="True" />
+            <HyperlinkButton Grid.Row ="2" Grid.Column="1"
+                             HorizontalAlignment="Left"
+                             NavigateUri="{Binding Url}"
+                             Content="{Binding Url}"
+                             TargetName="_blank" />
 
             <TextBlock Grid.Row ="3" Grid.Column="0"
                        VerticalAlignment="Center">Notes</TextBlock>

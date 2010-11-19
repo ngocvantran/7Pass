@@ -30,7 +30,14 @@ namespace KeePass
                 return;
             }
 
-            Display(GetGroup());
+            var group = GetGroup();
+            if (group == null)
+            {
+                this.OpenHome();
+                return;
+            }
+
+            Display(group);
 
             var home = ((ApplicationBarIconButton)
                 ApplicationBar.Buttons[0]);
