@@ -66,6 +66,7 @@
     <Compile Include="Utils\BufferEx.cs" />
     <Compile Include="Utils\Compressions.cs" />
     <Compile Include="Utils\HashedBlockStream.cs" />
+    <Compile Include="Utils\Replace.cs" />
     <Compile Include="XmlParser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />

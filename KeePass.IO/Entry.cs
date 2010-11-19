@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using KeePass.IO.Utils;
 
 namespace KeePass.IO
 {
@@ -20,6 +21,7 @@ namespace KeePass.IO
         };
 
         private readonly IDictionary<string, string> _fields;
+        private readonly string _url;
 
         /// <summary>
         /// Gets or sets the ID.
@@ -64,12 +66,12 @@ namespace KeePass.IO
         }
 
         /// <summary>
-        /// Gets the U rl.
+        /// Gets the Url.
         /// </summary>
-        /// <value>The U rl.</value>
+        /// <value>The Url.</value>
         public string Url
         {
-            get { return TryGet(KEY_URL); }
+            get { return _url; }
         }
 
         /// <summary>
@@ -85,7 +87,9 @@ namespace KeePass.IO
         {
             if (fields == null)
                 throw new ArgumentNullException("fields");
+
             _fields = fields;
+            _url = GetUrl();
         }
 
         public Entry()
@@ -100,6 +104,42 @@ namespace KeePass.IO
             return _fields.Keys
                 .Except(_known)
                 .ToArray();
+        }
+
+        private static string GetPattern(string key)
+        {
+            foreach (var known in _known)
+            {
+                if (string.Equals(key, known,
+                    StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return "{" + known + "}";
+                }
+            }
+
+            return "{S:" + key + "}";
+        }
+
+        private string GetUrl()
+        {
+            var url = TryGet(KEY_URL);
+
+            if (url == null)
+                return null;
+
+            var keys = _fields.Keys.ToList();
+            keys.Remove(KEY_URL);
+
+            foreach (var key in keys)
+            {
+                var pattern = GetPattern(key);
+
+                url = StringReplace.Replace(url,
+                    pattern, _fields[key], StringComparison
+                        .InvariantCultureIgnoreCase);
+            }
+
+            return url;
         }
 
         private string TryGet(string key)

@@ -25,8 +25,13 @@ namespace KeePass
             }
 
             var entry = GetEntry();
-            DataContext = entry;
+            if (entry == null)
+            {
+                NavigationService.GoBack();
+                return;
+            }
 
+            DataContext = entry;
             var others = entry.GetOthers();
             if (others.Length == 0)
                 return;
