@@ -74,6 +74,9 @@
             <shell:ApplicationBarIconButton IconUri="/Images/settings.png"
                                             Text="Settings"
                                             Click="Settings_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Images/search.png"
+                                            Text="Search"
+                                            Click="Search_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

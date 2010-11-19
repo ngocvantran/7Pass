@@ -79,6 +79,11 @@ namespace KeePass
             this.OpenHome();
         }
 
+        private void Search_Click(object sender, EventArgs e)
+        {
+            this.OpenSearch();
+        }
+
         private void Settings_Click(object sender, EventArgs e)
         {
             this.OpenSettings();

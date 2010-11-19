@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Windows;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -9,7 +9,7 @@ namespace KeePass.Data
     {
         public static void Activated()
         {
-            AppSettingsService.LoadSettings();
+            LoadState();
         }
 
         public static DatabaseCheckResults CheckDbState(
@@ -19,7 +19,17 @@ namespace KeePass.Data
                 throw new ArgumentNullException("page");
 
             if (KeyCache.Database != null)
+            {
+                var aware = page as ILifeCycleAware;
+
+                if (aware != null)
+                {
+                    aware.Load(PhoneApplicationService
+                        .Current.State);
+                }
+
                 return DatabaseCheckResults.Continue;
+            }
 
             page.NavigateTo(AppSettingsService.HasDatabase()
                 ? "/Password.xaml" : "/Download.xaml");
@@ -29,23 +39,34 @@ namespace KeePass.Data
 
         public static void Closing()
         {
-            PreventEndDebug();
+            SaveState();
         }
 
         public static void Deactivated()
         {
-            PreventEndDebug();
+            SaveState();
         }
 
         public static void Launching()
         {
+            LoadState();
+        }
+
+        private static void LoadState()
+        {
             AppSettingsService.LoadSettings();
         }
 
-        [Conditional("DEBUG")]
-        private static void PreventEndDebug()
+        private static void SaveState()
         {
-            PhoneApplicationService.Current.State["Dummy"] = "Dummy";
+            var aware = ((App)Application.Current)
+                .RootFrame.Content as ILifeCycleAware;
+
+            if (aware != null)
+            {
+                aware.Save(PhoneApplicationService
+                    .Current.State);
+            }
         }
     }
 }
