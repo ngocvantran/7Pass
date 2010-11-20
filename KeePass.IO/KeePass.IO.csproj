@@ -53,10 +53,14 @@
   <ItemGroup>
     <Compile Include="Database.cs" />
     <Compile Include="DatabaseReader.cs" />
+    <Compile Include="DbPersistentData.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="EntrySorter.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="GroupSorter.cs" />
+    <Compile Include="Utils\CryptoRandomStream.cs" />
+    <Compile Include="Utils\CrsAlgorithm.cs" />
+    <Compile Include="Utils\CryptoSerializer.cs" />
     <Compile Include="Utils\HeaderFields.cs" />
     <Compile Include="Utils\Headers.cs" />
     <Compile Include="InvalidDataException.cs" />
@@ -66,7 +70,8 @@
     <Compile Include="Utils\BufferEx.cs" />
     <Compile Include="Utils\Compressions.cs" />
     <Compile Include="Utils\HashedBlockStream.cs" />
-    <Compile Include="Utils\Replace.cs" />
+    <Compile Include="Utils\Salsa20Cipher.cs" />
+    <Compile Include="Utils\StringReplace.cs" />
     <Compile Include="XmlParser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
