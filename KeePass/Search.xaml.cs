@@ -166,6 +166,7 @@ namespace KeePass
                 return;
 
             this.NavigateTo(_items.Items[index]);
+            lstItems.SelectedIndex = -1;
         }
 
         private void txtSearch_KeyDown(

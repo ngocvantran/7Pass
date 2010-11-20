@@ -10,9 +10,9 @@
         <local:DatabaseItem Title="Group 01"
                             Icon="Images/group.png"
                             Notes="Group notes" />
-        <local:DatabaseItem Title="Entry 01"
+        <local:DatabaseItem Title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed metus massa, imperdiet sit amet pellentesque sit amet, porta in risus. Curabitur vel erat dolor, vitae ornare mauris. Nunc porta eros eget dolor imperdiet convallis. Fusce quis lectus et massa placerat accumsan. Nulla mi leo, mattis in facilisis a, tristique vel erat. Pellentesque vel condimentum lacus. Nunc a mauris massa. Praesent dapibus ornare elit sed feugiat. Sed venenatis odio eget nulla convallis iaculis. Nulla purus velit, convallis vitae tincidunt ac, auctor et arcu"
                             Icon="Images/entry.png"
-                            Notes="Entry notes" />
+                            Notes="Phasellus accumsan porttitor lorem. Vestibulum tempus dui accumsan leo ornare faucibus. Donec sollicitudin eros in quam pharetra mattis ullamcorper neque blandit. Sed convallis lectus in urna posuere tempor. Nullam id tempor tortor. In tellus ligula, pulvinar non volutpat non, interdum ut massa. Fusce tempor rutrum pharetra. Etiam hendrerit tristique nunc, in porttitor velit congue nec. Suspendisse quis massa et erat pellentesque pharetra. Ut vel odio in leo tincidunt viverra. Nam mattis semper aliquam." />
         <local:DatabaseItem Title="Entry 01"
                             Icon="Images/entry.png"
                             Notes="Entry notes" />

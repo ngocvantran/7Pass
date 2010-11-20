@@ -31,6 +31,7 @@ namespace KeePass.Data
                     Source = x,
                     Icon = icon,
                     Title = x.Title,
+                    Notes = x.Notes,
                 });
         }
 
