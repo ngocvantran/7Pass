@@ -6,7 +6,7 @@
     xmlns:my="clr-namespace:System;assembly=mscorlib">
 
     <Application.Resources>
-        <my:String x:Key="AppName">KeePass</my:String>
+        <my:String x:Key="AppName">7Pass</my:String>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

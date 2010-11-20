@@ -6,11 +6,11 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("KeePass for Windows Phone 7")]
+[assembly: AssemblyTitle("KeePass Reader for Windows Phone 7")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("KeePass")]
+[assembly: AssemblyProduct("7Pass")]
 [assembly: AssemblyCopyright("Copyright © Tran Ngoc Van 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
