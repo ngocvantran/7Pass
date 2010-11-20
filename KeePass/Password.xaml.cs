@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
+using System.Windows.Media.Imaging;
 using KeePass.Data;
 using KeePass.Properties;
 
@@ -13,6 +13,14 @@ namespace KeePass
         public Password()
         {
             InitializeComponent();
+
+            if (Theme.IsDarkTheme())
+                return;
+
+            var uri = new Uri("/Images/warning.light.png",
+                UriKind.Relative);
+
+            imgWarning.Source = new BitmapImage(uri);
         }
 
         private void OpenDatabase()
@@ -22,16 +30,6 @@ namespace KeePass
                 chkStore.IsChecked == true);
 
             NavigationService.GoBack();
-        }
-
-        private void Image_ManipulationStarted(
-            object sender, ManipulationStartedEventArgs e)
-        {
-            e.Complete();
-            e.Handled = true;
-
-            MessageBox.Show(AppResources
-                .WarningStorePassword);
         }
 
         private void OpenSettings(object sender, EventArgs e)
@@ -49,6 +47,16 @@ namespace KeePass
         private void cmdOpen_Click(object sender, EventArgs e)
         {
             OpenDatabase();
+        }
+
+        private void imgWarning_ManipulationStarted(
+            object sender, ManipulationStartedEventArgs e)
+        {
+            e.Complete();
+            e.Handled = true;
+
+            MessageBox.Show(AppResources
+                .WarningStorePassword);
         }
 
         private void txtPassword_KeyDown(

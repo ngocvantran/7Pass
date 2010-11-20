@@ -121,7 +121,11 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please ensure that you have PIN lock enabled..
+        ///   Looks up a localized string similar to Please make sure that your phone&apos;s lock screen is password protected.
+        ///
+        ///Saving your database password without lock screen protection will allow anyone to view your passwords.
+        ///
+        ///To set lock screen password, please go to Phone&apos;s Settings\lock &amp; wallpaper..
         /// </summary>
         internal static string WarningStorePassword {
             get {

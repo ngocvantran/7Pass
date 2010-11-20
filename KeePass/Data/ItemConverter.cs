@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using KeePass.IO;
 
 namespace KeePass.Data
@@ -12,7 +11,7 @@ namespace KeePass.Data
 
         public ItemConverter()
         {
-            _darkTheme = IsDarkTheme();
+            _darkTheme = Theme.IsDarkTheme();
         }
 
         public IEnumerable<DatabaseItem> Convert(
@@ -52,13 +51,6 @@ namespace KeePass.Data
                     Icon = icon,
                     Title = x.Name,
                 });
-        }
-
-        public static bool IsDarkTheme()
-        {
-            var v = (Visibility)Application.Current
-                .Resources["PhoneLightThemeVisibility"];
-            return v != Visibility.Visible;
         }
     }
 }
