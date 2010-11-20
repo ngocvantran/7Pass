@@ -8,7 +8,8 @@ namespace KeePass.IO
 {
     public static class DatabaseReader
     {
-        public static byte[] GetXml(Stream stream, string password)
+        public static DbPersistentData GetXml(
+            Stream stream, string password)
         {
             if (stream == null)
                 throw new ArgumentNullException("stream");
@@ -22,16 +23,28 @@ namespace KeePass.IO
             using (var buffer = new MemoryStream())
             {
                 BufferEx.CopyStream(decrypted, buffer);
-                return buffer.ToArray();
+
+                return new DbPersistentData
+                {
+                    Xml = buffer.ToArray(),
+                    Protection = CryptoSerializer
+                        .Serialize(headers),
+                };
             }
         }
 
-        public static Database Load(byte[] xml)
+        public static Database Load(DbPersistentData data)
         {
-            using (var buffer = new MemoryStream(xml))
+            if (data == null)
+                throw new ArgumentNullException("data");
+
+            using (var buffer = new MemoryStream(data.Xml))
             {
-                var root = XmlParser.Parse(buffer);
-                return new Database(root);
+                var crypto = CryptoSerializer
+                    .Deserialize(data.Protection);
+
+                var parser = new XmlParser(crypto);
+                return new Database(parser.Parse(buffer));
             }
         }
 

@@ -24,6 +24,12 @@ namespace KeePass.IO
         private readonly string _url;
 
         /// <summary>
+        /// Gets or sets the histories.
+        /// </summary>
+        /// <value>The histories.</value>
+        public List<Entry> Histories { get; set; }
+
+        /// <summary>
         /// Gets or sets the ID.
         /// </summary>
         /// <value>The ID.</value>
@@ -37,6 +43,12 @@ namespace KeePass.IO
         {
             get { return _fields[key]; }
         }
+
+        /// <summary>
+        /// Gets or sets the last modified time.
+        /// </summary>
+        /// <value>The last modified time.</value>
+        public DateTime LastModified { get; set; }
 
         /// <summary>
         /// Gets the notes.

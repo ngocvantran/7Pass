@@ -20,6 +20,15 @@ namespace KeePass.IO.Utils
             }
         }
 
+        public CrsAlgorithm CrsAlgorithm
+        {
+            get
+            {
+                return (CrsAlgorithm)BitConverter.ToChar(
+                    this[HeaderFields.InnerRandomStreamID], 0);
+            }
+        }
+
         public byte[] EncryptionIV
         {
             get { return this[HeaderFields.EncryptionIV]; }
@@ -28,6 +37,11 @@ namespace KeePass.IO.Utils
         public byte[] MasterSeed
         {
             get { return this[HeaderFields.MasterSeed]; }
+        }
+
+        public byte[] ProtectedStreamKey
+        {
+            get { return this[HeaderFields.ProtectedStreamKey]; }
         }
 
         public byte[] StreamStartBytes

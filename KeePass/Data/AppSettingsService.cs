@@ -49,20 +49,16 @@ namespace KeePass.Data
             using (var store = IsolatedStorageFile
                 .GetUserStoreForApplication())
             {
-                using (var stream = store.OpenFile(
-                    Consts.DECRYPTED, FileMode.Open, FileAccess.Read))
+                var db = new DbPersistentData
                 {
-                    using (var buffer = new MemoryStream())
-                    {
-                        BufferEx.CopyStream(stream, buffer);
-                        var xml = buffer.ToArray();
+                    Xml = ReadFile(store, Consts.DECRYPTED),
+                    Protection = ReadFile(store, Consts.PROTECTION),
+                };
 
-                        KeyCache.Database =
-                            DatabaseReader.Load(xml);
-                    }
-                }
+                KeyCache.Database = DatabaseReader.Load(db);
             }
         }
+
 
         public static bool Open(string password,
             bool savePassword)
@@ -96,11 +92,33 @@ namespace KeePass.Data
             }
         }
 
-        private static void Save(IsolatedStorageFile store, byte[] xml)
+        private static byte[] ReadFile(IsolatedStorageFile store, string path)
         {
+            using (var stream = store.OpenFile(path,
+                FileMode.Open, FileAccess.Read))
+            {
+                using (var buffer = new MemoryStream())
+                {
+                    BufferEx.CopyStream(stream, buffer);
+                    return buffer.ToArray();
+                }
+            }
+        }
+
+        private static void Save(IsolatedStorageFile store,
+            DbPersistentData db)
+        {
+            var xml = db.Xml;
             using (var fs = store.CreateFile(Consts.DECRYPTED))
             {
                 fs.Write(xml, 0, xml.Length);
+                fs.Flush();
+            }
+
+            var protection = db.Protection;
+            using (var fs = store.CreateFile(Consts.PROTECTION))
+            {
+                fs.Write(protection, 0, protection.Length);
                 fs.Flush();
             }
         }
