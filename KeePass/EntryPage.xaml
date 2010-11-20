@@ -41,14 +41,12 @@
             <TextBlock Grid.Row ="0" Grid.Column="0"
                        VerticalAlignment="Center">User name</TextBlock>
             <TextBox Grid.Row ="0" Grid.Column="1"
-                     Text="{Binding UserName}"
-                     IsReadOnly="True" />
+                     Text="{Binding UserName}" />
 
             <TextBlock Grid.Row ="1" Grid.Column="0"
                        VerticalAlignment="Center">Password</TextBlock>
             <TextBox Grid.Row ="1" Grid.Column="1"
-                     Text="{Binding Password}"
-                     IsReadOnly="True" />
+                     Text="{Binding Password}" />
 
             <TextBlock Grid.Row ="2" Grid.Column="0"
                        VerticalAlignment="Center">Url</TextBlock>
@@ -61,8 +59,7 @@
             <TextBlock Grid.Row ="3" Grid.Column="0"
                        VerticalAlignment="Center">Notes</TextBlock>
             <TextBox Grid.Row ="3" Grid.Column="1"
-                     Text="{Binding Notes}"
-                     IsReadOnly="True" />
+                     Text="{Binding Notes}" />
         </Grid>
     </Grid>
 
