@@ -6,7 +6,7 @@ namespace KeePass.Data
 {
     public class DatabaseItems : INotifyPropertyChanged
     {
-        private List<DatabaseItem> _items;
+        private IList<DatabaseItem> _items;
 
         /// <summary>
         /// Occurs when a property value changes.
@@ -17,7 +17,7 @@ namespace KeePass.Data
         /// Gets or sets the items.
         /// </summary>
         /// <value>The items.</value>
-        public List<DatabaseItem> Items
+        public IList<DatabaseItem> Items
         {
             get { return _items; }
             set
