@@ -52,7 +52,8 @@ namespace KeePass
 
                 var text = new TextBlock
                 {
-                    Text = key
+                    Text = key,
+                    VerticalAlignment = VerticalAlignment.Center
                 };
                 var value = new TextBox
                 {
