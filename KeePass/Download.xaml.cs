@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Net;
@@ -31,6 +32,16 @@ namespace KeePass
 
                 output.Write(buffer, 0, read);
             }
+        }
+
+        private void PhoneApplicationPage_BackKeyPress(
+            object sender, CancelEventArgs e)
+        {
+            if (AppSettingsService.HasDatabase())
+                return;
+
+            e.Cancel = true;
+            App.Quit();
         }
 
         private void DownloadDatabase()
