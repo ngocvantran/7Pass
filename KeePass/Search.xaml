@@ -32,7 +32,8 @@
             </Grid.RowDefinitions>
             
             <TextBox Name="txtSearch" Grid.Row="0"
-                     TextChanged="txtSearch_TextChanged" KeyDown="txtSearch_KeyDown" />
+                     TextChanged="txtSearch_TextChanged"
+                     KeyDown="txtSearch_KeyDown" />
             <ListBox Name="lstItems" Grid.Row="1"
                      ItemsSource="{Binding Items}"
                      VerticalAlignment="Stretch"
