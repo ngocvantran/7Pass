@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Data;
@@ -37,31 +41,26 @@ namespace KeePass
                 return;
             }
 
-            Display(group);
-
             var home = ((ApplicationBarIconButton)
                 ApplicationBar.Buttons[0]);
 
             home.IsEnabled = NavigationContext
                 .QueryString.Count != 0;
-        }
 
-        private void Display(Group root)
-        {
-            if (root == null)
-                throw new ArgumentNullException("root");
+            // Display entries
+            PageTitle.Text = group.Name;
 
-            DisplayItems(root);
-            PageTitle.Text = root.Name;
-        }
+            var args = new WorkerArgs
+            {
+                Root = group,
+                Converter = new ItemConverter(),
+                Items = _items.Items =
+                    new ObservableCollection<DatabaseItem>(),
+            };
 
-        private void DisplayItems(Group root)
-        {
-            var converter = new ItemConverter();
-
-            _items.Items = converter.Convert(root.Groups)
-                .Union(converter.Convert(root.Entries))
-                .ToList();
+            var worker = new BackgroundWorker();
+            worker.DoWork += worker_DoWork;
+            worker.RunWorkerAsync(args);
         }
 
         private Group GetGroup()
@@ -98,6 +97,36 @@ namespace KeePass
 
             this.NavigateTo(_items.Items[index]);
             lstItems.SelectedIndex = -1;
+        }
+
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var args = (WorkerArgs)e.Argument;
+
+            var root = args.Root;
+            var list = args.Items;
+            var converter = args.Converter;
+
+            var children = converter.Convert(root.Groups)
+                .Union(converter.Convert(root.Entries))
+                .ToList();
+
+            var dispatcher = lstItems.Dispatcher;
+            foreach (var child in children)
+            {
+                var item = child;
+                dispatcher.BeginInvoke(
+                    () => list.Add(item));
+
+                Thread.Sleep(50);
+            }
+        }
+
+        private class WorkerArgs
+        {
+            public ItemConverter Converter { get; set; }
+            public IList<DatabaseItem> Items { get; set; }
+            public Group Root { get; set; }
         }
     }
 }

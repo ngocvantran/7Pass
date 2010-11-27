@@ -57,7 +57,9 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Icon}" VerticalAlignment="Center" />
+                            <Image Source="{Binding Icon}"
+                                   Width="50" Height="50"
+                                   VerticalAlignment="Center" />
                             <StackPanel Margin="0,0,0,17" Width="432">
                                 <TextBlock Text="{Binding Title}" TextWrapping="Wrap"
                                            MaxHeight="120"
