@@ -56,7 +56,24 @@
                      SelectionChanged="lstItems_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Name="fadeIn">
+                            <StackPanel.Triggers>
+                                <EventTrigger RoutedEvent="StackPanel.Loaded">
+                                    <BeginStoryboard>
+                                        <BeginStoryboard.Storyboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.7" From="0" To="1"
+                                                                 Storyboard.TargetName="fadeIn" Storyboard.TargetProperty="Opacity">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <PowerEase EasingMode="EaseOut"/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard.Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </StackPanel.Triggers>
+
                             <Image Source="{Binding Icon}"
                                    Width="50" Height="50"
                                    VerticalAlignment="Center" />

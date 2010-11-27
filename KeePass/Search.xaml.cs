@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
@@ -13,6 +15,7 @@ namespace KeePass
     public partial class Search : ILifeCycleAware
     {
         private const int MAX_ITEMS = 10;
+        private readonly IList<DatabaseItem> _children;
 
         private readonly ItemConverter _converter;
         private readonly DatabaseItems _items;
@@ -27,6 +30,9 @@ namespace KeePass
 
             DataContext = _items =
                 new DatabaseItems();
+
+            _children = _items.Items =
+                new ObservableCollection<DatabaseItem>();
 
             _converter = new ItemConverter();
 
@@ -136,9 +142,24 @@ namespace KeePass
                 if (_worker.CancellationPending)
                     return;
 
-                e.Result = _converter.Convert(groups)
+                var items = _converter.Convert(groups)
                     .Union(_converter.Convert(entries))
                     .ToList();
+
+                var dispatcher = lstItems.Dispatcher;
+                dispatcher.BeginInvoke(() => _children.Clear());
+
+                foreach (var item in items)
+                {
+                    if (_worker.CancellationPending)
+                        return;
+
+                    var child = item;
+                    dispatcher.BeginInvoke(() =>
+                        _children.Add(child));
+
+                    Thread.Sleep(50);
+                }
             }
             finally
             {
@@ -149,13 +170,10 @@ namespace KeePass
         private void _worker_RunWorkerCompleted(
             object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-            {
-                PerformSearch();
+            if (!e.Cancelled)
                 return;
-            }
 
-            _items.Items = (List<DatabaseItem>)e.Result;
+            PerformSearch();
         }
 
         private void lstItems_SelectionChanged(
