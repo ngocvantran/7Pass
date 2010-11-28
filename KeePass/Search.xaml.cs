@@ -48,8 +48,18 @@ namespace KeePass
         public void Load(IDictionary<string, object> states)
         {
             object text;
-            if (states.TryGetValue("Search", out text))
-                txtSearch.Text = (string)text;
+            if (!states.TryGetValue("Search", out text))
+                return;
+
+            var alreadyHasData = lstItems.Items.Count > 0;
+
+            if (alreadyHasData)
+                txtSearch.TextChanged -= txtSearch_TextChanged;
+
+            txtSearch.Text = (string)text;
+
+            if (alreadyHasData)
+                txtSearch.TextChanged += txtSearch_TextChanged;
         }
 
         public void Save(IDictionary<string, object> states)

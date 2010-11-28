@@ -24,6 +24,10 @@ namespace KeePass
                 return;
             }
 
+            // Do not reload data
+            if (DataContext != null)
+                return;
+
             var entry = GetEntry();
             if (entry == null)
             {

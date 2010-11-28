@@ -34,6 +34,10 @@ namespace KeePass
                 return;
             }
 
+            // Do not reload data
+            if (lstItems.Items.Count > 0)
+                return;
+
             var group = GetGroup();
             if (group == null)
             {
