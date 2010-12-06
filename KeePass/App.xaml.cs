@@ -44,7 +44,6 @@ namespace KeePass
             if (_phoneApplicationInitialized)
                 return;
 
-            //RootFrame = new PhoneApplicationFrame();
             RootFrame = new TransitionFrame();
             RootFrame.Navigated += CompleteInitializePhoneApplication;
 
