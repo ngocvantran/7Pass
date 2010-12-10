@@ -8,6 +8,29 @@ namespace KeePass.Data
 {
     internal static class AppSettingsService
     {
+        private static readonly IsolatedStorageSettings _appSettings;
+
+        public static string DownloadUrl
+        {
+            get
+            {
+                string value;
+                return _appSettings.TryGetValue(Consts.KEY_URL, out value)
+                    ? value : null;
+            }
+            set
+            {
+                _appSettings[Consts.KEY_URL] = value;
+                _appSettings.Save();
+            }
+        }
+
+        static AppSettingsService()
+        {
+            _appSettings = IsolatedStorageSettings
+                .ApplicationSettings;
+        }
+
         public static void Clear()
         {
             KeyCache.Database = null;
@@ -58,7 +81,6 @@ namespace KeePass.Data
                 KeyCache.Database = DatabaseReader.Load(db);
             }
         }
-
 
         public static bool Open(string password,
             bool savePassword)

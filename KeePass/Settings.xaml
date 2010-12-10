@@ -51,6 +51,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
@@ -58,8 +59,13 @@
                     Name="cmdClearPass"
                     Content="Clear Password"
                     Click="cmdClearPass_Click"/>
-            
+
             <Button Grid.Row="1"
+                    Name="cmdClearUrl"
+                    Content="Clear Download Url"
+                    Click="cmdClearUrl_Click"/>
+
+            <Button Grid.Row="2"
                     Content="Update Database"
                     Click="DownloadDatabase"/>
         </Grid>

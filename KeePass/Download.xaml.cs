@@ -3,12 +3,13 @@ using System.ComponentModel;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using KeePass.Data;
 using KeePass.Properties;
-using NetworkInterface = System.Net.NetworkInformation.NetworkInterface;
 
 namespace KeePass
 {
@@ -17,6 +18,20 @@ namespace KeePass
         public Download()
         {
             InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (txtUrl.Text != "http://")
+                return;
+
+            var url = AppSettingsService.DownloadUrl;
+            if (string.IsNullOrEmpty(url))
+                return;
+            
+            txtUrl.Text = url;
         }
 
         private static void CopyStream(Stream input, Stream output)
@@ -34,16 +49,6 @@ namespace KeePass
             }
         }
 
-        private void PhoneApplicationPage_BackKeyPress(
-            object sender, CancelEventArgs e)
-        {
-            if (AppSettingsService.HasDatabase())
-                return;
-
-            e.Cancel = true;
-            App.Quit();
-        }
-
         private void DownloadDatabase()
         {
             if (!NetworkInterface.GetIsNetworkAvailable())
@@ -51,7 +56,7 @@ namespace KeePass
                 MessageBox.Show(AppResources.NoNetwork);
                 return;
             }
-            
+
             UpdateControls(true);
 
             var client = new WebClient();
@@ -92,6 +97,16 @@ namespace KeePass
             cmdDownload.IsEnabled = !isDownloading;
         }
 
+        private void PhoneApplicationPage_BackKeyPress(
+            object sender, CancelEventArgs e)
+        {
+            if (AppSettingsService.HasDatabase())
+                return;
+
+            e.Cancel = true;
+            App.Quit();
+        }
+
         private void client_DownloadProgressChanged(
             object sender, DownloadProgressChangedEventArgs e)
         {
@@ -111,8 +126,8 @@ namespace KeePass
                 UpdateControls(false);
                 MessageBox.Show(
                     AppResources.DownloadError +
-                    e.Error.Message);
-                
+                        e.Error.Message);
+
                 return;
             }
 
@@ -144,6 +159,8 @@ namespace KeePass
             }
 
             AppSettingsService.Clear();
+            AppSettingsService.DownloadUrl = txtUrl.Text;
+
             NavigationService.GoBack();
         }
 
