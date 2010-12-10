@@ -12,6 +12,8 @@ namespace KeePass
 
             cmdClearPass.IsEnabled =
                 AppSettingsService.HasPassword();
+            cmdClearUrl.IsEnabled = !string.IsNullOrEmpty(
+                AppSettingsService.DownloadUrl);
         }
 
         private void DownloadDatabase(object sender, RoutedEventArgs e)
@@ -23,6 +25,12 @@ namespace KeePass
         {
             cmdClearPass.IsEnabled = false;
             AppSettingsService.ClearPassword();
+        }
+
+        private void cmdClearUrl_Click(object sender, RoutedEventArgs e)
+        {
+            cmdClearUrl.IsEnabled = false;
+            AppSettingsService.DownloadUrl = string.Empty;
         }
     }
 }
