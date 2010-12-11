@@ -18,6 +18,14 @@ namespace KeePass
         public Download()
         {
             InitializeComponent();
+
+            if (TrialManager.IsTrial)
+            {
+                txtTrial.Text = string.Concat(AppResources.DemoDb,
+                    Environment.NewLine, AppResources.DemoDbTrial);
+            }
+            else
+                txtTrial.Text = AppResources.DemoDb;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -30,7 +38,7 @@ namespace KeePass
             var url = AppSettingsService.DownloadUrl;
             if (string.IsNullOrEmpty(url))
                 return;
-            
+
             txtUrl.Text = url;
         }
 
@@ -81,6 +89,21 @@ namespace KeePass
                 return store.IncreaseQuotaTo(
                     store.Quota + quotaSizeDemand);
             }
+        }
+
+        private void SaveDb(Stream database)
+        {
+            using (var store = IsolatedStorageFile
+                .GetUserStoreForApplication())
+            using (var fs = store.CreateFile(Consts.DATABASE))
+            {
+                CopyStream(database, fs);
+            }
+
+            AppSettingsService.Clear();
+            AppSettingsService.DownloadUrl = txtUrl.Text;
+
+            NavigationService.GoBack();
         }
 
         private void UpdateControls(bool isDownloading)
@@ -151,22 +174,20 @@ namespace KeePass
                 return;
             }
 
-            using (var store = IsolatedStorageFile
-                .GetUserStoreForApplication())
-            using (var fs = store.CreateFile(Consts.DATABASE))
-            {
-                CopyStream(result, fs);
-            }
-
-            AppSettingsService.Clear();
-            AppSettingsService.DownloadUrl = txtUrl.Text;
-
-            NavigationService.GoBack();
+            TrialManager.UseRealDb();
+            SaveDb(result);
         }
 
         private void cmdDownload_Click(object sender, RoutedEventArgs e)
         {
             DownloadDatabase();
+        }
+
+        private void lnkDemo_Click(object sender, RoutedEventArgs e)
+        {
+            TrialManager.UseDemoDb();
+            using (var buffer = new MemoryStream(AppResources.Demo7Pass))
+                SaveDb(buffer);
         }
 
         private void txtUrl_KeyDown(object sender, KeyEventArgs e)

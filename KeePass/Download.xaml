@@ -32,6 +32,9 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             
             <TextBlock Grid.Row="0">Database URL</TextBlock>
@@ -54,6 +57,11 @@
                     IsEnabled="False"
                     Content="Download"
                     Click="cmdDownload_Click" />
+
+            <HyperlinkButton Grid.Row="6"
+                             Click="lnkDemo_Click"
+                             Content="Use Demo database"/>
+            <TextBlock Name="txtTrial" Grid.Row="7" TextWrapping="Wrap" />
         </Grid>
     </Grid>
 </phone:PhoneApplicationPage>
