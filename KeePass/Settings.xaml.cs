@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows;
 using KeePass.Properties;
 using KeePass.Services;
@@ -30,16 +29,6 @@ namespace KeePass
         private void DownloadDatabase(object sender, RoutedEventArgs e)
         {
             this.OpenDownload();
-        }
-
-        private void PhoneApplicationPage_BackKeyPress(
-            object sender, CancelEventArgs e)
-        {
-            if (!TrialManager.HasExpired)
-                return;
-
-            e.Cancel = true;
-            App.Quit();
         }
 
         private void cmdClearPass_Click(object sender, RoutedEventArgs e)

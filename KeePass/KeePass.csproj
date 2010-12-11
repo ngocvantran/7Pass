@@ -142,6 +142,7 @@
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml" />
+    <None Include="Resources\Demo7Pass.kdbx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.png">

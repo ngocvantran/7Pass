@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO.IsolatedStorage;
 using Microsoft.Phone.Tasks;
-using Microsoft.Phone.Marketplace;
 
 namespace KeePass.Services
 {
@@ -14,7 +13,7 @@ namespace KeePass.Services
 
         public static bool HasExpired
         {
-            get { return Usages > USAGES_LIMIT; }
+            get { return !DemoDb && Usages > USAGES_LIMIT; }
         }
 
         public static bool IsTrial
@@ -38,12 +37,29 @@ namespace KeePass.Services
             }
         }
 
+        private static bool DemoDb
+        {
+            get
+            {
+                bool demoDb;
+                return _settings.TryGetValue(
+                    Consts.KEY_DEMO_DB, out demoDb)
+                        && demoDb;
+            }
+            set
+            {
+                _settings[Consts.KEY_DEMO_DB] = value;
+                _settings.Save();
+            }
+        }
+
         static TrialManager()
         {
 #if DEBUG
             _isTrial = true;
 #else
-            _isTrial = new LicenseInformation().IsTrial();
+            _isTrial = new Microsoft.Phone.Marketplace
+                .LicenseInformation().IsTrial();
 #endif
 
             _settings = IsolatedStorageSettings
@@ -57,8 +73,25 @@ namespace KeePass.Services
 
         public static void UpdateUsages()
         {
-            if (_isTrial)
+            if (_isTrial && !DemoDb)
                 Usages++;
+        }
+
+        public static void UseDemoDb()
+        {
+            if (DemoDb)
+                return;
+
+            Usages--;
+            DemoDb = true;
+        }
+
+        public static void UseRealDb()
+        {
+            if (DemoDb)
+                Usages++;
+
+            DemoDb = false;
         }
     }
 }

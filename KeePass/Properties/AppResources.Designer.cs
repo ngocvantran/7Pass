@@ -60,6 +60,31 @@ namespace KeePass.Properties {
             }
         }
         
+        internal static byte[] Demo7Pass {
+            get {
+                object obj = ResourceManager.GetObject("Demo7Pass", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password for the Demo database is &quot;demo&quot;, without quotes..
+        /// </summary>
+        internal static string DemoDb {
+            get {
+                return ResourceManager.GetString("DemoDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo database usages will not increase your trial period..
+        /// </summary>
+        internal static string DemoDbTrial {
+            get {
+                return ResourceManager.GetString("DemoDbTrial", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Error downloading your database.
         ///Please make sure that the url is correct.
