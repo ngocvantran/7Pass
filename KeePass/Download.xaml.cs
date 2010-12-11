@@ -185,6 +185,16 @@ namespace KeePass
 
         private void lnkDemo_Click(object sender, RoutedEventArgs e)
         {
+            if (AppSettingsService.HasDatabase())
+            {
+                var agree = MessageBox.Show(AppResources.ConfirmDemoDb,
+                    lnkDemo.Content.ToString(), MessageBoxButton.OKCancel) ==
+                        MessageBoxResult.OK;
+
+                if (!agree)
+                    return;
+            }
+
             TrialManager.UseDemoDb();
             using (var buffer = new MemoryStream(AppResources.Demo7Pass))
                 SaveDb(buffer);

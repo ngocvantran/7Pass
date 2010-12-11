@@ -58,7 +58,7 @@
                     Content="Download"
                     Click="cmdDownload_Click" />
 
-            <HyperlinkButton Grid.Row="6"
+            <HyperlinkButton Name="lnkDemo" Grid.Row="6"
                              Click="lnkDemo_Click"
                              Content="Use Demo database"/>
             <TextBlock Name="txtTrial" Grid.Row="7" TextWrapping="Wrap" />
