@@ -82,6 +82,15 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your trial peroid has ended..
+        /// </summary>
+        internal static string EndOfTrial {
+            get {
+                return ResourceManager.GetString("EndOfTrial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Database file too large..
         /// </summary>
         internal static string FileTooLarge {
@@ -97,6 +106,17 @@ namespace KeePass.Properties {
         internal static string NoNetwork {
             get {
                 return ResourceManager.GetString("NoNetwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please consider buying this application to support the author.
+        ///
+        ///Do you want to buy this app now?.
+        /// </summary>
+        internal static string NotifyPurchse {
+            get {
+                return ResourceManager.GetString("NotifyPurchse", resourceCulture);
             }
         }
         
@@ -117,6 +137,16 @@ namespace KeePass.Properties {
         internal static string Saving {
             get {
                 return ResourceManager.GetString("Saving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thank you for trying 7Pass.
+        ///You&apos;re at usage {0} out of {1} available for trial peroid..
+        /// </summary>
+        internal static string Trial {
+            get {
+                return ResourceManager.GetString("Trial", resourceCulture);
             }
         }
         

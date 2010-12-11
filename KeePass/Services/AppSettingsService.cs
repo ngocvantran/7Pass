@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.IO.IsolatedStorage;
+using KeePass.Data;
 using KeePass.IO;
 using KeePass.IO.Utils;
 
-namespace KeePass.Data
+namespace KeePass.Services
 {
     internal static class AppSettingsService
     {

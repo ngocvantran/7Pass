@@ -8,8 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
-using KeePass.Data;
 using KeePass.Properties;
+using KeePass.Services;
 
 namespace KeePass
 {

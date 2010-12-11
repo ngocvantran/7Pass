@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Data;
 using KeePass.IO;
+using KeePass.Services;
 using Microsoft.Phone.Shell;
 
 namespace KeePass

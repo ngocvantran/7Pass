@@ -3,7 +3,7 @@ using System.Windows;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace KeePass.Data
+namespace KeePass.Services
 {
     internal static class LifeCycle
     {
@@ -17,7 +17,7 @@ namespace KeePass.Data
         {
             if (page == null)
                 throw new ArgumentNullException("page");
-
+            
             if (KeyCache.Database != null)
             {
                 var aware = page as ILifeCycleAware;
@@ -55,6 +55,7 @@ namespace KeePass.Data
         private static void LoadState()
         {
             AppSettingsService.LoadSettings();
+            TrialManager.UpdateUsages();
         }
 
         private static void SaveState()

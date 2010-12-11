@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KeePass.Data
+namespace KeePass.Services
 {
     internal interface ILifeCycleAware
     {

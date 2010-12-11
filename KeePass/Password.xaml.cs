@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using KeePass.Data;
 using KeePass.Properties;
+using KeePass.Services;
 
 namespace KeePass
 {
