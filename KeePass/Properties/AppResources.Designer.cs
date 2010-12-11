@@ -60,6 +60,17 @@ namespace KeePass.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to You are going to replace your database with the Demo database.
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        internal static string ConfirmDemoDb {
+            get {
+                return ResourceManager.GetString("ConfirmDemoDb", resourceCulture);
+            }
+        }
+        
         internal static byte[] Demo7Pass {
             get {
                 object obj = ResourceManager.GetObject("Demo7Pass", resourceCulture);
@@ -77,7 +88,7 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Demo database usages will not increase your trial period..
+        ///   Looks up a localized string similar to Your trial period will not be affected when using the Demo database..
         /// </summary>
         internal static string DemoDbTrial {
             get {

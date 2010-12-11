@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.IO.IsolatedStorage;
-using KeePass.Data;
 using KeePass.IO;
 using KeePass.IO.Utils;
 
