@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KeePass.Data
+namespace KeePass.Services
 {
     internal enum DatabaseCheckResults
     {

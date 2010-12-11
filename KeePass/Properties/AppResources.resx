@@ -126,12 +126,20 @@ Please make sure that the url is correct.
   <data name="Downloading" xml:space="preserve">
     <value>Downloading {0:N0}% ...</value>
   </data>
+  <data name="EndOfTrial" xml:space="preserve">
+    <value>Your trial peroid has ended.</value>
+  </data>
   <data name="FileTooLarge" xml:space="preserve">
     <value>Database file too large.</value>
   </data>
   <data name="NoNetwork" xml:space="preserve">
     <value>No internet connection is available.
 Please try again later.</value>
+  </data>
+  <data name="NotifyPurchse" xml:space="preserve">
+    <value>Please consider buying this application to support the author.
+
+Do you want to buy this app now?</value>
   </data>
   <data name="NullDownload" xml:space="preserve">
     <value>
@@ -140,6 +148,10 @@ Please try again.</value>
   </data>
   <data name="Saving" xml:space="preserve">
     <value>Saving database...</value>
+  </data>
+  <data name="Trial" xml:space="preserve">
+    <value>Thank you for trying 7Pass.
+You're at usage {0} out of {1} available for trial peroid.</value>
   </data>
   <data name="WarningStorePassword" xml:space="preserve">
     <value>Please make sure that your phone's lock screen is password protected.

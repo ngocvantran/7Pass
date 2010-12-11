@@ -1,7 +1,7 @@
 ﻿using System;
 using KeePass.IO;
 
-namespace KeePass.Data
+namespace KeePass.Services
 {
     public static class KeyCache
     {

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Navigation;
-using KeePass.Data;
+using KeePass.Services;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -23,6 +23,7 @@ namespace KeePass
             InitializePhoneApplication();
         }
 
+        [DebuggerNonUserCode]
         public static void Quit()
         {
             throw new QuitException();

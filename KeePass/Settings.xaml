@@ -11,7 +11,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    BackKeyPress="PhoneApplicationPage_BackKeyPress">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -30,6 +31,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             
             <Button Grid.Row="0"
@@ -45,6 +48,15 @@
             <Button Grid.Row="2"
                     Content="Update Database"
                     Click="DownloadDatabase"/>
+            
+            <TextBlock Name="txtTrial" Grid.Row="4"
+                       Visibility="Collapsed" TextWrapping="Wrap">
+                [TrialMode]
+            </TextBlock>
+            
+            <HyperlinkButton Name="lnkTrial" Grid.Row="5"
+                             Visibility="Collapsed" Click="lnkTrial_Click"
+                             Content="Click here to purchase your license" />
         </Grid>
     </Grid>
 

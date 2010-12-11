@@ -2,8 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using KeePass.Data;
 using KeePass.IO;
+using KeePass.Properties;
+using KeePass.Services;
 
 namespace KeePass
 {
@@ -24,7 +25,35 @@ namespace KeePass
                 return;
             }
 
-            // Do not reload data
+            LoadData();
+            CheckLicense();
+        }
+
+        private static void CheckLicense()
+        {
+            if (!TrialManager.HasExpired)
+                return;
+
+            var purchase = MessageBox.Show(
+                AppResources.NotifyPurchse,
+                AppResources.EndOfTrial,
+                MessageBoxButton.OKCancel) ==
+                    MessageBoxResult.OK;
+
+            if (purchase)
+                TrialManager.ShowPurchase();
+        }
+
+        private Entry GetEntry()
+        {
+            var db = KeyCache.Database;
+            var entryId = NavigationContext.QueryString["id"];
+
+            return db.GetEntry(new Guid(entryId));
+        }
+
+        private void LoadData()
+        {
             if (DataContext != null)
                 return;
 
@@ -74,14 +103,6 @@ namespace KeePass
                 children.Add(text);
                 children.Add(value);
             }
-        }
-
-        private Entry GetEntry()
-        {
-            var db = KeyCache.Database;
-            var entryId = NavigationContext.QueryString["id"];
-
-            return db.GetEntry(new Guid(entryId));
         }
 
         private void Home_Click(object sender, EventArgs e)

@@ -63,18 +63,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\AppSettingsService.cs" />
-    <Compile Include="Data\Consts.cs" />
-    <Compile Include="Data\DatabaseCheckResults.cs" />
+    <Compile Include="Services\AppSettingsService.cs" />
+    <Compile Include="Services\Consts.cs" />
+    <Compile Include="Services\DatabaseCheckResults.cs" />
     <Compile Include="Data\DatabaseItem.cs" />
     <Compile Include="Data\DatabaseItems.cs" />
-    <Compile Include="Data\ILifeCycleAware.cs" />
-    <Compile Include="Data\LifeCycle.cs" />
+    <Compile Include="Services\ILifeCycleAware.cs" />
+    <Compile Include="Services\LifeCycle.cs" />
     <Compile Include="Data\Theme.cs" />
     <Compile Include="Download.xaml.cs">
       <DependentUpon>Download.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\KeyCache.cs" />
+    <Compile Include="Services\KeyCache.cs" />
     <Compile Include="EntryPage.xaml.cs">
       <DependentUpon>EntryPage.xaml</DependentUpon>
     </Compile>
@@ -94,6 +94,7 @@
     <Compile Include="Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\TrialManager.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
