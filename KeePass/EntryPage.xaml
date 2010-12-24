@@ -25,42 +25,44 @@
             <TextBlock x:Name="PageTitle" Text="{Binding Title}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <Grid x:Name="gridMain" Grid.Row="1" Margin="12,0,12,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="160" />
-            </Grid.RowDefinitions>
-            
-            <TextBlock Grid.Row ="0" Grid.Column="0"
-                       VerticalAlignment="Center">User name</TextBlock>
-            <TextBox Grid.Row ="0" Grid.Column="1"
-                     Text="{Binding UserName}" />
+        <ScrollViewer Grid.Row="1">
+            <Grid x:Name="gridMain" Margin="12,0,12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row ="1" Grid.Column="0"
-                       VerticalAlignment="Center">Password</TextBlock>
-            <TextBox Grid.Row ="1" Grid.Column="1"
-                     Text="{Binding Password}" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="160" />
+                </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row ="2" Grid.Column="0"
-                       VerticalAlignment="Center">Url</TextBlock>
-            <HyperlinkButton Grid.Row ="2" Grid.Column="1"
-                             HorizontalAlignment="Left"
-                             NavigateUri="{Binding Url}"
-                             Content="{Binding Url}"
-                             TargetName="_blank" />
+                <TextBlock Grid.Row ="0" Grid.Column="0"
+                    VerticalAlignment="Center">User name</TextBlock>
+                <TextBox Grid.Row ="0" Grid.Column="1"
+                    Text="{Binding UserName}" IsReadOnly="True" />
 
-            <TextBlock Grid.Row ="3" Grid.Column="0"
-                       VerticalAlignment="Center">Notes</TextBlock>
-            <TextBox Grid.Row ="3" Grid.Column="1"
-                     Text="{Binding Notes}" />
-        </Grid>
+                <TextBlock Grid.Row ="1" Grid.Column="0"
+                    VerticalAlignment="Center">Password</TextBlock>
+                <TextBox Grid.Row ="1" Grid.Column="1"
+                    Text="{Binding Password}" IsReadOnly="True" />
+
+                <TextBlock Grid.Row ="2" Grid.Column="0"
+                    VerticalAlignment="Center">Url</TextBlock>
+                <HyperlinkButton Grid.Row ="2" Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            NavigateUri="{Binding Url}"
+                            Content="{Binding Url}"
+                            TargetName="_blank" />
+
+                <TextBlock Grid.Row ="3" Grid.Column="0"
+                    VerticalAlignment="Center">Notes</TextBlock>
+                <TextBox Grid.Row ="3" Grid.Column="1"
+                    Text="{Binding Notes}" IsReadOnly="True" />
+            </Grid>
+        </ScrollViewer>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
