@@ -196,8 +196,10 @@ namespace KeePass
             }
 
             TrialManager.UseDemoDb();
-            using (var buffer = new MemoryStream(AppResources.Demo7Pass))
-                SaveDb(buffer);
+
+            var demoDb = Application.GetResourceStream(
+                new Uri("Demo7Pass.kdbx", UriKind.Relative));
+            SaveDb(demoDb.Stream);
         }
 
         private void txtUrl_KeyDown(object sender, KeyEventArgs e)

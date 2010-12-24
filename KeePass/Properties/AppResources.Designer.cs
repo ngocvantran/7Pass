@@ -71,13 +71,6 @@ namespace KeePass.Properties {
             }
         }
         
-        internal static byte[] Demo7Pass {
-            get {
-                object obj = ResourceManager.GetObject("Demo7Pass", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
         /// <summary>
         ///   Looks up a localized string similar to The password for the Demo database is &quot;demo&quot;, without quotes..
         /// </summary>
