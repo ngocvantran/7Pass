@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Navigation;
 using KeePass.IO;
 using KeePass.Properties;
@@ -70,7 +69,7 @@ namespace KeePass
             if (others.Length == 0)
                 return;
 
-            var rows = gridMain.RowDefinitions;
+            var rows = gridFields.RowDefinitions;
             for (var i = 0; i < others.Length; i++)
             {
                 rows.Add(new RowDefinition
@@ -79,7 +78,7 @@ namespace KeePass
                 });
             }
 
-            var children = gridMain.Children;
+            var children = gridFields.Children;
             for (var i = 0; i < others.Length; i++)
             {
                 var key = others[i];
@@ -98,8 +97,8 @@ namespace KeePass
                 Grid.SetColumn(text, 0);
                 Grid.SetColumn(value, 1);
 
-                Grid.SetRow(text, 4 + i);
-                Grid.SetRow(value, 4 + i);
+                Grid.SetRow(text, i);
+                Grid.SetRow(value, i);
 
                 children.Add(text);
                 children.Add(value);

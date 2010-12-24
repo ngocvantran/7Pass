@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -14,57 +15,48 @@
     d:DataContext="{d:DesignData Data/EntryData.xaml}"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <controls:Panorama Title="{Binding Title}">
+        <controls:PanoramaItem Header="General">
+            <StackPanel>
+                <TextBlock>User name</TextBlock>
+                <TextBox Text="{Binding UserName}" IsReadOnly="True" />
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="{Binding Title}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+                <TextBlock>Password</TextBlock>
+                <TextBox Text="{Binding Password}" IsReadOnly="True" />
 
-        <ScrollViewer Grid.Row="1">
-            <Grid x:Name="gridMain" Margin="12,0,12,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                <TextBlock>Url</TextBlock>
+                <HyperlinkButton NavigateUri="{Binding Url}"
+                                 Content="{Binding Url}"
+                                 TargetName="_blank" HorizontalContentAlignment="Left" />
+            </StackPanel>
+        </controls:PanoramaItem>
 
+        <controls:PanoramaItem Header="Notes">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="160" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row ="0" Grid.Column="0"
-                    VerticalAlignment="Center">User name</TextBlock>
-                <TextBox Grid.Row ="0" Grid.Column="1"
-                    Text="{Binding UserName}" IsReadOnly="True" />
-
-                <TextBlock Grid.Row ="1" Grid.Column="0"
-                    VerticalAlignment="Center">Password</TextBlock>
-                <TextBox Grid.Row ="1" Grid.Column="1"
-                    Text="{Binding Password}" IsReadOnly="True" />
-
-                <TextBlock Grid.Row ="2" Grid.Column="0"
-                    VerticalAlignment="Center">Url</TextBlock>
-                <HyperlinkButton Grid.Row ="2" Grid.Column="1"
-                            HorizontalAlignment="Left"
-                            NavigateUri="{Binding Url}"
-                            Content="{Binding Url}"
-                            TargetName="_blank" />
-
-                <TextBlock Grid.Row ="3" Grid.Column="0"
-                    VerticalAlignment="Center">Notes</TextBlock>
-                <TextBox Grid.Row ="3" Grid.Column="1"
+                
+                <TextBlock Grid.Row="0">Notes</TextBlock>
+                
+                <TextBox Grid.Row ="1" Grid.Column="1" TextWrapping="Wrap"
                     Text="{Binding Notes}" IsReadOnly="True" />
             </Grid>
-        </ScrollViewer>
-    </Grid>
+        </controls:PanoramaItem>
 
+        <controls:PanoramaItem Header="Fields">
+            <ScrollViewer>
+                <Grid x:Name="gridFields">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ScrollViewer>
+        </controls:PanoramaItem>
+    </controls:Panorama>
+    
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton IconUri="/Images/home.png"
