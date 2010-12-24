@@ -24,7 +24,6 @@ namespace KeePass
             if (Theme.IsDarkTheme())
                 return;
 
-
             var uri = new Uri("/Images/warning.light.png",
                 UriKind.Relative);
 
@@ -68,8 +67,8 @@ namespace KeePass
             e.Complete();
             e.Handled = true;
 
-            MessageBox.Show(AppResources
-                .WarningStorePassword);
+            MessageBox.Show(AppResources.WarningStorePassword,
+                (string)chkStore.Content, MessageBoxButton.OK);
         }
 
         private void txtPassword_KeyDown(
