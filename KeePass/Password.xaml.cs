@@ -6,17 +6,24 @@ using System.Windows.Media.Imaging;
 using KeePass.Data;
 using KeePass.Properties;
 using KeePass.Services;
+using Microsoft.Phone.Shell;
 
 namespace KeePass
 {
     public partial class Password
     {
+        private readonly ApplicationBarIconButton _cmdAppBarOpen;
+
         public Password()
         {
             InitializeComponent();
 
+            _cmdAppBarOpen = (ApplicationBarIconButton)
+                ApplicationBar.Buttons[0];
+
             if (Theme.IsDarkTheme())
                 return;
+
 
             var uri = new Uri("/Images/warning.light.png",
                 UriKind.Relative);
@@ -45,6 +52,11 @@ namespace KeePass
             App.Quit();
         }
 
+        private void cmdClear_Click(object sender, EventArgs e)
+        {
+            txtPassword.Password = string.Empty;
+        }
+
         private void cmdOpen_Click(object sender, EventArgs e)
         {
             OpenDatabase();
@@ -70,8 +82,11 @@ namespace KeePass
         private void txtPassword_PasswordChanged(
             object sender, RoutedEventArgs e)
         {
-            cmdOpen.IsEnabled = txtPassword
+            var hasPassword = txtPassword
                 .Password.Length > 0;
+
+            cmdOpen.IsEnabled = hasPassword;
+            _cmdAppBarOpen.IsEnabled = hasPassword;
         }
     }
 }
