@@ -8,6 +8,10 @@ Features:
  - Remembers download URL for frequent update.
  - Has built-in Demo database for trying without affecting trial period.
 
+Recent changes:
+ - Fixed keyboard obscures Open button in Password page.
+ - Improved entry page (fields scrolling, larger notes textbox).
+
 Future plan:
  - Add copy & paste support it is available.
  - Add support for entry history.
