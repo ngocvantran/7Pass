@@ -4,9 +4,9 @@ Features:
  - Compatible with KeePass 2.x databases protected by a Master password.
  - Supports custom fields, (protected & not protected).
  - Supports urls with embedded fields.
- - Remember your password so that you don't have to enter your password every time *.
- - Remember download URL for frequent update.
- - Has build in Demo databases for trying without affecting trial period.
+ - Remembers your password so that you don't have to enter your password every time *.
+ - Remembers download URL for frequent update.
+ - Has built-in Demo database for trying without affecting trial period.
 
 Future plan:
  - Add copy & paste support it is available.
@@ -14,7 +14,7 @@ Future plan:
 
 If you don't have a web server to download your database to your phone, you can use Java Mini Web Server from http://www.jibble.org/miniwebserver/, or any personal web server.
 
-* Please only use this feature when you're phone is already locked with a PIN. Doing so without a PIN lock will expose your passwords to anyone getting hold of your phone.
+* Please only use this feature when your phone is already locked with a PIN. Doing so without a PIN lock will expose your passwords to anyone getting hold of your phone.
 
 Keywords:
 7Pass KeePass password encrypt encryption privacy
