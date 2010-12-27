@@ -148,9 +148,13 @@ namespace KeePass
             if (e.Error != null)
             {
                 UpdateControls(false);
-                MessageBox.Show(
-                    AppResources.DownloadError +
-                        e.Error.Message);
+                
+                var message = AppResources.DownloadError +
+                    e.Error.Message;
+
+                MessageBox.Show(message,
+                    AppResources.DownloadTitle,
+                    MessageBoxButton.OK);
 
                 return;
             }
@@ -162,7 +166,9 @@ namespace KeePass
             if (result == null || result.Length == 0)
             {
                 UpdateControls(false);
-                MessageBox.Show(AppResources.NullDownload);
+                MessageBox.Show(AppResources.NullDownload,
+                    AppResources.DownloadTitle,
+                    MessageBoxButton.OK);
 
                 return;
             }
@@ -170,15 +176,19 @@ namespace KeePass
             if (!DatabaseReader.CheckSignature(result))
             {
                 UpdateControls(false);
-                MessageBox.Show(AppResources.NotKdbx);
+                MessageBox.Show(AppResources.NotKdbx,
+                    AppResources.DownloadTitle,
+                    MessageBoxButton.OK);
 
                 return;
             }
 
             if (!IncreaseStorage(result.Length))
             {
-                MessageBox.Show(AppResources.FileTooLarge);
                 UpdateControls(false);
+                MessageBox.Show(AppResources.FileTooLarge,
+                    AppResources.DownloadTitle,
+                    MessageBoxButton.OK);
 
                 return;
             }
@@ -198,11 +208,12 @@ namespace KeePass
         {
             if (AppSettingsService.HasDatabase())
             {
-                var agree = MessageBox.Show(AppResources.ConfirmDemoDb,
-                    lnkDemo.Content.ToString(), MessageBoxButton.OKCancel) ==
-                        MessageBoxResult.OK;
+                var result = MessageBox.Show(
+                    AppResources.ConfirmDemoDb,
+                    lnkDemo.Content.ToString(),
+                    MessageBoxButton.OKCancel);
 
-                if (!agree)
+                if (result != MessageBoxResult.OK)
                     return;
             }
 

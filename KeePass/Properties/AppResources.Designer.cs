@@ -111,6 +111,15 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Database Download.
+        /// </summary>
+        internal static string DownloadTitle {
+            get {
+                return ResourceManager.GetString("DownloadTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your trial peroid has ended..
         /// </summary>
         internal static string EndOfTrial {

@@ -175,4 +175,7 @@ Saving your database password without lock screen protection will allow anyone t
 
 To set lock screen password, please go to Phone's Settings\lock &amp; wallpaper.</value>
   </data>
+  <data name="DownloadTitle" xml:space="preserve">
+    <value>Database Download</value>
+  </data>
 </root>
