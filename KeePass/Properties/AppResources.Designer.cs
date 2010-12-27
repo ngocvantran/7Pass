@@ -138,6 +138,17 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve specified an incorrect password.
+        ///
+        ///Please note that 7Pass only support databases protected by Master Key only (not key file or Windows account or any of their combination)..
+        /// </summary>
+        internal static string IncorrectPassword {
+            get {
+                return ResourceManager.GetString("IncorrectPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No internet connection is available.
         ///Please try again later..
         /// </summary>
@@ -176,6 +187,15 @@ namespace KeePass.Properties {
         internal static string NullDownload {
             get {
                 return ResourceManager.GetString("NullDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master Key.
+        /// </summary>
+        internal static string PasswordTitle {
+            get {
+                return ResourceManager.GetString("PasswordTitle", resourceCulture);
             }
         }
         
