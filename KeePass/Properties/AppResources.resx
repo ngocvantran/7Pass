@@ -152,6 +152,10 @@ Please try again later.</value>
 
 Do you want to buy this app now?</value>
   </data>
+  <data name="NotKdbx" xml:space="preserve">
+    <value>Invalid file signature detected.
+The specified file is not a KeePass 2.x database.</value>
+  </data>
   <data name="NullDownload" xml:space="preserve">
     <value>
 Error downloading the database.

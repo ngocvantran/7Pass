@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using KeePass.IO;
 using KeePass.Properties;
 using KeePass.Services;
 
@@ -166,6 +167,14 @@ namespace KeePass
                 return;
             }
 
+            if (!DatabaseReader.CheckSignature(result))
+            {
+                UpdateControls(false);
+                MessageBox.Show(AppResources.NotKdbx);
+
+                return;
+            }
+
             if (!IncreaseStorage(result.Length))
             {
                 MessageBox.Show(AppResources.FileTooLarge);
@@ -175,6 +184,8 @@ namespace KeePass
             }
 
             TrialManager.UseRealDb();
+
+            result.Position = 0;
             SaveDb(result);
         }
 

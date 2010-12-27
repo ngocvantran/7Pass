@@ -8,13 +8,22 @@ namespace KeePass.IO
 {
     public static class DatabaseReader
     {
+        public static bool CheckSignature(Stream stream)
+        {
+            return FileFormat.Verify(stream);
+        }
+
         public static DbPersistentData GetXml(
             Stream stream, string password)
         {
             if (stream == null)
                 throw new ArgumentNullException("stream");
 
-            CheckSignature(stream);
+            if (!CheckSignature(stream))
+            {
+                throw new FormatException(
+                    "Invalid format detected");
+            }
 
             var headers = ReadHeaders(stream);
             headers.Verify();
@@ -45,15 +54,6 @@ namespace KeePass.IO
 
                 var parser = new XmlParser(crypto);
                 return new Database(parser.Parse(buffer));
-            }
-        }
-
-        private static void CheckSignature(Stream stream)
-        {
-            if (!FileFormat.Verify(stream))
-            {
-                throw new FormatException(
-                    "Invalid format detected");
             }
         }
 
