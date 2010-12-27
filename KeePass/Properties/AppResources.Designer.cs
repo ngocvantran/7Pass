@@ -150,6 +150,16 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid file signature detected.
+        ///The specified file is not a KeePass 2.x database..
+        /// </summary>
+        internal static string NotKdbx {
+            get {
+                return ResourceManager.GetString("NotKdbx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 
         ///Error downloading the database.
         ///Please try again..
