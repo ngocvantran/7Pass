@@ -32,11 +32,19 @@ namespace KeePass
 
         private void OpenDatabase()
         {
-            AppSettingsService.Open(
+            var opened = AppSettingsService.Open(
                 txtPassword.Password,
                 chkStore.IsChecked == true);
 
-            NavigationService.GoBack();
+            if (opened)
+            {
+                NavigationService.GoBack();
+                return;
+            }
+
+            MessageBox.Show(AppResources.IncorrectPassword,
+                AppResources.PasswordTitle,
+                MessageBoxButton.OK);
         }
 
         private void OpenSettings(object sender, EventArgs e)
