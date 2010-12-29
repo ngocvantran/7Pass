@@ -32,17 +32,9 @@
         </controls:PanoramaItem>
 
         <controls:PanoramaItem Header="Notes">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                
-                <TextBlock Grid.Row="0">Notes</TextBlock>
-                
-                <TextBox Grid.Row ="1" Grid.Column="1" TextWrapping="Wrap"
-                    Text="{Binding Notes}" IsReadOnly="True" />
-            </Grid>
+            <ScrollViewer>
+                <TextBlock TextWrapping="Wrap" Text="{Binding Notes}" />
+            </ScrollViewer>
         </controls:PanoramaItem>
 
         <controls:PanoramaItem Header="Fields">
