@@ -54,13 +54,14 @@ namespace KeePass
 
             // Display entries
             PageTitle.Text = group.Name;
+            var converter = new ItemConverter(KeyCache.Database);
+            _items.Items = new ObservableCollection<DatabaseItem>();
 
             var args = new WorkerArgs
             {
                 Root = group,
-                Converter = new ItemConverter(),
-                Items = _items.Items =
-                    new ObservableCollection<DatabaseItem>(),
+                Items = _items.Items,
+                Converter = converter,
             };
 
             var worker = new BackgroundWorker();
@@ -112,8 +113,8 @@ namespace KeePass
             var list = args.Items;
             var converter = args.Converter;
 
-            var children = converter.Convert(root.Groups)
-                .Union(converter.Convert(root.Entries))
+            var children = converter.Convert(root.Groups, Dispatcher)
+                .Union(converter.Convert(root.Entries, Dispatcher))
                 .ToList();
 
             var dispatcher = lstItems.Dispatcher;

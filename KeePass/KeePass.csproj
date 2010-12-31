@@ -143,50 +143,91 @@
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml" />
-    <Content Include="Demo7Pass.kdbx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Demo7Pass.kdbx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApplicationIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Background.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\check.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\close.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\entry.dark.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\entry.light.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\group.dark.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\group.light.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\search.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\settings.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\home.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\warning.dark.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\warning.light.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="ApplicationIcon.png" />
+    <Content Include="Background.png" />
+    <Content Include="Icons\00.png" />
+    <Content Include="Icons\01.png" />
+    <Content Include="Icons\02.png" />
+    <Content Include="Icons\03.png" />
+    <Content Include="Icons\04.png" />
+    <Content Include="Icons\05.png" />
+    <Content Include="Icons\06.png" />
+    <Content Include="Icons\07.png" />
+    <Content Include="Icons\08.png" />
+    <Content Include="Icons\09.png" />
+    <Content Include="Icons\10.png" />
+    <Content Include="Icons\11.png" />
+    <Content Include="Icons\12.png" />
+    <Content Include="Icons\13.png" />
+    <Content Include="Icons\14.png" />
+    <Content Include="Icons\15.png" />
+    <Content Include="Icons\16.png" />
+    <Content Include="Icons\17.png" />
+    <Content Include="Icons\18.png" />
+    <Content Include="Icons\19.png" />
+    <Content Include="Icons\20.png" />
+    <Content Include="Icons\21.png" />
+    <Content Include="Icons\22.png" />
+    <Content Include="Icons\23.png" />
+    <Content Include="Icons\24.png" />
+    <Content Include="Icons\25.png" />
+    <Content Include="Icons\26.png" />
+    <Content Include="Icons\27.png" />
+    <Content Include="Icons\28.png" />
+    <Content Include="Icons\29.png" />
+    <Content Include="Icons\30.png" />
+    <Content Include="Icons\31.png" />
+    <Content Include="Icons\32.png" />
+    <Content Include="Icons\33.png" />
+    <Content Include="Icons\34.png" />
+    <Content Include="Icons\35.png" />
+    <Content Include="Icons\36.png" />
+    <Content Include="Icons\37.png" />
+    <Content Include="Icons\38.png" />
+    <Content Include="Icons\39.png" />
+    <Content Include="Icons\40.png" />
+    <Content Include="Icons\41.png" />
+    <Content Include="Icons\42.png" />
+    <Content Include="Icons\43.png" />
+    <Content Include="Icons\44.png" />
+    <Content Include="Icons\45.png" />
+    <Content Include="Icons\46.png" />
+    <Content Include="Icons\47.png" />
+    <Content Include="Icons\48.png" />
+    <Content Include="Icons\49.png" />
+    <Content Include="Icons\50.png" />
+    <Content Include="Icons\51.png" />
+    <Content Include="Icons\52.png" />
+    <Content Include="Icons\53.png" />
+    <Content Include="Icons\54.png" />
+    <Content Include="Icons\55.png" />
+    <Content Include="Icons\56.png" />
+    <Content Include="Icons\57.png" />
+    <Content Include="Icons\58.png" />
+    <Content Include="Icons\59.png" />
+    <Content Include="Icons\60.png" />
+    <Content Include="Icons\61.png" />
+    <Content Include="Icons\62.png" />
+    <Content Include="Icons\63.png" />
+    <Content Include="Icons\64.png" />
+    <Content Include="Icons\65.png" />
+    <Content Include="Icons\66.png" />
+    <Content Include="Icons\67.png" />
+    <Content Include="Icons\68.png" />
+    <Content Include="Images\check.png" />
+    <Content Include="Images\close.png" />
+    <Content Include="Images\entry.dark.png" />
+    <Content Include="Images\entry.light.png" />
+    <Content Include="Images\group.dark.png" />
+    <Content Include="Images\group.light.png" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\settings.png" />
+    <Content Include="Images\home.png" />
+    <Content Include="Images\warning.dark.png" />
+    <Content Include="Images\warning.light.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\AppResources.resx">

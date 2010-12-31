@@ -52,9 +52,16 @@
                                 </EventTrigger>
                             </StackPanel.Triggers>
 
-                            <Image Source="{Binding Icon}"
-                                   Width="50" Height="50"
-                                   VerticalAlignment="Center" />
+                            <Grid Width="50" Height="50">
+                                <Image Source="{Binding Icon}" Stretch="None"
+                                       VerticalAlignment="Stretch"
+                                       HorizontalAlignment="Stretch" />
+                                <Image Source="{Binding Overlay}" Stretch="None"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Right"
+                                       Margin="0,0,8,8" />
+                            </Grid>
+                            
                             <StackPanel Margin="0,0,0,17" Width="432">
                                 <TextBlock Text="{Binding Title}" TextWrapping="Wrap"
                                            MaxHeight="120"

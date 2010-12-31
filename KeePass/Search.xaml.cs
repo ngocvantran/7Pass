@@ -16,12 +16,12 @@ namespace KeePass
     public partial class Search : ILifeCycleAware
     {
         private const int MAX_ITEMS = 10;
+        
         private readonly IList<DatabaseItem> _children;
-
-        private readonly ItemConverter _converter;
         private readonly DatabaseItems _items;
         private readonly BackgroundWorker _worker;
-
+        
+        private ItemConverter _converter;
         private List<Entry> _entries;
         private List<Group> _groups;
 
@@ -34,8 +34,6 @@ namespace KeePass
 
             _children = _items.Items =
                 new ObservableCollection<DatabaseItem>();
-
-            _converter = new ItemConverter();
 
             _worker = new BackgroundWorker
             {
@@ -71,7 +69,15 @@ namespace KeePass
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            LifeCycle.CheckDbState(this);
+
+            if (LifeCycle.CheckDbState(this) ==
+                DatabaseCheckResults.Terminate)
+            {
+                return;
+            }
+
+            _converter = new ItemConverter(
+                KeyCache.Database);
         }
 
         private static bool Contains(
@@ -153,8 +159,8 @@ namespace KeePass
                 if (_worker.CancellationPending)
                     return;
 
-                var items = _converter.Convert(groups)
-                    .Union(_converter.Convert(entries))
+                var items = _converter.Convert(groups, Dispatcher)
+                    .Union(_converter.Convert(entries, Dispatcher))
                     .ToList();
 
                 var dispatcher = lstItems.Dispatcher;
