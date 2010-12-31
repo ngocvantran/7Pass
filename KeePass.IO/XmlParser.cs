@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Xml;
 using KeePass.IO.Utils;
 
@@ -18,7 +20,7 @@ namespace KeePass.IO
             _crypto = crypto;
         }
 
-        public Group Parse(Stream stream)
+        public Database Parse(Stream stream)
         {
             if (stream == null)
                 throw new ArgumentNullException("stream");
@@ -36,14 +38,27 @@ namespace KeePass.IO
                 if (!reader.ReadToFollowing("KeePassFile"))
                     return null;
 
-                if (!reader.ReadToDescendant("Root"))
+                if (!reader.ReadToDescendant("Meta"))
                     return null;
+
+                IDictionary<Guid, ImageSource> icons;
+                using (var subReader = reader.ReadSubtree())
+                    icons = ParseIcons(subReader);
+
+                if (reader.Name != "Root" &&
+                    !reader.ReadToNextSibling("Root"))
+                {
+                    return null;
+                }
 
                 if (!reader.ReadToDescendant("Group"))
                     return null;
 
                 using (var subReader = reader.ReadSubtree())
-                    return ParseGroup(subReader);
+                {
+                    var root = ParseGroup(subReader);
+                    return new Database(root, icons);
+                }
             }
         }
 
@@ -144,13 +159,41 @@ namespace KeePass.IO
 
             if (reader.Name == "CustomIconUUID")
             {
-                var value = reader
-                    .ReadElementContentAsString();
-                data.Custom = new Guid(Convert
-                    .FromBase64String(value));
+                data.Custom = reader
+                    .ReadElementContentAsGuid();
             }
 
             return data;
+        }
+
+        private static IDictionary<Guid, ImageSource>
+            ParseIcons(XmlReader reader)
+        {
+            var icons = new Dictionary<Guid, ImageSource>();
+
+            if (reader.ReadToFollowing("CustomIcons"))
+            {
+                while (reader.ReadToFollowing("UUID"))
+                {
+                    var id = reader.ReadElementContentAsGuid();
+
+                    if (reader.Name != "Data" &&
+                        !reader.ReadToNextSibling("Data"))
+                    {
+                        continue;
+                    }
+
+                    var data = Convert.FromBase64String(
+                        reader.ReadElementContentAsString());
+
+                    var image = new BitmapImage();
+                    image.SetSource(new MemoryStream(data));
+
+                    icons.Add(id, image);
+                }
+            }
+
+            return icons;
         }
 
         private Dictionary<string, string>
@@ -202,8 +245,7 @@ namespace KeePass.IO
         private static Guid ReadId(XmlReader reader)
         {
             reader.ReadToDescendant("UUID");
-            var id = reader.ReadElementContentAsString();
-            return new Guid(Convert.FromBase64String(id));
+            return reader.ReadElementContentAsGuid();
         }
 
         private static DateTime ReadLastModified(XmlReader reader)

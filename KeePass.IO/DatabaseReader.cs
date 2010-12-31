@@ -53,7 +53,7 @@ namespace KeePass.IO
                     .Deserialize(data.Protection);
 
                 var parser = new XmlParser(crypto);
-                return new Database(parser.Parse(buffer));
+                return parser.Parse(buffer);
             }
         }
 
