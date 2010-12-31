@@ -4,11 +4,21 @@ Features:
  - Compatible with KeePass 2.x databases protected by a Master password.
  - Supports custom fields, (protected & not protected).
  - Supports urls with embedded fields.
+ - Supports group and entry icons (including custom icons).
  - Remembers your password so that you don't have to enter your password every time *.
  - Remembers download URL for frequent update.
  - Has built-in Demo database for trying without affecting trial period.
 
-Recent changes:
+Support Info:
+ - Blog: http://7pass.wordpress.com
+ - Source code: https://github.com/7pass/7pass
+
+Version 1.3:
+ - Added incorrect password prompt.
+ - Added support for group/entry icons.
+ - Improved notes displaying in entry page.
+
+Version 1.2:
  - Fixed keyboard obscures Open button in Password page.
  - Improved entry page (fields scrolling, larger notes textbox).
 
