@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Media;
 
 namespace KeePass.Data
 {
@@ -15,6 +16,14 @@ namespace KeePass.Data
         /// </summary>
         /// <value>The notes.</value>
         public string Notes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the overlay icon.
+        /// </summary>
+        /// <value>
+        /// The overlay icon.
+        /// </value>
+        public ImageSource Overlay { get; set; }
 
         /// <summary>
         /// Gets or sets the source.
