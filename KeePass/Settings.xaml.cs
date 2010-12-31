@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Navigation;
 using KeePass.Properties;
 using KeePass.Services;
 
@@ -21,6 +22,11 @@ namespace KeePass
 
             txtTrial.Visibility = Visibility.Visible;
             lnkTrial.Visibility = Visibility.Visible;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
 
             txtTrial.Text = string.Format(AppResources.Trial,
                 TrialManager.Usages, TrialManager.USAGES_LIMIT);

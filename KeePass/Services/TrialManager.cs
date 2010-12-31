@@ -79,11 +79,13 @@ namespace KeePass.Services
 
         public static void UseDemoDb()
         {
-            if (DemoDb)
-                return;
+            if (!DemoDb)
+                DemoDb = true;
+        }
 
-            Usages--;
-            DemoDb = true;
+        public static void UpdatedDb()
+        {
+            Usages = DemoDb ? 0 : 1;
         }
 
         public static void UseRealDb()

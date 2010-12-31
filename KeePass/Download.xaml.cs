@@ -101,6 +101,7 @@ namespace KeePass
                 CopyStream(database, fs);
             }
 
+            TrialManager.UpdatedDb();
             AppSettingsService.Clear();
             AppSettingsService.DownloadUrl = txtUrl.Text;
 
