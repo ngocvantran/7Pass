@@ -24,8 +24,8 @@ Version 1.2:
  - Improved entry page (fields scrolling, larger notes textbox).
 
 Future plan:
- - Add copy & paste support it is available.
  - Add support for entry history.
+ - Add copy & paste support (OS limitation).
 
 If you don't have a web server to download your database to your phone, you can use Java Mini Web Server from http://www.jibble.org/miniwebserver/, or any personal web server.
 
