@@ -36,6 +36,14 @@ namespace KeePass.IO
         public Guid ID { get; set; }
 
         /// <summary>
+        /// Gets or sets the icon data.
+        /// </summary>
+        /// <value>
+        /// The icon data.
+        /// </value>
+        public IconData Icon { get; set; }
+
+        /// <summary>
         /// Gets the value of the specified key.
         /// </summary>
         /// <value>Value of the specified key.</value>

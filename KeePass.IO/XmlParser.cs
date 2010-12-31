@@ -88,6 +88,7 @@ namespace KeePass.IO
         private Entry ParseEntry(XmlReader reader)
         {
             var id = ReadId(reader);
+            var icon = ParseIcon(reader);
 
             var lastModified = ReadLastModified(reader);
             var fields = ReadFields(reader);
@@ -99,6 +100,7 @@ namespace KeePass.IO
             var entry = new Entry(fields)
             {
                 ID = id,
+                Icon = icon,
                 Histories = histories,
                 LastModified = lastModified,
             };
@@ -116,15 +118,39 @@ namespace KeePass.IO
             var name = reader
                 .ReadElementContentAsString();
 
+            var icon = ParseIcon(reader);
+
             var group = new Group
             {
                 ID = id,
                 Name = name,
+                Icon = icon,
             };
 
             ParseChildren(reader, group);
 
             return group;
+        }
+
+        private static IconData ParseIcon(XmlReader reader)
+        {
+            var data = new IconData();
+
+            if (reader.Name != "IconID")
+                reader.ReadToNextSibling("IconID");
+
+            data.Standard = reader
+                .ReadElementContentAsInt();
+
+            if (reader.Name == "CustomIconUUID")
+            {
+                var value = reader
+                    .ReadElementContentAsString();
+                data.Custom = new Guid(Convert
+                    .FromBase64String(value));
+            }
+
+            return data;
         }
 
         private Dictionary<string, string>
