@@ -4,9 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:ms="clr-namespace:Microsoft.Unsupported"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls" mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -27,104 +28,16 @@
         <Controls:Pivot Grid.Row="1">
             <Controls:PivotItem Name="pivotGroup">
                 <ListBox Name="lstItems" ItemsSource="{Binding Items}"
-                     VerticalAlignment="Stretch"
-                     HorizontalAlignment="Stretch"
-                     ms:TiltEffect.IsTiltEnabled="True"
-                     SelectionChanged="lstItems_SelectionChanged">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Name="fadeIn">
-                                <StackPanel.Triggers>
-                                    <EventTrigger RoutedEvent="StackPanel.Loaded">
-                                        <BeginStoryboard>
-                                            <BeginStoryboard.Storyboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation Duration="0:0:0.7" From="0" To="1"
-                                                                     Storyboard.TargetName="fadeIn"
-                                                                     Storyboard.TargetProperty="Opacity">
-                                                        <DoubleAnimation.EasingFunction>
-                                                            <PowerEase EasingMode="EaseOut"/>
-                                                        </DoubleAnimation.EasingFunction>
-                                                    </DoubleAnimation>
-                                                </Storyboard>
-                                            </BeginStoryboard.Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                </StackPanel.Triggers>
-
-                                <Grid Width="50" Height="50">
-                                    <Image Source="{Binding Icon}" Stretch="None"
-                                       VerticalAlignment="Stretch"
-                                       HorizontalAlignment="Stretch" />
-                                    <Image Source="{Binding Overlay}" Stretch="None"
-                                       VerticalAlignment="Bottom"
-                                       HorizontalAlignment="Right"
-                                       Margin="0,0,8,8" />
-                                </Grid>
-
-                                <StackPanel Margin="0,0,0,17" Width="432">
-                                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap"
-                                           MaxHeight="120"
-                                           Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding Notes}" TextWrapping="Wrap"
-                                           Margin="12,-6,12,0" MaxHeight="112"
-                                           Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                         Style="{StaticResource ItemsList}"
+                         SelectionChanged="lstItems_SelectionChanged" />
             </Controls:PivotItem>
 
             <Controls:PivotItem Header="History">
                 <ListBox Name="lstHistory" ItemsSource="{Binding Histories}"
-                     VerticalAlignment="Stretch"
-                     HorizontalAlignment="Stretch"
-                     ms:TiltEffect.IsTiltEnabled="True"
-                     SelectionChanged="lstHistory_SelectionChanged">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Name="fadeIn">
-                                <StackPanel.Triggers>
-                                    <EventTrigger RoutedEvent="StackPanel.Loaded">
-                                        <BeginStoryboard>
-                                            <BeginStoryboard.Storyboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation Duration="0:0:0.7" From="0" To="1"
-                                                                     Storyboard.TargetName="fadeIn"
-                                                                     Storyboard.TargetProperty="Opacity">
-                                                        <DoubleAnimation.EasingFunction>
-                                                            <PowerEase EasingMode="EaseOut"/>
-                                                        </DoubleAnimation.EasingFunction>
-                                                    </DoubleAnimation>
-                                                </Storyboard>
-                                            </BeginStoryboard.Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                </StackPanel.Triggers>
-
-                                <Grid Width="50" Height="50">
-                                    <Image Source="{Binding Icon}" Stretch="None"
-                                       VerticalAlignment="Stretch"
-                                       HorizontalAlignment="Stretch" />
-                                    <Image Source="{Binding Overlay}" Stretch="None"
-                                       VerticalAlignment="Bottom"
-                                       HorizontalAlignment="Right"
-                                       Margin="0,0,8,8" />
-                                </Grid>
-
-                                <StackPanel Margin="0,0,0,17" Width="432">
-                                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap"
-                                           MaxHeight="120"
-                                           Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding Notes}" TextWrapping="Wrap"
-                                           Margin="12,-6,12,0" MaxHeight="112"
-                                           Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                         Style="{StaticResource ItemsList}"
+                         SelectionChanged="lstHistory_SelectionChanged" />
             </Controls:PivotItem>
         </Controls:Pivot>
     </Grid>

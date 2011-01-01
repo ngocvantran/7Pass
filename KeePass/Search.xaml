@@ -21,8 +21,10 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Search" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Search" Margin="9,-7,0,0"
+                       Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
@@ -36,51 +38,9 @@
                      KeyDown="txtSearch_KeyDown" />
             <ListBox Name="lstItems" Grid.Row="1"
                      ItemsSource="{Binding Items}"
-                     VerticalAlignment="Stretch"
-                     HorizontalAlignment="Stretch"
-                     SelectionChanged="lstItems_SelectionChanged">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Name="fadeIn">
-                            <StackPanel.Triggers>
-                                <EventTrigger RoutedEvent="StackPanel.Loaded">
-                                    <BeginStoryboard>
-                                        <BeginStoryboard.Storyboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Duration="0:0:0.7" From="0" To="1"
-                                                                 Storyboard.TargetName="fadeIn" Storyboard.TargetProperty="Opacity">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <PowerEase EasingMode="EaseOut"/>
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                            </Storyboard>
-                                        </BeginStoryboard.Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </StackPanel.Triggers>
-                            
-                            <Grid Width="50" Height="50">
-                                <Image Source="{Binding Icon}" Stretch="None"
-                                       VerticalAlignment="Stretch"
-                                       HorizontalAlignment="Stretch" />
-                                <Image Source="{Binding Overlay}" Stretch="None"
-                                       VerticalAlignment="Bottom"
-                                       HorizontalAlignment="Right"
-                                       Margin="0,0,8,8" />
-                            </Grid>
-                            
-                            <StackPanel Margin="0,0,0,17" Width="432">
-                                <TextBlock Text="{Binding Title}" TextWrapping="Wrap"
-                                           MaxHeight="120"
-                                           Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Text="{Binding Notes}" TextWrapping="Wrap"
-                                           Margin="12,-6,12,0" MaxHeight="112"
-                                           Style="{StaticResource PhoneTextSubtleStyle}"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                     Style="{StaticResource ItemsList}"
+                     SelectionChanged="lstItems_SelectionChanged" />
         </Grid>
     </Grid>
 
