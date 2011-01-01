@@ -7,6 +7,7 @@ Features:
  - Supports group and entry icons (including custom icons).
  - Remembers your password so that you don't have to enter your password every time *.
  - Remembers download URL for frequent update.
+ - Remembers recently viewed entries for quick access.
  - Has built-in Demo database for trying without affecting trial period.
 
 Support Info:
@@ -14,6 +15,7 @@ Support Info:
  - Source code: https://github.com/7pass/7pass
 
 Version 1.3:
+ - Added history of recently viewed entries.
  - Update your DB resets usage count to 1.
  - Added incorrect password prompt.
  - Added support for group/entry icons.
