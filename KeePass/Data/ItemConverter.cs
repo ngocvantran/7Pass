@@ -14,6 +14,7 @@ namespace KeePass.Data
         private readonly bool _darkTheme;
         private readonly Database _database;
         private readonly IDictionary<int, ImageSource> _icons;
+        private readonly object _lckIcons;
 
         public ItemConverter(Database database)
         {
@@ -21,6 +22,7 @@ namespace KeePass.Data
                 throw new ArgumentNullException("database");
 
             _database = database;
+            _lckIcons = new object();
             _darkTheme = Theme.IsDarkTheme();
             _icons = new Dictionary<int, ImageSource>();
         }
@@ -77,19 +79,25 @@ namespace KeePass.Data
                 if (_icons.TryGetValue(index, out source))
                     return source;
 
-                var wait = new ManualResetEvent(false);
-                dispatcher.BeginInvoke(() =>
+                lock (_lckIcons)
                 {
-                    source = new BitmapImage(new Uri(
-                        string.Format("/Icons/{0:00}.png", index),
-                        UriKind.Relative));
-                    wait.Set();
-                });
+                    if (_icons.TryGetValue(index, out source))
+                        return source;
 
-                wait.WaitOne();
-                _icons.Add(index, source);
+                    var wait = new ManualResetEvent(false);
+                    dispatcher.BeginInvoke(() =>
+                    {
+                        source = new BitmapImage(new Uri(
+                            string.Format("/Icons/{0:00}.png", index),
+                            UriKind.Relative));
+                        wait.Set();
+                    });
 
-                return source;
+                    wait.WaitOne();
+                    _icons.Add(index, source);
+
+                    return source;
+                }
             }
 
             return _database.Icons[data.Custom];
