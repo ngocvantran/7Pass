@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Linq;
 using KeePass.IO;
 using KeePass.IO.Utils;
 
@@ -9,6 +11,8 @@ namespace KeePass.Services
     internal static class AppSettingsService
     {
         private static readonly IsolatedStorageSettings _appSettings;
+
+        private static readonly IList<Guid> _recents;
 
         public static string DownloadUrl
         {
@@ -27,13 +31,33 @@ namespace KeePass.Services
 
         static AppSettingsService()
         {
+            _recents = new List<Guid>();
             _appSettings = IsolatedStorageSettings
                 .ApplicationSettings;
+        }
+
+        public static void AddRecent(Guid id)
+        {
+            _recents.Remove(id);
+            _recents.Insert(0, id);
+
+            while (_recents.Count > 10)
+                _recents.RemoveAt(10);
+
+            _appSettings[Consts.KEY_RECENTS] =
+                _recents.ToArray();
         }
 
         public static void Clear()
         {
             KeyCache.Database = null;
+        }
+
+        public static void ClearRecents()
+        {
+            _recents.Clear();
+            _appSettings[Consts.KEY_RECENTS] =
+                _recents.ToArray();
         }
 
         public static void ClearPassword()
@@ -44,6 +68,11 @@ namespace KeePass.Services
                 if (store.FileExists(Consts.DECRYPTED))
                     store.DeleteFile(Consts.DECRYPTED);
             }
+        }
+
+        public static IList<Guid> GetRecents()
+        {
+            return _recents.ToArray();
         }
 
         public static bool HasDatabase()
@@ -66,6 +95,8 @@ namespace KeePass.Services
 
         public static void LoadSettings()
         {
+            LoadRecents();
+
             if (!HasPassword())
                 return;
 
@@ -112,6 +143,17 @@ namespace KeePass.Services
                     return false;
                 }
             }
+        }
+
+        private static void LoadRecents()
+        {
+            object ids;
+            if (!_appSettings.TryGetValue(Consts.KEY_RECENTS, out ids))
+                return;
+
+            _recents.Clear();
+            foreach (var id in (Guid[])ids)
+                _recents.Add(id);
         }
 
         private static byte[] ReadFile(IsolatedStorageFile store, string path)

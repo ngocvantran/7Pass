@@ -6,12 +6,27 @@ namespace KeePass.Data
 {
     public class DatabaseItems : INotifyPropertyChanged
     {
+        private IList<DatabaseItem> _histories;
         private IList<DatabaseItem> _items;
 
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Gets or sets the items.
+        /// </summary>
+        /// <value>The items.</value>
+        public IList<DatabaseItem> Histories
+        {
+            get { return _histories; }
+            set
+            {
+                _histories = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("Histories"));
+            }
+        }
 
         /// <summary>
         /// Gets or sets the items.

@@ -12,11 +12,6 @@ namespace KeePass
         {
             InitializeComponent();
 
-            cmdClearPass.IsEnabled =
-                AppSettingsService.HasPassword();
-            cmdClearUrl.IsEnabled = !string.IsNullOrEmpty(
-                AppSettingsService.DownloadUrl);
-
             if (!TrialManager.IsTrial)
                 return;
 
@@ -27,6 +22,13 @@ namespace KeePass
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            cmdClearPass.IsEnabled =
+                AppSettingsService.HasPassword();
+            cmdClearUrl.IsEnabled = !string.IsNullOrEmpty(
+                AppSettingsService.DownloadUrl);
+            cmdClearRecents.IsEnabled = AppSettingsService
+                .GetRecents().Count > 0;
 
             txtTrial.Text = string.Format(AppResources.Trial,
                 TrialManager.Usages, TrialManager.USAGES_LIMIT);
@@ -41,6 +43,12 @@ namespace KeePass
         {
             cmdClearPass.IsEnabled = false;
             AppSettingsService.ClearPassword();
+        }
+
+        private void cmdClearRecents_Click(object sender, RoutedEventArgs e)
+        {
+            cmdClearRecents.IsEnabled = false;
+            AppSettingsService.ClearRecents();
         }
 
         private void cmdClearUrl_Click(object sender, RoutedEventArgs e)
