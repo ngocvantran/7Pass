@@ -25,7 +25,8 @@ namespace KeePass
                 new DatabaseItems();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(
+            NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
@@ -35,10 +36,27 @@ namespace KeePass
                 return;
             }
 
-            // Do not reload data
-            if (lstItems.Items.Count > 0)
-                return;
+            var converter = new ItemConverter(
+                KeyCache.Database);
 
+            if (lstItems.Items.Count == 0)
+                LoadGroupItems(converter);
+
+            LoadHistoryItems(converter);
+        }
+
+        private Group GetGroup()
+        {
+            string groupId;
+            var db = KeyCache.Database;
+            var pars = NavigationContext.QueryString;
+
+            return !pars.TryGetValue("id", out groupId)
+                ? db.Root : db.GetGroup(new Guid(groupId));
+        }
+
+        private void LoadGroupItems(ItemConverter converter)
+        {
             var group = GetGroup();
             if (group == null)
             {
@@ -53,30 +71,30 @@ namespace KeePass
                 .QueryString.Count != 0;
 
             // Display entries
-            PageTitle.Text = group.Name;
-            var converter = new ItemConverter(KeyCache.Database);
+            pivotGroup.Header = group.Name;
             _items.Items = new ObservableCollection<DatabaseItem>();
 
-            var args = new WorkerArgs
+            var bwGroup = new BackgroundWorker();
+            bwGroup.DoWork += bwGroup_DoWork;
+            bwGroup.RunWorkerAsync(new GroupWorkerArgs
             {
                 Root = group,
                 Items = _items.Items,
                 Converter = converter,
-            };
-
-            var worker = new BackgroundWorker();
-            worker.DoWork += worker_DoWork;
-            worker.RunWorkerAsync(args);
+            });
         }
 
-        private Group GetGroup()
+        private void LoadHistoryItems(ItemConverter converter)
         {
-            string groupId;
-            var db = KeyCache.Database;
-            var pars = NavigationContext.QueryString;
+            _items.Histories = new ObservableCollection<DatabaseItem>();
 
-            return !pars.TryGetValue("id", out groupId)
-                ? db.Root : db.GetGroup(new Guid(groupId));
+            var bwHistory = new BackgroundWorker();
+            bwHistory.DoWork += bwHistory_DoWork;
+            bwHistory.RunWorkerAsync(new HistoryWorkerArgs
+            {
+                Converter = converter,
+                Items = _items.Histories,
+            });
         }
 
         private void Home_Click(object sender, EventArgs e)
@@ -94,6 +112,66 @@ namespace KeePass
             this.OpenSettings();
         }
 
+        private void bwGroup_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var args = (GroupWorkerArgs)e.Argument;
+
+            var root = args.Root;
+            var list = args.Items;
+            var dispatcher = Dispatcher;
+            var converter = args.Converter;
+
+            var children = converter.Convert(root.Groups, dispatcher)
+                .Union(converter.Convert(root.Entries, dispatcher))
+                .ToList();
+
+            foreach (var child in children)
+            {
+                var item = child;
+                dispatcher.BeginInvoke(
+                    () => list.Add(item));
+
+                Thread.Sleep(50);
+            }
+        }
+
+        private void bwHistory_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var args = (HistoryWorkerArgs)e.Argument;
+
+            var list = args.Items;
+            var db = KeyCache.Database;
+            var dispatcher = Dispatcher;
+            var converter = args.Converter;
+
+            var recents = AppSettingsService.GetRecents()
+                .Select(db.GetEntry);
+
+            var entries = converter.Convert(
+                recents, dispatcher)
+                .ToList();
+
+            foreach (var entry in entries)
+            {
+                var item = entry;
+                dispatcher.BeginInvoke(
+                    () => list.Add(item));
+
+                Thread.Sleep(50);
+            }
+        }
+
+        private void lstHistory_SelectionChanged(
+            object sender, SelectionChangedEventArgs e)
+        {
+            var index = lstHistory.SelectedIndex;
+            if (index < 0)
+                return;
+
+            this.NavigateTo(_items.Histories[index]);
+            lstHistory.SelectedIndex = -1;
+        }
+
         private void lstItems_SelectionChanged(
             object sender, SelectionChangedEventArgs e)
         {
@@ -105,34 +183,17 @@ namespace KeePass
             lstItems.SelectedIndex = -1;
         }
 
-        private void worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            var args = (WorkerArgs)e.Argument;
-
-            var root = args.Root;
-            var list = args.Items;
-            var converter = args.Converter;
-
-            var children = converter.Convert(root.Groups, Dispatcher)
-                .Union(converter.Convert(root.Entries, Dispatcher))
-                .ToList();
-
-            var dispatcher = lstItems.Dispatcher;
-            foreach (var child in children)
-            {
-                var item = child;
-                dispatcher.BeginInvoke(
-                    () => list.Add(item));
-
-                Thread.Sleep(50);
-            }
-        }
-
-        private class WorkerArgs
+        private class GroupWorkerArgs
         {
             public ItemConverter Converter { get; set; }
             public IList<DatabaseItem> Items { get; set; }
             public Group Root { get; set; }
+        }
+
+        private class HistoryWorkerArgs
+        {
+            public ItemConverter Converter { get; set; }
+            public IList<DatabaseItem> Items { get; set; }
         }
     }
 }

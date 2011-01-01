@@ -29,6 +29,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -45,15 +46,20 @@
                     Click="cmdClearUrl_Click"/>
 
             <Button Grid.Row="2"
+                    Name="cmdClearRecents"
+                    Content="Clear History"
+                    Click="cmdClearRecents_Click"/>
+
+            <Button Grid.Row="3"
                     Content="Update Database"
                     Click="DownloadDatabase"/>
-            
-            <TextBlock Name="txtTrial" Grid.Row="4"
+
+            <TextBlock Name="txtTrial" Grid.Row="5"
                        Visibility="Collapsed" TextWrapping="Wrap">
                 [TrialMode]
             </TextBlock>
             
-            <HyperlinkButton Name="lnkTrial" Grid.Row="5"
+            <HyperlinkButton Name="lnkTrial" Grid.Row="6"
                              Visibility="Collapsed" Click="lnkTrial_Click"
                              Content="Click here to purchase your license" />
         </Grid>

@@ -65,6 +65,9 @@ namespace KeePass
             }
 
             DataContext = entry;
+            AppSettingsService
+                .AddRecent(entry.ID);
+
             var others = entry.GetOthers();
             if (others.Length == 0)
                 return;
