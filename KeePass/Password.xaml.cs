@@ -32,19 +32,44 @@ namespace KeePass
 
         private void OpenDatabase()
         {
-            var opened = AppSettingsService.Open(
-                txtPassword.Password,
-                chkStore.IsChecked == true);
-
-            if (opened)
+            OpenDbResults result;
+            try
             {
-                NavigationService.GoBack();
+                result = AppSettingsService.Open(
+                    txtPassword.Password,
+                    chkStore.IsChecked == true);
+            }
+            catch (Exception ex)
+            {
+                var sendMail = MessageBox.Show(
+                    AppResources.ParseError,
+                    AppResources.PasswordTitle,
+                    MessageBoxButton.OKCancel);
+
+                if (sendMail == MessageBoxResult.OK)
+                    ErrorReport.Report(ex);
+
                 return;
             }
 
-            MessageBox.Show(AppResources.IncorrectPassword,
-                AppResources.PasswordTitle,
-                MessageBoxButton.OK);
+            switch (result)
+            {
+                case OpenDbResults.Success:
+                    NavigationService.GoBack();
+                    break;
+
+                case OpenDbResults.IncorrectPassword:
+                    MessageBox.Show(AppResources.IncorrectPassword,
+                        AppResources.PasswordTitle,
+                        MessageBoxButton.OK);
+                    break;
+
+                case OpenDbResults.CorruptedFile:
+                    MessageBox.Show(AppResources.CorruptedFile,
+                        AppResources.PasswordTitle,
+                        MessageBoxButton.OK);
+                    break;
+            }
         }
 
         private void OpenSettings(object sender, EventArgs e)

@@ -28,7 +28,11 @@ namespace KeePass.IO
             var headers = ReadHeaders(stream);
             headers.Verify();
 
-            using (var decrypted = Decrypt(stream, headers, password))
+            var decrypted = Decrypt(stream, headers, password);
+            if (decrypted == null)
+                return null;
+
+            using (decrypted)
             using (var buffer = new MemoryStream())
             {
                 BufferEx.CopyStream(decrypted, buffer);
@@ -85,7 +89,8 @@ namespace KeePass.IO
                 eas.CreateDecryptor(),
                 CryptoStreamMode.Read);
 
-            VerifyStartBytes(headers, stream);
+            if (!VerifyStartBytes(headers, stream))
+                return null;
 
             stream = new HashedBlockStream(stream);
             return headers.Compression == Compressions.GZip
@@ -108,15 +113,14 @@ namespace KeePass.IO
             return fields;
         }
 
-        private static void VerifyStartBytes(
+        private static bool VerifyStartBytes(
             Headers headers, Stream stream)
         {
             var actual = new BinaryReader(stream)
                 .ReadBytes(32);
             var expected = headers.StreamStartBytes;
 
-            if (!BufferEx.Equals(actual, expected))
-                throw new InvalidDataException();
+            return BufferEx.Equals(actual, expected);
         }
     }
 }

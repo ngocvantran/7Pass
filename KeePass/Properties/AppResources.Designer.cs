@@ -72,6 +72,15 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The database file is corrupted!.
+        /// </summary>
+        internal static string CorruptedFile {
+            get {
+                return ResourceManager.GetString("CorruptedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password for the Demo database is &quot;demo&quot;, without quotes..
         /// </summary>
         internal static string DemoDb {
@@ -187,6 +196,18 @@ namespace KeePass.Properties {
         internal static string NullDownload {
             get {
                 return ResourceManager.GetString("NullDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your password is correct and the database seems valid.
+        ///Unfortunately, 7Pass encountered an error while reading the database.
+        ///
+        ///Do you want to send the author a report so that this bug can be fixed in next version?.
+        /// </summary>
+        internal static string ParseError {
+            get {
+                return ResourceManager.GetString("ParseError", resourceCulture);
             }
         }
         
