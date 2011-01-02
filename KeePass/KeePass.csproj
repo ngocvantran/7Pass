@@ -64,6 +64,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Refs\RelativeAnimatingContentControl.cs" />
+    <Compile Include="Refs\TiltEffect.cs" />
     <Compile Include="Services\AppSettingsService.cs" />
     <Compile Include="Services\Consts.cs" />
     <Compile Include="Services\DatabaseCheckResults.cs" />
@@ -102,7 +104,6 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Navigation.cs" />
-    <Compile Include="TiltEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

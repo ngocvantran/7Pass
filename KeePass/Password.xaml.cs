@@ -13,10 +13,15 @@ namespace KeePass
     public partial class Password
     {
         private readonly ApplicationBarIconButton _cmdAppBarOpen;
+        private readonly BackgroundWorker _wkOpen;
 
         public Password()
         {
             InitializeComponent();
+
+            _wkOpen = new BackgroundWorker();
+            _wkOpen.DoWork += _wkOpen_DoWork;
+            _wkOpen.RunWorkerCompleted += _wkOpen_RunWorkerCompleted;
 
             _cmdAppBarOpen = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
@@ -27,19 +32,58 @@ namespace KeePass
             var uri = new Uri("/Images/warning.light.png",
                 UriKind.Relative);
 
+            SetWorking(false);
             imgWarning.Source = new BitmapImage(uri);
         }
 
         private void OpenDatabase()
         {
-            OpenDbResults result;
-            try
+            SetWorking(true);
+
+            _wkOpen.RunWorkerAsync(new OpenArgs
             {
-                result = AppSettingsService.Open(
-                    txtPassword.Password,
-                    chkStore.IsChecked == true);
-            }
-            catch (Exception ex)
+                Password = txtPassword.Password,
+                SavePassword = chkStore.IsChecked == true,
+            });
+        }
+
+        private void SetWorking(bool working)
+        {
+            ApplicationBar.IsVisible = !working;
+            ContentPanel.IsHitTestVisible = !working;
+
+            progBusy.Visibility = working
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+            progBusy.IsIndeterminate = working;
+        }
+
+        private void OpenSettings(object sender, EventArgs e)
+        {
+            this.OpenSettings();
+        }
+
+        private void PhoneApplicationPage_BackKeyPress(
+            object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            App.Quit();
+        }
+
+        private static void _wkOpen_DoWork(
+            object sender, DoWorkEventArgs e)
+        {
+            var args = (OpenArgs)e.Argument;
+            e.Result = AppSettingsService.Open(
+                args.Password, args.SavePassword);
+        }
+
+        private void _wkOpen_RunWorkerCompleted(
+            object sender, RunWorkerCompletedEventArgs e)
+        {
+            SetWorking(false);
+
+            if (e.Error != null)
             {
                 var sendMail = MessageBox.Show(
                     AppResources.ParseError,
@@ -47,12 +91,12 @@ namespace KeePass
                     MessageBoxButton.OKCancel);
 
                 if (sendMail == MessageBoxResult.OK)
-                    ErrorReport.Report(ex);
+                    ErrorReport.Report(e.Error);
 
                 return;
             }
 
-            switch (result)
+            switch ((OpenDbResults)e.Result)
             {
                 case OpenDbResults.Success:
                     NavigationService.GoBack();
@@ -70,18 +114,6 @@ namespace KeePass
                         MessageBoxButton.OK);
                     break;
             }
-        }
-
-        private void OpenSettings(object sender, EventArgs e)
-        {
-            this.OpenSettings();
-        }
-
-        private void PhoneApplicationPage_BackKeyPress(
-            object sender, CancelEventArgs e)
-        {
-            e.Cancel = true;
-            App.Quit();
         }
 
         private void cmdClear_Click(object sender, EventArgs e)
@@ -122,6 +154,12 @@ namespace KeePass
 
             cmdOpen.IsEnabled = hasPassword;
             _cmdAppBarOpen.IsEnabled = hasPassword;
+        }
+
+        private class OpenArgs
+        {
+            public string Password { get; set; }
+            public bool SavePassword { get; set; }
         }
     }
 }

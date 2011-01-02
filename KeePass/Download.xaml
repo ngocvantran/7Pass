@@ -45,7 +45,8 @@
                      KeyDown="txtUrl_KeyDown" />
             
             <ProgressBar Name="progress" Grid.Row="2"
-                         Visibility="Collapsed"/>
+                         Visibility="Collapsed"
+                         Style="{StaticResource PerformanceProgressBar}" />
             <TextBlock Name="lblLoad"
                        Grid.Row="3"
                        Visibility="Collapsed">
