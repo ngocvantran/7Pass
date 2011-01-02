@@ -207,7 +207,7 @@ namespace KeePass
         private void txtSearch_KeyDown(
             object sender, KeyEventArgs e)
         {
-            if (e.Key != Key.Enter)
+            if (e.Key != Key.Enter || e.PlatformKeyCode == 0x0A)
                 return;
 
             if (txtSearch.Text.Length > 0)
