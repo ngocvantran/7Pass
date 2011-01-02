@@ -227,7 +227,10 @@ namespace KeePass
 
         private void txtUrl_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter && cmdDownload.IsEnabled)
+            if (!cmdDownload.IsEnabled)
+                return;
+
+            if (e.Key == Key.Enter || e.PlatformKeyCode == 0x0A)
                 DownloadDatabase();
         }
 

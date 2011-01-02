@@ -107,7 +107,10 @@ namespace KeePass
         private void txtPassword_KeyDown(
             object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter && cmdOpen.IsEnabled)
+            if (!cmdOpen.IsEnabled)
+                return;
+
+            if (e.Key == Key.Enter || e.PlatformKeyCode == 0x0A)
                 OpenDatabase();
         }
 
