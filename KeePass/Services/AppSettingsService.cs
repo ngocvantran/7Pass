@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
+using System.Security.Cryptography;
 using KeePass.IO;
 using KeePass.IO.Utils;
 
@@ -53,13 +54,6 @@ namespace KeePass.Services
             KeyCache.Database = null;
         }
 
-        public static void ClearRecents()
-        {
-            _recents.Clear();
-            _appSettings[Consts.KEY_RECENTS] =
-                _recents.ToArray();
-        }
-
         public static void ClearPassword()
         {
             using (var store = IsolatedStorageFile
@@ -68,6 +62,13 @@ namespace KeePass.Services
                 if (store.FileExists(Consts.DECRYPTED))
                     store.DeleteFile(Consts.DECRYPTED);
             }
+        }
+
+        public static void ClearRecents()
+        {
+            _recents.Clear();
+            _appSettings[Consts.KEY_RECENTS] =
+                _recents.ToArray();
         }
 
         public static IList<Guid> GetRecents()
@@ -113,7 +114,7 @@ namespace KeePass.Services
             }
         }
 
-        public static bool Open(string password,
+        public static OpenDbResults Open(string password,
             bool savePassword)
         {
             Clear();
@@ -122,25 +123,31 @@ namespace KeePass.Services
                 .GetUserStoreForApplication())
             {
                 if (!store.FileExists(Consts.DATABASE))
-                    return false;
+                    return OpenDbResults.NoDatabase;
 
-                try
+                using (var fs = store.OpenFile(
+                    Consts.DATABASE, FileMode.Open))
                 {
-                    using (var fs = store.OpenFile(
-                        Consts.DATABASE, FileMode.Open))
+                    DbPersistentData xml;
+
+                    try
                     {
-                        var xml = DatabaseReader.GetXml(fs, password);
-
-                        if (savePassword)
-                            Save(store, xml);
-
-                        KeyCache.Database = DatabaseReader.Load(xml);
-                        return true;
+                        xml = DatabaseReader
+                            .GetXml(fs, password);
                     }
-                }
-                catch (Exception)
-                {
-                    return false;
+                    catch (CryptographicException)
+                    {
+                        return OpenDbResults.CorruptedFile;
+                    }
+
+                    if (xml == null)
+                        return OpenDbResults.IncorrectPassword;
+
+                    if (savePassword)
+                        Save(store, xml);
+
+                    KeyCache.Database = DatabaseReader.Load(xml);
+                    return OpenDbResults.Success;
                 }
             }
         }

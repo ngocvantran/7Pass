@@ -186,4 +186,13 @@ Please note that 7Pass only support databases protected by Master Key only (not 
   <data name="PasswordTitle" xml:space="preserve">
     <value>Master Key</value>
   </data>
+  <data name="ParseError" xml:space="preserve">
+    <value>Your password is correct and the database seems valid.
+Unfortunately, 7Pass encountered an error while reading the database.
+
+Do you want to send the author a report so that this bug can be fixed in next version?</value>
+  </data>
+  <data name="CorruptedFile" xml:space="preserve">
+    <value>The database file is corrupted!</value>
+  </data>
 </root>

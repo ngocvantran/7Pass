@@ -69,6 +69,7 @@
     <Compile Include="Services\DatabaseCheckResults.cs" />
     <Compile Include="Data\DatabaseItem.cs" />
     <Compile Include="Data\DatabaseItems.cs" />
+    <Compile Include="Services\ErrorReport.cs" />
     <Compile Include="Services\ILifeCycleAware.cs" />
     <Compile Include="Services\LifeCycle.cs" />
     <Compile Include="Data\Theme.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\OpenDbResults.cs" />
     <Compile Include="Services\TrialManager.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
