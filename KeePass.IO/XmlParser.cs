@@ -41,7 +41,7 @@ namespace KeePass.IO
                 if (!reader.ReadToDescendant("Meta"))
                     return null;
 
-                IDictionary<Guid, ImageSource> icons;
+                IDictionary<string, ImageSource> icons;
                 using (var subReader = reader.ReadSubtree())
                     icons = ParseIcons(subReader);
 
@@ -160,22 +160,22 @@ namespace KeePass.IO
             if (reader.Name == "CustomIconUUID")
             {
                 data.Custom = reader
-                    .ReadElementContentAsGuid();
+                    .ReadElementContentAsString();
             }
 
             return data;
         }
 
-        private static IDictionary<Guid, ImageSource>
+        private static IDictionary<string, ImageSource>
             ParseIcons(XmlReader reader)
         {
-            var icons = new Dictionary<Guid, ImageSource>();
+            var icons = new Dictionary<string, ImageSource>();
 
             if (reader.ReadToFollowing("CustomIcons"))
             {
                 while (reader.ReadToFollowing("UUID"))
                 {
-                    var id = reader.ReadElementContentAsGuid();
+                    var id = reader.ReadElementContentAsString();
 
                     if (reader.Name != "Data" &&
                         !reader.ReadToNextSibling("Data"))
@@ -242,10 +242,10 @@ namespace KeePass.IO
             return histories;
         }
 
-        private static Guid ReadId(XmlReader reader)
+        private static string ReadId(XmlReader reader)
         {
             reader.ReadToDescendant("UUID");
-            return reader.ReadElementContentAsGuid();
+            return reader.ReadElementContentAsString();
         }
 
         private static DateTime ReadLastModified(XmlReader reader)

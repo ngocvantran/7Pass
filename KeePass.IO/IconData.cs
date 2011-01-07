@@ -10,11 +10,11 @@ namespace KeePass.IO
         /// <value>
         /// The custom icon id.
         /// </value>
-        public Guid Custom { get; set; }
+        public string Custom { get; set; }
 
         /// <summary>
         /// Gets or sets the standard icon index.
-        /// This value is used when <see cref="Custom"/> is <see cref="Guid.Empty"/>.
+        /// This value is used when <see cref="Custom"/> is <c>null</c>..
         /// </summary>
         /// <value>
         /// The standard icon index.

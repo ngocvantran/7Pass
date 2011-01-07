@@ -56,6 +56,7 @@
     <Compile Include="DbPersistentData.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="EntrySorter.cs" />
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="GroupSorter.cs" />
     <Compile Include="IconData.cs" />
@@ -73,7 +74,6 @@
     <Compile Include="Utils\HashedBlockStream.cs" />
     <Compile Include="Utils\Salsa20Cipher.cs" />
     <Compile Include="Utils\StringReplace.cs" />
-    <Compile Include="Utils\XmlReaderExtensions.cs" />
     <Compile Include="XmlParser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />

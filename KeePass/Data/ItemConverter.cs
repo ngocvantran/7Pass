@@ -71,7 +71,7 @@ namespace KeePass.Data
         private ImageSource GetSource(
             IconData data, Dispatcher dispatcher)
         {
-            if (data.Custom == Guid.Empty)
+            if (string.IsNullOrEmpty(data.Custom))
             {
                 ImageSource source;
                 var index = data.Standard;

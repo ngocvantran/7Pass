@@ -52,7 +52,7 @@ namespace KeePass
             var pars = NavigationContext.QueryString;
 
             return !pars.TryGetValue("id", out groupId)
-                ? db.Root : db.GetGroup(new Guid(groupId));
+                ? db.Root : db.GetGroup(groupId);
         }
 
         private void LoadGroupItems(ItemConverter converter)
