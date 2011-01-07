@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using KeePass.Data;
 using KeePass.IO;
 using Microsoft.Phone.Controls;
@@ -12,7 +13,12 @@ namespace KeePass
             string url, params object[] args)
         {
             if (args != null && args.Length > 0)
-                url = string.Format(url, args);
+            {
+                url = string.Format(url, args
+                    .Select(x => x.ToString())
+                    .Select(Uri.EscapeDataString)
+                    .ToArray());
+            }
 
             page.NavigationService.Navigate(
                 new Uri(url, UriKind.Relative));

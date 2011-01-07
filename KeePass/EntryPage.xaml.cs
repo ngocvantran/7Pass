@@ -49,7 +49,7 @@ namespace KeePass
             var db = KeyCache.Database;
             var entryId = NavigationContext.QueryString["id"];
 
-            return db.GetEntry(new Guid(entryId));
+            return db.GetEntry(entryId);
         }
 
         private void LoadData()

@@ -13,7 +13,7 @@ namespace KeePass.Services
     {
         private static readonly IsolatedStorageSettings _appSettings;
 
-        private static readonly IList<Guid> _recents;
+        private static readonly IList<string> _recents;
 
         public static string DownloadUrl
         {
@@ -32,12 +32,12 @@ namespace KeePass.Services
 
         static AppSettingsService()
         {
-            _recents = new List<Guid>();
+            _recents = new List<string>();
             _appSettings = IsolatedStorageSettings
                 .ApplicationSettings;
         }
 
-        public static void AddRecent(Guid id)
+        public static void AddRecent(string id)
         {
             _recents.Remove(id);
             _recents.Insert(0, id);
@@ -71,7 +71,7 @@ namespace KeePass.Services
                 _recents.ToArray();
         }
 
-        public static IList<Guid> GetRecents()
+        public static IList<string> GetRecents()
         {
             return _recents.ToArray();
         }
@@ -159,7 +159,12 @@ namespace KeePass.Services
                 return;
 
             _recents.Clear();
-            foreach (var id in (Guid[])ids)
+
+            var stringIds = ids as string[];
+            if (stringIds == null)
+                return;
+
+            foreach (var id in stringIds)
                 _recents.Add(id);
         }
 

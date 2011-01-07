@@ -6,9 +6,9 @@ namespace KeePass.IO
 {
     public class Database
     {
-        private readonly IDictionary<Guid, ImageSource> _customIcons;
-        private readonly IDictionary<Guid, Entry> _entries;
-        private readonly IDictionary<Guid, Group> _groups;
+        private readonly IDictionary<string, ImageSource> _customIcons;
+        private readonly IDictionary<string, Entry> _entries;
+        private readonly IDictionary<string, Group> _groups;
 
         private readonly Group _root;
 
@@ -31,7 +31,7 @@ namespace KeePass.IO
         /// <summary>
         /// Gets the custom icons.
         /// </summary>
-        public IDictionary<Guid, ImageSource> Icons
+        public IDictionary<string, ImageSource> Icons
         {
             get { return _customIcons; }
         }
@@ -45,15 +45,15 @@ namespace KeePass.IO
         }
 
         public Database(Group root,
-            IDictionary<Guid, ImageSource> customIcons)
+            IDictionary<string, ImageSource> customIcons)
         {
             if (root == null) throw new ArgumentNullException("root");
             if (customIcons == null) throw new ArgumentNullException("customIcons");
 
             _root = root;
             _customIcons = customIcons;
-            _groups = new Dictionary<Guid, Group>();
-            _entries = new Dictionary<Guid, Entry>();
+            _groups = new Dictionary<string, Group>();
+            _entries = new Dictionary<string, Entry>();
 
             Index(root);
         }
@@ -63,7 +63,7 @@ namespace KeePass.IO
         /// </summary>
         /// <param name="id">The entry id.</param>
         /// <returns>Entry with the specified id, or <c>null</c> if not found.</returns>
-        public Entry GetEntry(Guid id)
+        public Entry GetEntry(string id)
         {
             Entry entry;
             return _entries.TryGetValue(id, out entry)
@@ -75,7 +75,7 @@ namespace KeePass.IO
         /// </summary>
         /// <param name="id">The group id.</param>
         /// <returns>Group with the specified id, or <c>null</c> if not found.</returns>
-        public Group GetGroup(Guid id)
+        public Group GetGroup(string id)
         {
             Group group;
             return _groups.TryGetValue(id, out group)
@@ -84,10 +84,10 @@ namespace KeePass.IO
 
         private void Index(Group group)
         {
-            _groups.Add(group.ID, group);
+            _groups.AddOrSet(group.ID, group);
 
             foreach (var entry in group.Entries)
-                _entries.Add(entry.ID, entry);
+                _entries.AddOrSet(entry.ID, entry);
 
             foreach (var child in group.Groups)
                 Index(child);

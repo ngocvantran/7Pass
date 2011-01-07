@@ -32,7 +32,7 @@ namespace KeePass.IO
         /// Gets or sets the ID.
         /// </summary>
         /// <value>The ID.</value>
-        public Guid ID { get; set; }
+        public string ID { get; set; }
 
         /// <summary>
         /// Gets or sets the icon data.
