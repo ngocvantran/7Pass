@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
-using System.Security.Cryptography;
 using KeePass.IO;
 using KeePass.IO.Utils;
 
@@ -135,11 +134,11 @@ namespace KeePass.Services
                         xml = DatabaseReader
                             .GetXml(fs, password);
                     }
-                    catch (CryptographicException)
+                    catch
                     {
                         return OpenDbResults.CorruptedFile;
                     }
-
+                    
                     if (xml == null)
                         return OpenDbResults.IncorrectPassword;
 
