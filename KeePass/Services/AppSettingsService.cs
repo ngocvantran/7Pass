@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
+using System.Windows;
+using System.Windows.Threading;
 using KeePass.IO;
 using KeePass.IO.Utils;
 
@@ -109,12 +111,15 @@ namespace KeePass.Services
                     Protection = ReadFile(store, Consts.PROTECTION),
                 };
 
-                KeyCache.Database = DatabaseReader.Load(db);
+                var dispatcher = Application.Current
+                    .RootVisual.Dispatcher;
+                KeyCache.Database = DatabaseReader
+                    .Load(db, dispatcher);
             }
         }
 
         public static OpenDbResults Open(string password,
-            bool savePassword)
+            bool savePassword, Dispatcher dispatcher)
         {
             Clear();
 
@@ -145,7 +150,8 @@ namespace KeePass.Services
                     if (savePassword)
                         Save(store, xml);
 
-                    KeyCache.Database = DatabaseReader.Load(xml);
+                    KeyCache.Database = DatabaseReader
+                        .Load(xml, dispatcher);
                     return OpenDbResults.Success;
                 }
             }

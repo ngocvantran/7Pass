@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Windows.Threading;
 using ICSharpCode.SharpZipLib.GZip;
 using KeePass.IO.Utils;
 
@@ -46,7 +47,8 @@ namespace KeePass.IO
             }
         }
 
-        public static Database Load(DbPersistentData data)
+        public static Database Load(DbPersistentData data,
+            Dispatcher dispatcher)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -56,8 +58,8 @@ namespace KeePass.IO
                 var crypto = CryptoSerializer
                     .Deserialize(data.Protection);
 
-                var parser = new XmlParser(crypto);
-                return parser.Parse(buffer);
+                return new XmlParser(crypto, buffer, dispatcher)
+                    .Parse();
             }
         }
 

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using KeePass.Data;
 using KeePass.Properties;
 using KeePass.Services;
@@ -42,6 +43,7 @@ namespace KeePass
 
             _wkOpen.RunWorkerAsync(new OpenArgs
             {
+                Dispatcher = Dispatcher,
                 Password = txtPassword.Password,
                 SavePassword = chkStore.IsChecked == true,
             });
@@ -74,8 +76,8 @@ namespace KeePass
             object sender, DoWorkEventArgs e)
         {
             var args = (OpenArgs)e.Argument;
-            e.Result = AppSettingsService.Open(
-                args.Password, args.SavePassword);
+            e.Result = AppSettingsService.Open(args.Password,
+                args.SavePassword, args.Dispatcher);
         }
 
         private void _wkOpen_RunWorkerCompleted(
@@ -158,6 +160,7 @@ namespace KeePass
 
         private class OpenArgs
         {
+            public Dispatcher Dispatcher { get; set; }
             public string Password { get; set; }
             public bool SavePassword { get; set; }
         }
