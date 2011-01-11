@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using System.Xml;
 using KeePass.IO.Utils;
 
@@ -12,19 +14,23 @@ namespace KeePass.IO
     internal class XmlParser
     {
         private readonly CryptoRandomStream _crypto;
+        private readonly Dispatcher _dispatcher;
+        private readonly Stream _stream;
 
-        public XmlParser(CryptoRandomStream crypto)
+        public XmlParser(CryptoRandomStream crypto,
+            Stream stream, Dispatcher dispatcher)
         {
-            if (crypto == null)
-                throw new ArgumentNullException("crypto");
+            if (crypto == null) throw new ArgumentNullException("crypto");
+            if (stream == null) throw new ArgumentNullException("stream");
+            if (dispatcher == null) throw new ArgumentNullException("dispatcher");
+
             _crypto = crypto;
+            _stream = stream;
+            _dispatcher = dispatcher;
         }
-
-        public Database Parse(Stream stream)
+        
+        public Database Parse()
         {
-            if (stream == null)
-                throw new ArgumentNullException("stream");
-
             var settings = new XmlReaderSettings
             {
                 CloseInput = false,
@@ -33,7 +39,7 @@ namespace KeePass.IO
                 IgnoreProcessingInstructions = true,
             };
 
-            using (var reader = XmlReader.Create(stream, settings))
+            using (var reader = XmlReader.Create(_stream, settings))
             {
                 if (!reader.ReadToFollowing("KeePassFile"))
                     return null;
@@ -43,7 +49,7 @@ namespace KeePass.IO
 
                 IDictionary<string, ImageSource> icons;
                 using (var subReader = reader.ReadSubtree())
-                    icons = ParseIcons(subReader);
+                    icons = ParseIcons(subReader, _dispatcher);
 
                 if (reader.Name != "Root" &&
                     !reader.ReadToNextSibling("Root"))
@@ -167,7 +173,7 @@ namespace KeePass.IO
         }
 
         private static IDictionary<string, ImageSource>
-            ParseIcons(XmlReader reader)
+            ParseIcons(XmlReader reader, Dispatcher dispatcher)
         {
             var icons = new Dictionary<string, ImageSource>();
 
@@ -186,9 +192,18 @@ namespace KeePass.IO
                     var data = Convert.FromBase64String(
                         reader.ReadElementContentAsString());
 
-                    var image = new BitmapImage();
-                    image.SetSource(new MemoryStream(data));
+                    BitmapImage image = null;
+                    var wait = new ManualResetEvent(false);
 
+                    dispatcher.BeginInvoke(() =>
+                    {
+                        image = new BitmapImage();
+                        image.SetSource(new MemoryStream(data));
+
+                        wait.Set();
+                    });
+
+                    wait.WaitOne();
                     icons.Add(id, image);
                 }
             }
