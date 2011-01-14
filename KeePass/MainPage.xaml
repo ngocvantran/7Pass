@@ -27,9 +27,9 @@
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            
-        </Grid>
+        <ListBox Name="lstDatabases"
+                 Grid.Row="1" Margin="12,0,12,0"
+                 Style="{StaticResource KeePassList}" />
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>

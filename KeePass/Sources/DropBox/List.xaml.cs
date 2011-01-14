@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Sources.DropBox.Api;
+using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
 
@@ -34,6 +35,9 @@ namespace KeePass.Sources.DropBox
         protected override void OnNavigatedTo(
             bool cancelled, NavigationEventArgs e)
         {
+            if (cancelled)
+                return;
+
             InitPars();
 
             if (_path != "/")
@@ -59,6 +63,41 @@ namespace KeePass.Sources.DropBox
                 _token, _secret, path);
         }
 
+        private void OnFileDownloaded(Stream file)
+        {
+            var dispatcher = Dispatcher;
+
+            try
+            {
+                if (file == null)
+                {
+                    dispatcher.BeginInvoke(() => MessageBox.Show(
+                        DropBoxResources.DownloadError,
+                        DropBoxResources.ListTitle,
+                        MessageBoxButton.OK));
+
+                    return;
+                }
+
+                if (!DatabaseVerifier.Verify(dispatcher, file))
+                    return;
+
+                var storage = new DatabaseInfo();
+                storage.SetDatabase(file);
+
+                dispatcher.BeginInvoke(
+                    GoBack<MainPage>);
+            }
+            finally
+            {
+                dispatcher.BeginInvoke(() =>
+                {
+                    progList.IsLoading = false;
+                    _cmdRefresh.IsEnabled = true;
+                });
+            }
+        }
+
         private void OnListComplete(MetaData data)
         {
             var dispatcher = Dispatcher;
@@ -75,26 +114,18 @@ namespace KeePass.Sources.DropBox
                     return;
                 }
 
-                if (data.IsDir)
-                {
-                    dispatcher.BeginInvoke(
-                        () => _items.Clear());
+                dispatcher.BeginInvoke(
+                    () => _items.Clear());
 
-                    foreach (var child in data.Contents
-                        .OrderBy(x => !x.IsDir)
-                        .ThenBy(x => x.Name))
-                    {
-                        var meta = child;
-                        dispatcher.BeginInvoke(() => _items
-                            .Add(new MetaListItemInfo(meta)));
-
-                        Thread.Sleep(50);
-                    }
-                }
-                else
+                foreach (var child in data.Contents
+                    .OrderBy(x => !x.IsDir)
+                    .ThenBy(x => x.Name))
                 {
-                    dispatcher.BeginInvoke(
-                        GoBack<MainPage>);
+                    var meta = child;
+                    dispatcher.BeginInvoke(() => _items
+                        .Add(new MetaListItemInfo(meta)));
+
+                    Thread.Sleep(50);
                 }
             }
             finally
@@ -112,8 +143,8 @@ namespace KeePass.Sources.DropBox
             progList.IsLoading = true;
             _cmdRefresh.IsEnabled = false;
 
-            new Client(_token, _secret)
-                .ListAsync(_path, OnListComplete);
+            new Client(_token, _secret).ListAsync(
+                _path, OnListComplete);
         }
 
         private void cmdRefresh_Click(object sender, EventArgs e)
@@ -129,7 +160,20 @@ namespace KeePass.Sources.DropBox
             if (meta == null)
                 return;
 
-            NavigateTo(meta.Path);
+            if (Network.CheckNetwork())
+            {
+                if (meta.IsDir)
+                    NavigateTo(meta.Path);
+                else
+                {
+                    progList.IsLoading = true;
+                    _cmdRefresh.IsEnabled = false;
+
+                    new Client(_token, _secret).DownloadAsync(
+                        meta.Path, OnFileDownloaded);
+                }
+            }
+
             lstBrowse.SelectedItem = null;
         }
     }
