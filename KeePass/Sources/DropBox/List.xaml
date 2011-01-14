@@ -35,4 +35,11 @@
                  SelectionChanged="lstBrowse_SelectionChanged" />
     </Grid>
 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/refresh.png" Text="Refresh"
+                Click="cmdRefresh_Click" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </keepass:KeePassPage>

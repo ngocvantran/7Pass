@@ -61,6 +61,25 @@ namespace KeePass.Sources.DropBox {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error listing folder contents.
+        ///Please try again later..
+        /// </summary>
+        internal static string ListError {
+            get {
+                return ResourceManager.GetString("ListError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DropBox Browser.
+        /// </summary>
+        internal static string ListTitle {
+            get {
+                return ResourceManager.GetString("ListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You&apos;ve specified an invalid e-mail or password...
         /// </summary>
         internal static string LoginFailure {
