@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
-namespace KeePass.Data
+namespace KeePass
 {
     public class ListItemInfo
     {
