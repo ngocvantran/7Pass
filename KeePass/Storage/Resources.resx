@@ -117,21 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DownloadError" xml:space="preserve">
-    <value>Error downloading the selected file.
-Please try again later.</value>
+  <data name="DownloadTitle" xml:space="preserve">
+    <value>Database Download</value>
   </data>
-  <data name="ListError" xml:space="preserve">
-    <value>Error listing folder contents.
-Please try again later.</value>
+  <data name="EmptyFile" xml:space="preserve">
+    <value>Empty file detected.
+The file is invalid or a connection problem has occured.</value>
   </data>
-  <data name="ListTitle" xml:space="preserve">
-    <value>DropBox Browser</value>
-  </data>
-  <data name="LoginFailure" xml:space="preserve">
-    <value>You've specified an invalid e-mail or password..</value>
-  </data>
-  <data name="LoginTitle" xml:space="preserve">
-    <value>DropBox Authentication</value>
+  <data name="NotKdbx" xml:space="preserve">
+    <value>Invalid file signature detected.
+The specified file is not a KeePass 2.x database.</value>
   </data>
 </root>

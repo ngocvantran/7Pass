@@ -6,7 +6,13 @@ namespace KeePass.Sources.DropBox
 {
     internal class MetaListItemInfo : ListItemInfo
     {
+        private readonly bool _idDir;
         private readonly string _path;
+
+        public bool IsDir
+        {
+            get { return _idDir; }
+        }
 
         public string Path
         {
@@ -18,8 +24,10 @@ namespace KeePass.Sources.DropBox
             if (data == null)
                 throw new ArgumentNullException("data");
 
-            _path = data.Path;
             Title = data.Name;
+            _path = data.Path;
+            _idDir = data.IsDir;
+
             Icon = ThemeData.GetImage(
                 data.IsDir ? "folder" : "entry");
         }

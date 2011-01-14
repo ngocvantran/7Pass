@@ -46,7 +46,8 @@ namespace KeePass.Sources.DropBox.Api
             };
         }
 
-        public void DownloadAsync(string path, Action<Stream> report)
+        public void DownloadAsync(string path,
+            Action<Stream> report)
         {
             if (!IsAuthenticated)
             {

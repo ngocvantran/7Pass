@@ -20,6 +20,24 @@ namespace KeePass.Storage
         public string Folder { get; set; }
 
         /// <summary>
+        /// Gets a value indicating whether this database has saved password.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this database has saved password; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasPassword
+        {
+            get
+            {
+                using (var store = IsolatedStorageFile
+                    .GetUserStoreForApplication())
+                {
+                    return store.FileExists(ParsedXmlPath);
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the name.
         /// </summary>
         /// <value>
@@ -87,6 +105,17 @@ namespace KeePass.Storage
         }
 
         /// <summary>
+        /// Opens the database using saved password dispatcher.
+        /// </summary>
+        /// <param name="dispatcher">The dispatcher.</param>
+        public void Open(Dispatcher dispatcher)
+        {
+            var xml = GetSavedPassword();
+            Cache.Database = DatabaseReader
+                .Load(xml, dispatcher);
+        }
+
+        /// <summary>
         /// Opens the database using the specified password.
         /// </summary>
         /// <param name="dispatcher">The dispatcher.</param>
@@ -145,6 +174,40 @@ namespace KeePass.Storage
             }
         }
 
+        /// <summary>
+        /// Gets the saved password.
+        /// </summary>
+        /// <returns></returns>
+        private DbPersistentData GetSavedPassword()
+        {
+            using (var store = IsolatedStorageFile
+                .GetUserStoreForApplication())
+            {
+                var result = new DbPersistentData();
+
+                using (var fs = store.OpenFile(ProtectionPath, FileMode.Open))
+                using (var buffer = new MemoryStream((int)fs.Length))
+                {
+                    BufferEx.CopyStream(fs, buffer);
+                    result.Protection = buffer.ToArray();
+                }
+
+                using (var fs = store.OpenFile(ParsedXmlPath, FileMode.Open))
+                using (var buffer = new MemoryStream((int)fs.Length))
+                {
+                    BufferEx.CopyStream(fs, buffer);
+                    result.Xml = buffer.ToArray();
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Saves user password.
+        /// </summary>
+        /// <param name="store">The store.</param>
+        /// <param name="xml">The XML.</param>
         private void Save(IsolatedStorageFile store,
             DbPersistentData xml)
         {

@@ -63,6 +63,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseListItemInfo.xaml.cs" />
     <Compile Include="ListItemInfo.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -76,7 +77,13 @@
     <Compile Include="Sources\DropBox\MetaListItemInfo.cs" />
     <Compile Include="Storage\Cache.cs" />
     <Compile Include="Storage\DatabaseInfo.cs" />
+    <Compile Include="Storage\DatabaseVerifier.cs" />
     <Compile Include="Storage\OpenDbResults.cs" />
+    <Compile Include="Storage\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utils\KeePassPage.cs" />
     <Compile Include="Utils\Navigation.cs" />
     <Compile Include="Refs\ProgressBar\PerformanceProgressBar.cs" />
@@ -160,6 +167,10 @@
     <EmbeddedResource Include="Sources\DropBox\DropBoxResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DropBoxResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Storage\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

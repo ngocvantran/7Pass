@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KeePass.Sources.DropBox {
+namespace KeePass.Storage {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace KeePass.Sources.DropBox {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class DropBoxResources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DropBoxResources() {
+        internal Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace KeePass.Sources.DropBox {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KeePass.Sources.DropBox.DropBoxResources", typeof(DropBoxResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KeePass.Storage.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,49 +61,31 @@ namespace KeePass.Sources.DropBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error downloading the selected file.
-        ///Please try again later..
+        ///   Looks up a localized string similar to Database Download.
         /// </summary>
-        internal static string DownloadError {
+        internal static string DownloadTitle {
             get {
-                return ResourceManager.GetString("DownloadError", resourceCulture);
+                return ResourceManager.GetString("DownloadTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error listing folder contents.
-        ///Please try again later..
+        ///   Looks up a localized string similar to Empty file detected.
+        ///The file is invalid or a connection problem has occured..
         /// </summary>
-        internal static string ListError {
+        internal static string EmptyFile {
             get {
-                return ResourceManager.GetString("ListError", resourceCulture);
+                return ResourceManager.GetString("EmptyFile", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DropBox Browser.
+        ///   Looks up a localized string similar to Invalid file signature detected.
+        ///The specified file is not a KeePass 2.x database..
         /// </summary>
-        internal static string ListTitle {
+        internal static string NotKdbx {
             get {
-                return ResourceManager.GetString("ListTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You&apos;ve specified an invalid e-mail or password...
-        /// </summary>
-        internal static string LoginFailure {
-            get {
-                return ResourceManager.GetString("LoginFailure", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to DropBox Authentication.
-        /// </summary>
-        internal static string LoginTitle {
-            get {
-                return ResourceManager.GetString("LoginTitle", resourceCulture);
+                return ResourceManager.GetString("NotKdbx", resourceCulture);
             }
         }
     }
