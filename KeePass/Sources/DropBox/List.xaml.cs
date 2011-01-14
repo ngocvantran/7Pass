@@ -3,15 +3,18 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Sources.DropBox.Api;
 using KeePass.Utils;
+using Microsoft.Phone.Shell;
 
 namespace KeePass.Sources.DropBox
 {
     public partial class List
     {
+        private readonly ApplicationBarIconButton _cmdRefresh;
         private readonly ObservableCollection<MetaListItemInfo> _items;
         private string _path;
         private string _secret;
@@ -23,6 +26,9 @@ namespace KeePass.Sources.DropBox
 
             _items = new ObservableCollection<MetaListItemInfo>();
             lstBrowse.ItemsSource = _items;
+
+            _cmdRefresh = (ApplicationBarIconButton)
+                ApplicationBar.Buttons[0];
         }
 
         protected override void OnNavigatedTo(
@@ -33,9 +39,8 @@ namespace KeePass.Sources.DropBox
             if (_path != "/")
                 PageTitle.Text = Path.GetFileName(_path);
 
-            progList.IsLoading = true;
-            new Client(_token, _secret)
-                .ListAsync(_path, OnListComplete);
+            if (Network.CheckNetwork() && _items.Count == 0)
+                RefreshList();
         }
 
         private void InitPars()
@@ -58,27 +63,62 @@ namespace KeePass.Sources.DropBox
         {
             var dispatcher = Dispatcher;
 
-            if (data.IsDir)
+            try
             {
-                foreach (var child in data.Contents
-                    .OrderBy(x => !x.IsDir)
-                    .ThenBy(x => x.Name))
+                if (data == null)
                 {
-                    var meta = child;
-                    dispatcher.BeginInvoke(() => _items
-                        .Add(new MetaListItemInfo(meta)));
+                    dispatcher.BeginInvoke(() => MessageBox.Show(
+                        DropBoxResources.ListError,
+                        DropBoxResources.ListTitle,
+                        MessageBoxButton.OK));
 
-                    Thread.Sleep(50);
+                    return;
+                }
+
+                if (data.IsDir)
+                {
+                    dispatcher.BeginInvoke(
+                        () => _items.Clear());
+
+                    foreach (var child in data.Contents
+                        .OrderBy(x => !x.IsDir)
+                        .ThenBy(x => x.Name))
+                    {
+                        var meta = child;
+                        dispatcher.BeginInvoke(() => _items
+                            .Add(new MetaListItemInfo(meta)));
+
+                        Thread.Sleep(50);
+                    }
+                }
+                else
+                {
+                    dispatcher.BeginInvoke(
+                        GoBack<MainPage>);
                 }
             }
-            else
+            finally
             {
-                dispatcher.BeginInvoke(
-                    GoBack<MainPage>);
+                dispatcher.BeginInvoke(() =>
+                {
+                    progList.IsLoading = false;
+                    _cmdRefresh.IsEnabled = true;
+                });
             }
+        }
 
-            dispatcher.BeginInvoke(() =>
-                progList.IsLoading = false);
+        private void RefreshList()
+        {
+            progList.IsLoading = true;
+            _cmdRefresh.IsEnabled = false;
+
+            new Client(_token, _secret)
+                .ListAsync(_path, OnListComplete);
+        }
+
+        private void cmdRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshList();
         }
 
         private void lstBrowse_SelectionChanged(

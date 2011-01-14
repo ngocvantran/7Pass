@@ -63,7 +63,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\ListItemInfo.cs" />
+    <Compile Include="ListItemInfo.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -74,6 +74,9 @@
       <DependentUpon>List.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sources\DropBox\MetaListItemInfo.cs" />
+    <Compile Include="Storage\Cache.cs" />
+    <Compile Include="Storage\DatabaseInfo.cs" />
+    <Compile Include="Storage\OpenDbResults.cs" />
     <Compile Include="Utils\KeePassPage.cs" />
     <Compile Include="Utils\Navigation.cs" />
     <Compile Include="Refs\ProgressBar\PerformanceProgressBar.cs" />
@@ -146,7 +149,8 @@
     <Content Include="Images\folder.dark.png" />
     <Content Include="Images\folder.light.png" />
     <Content Include="Images\new.png" />
-    <Resource Include="Images\check.png" />
+    <Content Include="Images\refresh.png" />
+    <Content Include="Images\check.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -158,7 +162,12 @@
       <LastGenOutput>DropBoxResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\KeePass.IO\KeePass.IO.csproj">
+      <Project>{3BC6B06B-0B8D-4E34-BF60-C026C4252E7B}</Project>
+      <Name>KeePass.IO</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
