@@ -6,12 +6,12 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("KeePass Reader for Windows Phone 7")]
+[assembly: AssemblyTitle("7Pass")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("7Pass")]
-[assembly: AssemblyCopyright("Copyright © Tran Ngoc Van 2010")]
+[assembly: AssemblyCompany("Tran Ngoc Van")]
+[assembly: AssemblyProduct("KeePass")]
+[assembly: AssemblyCopyright("Copyright © Tran Ngoc Van 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +21,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("17771456-9b99-4fea-99d5-d4c3f86dc43a")]
+[assembly: Guid("ecaa1bca-5401-4dd1-816b-8fab1c095a0d")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,6 +32,6 @@ using System.Resources;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.3.0.0")]
-[assembly: AssemblyFileVersion("1.3.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
