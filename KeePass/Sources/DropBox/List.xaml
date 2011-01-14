@@ -1,17 +1,18 @@
 ﻿<keepass:KeePassPage 
-    x:Class="KeePass.MainPage"
+    x:Class="KeePass.Sources.DropBox.List"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     xmlns:keepass="clr-namespace:KeePass.Utils"
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -21,23 +22,17 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <controls:PerformanceProgressBar x:Name="progList" />
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Databases" Margin="9,-7,0,0"
+            <TextBlock x:Name="PageTitle" Text="DropBox" Margin="9,-7,0,0"
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            
-        </Grid>
+        <ListBox Name="lstBrowse"
+                 Grid.Row="1" Margin="12,0,12,0"
+                 Style="{StaticResource KeePassList}"
+                 SelectionChanged="lstBrowse_SelectionChanged" />
     </Grid>
- 
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton
-                IconUri="/Images/new.png" Text="Add New"
-                Click="mnuNew_Click"/>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
 
 </keepass:KeePassPage>

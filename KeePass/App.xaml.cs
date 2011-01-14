@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Navigation;
-using KeePass.Services;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -10,6 +9,13 @@ namespace KeePass
 {
     public partial class App
     {
+        private bool _initialized;
+
+        public new static App Current
+        {
+            get { return (App)Application.Current; }
+        }
+
         public PhoneApplicationFrame RootFrame { get; private set; }
 
         public App()
@@ -17,40 +23,42 @@ namespace KeePass
             UnhandledException += Application_UnhandledException;
 
             if (Debugger.IsAttached)
-                Current.Host.Settings.EnableFrameRateCounter = true;
+                Host.Settings.EnableFrameRateCounter = true;
 
             InitializeComponent();
+
             InitializePhoneApplication();
         }
 
-        [DebuggerNonUserCode]
-        public static void Quit()
+        private void InitializePhoneApplication()
         {
-            throw new QuitException();
+            if (_initialized)
+                return;
+
+            RootFrame = new PhoneApplicationFrame();
+            RootFrame.Navigated += CompleteInitializePhoneApplication;
+            RootFrame.NavigationFailed += RootFrame_NavigationFailed;
+
+            _initialized = true;
         }
 
-        private void RootFrame_NavigationFailed(
-            object sender, NavigationFailedEventArgs e)
+        private void Application_Activated(
+            object sender, ActivatedEventArgs e) {}
+
+        private void Application_Closing(
+            object sender, ClosingEventArgs e) {}
+
+        private void Application_Deactivated(
+            object sender, DeactivatedEventArgs e) {}
+
+        private void Application_Launching(
+            object sender, LaunchingEventArgs e) {}
+
+        private static void Application_UnhandledException(
+            object sender, ApplicationUnhandledExceptionEventArgs e)
         {
             if (Debugger.IsAttached)
                 Debugger.Break();
-        }
-
-        #region Phone application initialization
-
-        private bool _phoneApplicationInitialized;
-
-        private void InitializePhoneApplication()
-        {
-            if (_phoneApplicationInitialized)
-                return;
-
-            RootFrame = new TransitionFrame();
-            RootFrame.Navigated += CompleteInitializePhoneApplication;
-
-            RootFrame.NavigationFailed += RootFrame_NavigationFailed;
-
-            _phoneApplicationInitialized = true;
         }
 
         private void CompleteInitializePhoneApplication(
@@ -60,38 +68,11 @@ namespace KeePass
             RootFrame.Navigated -= CompleteInitializePhoneApplication;
         }
 
-        #endregion
-
-        private void Application_Activated(object sender, ActivatedEventArgs e)
+        private static void RootFrame_NavigationFailed(
+            object sender, NavigationFailedEventArgs e)
         {
-            LifeCycle.Activated();
-        }
-
-        private void Application_Closing(object sender, ClosingEventArgs e)
-        {
-            LifeCycle.Closing();
-        }
-
-        private void Application_Deactivated(object sender, DeactivatedEventArgs e)
-        {
-            LifeCycle.Deactivated();
-        }
-
-        private void Application_Launching(object sender, LaunchingEventArgs e)
-        {
-            LifeCycle.Launching();
-        }
-
-        private void Application_UnhandledException(
-            object sender, ApplicationUnhandledExceptionEventArgs e)
-        {
-            if (e.ExceptionObject is QuitException)
-                return;
-
             if (Debugger.IsAttached)
                 Debugger.Break();
         }
-
-        private class QuitException : Exception {}
     }
 }

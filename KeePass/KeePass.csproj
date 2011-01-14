@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CBF9DCE4-30F8-46AA-A9FC-7A52339681E0}</ProjectGuid>
+    <ProjectGuid>{37AFBD4F-8D32-4CDF-B01E-D60848AB1E90}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -20,7 +20,7 @@
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>7Pass.xap</XapFilename>
+    <XapFilename>KeePass.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <SilverlightAppEntry>KeePass.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
@@ -48,12 +48,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hammock.WindowsPhone, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone" />
-    <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Interop" />
-    <Reference Include="Microsoft.Xna.Framework" />
-    <Reference Include="Microsoft.Xna.Framework.Input.Touch" />
+    <Reference Include="Newtonsoft.Json.Silverlight, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="SharpZipLib.WindowsPhone7, Version=0.86.0.518, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -64,81 +63,68 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Refs\RelativeAnimatingContentControl.cs" />
-    <Compile Include="Refs\TiltEffect.cs" />
-    <Compile Include="Services\AppSettingsService.cs" />
-    <Compile Include="Services\Consts.cs" />
-    <Compile Include="Services\DatabaseCheckResults.cs" />
-    <Compile Include="Data\DatabaseItem.cs" />
-    <Compile Include="Data\DatabaseItems.cs" />
-    <Compile Include="Services\ErrorReport.cs" />
-    <Compile Include="Services\ILifeCycleAware.cs" />
-    <Compile Include="Services\LifeCycle.cs" />
-    <Compile Include="Data\Theme.cs" />
-    <Compile Include="Download.xaml.cs">
-      <DependentUpon>Download.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Services\KeyCache.cs" />
-    <Compile Include="EntryPage.xaml.cs">
-      <DependentUpon>EntryPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ItemConverter.cs" />
+    <Compile Include="Data\ListItemInfo.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Password.xaml.cs">
-      <DependentUpon>Password.xaml</DependentUpon>
+    <Compile Include="Sources\DropBox\DropBox.xaml.cs">
+      <DependentUpon>DropBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sources\DropBox\List.xaml.cs">
+      <DependentUpon>List.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\DropBox\MetaListItemInfo.cs" />
+    <Compile Include="Utils\KeePassPage.cs" />
+    <Compile Include="Utils\Navigation.cs" />
+    <Compile Include="Refs\ProgressBar\PerformanceProgressBar.cs" />
+    <Compile Include="Refs\ProgressBar\RelativeAnimatingContentControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\AppResources.Designer.cs">
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Search.xaml.cs">
-      <DependentUpon>Search.xaml</DependentUpon>
+    <Compile Include="Refs\TiltEffect.cs" />
+    <Compile Include="Sources\Download.xaml.cs">
+      <DependentUpon>Download.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\OpenDbResults.cs" />
-    <Compile Include="Services\TrialManager.cs" />
-    <Compile Include="Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
+    <Compile Include="Sources\DropBox\Api\Client.cs" />
+    <Compile Include="Sources\DropBox\Api\DropBoxInfo.cs" />
+    <Compile Include="Sources\DropBox\Api\LoginInfo.cs" />
+    <Compile Include="Sources\DropBox\Api\MetaData.cs" />
+    <Compile Include="Sources\DropBox\Api\Serialize\JsonConventionResolver.cs" />
+    <Compile Include="Sources\DropBox\Api\Serialize\JsonSerializer.cs" />
+    <Compile Include="Sources\DropBox\Api\Serialize\SerializerBase.cs" />
+    <Compile Include="Sources\DropBox\DropBoxResources.Designer.cs">
+      <DependentUpon>DropBoxResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Navigation.cs" />
+    <Compile Include="Utils\Network.cs" />
+    <Compile Include="Utils\ThemeData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <DesignData Include="Data\DesignData.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </DesignData>
-    <DesignData Include="Data\EntryData.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </DesignData>
-    <Page Include="Download.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EntryPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Password.xaml">
+    <ApplicationDefinition Include="Sources\Download.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <ApplicationDefinition Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Sources\DropBox\DropBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Search.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Settings.xaml">
+    <Page Include="Sources\DropBox\List.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,104 +132,33 @@
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml" />
-    <Content Include="Demo7Pass.kdbx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApplicationIcon.png" />
-    <Content Include="Background.png" />
-    <Content Include="Icons\00.png" />
-    <Content Include="Icons\01.png" />
-    <Content Include="Icons\02.png" />
-    <Content Include="Icons\03.png" />
-    <Content Include="Icons\04.png" />
-    <Content Include="Icons\05.png" />
-    <Content Include="Icons\06.png" />
-    <Content Include="Icons\07.png" />
-    <Content Include="Icons\08.png" />
-    <Content Include="Icons\09.png" />
-    <Content Include="Icons\10.png" />
-    <Content Include="Icons\11.png" />
-    <Content Include="Icons\12.png" />
-    <Content Include="Icons\13.png" />
-    <Content Include="Icons\14.png" />
-    <Content Include="Icons\15.png" />
-    <Content Include="Icons\16.png" />
-    <Content Include="Icons\17.png" />
-    <Content Include="Icons\18.png" />
-    <Content Include="Icons\19.png" />
-    <Content Include="Icons\20.png" />
-    <Content Include="Icons\21.png" />
-    <Content Include="Icons\22.png" />
-    <Content Include="Icons\23.png" />
-    <Content Include="Icons\24.png" />
-    <Content Include="Icons\25.png" />
-    <Content Include="Icons\26.png" />
-    <Content Include="Icons\27.png" />
-    <Content Include="Icons\28.png" />
-    <Content Include="Icons\29.png" />
-    <Content Include="Icons\30.png" />
-    <Content Include="Icons\31.png" />
-    <Content Include="Icons\32.png" />
-    <Content Include="Icons\33.png" />
-    <Content Include="Icons\34.png" />
-    <Content Include="Icons\35.png" />
-    <Content Include="Icons\36.png" />
-    <Content Include="Icons\37.png" />
-    <Content Include="Icons\38.png" />
-    <Content Include="Icons\39.png" />
-    <Content Include="Icons\40.png" />
-    <Content Include="Icons\41.png" />
-    <Content Include="Icons\42.png" />
-    <Content Include="Icons\43.png" />
-    <Content Include="Icons\44.png" />
-    <Content Include="Icons\45.png" />
-    <Content Include="Icons\46.png" />
-    <Content Include="Icons\47.png" />
-    <Content Include="Icons\48.png" />
-    <Content Include="Icons\49.png" />
-    <Content Include="Icons\50.png" />
-    <Content Include="Icons\51.png" />
-    <Content Include="Icons\52.png" />
-    <Content Include="Icons\53.png" />
-    <Content Include="Icons\54.png" />
-    <Content Include="Icons\55.png" />
-    <Content Include="Icons\56.png" />
-    <Content Include="Icons\57.png" />
-    <Content Include="Icons\58.png" />
-    <Content Include="Icons\59.png" />
-    <Content Include="Icons\60.png" />
-    <Content Include="Icons\61.png" />
-    <Content Include="Icons\62.png" />
-    <Content Include="Icons\63.png" />
-    <Content Include="Icons\64.png" />
-    <Content Include="Icons\65.png" />
-    <Content Include="Icons\66.png" />
-    <Content Include="Icons\67.png" />
-    <Content Include="Icons\68.png" />
-    <Content Include="Images\check.png" />
-    <Content Include="Images\close.png" />
+    <Content Include="ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dropbox.png" />
     <Content Include="Images\entry.dark.png" />
     <Content Include="Images\entry.light.png" />
-    <Content Include="Images\group.dark.png" />
-    <Content Include="Images\group.light.png" />
-    <Content Include="Images\search.png" />
-    <Content Include="Images\settings.png" />
-    <Content Include="Images\home.png" />
-    <Content Include="Images\warning.dark.png" />
-    <Content Include="Images\warning.light.png" />
+    <Content Include="Images\folder.dark.png" />
+    <Content Include="Images\folder.light.png" />
+    <Content Include="Images\new.png" />
+    <Resource Include="Images\check.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\AppResources.resx">
+    <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\DropBox\DropBoxResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DropBoxResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\KeePass.IO\KeePass.IO.csproj">
-      <Project>{3BC6B06B-0B8D-4E34-BF60-C026C4252E7B}</Project>
-      <Name>KeePass.IO</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
