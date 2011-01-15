@@ -13,6 +13,6 @@ namespace KeePass
 {
     internal static class LifeCycle
     {
-
+        
     }
 }

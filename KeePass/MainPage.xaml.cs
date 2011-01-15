@@ -31,7 +31,7 @@ namespace KeePass
             if (cancelled)
                 return;
 
-            Cache.Database = null;
+            Cache.Clear();
             RefreshDbList();
         }
 

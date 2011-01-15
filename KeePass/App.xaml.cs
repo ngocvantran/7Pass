@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Navigation;
+using KeePass.Storage;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -43,7 +44,10 @@ namespace KeePass
         }
 
         private void Application_Activated(
-            object sender, ActivatedEventArgs e) {}
+            object sender, ActivatedEventArgs e)
+        {
+            Cache.RestoreCache(RootFrame.Dispatcher);
+        }
 
         private void Application_Closing(
             object sender, ClosingEventArgs e) {}

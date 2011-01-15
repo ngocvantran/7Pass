@@ -169,9 +169,7 @@ namespace KeePass.Storage
         /// <param name="dispatcher">The dispatcher.</param>
         public void Open(Dispatcher dispatcher)
         {
-            var xml = GetSavedPassword();
-            Cache.Database = DatabaseReader
-                .Load(xml, dispatcher);
+            Open(GetSavedPassword(), dispatcher);
         }
 
         /// <summary>
@@ -208,8 +206,7 @@ namespace KeePass.Storage
                     if (savePassword)
                         Save(store, xml);
 
-                    Cache.Database = DatabaseReader
-                        .Load(xml, dispatcher);
+                    Open(xml, dispatcher);
 
                     return OpenDbResults.Success;
                 }
@@ -275,6 +272,17 @@ namespace KeePass.Storage
 
                 return result;
             }
+        }
+
+        private void Open(DbPersistentData xml,
+            Dispatcher dispatcher)
+        {
+            var database = DatabaseReader
+                .Load(xml, dispatcher);
+
+            var name = HasPassword
+                ? Folder : string.Empty;
+            Cache.CacheDb(name, database);
         }
 
         /// <summary>

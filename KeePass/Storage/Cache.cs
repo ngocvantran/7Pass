@@ -1,36 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using KeePass.IO;
 
 namespace KeePass.Storage
 {
     internal static class Cache
     {
+        private const string KEY_DATABASE = "Database";
+
+        private static readonly IsolatedStorageSettings _appSettings;
         private static readonly Dictionary<int, ImageSource> _standards;
 
-        private static Database _database;
-
         /// <summary>
-        /// Gets or sets the database.
+        /// Gets the database.
         /// </summary>
         /// <value>
         /// The database.
         /// </value>
-        public static Database Database
-        {
-            get { return _database; }
-            set
-            {
-                _database = value;
-                _standards.Clear();
-            }
-        }
+        public static Database Database { get; private set; }
 
         static Cache()
         {
+            _appSettings = IsolatedStorageSettings
+                .ApplicationSettings;
             _standards = new Dictionary<int, ImageSource>();
+        }
+
+        public static void CacheDb(string name, Database database)
+        {
+            _standards.Clear();
+            Database = database;
+
+            _appSettings[KEY_DATABASE] = name;
+            _appSettings.Save();
+        }
+
+        public static void Clear()
+        {
+            Database = null;
+            _standards.Clear();
+
+            _appSettings.Remove(KEY_DATABASE);
+            _appSettings.Save();
         }
 
         /// <summary>
@@ -45,7 +60,7 @@ namespace KeePass.Storage
 
             ImageSource source;
             if (!string.IsNullOrEmpty(icon.Custom) &&
-                _database.Icons.TryGetValue(icon.Custom, out source))
+                Database.Icons.TryGetValue(icon.Custom, out source))
                 return source;
 
             var id = icon.Standard;
@@ -59,6 +74,23 @@ namespace KeePass.Storage
             }
 
             return source;
+        }
+
+        public static void RestoreCache(Dispatcher dispatcher)
+        {
+            if (dispatcher == null)
+                throw new ArgumentNullException("dispatcher");
+
+            string name;
+            if (!_appSettings.TryGetValue(KEY_DATABASE, out name) ||
+                string.IsNullOrEmpty(name))
+                return;
+
+            var info = new DatabaseInfo(name);
+            if (!info.HasPassword)
+                return;
+
+            info.Open(dispatcher);
         }
     }
 }
