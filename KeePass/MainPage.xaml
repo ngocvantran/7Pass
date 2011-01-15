@@ -7,7 +7,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
-    xmlns:ms="clr-namespace:Microsoft.Unsupported" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
+    xmlns:ms="clr-namespace:Microsoft.Unsupported"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -28,25 +31,30 @@
         </StackPanel>
 
         <ListBox Name="lstDatabases"
+                 HorizontalAlignment="Stretch"
                  Grid.Row="1" Margin="12,0,12,0"
                  ms:TiltEffect.IsTiltEnabled="True"
-                 keepass:EaseEffect.IsEnabled="True">
+                 SelectionChanged="lstDatabases_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}"
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}"
+                               keepass:EaseEffect.IsEnabled="True"
                                Style="{StaticResource PhoneTextExtraLargeStyle}">
-                        <toolkit:ContextMenuService.ContextMenu>
-                            <toolkit:ContextMenu Tag="{Binding Info}"
-                                                 Opened="ctmDatabase_Opened">
-                                <toolkit:MenuItem Header="update"
-                                                  Tag="{Binding Info}"
-                                                  Click="mnuUpdate_Click" />
-                                <toolkit:MenuItem Header="delete"
-                                                  Tag="{Binding Info}"
-                                                  Click="mnuDelete_Click" />
-                            </toolkit:ContextMenu>
-                        </toolkit:ContextMenuService.ContextMenu>
-                    </TextBlock>
+                            <toolkit:ContextMenuService.ContextMenu>
+                                <toolkit:ContextMenu>
+                                    <toolkit:MenuItem Header="update"
+                                                      Tag="{Binding Info}"
+                                                      Click="mnuUpdate_Click" />
+                                    <toolkit:MenuItem Header="delete"
+                                                      Tag="{Binding Info}"
+                                                      Click="mnuDelete_Click" />
+                                </toolkit:ContextMenu>
+                            </toolkit:ContextMenuService.ContextMenu>
+                        </TextBlock>
+                        <controls:PerformanceProgressBar x:Name="progList"
+                                                         IsLoading="{Binding IsUpdating}"/>
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

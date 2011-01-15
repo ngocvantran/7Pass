@@ -216,7 +216,6 @@ namespace KeePass.Storage
             }
         }
 
-
         /// <summary>
         /// Sets the database.
         /// </summary>

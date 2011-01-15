@@ -122,11 +122,41 @@
 
 Doing so will only remove {0} from your phone, and will not delete the source file on your server.</value>
   </data>
+  <data name="CorruptedFile" xml:space="preserve">
+    <value>The database file is corrupted!</value>
+  </data>
   <data name="DeleteDbTitle" xml:space="preserve">
     <value>Delete Database</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>You've specified an incorrect password.
+
+Please note that 7Pass only support databases protected by Master Key only (not key file or Windows account or any of their combination).</value>
   </data>
   <data name="NoNetwork" xml:space="preserve">
     <value>No internet connection is available.
 Please try again later..</value>
+  </data>
+  <data name="ParseError" xml:space="preserve">
+    <value>Your password is correct and the database seems valid.
+Unfortunately, 7Pass encountered an error while reading the database.
+
+Do you want to send the author a report so that this bug can be fixed in next version?</value>
+  </data>
+  <data name="PasswordTitle" xml:space="preserve">
+    <value>Master Key</value>
+  </data>
+  <data name="UpdateFailure" xml:space="preserve">
+    <value>Updating of database {0} failed</value>
+  </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value>Database Update</value>
+  </data>
+  <data name="WarningStorePassword" xml:space="preserve">
+    <value>Please make sure that your phone's lock screen is password protected.
+
+Saving your database password without lock screen protection will allow anyone to view your passwords.
+
+To set lock screen password, please go to Phone's Settings\lock &amp; wallpaper.</value>
   </data>
 </root>
