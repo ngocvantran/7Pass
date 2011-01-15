@@ -17,6 +17,11 @@ namespace KeePass.Data
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public bool CanUpdate
+        {
+            get { return !string.IsNullOrEmpty(_info.Details.Url); }
+        }
+
         public bool HasPassword
         {
             get { return _hasPassword; }

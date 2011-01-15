@@ -128,6 +128,12 @@ Doing so will only remove {0} from your phone, and will not delete the source fi
   <data name="DeleteDbTitle" xml:space="preserve">
     <value>Delete Database</value>
   </data>
+  <data name="DemoDbText" xml:space="preserve">
+    <value>The password of demo database is "demo", without quotes.</value>
+  </data>
+  <data name="DemoDbTitle" xml:space="preserve">
+    <value>Database Password</value>
+  </data>
   <data name="IncorrectPassword" xml:space="preserve">
     <value>You've specified an incorrect password.
 

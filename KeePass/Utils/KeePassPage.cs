@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 
@@ -14,6 +15,9 @@ namespace KeePass.Utils
                 return;
 
             _backTarget = uri;
+            App.Current.RootFrame.Visibility =
+                Visibility.Collapsed;
+
             NavigationService.GoBack();
         }
 
@@ -39,7 +43,13 @@ namespace KeePass.Utils
                     _backTarget = null;
             }
 
-            OnNavigatedTo(_backTarget != null, e);
+            var cancelled = _backTarget != null;
+
+            if (!cancelled)
+                App.Current.RootFrame.Visibility =
+                    Visibility.Visible;
+
+            OnNavigatedTo(cancelled, e);
         }
 
         protected virtual void OnNavigatedTo(
