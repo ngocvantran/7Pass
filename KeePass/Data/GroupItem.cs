@@ -1,5 +1,6 @@
 ﻿using System;
 using KeePass.IO;
+using KeePass.Storage;
 using KeePass.Utils;
 
 namespace KeePass.Data
@@ -20,6 +21,7 @@ namespace KeePass.Data
 
             Title = group.Name;
             Icon = ThemeData.GetImage("folder");
+            Overlay = Cache.GetOverlay(group.Icon);
 
             _targetUri = Navigation.GetPathTo<GroupDetails>(
                 "id={0}", group.ID);
@@ -33,6 +35,7 @@ namespace KeePass.Data
             Title = entry.Title;
             Notes = entry.Notes;
             Icon = ThemeData.GetImage("entry");
+            Overlay = Cache.GetOverlay(entry.Icon);
 
             _targetUri = Navigation.GetPathTo<EntryDetails>(
                 "id={0}", entry.ID);
