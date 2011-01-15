@@ -80,6 +80,9 @@
     <Compile Include="Password.xaml.cs">
       <DependentUpon>Password.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Search.xaml.cs">
+      <DependentUpon>Search.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sources\DropBox\DropBox.xaml.cs">
       <DependentUpon>DropBox.xaml</DependentUpon>
     </Compile>
@@ -156,6 +159,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Password.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Search.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -259,6 +266,7 @@
     <Content Include="Images\new.png" />
     <Content Include="Images\refresh.png" />
     <Content Include="Images\check.png" />
+    <Content Include="Images\search.png" />
     <Content Include="Images\warning.dark.png" />
     <Content Include="Images\warning.light.png" />
   </ItemGroup>

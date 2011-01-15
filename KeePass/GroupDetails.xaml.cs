@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using KeePass.Data;
 using KeePass.IO;
 using KeePass.Storage;
+using KeePass.Utils;
 using Microsoft.Phone.Shell;
 
 namespace KeePass
@@ -97,6 +98,11 @@ namespace KeePass
         private void cmdHome_Click(object sender, EventArgs e)
         {
             GoBack<GroupDetails>();
+        }
+
+        private void cmdSearch_Click(object sender, EventArgs e)
+        {
+            this.NavigateTo<Search>();
         }
 
         private void lstGroup_SelectionChanged(
