@@ -6,11 +6,17 @@ using System.Linq;
 using System.Windows.Threading;
 using KeePass.IO;
 using KeePass.IO.Utils;
+using Newtonsoft.Json;
 
 namespace KeePass.Storage
 {
     internal class DatabaseInfo
     {
+        /// <summary>
+        /// Gets the database' details.
+        /// </summary>
+        public DatabaseDetails Details { get; private set; }
+
         /// <summary>
         /// Gets or sets the folder.
         /// </summary>
@@ -38,14 +44,6 @@ namespace KeePass.Storage
         }
 
         /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        public string Name { get; set; }
-
-        /// <summary>
         /// Gets the path to database file.
         /// </summary>
         private string DatabasePath
@@ -54,6 +52,18 @@ namespace KeePass.Storage
             {
                 return Path.Combine(
                     Folder, "database.kdbx");
+            }
+        }
+
+        /// <summary>
+        /// Gets the path to the database information file.
+        /// </summary>
+        private string InfoPath
+        {
+            get
+            {
+                return Path.Combine(
+                    Folder, "database.info");
             }
         }
 
@@ -90,6 +100,31 @@ namespace KeePass.Storage
             : this(Guid.NewGuid().ToString("N")) {}
 
         /// <summary>
+        /// Clears the saved password.
+        /// </summary>
+        public void ClearPassword()
+        {
+            using (var store = IsolatedStorageFile
+                .GetUserStoreForApplication())
+            {
+                store.DeleteFile(ProtectionPath);
+                store.DeleteFile(ParsedXmlPath);
+            }
+        }
+
+        /// <summary>
+        /// Deletes this database.
+        /// </summary>
+        public void Delete()
+        {
+            using (var store = IsolatedStorageFile
+                .GetUserStoreForApplication())
+            {
+                store.DeleteDirectory(Folder);
+            }
+        }
+
+        /// <summary>
         /// Gets all databases.
         /// </summary>
         /// <returns>All databases.</returns>
@@ -101,6 +136,28 @@ namespace KeePass.Storage
                 return store.GetDirectoryNames()
                     .Select(x => new DatabaseInfo(x))
                     .ToList();
+            }
+        }
+
+        /// <summary>
+        /// Loads the <see cref="Details"/> data.
+        /// </summary>
+        public void LoadDetails()
+        {
+            using (var store = IsolatedStorageFile
+                .GetUserStoreForApplication())
+            {
+                using (var fs = store.OpenFile(InfoPath, FileMode.Open))
+                {
+                    var serializer = new JsonSerializer();
+                    var reader = new JsonTextReader(
+                        new StreamReader(fs));
+
+                    var details = serializer.Deserialize
+                        <DatabaseDetails>(reader);
+
+                    Details = details;
+                }
             }
         }
 
@@ -157,17 +214,33 @@ namespace KeePass.Storage
             }
         }
 
+
         /// <summary>
         /// Sets the database.
         /// </summary>
         /// <param name="data">The data.</param>
-        public void SetDatabase(Stream data)
+        /// <param name="details">The details.</param>
+        public void SetDatabase(Stream data, DatabaseDetails details)
         {
+            if (data == null) throw new ArgumentNullException("data");
+            if (details == null) throw new ArgumentNullException("details");
+
             using (var store = IsolatedStorageFile
                 .GetUserStoreForApplication())
             {
                 if (!store.DirectoryExists(Folder))
                     store.CreateDirectory(Folder);
+
+                using (var fs = store.CreateFile(InfoPath))
+                {
+                    Details = details;
+                    
+                    var writer = new StreamWriter(fs);
+                    var serializer = new JsonSerializer();
+                    serializer.Serialize(writer, details);
+
+                    writer.Flush();
+                }
 
                 using (var fs = store.CreateFile(DatabasePath))
                     BufferEx.CopyStream(data, fs);

@@ -34,9 +34,14 @@ namespace KeePass
         private void ListDatabases(object ignored)
         {
             var dispatcher = Dispatcher;
+            
+            var databases = DatabaseInfo.GetAll();
+            foreach (var database in databases)
+                database.LoadDetails();
 
-            var items = DatabaseInfo.GetAll()
+            var items = databases
                 .Select(x => new DatabaseListItemInfo(x))
+                .OrderBy(x => x.Title)
                 .ToList();
 
             foreach (var item in items)
