@@ -34,7 +34,8 @@ namespace KeePass.Data
             Notes = entry.Notes;
             Icon = ThemeData.GetImage("entry");
 
-            // TODO: _targetUri
+            _targetUri = Navigation.GetPathTo<EntryDetails>(
+                "id={0}", entry.ID);
         }
     }
 }
