@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows.Media;
 using KeePass.Storage;
 
 namespace KeePass.Data
@@ -7,13 +8,27 @@ namespace KeePass.Data
     public class DatabaseItem : INotifyPropertyChanged
     {
         private readonly DatabaseInfo _info;
-
+        private bool _hasPassword;
         private bool _isUpdating;
+        private ImageSource _passwordIcon;
 
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public bool HasPassword
+        {
+            get { return _hasPassword; }
+            set
+            {
+                if (value == _hasPassword)
+                    return;
+
+                _hasPassword = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("HasPassword"));
+            }
+        }
 
         public object Info
         {
@@ -38,12 +53,23 @@ namespace KeePass.Data
             get { return _info.Details.Name; }
         }
 
+        public ImageSource PasswordIcon
+        {
+            get { return _passwordIcon; }
+            set
+            {
+                _passwordIcon = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("PasswordIcon"));
+            }
+        }
+
         internal DatabaseItem(DatabaseInfo info)
         {
             if (info == null)
                 throw new ArgumentNullException("info");
 
             _info = info;
+            _hasPassword = info.HasPassword;
 
             if (info.Details == null)
                 info.LoadDetails();
