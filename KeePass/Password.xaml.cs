@@ -82,7 +82,7 @@ namespace KeePass
             switch ((OpenDbResults)e.Result)
             {
                 case OpenDbResults.Success:
-                    NavigationService.GoBack();
+                    this.NavigateTo<GroupDetails>();
                     break;
 
                 case OpenDbResults.IncorrectPassword:
