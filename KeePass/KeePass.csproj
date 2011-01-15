@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="Sources\DropBox\MetaListItemInfo.cs" />
     <Compile Include="Storage\Cache.cs" />
+    <Compile Include="Storage\DatabaseDetails.cs" />
     <Compile Include="Storage\DatabaseInfo.cs" />
     <Compile Include="Storage\DatabaseVerifier.cs" />
     <Compile Include="Storage\OpenDbResults.cs" />

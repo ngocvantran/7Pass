@@ -18,7 +18,7 @@ namespace KeePass
                 throw new ArgumentNullException("database");
 
             _database = database;
-            Title = "Test";
+            Title = database.Details.Name;
         }
     }
 }

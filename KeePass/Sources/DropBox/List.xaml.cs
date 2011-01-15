@@ -63,7 +63,8 @@ namespace KeePass.Sources.DropBox
                 _token, _secret, path);
         }
 
-        private void OnFileDownloaded(Stream file)
+        private void OnFileDownloaded(Stream file,
+            string path, string title)
         {
             var dispatcher = Dispatcher;
 
@@ -83,7 +84,12 @@ namespace KeePass.Sources.DropBox
                     return;
 
                 var storage = new DatabaseInfo();
-                storage.SetDatabase(file);
+                storage.SetDatabase(file, new DatabaseDetails
+                {
+                    Url = path,
+                    Name = title,
+                    Source = "DropBox",
+                });
 
                 dispatcher.BeginInvoke(
                     GoBack<MainPage>);
@@ -169,8 +175,8 @@ namespace KeePass.Sources.DropBox
                     progList.IsLoading = true;
                     _cmdRefresh.IsEnabled = false;
 
-                    new Client(_token, _secret).DownloadAsync(
-                        meta.Path, OnFileDownloaded);
+                    new Client(_token, _secret).DownloadAsync(meta.Path,
+                        x => OnFileDownloaded(x, meta.Path, meta.Title));
                 }
             }
 
