@@ -74,6 +74,7 @@
       <DependentUpon>GroupDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\ListItemInfo.cs" />
+    <Compile Include="LifeCycle.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -267,6 +268,8 @@
     <Content Include="Images\refresh.png" />
     <Content Include="Images\check.png" />
     <Content Include="Images\search.png" />
+    <Content Include="Images\unlock.dark.png" />
+    <Content Include="Images\unlock.light.png" />
     <Content Include="Images\warning.dark.png" />
     <Content Include="Images\warning.light.png" />
   </ItemGroup>

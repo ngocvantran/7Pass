@@ -37,24 +37,40 @@
                  SelectionChanged="lstDatabases_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Name}"
-                               keepass:EaseEffect.IsEnabled="True"
-                               Style="{StaticResource PhoneTextExtraLargeStyle}">
-                            <toolkit:ContextMenuService.ContextMenu>
-                                <toolkit:ContextMenu>
-                                    <toolkit:MenuItem Header="update"
-                                                      Tag="{Binding Info}"
+                    <Grid keepass:EaseEffect.IsEnabled="True"
+                          HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <toolkit:ContextMenuService.ContextMenu>
+                            <toolkit:ContextMenu>
+                                <toolkit:MenuItem Header="clear password" Tag="{Binding Info}"
+                                                      IsEnabled="{Binding HasPassword}"
+                                                      Click="mnuClear_Click" />
+                                <toolkit:MenuItem Header="update" Tag="{Binding Info}"
                                                       Click="mnuUpdate_Click" />
-                                    <toolkit:MenuItem Header="delete"
-                                                      Tag="{Binding Info}"
+                                <toolkit:MenuItem Header="delete" Tag="{Binding Info}"
                                                       Click="mnuDelete_Click" />
-                                </toolkit:ContextMenu>
-                            </toolkit:ContextMenuService.ContextMenu>
-                        </TextBlock>
-                        <controls:PerformanceProgressBar x:Name="progList"
-                                                         IsLoading="{Binding IsUpdating}"/>
-                    </StackPanel>
+                            </toolkit:ContextMenu>
+                        </toolkit:ContextMenuService.ContextMenu>
+
+                        <TextBlock Text="{Binding Name}" Grid.Column="0" Grid.Row="0"
+                                   Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                        
+                        <Image Source="{Binding PasswordIcon}"
+                               Grid.Column="1" Grid.Row="0"/>
+
+                        <controls:PerformanceProgressBar
+                            Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                            x:Name="progList" IsLoading="{Binding IsUpdating}"/>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

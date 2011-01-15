@@ -28,8 +28,11 @@ namespace KeePass
         protected override void OnNavigatedTo(
             bool cancelled, NavigationEventArgs e)
         {
-            if (!cancelled)
-                RefreshDbList();
+            if (cancelled)
+                return;
+
+            Cache.Database = null;
+            RefreshDbList();
         }
 
         private void DatabaseUpdated(
@@ -68,7 +71,15 @@ namespace KeePass
             {
                 var local = item;
                 dispatcher.BeginInvoke(() =>
-                    _items.Add(local));
+                {
+                    if (local.HasPassword)
+                    {
+                        local.PasswordIcon = ThemeData
+                            .GetImageSource("unlock");
+                    }
+
+                    _items.Add(local);
+                });
 
                 Thread.Sleep(50);
             }
@@ -106,6 +117,19 @@ namespace KeePass
             }
 
             lstDatabases.SelectedItem = null;
+        }
+
+        private void mnuClear_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MenuItem)sender;
+            var database = (DatabaseInfo)item.Tag;
+
+            database.ClearPassword();
+            var listItem = _items.First(
+                x => x.Info == database);
+
+            listItem.HasPassword = false;
+            listItem.PasswordIcon = null;
         }
 
         private void mnuDelete_Click(object sender, RoutedEventArgs e)

@@ -82,6 +82,7 @@ namespace KeePass
             switch ((OpenDbResults)e.Result)
             {
                 case OpenDbResults.Success:
+                    txtPassword.Password = string.Empty;
                     this.NavigateTo<GroupDetails>();
                     break;
 
