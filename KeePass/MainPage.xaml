@@ -52,12 +52,13 @@
                         <toolkit:ContextMenuService.ContextMenu>
                             <toolkit:ContextMenu>
                                 <toolkit:MenuItem Header="clear password" Tag="{Binding Info}"
-                                                      IsEnabled="{Binding HasPassword}"
-                                                      Click="mnuClear_Click" />
+                                                  IsEnabled="{Binding HasPassword}"
+                                                  Click="mnuClear_Click" />
                                 <toolkit:MenuItem Header="update" Tag="{Binding Info}"
-                                                      Click="mnuUpdate_Click" />
+                                                  IsEnabled="{Binding CanUpdate}"
+                                                  Click="mnuUpdate_Click" />
                                 <toolkit:MenuItem Header="delete" Tag="{Binding Info}"
-                                                      Click="mnuDelete_Click" />
+                                                  Click="mnuDelete_Click" />
                             </toolkit:ContextMenu>
                         </toolkit:ContextMenuService.ContextMenu>
 

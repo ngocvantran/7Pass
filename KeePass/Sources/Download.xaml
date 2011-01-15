@@ -27,9 +27,11 @@
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <HyperlinkButton Content="DropBox"
                              NavigateUri="/Sources/DropBox/DropBox.xaml" />
-        </Grid>
+            <HyperlinkButton Content="Demo Database"
+                             Click="lnkDemo_Click" />
+        </StackPanel>
     </Grid>
 </keepass:KeePassPage>

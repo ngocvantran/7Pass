@@ -90,6 +90,24 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The password of demo database is &quot;demo&quot;, without quotes..
+        /// </summary>
+        internal static string DemoDbText {
+            get {
+                return ResourceManager.GetString("DemoDbText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database Password.
+        /// </summary>
+        internal static string DemoDbTitle {
+            get {
+                return ResourceManager.GetString("DemoDbTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You&apos;ve specified an incorrect password.
         ///
         ///Please note that 7Pass only support databases protected by Master Key only (not key file or Windows account or any of their combination)..
