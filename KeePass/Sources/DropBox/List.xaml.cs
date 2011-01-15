@@ -175,8 +175,13 @@ namespace KeePass.Sources.DropBox
                     progList.IsLoading = true;
                     _cmdRefresh.IsEnabled = false;
 
-                    new Client(_token, _secret).DownloadAsync(meta.Path,
-                        x => OnFileDownloaded(x, meta.Path, meta.Title));
+                    var url = string.Format(
+                        "dropbox://{0}:{1}@dropbox.com{2}",
+                        _token, _secret, meta.Path);
+
+                    var client = new Client(_token, _secret);
+                    client.DownloadAsync(meta.Path, x =>
+                        OnFileDownloaded(x, url, meta.Title));
                 }
             }
 

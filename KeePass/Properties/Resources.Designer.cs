@@ -72,11 +72,31 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The database file is corrupted!.
+        /// </summary>
+        internal static string CorruptedFile {
+            get {
+                return ResourceManager.GetString("CorruptedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete Database.
         /// </summary>
         internal static string DeleteDbTitle {
             get {
                 return ResourceManager.GetString("DeleteDbTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve specified an incorrect password.
+        ///
+        ///Please note that 7Pass only support databases protected by Master Key only (not key file or Windows account or any of their combination)..
+        /// </summary>
+        internal static string IncorrectPassword {
+            get {
+                return ResourceManager.GetString("IncorrectPassword", resourceCulture);
             }
         }
         
@@ -87,6 +107,58 @@ namespace KeePass.Properties {
         internal static string NoNetwork {
             get {
                 return ResourceManager.GetString("NoNetwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your password is correct and the database seems valid.
+        ///Unfortunately, 7Pass encountered an error while reading the database.
+        ///
+        ///Do you want to send the author a report so that this bug can be fixed in next version?.
+        /// </summary>
+        internal static string ParseError {
+            get {
+                return ResourceManager.GetString("ParseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master Key.
+        /// </summary>
+        internal static string PasswordTitle {
+            get {
+                return ResourceManager.GetString("PasswordTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating of database {0} failed.
+        /// </summary>
+        internal static string UpdateFailure {
+            get {
+                return ResourceManager.GetString("UpdateFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database Update.
+        /// </summary>
+        internal static string UpdateTitle {
+            get {
+                return ResourceManager.GetString("UpdateTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please make sure that your phone&apos;s lock screen is password protected.
+        ///
+        ///Saving your database password without lock screen protection will allow anyone to view your passwords.
+        ///
+        ///To set lock screen password, please go to Phone&apos;s Settings\lock &amp; wallpaper..
+        /// </summary>
+        internal static string WarningStorePassword {
+            get {
+                return ResourceManager.GetString("WarningStorePassword", resourceCulture);
             }
         }
     }

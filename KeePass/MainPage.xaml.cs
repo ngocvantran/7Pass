@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Sources;
 using KeePass.Storage;
@@ -28,6 +29,29 @@ namespace KeePass
         {
             if (!cancelled)
                 RefreshDbList();
+        }
+
+        private void DatabaseUpdated(
+            DatabaseInfo info, bool success)
+        {
+            var dispatcher = Dispatcher;
+            var listItem = _items.First(
+                x => x.Info == info);
+
+            dispatcher.BeginInvoke(() =>
+                listItem.IsUpdating = false);
+
+            if (success)
+                return;
+
+            var msg = string.Format(
+                Properties.Resources.UpdateFailure,
+                info.Details.Name);
+
+            dispatcher.BeginInvoke(() =>
+                MessageBox.Show(msg,
+                    Properties.Resources.UpdateTitle,
+                    MessageBoxButton.OK));
         }
 
         private void ListDatabases(object ignored)
@@ -56,10 +80,22 @@ namespace KeePass
                 .Start();
         }
 
-        private void ctmDatabase_Opened(object sender, RoutedEventArgs e)
+        private void lstDatabases_SelectionChanged(
+            object sender, SelectionChangedEventArgs e)
         {
-            var context = (ContextMenu)sender;
-            var database = (DatabaseInfo)context.Tag;
+            var item = lstDatabases.SelectedItem as DatabaseItem;
+            if (item == null)
+                return;
+
+            if (item.IsUpdating)
+                item.IsUpdating = false;
+            else
+            {
+                this.NavigateTo<Password>("db={0}",
+                    ((DatabaseInfo)item.Info).Folder);
+            }
+
+            lstDatabases.SelectedItem = null;
         }
 
         private void mnuDelete_Click(object sender, RoutedEventArgs e)
@@ -91,6 +127,12 @@ namespace KeePass
         {
             var item = (MenuItem)sender;
             var database = (DatabaseInfo)item.Tag;
+
+            var listItem = _items.First(x => x.Info == database);
+            listItem.IsUpdating = true;
+
+            Sources.DropBox.DropBoxUpdater.Update(database,
+                _ => listItem.IsUpdating, DatabaseUpdated);
         }
     }
 }
