@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using KeePass.Storage;
 
-namespace KeePass
+namespace KeePass.Data
 {
     public class DatabaseItem : INotifyPropertyChanged
     {

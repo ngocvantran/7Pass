@@ -29,7 +29,16 @@
 
         <ListBox Name="lstGroup"
                  Grid.Row="1" Margin="12,0,12,0"
-                 Style="{StaticResource KeePassList}" />
+                 Style="{StaticResource KeePassList}"
+                 SelectionChanged="lstGroup_SelectionChanged" />
     </Grid>
- 
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True">
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/home.png"
+                Text="Home" Click="cmdHome_Click" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
 </keepass:KeePassPage>

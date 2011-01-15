@@ -61,7 +61,7 @@
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+        <shell:ApplicationBar IsVisible="True">
             <shell:ApplicationBarIconButton
                 IconUri="/Images/new.png" Text="Add New"
                 Click="mnuNew_Click"/>

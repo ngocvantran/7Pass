@@ -8,8 +8,27 @@ namespace KeePass.Utils
     {
         private const string BASE_NS = "KeePass";
 
-        public static void NavigateTo(
-            this PhoneApplicationPage page,
+        public static Uri GetPathTo<T>()
+            where T : PhoneApplicationPage
+        {
+            return GetPathTo<T>(string.Empty);
+        }
+
+        public static Uri GetPathTo<T>(
+            string queries, params object[] args)
+            where T : PhoneApplicationPage
+        {
+            var path = typeof(T).FullName;
+            path = path.Substring(BASE_NS.Length);
+            path = path.Replace(".", "/") + ".xaml";
+
+            if (!string.IsNullOrEmpty(queries))
+                path += "?" + queries;
+
+            return GetPathTo(path, args);
+        }
+
+        public static Uri GetPathTo(
             string url, params object[] args)
         {
             if (args != null && args.Length > 0)
@@ -20,28 +39,32 @@ namespace KeePass.Utils
                     .ToArray());
             }
 
-            page.NavigationService.Navigate(
-                new Uri(url, UriKind.Relative));
+            return new Uri(url, UriKind.Relative);
+        }
+
+        public static void NavigateTo(
+            this PhoneApplicationPage page,
+            string url, params object[] args)
+        {
+            var uri = GetPathTo(url, args);
+            page.NavigationService.Navigate(uri);
         }
 
         public static void NavigateTo<T>(
             this PhoneApplicationPage page,
             string queries, params object[] args)
+            where T : PhoneApplicationPage
         {
-            var path = typeof(T).FullName;
-            path = path.Substring(BASE_NS.Length);
-            path = path.Replace(".", "/") + ".xaml";
-
-            if (!string.IsNullOrEmpty(queries))
-                path += "?" + queries;
-
-            NavigateTo(page, path, args);
+            var uri = GetPathTo<T>(queries, args);
+            page.NavigationService.Navigate(uri);
         }
 
         public static void NavigateTo<T>(
             this PhoneApplicationPage page)
+            where T : PhoneApplicationPage
         {
-            NavigateTo<T>(page, string.Empty);
+            var uri = GetPathTo<T>();
+            page.NavigationService.Navigate(uri);
         }
     }
 }

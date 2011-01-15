@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Media;
 
-namespace KeePass
+namespace KeePass.Data
 {
     public class ListItemInfo
     {
@@ -58,7 +60,7 @@ namespace KeePass
         /// <value>
         /// The overlay icon.
         /// </value>
-        public string Overlay { get; set; }
+        public ImageSource Overlay { get; set; }
 
         /// <summary>
         /// Gets or sets the title.

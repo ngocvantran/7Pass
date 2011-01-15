@@ -64,11 +64,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseItem.cs" />
+    <Compile Include="Data\DatabaseItem.cs" />
+    <Compile Include="Data\GroupItem.cs" />
     <Compile Include="GroupDetails.xaml.cs">
       <DependentUpon>GroupDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListItemInfo.cs" />
+    <Compile Include="Data\ListItemInfo.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -177,6 +178,7 @@
     <Content Include="Images\entry.light.png" />
     <Content Include="Images\folder.dark.png" />
     <Content Include="Images\folder.light.png" />
+    <Content Include="Images\home.png" />
     <Content Include="Images\new.png" />
     <Content Include="Images\refresh.png" />
     <Content Include="Images\check.png" />

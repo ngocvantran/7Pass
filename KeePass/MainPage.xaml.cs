@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using KeePass.Data;
 using KeePass.Sources;
 using KeePass.Storage;
 using KeePass.Utils;
@@ -76,8 +77,7 @@ namespace KeePass
         private void RefreshDbList()
         {
             _items.Clear();
-            new Thread(ListDatabases)
-                .Start();
+            ThreadPool.QueueUserWorkItem(ListDatabases);
         }
 
         private void lstDatabases_SelectionChanged(
@@ -91,8 +91,18 @@ namespace KeePass
                 item.IsUpdating = false;
             else
             {
-                this.NavigateTo<Password>("db={0}",
-                    ((DatabaseInfo)item.Info).Folder);
+                var database = (DatabaseInfo)item.Info;
+
+                if (!database.HasPassword)
+                {
+                    this.NavigateTo<Password>("db={0}",
+                        database.Folder);
+                }
+                else
+                {
+                    database.Open(Dispatcher);
+                    this.NavigateTo<GroupDetails>();
+                }
             }
 
             lstDatabases.SelectedItem = null;
