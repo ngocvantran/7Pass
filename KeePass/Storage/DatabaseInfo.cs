@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Threading;
 using KeePass.IO;
 using KeePass.IO.Utils;
+using KeePass.Utils;
 using Newtonsoft.Json;
 
 namespace KeePass.Storage
@@ -13,7 +14,7 @@ namespace KeePass.Storage
     internal class DatabaseInfo
     {
         /// <summary>
-        /// Gets the database' details.
+        /// Gets the database's details.
         /// </summary>
         public DatabaseDetails Details { get; private set; }
 
@@ -120,7 +121,7 @@ namespace KeePass.Storage
             using (var store = IsolatedStorageFile
                 .GetUserStoreForApplication())
             {
-                store.DeleteDirectory(Folder);
+                store.DeleteDirectory(Folder, true);
             }
         }
 
@@ -157,6 +158,7 @@ namespace KeePass.Storage
                         <DatabaseDetails>(reader);
 
                     Details = details;
+                    reader.Close();
                 }
             }
         }
@@ -234,7 +236,7 @@ namespace KeePass.Storage
                 using (var fs = store.CreateFile(InfoPath))
                 {
                     Details = details;
-                    
+
                     var writer = new StreamWriter(fs);
                     var serializer = new JsonSerializer();
                     serializer.Serialize(writer, details);

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KeePass.Sources.Properties {
+namespace KeePass.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace KeePass.Sources.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KeePass.Sources.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KeePass.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,26 @@ namespace KeePass.Sources.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to delete database {0}?
+        ///
+        ///Doing so will only remove {0} from your phone, and will not delete the source file on your server..
+        /// </summary>
+        internal static string ConfirmDeleteDb {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Database.
+        /// </summary>
+        internal static string DeleteDbTitle {
+            get {
+                return ResourceManager.GetString("DeleteDbTitle", resourceCulture);
             }
         }
         

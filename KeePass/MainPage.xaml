@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
+    xmlns:ms="clr-namespace:Microsoft.Unsupported" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -29,7 +29,27 @@
 
         <ListBox Name="lstDatabases"
                  Grid.Row="1" Margin="12,0,12,0"
-                 Style="{StaticResource KeePassList}" />
+                 ms:TiltEffect.IsTiltEnabled="True"
+                 keepass:EaseEffect.IsEnabled="True">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"
+                               Style="{StaticResource PhoneTextExtraLargeStyle}">
+                        <toolkit:ContextMenuService.ContextMenu>
+                            <toolkit:ContextMenu Tag="{Binding Info}"
+                                                 Opened="ctmDatabase_Opened">
+                                <toolkit:MenuItem Header="update"
+                                                  Tag="{Binding Info}"
+                                                  Click="mnuUpdate_Click" />
+                                <toolkit:MenuItem Header="delete"
+                                                  Tag="{Binding Info}"
+                                                  Click="mnuDelete_Click" />
+                            </toolkit:ContextMenu>
+                        </toolkit:ContextMenuService.ContextMenu>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>

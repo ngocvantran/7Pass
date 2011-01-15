@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
-    xmlns:ms="clr-namespace:Microsoft.Unsupported">
+    xmlns:ms="clr-namespace:Microsoft.Unsupported"
+    xmlns:keepass="clr-namespace:KeePass.Utils">
 
     <Application.Resources>
         <system:String x:Key="AppName">7Pass</system:String>
@@ -13,24 +14,8 @@
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Name="fadeIn">
-                            <StackPanel.Triggers>
-                                <EventTrigger RoutedEvent="StackPanel.Loaded">
-                                    <BeginStoryboard>
-                                        <BeginStoryboard.Storyboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Duration="0:0:0.7" From="0" To="1"
-                                                                     Storyboard.TargetName="fadeIn"
-                                                                     Storyboard.TargetProperty="Opacity">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <PowerEase EasingMode="EaseOut"/>
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                            </Storyboard>
-                                        </BeginStoryboard.Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </StackPanel.Triggers>
+                        <StackPanel Orientation="Horizontal"
+                                    keepass:EaseEffect.IsEnabled="True">
 
                             <Grid Width="50" Height="50" Visibility="{Binding IconState}">
                                 <Image Source="{Binding Icon}" Stretch="None"
