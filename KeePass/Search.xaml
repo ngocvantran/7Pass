@@ -1,5 +1,5 @@
-﻿<keepass:KeePassPage
-    x:Class="KeePass.GroupDetails"
+﻿<keepass:KeePassPage 
+    x:Class="KeePass.Search"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -23,24 +23,34 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Group" Margin="9,-7,0,0"
+            <TextBlock x:Name="PageTitle" Text="Search" Margin="9,-7,0,0"
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <ListBox Name="lstGroup"
-                 Grid.Row="1" Margin="12,0,12,0"
-                 Style="{StaticResource KeePassList}"
-                 SelectionChanged="lstGroup_SelectionChanged" />
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBox Name="txtSearch" Grid.Row="0"
+                     TextChanged="txtSearch_TextChanged"
+                     KeyDown="txtSearch_KeyDown" />
+            <ListBox Name="lstItems" Grid.Row="1"
+                     Style="{StaticResource KeePassList}"
+                     SelectionChanged="lstItems_SelectionChanged" />
+
+        </Grid>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True">
             <shell:ApplicationBarIconButton
+                IconUri="/Images/check.png" IsEnabled="False"
+                Text="Search" Click="cmdSearch_Click" />
+            <shell:ApplicationBarIconButton
                 IconUri="/Images/home.png"
                 Text="Home" Click="cmdHome_Click" />
-            <shell:ApplicationBarIconButton
-                IconUri="/Images/search.png"
-                Text="Search" Click="cmdSearch_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
