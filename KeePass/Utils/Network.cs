@@ -1,6 +1,7 @@
-﻿using System.Net.NetworkInformation;
+﻿using System;
+using System.Net.NetworkInformation;
 using System.Windows;
-using KeePass.Sources.Properties;
+using KeePass.Properties;
 
 namespace KeePass.Utils
 {
