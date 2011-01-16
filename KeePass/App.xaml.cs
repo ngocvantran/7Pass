@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Navigation;
 using KeePass.Storage;
+using KeePass.Utils;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -46,6 +47,7 @@ namespace KeePass
         private void Application_Activated(
             object sender, ActivatedEventArgs e)
         {
+            ThemeData.Initialize();
             Cache.RestoreCache(RootFrame.Dispatcher);
         }
 
@@ -56,7 +58,10 @@ namespace KeePass
             object sender, DeactivatedEventArgs e) {}
 
         private void Application_Launching(
-            object sender, LaunchingEventArgs e) {}
+            object sender, LaunchingEventArgs e)
+        {
+            ThemeData.Initialize();
+        }
 
         private static void Application_UnhandledException(
             object sender, ApplicationUnhandledExceptionEventArgs e)
