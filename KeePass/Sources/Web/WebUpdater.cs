@@ -17,7 +17,11 @@ namespace KeePass.Sources.Web
             if (report == null) throw new ArgumentNullException("report");
 
             var details = info.Details;
-            WebUtils.Download(details.Url, (req, getResponse) =>
+            var urlInfo = WebUtils.Deserialize(details.Url);
+            var credentials = WebUtils.CreateCredentials(
+                urlInfo.User, urlInfo.Password, urlInfo.Domain);
+
+            WebUtils.Download(urlInfo.Url, credentials, (req, getResponse) =>
             {
                 if (!queryUpdate(info))
                     return;
