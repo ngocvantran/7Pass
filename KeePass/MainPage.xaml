@@ -35,6 +35,18 @@
                  Grid.Row="1" Margin="12,0,12,0"
                  ms:TiltEffect.IsTiltEnabled="True"
                  SelectionChanged="lstDatabases_SelectionChanged">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid keepass:EaseEffect.IsEnabled="True"
@@ -54,6 +66,8 @@
                                 <toolkit:MenuItem Header="clear password" Tag="{Binding Info}"
                                                   IsEnabled="{Binding HasPassword}"
                                                   Click="mnuClear_Click" />
+                                <toolkit:MenuItem Header="rename" Tag="{Binding Info}"
+                                                  Click="mnuRename_Click" />
                                 <toolkit:MenuItem Header="update" Tag="{Binding Info}"
                                                   IsEnabled="{Binding CanUpdate}"
                                                   Click="mnuUpdate_Click" />

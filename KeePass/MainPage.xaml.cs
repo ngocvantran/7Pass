@@ -157,6 +157,13 @@ namespace KeePass
             this.NavigateTo<Download>();
         }
 
+        private void mnuRename_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MenuItem)sender;
+            var database = (DatabaseInfo)item.Tag;
+            this.NavigateTo<Rename>("db={0}", database.Folder);
+        }
+
         private void mnuUpdate_Click(object sender, RoutedEventArgs e)
         {
             if (!Network.CheckNetwork())
