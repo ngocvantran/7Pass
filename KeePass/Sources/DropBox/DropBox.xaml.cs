@@ -60,13 +60,13 @@ namespace KeePass.Sources.DropBox
 
         private void txtEmail_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter || e.PlatformKeyCode == 0x0A)
+            if (e.IsEnter())
                 txtPassword.Focus();
         }
 
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter || e.PlatformKeyCode == 0x0A)
+            if (e.IsEnter())
                 PerformLogin();
         }
 

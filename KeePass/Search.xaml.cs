@@ -9,6 +9,7 @@ using System.Windows.Input;
 using KeePass.Data;
 using KeePass.IO;
 using KeePass.Storage;
+using KeePass.Utils;
 using Microsoft.Phone.Shell;
 
 namespace KeePass
@@ -180,7 +181,7 @@ namespace KeePass
 
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter || e.PlatformKeyCode == 0x0A)
+            if (e.IsEnter())
                 HideKeyboard();
         }
 
