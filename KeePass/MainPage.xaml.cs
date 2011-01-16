@@ -46,16 +46,25 @@ namespace KeePass
                 listItem.IsUpdating = false);
 
             if (success)
+            {
+                dispatcher.BeginInvoke(() =>
+                    UpdateItem(listItem, true));
+
                 return;
+            }
 
             var msg = string.Format(
                 Properties.Resources.UpdateFailure,
                 info.Details.Name, error);
 
             dispatcher.BeginInvoke(() =>
+            {
+                listItem.UpdatedIcon = null;
+
                 MessageBox.Show(msg,
                     Properties.Resources.UpdateTitle,
-                    MessageBoxButton.OK));
+                    MessageBoxButton.OK);
+            });
         }
 
         private void ListDatabases(object ignored)
@@ -72,12 +81,7 @@ namespace KeePass
                 var local = item;
                 dispatcher.BeginInvoke(() =>
                 {
-                    if (local.HasPassword)
-                    {
-                        local.PasswordIcon = ThemeData
-                            .GetImageSource("unlock");
-                    }
-
+                    UpdateItem(local, false);
                     _items.Add(local);
                 });
 
@@ -89,6 +93,28 @@ namespace KeePass
         {
             _items.Clear();
             ThreadPool.QueueUserWorkItem(ListDatabases);
+        }
+
+        private static void UpdateItem(
+            DatabaseItem item, bool updated)
+        {
+            var info = (DatabaseInfo)item.Info;
+
+            if (info.HasPassword)
+            {
+                item.PasswordIcon = ThemeData
+                    .GetImageSource("unlock");
+            }
+            else
+                item.PasswordIcon = null;
+
+            if (updated)
+            {
+                item.UpdatedIcon = ThemeData
+                    .GetImageSource("updated");
+            }
+            else
+                item.UpdatedIcon = null;
         }
 
         private void lstDatabases_SelectionChanged(

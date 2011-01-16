@@ -11,6 +11,7 @@ namespace KeePass.Data
         private bool _hasPassword;
         private bool _isUpdating;
         private ImageSource _passwordIcon;
+        private ImageSource _updatedIcon;
 
         /// <summary>
         /// Occurs when a property value changes.
@@ -31,7 +32,7 @@ namespace KeePass.Data
                     return;
 
                 _hasPassword = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("HasPassword"));
+                OnPropertyChanged("HasPassword");
             }
         }
 
@@ -49,7 +50,7 @@ namespace KeePass.Data
                     return;
 
                 _isUpdating = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("IsUpdating"));
+                OnPropertyChanged("IsUpdating");
             }
         }
 
@@ -64,7 +65,17 @@ namespace KeePass.Data
             set
             {
                 _passwordIcon = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("PasswordIcon"));
+                OnPropertyChanged("PasswordIcon");
+            }
+        }
+
+        public ImageSource UpdatedIcon
+        {
+            get { return _updatedIcon; }
+            set
+            {
+                _updatedIcon = value;
+                OnPropertyChanged("UpdatedIcon");
             }
         }
 
@@ -89,6 +100,11 @@ namespace KeePass.Data
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, e);
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
     }
 }
