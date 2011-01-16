@@ -26,7 +26,7 @@ namespace KeePass.Utils
         {
             GoBack(Navigation.GetPathTo<T>());
         }
-
+        
         [Obsolete("Please override the other override", true)]
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
