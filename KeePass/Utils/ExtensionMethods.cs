@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO.IsolatedStorage;
+using System.Windows.Input;
 
 namespace KeePass.Utils
 {
-    internal static class IsolatedStorageFileExtensions
+    internal static class ExtensionMethods
     {
         public static void DeleteDirectory(
             this IsolatedStorageFile store,
@@ -12,7 +13,7 @@ namespace KeePass.Utils
             if (recursive)
             {
                 var basePath = path + "/";
-                
+
                 var folders = store.GetDirectoryNames(basePath);
                 foreach (var folder in folders)
                 {
@@ -26,6 +27,12 @@ namespace KeePass.Utils
             }
 
             store.DeleteDirectory(path);
+        }
+
+        public static bool IsEnter(this KeyEventArgs e)
+        {
+            return e.Key == Key.Enter ||
+                e.PlatformKeyCode == 0x0A;
         }
     }
 }

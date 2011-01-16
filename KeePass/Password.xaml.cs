@@ -126,7 +126,7 @@ namespace KeePass
             if (!cmdOpen.IsEnabled)
                 return;
 
-            if (e.Key == Key.Enter || e.PlatformKeyCode == 0x0A)
+            if (e.IsEnter())
                 OpenDatabase();
         }
 
