@@ -1,0 +1,63 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="KeePass.About"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="About" Margin="9,-7,0,0"
+                       Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="12,0,12,0">
+            <TextBlock HorizontalAlignment="Center">
+                Purchase and Rating:
+            </TextBlock>
+            <HyperlinkButton Content="7Pass on MartketPlace"
+                             Click="lnkMartket_Click" />
+
+            <TextBlock HorizontalAlignment="Center">
+                <LineBreak />
+                Developer's Blog (News &amp; Feedback):
+            </TextBlock>
+            <HyperlinkButton Content="7pass.wordpress.com" TargetName="_blank"
+                             NavigateUri="http://7pass.wordpress.com" />
+
+            <TextBlock HorizontalAlignment="Center">
+                <LineBreak />
+                Source Code:
+            </TextBlock>
+            <HyperlinkButton Content="github.com/7pass/7pass" TargetName="_blank"
+                             NavigateUri="http://github.com/7pass/7pass" />
+
+            <TextBlock HorizontalAlignment="Center">
+                <LineBreak />
+                Libraries used/referenced:
+            </TextBlock>
+
+            <HyperlinkButton Content="KeePass" TargetName="_blank"
+                             NavigateUri="http://keepass.info" />
+            <HyperlinkButton Content="Hammock for REST" TargetName="_blank"
+                             NavigateUri="http://hammock.codeplex.com" />
+            <HyperlinkButton Content="#ziplib" TargetName="_blank"
+                             NavigateUri="http://www.icsharpcode.net/opensource/sharpziplib/" />
+        </StackPanel>
+    </Grid>
+</phone:PhoneApplicationPage>

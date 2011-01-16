@@ -99,8 +99,11 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True">
             <shell:ApplicationBarIconButton
-                IconUri="/Images/new.png" Text="Add New"
-                Click="mnuNew_Click"/>
+                IconUri="/Images/new.png"
+                Text="Add New" Click="mnuNew_Click"/>
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/about.png"
+                Text="About" Click="mnuAbout_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

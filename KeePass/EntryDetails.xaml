@@ -25,8 +25,7 @@
                 <TextBox Text="{Binding Password}" IsReadOnly="True" />
 
                 <TextBlock>Url</TextBlock>
-                <HyperlinkButton NavigateUri="{Binding Url}"
-                                 Content="{Binding Url}"
+                <HyperlinkButton NavigateUri="{Binding Url}" Content="{Binding Url}"
                                  TargetName="_blank" HorizontalContentAlignment="Left" />
             </StackPanel>
         </controls:PanoramaItem>
@@ -54,6 +53,12 @@
             <shell:ApplicationBarIconButton
                 IconUri="/Images/home.png"
                 Text="Home" Click="cmdHome_Click" />
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/root.png"
+                Text="Select DB" Click="cmdRoot_Click" />
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/about.png"
+                Text="About" Click="cmdAbout_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
     

@@ -145,6 +145,11 @@ namespace KeePass
             lstDatabases.SelectedItem = null;
         }
 
+        private void mnuAbout_Click(object sender, EventArgs e)
+        {
+            this.NavigateTo<About>();
+        }
+
         private void mnuClear_Click(object sender, RoutedEventArgs e)
         {
             var item = (MenuItem)sender;

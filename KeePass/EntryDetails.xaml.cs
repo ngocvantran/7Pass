@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Navigation;
 using KeePass.Storage;
+using KeePass.Utils;
 
 namespace KeePass
 {
@@ -33,9 +34,19 @@ namespace KeePass
             Cache.AddRecent(id);
         }
 
+        private void cmdAbout_Click(object sender, EventArgs e)
+        {
+            this.NavigateTo<About>();
+        }
+
         private void cmdHome_Click(object sender, EventArgs e)
         {
             GoBack<GroupDetails>();
+        }
+
+        private void cmdRoot_Click(object sender, EventArgs e)
+        {
+            GoBack<MainPage>();
         }
     }
 }

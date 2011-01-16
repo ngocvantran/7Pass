@@ -120,6 +120,11 @@ namespace KeePass
                 Display(items, _items);
         }
 
+        private void cmdAbout_Click(object sender, EventArgs e)
+        {
+            this.NavigateTo<About>();
+        }
+
         private void cmdHome_Click(object sender, EventArgs e)
         {
             GoBack<GroupDetails>();
