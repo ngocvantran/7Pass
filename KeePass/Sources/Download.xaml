@@ -27,12 +27,16 @@
         </StackPanel>
 
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <HyperlinkButton Content="DropBox"
-                             NavigateUri="/Sources/DropBox/DropBox.xaml" />
             <HyperlinkButton Content="Web Server"
-                             NavigateUri="/Sources/Web/WebDownload.xaml" />
-            <HyperlinkButton Content="Demo Database"
-                             Click="lnkDemo_Click" />
+                             NavigateUri="/Sources/Web/WebDownload.xaml"
+                             FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
+            <TextBlock Text=" " />
+            <HyperlinkButton Content="DropBox"
+                             NavigateUri="/Sources/DropBox/DropBox.xaml"
+                             FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
+            <TextBlock Text=" " />
+            <HyperlinkButton Content="Demo Database" Click="lnkDemo_Click"
+                             FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
         </StackPanel>
     </Grid>
 </keepass:KeePassPage>
