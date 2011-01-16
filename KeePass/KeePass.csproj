@@ -116,6 +116,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TrialNotification.xaml.cs">
+      <DependentUpon>TrialNotification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\EaseEffect.cs" />
     <Compile Include="Utils\ErrorReport.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
@@ -147,6 +150,9 @@
     </Compile>
     <Compile Include="Utils\Network.cs" />
     <Compile Include="Utils\ThemeData.cs" />
+    <Compile Include="Utils\TrialManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -198,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Sources\Web\WebDownload.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TrialNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
