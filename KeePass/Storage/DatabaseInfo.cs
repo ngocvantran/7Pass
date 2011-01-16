@@ -108,9 +108,14 @@ namespace KeePass.Storage
             using (var store = IsolatedStorageFile
                 .GetUserStoreForApplication())
             {
-                store.DeleteFile(ProtectionPath);
-                store.DeleteFile(ParsedXmlPath);
+                ClearPassword(store);
             }
+        }
+
+        private void ClearPassword(IsolatedStorageFile store)
+        {
+            store.DeleteFile(ProtectionPath);
+            store.DeleteFile(ParsedXmlPath);
         }
 
         /// <summary>
@@ -234,6 +239,8 @@ namespace KeePass.Storage
                 if (!store.DirectoryExists(Folder))
                     store.CreateDirectory(Folder);
 
+                ClearPassword(store);
+                
                 Details = details;
                 SaveDetails(store);
 
