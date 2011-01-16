@@ -85,6 +85,7 @@
     <Compile Include="Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sources\DatabaseUpdater.cs" />
     <Compile Include="Sources\DropBox\DropBox.xaml.cs">
       <DependentUpon>DropBox.xaml</DependentUpon>
     </Compile>
@@ -93,9 +94,12 @@
       <DependentUpon>List.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sources\DropBox\MetaListItemInfo.cs" />
-    <Compile Include="Sources\WebDownload.xaml.cs">
+    <Compile Include="Sources\ReportUpdateResult.cs" />
+    <Compile Include="Sources\Web\WebDownload.xaml.cs">
       <DependentUpon>WebDownload.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sources\Web\WebUpdater.cs" />
+    <Compile Include="Sources\Web\WebUtils.cs" />
     <Compile Include="Storage\Cache.cs" />
     <Compile Include="Storage\DatabaseDetails.cs" />
     <Compile Include="Storage\DatabaseInfo.cs" />
@@ -179,7 +183,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Sources\WebDownload.xaml">
+    <Page Include="Sources\Web\WebDownload.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -35,8 +35,8 @@ namespace KeePass
             RefreshDbList();
         }
 
-        private void DatabaseUpdated(
-            DatabaseInfo info, bool success)
+        private void DatabaseUpdated(DatabaseInfo info,
+            bool success, string error)
         {
             var dispatcher = Dispatcher;
             var listItem = _items.First(
@@ -50,7 +50,7 @@ namespace KeePass
 
             var msg = string.Format(
                 Properties.Resources.UpdateFailure,
-                info.Details.Name);
+                info.Details.Name, error);
 
             dispatcher.BeginInvoke(() =>
                 MessageBox.Show(msg,
@@ -159,14 +159,18 @@ namespace KeePass
 
         private void mnuUpdate_Click(object sender, RoutedEventArgs e)
         {
+            if (!Network.CheckNetwork())
+                return;
+
             var item = (MenuItem)sender;
             var database = (DatabaseInfo)item.Tag;
 
             var listItem = _items.First(x => x.Info == database);
             listItem.IsUpdating = true;
 
-            Sources.DropBox.DropBoxUpdater.Update(database,
-                _ => listItem.IsUpdating, DatabaseUpdated);
+            DatabaseUpdater.Update(database,
+                _ => listItem.IsUpdating,
+                DatabaseUpdated);
         }
     }
 }

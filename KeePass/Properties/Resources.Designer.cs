@@ -108,6 +108,27 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error downloading your database.
+        ///Please make sure that the url is correct.
+        ///
+        ///.
+        /// </summary>
+        internal static string DownloadError {
+            get {
+                return ResourceManager.GetString("DownloadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database Download.
+        /// </summary>
+        internal static string DownloadTitle {
+            get {
+                return ResourceManager.GetString("DownloadTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You&apos;ve specified an incorrect password.
         ///
         ///Please note that 7Pass only support databases protected by Master Key only (not key file or Windows account or any of their combination)..
@@ -150,7 +171,8 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updating of database {0} failed.
+        ///   Looks up a localized string similar to Updating of database {0} failed:
+        ///{1}.
         /// </summary>
         internal static string UpdateFailure {
             get {

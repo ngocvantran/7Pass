@@ -134,6 +134,15 @@ Doing so will only remove {0} from your phone, and will not delete the source fi
   <data name="DemoDbTitle" xml:space="preserve">
     <value>Database Password</value>
   </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Error downloading your database.
+Please make sure that the url is correct.
+
+</value>
+  </data>
+  <data name="DownloadTitle" xml:space="preserve">
+    <value>Database Download</value>
+  </data>
   <data name="IncorrectPassword" xml:space="preserve">
     <value>You've specified an incorrect password.
 
@@ -153,7 +162,8 @@ Do you want to send the author a report so that this bug can be fixed in next ve
     <value>Master Key</value>
   </data>
   <data name="UpdateFailure" xml:space="preserve">
-    <value>Updating of database {0} failed</value>
+    <value>Updating of database {0} failed:
+{1}</value>
   </data>
   <data name="UpdateTitle" xml:space="preserve">
     <value>Database Update</value>
