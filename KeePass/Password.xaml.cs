@@ -130,6 +130,12 @@ namespace KeePass
                 OpenDatabase();
         }
 
+        private void txtPassword_Loaded(
+            object sender, RoutedEventArgs e)
+        {
+            txtPassword.Focus();
+        }
+
         private void txtPassword_PasswordChanged(
             object sender, RoutedEventArgs e)
         {

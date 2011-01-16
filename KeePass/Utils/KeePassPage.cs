@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 
@@ -26,7 +27,7 @@ namespace KeePass.Utils
         {
             GoBack(Navigation.GetPathTo<T>());
         }
-        
+
         [Obsolete("Please override the other override", true)]
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -50,6 +51,13 @@ namespace KeePass.Utils
                     Visibility.Visible;
 
             OnNavigatedTo(cancelled, e);
+
+            if (!TrialManager.ShouldShowPopup())
+                return;
+
+            var container = Content as Panel;
+            if (container != null)
+                container.Children.Add(new TrialNotification());
         }
 
         protected virtual void OnNavigatedTo(

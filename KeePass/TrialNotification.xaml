@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="KeePass.TrialNotification"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:keepass="clr-namespace:KeePass.Utils"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    mc:Ignorable="d" d:DesignHeight="480" d:DesignWidth="480">
+    
+    <UserControl.Resources>
+        <Storyboard x:Key="hideBoard" Completed="story_Completed">
+            <DoubleAnimation Duration="0:0:0.7" From="1" To="0"
+                                     Storyboard.TargetName="pnlMain"
+                                     Storyboard.TargetProperty="Opacity">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <Popup Name="popupTrial" Loaded="popupTrial_Loaded">
+        <StackPanel Width="480" Name="pnlMain"
+                    keepass:EaseEffect.IsEnabled="True"
+                    Background="{StaticResource PhoneAccentBrush}">
+            <TextBlock>
+                Thank you for trying 7Pass.<LineBreak />
+                This is the fully functional trial version of 7Pass.
+            </TextBlock>
+
+            <HyperlinkButton Content="Review/Purchase"
+                             HorizontalAlignment="Left"
+                             Click="lnkBuy_Click" />
+        </StackPanel>
+        
+    </Popup>
+</UserControl>
