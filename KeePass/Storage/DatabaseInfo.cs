@@ -148,18 +148,7 @@ namespace KeePass.Storage
             using (var store = IsolatedStorageFile
                 .GetUserStoreForApplication())
             {
-                using (var fs = store.OpenFile(InfoPath, FileMode.Open))
-                {
-                    var serializer = new JsonSerializer();
-                    var reader = new JsonTextReader(
-                        new StreamReader(fs));
-
-                    var details = serializer.Deserialize
-                        <DatabaseDetails>(reader);
-
-                    Details = details;
-                    reader.Close();
-                }
+                LoadDetails(store);
             }
         }
 
@@ -169,7 +158,12 @@ namespace KeePass.Storage
         /// <param name="dispatcher">The dispatcher.</param>
         public void Open(Dispatcher dispatcher)
         {
-            Open(GetSavedPassword(), dispatcher);
+            using (var store = IsolatedStorageFile
+                .GetUserStoreForApplication())
+            {
+                var xml = GetSavedPassword(store);
+                Open(store, xml, dispatcher);
+            }
         }
 
         /// <summary>
@@ -206,10 +200,21 @@ namespace KeePass.Storage
                     if (savePassword)
                         Save(store, xml);
 
-                    Open(xml, dispatcher);
-
+                    Open(store, xml, dispatcher);
                     return OpenDbResults.Success;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Saves the <see cref="Details"/> information.
+        /// </summary>
+        public void SaveDetails()
+        {
+            using (var store = IsolatedStorageFile
+                .GetUserStoreForApplication())
+            {
+                SaveDetails(store);
             }
         }
 
@@ -229,16 +234,8 @@ namespace KeePass.Storage
                 if (!store.DirectoryExists(Folder))
                     store.CreateDirectory(Folder);
 
-                using (var fs = store.CreateFile(InfoPath))
-                {
-                    Details = details;
-
-                    var writer = new StreamWriter(fs);
-                    var serializer = new JsonSerializer();
-                    serializer.Serialize(writer, details);
-
-                    writer.Flush();
-                }
+                Details = details;
+                SaveDetails(store);
 
                 using (var fs = store.CreateFile(DatabasePath))
                     BufferEx.CopyStream(data, fs);
@@ -249,40 +246,56 @@ namespace KeePass.Storage
         /// Gets the saved password.
         /// </summary>
         /// <returns></returns>
-        private DbPersistentData GetSavedPassword()
+        private DbPersistentData GetSavedPassword(IsolatedStorageFile store)
         {
-            using (var store = IsolatedStorageFile
-                .GetUserStoreForApplication())
+            var result = new DbPersistentData();
+
+            using (var fs = store.OpenFile(ProtectionPath, FileMode.Open))
+            using (var buffer = new MemoryStream((int)fs.Length))
             {
-                var result = new DbPersistentData();
+                BufferEx.CopyStream(fs, buffer);
+                result.Protection = buffer.ToArray();
+            }
 
-                using (var fs = store.OpenFile(ProtectionPath, FileMode.Open))
-                using (var buffer = new MemoryStream((int)fs.Length))
-                {
-                    BufferEx.CopyStream(fs, buffer);
-                    result.Protection = buffer.ToArray();
-                }
+            using (var fs = store.OpenFile(ParsedXmlPath, FileMode.Open))
+            using (var buffer = new MemoryStream((int)fs.Length))
+            {
+                BufferEx.CopyStream(fs, buffer);
+                result.Xml = buffer.ToArray();
+            }
 
-                using (var fs = store.OpenFile(ParsedXmlPath, FileMode.Open))
-                using (var buffer = new MemoryStream((int)fs.Length))
-                {
-                    BufferEx.CopyStream(fs, buffer);
-                    result.Xml = buffer.ToArray();
-                }
+            return result;
+        }
 
-                return result;
+        private void LoadDetails(IsolatedStorageFile store)
+        {
+            using (var fs = store.OpenFile(InfoPath, FileMode.Open))
+            {
+                var serializer = new JsonSerializer();
+                var reader = new JsonTextReader(
+                    new StreamReader(fs));
+
+                var details = serializer.Deserialize
+                    <DatabaseDetails>(reader);
+
+                Details = details;
+                reader.Close();
             }
         }
 
-        private void Open(DbPersistentData xml,
-            Dispatcher dispatcher)
+        private void Open(IsolatedStorageFile store,
+            DbPersistentData xml, Dispatcher dispatcher)
         {
             var database = DatabaseReader
                 .Load(xml, dispatcher);
 
             var name = HasPassword
                 ? Folder : string.Empty;
-            Cache.CacheDb(name, database);
+
+            if (Details == null)
+                LoadDetails(store);
+
+            Cache.CacheDb(this, name, database);
         }
 
         /// <summary>
@@ -305,6 +318,18 @@ namespace KeePass.Storage
             using (var fs = store.CreateFile(ParsedXmlPath))
             using (var buffer = new MemoryStream(xml.Xml))
                 BufferEx.CopyStream(buffer, fs);
+        }
+
+        private void SaveDetails(IsolatedStorageFile store)
+        {
+            using (var fs = store.CreateFile(InfoPath))
+            {
+                var writer = new StreamWriter(fs);
+                var serializer = new JsonSerializer();
+                serializer.Serialize(writer, Details);
+
+                writer.Flush();
+            }
         }
     }
 }

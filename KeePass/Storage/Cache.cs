@@ -14,6 +14,7 @@ namespace KeePass.Storage
 
         private static readonly IsolatedStorageSettings _appSettings;
         private static readonly Dictionary<int, ImageSource> _standards;
+        private static DatabaseInfo _info;
 
         /// <summary>
         /// Gets the database.
@@ -30,8 +31,27 @@ namespace KeePass.Storage
             _standards = new Dictionary<int, ImageSource>();
         }
 
-        public static void CacheDb(string name, Database database)
+        /// <summary>
+        /// Adds the specified entry id to the recently viewed entries list.
+        /// </summary>
+        /// <param name="entryId">The entry id.</param>
+        public static void AddRecent(string entryId)
         {
+            var recents = _info.Details.Recents;
+
+            recents.Remove(entryId);
+            recents.Insert(0, entryId);
+
+            if (recents.Count == 10)
+                recents.RemoveAt(9);
+
+            _info.SaveDetails();
+        }
+
+        public static void CacheDb(DatabaseInfo info,
+            string name, Database database)
+        {
+            _info = info;
             _standards.Clear();
             Database = database;
 
@@ -46,6 +66,15 @@ namespace KeePass.Storage
 
             _appSettings.Remove(KEY_DATABASE);
             _appSettings.Save();
+        }
+
+        /// <summary>
+        /// Clears the recently viewed entries list.
+        /// </summary>
+        public static void ClearRecents()
+        {
+            _info.Details.Recents.Clear();
+            _info.SaveDetails();
         }
 
         /// <summary>
@@ -74,6 +103,15 @@ namespace KeePass.Storage
             }
 
             return source;
+        }
+
+        /// <summary>
+        /// Gets the recently viewed entries.
+        /// </summary>
+        /// <returns></returns>
+        public static string[] GetRecents()
+        {
+            return _info.Details.Recents.ToArray();
         }
 
         public static void RestoreCache(Dispatcher dispatcher)

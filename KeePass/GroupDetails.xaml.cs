@@ -17,6 +17,8 @@ namespace KeePass
     {
         private readonly ApplicationBarIconButton _cmdHome;
         private readonly ObservableCollection<GroupItem> _items;
+        private readonly ObservableCollection<GroupItem> _recents;
+
         private bool _loaded;
 
         public GroupDetails()
@@ -27,13 +29,16 @@ namespace KeePass
                 ApplicationBar.Buttons[0];
 
             _items = new ObservableCollection<GroupItem>();
+            _recents = new ObservableCollection<GroupItem>();
+
             lstGroup.ItemsSource = _items;
+            lstHistory.ItemsSource = _recents;
         }
 
         protected override void OnNavigatedTo(
             bool cancelled, NavigationEventArgs e)
         {
-            if (cancelled || _loaded)
+            if (cancelled)
                 return;
 
             var database = Cache.Database;
@@ -43,20 +48,26 @@ namespace KeePass
                 return;
             }
 
-            _loaded = true;
-            ListItems(database);
+            if (!_loaded)
+            {
+                _loaded = true;
+                ListItems(database);
+            }
+
+            ListHistory(database);
         }
 
-        private void Display(object itemsList)
+        private void Display(
+            IEnumerable<GroupItem> items,
+            ICollection<GroupItem> list)
         {
             var dispatcher = Dispatcher;
-            var items = (IList<GroupItem>)itemsList;
 
             foreach (var item in items)
             {
                 var local = item;
                 dispatcher.BeginInvoke(() =>
-                    _items.Add(local));
+                    list.Add(local));
 
                 Thread.Sleep(50);
             }
@@ -78,11 +89,27 @@ namespace KeePass
             return group;
         }
 
+        private void ListHistory(Database database)
+        {
+            _recents.Clear();
+
+            var recents = Cache.GetRecents()
+                .Select(database.GetEntry)
+                .Select(x => new GroupItem(x))
+                .ToList();
+
+            if (recents.Count > 0)
+            {
+                ThreadPool.QueueUserWorkItem(
+                    _ => Display(recents, _recents));
+            }
+        }
+
         private void ListItems(Database database)
         {
             var group = GetGroup(database);
 
-            PageTitle.Text = group.Name;
+            pivotGroup.Header = group.Name;
 
             var items = new List<GroupItem>();
             items.AddRange(group.Groups
@@ -92,7 +119,11 @@ namespace KeePass
                 .OrderBy(x => x.Title)
                 .Select(x => new GroupItem(x)));
 
-            ThreadPool.QueueUserWorkItem(Display, items);
+            if (items.Count > 0)
+            {
+                ThreadPool.QueueUserWorkItem(
+                    _ => Display(items, _items));
+            }
         }
 
         private void cmdHome_Click(object sender, EventArgs e)
@@ -105,15 +136,23 @@ namespace KeePass
             this.NavigateTo<Search>();
         }
 
-        private void lstGroup_SelectionChanged(
+        private void lst_SelectionChanged(
             object sender, SelectionChangedEventArgs e)
         {
-            var item = lstGroup.SelectedItem as GroupItem;
+            var list = (ListBox)sender;
+
+            var item = list.SelectedItem as GroupItem;
             if (item == null)
                 return;
 
             NavigationService.Navigate(item.TargetUri);
-            lstGroup.SelectedItem = null;
+            list.SelectedItem = null;
+        }
+
+        private void mnuHistory_Click(object sender, EventArgs e)
+        {
+            _recents.Clear();
+            Cache.ClearRecents();
         }
     }
 }

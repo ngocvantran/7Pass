@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace KeePass.Storage
 {
@@ -11,6 +12,14 @@ namespace KeePass.Storage
         /// The name.
         /// </value>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the recently viewed entries.
+        /// </summary>
+        /// <value>
+        /// The recently viewed entries.
+        /// </value>
+        public List<string> Recents { get; set; }
 
         /// <summary>
         /// Gets or sets the source.
@@ -27,5 +36,10 @@ namespace KeePass.Storage
         /// The URL.
         /// </value>
         public string Url { get; set; }
+
+        public DatabaseDetails()
+        {
+            Recents = new List<string>();
+        }
     }
 }

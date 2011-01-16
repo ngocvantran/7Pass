@@ -28,7 +28,9 @@ namespace KeePass
 
             _loaded = true;
             var id = NavigationContext.QueryString["id"];
+
             DataContext = database.GetEntry(id);
+            Cache.AddRecent(id);
         }
 
         private void cmdHome_Click(object sender, EventArgs e)
