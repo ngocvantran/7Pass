@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Threading;
 using KeePass.IO;
 using KeePass.IO.Utils;
+using KeePass.Sources;
 using KeePass.Utils;
 using Newtonsoft.Json;
 
@@ -112,12 +113,6 @@ namespace KeePass.Storage
             }
         }
 
-        private void ClearPassword(IsolatedStorageFile store)
-        {
-            store.DeleteFile(ProtectionPath);
-            store.DeleteFile(ParsedXmlPath);
-        }
-
         /// <summary>
         /// Deletes this database.
         /// </summary>
@@ -139,6 +134,8 @@ namespace KeePass.Storage
             using (var store = IsolatedStorageFile
                 .GetUserStoreForApplication())
             {
+                Upgrade(store);
+
                 return store.GetDirectoryNames()
                     .Select(x => new DatabaseInfo(x))
                     .ToList();
@@ -240,7 +237,7 @@ namespace KeePass.Storage
                     store.CreateDirectory(Folder);
 
                 ClearPassword(store);
-                
+
                 Details = details;
                 SaveDetails(store);
 
@@ -249,22 +246,39 @@ namespace KeePass.Storage
             }
         }
 
+        private void ClearPassword(IsolatedStorageFile store)
+        {
+            store.DeleteFile(ProtectionPath);
+            store.DeleteFile(ParsedXmlPath);
+        }
+
         /// <summary>
         /// Gets the saved password.
         /// </summary>
         /// <returns></returns>
         private DbPersistentData GetSavedPassword(IsolatedStorageFile store)
         {
+            return GetSavedPassword(store,
+                ProtectionPath, ParsedXmlPath);
+        }
+
+        /// <summary>
+        /// Gets the saved password.
+        /// </summary>
+        /// <returns></returns>
+        private static DbPersistentData GetSavedPassword(IsolatedStorageFile store,
+            string protectPath, string parsedXmlPath)
+        {
             var result = new DbPersistentData();
 
-            using (var fs = store.OpenFile(ProtectionPath, FileMode.Open))
+            using (var fs = store.OpenFile(protectPath, FileMode.Open))
             using (var buffer = new MemoryStream((int)fs.Length))
             {
                 BufferEx.CopyStream(fs, buffer);
                 result.Protection = buffer.ToArray();
             }
 
-            using (var fs = store.OpenFile(ParsedXmlPath, FileMode.Open))
+            using (var fs = store.OpenFile(parsedXmlPath, FileMode.Open))
             using (var buffer = new MemoryStream((int)fs.Length))
             {
                 BufferEx.CopyStream(fs, buffer);
@@ -337,6 +351,52 @@ namespace KeePass.Storage
 
                 writer.Flush();
             }
+        }
+
+        private static void Upgrade(IsolatedStorageFile store)
+        {
+            var files = new List<string>(
+                store.GetFileNames());
+
+            if (!files.Contains("Database.kdbx"))
+                return;
+
+            var appSettings = IsolatedStorageSettings
+                .ApplicationSettings;
+
+            string url;
+            if (!appSettings.TryGetValue("Url", out url))
+                url = null;
+
+            var info = new DatabaseInfo();
+
+            using (var fs = store.OpenFile("Database.kdbx", FileMode.Open))
+            {
+                var source = string.IsNullOrEmpty(url)
+                    ? "7Pass" : DatabaseUpdater.WEB_UPDATER;
+
+                var details = new DatabaseDetails
+                {
+                    Url = url,
+                    Source = source,
+                    Name = "7Pass 1.x database",
+                };
+
+                info.SetDatabase(fs, details);
+            }
+
+            store.DeleteFile("Database.kdbx");
+
+            if (!files.Contains("Decrypted.xml"))
+                return;
+
+            var password = GetSavedPassword(store,
+                "Protection.bin", "Decrypted.xml");
+
+            info.Save(store, password);
+
+            store.DeleteFile("Protection.bin");
+            store.DeleteFile("Decrypted.xml");
         }
     }
 }

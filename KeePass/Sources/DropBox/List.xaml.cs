@@ -88,7 +88,7 @@ namespace KeePass.Sources.DropBox
                 {
                     Url = path,
                     Name = title,
-                    Source = DropBoxUpdater.NAME,
+                    Source = DatabaseUpdater.DROPBOX_UPDATER,
                 });
 
                 dispatcher.BeginInvoke(

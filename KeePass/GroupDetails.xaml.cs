@@ -78,15 +78,11 @@ namespace KeePass
             string groupId;
             var queries = NavigationContext.QueryString;
 
-            Group group;
             if (queries.TryGetValue("id", out groupId))
-                group = database.GetGroup(groupId);
-            else
-            {
-                group = database.Root;
-                _cmdHome.IsEnabled = false;
-            }
-            return group;
+                return database.GetGroup(groupId);
+
+            _cmdHome.IsEnabled = false;
+            return database.Root;
         }
 
         private void ListHistory(Database database)
@@ -129,6 +125,11 @@ namespace KeePass
         private void cmdHome_Click(object sender, EventArgs e)
         {
             GoBack<GroupDetails>();
+        }
+
+        private void cmdRoot_Click(object sender, EventArgs e)
+        {
+            GoBack<MainPage>();
         }
 
         private void cmdSearch_Click(object sender, EventArgs e)

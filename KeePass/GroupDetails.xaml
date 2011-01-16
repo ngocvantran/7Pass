@@ -48,6 +48,9 @@
             <shell:ApplicationBarIconButton
                 IconUri="/Images/search.png"
                 Text="Search" Click="cmdSearch_Click" />
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/root.png"
+                Text="Select DB" Click="cmdRoot_Click" />
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem
                     Text="Clear History List"

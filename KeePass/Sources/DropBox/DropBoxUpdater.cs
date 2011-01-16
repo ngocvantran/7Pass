@@ -6,8 +6,6 @@ namespace KeePass.Sources.DropBox
 {
     internal static class DropBoxUpdater
     {
-        public const string NAME = "DropBox";
-
         public static void Update(DatabaseInfo info,
             Func<DatabaseInfo, bool> queryUpdate,
             ReportUpdateResult report)
