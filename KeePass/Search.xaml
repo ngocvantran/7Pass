@@ -51,6 +51,9 @@
             <shell:ApplicationBarIconButton
                 IconUri="/Images/home.png"
                 Text="Home" Click="cmdHome_Click" />
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/root.png"
+                Text="Select DB" Click="cmdRoot_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
