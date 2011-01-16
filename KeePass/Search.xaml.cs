@@ -74,13 +74,17 @@ namespace KeePass
             if (_wkSearch.CancellationPending)
                 return;
 
+            var dispatcher = Dispatcher;
             entries = entries.Take(MAX_ITEMS);
+
             foreach (var entry in entries)
             {
                 if (_wkSearch.CancellationPending)
                     return;
 
-                _wkSearch.ReportProgress(0, entry);
+                _wkSearch.ReportProgress(0,
+                    new GroupItem(entry, dispatcher));
+
                 Thread.Sleep(50);
             }
         }
@@ -99,13 +103,17 @@ namespace KeePass
             if (_wkSearch.CancellationPending)
                 return;
 
+            var dispatcher = Dispatcher;
             groups = groups.Take(MAX_ITEMS);
+
             foreach (var group in groups)
             {
                 if (_wkSearch.CancellationPending)
                     return;
 
-                _wkSearch.ReportProgress(1, group);
+                _wkSearch.ReportProgress(0,
+                    new GroupItem(group, dispatcher));
+
                 Thread.Sleep(50);
             }
         }
@@ -137,18 +145,7 @@ namespace KeePass
         private void _wkSearch_ProgressChanged(
             object sender, ProgressChangedEventArgs e)
         {
-            switch (e.ProgressPercentage)
-            {
-                case 0:
-                    var entry = (Entry)e.UserState;
-                    _items.Add(new GroupItem(entry));
-                    break;
-
-                case 1:
-                    var group = (Group)e.UserState;
-                    _items.Add(new GroupItem(group));
-                    break;
-            }
+            _items.Add((GroupItem)e.UserState);
         }
 
         private void _wkSearch_RunWorkerCompleted(

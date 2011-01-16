@@ -51,10 +51,16 @@ namespace KeePass
             if (!_loaded)
             {
                 _loaded = true;
-                ListItems(database);
+                var group = GetGroup(database);
+                pivotGroup.Header = group.Name;
+
+                ThreadPool.QueueUserWorkItem(_ =>
+                    ListItems(group));
             }
 
-            ListHistory(database);
+            _recents.Clear();
+            ThreadPool.QueueUserWorkItem(_ =>
+                ListHistory(database));
         }
 
         private void Display(
@@ -87,39 +93,31 @@ namespace KeePass
 
         private void ListHistory(Database database)
         {
-            _recents.Clear();
+            var dispatcher = Dispatcher;
 
             var recents = Cache.GetRecents()
                 .Select(database.GetEntry)
-                .Select(x => new GroupItem(x))
+                .Select(x => new GroupItem(x, dispatcher))
                 .ToList();
 
             if (recents.Count > 0)
-            {
-                ThreadPool.QueueUserWorkItem(
-                    _ => Display(recents, _recents));
-            }
+                Display(recents, _recents);
         }
 
-        private void ListItems(Database database)
+        private void ListItems(Group group)
         {
-            var group = GetGroup(database);
-
-            pivotGroup.Header = group.Name;
+            var dispatcher = Dispatcher;
 
             var items = new List<GroupItem>();
             items.AddRange(group.Groups
                 .OrderBy(x => x.Name)
-                .Select(x => new GroupItem(x)));
+                .Select(x => new GroupItem(x, dispatcher)));
             items.AddRange(group.Entries
                 .OrderBy(x => x.Title)
-                .Select(x => new GroupItem(x)));
+                .Select(x => new GroupItem(x, dispatcher)));
 
             if (items.Count > 0)
-            {
-                ThreadPool.QueueUserWorkItem(
-                    _ => Display(items, _items));
-            }
+                Display(items, _items);
         }
 
         private void cmdHome_Click(object sender, EventArgs e)
