@@ -149,8 +149,8 @@ namespace KeePass.Sources.Web
             info.SetDatabase(stream, new DatabaseDetails
             {
                 Url = url,
-                Source = WebUpdater.NAME,
                 Name = Path.GetFileName(url),
+                Source = DatabaseUpdater.WEB_UPDATER,
             });
 
             dispatcher.BeginInvoke(GoBack<MainPage>);

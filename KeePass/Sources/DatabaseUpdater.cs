@@ -7,6 +7,9 @@ namespace KeePass.Sources
 {
     internal static class DatabaseUpdater
     {
+        public const string DROPBOX_UPDATER = "DropBox";
+        public const string WEB_UPDATER = "Web";
+
         public static void Update(DatabaseInfo info,
             Func<DatabaseInfo, bool> queryUpdate,
             ReportUpdateResult report)
@@ -14,12 +17,12 @@ namespace KeePass.Sources
             var details = info.Details;
             switch (details.Source)
             {
-                case DropBoxUpdater.NAME:
+                case DROPBOX_UPDATER:
                     DropBoxUpdater.Update(info,
                         queryUpdate, report);
                     break;
 
-                case WebUpdater.NAME:
+                case WEB_UPDATER:
                     WebUpdater.Update(info,
                         queryUpdate, report);
                     break;

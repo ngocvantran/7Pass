@@ -8,8 +8,6 @@ namespace KeePass.Sources.Web
 {
     internal static class WebUpdater
     {
-        public const string NAME = "Web";
-
         public static void Update(DatabaseInfo info,
             Func<DatabaseInfo, bool> queryUpdate,
             ReportUpdateResult report)
