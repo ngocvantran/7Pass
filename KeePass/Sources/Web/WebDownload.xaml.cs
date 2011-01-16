@@ -33,6 +33,7 @@ namespace KeePass.Sources.Web
         private void SetWorkState(bool working)
         {
             txtUrl.IsEnabled = !working;
+            ucAuth.IsEnabled = !working;
             progList.IsLoading = working;
             cmdDownload.IsEnabled = !working;
         }
@@ -45,6 +46,12 @@ namespace KeePass.Sources.Web
         private void cmdDownload_Click(object sender, EventArgs e)
         {
             PerformDownload();
+        }
+
+        private void mnuBoxNet_Click(object sender, EventArgs e)
+        {
+            ucAuth.UseAuth = true;
+            txtUrl.Text = "https://www.box.net/dav";
         }
 
         private void txtUrl_KeyDown(object sender, KeyEventArgs e)
@@ -61,6 +68,11 @@ namespace KeePass.Sources.Web
 
             cmdDownload.IsEnabled = isValidUrl;
             _cmdAppBarDownload.IsEnabled = isValidUrl;
+        }
+
+        private void ucAuth_Completed(object sender, EventArgs e)
+        {
+            PerformDownload();
         }
     }
 }

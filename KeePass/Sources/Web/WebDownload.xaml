@@ -42,10 +42,11 @@
             
             <TextBlock Grid.Row="0">Database URL:</TextBlock>
             <TextBox Name="txtUrl" Text="http://" Grid.Row="1"
-                     KeyDown="txtUrl_KeyDown"
+                     KeyDown="txtUrl_KeyDown" InputScope="Url"
                      TextChanged="txtUrl_TextChanged" />
             
-            <web:WebAuth x:Name="ucAuth" Grid.Row="2" />
+            <web:WebAuth x:Name="ucAuth" Grid.Row="2"
+                         Completed="ucAuth_Completed" />
 
             <Button Name="cmdDownload" Content="Download"
                     Grid.Row="3" IsEnabled="False" Click="cmdDownload_Click" />
@@ -62,6 +63,11 @@
                 IconUri="/Images/check.png"
                 Text="Open" IsEnabled="False"
                 Click="cmdDownload_Click" />
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem
+                    Text="Use Box.net"
+                    Click="mnuBoxNet_Click" />
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

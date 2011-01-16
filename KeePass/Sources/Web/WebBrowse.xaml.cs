@@ -59,6 +59,7 @@ namespace KeePass.Sources.Web
 
         private void _download_Completed(object sender, EventArgs e)
         {
+            lstLinks.IsEnabled = true;
             progList.IsLoading = false;
         }
 
@@ -70,6 +71,7 @@ namespace KeePass.Sources.Web
                 return;
 
             progList.IsLoading = true;
+            lstLinks.IsEnabled = false;
             lstLinks.SelectedItem = null;
             _download.Download(item.Url, _credentials);
         }

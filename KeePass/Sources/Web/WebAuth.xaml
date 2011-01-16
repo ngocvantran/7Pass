@@ -21,26 +21,31 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <CheckBox Name="chkAuth" Click="chkAuth_Click"
-                  Grid.ColumnSpan="2"
+        <CheckBox Name="chkAuth" Grid.ColumnSpan="2"
+                  Checked="chkAuth_CheckedChanged"
+                  Unchecked="chkAuth_CheckedChanged"
                   Content="Server requires authentication" />
 
         <TextBlock Name="lblUser" Visibility="Collapsed"
                    Grid.Column="0" Grid.Row="1"
                    VerticalAlignment="Center" Text="User:" />
         <TextBox Name="txtUser" Visibility="Collapsed"
-                 Grid.Column="1" Grid.Row="1" />
+                 InputScope="EmailSmtpAddress"
+                 Grid.Column="1" Grid.Row="1"
+                 KeyDown="txtUser_KeyDown" />
 
         <TextBlock Name="lblPassword" Visibility="Collapsed"
                    Grid.Column="0" Grid.Row="2"
                    VerticalAlignment="Center" Text="Password:" />
         <PasswordBox Name="txtPassword" Visibility="Collapsed"
-                     Grid.Column="1" Grid.Row="2" />
+                     Grid.Column="1" Grid.Row="2"
+                     KeyDown="txtPassword_KeyDown" />
 
         <TextBlock Name="lblDomain" Visibility="Collapsed"
                    Grid.Column="0" Grid.Row="3"
                    VerticalAlignment="Center" Text="Domain:" />
         <TextBox Name="txtDomain" Visibility="Collapsed"
-                 Grid.Column="1" Grid.Row="3" />
+                 Grid.Column="1" Grid.Row="3"
+                 KeyDown="txtDomain_KeyDown" />
     </Grid>
 </UserControl>
