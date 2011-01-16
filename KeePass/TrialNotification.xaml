@@ -24,15 +24,13 @@
     <Popup Name="popupTrial" Loaded="popupTrial_Loaded">
         <StackPanel Width="480" Name="pnlMain"
                     keepass:EaseEffect.IsEnabled="True"
-                    Background="{StaticResource PhoneAccentBrush}">
+                    Background="{StaticResource PhoneAccentBrush}"
+                    ManipulationStarted="pnlMain_ManipulationStarted">
             <TextBlock>
                 Thank you for trying 7Pass.<LineBreak />
-                This is the fully functional trial version of 7Pass.
+                This is the fully functional trial version of 7Pass.<LineBreak />
+                Click this notification to Review/Purchase 7Pass.
             </TextBlock>
-
-            <HyperlinkButton Content="Review/Purchase"
-                             HorizontalAlignment="Left"
-                             Click="lnkBuy_Click" />
         </StackPanel>
         
     </Popup>

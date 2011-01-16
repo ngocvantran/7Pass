@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using KeePass.Utils;
@@ -46,8 +47,10 @@ namespace KeePass
             _tmrHide.Start();
         }
 
-        private void lnkBuy_Click(object sender, RoutedEventArgs e)
+        private void pnlMain_ManipulationStarted(
+            object sender, ManipulationStartedEventArgs e)
         {
+            e.Handled = true;
             new MarketplaceDetailTask().Show();
         }
 
