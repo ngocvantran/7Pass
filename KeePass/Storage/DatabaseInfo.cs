@@ -201,6 +201,8 @@ namespace KeePass.Storage
 
                     if (savePassword)
                         Save(store, xml);
+                    else
+                        ClearPassword();
 
                     Open(store, xml, dispatcher);
                     return OpenDbResults.Success;
