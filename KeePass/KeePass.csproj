@@ -78,7 +78,6 @@
       <DependentUpon>GroupDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\ListItemInfo.cs" />
-    <Compile Include="LifeCycle.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using KeePass.Data;
 using KeePass.IO;
 using KeePass.Storage;
@@ -41,6 +42,30 @@ namespace KeePass
             _wkSearch.DoWork += _wkSearch_DoWork;
             _wkSearch.ProgressChanged += _wkSearch_ProgressChanged;
             _wkSearch.RunWorkerCompleted += _wkSearch_RunWorkerCompleted;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            State["Search"] = txtSearch.Text;
+        }
+
+        protected override void OnNavigatedTo(
+            bool cancelled, NavigationEventArgs e)
+        {
+            if (cancelled)
+                return;
+
+            if (Cache.Database == null)
+                GoBack<MainPage>();
+
+            object search;
+            if (!State.TryGetValue("Search", out search))
+                return;
+
+            var searchText = search as string;
+            if (!string.IsNullOrEmpty(searchText))
+                txtSearch.Text = searchText;
         }
 
         private void HideKeyboard()
@@ -158,6 +183,11 @@ namespace KeePass
         private void cmdHome_Click(object sender, EventArgs e)
         {
             GoBack<GroupDetails>();
+        }
+
+        private void cmdRoot_Click(object sender, EventArgs e)
+        {
+            GoBack<MainPage>();
         }
 
         private void cmdSearch_Click(object sender, EventArgs e)
