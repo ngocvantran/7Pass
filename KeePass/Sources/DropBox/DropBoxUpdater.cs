@@ -6,9 +6,11 @@ namespace KeePass.Sources.DropBox
 {
     internal static class DropBoxUpdater
     {
+        public const string NAME = "DropBox";
+
         public static void Update(DatabaseInfo info,
             Func<DatabaseInfo, bool> queryUpdate,
-            Action<DatabaseInfo, bool> report)
+            ReportUpdateResult report)
         {
             if (info == null) throw new ArgumentNullException("info");
             if (queryUpdate == null) throw new ArgumentNullException("queryUpdate");
@@ -25,12 +27,14 @@ namespace KeePass.Sources.DropBox
 
                 if (x == null)
                 {
-                    report(info, false);
+                    report(info, false,
+                        DropBoxResources.DownloadError);
+
                     return;
                 }
 
                 info.SetDatabase(x, details);
-                report(info, true);
+                report(info, true, null);
             });
         }
 

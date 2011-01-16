@@ -30,7 +30,7 @@
             <HyperlinkButton Content="DropBox"
                              NavigateUri="/Sources/DropBox/DropBox.xaml" />
             <HyperlinkButton Content="Web Server"
-                             NavigateUri="/Sources/WebDownload.xaml" />
+                             NavigateUri="/Sources/Web/WebDownload.xaml" />
             <HyperlinkButton Content="Demo Database"
                              Click="lnkDemo_Click" />
         </StackPanel>
