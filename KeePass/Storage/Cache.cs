@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
+using System.Threading;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -13,6 +14,7 @@ namespace KeePass.Storage
         private const string KEY_DATABASE = "Database";
 
         private static readonly IsolatedStorageSettings _appSettings;
+        private static readonly object _lckStandards;
         private static readonly Dictionary<int, ImageSource> _standards;
         private static DatabaseInfo _info;
 
@@ -26,6 +28,7 @@ namespace KeePass.Storage
 
         static Cache()
         {
+            _lckStandards = new object();
             _appSettings = IsolatedStorageSettings
                 .ApplicationSettings;
             _standards = new Dictionary<int, ImageSource>();
@@ -80,9 +83,13 @@ namespace KeePass.Storage
         /// <summary>
         /// Gets the overlay icon.
         /// </summary>
+        /// <param name="dispatcher">The dispatcher.</param>
         /// <param name="icon">The icon information.</param>
-        /// <returns>The overlay icon.</returns>
-        public static ImageSource GetOverlay(IconData icon)
+        /// <returns>
+        /// The overlay icon.
+        /// </returns>
+        public static ImageSource GetOverlay(
+            Dispatcher dispatcher, IconData icon)
         {
             if (icon == null)
                 throw new ArgumentNullException("icon");
@@ -95,11 +102,26 @@ namespace KeePass.Storage
             var id = icon.Standard;
             if (!_standards.TryGetValue(id, out source))
             {
-                var uri = string.Format(
-                    "/Images/KeePass/{0:00}.png", id);
-                source = new BitmapImage(new Uri(
-                    uri, UriKind.Relative));
-                _standards.Add(id, source);
+                lock (_lckStandards)
+                {
+                    if (!_standards.TryGetValue(id, out source))
+                    {
+                        var wait = new ManualResetEvent(false);
+
+                        dispatcher.BeginInvoke(() =>
+                        {
+                            var uri = string.Format(
+                                "/Images/KeePass/{0:00}.png", id);
+                            source = new BitmapImage(new Uri(
+                                uri, UriKind.Relative));
+                            _standards.Add(id, source);
+
+                            wait.Set();
+                        });
+
+                        wait.WaitOne();
+                    }
+                }
             }
 
             return source;
