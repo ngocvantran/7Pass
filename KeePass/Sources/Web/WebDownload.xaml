@@ -6,8 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
+    xmlns:web="clr-namespace:KeePass.Sources.Web"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
-    xmlns:ms="clr-namespace:Microsoft.Unsupported"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -35,6 +36,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             
@@ -42,32 +44,25 @@
             <TextBox Name="txtUrl" Text="http://" Grid.Row="1"
                      KeyDown="txtUrl_KeyDown"
                      TextChanged="txtUrl_TextChanged" />
-            <Button Name="cmdDownload" Content="Download"
-                    Grid.Row="2" IsEnabled="False" Click="cmdDownload_Click" />
             
-            <TextBlock Name="lblLinks" Grid.Row="3" Visibility="Collapsed">
+            <web:WebAuth x:Name="ucAuth" Grid.Row="2" />
+
+            <Button Name="cmdDownload" Content="Download"
+                    Grid.Row="3" IsEnabled="False" Click="cmdDownload_Click" />
+
+            <TextBlock Name="lblLinks" Grid.Row="4" Visibility="Collapsed">
                 Detected links:
             </TextBlock>
-            <ListBox Name="lstLinks" Grid.Row="4"
-                     ms:TiltEffect.IsTiltEnabled="True"
-                     keepass:EaseEffect.IsEnabled="True"
-                     SelectionChanged="lstLinks_SelectionChanged">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Margin="0,0,0,17" Width="432">
-                            <TextBlock Text="{Binding Name}"
-                                       TextWrapping="Wrap" MaxHeight="120"
-                                       Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                            <TextBlock Text="{Binding Url}" TextWrapping="Wrap"
-                                       Visibility="{Binding NotesState}"
-                                       Margin="12,-6,12,0" MaxHeight="112"
-                                       Style="{StaticResource PhoneTextSubtleStyle}">
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
         </Grid>
     </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True">
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/check.png"
+                Text="Open" IsEnabled="False"
+                Click="cmdDownload_Click" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </keepass:KeePassPage>
