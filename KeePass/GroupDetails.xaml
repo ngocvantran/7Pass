@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -20,27 +21,38 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
-                       Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Group" Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+        <TextBlock x:Name="ApplicationTitle" Grid.Row="0"
+                   Text="{StaticResource AppName}"
+                   Style="{StaticResource PhoneTextNormalStyle}"/>
 
-        <ListBox Name="lstGroup"
-                 Grid.Row="1" Margin="12,0,12,0"
-                 Style="{StaticResource KeePassList}"
-                 SelectionChanged="lstGroup_SelectionChanged" />
+        <controls:Pivot Grid.Row="1" Margin="12,0,12,0">
+            <controls:PivotItem Name="pivotGroup">
+                <ListBox Name="lstGroup"
+                         Style="{StaticResource KeePassList}"
+                         SelectionChanged="lst_SelectionChanged" />
+            </controls:PivotItem>
+
+            <controls:PivotItem Header="History">
+                <ListBox Name="lstHistory"
+                         Style="{StaticResource KeePassList}"
+                         SelectionChanged="lst_SelectionChanged" />
+            </controls:PivotItem>
+        </controls:Pivot>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton
                 IconUri="/Images/home.png"
                 Text="Home" Click="cmdHome_Click" />
             <shell:ApplicationBarIconButton
                 IconUri="/Images/search.png"
                 Text="Search" Click="cmdSearch_Click" />
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem
+                    Text="Clear History List"
+                    Click="mnuHistory_Click" />
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
