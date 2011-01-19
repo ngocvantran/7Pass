@@ -37,14 +37,36 @@
         </controls:PanoramaItem>
 
         <controls:PanoramaItem Header="Fields">
-            <ScrollViewer>
-                <Grid x:Name="gridFields">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                </Grid>
-            </ScrollViewer>
+            <ListBox ItemsSource="{Binding CustomFields}"
+                     HorizontalAlignment="Stretch">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <ContentPresenter HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Stretch"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="{Binding Key}" Grid.Column="0"
+                                       VerticalAlignment="Center" />
+                            <TextBox Text="{Binding Value}" Grid.Column="1"
+                                     IsReadOnly="True" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </controls:PanoramaItem>
     </controls:Panorama>
 

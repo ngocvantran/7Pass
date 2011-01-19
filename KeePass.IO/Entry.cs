@@ -24,6 +24,19 @@ namespace KeePass.IO
         private readonly string _url;
 
         /// <summary>
+        /// Gets the custom fields.
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<string, string> CustomFields
+        {
+            get
+            {
+                return _fields.Keys.Except(_known)
+                    .ToDictionary(x => x, x => _fields[x]);
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the histories.
         /// </summary>
         /// <value>The histories.</value>
@@ -114,17 +127,6 @@ namespace KeePass.IO
 
         public Entry()
             : this(new Dictionary<string, string>()) {}
-
-        /// <summary>
-        /// Gets other fields.
-        /// </summary>
-        /// <returns>Other fields</returns>
-        public string[] GetOthers()
-        {
-            return _fields.Keys
-                .Except(_known)
-                .ToArray();
-        }
 
         private static string GetPattern(string key)
         {
