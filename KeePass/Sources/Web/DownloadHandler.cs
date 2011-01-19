@@ -8,6 +8,8 @@ using System.Windows;
 using KeePass.IO.Utils;
 using KeePass.Storage;
 using KeePass.Utils;
+using Microsoft.Phone.Tasks;
+using Resources = KeePass.Properties.Resources;
 
 namespace KeePass.Sources.Web
 {
@@ -38,6 +40,21 @@ namespace KeePass.Sources.Web
         {
             if (Completed != null)
                 Completed(this, e);
+        }
+
+        private static bool DetectCertificateError(
+            WebRequest request, WebException ex)
+        {
+            var uri = request.RequestUri;
+            if (uri.Scheme.ToUpper() != "HTTPS")
+                return false;
+
+            var response = ex.Response as HttpWebResponse;
+            if (response == null)
+                return false;
+
+            return response.StatusCode ==
+                HttpStatusCode.NotFound;
         }
 
         private bool DetectLinks(
@@ -76,7 +93,7 @@ namespace KeePass.Sources.Web
             var html = Encoding.UTF8.GetString(
                 buffer, 0, buffer.Length);
 
-            var regex = new Regex("<a\\s+[^>]?href\\s?=\\s?(['\"])(.+?)\\1");
+            var regex = new Regex(Resources.LinkRegex);
             var matches = regex.Matches(html);
 
             return matches
@@ -101,13 +118,38 @@ namespace KeePass.Sources.Web
                 }
                 catch (WebException ex)
                 {
-                    var message = Properties.Resources
-                        .DownloadError + ex.Message;
+                    var message = Resources.DownloadError +
+                        ex.Message;
 
-                    dispatcher.BeginInvoke(() =>
-                        MessageBox.Show(message,
-                            Properties.Resources.DownloadTitle,
-                            MessageBoxButton.OK));
+                    var certificate = DetectCertificateError(
+                        request, ex);
+
+                    if (!certificate)
+                    {
+                        dispatcher.BeginInvoke(() =>
+                            MessageBox.Show(message,
+                                Resources.DownloadTitle,
+                                MessageBoxButton.OK));
+                    }
+                    else
+                    {
+                        message += Resources.InvalidCertificate;
+
+                        dispatcher.BeginInvoke(() =>
+                        {
+                            var result = MessageBox.Show(message,
+                                Resources.DownloadTitle,
+                                MessageBoxButton.OKCancel);
+
+                            if (result != MessageBoxResult.OK)
+                                return;
+
+                            new WebBrowserTask
+                            {
+                                URL = Resources.InvalidCertificateUrl
+                            }.Show();
+                        });
+                    }
 
                     return;
                 }

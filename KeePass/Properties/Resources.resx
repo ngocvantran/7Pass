@@ -148,6 +148,15 @@ Please make sure that the url is correct.
 
 Please note that 7Pass only support databases protected by Master Key only (not key file or Windows account or any of their combination).</value>
   </data>
+  <data name="InvalidCertificate" xml:space="preserve">
+    <value>
+
+It is possible that the server's SSL certificate is not trused by your phone.
+Do you want to read more about this?</value>
+  </data>
+  <data name="InvalidCertificateUrl" xml:space="preserve">
+    <value>http://7pass.wordpress.com/2011/01/09/faq-updated-why-7pass-says-my-database-signature-is-invalid/</value>
+  </data>
   <data name="NoNetwork" xml:space="preserve">
     <value>No internet connection is available.
 Please try again later..</value>
@@ -174,5 +183,8 @@ Do you want to send the author a report so that this bug can be fixed in next ve
 Saving your database password without lock screen protection will allow anyone to view your passwords.
 
 To set lock screen password, please go to Phone's Settings\lock &amp; wallpaper.</value>
+  </data>
+  <data name="LinkRegex" xml:space="preserve">
+    <value>&lt;a\s+[^&gt;]?href\s?=\s?(['"])(.+?)\1</value>
   </data>
 </root>
