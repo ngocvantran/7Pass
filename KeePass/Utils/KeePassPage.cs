@@ -47,11 +47,21 @@ namespace KeePass.Utils
             var cancelled = _backTarget != null;
 
             if (!cancelled)
+            {
                 App.Current.RootFrame.Visibility =
                     Visibility.Visible;
+            }
 
             OnNavigatedTo(cancelled, e);
 
+            ShowTrialNotification();
+        }
+
+        protected virtual void OnNavigatedTo(
+            bool cancelled, NavigationEventArgs e) {}
+
+        private void ShowTrialNotification()
+        {
             if (!TrialManager.ShouldShowPopup())
                 return;
 
@@ -59,8 +69,5 @@ namespace KeePass.Utils
             if (container != null)
                 container.Children.Add(new TrialNotification());
         }
-
-        protected virtual void OnNavigatedTo(
-            bool cancelled, NavigationEventArgs e) {}
     }
 }
