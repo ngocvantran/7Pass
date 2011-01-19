@@ -140,6 +140,36 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 
+        ///
+        ///It is possible that the server&apos;s SSL certificate is not trused by your phone.
+        ///Do you want to read more about this?.
+        /// </summary>
+        internal static string InvalidCertificate {
+            get {
+                return ResourceManager.GetString("InvalidCertificate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://7pass.wordpress.com/2011/01/09/faq-updated-why-7pass-says-my-database-signature-is-invalid/.
+        /// </summary>
+        internal static string InvalidCertificateUrl {
+            get {
+                return ResourceManager.GetString("InvalidCertificateUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;a\s+[^&gt;]?href\s?=\s?([&apos;&quot;])(.+?)\1.
+        /// </summary>
+        internal static string LinkRegex {
+            get {
+                return ResourceManager.GetString("LinkRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No internet connection is available.
         ///Please try again later...
         /// </summary>
