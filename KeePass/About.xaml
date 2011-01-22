@@ -28,7 +28,11 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Margin="12,0,12,0">
+            <TextBlock Name="lblVersion" HorizontalAlignment="Center">
+                7Pass Version: {0}
+            </TextBlock>
             <TextBlock HorizontalAlignment="Center">
+                <LineBreak />
                 Purchase and Rating:
             </TextBlock>
             <HyperlinkButton Content="7Pass on MartketPlace"
