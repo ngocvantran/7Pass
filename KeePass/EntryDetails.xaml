@@ -62,7 +62,7 @@
                             <TextBlock Text="{Binding Key}" Grid.Column="0"
                                        VerticalAlignment="Center" />
                             <TextBox Text="{Binding Value}" Grid.Column="1"
-                                     IsReadOnly="True" />
+                                     TextWrapping="Wrap" IsReadOnly="True" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
