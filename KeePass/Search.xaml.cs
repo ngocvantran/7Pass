@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -107,8 +108,14 @@ namespace KeePass
                 if (_wkSearch.CancellationPending)
                     return;
 
+                var sb = new StringBuilder();
+                entry.Group.GetPath(sb, "»", true);
+
                 _wkSearch.ReportProgress(0,
-                    new GroupItem(entry, dispatcher));
+                    new GroupItem(entry, dispatcher)
+                    {
+                        Notes = sb.ToString(),
+                    });
 
                 Thread.Sleep(50);
             }
@@ -136,8 +143,14 @@ namespace KeePass
                 if (_wkSearch.CancellationPending)
                     return;
 
+                var sb = new StringBuilder();
+                group.GetPath(sb, "»", false);
+
                 _wkSearch.ReportProgress(0,
-                    new GroupItem(group, dispatcher));
+                    new GroupItem(group, dispatcher)
+                    {
+                        Notes = sb.ToString(),
+                    });
 
                 Thread.Sleep(50);
             }

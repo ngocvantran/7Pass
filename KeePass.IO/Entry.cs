@@ -37,6 +37,14 @@ namespace KeePass.IO
         }
 
         /// <summary>
+        /// Gets or sets the group.
+        /// </summary>
+        /// <value>
+        /// The group.
+        /// </value>
+        public Group Group { get; set; }
+
+        /// <summary>
         /// Gets or sets the histories.
         /// </summary>
         /// <value>The histories.</value>

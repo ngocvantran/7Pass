@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 
 namespace KeePass.IO
 {
@@ -25,7 +26,7 @@ namespace KeePass.IO
         /// <value>The child groups.</value>
         public ICollection<Group> Groups
         {
-            get { return _groups; }
+            get { return _groups.AsReadOnly(); }
         }
 
         /// <summary>
@@ -48,6 +49,11 @@ namespace KeePass.IO
         /// <value>The name.</value>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Gets the parent group.
+        /// </summary>
+        public Group Parent { get; private set; }
+
         public Group()
         {
             _groups = new List<Group>();
@@ -60,6 +66,10 @@ namespace KeePass.IO
         /// <param name="group">The group.</param>
         public void Add(Group group)
         {
+            if (group == null)
+                throw new ArgumentNullException("group");
+
+            group.Parent = this;
             _groups.Add(group);
         }
 
@@ -69,7 +79,27 @@ namespace KeePass.IO
         /// <param name="entry">The entry.</param>
         public void Add(Entry entry)
         {
+            if (entry == null)
+                throw new ArgumentNullException("entry");
+
+            entry.Group = this;
             _entries.Add(entry);
+        }
+
+        public void GetPath(StringBuilder sb,
+            string separator, bool includeThis)
+        {
+            var parent = Parent;
+            if (parent != null)
+                parent.GetPath(sb, separator, true);
+
+            if (!includeThis)
+                return;
+
+            if (sb.Length > 0)
+                sb.Append(separator);
+
+            sb.Append(Name);
         }
 
         public void Sort()
