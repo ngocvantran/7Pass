@@ -5,7 +5,8 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:ms="clr-namespace:Microsoft.Unsupported"
-    xmlns:keepass="clr-namespace:KeePass.Utils">
+    xmlns:keepass="clr-namespace:KeePass.Utils"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone">
 
     <Application.Resources>
         <system:String x:Key="AppName">7Pass</system:String>
@@ -41,6 +42,14 @@
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+        <Style x:Key="KeePassPage" TargetType="controls:PhoneApplicationPage">
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}" />
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}" />
+            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}" />
+            <Setter Property="SupportedOrientations" Value="Portrait" />
+            <Setter Property="Orientation" Value="Portrait" />
+            <Setter Property="shell:SystemTray.IsVisible" Value="True" />
         </Style>
     </Application.Resources>
 
