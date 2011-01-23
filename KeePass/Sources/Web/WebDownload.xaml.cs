@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using KeePass.Utils;
@@ -58,6 +59,12 @@ namespace KeePass.Sources.Web
         {
             if (e.IsEnter() && cmdDownload.IsEnabled)
                 PerformDownload();
+        }
+
+        private void txtUrl_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtUrl.Focus();
+            txtUrl.SelectionStart = txtUrl.Text.Length;
         }
 
         private void txtUrl_TextChanged(

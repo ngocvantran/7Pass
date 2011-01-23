@@ -64,6 +64,11 @@ namespace KeePass.Sources.DropBox
                 txtPassword.Focus();
         }
 
+        private void txtEmail_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtEmail.Focus();
+        }
+
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.IsEnter())

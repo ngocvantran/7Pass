@@ -37,8 +37,10 @@
             </Grid.RowDefinitions>
             
             <TextBlock Grid.Row="0">Database URL:</TextBlock>
-            <TextBox Name="txtUrl" Text="http://" Grid.Row="1"
-                     KeyDown="txtUrl_KeyDown" InputScope="Url"
+            <TextBox Name="txtUrl" Text="http://"
+                     Grid.Row="1" InputScope="Url"
+                     Loaded="txtUrl_Loaded"
+                     KeyDown="txtUrl_KeyDown" 
                      TextChanged="txtUrl_TextChanged" />
             
             <web:WebAuth x:Name="ucAuth" Grid.Row="2"
