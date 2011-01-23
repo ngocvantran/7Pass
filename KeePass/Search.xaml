@@ -30,8 +30,9 @@
             </Grid.RowDefinitions>
 
             <TextBox Name="txtSearch" Grid.Row="0"
-                     TextChanged="txtSearch_TextChanged"
-                     KeyDown="txtSearch_KeyDown" />
+                     Loaded="txtSearch_Loaded"
+                     KeyDown="txtSearch_KeyDown"
+                     TextChanged="txtSearch_TextChanged" />
             <ListBox Name="lstItems" Grid.Row="1"
                      Style="{StaticResource KeePassList}"
                      SelectionChanged="lstItems_SelectionChanged" />

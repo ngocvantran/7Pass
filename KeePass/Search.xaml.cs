@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
@@ -223,6 +224,11 @@ namespace KeePass
         {
             if (e.IsEnter())
                 HideKeyboard();
+        }
+
+        private void txtSearch_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtSearch.Focus();
         }
 
         private void txtSearch_TextChanged(

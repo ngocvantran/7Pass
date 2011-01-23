@@ -43,6 +43,7 @@
             </TextBlock>
             <TextBox Name="txtEmail"
                      TextChanged="txt_Changed"
+                     Loaded="txtEmail_Loaded"
                      KeyDown="txtEmail_KeyDown"
                      InputScope="EmailSmtpAddress"
                      Grid.Row="0" Grid.Column="1" />
