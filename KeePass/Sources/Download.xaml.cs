@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Navigation;
 using KeePass.Storage;
+using KeePass.Utils;
 
 namespace KeePass.Sources
 {
@@ -11,7 +13,20 @@ namespace KeePass.Sources
             InitializeComponent();
         }
 
-        private void lnkDemo_Click(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(
+            bool cancelled, NavigationEventArgs e)
+        {
+            if (cancelled)
+                return;
+
+            var isTrial = TrialManager.IsTrial;
+            lnkDemo.Visibility = isTrial
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+            ApplicationBar.IsVisible = !isTrial;
+        }
+
+        private void lnkDemo_Click(object sender, EventArgs e)
         {
             var info = new DatabaseInfo();
             var demoDb = Application.GetResourceStream(
