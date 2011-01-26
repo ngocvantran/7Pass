@@ -60,6 +60,8 @@
     <Compile Include="Group.cs" />
     <Compile Include="GroupSorter.cs" />
     <Compile Include="IconData.cs" />
+    <Compile Include="KeyFile.cs" />
+    <Compile Include="MemUtil.cs" />
     <Compile Include="Utils\CryptoRandomStream.cs" />
     <Compile Include="Utils\CrsAlgorithm.cs" />
     <Compile Include="Utils\CryptoSerializer.cs" />

@@ -34,9 +34,12 @@ namespace KeePass.Sources.DropBox
                     return;
                 }
 
+                var folder = NavigationContext
+                    .QueryString["folder"];
+
                 this.NavigateTo<List>(
-                    "token={0}&secret={1}&path=/",
-                    info.Token, info.Secret);
+                    "token={0}&secret={1}&path=/&folder={2}",
+                    info.Token, info.Secret, folder);
             });
         }
 

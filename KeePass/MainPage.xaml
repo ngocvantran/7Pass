@@ -70,6 +70,11 @@
                                                   Click="mnuUpdate_Click" />
                                 <toolkit:MenuItem Header="delete" Tag="{Binding Info}"
                                                   Click="mnuDelete_Click" />
+                                <toolkit:MenuItem Header="download keyfile" Tag="{Binding Info}"
+                                                  Click="mnuKeyFile_Click" />
+                                <toolkit:MenuItem Header="clear keyfile" Tag="{Binding Info}"
+                                                  IsEnabled="{Binding HasKeyFile}"
+                                                  Click="mnuClearKeyFile_Click" />
                             </toolkit:ContextMenu>
                         </toolkit:ContextMenuService.ContextMenu>
 

@@ -161,6 +161,24 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve selected an invalid/corrupted keyfile..
+        /// </summary>
+        internal static string InvalidKeyFile {
+            get {
+                return ResourceManager.GetString("InvalidKeyFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download KeyFile.
+        /// </summary>
+        internal static string KeyFileTitle {
+            get {
+                return ResourceManager.GetString("KeyFileTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;a\s+[^&gt;]?href\s?=\s?([&apos;&quot;])(.+?)\1.
         /// </summary>
         internal static string LinkRegex {

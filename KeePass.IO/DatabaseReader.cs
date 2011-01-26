@@ -15,7 +15,7 @@ namespace KeePass.IO
         }
 
         public static DbPersistentData GetXml(
-            Stream stream, string password)
+            Stream stream, string password, byte[] keyFile)
         {
             if (stream == null)
                 throw new ArgumentNullException("stream");
@@ -29,7 +29,8 @@ namespace KeePass.IO
             var headers = ReadHeaders(stream);
             headers.Verify();
 
-            var decrypted = Decrypt(stream, headers, password);
+            var decrypted = Decrypt(stream,
+                headers, password, keyFile);
             if (decrypted == null)
                 return null;
 
@@ -64,9 +65,9 @@ namespace KeePass.IO
         }
 
         private static Stream Decrypt(Stream source,
-            Headers headers, string password)
+            Headers headers, string password, byte[] keyFile)
         {
-            var masterKey = new PasswordData(password)
+            var masterKey = new PasswordData(password, keyFile)
                 .TransformKey(headers.TransformSeed,
                     headers.TransformRounds);
 

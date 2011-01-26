@@ -185,7 +185,7 @@ namespace KeePass
 
         private void mnuNew_Click(object sender, EventArgs e)
         {
-            this.NavigateTo<Download>();
+            this.NavigateTo<Download>("folder=");
         }
 
         private void mnuRename_Click(object sender, RoutedEventArgs e)
@@ -203,12 +203,32 @@ namespace KeePass
             var item = (MenuItem)sender;
             var database = (DatabaseInfo)item.Tag;
 
-            var listItem = _items.First(x => x.Info == database);
+            var listItem = _items.First
+                (x => x.Info == database);
             listItem.IsUpdating = true;
 
             DatabaseUpdater.Update(database,
                 _ => listItem.IsUpdating,
                 DatabaseUpdated);
+        }
+
+        private void mnuKeyFile_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MenuItem)sender;
+            var database = (DatabaseInfo)item.Tag;
+            this.NavigateTo<Download>(
+                "folder={0}", database.Folder);
+        }
+
+        private void mnuClearKeyFile_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MenuItem)sender;
+            var database = (DatabaseInfo)item.Tag;
+            
+            database.SetKeyFile(null);
+            var listItem = _items.First(
+                x => x.Info == database);
+            listItem.HasKeyFile = false;
         }
     }
 }

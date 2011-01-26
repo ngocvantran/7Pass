@@ -5,6 +5,8 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Threading;
+using KeePass.IO;
 using KeePass.IO.Utils;
 using KeePass.Storage;
 using KeePass.Utils;
@@ -15,15 +17,18 @@ namespace KeePass.Sources.Web
 {
     internal class DownloadHandler
     {
+        private readonly string _folder;
         private readonly KeePassPage _page;
 
         public event EventHandler Completed;
 
-        public DownloadHandler(KeePassPage page)
+        public DownloadHandler(KeePassPage page, string folder)
         {
-            if (page == null)
-                throw new ArgumentNullException("page");
+            if (page == null) throw new ArgumentNullException("page");
+            if (folder == null) throw new ArgumentNullException("folder");
+
             _page = page;
+            _folder = folder;
         }
 
         public void Download(string url, ICredentials credentials)
@@ -74,9 +79,12 @@ namespace KeePass.Sources.Web
                 ?? new NetworkCredential();
 
             _page.Dispatcher.BeginInvoke(() => _page.NavigateTo<WebBrowse>(
-                "l={0}&user={1}&password={2}&domain={3}",
-                sb.ToString(), credentials.UserName,
-                credentials.Password, credentials.Domain));
+                "l={0}&user={1}&password={2}&domain={3}&folder={4}",
+                sb.ToString(),
+                credentials.UserName,
+                credentials.Password,
+                credentials.Domain,
+                _folder));
 
             return true;
         }
@@ -162,22 +170,15 @@ namespace KeePass.Sources.Web
                         stream.Position = 0;
                     }
 
-                    var error = DatabaseVerifier.VerifyUnattened(stream);
-
-                    if (error == null)
+                    if (string.IsNullOrEmpty(_folder))
                     {
-                        SaveDatabase(request, stream);
-                        return;
+                        VerifyAndSaveDb(request, dispatcher,
+                            response, stream);
                     }
-
-                    // Not a database, try to extract links
-                    if (response.StatusCode != HttpStatusCode.OK ||
-                        !DetectLinks(stream, request))
+                    else
                     {
-                        dispatcher.BeginInvoke(() =>
-                            MessageBox.Show(error,
-                                Properties.Resources.DownloadTitle,
-                                MessageBoxButton.OK));
+                        VerifyAndSaveKeyFile(request,
+                            dispatcher, response, stream);
                     }
                 }
             }
@@ -207,6 +208,61 @@ namespace KeePass.Sources.Web
 
             _page.Dispatcher.BeginInvoke(
                 _page.GoBack<MainPage>);
+        }
+
+        private void SaveKeyFile(byte[] hash)
+        {
+            var info = new DatabaseInfo(_folder);
+
+            info.SetKeyFile(hash);
+            _page.Dispatcher.BeginInvoke(
+                _page.GoBack<MainPage>);
+        }
+
+        private void VerifyAndSaveDb(HttpWebRequest request,
+            Dispatcher dispatcher, HttpWebResponse response,
+            MemoryStream stream)
+        {
+            var error = DatabaseVerifier.VerifyUnattened(stream);
+
+            if (error == null)
+            {
+                SaveDatabase(request, stream);
+                return;
+            }
+
+            // Not a database, try to extract links
+            if (response.StatusCode != HttpStatusCode.OK ||
+                !DetectLinks(stream, request))
+            {
+                dispatcher.BeginInvoke(() =>
+                    MessageBox.Show(error,
+                        Resources.DownloadTitle,
+                        MessageBoxButton.OK));
+            }
+        }
+
+        private void VerifyAndSaveKeyFile(
+            HttpWebRequest request, Dispatcher dispatcher,
+            HttpWebResponse response, MemoryStream stream)
+        {
+            var hash = KeyFile.GetKey(stream);
+            if (hash != null)
+            {
+                SaveKeyFile(hash);
+                return;
+            }
+
+            // Not a key file, try to extract links
+            if (response.StatusCode != HttpStatusCode.OK ||
+                !DetectLinks(stream, request))
+            {
+                dispatcher.BeginInvoke(() =>
+                    MessageBox.Show(
+                        Resources.InvalidKeyFile,
+                        Resources.KeyFileTitle,
+                        MessageBoxButton.OK));
+            }
         }
     }
 }

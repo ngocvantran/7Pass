@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using System.Windows.Threading;
 using KeePass.Storage;
 using KeePass.Utils;
@@ -13,6 +14,9 @@ namespace KeePass
     {
         private readonly ApplicationBarIconButton _cmdAppBarOpen;
         private readonly BackgroundWorker _wkOpen;
+
+        private string _folder;
+        private bool _hasKeyFile;
 
         public Password()
         {
@@ -29,15 +33,25 @@ namespace KeePass
             imgWarning.Source = ThemeData.GetImageSource("warning");
         }
 
+        protected override void OnNavigatedTo(
+            bool cancelled, NavigationEventArgs e)
+        {
+            if (cancelled)
+                return;
+
+            _folder = NavigationContext.QueryString["db"];
+            _hasKeyFile = new DatabaseInfo(_folder).HasKeyFile;
+
+            UpdatePasswordStatus();
+        }
+
         private void OpenDatabase()
         {
             SetWorking(true);
 
-            var folder = NavigationContext.QueryString["db"];
-
             _wkOpen.RunWorkerAsync(new OpenArgs
             {
-                Folder = folder,
+                Folder = _folder,
                 Dispatcher = Dispatcher,
                 Password = txtPassword.Password,
                 SavePassword = chkStore.IsChecked == true,
@@ -49,6 +63,15 @@ namespace KeePass
             progBusy.IsLoading = working;
             ApplicationBar.IsVisible = !working;
             ContentPanel.IsHitTestVisible = !working;
+        }
+
+        private void UpdatePasswordStatus()
+        {
+            var hasPassword = _hasKeyFile ||
+                txtPassword.Password.Length > 0;
+
+            cmdOpen.IsEnabled = hasPassword;
+            _cmdAppBarOpen.IsEnabled = hasPassword;
         }
 
         private static void _wkOpen_DoWork(
@@ -139,11 +162,7 @@ namespace KeePass
         private void txtPassword_PasswordChanged(
             object sender, RoutedEventArgs e)
         {
-            var hasPassword = txtPassword
-                .Password.Length > 0;
-
-            cmdOpen.IsEnabled = hasPassword;
-            _cmdAppBarOpen.IsEnabled = hasPassword;
+            UpdatePasswordStatus();
         }
 
         private class OpenArgs

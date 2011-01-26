@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
 
@@ -10,16 +11,24 @@ namespace KeePass.Sources.Web
     public partial class WebDownload
     {
         private readonly ApplicationBarIconButton _cmdAppBarDownload;
-        private readonly DownloadHandler _download;
+        private DownloadHandler _download;
 
         public WebDownload()
         {
             InitializeComponent();
 
-            _download = new DownloadHandler(this);
             _cmdAppBarDownload = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
+        }
 
+        protected override void OnNavigatedTo(
+            bool cancelled, NavigationEventArgs e)
+        {
+            if (cancelled)
+                return;
+
+            _download = new DownloadHandler(this,
+                NavigationContext.QueryString["folder"]);
             _download.Completed += _download_Completed;
         }
 
