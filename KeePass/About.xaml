@@ -25,12 +25,13 @@
             <TextBlock Name="lblVersion" HorizontalAlignment="Center">
                 7Pass Version: {0}
             </TextBlock>
-            <TextBlock HorizontalAlignment="Center">
-                <LineBreak />
-                Purchase and Rating:
-            </TextBlock>
-            <HyperlinkButton Content="7Pass on MartketPlace"
-                             Click="lnkMartket_Click" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <HyperlinkButton Content="Purchase"
+                             Click="lnkPurchase_Click" />
+                <TextBlock Text="/" />
+                <HyperlinkButton Content="Review"
+                             Click="lnkReview_Click" />
+            </StackPanel>
 
             <TextBlock HorizontalAlignment="Center">
                 <LineBreak />
@@ -57,6 +58,8 @@
                              NavigateUri="http://hammock.codeplex.com" />
             <HyperlinkButton Content="#ziplib" TargetName="_blank"
                              NavigateUri="http://www.icsharpcode.net/opensource/sharpziplib/" />
+            <HyperlinkButton Content="Json.NET" TargetName="_blank"
+                             NavigateUri="http://json.codeplex.com/" />
         </StackPanel>
     </Grid>
 </keepass:KeePassPage>

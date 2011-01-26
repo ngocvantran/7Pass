@@ -19,10 +19,16 @@ namespace KeePass
                 lblVersion.Text, version);
         }
 
-        private void lnkMartket_Click(
+        private void lnkPurchase_Click(
             object sender, RoutedEventArgs e)
         {
             new MarketplaceDetailTask().Show();
+        }
+
+        private void lnkReview_Click(
+            object sender, RoutedEventArgs e)
+        {
+            new MarketplaceReviewTask().Show();
         }
     }
 }
