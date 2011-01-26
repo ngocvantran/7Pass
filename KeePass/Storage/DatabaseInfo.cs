@@ -28,6 +28,24 @@ namespace KeePass.Storage
         public string Folder { get; set; }
 
         /// <summary>
+        /// Gets a value indicating whether this database has key file.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this database has key file; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasKeyFile
+        {
+            get
+            {
+                using (var store = IsolatedStorageFile
+                    .GetUserStoreForApplication())
+                {
+                    return store.FileExists(KeyFilePath);
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether this database has saved password.
         /// </summary>
         /// <value>
@@ -66,6 +84,18 @@ namespace KeePass.Storage
             {
                 return Path.Combine(
                     Folder, "database.info");
+            }
+        }
+
+        /// <summary>
+        /// Gets the key file path.
+        /// </summary>
+        private string KeyFilePath
+        {
+            get
+            {
+                return Path.Combine(
+                    Folder, "keyfile.bin");
             }
         }
 
@@ -188,8 +218,8 @@ namespace KeePass.Storage
 
                     try
                     {
-                        xml = DatabaseReader
-                            .GetXml(fs, password);
+                        xml = DatabaseReader.GetXml(fs,
+                            password, GetKeyFile(store));
                     }
                     catch
                     {
@@ -207,6 +237,23 @@ namespace KeePass.Storage
                     Open(store, xml, dispatcher);
                     return OpenDbResults.Success;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Opens the key file.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        public void OpenKeyFile(Action<Stream> action)
+        {
+            if (action == null)
+                throw new ArgumentNullException("action");
+
+            using (var store = IsolatedStorageFile
+                .GetUserStoreForApplication())
+            {
+                using (var fs = store.OpenFile(KeyFilePath, FileMode.Open))
+                    action(fs);
             }
         }
 
@@ -248,10 +295,47 @@ namespace KeePass.Storage
             }
         }
 
+        /// <summary>
+        /// Sets the key file.
+        /// </summary>
+        /// <param name="keyFile">The key file.</param>
+        public void SetKeyFile(byte[] keyFile)
+        {
+            using (var store = IsolatedStorageFile
+                .GetUserStoreForApplication())
+            {
+                var path = KeyFilePath;
+                if (store.FileExists(path))
+                    store.DeleteFile(path);
+
+                if (keyFile == null)
+                    return;
+
+                using (var fs = store.CreateFile(path))
+                    fs.Write(keyFile, 0, keyFile.Length);
+            }
+        }
+
         private void ClearPassword(IsolatedStorageFile store)
         {
             store.DeleteFile(ProtectionPath);
             store.DeleteFile(ParsedXmlPath);
+        }
+
+        private byte[] GetKeyFile(IsolatedStorageFile store)
+        {
+            var path = KeyFilePath;
+            if (!store.FileExists(path))
+                return null;
+
+            using (var fs = store.OpenFile(path, FileMode.Open))
+            {
+                var length = (int)fs.Length;
+                var keyFile = new byte[length];
+                fs.Read(keyFile, 0, length);
+
+                return keyFile;
+            }
         }
 
         /// <summary>

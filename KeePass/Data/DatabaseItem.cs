@@ -8,6 +8,7 @@ namespace KeePass.Data
     public class DatabaseItem : INotifyPropertyChanged
     {
         private readonly DatabaseInfo _info;
+        private bool _hasKeyFile;
         private bool _hasPassword;
         private bool _isUpdating;
         private ImageSource _passwordIcon;
@@ -20,7 +21,24 @@ namespace KeePass.Data
 
         public bool CanUpdate
         {
-            get { return !string.IsNullOrEmpty(_info.Details.Url); }
+            get
+            {
+                return !string.IsNullOrEmpty(
+                    _info.Details.Url);
+            }
+        }
+
+        public bool HasKeyFile
+        {
+            get { return _hasKeyFile; }
+            set
+            {
+                if (value == _hasKeyFile)
+                    return;
+
+                _hasKeyFile = value;
+                OnPropertyChanged("HasKeyFile");
+            }
         }
 
         public bool HasPassword
@@ -85,6 +103,7 @@ namespace KeePass.Data
                 throw new ArgumentNullException("info");
 
             _info = info;
+            _hasKeyFile = info.HasKeyFile;
             _hasPassword = info.HasPassword;
 
             if (info.Details == null)

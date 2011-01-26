@@ -187,4 +187,10 @@ To set lock screen password, please go to Phone's Settings\lock &amp; wallpaper.
   <data name="LinkRegex" xml:space="preserve">
     <value>&lt;a\s+[^&gt;]?href\s?=\s?(['"])(.+?)\1</value>
   </data>
+  <data name="InvalidKeyFile" xml:space="preserve">
+    <value>You've selected an invalid/corrupted keyfile.</value>
+  </data>
+  <data name="KeyFileTitle" xml:space="preserve">
+    <value>Download KeyFile</value>
+  </data>
 </root>

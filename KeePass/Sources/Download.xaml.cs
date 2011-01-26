@@ -3,11 +3,14 @@ using System.Windows;
 using System.Windows.Navigation;
 using KeePass.Storage;
 using KeePass.Utils;
+using Microsoft.Phone.Controls;
 
 namespace KeePass.Sources
 {
     public partial class Download
     {
+        private string _folder;
+
         public Download()
         {
             InitializeComponent();
@@ -23,7 +26,15 @@ namespace KeePass.Sources
             lnkDemo.Visibility = isTrial
                 ? Visibility.Visible
                 : Visibility.Collapsed;
+
             ApplicationBar.IsVisible = !isTrial;
+            _folder = NavigationContext.QueryString["folder"];
+        }
+
+        private void Navigate<T>()
+            where T : PhoneApplicationPage
+        {
+            this.NavigateTo<T>("folder={0}", _folder);
         }
 
         private void lnkDemo_Click(object sender, EventArgs e)
@@ -44,6 +55,16 @@ namespace KeePass.Sources
                 MessageBoxButton.OK);
 
             GoBack<MainPage>();
+        }
+
+        private void lnkDropBox_Click(object sender, RoutedEventArgs e)
+        {
+            Navigate<DropBox.DropBox>();
+        }
+
+        private void lnkWeb_Click(object sender, RoutedEventArgs e)
+        {
+            Navigate<Web.WebDownload>();
         }
     }
 }

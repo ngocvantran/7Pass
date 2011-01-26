@@ -10,19 +10,16 @@ namespace KeePass.Sources.Web
 {
     public partial class WebBrowse
     {
-        private readonly DownloadHandler _download;
         private readonly ObservableCollection<WebLinkInfo> _items;
         private NetworkCredential _credentials;
+        private DownloadHandler _download;
 
         public WebBrowse()
         {
             InitializeComponent();
 
-            _download = new DownloadHandler(this);
             _items = new ObservableCollection<WebLinkInfo>();
             lstLinks.ItemsSource = _items;
-
-            _download.Completed += _download_Completed;
         }
 
         protected override void OnNavigatedTo(
@@ -31,8 +28,11 @@ namespace KeePass.Sources.Web
             if (cancelled)
                 return;
 
-            var pars = NavigationContext.QueryString;
+            _download = new DownloadHandler(this,
+                NavigationContext.QueryString["folder"]);
+            _download.Completed += _download_Completed;
 
+            var pars = NavigationContext.QueryString;
             _credentials = WebUtils.CreateCredentials(
                 pars["user"], pars["password"], pars["domain"]);
 
@@ -73,6 +73,7 @@ namespace KeePass.Sources.Web
             progList.IsLoading = true;
             lstLinks.IsEnabled = false;
             lstLinks.SelectedItem = null;
+
             _download.Download(item.Url, _credentials);
         }
     }

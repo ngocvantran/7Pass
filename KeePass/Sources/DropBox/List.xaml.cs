@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using KeePass.IO;
 using KeePass.Sources.DropBox.Api;
 using KeePass.Storage;
 using KeePass.Utils;
@@ -17,6 +18,8 @@ namespace KeePass.Sources.DropBox
     {
         private readonly ApplicationBarIconButton _cmdRefresh;
         private readonly ObservableCollection<MetaListItemInfo> _items;
+        private string _folder;
+
         private string _path;
         private string _secret;
         private string _token;
@@ -53,14 +56,15 @@ namespace KeePass.Sources.DropBox
 
             _path = pars["path"];
             _token = pars["token"];
+            _folder = pars["folder"];
             _secret = pars["secret"];
         }
 
         private void NavigateTo(string path)
         {
             this.NavigateTo<List>(
-                "token={0}&secret={1}&path={2}",
-                _token, _secret, path);
+                "token={0}&secret={1}&path={2}&folder={3}",
+                _token, _secret, path, _folder);
         }
 
         private void OnFileDownloaded(Stream file,
@@ -80,16 +84,35 @@ namespace KeePass.Sources.DropBox
                     return;
                 }
 
-                if (!DatabaseVerifier.Verify(dispatcher, file))
-                    return;
-
-                var storage = new DatabaseInfo();
-                storage.SetDatabase(file, new DatabaseDetails
+                if (string.IsNullOrEmpty(_folder))
                 {
-                    Url = path,
-                    Name = title,
-                    Source = DatabaseUpdater.DROPBOX_UPDATER,
-                });
+                    if (!DatabaseVerifier.Verify(dispatcher, file))
+                        return;
+
+                    var storage = new DatabaseInfo();
+                    storage.SetDatabase(file, new DatabaseDetails
+                    {
+                        Url = path,
+                        Name = title,
+                        Source = DatabaseUpdater.DROPBOX_UPDATER,
+                    });
+                }
+                else
+                {
+                    var hash = KeyFile.GetKey(file);
+                    if (hash == null)
+                    {
+                        dispatcher.BeginInvoke(() => MessageBox.Show(
+                            Properties.Resources.InvalidKeyFile,
+                            Properties.Resources.KeyFileTitle,
+                            MessageBoxButton.OK));
+
+                        return;
+                    }
+
+                    new DatabaseInfo(_folder)
+                        .SetKeyFile(hash);
+                }
 
                 dispatcher.BeginInvoke(
                     GoBack<MainPage>);

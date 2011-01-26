@@ -7,12 +7,34 @@ namespace KeePass.IO.Utils
     internal class PasswordData
     {
         private readonly byte[] _hash;
-        private readonly byte[] _utf8;
 
-        public PasswordData(string password)
+        public PasswordData(string password, byte[] keyFile)
         {
-            _utf8 = Encoding.UTF8.GetBytes(password);
-            _hash = BufferEx.GetHash(_utf8);
+            if (!string.IsNullOrEmpty(password))
+            {
+                var utf8 = Encoding.UTF8.GetBytes(password);
+                _hash = BufferEx.GetHash(utf8);
+            }
+
+            if (keyFile != null)
+            {
+                if (_hash != null)
+                {
+                    var current = _hash.Length;
+                    Array.Resize(ref _hash, current + keyFile.Length);
+                    Array.Copy(keyFile, 0, _hash,
+                        current, keyFile.Length);
+                }
+                else
+                    _hash = keyFile;
+            }
+
+            if (_hash == null)
+            {
+                throw new InvalidOperationException(
+                    "At least password or key file must be provided");
+            }
+
             _hash = BufferEx.GetHash(_hash);
         }
 
