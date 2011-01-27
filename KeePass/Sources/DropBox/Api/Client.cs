@@ -110,6 +110,7 @@ namespace KeePass.Sources.DropBox.Api
             };
             request.AddField("email", email);
             request.AddField("password", password);
+            request.AddField("oauth_signature_method", "HMAC-SHA1");
             request.AddField("oauth_consumer_key", DropBoxInfo.KEY);
 
             ClearAuthenticator();
