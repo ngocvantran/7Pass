@@ -1,14 +1,15 @@
-7Pass is the first KeePass 2.x database (*.kdbx) reader for Windows Phone 7.
+7Pass is a KeePass 2.x database (*.kdbx) reader for Windows Phone 7.
 (As a reader, entries editing is not supported).
 
 Features:
- - Compatible with KeePass 2.x databases protected by a Master password.
- - Supports downloading from DropBox.
+ - Compatible with KeePass 2.x databases.
+ - Has DropBox integration.
+ - Supports keyfile and master password.
  - Supports multiple databases.
  - Supports custom fields, (protected & not protected).
  - Supports urls with embedded fields.
  - Supports group and entry icons (including custom icons).
- - Remembers your password so that you don't have to enter your password every time *.
+ - Remembers your password*.
  - Remembers recently viewed entries for quick access.
  - Has built-in Demo database.
 
@@ -16,26 +17,22 @@ Support Info:
  - Blog: http://7pass.wordpress.com
  - Source code: https://github.com/7pass/7pass
 
+Version 2.2:
+ - Added KeyFile support.
+ - Display group/entry path in search result.
+ - Larger field value display.
+ - Moved Demo database to application bar for paid users.
+ - Fixed DropBox login.
+
+Version 2.1:
+ - Fixed fields not displayed.
+
 Version 2.0:
  - Rebuilt from ground up.
  - Added DropBox support.
  - Added links detection for web download.
  - Added web authentication support (experimental support for WebDav & Box.net).
  - Made trial mode notification very subtle.
-
-Version 1.3:
- - Added history of recently viewed entries.
- - Update your DB resets usage count to 1.
- - Added incorrect password prompt.
- - Added support for group/entry icons.
- - Improved notes displaying in entry page.
-
-Version 1.2:
- - Fixed keyboard obscures Open button in Password page.
- - Improved entry page (fields scrolling, larger notes textbox).
-
-Future plan:
- - Add copy & paste support (OS limitation).
 
 If you don't have a web server to download your database to your phone, you can use Java Mini Web Server from http://www.jibble.org/miniwebserver/, or any personal web server.
 
