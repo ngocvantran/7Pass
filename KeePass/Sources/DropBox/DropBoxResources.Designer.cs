@@ -90,7 +90,7 @@ namespace KeePass.Sources.DropBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You&apos;ve specified an invalid e-mail or password...
+        ///   Looks up a localized string similar to You&apos;ve specified an invalid e-mail or password..
         /// </summary>
         internal static string LoginFailure {
             get {

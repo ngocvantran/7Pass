@@ -21,6 +21,12 @@ namespace KeePass.Sources.Web
                 ApplicationBar.Buttons[0];
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            ucAuth.ClearPassword();
+        }
+
         protected override void OnNavigatedTo(
             bool cancelled, NavigationEventArgs e)
         {

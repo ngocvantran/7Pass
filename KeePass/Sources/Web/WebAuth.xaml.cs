@@ -21,6 +21,11 @@ namespace KeePass.Sources.Web
             InitializeComponent();
         }
 
+        public void ClearPassword()
+        {
+            txtPassword.Password = string.Empty;
+        }
+
         public NetworkCredential GetCredentials()
         {
             if (!UseAuth)
