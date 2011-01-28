@@ -23,7 +23,7 @@ namespace KeePass.Sources.DropBox
         {
             Dispatcher.BeginInvoke(() =>
             {
-                progLogin.IsLoading = false;
+                SetWorking(false);
 
                 if (info == null)
                 {
@@ -33,6 +33,8 @@ namespace KeePass.Sources.DropBox
 
                     return;
                 }
+
+                txtPassword.Password = string.Empty;
 
                 var folder = NavigationContext
                     .QueryString["folder"];
@@ -48,12 +50,20 @@ namespace KeePass.Sources.DropBox
             if (!Network.CheckNetwork())
                 return;
 
-            progLogin.IsLoading = true;
+            SetWorking(true);
 
             new Client().LoginAsync(
                 txtEmail.Text,
                 txtPassword.Password,
                 LoginCompleted);
+        }
+
+        private void SetWorking(bool working)
+        {
+            progLogin.IsLoading = working;
+            txtEmail.IsEnabled = !working;
+            cmdLogin.IsEnabled = !working;
+            txtPassword.IsEnabled = !working;
         }
 
         private void cmdLogin_Click(object sender, EventArgs e)

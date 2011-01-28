@@ -119,11 +119,8 @@ namespace KeePass.Sources.DropBox
             }
             finally
             {
-                dispatcher.BeginInvoke(() =>
-                {
-                    progList.IsLoading = false;
-                    _cmdRefresh.IsEnabled = true;
-                });
+                dispatcher.BeginInvoke(
+                    () => SetWorking(false));
             }
         }
 
@@ -176,6 +173,13 @@ namespace KeePass.Sources.DropBox
                 _path, OnListComplete);
         }
 
+        private void SetWorking(bool working)
+        {
+            progList.IsLoading = working;
+            lstBrowse.IsEnabled = !working;
+            _cmdRefresh.IsEnabled = !working;
+        }
+
         private void cmdRefresh_Click(object sender, EventArgs e)
         {
             RefreshList();
@@ -195,12 +199,11 @@ namespace KeePass.Sources.DropBox
                     NavigateTo(meta.Path);
                 else
                 {
-                    progList.IsLoading = true;
-                    _cmdRefresh.IsEnabled = false;
-
                     var url = string.Format(
                         "dropbox://{0}:{1}@dropbox.com{2}",
                         _token, _secret, meta.Path);
+
+                    SetWorking(true);
 
                     var client = new Client(_token, _secret);
                     client.DownloadAsync(meta.Path, x =>

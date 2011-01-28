@@ -129,7 +129,7 @@ Please try again later.</value>
     <value>DropBox Browser</value>
   </data>
   <data name="LoginFailure" xml:space="preserve">
-    <value>You've specified an invalid e-mail or password..</value>
+    <value>You've specified an invalid e-mail or password.</value>
   </data>
   <data name="LoginTitle" xml:space="preserve">
     <value>DropBox Authentication</value>
