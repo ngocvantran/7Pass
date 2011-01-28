@@ -3,15 +3,15 @@
 
 Features:
  - Compatible with KeePass 2.x databases.
- - Has DropBox integration.
+ - DropBox integration.
+ - Web & WebDAV download with authentication (supports Box.net).
  - Supports keyfile and master password.
- - Supports multiple databases.
+ - Multiple databases.
  - Supports custom fields, (protected & not protected).
  - Supports urls with embedded fields.
  - Supports group and entry icons (including custom icons).
  - Remembers your password*.
  - Remembers recently viewed entries for quick access.
- - Has built-in Demo database.
 
 Support Info:
  - Blog: http://7pass.wordpress.com
