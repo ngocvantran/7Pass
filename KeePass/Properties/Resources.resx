@@ -146,7 +146,7 @@ Please make sure that the url is correct.
   <data name="IncorrectPassword" xml:space="preserve">
     <value>You've specified an incorrect password.
 
-Please note that 7Pass only support databases protected by Master Key only (not key file or Windows account or any of their combination).</value>
+Please note that 7Pass doesn't support using Windows account or custom password providers for the master password.</value>
   </data>
   <data name="InvalidCertificate" xml:space="preserve">
     <value>

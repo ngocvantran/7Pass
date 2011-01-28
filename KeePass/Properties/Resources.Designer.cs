@@ -131,7 +131,7 @@ namespace KeePass.Properties {
         /// <summary>
         ///   Looks up a localized string similar to You&apos;ve specified an incorrect password.
         ///
-        ///Please note that 7Pass only support databases protected by Master Key only (not key file or Windows account or any of their combination)..
+        ///Please note that 7Pass doesn&apos;t support using Windows account or custom password providers for the master password..
         /// </summary>
         internal static string IncorrectPassword {
             get {
