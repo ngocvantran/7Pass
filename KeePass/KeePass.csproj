@@ -58,7 +58,9 @@
     <Reference Include="Newtonsoft.Json.Silverlight">
       <HintPath>..\Libs\Newtonsoft.Json.Silverlight.dll</HintPath>
     </Reference>
-    <Reference Include="SharpZipLib.WindowsPhone7, Version=0.86.0.518, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="SharpZipLib.WindowsPhone7">
+      <HintPath>..\Libs\SharpZipLib.WindowsPhone7.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />

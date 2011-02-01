@@ -101,7 +101,8 @@ namespace KeePass.Sources.Web
             var html = Encoding.UTF8.GetString(
                 buffer, 0, buffer.Length);
 
-            var regex = new Regex(Resources.LinkRegex);
+            var regex = new Regex(Resources.LinkRegex,
+                RegexOptions.IgnoreCase);
             var matches = regex.Matches(html);
 
             return matches
