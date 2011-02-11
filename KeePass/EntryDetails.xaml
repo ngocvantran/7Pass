@@ -8,6 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     Style="{StaticResource KeePassPage}">
 
@@ -22,7 +23,15 @@
 
                 <TextBlock>Url</TextBlock>
                 <HyperlinkButton Tag="{Binding Url}" Content="{Binding Url}"
-                                 Click="lnkUrl_Click" HorizontalContentAlignment="Left" />
+                                 Click="lnkUrl_Click" HorizontalContentAlignment="Left">
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu>
+                            <toolkit:MenuItem Header="open with phone browser"
+                                              Tag="{Binding Url}"
+                                              Click="mnuBrowser_Click" />
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+                </HyperlinkButton>
             </StackPanel>
         </controls:PanoramaItem>
 
