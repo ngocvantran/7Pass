@@ -14,7 +14,7 @@ namespace KeePass.Utils
             {
                 if (_isTrial == null)
                 {
-#if DEBUG
+#if DEBUG || FREEWARE
                     _isTrial = true;
 #else
                     _isTrial = new Microsoft.Phone.Marketplace

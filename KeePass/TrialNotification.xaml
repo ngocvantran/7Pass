@@ -26,10 +26,15 @@
                     keepass:EaseEffect.IsEnabled="True"
                     Background="{StaticResource PhoneAccentBrush}"
                     ManipulationStarted="pnlMain_ManipulationStarted">
-            <TextBlock>
+            <TextBlock Name="lblTrial">
                 Thank you for trying 7Pass.<LineBreak />
                 This is the fully functional trial version of 7Pass.<LineBreak />
                 Click this notification to Review/Purchase 7Pass.
+            </TextBlock>
+            <TextBlock Name="lblFree" Visibility="Collapsed">
+                This is the fully functional free version of 7Pass.<LineBreak />
+                You can support the author by tapping this<LineBreak />
+                notification to purchase the paid version.
             </TextBlock>
         </StackPanel>
         
