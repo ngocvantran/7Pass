@@ -2,9 +2,10 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using KeePass.IO;
 using KeePass.Storage;
 using KeePass.Utils;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Tasks;
 
 namespace KeePass
 {
@@ -54,9 +55,20 @@ namespace KeePass
 
         private void lnkUrl_Click(object sender, RoutedEventArgs e)
         {
-            var lnkUrl = (HyperlinkButton) sender;
+            var lnkUrl = (HyperlinkButton)sender;
             this.NavigateTo<WebView>("url={0}&entry={1}",
                 lnkUrl.Tag, NavigationContext.QueryString["id"]);
+        }
+
+        private void mnuBrowser_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MenuItem)sender;
+            var url = (string)item.Tag;
+
+            new WebBrowserTask
+            {
+                URL = url,
+            }.Show();
         }
     }
 }

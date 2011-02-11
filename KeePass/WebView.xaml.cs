@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Navigation;
 using KeePass.IO;
 using KeePass.Storage;
@@ -18,15 +16,6 @@ namespace KeePass
         public WebView()
         {
             InitializeComponent();
-        }
-
-        private void browser_Loaded(object sender, RoutedEventArgs e)
-        {
-            var url = new Uri(
-                NavigationContext.QueryString["url"],
-                UriKind.Absolute);
-
-            browser.Navigate(url);
         }
 
         protected override void OnNavigatedTo(
@@ -53,11 +42,6 @@ namespace KeePass
             }
         }
 
-        private void cmdPassword_Click(object sender, EventArgs e)
-        {
-            SetValue(_entry.Password);
-        }
-
         private void SetValue(string value)
         {
             try
@@ -76,9 +60,39 @@ namespace KeePass
             }
         }
 
-        private void cmdUser_Click(object sender, EventArgs e)
+        private void browser_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            SetValue(_entry.UserName);
+            progBusy.IsLoading = false;
+            progBusy.Visibility = Visibility.Collapsed;
+        }
+
+        private void browser_Loaded(object sender, RoutedEventArgs e)
+        {
+            var url = new Uri(
+                NavigationContext.QueryString["url"],
+                UriKind.Absolute);
+
+            browser.Navigate(url);
+        }
+
+        private void browser_Navigated(object sender, NavigationEventArgs e)
+        {
+            progBusy.IsLoading = true;
+            progBusy.Visibility = Visibility.Visible;
+        }
+
+        private void cmdBack_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                browser.InvokeScript("eval", "history.go(-1)");
+            }
+            catch {}
+        }
+
+        private void cmdPassword_Click(object sender, EventArgs e)
+        {
+            SetValue(_entry.Password);
         }
 
         private void cmdRefresh_Click(object sender, EventArgs e)
@@ -93,15 +107,9 @@ namespace KeePass
             }
         }
 
-        private void cmdBack_Click(object sender, EventArgs e)
+        private void cmdUser_Click(object sender, EventArgs e)
         {
-            try
-            {
-                browser.InvokeScript("eval", "history.go(-1)");
-            }
-            catch
-            {
-            }
+            SetValue(_entry.UserName);
         }
 
         private void vwOverlay_Flick(object sender, FlickGestureEventArgs e)
@@ -114,18 +122,6 @@ namespace KeePass
 
             e.Handled = true;
             vwOverlay.Visibility = Visibility.Collapsed;
-        }
-
-        private void browser_Navigated(object sender, NavigationEventArgs e)
-        {
-            progBusy.IsLoading = true;
-            progBusy.Visibility = Visibility.Visible;
-        }
-
-        private void browser_LoadCompleted(object sender, NavigationEventArgs e)
-        {
-            progBusy.IsLoading = false;
-            progBusy.Visibility = Visibility.Collapsed;
         }
     }
 }
