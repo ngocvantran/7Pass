@@ -55,7 +55,7 @@ namespace KeePass
                 pivotGroup.Header = group.Name;
 
                 ThreadPool.QueueUserWorkItem(_ =>
-                    ListItems(group));
+                    ListItems(group, database.RecycleBin));
             }
 
             _recents.Clear();
@@ -104,12 +104,21 @@ namespace KeePass
                 Display(recents, _recents);
         }
 
-        private void ListItems(Group group)
+        private void ListItems(Group group, Group recycleBin)
         {
             var dispatcher = Dispatcher;
+            var groups = group.Groups.AsEnumerable();
+
+            if (recycleBin != null)
+            {
+                var settings = AppSettings.Instance;
+
+                if (settings.HideRecycleBin)
+                    groups = groups.Except(new[] { recycleBin });
+            }
 
             var items = new List<GroupItem>();
-            items.AddRange(group.Groups
+            items.AddRange(groups
                 .OrderBy(x => x.Name)
                 .Select(x => new GroupItem(x, dispatcher)));
             items.AddRange(group.Entries

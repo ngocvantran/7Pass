@@ -76,6 +76,18 @@ namespace KeePass
                 lstItems.Focus();
         }
 
+        private static bool IsRelated(Group group, Group target)
+        {
+            if (group == target)
+                return true;
+
+            var parent = group.Parent;
+            if (parent == null)
+                return false;
+
+            return IsRelated(parent, target);
+        }
+
         private void PerformSearch()
         {
             if (!_wkSearch.IsBusy)
@@ -96,6 +108,16 @@ namespace KeePass
                 entries = entries.Where(x =>
                     x.Title.ToUpperInvariant()
                         .Contains(local));
+            }
+
+            if (_wkSearch.CancellationPending)
+                return;
+
+            var recycleBin = _database.RecycleBin;
+            if (recycleBin != null && AppSettings.Instance.HideRecycleBin)
+            {
+                entries = entries.Where(x =>
+                    !IsRelated(x.Group, recycleBin));
             }
 
             if (_wkSearch.CancellationPending)
