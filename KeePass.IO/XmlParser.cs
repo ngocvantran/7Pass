@@ -47,9 +47,29 @@ namespace KeePass.IO
                 if (!reader.ReadToDescendant("Meta"))
                     return null;
 
-                IDictionary<string, ImageSource> icons;
+                string recycleBinId = null;
+                var icons = new Dictionary<string, ImageSource>();
                 using (var subReader = reader.ReadSubtree())
-                    icons = ParseIcons(subReader, _dispatcher);
+                {
+                    subReader.ReadToFollowing("Generator");
+
+                    while (!string.IsNullOrEmpty(subReader.Name))
+                    {
+                        subReader.Skip();
+
+                        switch (subReader.Name)
+                        {
+                            case "RecycleBinUUID":
+                                recycleBinId = subReader
+                                    .ReadElementContentAsString();
+                                break;
+
+                            case "CustomIcons":
+                                ParseIcons(subReader, _dispatcher, icons);
+                                break;
+                        }
+                    }
+                }
 
                 if (reader.Name != "Root" &&
                     !reader.ReadToNextSibling("Root"))
@@ -63,7 +83,15 @@ namespace KeePass.IO
                 using (var subReader = reader.ReadSubtree())
                 {
                     var root = ParseGroup(subReader);
-                    return new Database(root, icons);
+                    var database = new Database(root, icons);
+
+                    if (!string.IsNullOrEmpty(recycleBinId))
+                    {
+                        database.RecycleBin = database
+                            .GetGroup(recycleBinId);
+                    }
+
+                    return database;
                 }
             }
         }
@@ -172,27 +200,31 @@ namespace KeePass.IO
             return data;
         }
 
-        private static IDictionary<string, ImageSource>
-            ParseIcons(XmlReader reader, Dispatcher dispatcher)
+        private static void ParseIcons(XmlReader reader, Dispatcher dispatcher,
+            IDictionary<string, ImageSource> icons)
         {
-            var icons = new Dictionary<string, ImageSource>();
-
-            if (reader.ReadToFollowing("CustomIcons"))
+            while (reader.ReadToFollowing("UUID"))
             {
-                while (reader.ReadToFollowing("UUID"))
+                var id = reader.ReadElementContentAsString();
+
+                if (reader.Name != "Data" &&
+                    !reader.ReadToNextSibling("Data"))
                 {
-                    var id = reader.ReadElementContentAsString();
+                    continue;
+                }
 
-                    if (reader.Name != "Data" &&
-                        !reader.ReadToNextSibling("Data"))
-                    {
-                        continue;
-                    }
+                var data = Convert.FromBase64String(
+                    reader.ReadElementContentAsString());
 
-                    var data = Convert.FromBase64String(
-                        reader.ReadElementContentAsString());
+                BitmapImage image = null;
 
-                    BitmapImage image = null;
+                if (dispatcher.CheckAccess())
+                {
+                    image = new BitmapImage();
+                    image.SetSource(new MemoryStream(data));
+                }
+                else
+                {
                     var wait = new ManualResetEvent(false);
 
                     dispatcher.BeginInvoke(() =>
@@ -204,11 +236,10 @@ namespace KeePass.IO
                     });
 
                     wait.WaitOne();
-                    icons.Add(id, image);
                 }
+                
+                icons.Add(id, image);
             }
-
-            return icons;
         }
 
         private Dictionary<string, string>

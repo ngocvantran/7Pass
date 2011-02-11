@@ -38,6 +38,22 @@ namespace KeePass
             Cache.AddRecent(id);
         }
 
+        private void OpenUrl(string url,
+            bool useIntegreatedBrowser)
+        {
+            if (useIntegreatedBrowser)
+            {
+                this.NavigateTo<WebView>("url={0}&entry={1}",
+                    url, NavigationContext.QueryString["id"]);
+                return;
+            }
+
+            new WebBrowserTask
+            {
+                URL = url,
+            }.Show();
+        }
+
         private void cmdAbout_Click(object sender, EventArgs e)
         {
             this.NavigateTo<About>();
@@ -56,19 +72,22 @@ namespace KeePass
         private void lnkUrl_Click(object sender, RoutedEventArgs e)
         {
             var lnkUrl = (HyperlinkButton)sender;
-            this.NavigateTo<WebView>("url={0}&entry={1}",
-                lnkUrl.Tag, NavigationContext.QueryString["id"]);
+            var url = (string)lnkUrl.Tag;
+
+            var settings = AppSettings.Instance;
+            OpenUrl(url, settings.UseIntBrowser);
         }
 
         private void mnuBrowser_Click(object sender, RoutedEventArgs e)
         {
             var item = (MenuItem)sender;
-            var url = (string)item.Tag;
+            OpenUrl((string)item.Tag, false);
+        }
 
-            new WebBrowserTask
-            {
-                URL = url,
-            }.Show();
+        private void mnuIntegrated_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MenuItem)sender;
+            OpenUrl((string)item.Tag, true);
         }
     }
 }

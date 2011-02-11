@@ -96,6 +96,9 @@
     <Compile Include="Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sources\DatabaseUpdater.cs" />
     <Compile Include="Sources\DropBox\DropBox.xaml.cs">
       <DependentUpon>DropBox.xaml</DependentUpon>
@@ -132,6 +135,7 @@
     <Compile Include="TrialNotification.xaml.cs">
       <DependentUpon>TrialNotification.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\AppSettings.cs" />
     <Compile Include="Utils\EaseEffect.cs" />
     <Compile Include="Utils\ErrorReport.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
@@ -191,6 +195,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Sources\Download.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -247,6 +255,7 @@
     <Content Include="Images\back.png" />
     <Content Include="Images\password.png" />
     <Content Include="Images\root.png" />
+    <Content Include="Images\settings.png" />
     <Content Include="Images\updated.dark.png" />
     <Content Include="Images\updated.light.png" />
     <Content Include="Images\username.png" />

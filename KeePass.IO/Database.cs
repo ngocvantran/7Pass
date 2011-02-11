@@ -37,6 +37,14 @@ namespace KeePass.IO
         }
 
         /// <summary>
+        /// Gets or sets the recycle bin.
+        /// </summary>
+        /// <value>
+        /// The recycle bin.
+        /// </value>
+        public Group RecycleBin { get; set; }
+
+        /// <summary>
         /// Gets the root group.
         /// </summary>
         public Group Root

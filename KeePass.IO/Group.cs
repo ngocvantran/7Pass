@@ -30,6 +30,14 @@ namespace KeePass.IO
         }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="Group"/> is hidden.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if hidden; otherwise, <c>false</c>.
+        /// </value>
+        public bool Hidden { get; set; }
+
+        /// <summary>
         /// Gets or sets the ID.
         /// </summary>
         /// <value>The ID.</value>

@@ -150,6 +150,17 @@ namespace KeePass
             this.NavigateTo<About>();
         }
 
+        private void mnuClearKeyFile_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MenuItem)sender;
+            var database = (DatabaseInfo)item.Tag;
+
+            database.SetKeyFile(null);
+            var listItem = _items.First(
+                x => x.Info == database);
+            listItem.HasKeyFile = false;
+        }
+
         private void mnuClear_Click(object sender, RoutedEventArgs e)
         {
             var item = (MenuItem)sender;
@@ -183,6 +194,14 @@ namespace KeePass
             RefreshDbList();
         }
 
+        private void mnuKeyFile_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MenuItem)sender;
+            var database = (DatabaseInfo)item.Tag;
+            this.NavigateTo<Download>(
+                "folder={0}", database.Folder);
+        }
+
         private void mnuNew_Click(object sender, EventArgs e)
         {
             this.NavigateTo<Download>("folder=");
@@ -193,6 +212,11 @@ namespace KeePass
             var item = (MenuItem)sender;
             var database = (DatabaseInfo)item.Tag;
             this.NavigateTo<Rename>("db={0}", database.Folder);
+        }
+
+        private void mnuSettings_Click(object sender, EventArgs e)
+        {
+            this.NavigateTo<Settings>();
         }
 
         private void mnuUpdate_Click(object sender, RoutedEventArgs e)
@@ -210,25 +234,6 @@ namespace KeePass
             DatabaseUpdater.Update(database,
                 _ => listItem.IsUpdating,
                 DatabaseUpdated);
-        }
-
-        private void mnuKeyFile_Click(object sender, RoutedEventArgs e)
-        {
-            var item = (MenuItem)sender;
-            var database = (DatabaseInfo)item.Tag;
-            this.NavigateTo<Download>(
-                "folder={0}", database.Folder);
-        }
-
-        private void mnuClearKeyFile_Click(object sender, RoutedEventArgs e)
-        {
-            var item = (MenuItem)sender;
-            var database = (DatabaseInfo)item.Tag;
-            
-            database.SetKeyFile(null);
-            var listItem = _items.First(
-                x => x.Info == database);
-            listItem.HasKeyFile = false;
         }
     }
 }

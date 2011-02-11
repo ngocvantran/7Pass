@@ -1,0 +1,37 @@
+﻿<keepass:KeePassPage 
+    x:Class="KeePass.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:keepass="clr-namespace:KeePass.Utils"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    Style="{StaticResource KeePassPage}">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Settings" Margin="9,-7,0,0"
+                       Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1">
+            <toolkit:ToggleSwitch
+                Name="chkRecycleBin" Header="Hide Recycle Bin"
+                Checked="chkRecycleBin_CheckedChanged"
+                Unchecked="chkRecycleBin_CheckedChanged" />
+            <toolkit:ToggleSwitch
+                Name="chkBrowser" Header="Use integrated browser"
+                Checked="chkBrowser_CheckedChanged"
+                Unchecked="chkBrowser_CheckedChanged" />
+        </StackPanel>
+    </Grid>
+
+</keepass:KeePassPage>

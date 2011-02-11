@@ -26,9 +26,12 @@
                                  Click="lnkUrl_Click" HorizontalContentAlignment="Left">
                     <toolkit:ContextMenuService.ContextMenu>
                         <toolkit:ContextMenu>
-                            <toolkit:MenuItem Header="open with phone browser"
+                            <toolkit:MenuItem Header="use phone browser"
                                               Tag="{Binding Url}"
                                               Click="mnuBrowser_Click" />
+                            <toolkit:MenuItem Header="use integrated browser"
+                                              Tag="{Binding Url}"
+                                              Click="mnuIntegrated_Click" />
                         </toolkit:ContextMenu>
                     </toolkit:ContextMenuService.ContextMenu>
                 </HyperlinkButton>
