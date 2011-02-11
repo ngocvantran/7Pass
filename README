@@ -5,6 +5,7 @@ Features:
  - Compatible with KeePass 2.x databases.
  - DropBox integration.
  - Web & WebDAV download with authentication (supports Box.net).
+ - Integreated web browser.
  - Supports keyfile and master password.
  - Multiple databases.
  - Supports custom fields, (protected & not protected).
@@ -16,6 +17,10 @@ Features:
 Support Info:
  - Blog: http://7pass.wordpress.com
  - Source code: https://github.com/7pass/7pass
+
+Version 2.3:
+ - Added integrated web browser.
+ - Added option to hide Recycle Bin.
 
 Version 2.2:
  - Added KeyFile support.
