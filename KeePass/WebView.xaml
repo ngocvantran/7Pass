@@ -1,0 +1,61 @@
+﻿<keepass:KeePassPage 
+    x:Class="KeePass.WebView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:keepass="clr-namespace:KeePass.Utils"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    Style="{StaticResource KeePassPage}">
+
+	<Grid>
+		<Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <controls:PerformanceProgressBar
+            x:Name="progBusy" Grid.Row="0" Visibility="Collapsed" />
+
+		<phone:WebBrowser Name="browser" IsScriptEnabled="True"
+		                  Loaded="browser_Loaded"
+                          Navigated="browser_Navigated"
+                          LoadCompleted="browser_LoadCompleted"
+                          Grid.Row="1" Grid.RowSpan="2"/>
+		
+        <ScrollViewer Name="vwOverlay" Visibility="Collapsed"
+                      HorizontalScrollBarVisibility="Visible"
+                      VerticalScrollBarVisibility="Disabled"
+                      Background="Black" Opacity="0.6" Grid.Row="1">
+            <toolkit:GestureService.GestureListener>
+                <toolkit:GestureListener
+                    Flick="vwOverlay_Flick" />
+            </toolkit:GestureService.GestureListener>
+            <TextBlock Name="lblOverlay" />
+        </ScrollViewer>
+
+	</Grid>
+
+	<phone:PhoneApplicationPage.ApplicationBar>
+		<shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/refresh.png" Text="Refresh"
+                Click="cmdRefresh_Click" />
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/back.png" Text="Go Back"
+                Click="cmdBack_Click" />
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/username.png" Text="Username"
+                Click="cmdUser_Click" />
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/password.png" Text="Password"
+                Click="cmdPassword_Click" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</keepass:KeePassPage>
