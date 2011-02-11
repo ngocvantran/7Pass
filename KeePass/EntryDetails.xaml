@@ -21,8 +21,8 @@
                 <TextBox Text="{Binding Password}" IsReadOnly="True" />
 
                 <TextBlock>Url</TextBlock>
-                <HyperlinkButton NavigateUri="{Binding Url}" Content="{Binding Url}"
-                                 TargetName="_blank" HorizontalContentAlignment="Left" />
+                <HyperlinkButton Tag="{Binding Url}" Content="{Binding Url}"
+                                 Click="lnkUrl_Click" HorizontalContentAlignment="Left" />
             </StackPanel>
         </controls:PanoramaItem>
 

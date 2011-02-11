@@ -166,6 +166,9 @@
     <Compile Include="Utils\TrialManager.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="WebView.xaml.cs">
+      <DependentUpon>WebView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -232,14 +235,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WebView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml" />
     <Content Include="Images\about.png" />
+    <Content Include="Images\back.png" />
+    <Content Include="Images\password.png" />
     <Content Include="Images\root.png" />
     <Content Include="Images\updated.dark.png" />
     <Content Include="Images\updated.light.png" />
+    <Content Include="Images\username.png" />
     <Content Include="Sources\Demo7Pass.kdbx" />
   </ItemGroup>
   <ItemGroup>
