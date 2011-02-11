@@ -8,16 +8,28 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Free|Any CPU = Free|Any CPU
+		Freeware|Any CPU = Freeware|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3BC6B06B-0B8D-4E34-BF60-C026C4252E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3BC6B06B-0B8D-4E34-BF60-C026C4252E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BC6B06B-0B8D-4E34-BF60-C026C4252E7B}.Free|Any CPU.ActiveCfg = Release|Any CPU
+		{3BC6B06B-0B8D-4E34-BF60-C026C4252E7B}.Free|Any CPU.Build.0 = Release|Any CPU
+		{3BC6B06B-0B8D-4E34-BF60-C026C4252E7B}.Freeware|Any CPU.ActiveCfg = Release|Any CPU
+		{3BC6B06B-0B8D-4E34-BF60-C026C4252E7B}.Freeware|Any CPU.Build.0 = Release|Any CPU
 		{3BC6B06B-0B8D-4E34-BF60-C026C4252E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BC6B06B-0B8D-4E34-BF60-C026C4252E7B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{37AFBD4F-8D32-4CDF-B01E-D60848AB1E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{37AFBD4F-8D32-4CDF-B01E-D60848AB1E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37AFBD4F-8D32-4CDF-B01E-D60848AB1E90}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{37AFBD4F-8D32-4CDF-B01E-D60848AB1E90}.Free|Any CPU.ActiveCfg = Release|Any CPU
+		{37AFBD4F-8D32-4CDF-B01E-D60848AB1E90}.Free|Any CPU.Build.0 = Release|Any CPU
+		{37AFBD4F-8D32-4CDF-B01E-D60848AB1E90}.Free|Any CPU.Deploy.0 = Release|Any CPU
+		{37AFBD4F-8D32-4CDF-B01E-D60848AB1E90}.Freeware|Any CPU.ActiveCfg = Freeware|Any CPU
+		{37AFBD4F-8D32-4CDF-B01E-D60848AB1E90}.Freeware|Any CPU.Build.0 = Freeware|Any CPU
+		{37AFBD4F-8D32-4CDF-B01E-D60848AB1E90}.Freeware|Any CPU.Deploy.0 = Freeware|Any CPU
 		{37AFBD4F-8D32-4CDF-B01E-D60848AB1E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37AFBD4F-8D32-4CDF-B01E-D60848AB1E90}.Release|Any CPU.Build.0 = Release|Any CPU
 		{37AFBD4F-8D32-4CDF-B01E-D60848AB1E90}.Release|Any CPU.Deploy.0 = Release|Any CPU

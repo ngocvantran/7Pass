@@ -28,6 +28,11 @@ namespace KeePass
                 Interval = TimeSpan.FromSeconds(10),
             };
             _tmrHide.Tick += _tmrHide_Tick;
+
+#if FREEWARE
+            lblTrial.Visibility = Visibility.Collapsed;
+            lblFree.Visibility = Visibility.Visible;
+#endif
         }
 
         private void _tmrHide_Tick(object sender, EventArgs e)
@@ -51,7 +56,17 @@ namespace KeePass
             object sender, ManipulationStartedEventArgs e)
         {
             e.Handled = true;
+
+#if !FREEWARE
             new MarketplaceDetailTask().Show();
+#else
+#endif
+            new MarketplaceDetailTask
+            {
+                ContentType = MarketplaceContentType.Applications,
+                ContentIdentifier = "2f1d7d92-cef4-df11-9264-00237de2db9e",
+            }.Show();
+            
         }
 
         private void popupTrial_Loaded(object sender, RoutedEventArgs e)
