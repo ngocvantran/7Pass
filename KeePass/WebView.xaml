@@ -19,7 +19,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
-        <controls:PerformanceProgressBar
+        <controls:PerformanceProgressBarEx
             x:Name="progBusy" Grid.Row="0" Visibility="Collapsed" />
 
 		<phone:WebBrowser Name="browser" IsScriptEnabled="True"

@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <controls:PerformanceProgressBar x:Name="progList" />
+            <controls:PerformanceProgressBarEx x:Name="progList" />
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="DropBox" Margin="9,-7,0,0"

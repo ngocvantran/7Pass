@@ -88,7 +88,7 @@
                         <Image Source="{Binding PasswordIcon}"
                                Grid.Column="2" Grid.Row="0"/>
                         
-                        <controls:PerformanceProgressBar
+                        <controls:PerformanceProgressBarEx
                             Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
                             x:Name="progList" IsLoading="{Binding IsUpdating}"/>
                     </Grid>

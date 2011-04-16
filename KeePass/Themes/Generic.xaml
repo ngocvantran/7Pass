@@ -11,7 +11,7 @@
   xmlns:local="clr-namespace:Microsoft.Phone.Controls"
   xmlns:localPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives" >
 
-    <Style TargetType="local:PerformanceProgressBar">
+    <Style TargetType="local:PerformanceProgressBarEx">
         <!-- This control only benefits indeterminate situations so it is only
              designed for that. -->
         <Setter Property="IsIndeterminate" Value="False"/>
@@ -21,7 +21,7 @@
         <Setter Property="Padding" Value="{StaticResource PhoneHorizontalMargin}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:PerformanceProgressBar">
+                <ControlTemplate TargetType="local:PerformanceProgressBarEx">
                     <localPrimitives:RelativeAnimatingContentControl HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                         <localPrimitives:RelativeAnimatingContentControl.Resources>
                             <ExponentialEase EasingMode="EaseOut" Exponent="1" x:Key="ProgressBarEaseOut"/>

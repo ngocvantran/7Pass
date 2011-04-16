@@ -23,7 +23,7 @@ namespace Microsoft.Phone.Controls
     /// IsIndeterminate is in the default style. Use the determinate version at
     /// your own risk as there are no benefits to this over the standard 
     /// progress bar in that situation.</remarks>
-    public class PerformanceProgressBar : ProgressBar
+    public class PerformanceProgressBarEx : ProgressBar
     {
         /// <summary>
         /// The common state group name.
@@ -58,17 +58,17 @@ namespace Microsoft.Phone.Controls
             DependencyProperty.Register(
                 "IsLoading",
                 typeof(bool),
-                typeof(PerformanceProgressBar),
+                typeof(PerformanceProgressBarEx),
                 new PropertyMetadata(false, OnIsLoadingPropertyChanged));
 
         /// <summary>
         /// IsLoadingProperty property changed handler.
         /// </summary>
-        /// <param name="d">PerformanceProgressBar that changed its IsLoading.</param>
+        /// <param name="d">PerformanceProgressBarEx that changed its IsLoading.</param>
         /// <param name="e">Event arguments.</param>
         private static void OnIsLoadingPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var source = d as PerformanceProgressBar;
+            var source = d as PerformanceProgressBarEx;
             if (source != null)
             {
                 source.OnIsLoadingChanged((bool) e.NewValue);
@@ -78,11 +78,11 @@ namespace Microsoft.Phone.Controls
 
 
         /// <summary>
-        /// Initializes a new instance of the PerformanceProgressBar type.
+        /// Initializes a new instance of the PerformanceProgressBarEx type.
         /// </summary>
-        public PerformanceProgressBar() : base()
+        public PerformanceProgressBarEx() : base()
         {
-            DefaultStyleKey = typeof (PerformanceProgressBar);
+            DefaultStyleKey = typeof (PerformanceProgressBarEx);
         }
 
         /// <summary>

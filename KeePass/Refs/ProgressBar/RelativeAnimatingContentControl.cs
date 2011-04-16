@@ -488,11 +488,11 @@ namespace Microsoft.Phone.Controls.Primitives
 // the difference: except this style will not use the UI thread at
 // runtime when IsIndeterminate=true.
 // 
-// <ProgressBar Style="{StaticResource PerformanceProgressBar}"
+// <ProgressBar Style="{StaticResource PerformanceProgressBarEx}"
 //              IsIndeterminate="true"/>
 //
 -->
-<Style x:Key="PerformanceProgressBar" TargetType="ProgressBar">
+<Style x:Key="PerformanceProgressBarEx" TargetType="ProgressBar">
     <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}"/>
     <Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
     <Setter Property="Maximum" Value="100"/>
