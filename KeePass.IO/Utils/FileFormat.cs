@@ -23,10 +23,10 @@ namespace KeePass.IO.Utils
 
         private static bool Version(BinaryReader reader)
         {
-            var minor = reader.ReadInt16();
+            reader.ReadInt16(); // minor
             var major = reader.ReadInt16();
 
-            return major == 2;
+            return major == 2 || major == 3;
         }
     }
 }

@@ -200,7 +200,8 @@ namespace KeePass.IO
             return data;
         }
 
-        private static void ParseIcons(XmlReader reader, Dispatcher dispatcher,
+        private static void ParseIcons(
+            XmlReader reader, Dispatcher dispatcher,
             IDictionary<string, ImageSource> icons)
         {
             while (reader.ReadToFollowing("UUID"))
