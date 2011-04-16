@@ -42,7 +42,9 @@
 	</Grid>
 
 	<phone:PhoneApplicationPage.ApplicationBar>
-		<shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+		<shell:ApplicationBar IsVisible="True"
+                              IsMenuEnabled="True"
+                              Opacity="0.25">
             <shell:ApplicationBarIconButton
                 IconUri="/Images/refresh.png" Text="Refresh"
                 Click="cmdRefresh_Click" />
