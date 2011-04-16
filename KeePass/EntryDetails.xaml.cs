@@ -74,6 +74,9 @@ namespace KeePass
             var lnkUrl = (HyperlinkButton)sender;
             var url = (string)lnkUrl.Tag;
 
+            if (string.IsNullOrEmpty(url))
+                return;
+
             var settings = AppSettings.Instance;
             OpenUrl(url, settings.UseIntBrowser);
         }
