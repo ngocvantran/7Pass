@@ -10,12 +10,14 @@ using KeePass.Sources;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 
 namespace KeePass
 {
     public partial class MainPage
     {
         private readonly ObservableCollection<DatabaseItem> _items;
+        private readonly ApplicationBarMenuItem _mnuUpdateAll;
 
         public MainPage()
         {
@@ -23,6 +25,9 @@ namespace KeePass
 
             _items = new ObservableCollection<DatabaseItem>();
             lstDatabases.ItemsSource = _items;
+
+            _mnuUpdateAll = (ApplicationBarMenuItem)
+                ApplicationBar.MenuItems[0];
         }
 
         protected override void OnNavigatedTo(
@@ -67,7 +72,7 @@ namespace KeePass
             });
         }
 
-        private void ListDatabases(object ignored)
+        private void ListDatabases()
         {
             var dispatcher = Dispatcher;
 
@@ -87,12 +92,35 @@ namespace KeePass
 
                 Thread.Sleep(50);
             }
+
+            var hasUpdatables = _items
+                .Any(x => x.CanUpdate);
+
+            dispatcher.BeginInvoke(() =>
+                _mnuUpdateAll.IsEnabled = hasUpdatables);
         }
 
         private void RefreshDbList()
         {
             _items.Clear();
-            ThreadPool.QueueUserWorkItem(ListDatabases);
+            ThreadPool.QueueUserWorkItem(
+                _ => ListDatabases());
+        }
+
+        private void Update(DatabaseItem item)
+        {
+            if (item == null)
+                throw new ArgumentNullException("item");
+
+            if (!Network.CheckNetwork())
+                return;
+
+            item.IsUpdating = true;
+            var database = (DatabaseInfo)item.Info;
+
+            DatabaseUpdater.Update(database,
+                _ => item.IsUpdating,
+                DatabaseUpdated);
         }
 
         private static void UpdateItem(
@@ -150,7 +178,8 @@ namespace KeePass
             this.NavigateTo<About>();
         }
 
-        private void mnuClearKeyFile_Click(object sender, RoutedEventArgs e)
+        private void mnuClearKeyFile_Click(
+            object sender, RoutedEventArgs e)
         {
             var item = (MenuItem)sender;
             var database = (DatabaseInfo)item.Tag;
@@ -219,6 +248,15 @@ namespace KeePass
             this.NavigateTo<Settings>();
         }
 
+        private void mnuUpdateAll_Click(object sender, EventArgs e)
+        {
+            var updatables = _items
+                .Where(x => x.CanUpdate);
+
+            foreach (var item in updatables)
+                Update(item);
+        }
+
         private void mnuUpdate_Click(object sender, RoutedEventArgs e)
         {
             if (!Network.CheckNetwork())
@@ -229,11 +267,8 @@ namespace KeePass
 
             var listItem = _items.First
                 (x => x.Info == database);
-            listItem.IsUpdating = true;
 
-            DatabaseUpdater.Update(database,
-                _ => listItem.IsUpdating,
-                DatabaseUpdated);
+            Update(listItem);
         }
     }
 }
