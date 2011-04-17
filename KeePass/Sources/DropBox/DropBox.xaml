@@ -37,9 +37,9 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0"
-                       VerticalAlignment="Center">
-                Email:
+            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
+                       Style="{StaticResource PhoneTextNormalStyle}">
+                Email
             </TextBlock>
             <TextBox Name="txtEmail"
                      TextChanged="txt_Changed"
@@ -48,9 +48,9 @@
                      InputScope="EmailSmtpAddress"
                      Grid.Row="0" Grid.Column="1" />
 
-            <TextBlock Grid.Row="1" Grid.Column="0"
-                       VerticalAlignment="Center">
-                Password:
+            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
+                       Style="{StaticResource PhoneTextNormalStyle}">
+                Password
             </TextBlock>
             <PasswordBox Name="txtPassword"
                          PasswordChanged="txt_Changed"

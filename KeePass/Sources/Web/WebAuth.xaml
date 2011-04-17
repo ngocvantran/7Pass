@@ -26,24 +26,27 @@
                   Unchecked="chkAuth_CheckedChanged"
                   Content="Server requires authentication" />
 
-        <TextBlock Name="lblUser" Visibility="Collapsed"
+        <TextBlock Name="lblUser" Text="User"
                    Grid.Column="0" Grid.Row="1"
-                   VerticalAlignment="Center" Text="User:" />
+                   VerticalAlignment="Center" Visibility="Collapsed"
+                   Style="{StaticResource PhoneTextNormalStyle}" />
         <TextBox Name="txtUser" Visibility="Collapsed"
                  InputScope="EmailSmtpAddress"
                  Grid.Column="1" Grid.Row="1"
                  KeyDown="txtUser_KeyDown" />
 
-        <TextBlock Name="lblPassword" Visibility="Collapsed"
+        <TextBlock Name="lblPassword" Text="Password"
                    Grid.Column="0" Grid.Row="2"
-                   VerticalAlignment="Center" Text="Password:" />
+                   VerticalAlignment="Center" Visibility="Collapsed"
+                   Style="{StaticResource PhoneTextNormalStyle}" />
         <PasswordBox Name="txtPassword" Visibility="Collapsed"
                      Grid.Column="1" Grid.Row="2"
                      KeyDown="txtPassword_KeyDown" />
 
-        <TextBlock Name="lblDomain" Visibility="Collapsed"
+        <TextBlock Name="lblDomain" Text="Domain"
                    Grid.Column="0" Grid.Row="3"
-                   VerticalAlignment="Center" Text="Domain:" />
+                   VerticalAlignment="Center" Visibility="Collapsed"
+                   Style="{StaticResource PhoneTextNormalStyle}" />
         <TextBox Name="txtDomain" Visibility="Collapsed"
                  Grid.Column="1" Grid.Row="3"
                  KeyDown="txtDomain_KeyDown" />

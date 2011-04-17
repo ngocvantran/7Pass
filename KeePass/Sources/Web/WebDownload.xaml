@@ -35,8 +35,9 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
-            <TextBlock Grid.Row="0">Database URL:</TextBlock>
+
+            <TextBlock Text="Database URL" Grid.Row="0"
+                       Style="{StaticResource PhoneTextNormalStyle}" />
             <TextBox Name="txtUrl" Text="http://"
                      Grid.Row="1" InputScope="Url"
                      Loaded="txtUrl_Loaded"
@@ -50,7 +51,7 @@
                     Grid.Row="3" IsEnabled="False" Click="cmdDownload_Click" />
 
             <TextBlock Name="lblLinks" Grid.Row="4" Visibility="Collapsed">
-                Detected links:
+                Detected links
             </TextBlock>
         </Grid>
     </Grid>

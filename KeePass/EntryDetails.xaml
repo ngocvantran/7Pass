@@ -15,13 +15,13 @@
     <controls:Panorama Title="{Binding Title}">
         <controls:PanoramaItem Header="General">
             <StackPanel>
-                <TextBlock>User name</TextBlock>
+                <TextBlock Text="User name" Style="{StaticResource PhoneTextNormalStyle}" />
                 <TextBox Text="{Binding UserName}" IsReadOnly="True" />
 
-                <TextBlock>Password</TextBlock>
+                <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
                 <TextBox Text="{Binding Password}" IsReadOnly="True" />
 
-                <TextBlock>Url</TextBlock>
+                <TextBlock Text="Url" Style="{StaticResource PhoneTextNormalStyle}" />
                 <HyperlinkButton Tag="{Binding Url}" Content="{Binding Url}"
                                  Click="lnkUrl_Click" HorizontalContentAlignment="Left">
                     <toolkit:ContextMenuService.ContextMenu>
@@ -68,7 +68,8 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Text="{Binding Key}" Grid.Column="0"
-                                       VerticalAlignment="Center" />
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource PhoneTextNormalStyle}" />
                             <TextBox Text="{Binding Value}" Grid.Column="1"
                                      TextWrapping="Wrap" IsReadOnly="True" />
                         </Grid>

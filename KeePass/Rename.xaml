@@ -24,7 +24,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock Name="lblRename">
+            <TextBlock Name="lblRename" Style="{StaticResource PhoneTextNormalStyle}">
                 Please enter new name for {0}:
             </TextBlock>
             
