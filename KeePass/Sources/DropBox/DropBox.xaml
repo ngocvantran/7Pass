@@ -34,7 +34,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
@@ -56,10 +55,6 @@
                          PasswordChanged="txt_Changed"
                          KeyDown="txtPassword_KeyDown"
                          Grid.Row="1" Grid.Column="1" />
-
-            <Button Name="cmdLogin" Content="Login"
-                    Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                    Click="cmdLogin_Click" IsEnabled="False" />
         </Grid>
     </Grid>
 

@@ -12,7 +12,7 @@ namespace KeePass
 {
     public partial class Password
     {
-        private readonly ApplicationBarIconButton _cmdAppBarOpen;
+        private readonly ApplicationBarIconButton _cmdOpen;
         private readonly BackgroundWorker _wkOpen;
 
         private string _folder;
@@ -26,7 +26,7 @@ namespace KeePass
             _wkOpen.DoWork += _wkOpen_DoWork;
             _wkOpen.RunWorkerCompleted += _wkOpen_RunWorkerCompleted;
 
-            _cmdAppBarOpen = (ApplicationBarIconButton)
+            _cmdOpen = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
 
             SetWorking(false);
@@ -73,8 +73,7 @@ namespace KeePass
             var hasPassword = _hasKeyFile ||
                 txtPassword.Password.Length > 0;
 
-            cmdOpen.IsEnabled = hasPassword;
-            _cmdAppBarOpen.IsEnabled = hasPassword;
+            _cmdOpen.IsEnabled = hasPassword;
         }
 
         private static void _wkOpen_DoWork(
@@ -149,7 +148,7 @@ namespace KeePass
         private void txtPassword_KeyDown(
             object sender, KeyEventArgs e)
         {
-            if (!cmdOpen.IsEnabled)
+            if (!_cmdOpen.IsEnabled)
                 return;
 
             if (e.IsEnter())

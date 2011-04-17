@@ -10,14 +10,14 @@ namespace KeePass.Sources.Web
 {
     public partial class WebDownload
     {
-        private readonly ApplicationBarIconButton _cmdAppBarDownload;
+        private readonly ApplicationBarIconButton _cmdDownload;
         private DownloadHandler _download;
 
         public WebDownload()
         {
             InitializeComponent();
 
-            _cmdAppBarDownload = (ApplicationBarIconButton)
+            _cmdDownload = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
         }
 
@@ -51,7 +51,7 @@ namespace KeePass.Sources.Web
             txtUrl.IsEnabled = !working;
             ucAuth.IsEnabled = !working;
             progList.IsLoading = working;
-            cmdDownload.IsEnabled = !working;
+            ApplicationBar.IsVisible = !working;
         }
 
         private void _download_Completed(object sender, EventArgs e)
@@ -72,7 +72,7 @@ namespace KeePass.Sources.Web
 
         private void txtUrl_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.IsEnter() && cmdDownload.IsEnabled)
+            if (e.IsEnter() && _cmdDownload.IsEnabled)
                 PerformDownload();
         }
 
@@ -88,8 +88,7 @@ namespace KeePass.Sources.Web
             var isValidUrl = Uri.IsWellFormedUriString(
                 txtUrl.Text, UriKind.Absolute);
 
-            cmdDownload.IsEnabled = isValidUrl;
-            _cmdAppBarDownload.IsEnabled = isValidUrl;
+            _cmdDownload.IsEnabled = isValidUrl;
         }
 
         private void ucAuth_Completed(object sender, EventArgs e)

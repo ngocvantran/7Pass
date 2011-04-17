@@ -32,10 +32,6 @@
                      Loaded="txtName_Loaded"
                      KeyDown="txtName_KeyDown"
                      TextChanged="txtName_TextChanged" />
-            <Button Name="cmdRename" Click="cmdRename_Click"
-                    IsEnabled="False" Content="Rename" />
-            <Button Click="cmdClear_Click"
-                    Content="Clear" />
         </StackPanel>
     </Grid>
  

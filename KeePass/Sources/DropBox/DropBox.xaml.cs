@@ -9,13 +9,13 @@ namespace KeePass.Sources.DropBox
 {
     public partial class DropBox
     {
-        private readonly ApplicationBarIconButton _cmdAppBarOpen;
+        private readonly ApplicationBarIconButton _cmdOpen;
 
         public DropBox()
         {
             InitializeComponent();
 
-            _cmdAppBarOpen = (ApplicationBarIconButton)
+            _cmdOpen = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
         }
 
@@ -30,6 +30,9 @@ namespace KeePass.Sources.DropBox
                     MessageBox.Show(DropBoxResources.LoginFailure,
                         DropBoxResources.LoginTitle,
                         MessageBoxButton.OK);
+
+                    txtEmail.Focus();
+                    txtEmail.SelectAll();
 
                     return;
                 }
@@ -62,8 +65,8 @@ namespace KeePass.Sources.DropBox
         {
             progLogin.IsLoading = working;
             txtEmail.IsEnabled = !working;
-            cmdLogin.IsEnabled = !working;
             txtPassword.IsEnabled = !working;
+            ApplicationBar.IsVisible = !working;
         }
 
         private void cmdLogin_Click(object sender, EventArgs e)
@@ -93,8 +96,7 @@ namespace KeePass.Sources.DropBox
             var hasData = txtEmail.Text.Length > 0 &&
                 txtPassword.Password.Length > 0;
 
-            cmdLogin.IsEnabled = hasData;
-            _cmdAppBarOpen.IsEnabled = hasData;
+            _cmdOpen.IsEnabled = hasData;
         }
     }
 }

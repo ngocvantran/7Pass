@@ -32,7 +32,6 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -47,10 +46,7 @@
             <web:WebAuth x:Name="ucAuth" Grid.Row="2"
                          Completed="ucAuth_Completed" />
 
-            <Button Name="cmdDownload" Content="Download"
-                    Grid.Row="3" IsEnabled="False" Click="cmdDownload_Click" />
-
-            <TextBlock Name="lblLinks" Grid.Row="4" Visibility="Collapsed">
+            <TextBlock Name="lblLinks" Grid.Row="3" Visibility="Collapsed">
                 Detected links
             </TextBlock>
         </Grid>

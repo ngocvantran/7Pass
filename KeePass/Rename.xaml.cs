@@ -5,17 +5,22 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using KeePass.Storage;
 using KeePass.Utils;
+using Microsoft.Phone.Shell;
 
 namespace KeePass
 {
     public partial class Rename
     {
+        private readonly ApplicationBarIconButton _cmdRename;
         private DatabaseInfo _database;
         private string _originalName;
 
         public Rename()
         {
             InitializeComponent();
+
+            _cmdRename = (ApplicationBarIconButton)
+                ApplicationBar.Buttons[0];
         }
 
         protected override void OnNavigatedTo(
@@ -61,7 +66,7 @@ namespace KeePass
 
         private void txtName_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.IsEnter() && cmdRename.IsEnabled)
+            if (e.IsEnter() && _cmdRename.IsEnabled)
                 PerformRename();
         }
 
@@ -74,8 +79,9 @@ namespace KeePass
             object sender, TextChangedEventArgs e)
         {
             var name = txtName.Text;
-            cmdRename.IsEnabled = !string.IsNullOrEmpty(name) &&
-                name != _originalName;
+            _cmdRename.IsEnabled =
+                !string.IsNullOrEmpty(name) &&
+                    name != _originalName;
         }
     }
 }
