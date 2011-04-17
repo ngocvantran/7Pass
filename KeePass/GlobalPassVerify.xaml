@@ -27,7 +27,9 @@
             <TextBlock Style="{StaticResource PhoneTextNormalStyle}">
                 Please enter your password to unlock 7Pass
             </TextBlock>
-			<PasswordBox Name="txtPass" Loaded="txtPass_Loaded"
+			<PasswordBox Name="txtPass"
+                         Loaded="txtPass_Loaded"
+                         KeyDown="txtPass_KeyDown"
                          PasswordChanged="txtPass_PasswordChanged" />
 		</StackPanel>
 	</Grid>

@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows;
+using System.Windows.Input;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
 
@@ -9,7 +10,7 @@ namespace KeePass
 {
     public partial class GlobalPassVerify
     {
-        private readonly ApplicationBarIconButton _cmdSet;
+        private readonly ApplicationBarIconButton _cmdOk;
         private readonly BackgroundWorker _wkVerify;
 
         public GlobalPassVerify()
@@ -21,8 +22,17 @@ namespace KeePass
             _wkVerify.RunWorkerCompleted +=
                 _wkVerify_RunWorkerCompleted;
 
-            _cmdSet = (ApplicationBarIconButton)
+            _cmdOk = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
+        }
+
+        private void Verify()
+        {
+            txtPass.IsEnabled = false;
+            ApplicationBar.IsVisible = false;
+
+            _wkVerify.RunWorkerAsync(
+                txtPass.Password);
         }
 
         private void KeePassPage_BackKeyPress(
@@ -36,7 +46,8 @@ namespace KeePass
             object sender, DoWorkEventArgs e)
         {
             var password = (string)e.Argument;
-            var globalPass = AppSettings.Instance.GlobalPass;
+            var globalPass = GlobalPassHandler.Instance;
+
             if (globalPass.Verify(password))
             {
                 e.Result = true;
@@ -64,28 +75,36 @@ namespace KeePass
             txtPass.SelectAll();
         }
 
-        private void cmdClear_Click(object sender, EventArgs e)
+        private void cmdClear_Click(
+            object sender, EventArgs e)
         {
             txtPass.Password = string.Empty;
             txtPass.Focus();
         }
 
-        private void cmdOK_Click(object sender, EventArgs e)
+        private void cmdOK_Click(
+            object sender, EventArgs e)
         {
-            txtPass.IsEnabled = false;
-            ApplicationBar.IsVisible = false;
-
-            _wkVerify.RunWorkerAsync(txtPass.Password);
+            Verify();
         }
 
-        private void txtPass_Loaded(object sender, RoutedEventArgs e)
+        private void txtPass_KeyDown(
+            object sender, KeyEventArgs e)
+        {
+            if (e.IsEnter() && _cmdOk.IsEnabled)
+                Verify();
+        }
+
+        private void txtPass_Loaded(
+            object sender, RoutedEventArgs e)
         {
             txtPass.Focus();
         }
 
-        private void txtPass_PasswordChanged(object sender, RoutedEventArgs e)
+        private void txtPass_PasswordChanged(
+            object sender, RoutedEventArgs e)
         {
-            _cmdSet.IsEnabled = !string
+            _cmdOk.IsEnabled = !string
                 .IsNullOrEmpty(txtPass.Password);
         }
     }
