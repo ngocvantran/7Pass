@@ -32,7 +32,8 @@
                 Checked="chkBrowser_CheckedChanged"
                 Unchecked="chkBrowser_CheckedChanged" />
             <toolkit:ToggleSwitch
-                Name="chkPassword" Header="Requires Password" />
+                Name="chkPassword" Header="Requires Password"
+                Loaded="chkPassword_Loaded" />
         </StackPanel>
     </Grid>
 

@@ -24,8 +24,6 @@ namespace KeePass
 
             chkPassword.IsChecked = !string
                 .IsNullOrEmpty(settings.Password);
-            chkPassword.Checked += chkPassword_Checked;
-            chkPassword.Unchecked += chkPassword_Unchecked;
         }
 
         private void chkBrowser_CheckedChanged(
@@ -39,6 +37,12 @@ namespace KeePass
             object sender, RoutedEventArgs e)
         {
             this.NavigateTo<GlobalPass>();
+        }
+
+        private void chkPassword_Loaded(object sender, RoutedEventArgs e)
+        {
+            chkPassword.Checked += chkPassword_Checked;
+            chkPassword.Unchecked += chkPassword_Unchecked;
         }
 
         private static void chkPassword_Unchecked(

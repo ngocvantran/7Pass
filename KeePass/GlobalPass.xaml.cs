@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using KeePass.IO.Utils;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
@@ -18,6 +19,14 @@ namespace KeePass
                 ApplicationBar.Buttons[0];
         }
 
+        private void SetPassword()
+        {
+            AppSettings.Instance.Password =
+                BufferEx.GetHash(txtPass.Password);
+
+            NavigationService.GoBack();
+        }
+
         private void cmdClear_Click(object sender, EventArgs e)
         {
             txtPass.Password = string.Empty;
@@ -28,10 +37,16 @@ namespace KeePass
 
         private void cmdSet_Click(object sender, EventArgs e)
         {
-            AppSettings.Instance.Password =
-                BufferEx.GetHash(txtPass.Password);
+            SetPassword();
+        }
 
-            NavigationService.GoBack();
+        private void txtConfirm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!e.IsEnter())
+                return;
+
+            if (_cmdSet.IsEnabled)
+                SetPassword();
         }
 
         private void txtConfirm_PasswordChanged(
@@ -42,6 +57,15 @@ namespace KeePass
             _cmdSet.IsEnabled =
                 !string.IsNullOrEmpty(password) &&
                     txtPass.Password == password;
+        }
+
+        private void txtPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!e.IsEnter())
+                return;
+
+            txtConfirm.Focus();
+            txtConfirm.SelectAll();
         }
 
         private void txtPass_Loaded(object sender, RoutedEventArgs e)

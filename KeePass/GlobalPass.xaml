@@ -24,11 +24,15 @@
         </StackPanel>
         
         <StackPanel Grid.Row="1">
-            <TextBlock Text="Global password" Style="{StaticResource PhoneTextNormalStyle}" />
-            <PasswordBox Name="txtPass" Loaded="txtPass_Loaded" />
+            <TextBlock Text="Global password"
+                       Style="{StaticResource PhoneTextNormalStyle}" />
+            <PasswordBox Name="txtPass" Loaded="txtPass_Loaded"
+                         KeyDown="txtPass_KeyDown" />
 
-            <TextBlock Text="Confirm your password" Style="{StaticResource PhoneTextNormalStyle}" />
+            <TextBlock Text="Confirm your password"
+                       Style="{StaticResource PhoneTextNormalStyle}" />
             <PasswordBox Name="txtConfirm"
+                         KeyDown="txtConfirm_KeyDown"
                          PasswordChanged="txtConfirm_PasswordChanged" />
         </StackPanel>
     </Grid>
