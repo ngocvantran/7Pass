@@ -23,6 +23,11 @@ namespace KeePass.Utils
             }
         }
 
+        public static GlobalPassHandler Instance
+        {
+            get { return AppSettings.Instance.GlobalPass; }
+        }
+
         /// <summary>
         /// Gets a value indicating whether the glo.
         /// </summary>

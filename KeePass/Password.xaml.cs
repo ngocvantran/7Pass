@@ -30,7 +30,10 @@ namespace KeePass
                 ApplicationBar.Buttons[0];
 
             SetWorking(false);
+
             imgWarning.Source = ThemeData.GetImageSource("warning");
+            imgWarning.Visibility = GlobalPassHandler.Instance.HasGlobalPass
+                ? Visibility.Collapsed : Visibility.Visible;
         }
 
         protected override void OnNavigatedTo(
