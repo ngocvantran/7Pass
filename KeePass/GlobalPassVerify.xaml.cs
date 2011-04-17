@@ -59,6 +59,9 @@ namespace KeePass
 
             txtPass.IsEnabled = true;
             ApplicationBar.IsVisible = true;
+
+            txtPass.Focus();
+            txtPass.SelectAll();
         }
 
         private void cmdClear_Click(object sender, EventArgs e)
