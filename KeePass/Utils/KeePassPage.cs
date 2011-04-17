@@ -49,10 +49,20 @@ namespace KeePass.Utils
             {
                 App.Current.RootFrame.Visibility =
                     Visibility.Visible;
+
+                var globalPass = AppSettings
+                    .Instance.GlobalPass;
+
+                if (globalPass.ShouldPromptGlobalPass)
+                {
+                    OnNavigatedTo(true, e);
+                    this.NavigateTo<GlobalPassVerify>();
+
+                    return;
+                }
             }
 
             OnNavigatedTo(cancelled, e);
-
             ShowTrialNotification();
         }
 

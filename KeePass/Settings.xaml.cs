@@ -12,7 +12,8 @@ namespace KeePass
             InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(bool cancelled, NavigationEventArgs e)
+        protected override void OnNavigatedTo(
+            bool cancelled, NavigationEventArgs e)
         {
             if (cancelled)
                 return;
@@ -20,15 +21,34 @@ namespace KeePass
             var settings = AppSettings.Instance;
             chkBrowser.IsChecked = settings.UseIntBrowser;
             chkRecycleBin.IsChecked = settings.HideRecycleBin;
+
+            chkPassword.IsChecked = !string
+                .IsNullOrEmpty(settings.Password);
+            chkPassword.Checked += chkPassword_Checked;
+            chkPassword.Unchecked += chkPassword_Unchecked;
         }
 
-        private void chkBrowser_CheckedChanged(object sender, RoutedEventArgs e)
+        private void chkBrowser_CheckedChanged(
+            object sender, RoutedEventArgs e)
         {
             AppSettings.Instance.UseIntBrowser =
                 chkBrowser.IsChecked == true;
         }
 
-        private void chkRecycleBin_CheckedChanged(object sender, RoutedEventArgs e)
+        private void chkPassword_Checked(
+            object sender, RoutedEventArgs e)
+        {
+            this.NavigateTo<GlobalPass>();
+        }
+
+        private static void chkPassword_Unchecked(
+            object sender, RoutedEventArgs e)
+        {
+            AppSettings.Instance.Password = string.Empty;
+        }
+
+        private void chkRecycleBin_CheckedChanged(
+            object sender, RoutedEventArgs e)
         {
             AppSettings.Instance.HideRecycleBin =
                 chkRecycleBin.IsChecked == true;

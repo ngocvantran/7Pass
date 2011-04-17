@@ -103,6 +103,7 @@ namespace KeePass
         private void RefreshDbList()
         {
             _items.Clear();
+
             ThreadPool.QueueUserWorkItem(
                 _ => ListDatabases());
         }

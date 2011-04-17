@@ -31,6 +31,8 @@
                 Name="chkBrowser" Header="Use integrated browser"
                 Checked="chkBrowser_CheckedChanged"
                 Unchecked="chkBrowser_CheckedChanged" />
+            <toolkit:ToggleSwitch
+                Name="chkPassword" Header="Requires Password" />
         </StackPanel>
     </Grid>
 

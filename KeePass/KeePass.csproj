@@ -92,11 +92,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalPass.xaml.cs">
+      <DependentUpon>GlobalPass.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Data\DatabaseItem.cs" />
     <Compile Include="Data\GroupItem.cs" />
     <Compile Include="Data\WebLinkInfo.cs" />
     <Compile Include="EntryDetails.xaml.cs">
       <DependentUpon>EntryDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalPassVerify.xaml.cs">
+      <DependentUpon>GlobalPassVerify.xaml</DependentUpon>
     </Compile>
     <Compile Include="GroupDetails.xaml.cs">
       <DependentUpon>GroupDetails.xaml</DependentUpon>
@@ -157,6 +163,7 @@
     <Compile Include="Utils\EaseEffect.cs" />
     <Compile Include="Utils\ErrorReport.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
+    <Compile Include="Utils\GlobalPassHandler.cs" />
     <Compile Include="Utils\KeePassPage.cs" />
     <Compile Include="Utils\Navigation.cs" />
     <Compile Include="Refs\ProgressBar\PerformanceProgressBarEx.cs" />
@@ -184,6 +191,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Utils\Network.cs" />
+    <Compile Include="Utils\QuitException.cs" />
     <Compile Include="Utils\ThemeData.cs" />
     <Compile Include="Utils\TrialManager.cs">
       <SubType>Code</SubType>
@@ -201,9 +209,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GlobalPass.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="EntryDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GlobalPassVerify.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="GroupDetails.xaml">
       <SubType>Designer</SubType>

@@ -6,10 +6,20 @@ namespace KeePass.Utils
     internal class AppSettings
     {
         private const string KEY_HIDE_BIN = "HideRecycleBin";
+        private const string KEY_PASSWORD = "Password";
         private const string KEY_USE_INT_BROWSER = "UseIntegratedBrowser";
 
         private static AppSettings _instance;
+        private readonly GlobalPassHandler _globalPass;
         private readonly IsolatedStorageSettings _settings;
+
+        /// <summary>
+        /// Gets the global password handler.
+        /// </summary>
+        public GlobalPassHandler GlobalPass
+        {
+            get { return _globalPass; }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating
@@ -39,6 +49,22 @@ namespace KeePass.Utils
                 }
 
                 return _instance;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the password to open 7Pass.
+        /// </summary>
+        /// <value>
+        /// The password to open 7Pass.
+        /// </value>
+        public string Password
+        {
+            get { return this[KEY_PASSWORD]; }
+            set
+            {
+                this[KEY_PASSWORD] = value;
+                _globalPass.GloablPassEntered();
             }
         }
 
@@ -90,6 +116,7 @@ namespace KeePass.Utils
                 throw new ArgumentNullException("settings");
 
             _settings = settings;
+            _globalPass = new GlobalPassHandler(this);
         }
     }
 }

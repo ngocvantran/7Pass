@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace KeePass.IO.Utils
 {
@@ -20,6 +21,12 @@ namespace KeePass.IO.Utils
 
                 output.Write(buffer, 0, read);
             }
+        }
+
+        public static string GetHash(string password)
+        {
+            return Convert.ToBase64String(
+                GetHash(Encoding.UTF8.GetBytes(password)));
         }
 
         internal static byte[] Clone(byte[] input)
