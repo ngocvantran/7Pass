@@ -19,7 +19,8 @@
                 <TextBox Text="{Binding UserName}" IsReadOnly="True" />
 
                 <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Text="{Binding Password}" IsReadOnly="True" />
+                <TextBox Name="txtPassword" Text="{Binding Password}"
+                         IsReadOnly="True" Loaded="txtPassword_Loaded" />
 
                 <TextBlock Text="Url" Style="{StaticResource PhoneTextNormalStyle}" />
                 <HyperlinkButton Tag="{Binding Url}" Content="{Binding Url}"
