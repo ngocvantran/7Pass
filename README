@@ -11,37 +11,18 @@ Features:
  - Supports custom fields, (protected & not protected).
  - Supports urls with embedded fields.
  - Supports group and entry icons (including custom icons).
- - Remembers your password*.
+ - Remembers your database password.
  - Remembers recently viewed entries for quick access.
 
 Support Info:
  - Blog: http://7pass.wordpress.com
  - Source code: https://github.com/7pass/7pass
 
-Version 2.3:
- - Added integrated web browser.
- - Added option to hide Recycle Bin.
-
-Version 2.2:
- - Added KeyFile support.
- - Display group/entry path in search result.
- - Larger field value display.
- - Moved Demo database to application bar for paid users.
- - Fixed DropBox login.
-
-Version 2.1:
- - Fixed fields not displayed.
-
-Version 2.0:
- - Rebuilt from ground up.
- - Added DropBox support.
- - Added links detection for web download.
- - Added web authentication support (experimental support for WebDav & Box.net).
- - Made trial mode notification very subtle.
+Version 2.4:
+ - Supports KeePass 2.15 database format.
+ - Added global password protection.
 
 If you don't have a web server to download your database to your phone, you can use Java Mini Web Server from http://www.jibble.org/miniwebserver/, or any personal web server.
-
-* Please only use this feature when your phone is already locked with a PIN. Doing so without a PIN lock will expose your passwords to anyone getting hold of your phone.
 
 Keywords:
 7Pass KeePass password encrypt encryption privacy dropbox webdav
