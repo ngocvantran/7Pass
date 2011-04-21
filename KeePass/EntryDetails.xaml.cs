@@ -92,11 +92,5 @@ namespace KeePass
             var item = (MenuItem)sender;
             OpenUrl((string)item.Tag, true);
         }
-
-        private void txtPassword_Loaded(object sender, RoutedEventArgs e)
-        {
-            txtPassword.Focus();
-            txtPassword.SelectAll();
-        }
     }
 }
