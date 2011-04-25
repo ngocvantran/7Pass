@@ -108,6 +108,8 @@ namespace KeePass.Sources.Web
             return matches
                 .Cast<Match>()
                 .Select(x => x.Groups[2].Value)
+                .Distinct()
+                .Take(30)
                 .Select(x => new Uri(baseUrl, x))
                 .Select(x => x.ToString())
                 .ToArray();
