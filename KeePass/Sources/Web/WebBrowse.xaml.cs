@@ -31,6 +31,7 @@ namespace KeePass.Sources.Web
             _download = new DownloadHandler(this,
                 NavigationContext.QueryString["folder"]);
             _download.Completed += _download_Completed;
+            _download.NavigationFailed += _download_Completed;
 
             var pars = NavigationContext.QueryString;
             _credentials = WebUtils.CreateCredentials(

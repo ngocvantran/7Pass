@@ -188,6 +188,24 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected URL cannot be displayed. If the URL is too long (&gt; 500 characters), try to relocate your resource to another location where the URL is shorter..
+        /// </summary>
+        internal static string InvalidUrlPrompt {
+            get {
+                return ResourceManager.GetString("InvalidUrlPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid URL.
+        /// </summary>
+        internal static string InvalidUrlTitle {
+            get {
+                return ResourceManager.GetString("InvalidUrlTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download KeyFile.
         /// </summary>
         internal static string KeyFileTitle {

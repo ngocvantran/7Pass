@@ -207,4 +207,10 @@ Is it ok if I create an email so that you can send to me to fix this problem?</v
   <data name="UnhandledExTitle" xml:space="preserve">
     <value>Ooopppppps</value>
   </data>
+  <data name="InvalidUrlPrompt" xml:space="preserve">
+    <value>The selected URL cannot be displayed. If the URL is too long (&gt; 500 characters), try to relocate your resource to another location where the URL is shorter.</value>
+  </data>
+  <data name="InvalidUrlTitle" xml:space="preserve">
+    <value>Invalid URL</value>
+  </data>
 </root>
