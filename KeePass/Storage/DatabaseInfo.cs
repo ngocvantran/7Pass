@@ -168,8 +168,20 @@ namespace KeePass.Storage
 
                 return store.GetDirectoryNames()
                     .Select(x => new DatabaseInfo(x))
+                    .Where(x => x.IsValid(store))
                     .ToList();
             }
+        }
+
+        /// <summary>
+        /// Determines whether the this database has stored data.
+        /// </summary>
+        /// <param name="store">The store.</param>
+        /// <returns><c>true</c> if this database is valid; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsValid(IsolatedStorageFile store)
+        {
+            return store.FileExists(InfoPath);
         }
 
         /// <summary>
@@ -342,7 +354,8 @@ namespace KeePass.Storage
         /// Gets the saved password.
         /// </summary>
         /// <returns></returns>
-        private DbPersistentData GetSavedPassword(IsolatedStorageFile store)
+        private DbPersistentData GetSavedPassword(
+            IsolatedStorageFile store)
         {
             return GetSavedPassword(store,
                 ProtectionPath, ParsedXmlPath);
@@ -352,7 +365,8 @@ namespace KeePass.Storage
         /// Gets the saved password.
         /// </summary>
         /// <returns></returns>
-        private static DbPersistentData GetSavedPassword(IsolatedStorageFile store,
+        private static DbPersistentData GetSavedPassword(
+            IsolatedStorageFile store,
             string protectPath, string parsedXmlPath)
         {
             var result = new DbPersistentData();
