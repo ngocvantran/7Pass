@@ -61,17 +61,6 @@ namespace KeePass
             _recents.Clear();
             ThreadPool.QueueUserWorkItem(_ =>
                 ListHistory(database));
-
-            CheckHistory();
-        }
-
-        private void CheckHistory()
-        {
-            var fromTile = NavigationContext
-                .QueryString.ContainsKey("fromTile");
-
-            if (fromTile)
-                NavigationService.RemoveBackEntry();
         }
 
         private void Display(

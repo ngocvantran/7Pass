@@ -48,19 +48,6 @@ namespace KeePass
             _folder = NavigationContext.QueryString["db"];
             var database = new DatabaseInfo(_folder);
 
-            if (e.NavigationMode != NavigationMode.Back)
-            {
-                var fromTile = NavigationContext
-                    .QueryString.ContainsKey("fromTile");
-                if (fromTile && database.HasPassword)
-                {
-                    database.Open(Dispatcher);
-                    this.NavigateTo<GroupDetails>("fromTile=1");
-
-                    return;
-                }
-            }
-
             _hasKeyFile = database.HasKeyFile;
             UpdatePasswordStatus();
         }

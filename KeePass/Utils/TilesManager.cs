@@ -59,11 +59,14 @@ namespace KeePass.Utils
         private static ShellTileData
             GetData(DatabaseInfo database)
         {
+            var background = new Uri(
+                "Background.png",
+                UriKind.Relative);
+
             return new StandardTileData
             {
+                BackgroundImage = background,
                 Title = database.Details.Name,
-                BackBackgroundImage = new Uri(
-                    "Background.png", UriKind.Relative),
             };
         }
 
@@ -76,8 +79,8 @@ namespace KeePass.Utils
 
         private static Uri GetUri(DatabaseInfo db)
         {
-            return Navigation.GetPathTo<Password>(
-                "db={0}&fromTile=1", db.Folder);
+            return Navigation.GetPathTo<MainPage>(
+                "tile={0}", db.Folder);
         }
     }
 }

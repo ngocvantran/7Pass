@@ -37,7 +37,11 @@ namespace KeePass
                 return;
 
             Cache.Clear();
-            RefreshDbList();
+
+            var openDb = e.NavigationMode !=
+                NavigationMode.Back;
+
+            RefreshDbList(openDb);
         }
 
         private void DatabaseUpdated(DatabaseInfo info,
@@ -72,17 +76,19 @@ namespace KeePass
             });
         }
 
-        private static Uri GetUri(DatabaseInfo db)
+        private void ListDatabases(string tile)
         {
-            return Navigation.GetPathTo
-                <Password>("db={0}&fromTile=1", db.Folder);
-        }
-
-        private void ListDatabases()
-        {
+            DatabaseInfo open = null;
             var dispatcher = Dispatcher;
+            var databases = DatabaseInfo.GetAll();
 
-            var items = DatabaseInfo.GetAll()
+            if (tile != null)
+            {
+                open = databases.FirstOrDefault(
+                    x => x.Folder == tile);
+            }
+
+            var items = databases
                 .Select(x => new DatabaseItem(x))
                 .OrderBy(x => x.Name)
                 .ToList();
@@ -96,7 +102,8 @@ namespace KeePass
                     _items.Add(local);
                 });
 
-                Thread.Sleep(50);
+                if (open == null)
+                    Thread.Sleep(50);
             }
 
             var hasUpdatables = _items
@@ -104,14 +111,41 @@ namespace KeePass
 
             dispatcher.BeginInvoke(() =>
                 _mnuUpdateAll.IsEnabled = hasUpdatables);
+
+            if (open != null)
+            {
+                dispatcher.BeginInvoke(
+                    () => Open(open));
+            }
         }
 
-        private void RefreshDbList()
+        private void Open(DatabaseInfo database)
+        {
+            if (!database.HasPassword)
+            {
+                this.NavigateTo<Password>(
+                    "db={0}", database.Folder);
+
+                return;
+            }
+
+            database.Open(Dispatcher);
+            this.NavigateTo<GroupDetails>();
+        }
+
+        private void RefreshDbList(bool openTile)
         {
             _items.Clear();
 
+            string tile;
+            if (!openTile || !NavigationContext
+                .QueryString.TryGetValue("tile", out tile))
+            {
+                tile = null;
+            }
+
             ThreadPool.QueueUserWorkItem(
-                _ => ListDatabases());
+                _ => ListDatabases(tile));
         }
 
         private void Update(DatabaseItem item)
@@ -162,20 +196,7 @@ namespace KeePass
             if (item.IsUpdating)
                 item.IsUpdating = false;
             else
-            {
-                var database = (DatabaseInfo)item.Info;
-
-                if (!database.HasPassword)
-                {
-                    this.NavigateTo<Password>(
-                        "db={0}", database.Folder);
-                }
-                else
-                {
-                    database.Open(Dispatcher);
-                    this.NavigateTo<GroupDetails>();
-                }
-            }
+                Open((DatabaseInfo)item.Info);
 
             lstDatabases.SelectedItem = null;
         }
@@ -229,7 +250,7 @@ namespace KeePass
             database.Delete();
             TilesManager.Deleted(database);
 
-            RefreshDbList();
+            RefreshDbList(false);
         }
 
         private void mnuKeyFile_Click(object sender, RoutedEventArgs e)

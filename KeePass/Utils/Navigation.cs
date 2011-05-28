@@ -16,8 +16,7 @@ namespace KeePass.Utils
         public static void BackToDatabases(
             this PhoneApplicationPage page)
         {
-            if (!GoBack<MainPage>(page))
-                NavigateTo<MainPage>(page);
+            GoBack<MainPage>(page, true);
         }
 
         /// <summary>
@@ -27,8 +26,7 @@ namespace KeePass.Utils
         public static void BackToRoot(
             this PhoneApplicationPage page)
         {
-            if (!GoBack<GroupDetails>(page))
-                NavigateTo<GroupDetails>(page);
+            GoBack<GroupDetails>(page, false);
         }
 
         public static Uri GetPathTo<T>()
@@ -65,11 +63,13 @@ namespace KeePass.Utils
             return new Uri(url, UriKind.Relative);
         }
 
-        public static bool GoBack<T>(
-            this PhoneApplicationPage page)
+        public static void GoBack<T>(
+            this PhoneApplicationPage page,
+            bool ignoreQueries)
             where T : PhoneApplicationPage
         {
-            return GoBack(page, GetPathTo<T>());
+            var path = GetPathTo<T>();
+            GoBack(page, path, ignoreQueries);
         }
 
         public static void NavigateTo(
@@ -97,25 +97,44 @@ namespace KeePass.Utils
             page.NavigationService.Navigate(uri);
         }
 
-        private static bool GoBack(Page page, Uri uri)
+        private static void GoBack(Page page,
+            Uri uri, bool ignoreQueries)
         {
             var service = page.NavigationService;
             if (!service.CanGoBack)
-                return false;
+                return;
 
             var backStack = service.BackStack
                 .Select(x => x.Source)
                 .ToList();
 
-            var index = backStack.IndexOf(uri);
+            int index;
+
+            if (!ignoreQueries)
+                index = backStack.IndexOf(uri);
+            else
+            {
+                index = -1;
+                var uriString = uri.ToString();
+
+                for (var i = 0; i < backStack.Count; i++)
+                {
+                    if (backStack[i].ToString()
+                        .StartsWith(uriString))
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+            }
+
             if (index < 0)
-                return false;
+                return;
 
             for (var i = 0; i < index; i++)
                 service.RemoveBackEntry();
 
             service.GoBack();
-            return true;
         }
     }
 }
