@@ -199,4 +199,10 @@ To set lock screen password, please go to Phone's Settings\lock &amp; wallpaper.
   <data name="GlobalPassTitle" xml:space="preserve">
     <value>7Pass Global password</value>
   </data>
+  <data name="AlreadyPinned" xml:space="preserve">
+    <value>The selected database has already been pinned to the main screen.</value>
+  </data>
+  <data name="PinDatabase" xml:space="preserve">
+    <value>Pin Database</value>
+  </data>
 </root>

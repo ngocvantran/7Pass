@@ -51,6 +51,7 @@ namespace KeePass
             _database.Details.Name = txtName.Text;
             _database.SaveDetails();
 
+            TilesManager.Renamed(_database);
             NavigationService.GoBack();
         }
 

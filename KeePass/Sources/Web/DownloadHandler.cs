@@ -157,7 +157,7 @@ namespace KeePass.Sources.Web
 
                             new WebBrowserTask
                             {
-                                URL = Resources.InvalidCertificateUrl
+                                Uri = new Uri(Resources.InvalidCertificateUrl)
                             }.Show();
                         });
                     }

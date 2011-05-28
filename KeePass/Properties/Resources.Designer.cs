@@ -61,6 +61,15 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected database has already been pinned to the main screen..
+        /// </summary>
+        internal static string AlreadyPinned {
+            get {
+                return ResourceManager.GetString("AlreadyPinned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to delete database {0}?
         ///
         ///Doing so will only remove {0} from your phone, and will not delete the source file on your server..
@@ -233,6 +242,15 @@ namespace KeePass.Properties {
         internal static string PasswordTitle {
             get {
                 return ResourceManager.GetString("PasswordTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pin Database.
+        /// </summary>
+        internal static string PinDatabase {
+            get {
+                return ResourceManager.GetString("PinDatabase", resourceCulture);
             }
         }
         

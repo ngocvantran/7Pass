@@ -55,7 +55,7 @@ namespace KeePass
                 if (fromTile && database.HasPassword)
                 {
                     database.Open(Dispatcher);
-                    this.NavigateTo<GroupDetails>();
+                    this.NavigateTo<GroupDetails>("fromTile=1");
 
                     return;
                 }

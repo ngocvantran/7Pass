@@ -50,7 +50,7 @@ namespace KeePass
 
             new WebBrowserTask
             {
-                URL = url,
+                Uri = new Uri(url),
             }.Show();
         }
 

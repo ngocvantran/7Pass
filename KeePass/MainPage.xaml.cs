@@ -227,6 +227,8 @@ namespace KeePass
                 return;
 
             database.Delete();
+            TilesManager.Deleted(database);
+
             RefreshDbList();
         }
 
@@ -248,33 +250,22 @@ namespace KeePass
             var item = (MenuItem)sender;
             var database = (DatabaseInfo)item.Tag;
 
-            var uri = Navigation.GetPathTo<Password>(
-                "db={0}&fromTile=1", database.Folder);
-
-            var exists = ShellTile.ActiveTiles
-                .Any(x => x.NavigationUri == uri);
-
-            if (exists)
-            {
-                // TODO: Prompt
+            if (TilesManager.Pin(database))
                 return;
-            }
 
-            var tile = new StandardTileData
-            {
-                Title = database.Details.Name,
-                BackBackgroundImage = new Uri(
-                    "/Background.png", UriKind.Relative),
-            };
-
-            ShellTile.Create(uri, tile);
+            MessageBox.Show(
+                Properties.Resources.AlreadyPinned,
+                Properties.Resources.PinDatabase,
+                MessageBoxButton.OK);
         }
 
         private void mnuRename_Click(object sender, RoutedEventArgs e)
         {
             var item = (MenuItem)sender;
             var database = (DatabaseInfo)item.Tag;
-            this.NavigateTo<Rename>("db={0}", database.Folder);
+
+            this.NavigateTo<Rename>(
+                "db={0}", database.Folder);
         }
 
         private void mnuSettings_Click(object sender, EventArgs e)

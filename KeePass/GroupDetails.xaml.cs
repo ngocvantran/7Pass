@@ -61,6 +61,17 @@ namespace KeePass
             _recents.Clear();
             ThreadPool.QueueUserWorkItem(_ =>
                 ListHistory(database));
+
+            CheckHistory();
+        }
+
+        private void CheckHistory()
+        {
+            var fromTile = NavigationContext
+                .QueryString.ContainsKey("fromTile");
+
+            if (fromTile)
+                NavigationService.RemoveBackEntry();
         }
 
         private void Display(
@@ -114,7 +125,7 @@ namespace KeePass
                 var settings = AppSettings.Instance;
 
                 if (settings.HideRecycleBin)
-                    groups = groups.Except(new[] { recycleBin });
+                    groups = groups.Except(new[] {recycleBin});
             }
 
             var items = new List<GroupItem>();
