@@ -88,6 +88,14 @@ namespace KeePass
                     x => x.Folder == tile);
             }
 
+            if (open != null)
+            {
+                dispatcher.BeginInvoke(
+                    () => Open(open));
+
+                return;
+            }
+
             var items = databases
                 .Select(x => new DatabaseItem(x))
                 .OrderBy(x => x.Name)
@@ -101,9 +109,6 @@ namespace KeePass
                     UpdateItem(local, false);
                     _items.Add(local);
                 });
-
-                if (open == null)
-                    Thread.Sleep(50);
             }
 
             var hasUpdatables = _items
@@ -111,12 +116,6 @@ namespace KeePass
 
             dispatcher.BeginInvoke(() =>
                 _mnuUpdateAll.IsEnabled = hasUpdatables);
-
-            if (open != null)
-            {
-                dispatcher.BeginInvoke(
-                    () => Open(open));
-            }
         }
 
         private void Open(DatabaseInfo database)
