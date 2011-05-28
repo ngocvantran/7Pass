@@ -42,12 +42,43 @@ namespace KeePass.Utils
                 return;
             }
 
+            SetTransition(e);
             OnNavigatedTo(false, e);
+
             ShowTrialNotification();
         }
 
         protected virtual void OnNavigatedTo(
             bool cancelled, NavigationEventArgs e) {}
+
+        private void SetTransition(NavigationEventArgs e)
+        {
+            TransitionService.SetNavigationInTransition(
+                this, new NavigationInTransition
+                {
+                    Backward = new TurnstileTransition
+                    {
+                        Mode = TurnstileTransitionMode.BackwardIn,
+                    },
+                    Forward = new TurnstileTransition
+                    {
+                        Mode = TurnstileTransitionMode.ForwardIn,
+                    }
+                });
+
+            TransitionService.SetNavigationOutTransition(
+                this, new NavigationOutTransition
+                {
+                    Backward = new TurnstileTransition
+                    {
+                        Mode = TurnstileTransitionMode.BackwardOut,
+                    },
+                    Forward = new TurnstileTransition
+                    {
+                        Mode = TurnstileTransitionMode.ForwardOut,
+                    }
+                });
+        }
 
         private void ShowTrialNotification()
         {
