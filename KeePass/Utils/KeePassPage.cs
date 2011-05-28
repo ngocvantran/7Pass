@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -9,18 +10,24 @@ namespace KeePass.Utils
 {
     public class KeePassPage : PhoneApplicationPage
     {
-        private static Uri _backTarget;
-
         public void GoBack(Uri uri)
         {
-            if (!NavigationService.CanGoBack)
+            var service = NavigationService;
+            if (!service.CanGoBack)
                 return;
 
-            _backTarget = uri;
-            App.Current.RootFrame.Visibility =
-                Visibility.Collapsed;
+            var backStack = service.BackStack
+                .Select(x => x.Source)
+                .ToList();
 
-            NavigationService.GoBack();
+            var index = backStack.IndexOf(uri);
+            if (index < 0)
+                return;
+
+            for (var i = 0; i < index; i++)
+                service.RemoveBackEntry();
+
+            service.GoBack();
         }
 
         public void GoBack<T>()
@@ -47,41 +54,23 @@ namespace KeePass.Utils
             return indicator;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(
+            NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            if (_backTarget != null && e.Uri == _backTarget)
-                _backTarget = null;
+            var globalPass = AppSettings
+                .Instance.GlobalPass;
 
-            if (_backTarget != null)
+            if (globalPass.ShouldPromptGlobalPass)
             {
-                if (NavigationService.CanGoBack)
-                    NavigationService.GoBack();
-                else
-                    _backTarget = null;
+                OnNavigatedTo(true, e);
+                this.NavigateTo<GlobalPassVerify>();
+
+                return;
             }
 
-            var cancelled = _backTarget != null;
-
-            if (!cancelled)
-            {
-                App.Current.RootFrame.Visibility =
-                    Visibility.Visible;
-
-                var globalPass = AppSettings
-                    .Instance.GlobalPass;
-
-                if (globalPass.ShouldPromptGlobalPass)
-                {
-                    OnNavigatedTo(true, e);
-                    this.NavigateTo<GlobalPassVerify>();
-
-                    return;
-                }
-            }
-
-            OnNavigatedTo(cancelled, e);
+            OnNavigatedTo(false, e);
             ShowTrialNotification();
         }
 
@@ -95,7 +84,10 @@ namespace KeePass.Utils
 
             var container = Content as Panel;
             if (container != null)
-                container.Children.Add(new TrialNotification());
+            {
+                container.Children.Add(
+                    new TrialNotification());
+            }
         }
     }
 }
