@@ -117,8 +117,8 @@ namespace KeePass.Sources.DropBox
                         .SetKeyFile(hash);
                 }
 
-                dispatcher.BeginInvoke(
-                    GoBack<MainPage>);
+                dispatcher.BeginInvoke(() =>
+                    this.BackToDatabases());
             }
             finally
             {
