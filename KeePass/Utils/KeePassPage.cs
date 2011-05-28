@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
@@ -10,32 +8,6 @@ namespace KeePass.Utils
 {
     public class KeePassPage : PhoneApplicationPage
     {
-        public void GoBack(Uri uri)
-        {
-            var service = NavigationService;
-            if (!service.CanGoBack)
-                return;
-
-            var backStack = service.BackStack
-                .Select(x => x.Source)
-                .ToList();
-
-            var index = backStack.IndexOf(uri);
-            if (index < 0)
-                return;
-
-            for (var i = 0; i < index; i++)
-                service.RemoveBackEntry();
-
-            service.GoBack();
-        }
-
-        public void GoBack<T>()
-            where T : PhoneApplicationPage
-        {
-            GoBack(Navigation.GetPathTo<T>());
-        }
-
         /// <summary>
         /// Gets the system tray progress indicator.
         /// </summary>

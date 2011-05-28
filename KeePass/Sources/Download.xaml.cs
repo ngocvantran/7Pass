@@ -54,7 +54,7 @@ namespace KeePass.Sources
                 Properties.Resources.DemoDbTitle,
                 MessageBoxButton.OK);
 
-            GoBack<MainPage>();
+            this.BackToDatabases();
         }
 
         private void lnkDropBox_Click(object sender, RoutedEventArgs e)

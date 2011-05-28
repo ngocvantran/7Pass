@@ -59,7 +59,7 @@ namespace KeePass
                 return;
 
             if (Cache.Database == null)
-                GoBack<MainPage>();
+                this.BackToDatabases();
 
             object search;
             if (!State.TryGetValue("Search", out search))
@@ -218,12 +218,12 @@ namespace KeePass
 
         private void cmdHome_Click(object sender, EventArgs e)
         {
-            GoBack<GroupDetails>();
+            this.BackToRoot();
         }
 
         private void cmdRoot_Click(object sender, EventArgs e)
         {
-            GoBack<MainPage>();
+            this.BackToDatabases();
         }
 
         private void cmdSearch_Click(object sender, EventArgs e)
@@ -262,7 +262,7 @@ namespace KeePass
 
                 if (_database == null)
                 {
-                    GoBack<MainPage>();
+                    this.BackToDatabases();
                     return;
                 }
             }

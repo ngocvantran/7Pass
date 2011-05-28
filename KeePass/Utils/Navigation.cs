@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Windows.Controls;
 using Microsoft.Phone.Controls;
 
 namespace KeePass.Utils
@@ -7,6 +8,28 @@ namespace KeePass.Utils
     public static class Navigation
     {
         private const string BASE_NS = "KeePass";
+
+        /// <summary>
+        /// Navigates back to databases page.
+        /// </summary>
+        /// <param name="page">The page.</param>
+        public static void BackToDatabases(
+            this PhoneApplicationPage page)
+        {
+            if (!GoBack<MainPage>(page))
+                NavigateTo<MainPage>(page);
+        }
+
+        /// <summary>
+        /// Navigates back to root group.
+        /// </summary>
+        /// <param name="page">The page.</param>
+        public static void BackToRoot(
+            this PhoneApplicationPage page)
+        {
+            if (!GoBack<GroupDetails>(page))
+                NavigateTo<GroupDetails>(page);
+        }
 
         public static Uri GetPathTo<T>()
             where T : PhoneApplicationPage
@@ -42,6 +65,13 @@ namespace KeePass.Utils
             return new Uri(url, UriKind.Relative);
         }
 
+        public static bool GoBack<T>(
+            this PhoneApplicationPage page)
+            where T : PhoneApplicationPage
+        {
+            return GoBack(page, GetPathTo<T>());
+        }
+
         public static void NavigateTo(
             this PhoneApplicationPage page,
             string url, params object[] args)
@@ -65,6 +95,27 @@ namespace KeePass.Utils
         {
             var uri = GetPathTo<T>();
             page.NavigationService.Navigate(uri);
+        }
+
+        private static bool GoBack(Page page, Uri uri)
+        {
+            var service = page.NavigationService;
+            if (!service.CanGoBack)
+                return false;
+
+            var backStack = service.BackStack
+                .Select(x => x.Source)
+                .ToList();
+
+            var index = backStack.IndexOf(uri);
+            if (index < 0)
+                return false;
+
+            for (var i = 0; i < index; i++)
+                service.RemoveBackEntry();
+
+            service.GoBack();
+            return true;
         }
     }
 }

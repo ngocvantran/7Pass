@@ -209,8 +209,8 @@ namespace KeePass.Sources.Web
                 Source = DatabaseUpdater.WEB_UPDATER,
             });
 
-            _page.Dispatcher.BeginInvoke(
-                _page.GoBack<MainPage>);
+            _page.Dispatcher.BeginInvoke(() =>
+                _page.BackToDatabases());
         }
 
         private void SaveKeyFile(byte[] hash)
@@ -218,8 +218,8 @@ namespace KeePass.Sources.Web
             var info = new DatabaseInfo(_folder);
 
             info.SetKeyFile(hash);
-            _page.Dispatcher.BeginInvoke(
-                _page.GoBack<MainPage>);
+            _page.Dispatcher.BeginInvoke(() =>
+                _page.BackToDatabases());
         }
 
         private void VerifyAndSaveDb(HttpWebRequest request,
