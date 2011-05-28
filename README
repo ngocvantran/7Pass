@@ -18,6 +18,10 @@ Support Info:
  - Blog: http://7pass.wordpress.com
  - Source code: https://github.com/7pass/7pass
 
+Version 2.5:
+ - Added pin database to start screen.
+ - Added navigation transitions.
+ 
 Version 2.4:
  - Supports KeePass 2.15 database format.
  - Added global password protection.
