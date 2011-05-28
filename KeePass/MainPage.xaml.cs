@@ -72,6 +72,12 @@ namespace KeePass
             });
         }
 
+        private static Uri GetUri(DatabaseInfo db)
+        {
+            return Navigation.GetPathTo
+                <Password>("db={0}&fromTile=1", db.Folder);
+        }
+
         private void ListDatabases()
         {
             var dispatcher = Dispatcher;
@@ -161,8 +167,8 @@ namespace KeePass
 
                 if (!database.HasPassword)
                 {
-                    this.NavigateTo<Password>("db={0}",
-                        database.Folder);
+                    this.NavigateTo<Password>(
+                        "db={0}", database.Folder);
                 }
                 else
                 {
@@ -235,6 +241,33 @@ namespace KeePass
         private void mnuNew_Click(object sender, EventArgs e)
         {
             this.NavigateTo<Download>("folder=");
+        }
+
+        private void mnuPin_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MenuItem)sender;
+            var database = (DatabaseInfo)item.Tag;
+
+            var uri = Navigation.GetPathTo<Password>(
+                "db={0}&fromTile=1", database.Folder);
+
+            var exists = ShellTile.ActiveTiles
+                .Any(x => x.NavigationUri == uri);
+
+            if (exists)
+            {
+                // TODO: Prompt
+                return;
+            }
+
+            var tile = new StandardTileData
+            {
+                Title = database.Details.Name,
+                BackBackgroundImage = new Uri(
+                    "/Background.png", UriKind.Relative),
+            };
+
+            ShellTile.Create(uri, tile);
         }
 
         private void mnuRename_Click(object sender, RoutedEventArgs e)
