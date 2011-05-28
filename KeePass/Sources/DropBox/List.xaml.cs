@@ -18,6 +18,7 @@ namespace KeePass.Sources.DropBox
     {
         private readonly ApplicationBarIconButton _cmdRefresh;
         private readonly ObservableCollection<MetaListItemInfo> _items;
+        private readonly ProgressIndicator _progList;
         private string _folder;
 
         private string _path;
@@ -27,6 +28,8 @@ namespace KeePass.Sources.DropBox
         public List()
         {
             InitializeComponent();
+
+            _progList = GetIndicator();
 
             _items = new ObservableCollection<MetaListItemInfo>();
             lstBrowse.ItemsSource = _items;
@@ -158,7 +161,7 @@ namespace KeePass.Sources.DropBox
             {
                 dispatcher.BeginInvoke(() =>
                 {
-                    progList.IsLoading = false;
+                    _progList.IsVisible = false;
                     _cmdRefresh.IsEnabled = true;
                 });
             }
@@ -166,7 +169,7 @@ namespace KeePass.Sources.DropBox
 
         private void RefreshList()
         {
-            progList.IsLoading = true;
+            _progList.IsVisible = true;
             _cmdRefresh.IsEnabled = false;
 
             new Client(_token, _secret).ListAsync(
@@ -175,7 +178,7 @@ namespace KeePass.Sources.DropBox
 
         private void SetWorking(bool working)
         {
-            progList.IsLoading = working;
+            _progList.IsVisible = working;
             lstBrowse.IsEnabled = !working;
             _cmdRefresh.IsEnabled = !working;
         }

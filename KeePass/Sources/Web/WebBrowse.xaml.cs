@@ -5,18 +5,23 @@ using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Data;
+using Microsoft.Phone.Shell;
 
 namespace KeePass.Sources.Web
 {
     public partial class WebBrowse
     {
         private readonly ObservableCollection<WebLinkInfo> _items;
+        private readonly ProgressIndicator _progList;
+
         private NetworkCredential _credentials;
         private DownloadHandler _download;
 
         public WebBrowse()
         {
             InitializeComponent();
+
+            _progList = GetIndicator();
 
             _items = new ObservableCollection<WebLinkInfo>();
             lstLinks.ItemsSource = _items;
@@ -60,7 +65,7 @@ namespace KeePass.Sources.Web
         private void _download_Completed(object sender, EventArgs e)
         {
             lstLinks.IsEnabled = true;
-            progList.IsLoading = false;
+            _progList.IsVisible = false;
         }
 
         private void lstLinks_SelectionChanged(
@@ -70,7 +75,7 @@ namespace KeePass.Sources.Web
             if (item == null)
                 return;
 
-            progList.IsLoading = true;
+            _progList.IsVisible = true;
             lstLinks.IsEnabled = false;
             lstLinks.SelectedItem = null;
 

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 
 namespace KeePass.Utils
 {
@@ -26,6 +27,24 @@ namespace KeePass.Utils
             where T : PhoneApplicationPage
         {
             GoBack(Navigation.GetPathTo<T>());
+        }
+
+        /// <summary>
+        /// Gets the system tray progress indicator.
+        /// </summary>
+        /// <returns>System tray progress indicator.</returns>
+        protected ProgressIndicator GetIndicator()
+        {
+            var indicator = new ProgressIndicator
+            {
+                IsVisible = false,
+                IsIndeterminate = true,
+            };
+
+            SystemTray.SetProgressIndicator(
+                this, indicator);
+
+            return indicator;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

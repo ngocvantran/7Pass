@@ -13,6 +13,7 @@ namespace KeePass
     public partial class Password
     {
         private readonly ApplicationBarIconButton _cmdOpen;
+        private readonly ProgressIndicator _progBusy;
         private readonly BackgroundWorker _wkOpen;
 
         private string _folder;
@@ -21,6 +22,8 @@ namespace KeePass
         public Password()
         {
             InitializeComponent();
+
+            _progBusy = GetIndicator();
 
             _wkOpen = new BackgroundWorker();
             _wkOpen.DoWork += _wkOpen_DoWork;
@@ -63,7 +66,7 @@ namespace KeePass
 
         private void SetWorking(bool working)
         {
-            progBusy.IsLoading = working;
+            _progBusy.IsVisible = working;
             ApplicationBar.IsVisible = !working;
             ContentPanel.IsHitTestVisible = !working;
         }

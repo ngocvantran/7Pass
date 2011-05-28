@@ -6,7 +6,6 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     xmlns:keepass="clr-namespace:KeePass.Utils"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     Style="{StaticResource KeePassPage}">
@@ -18,7 +17,6 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <controls:PerformanceProgressBarEx x:Name="progLogin" />
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="DropBox Login" Margin="9,-7,0,0"

@@ -11,12 +11,15 @@ namespace KeePass.Sources.Web
     public partial class WebDownload
     {
         private readonly ApplicationBarIconButton _cmdDownload;
+        private readonly ProgressIndicator _progList;
+
         private DownloadHandler _download;
 
         public WebDownload()
         {
             InitializeComponent();
 
+            _progList = GetIndicator();
             _cmdDownload = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
         }
@@ -50,7 +53,7 @@ namespace KeePass.Sources.Web
         {
             txtUrl.IsEnabled = !working;
             ucAuth.IsEnabled = !working;
-            progList.IsLoading = working;
+            _progList.IsVisible = working;
             ApplicationBar.IsVisible = !working;
         }
 

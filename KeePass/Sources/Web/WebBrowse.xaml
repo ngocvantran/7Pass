@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
     xmlns:ms="clr-namespace:Microsoft.Unsupported"
-    xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     Style="{StaticResource KeePassPage}">
 
@@ -17,7 +16,6 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <controls:PerformanceProgressBarEx x:Name="progList" />
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="Detected Links" Margin="9,-7,0,0"

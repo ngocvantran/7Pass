@@ -11,11 +11,14 @@ namespace KeePass
 {
     public partial class WebView
     {
+        private readonly ProgressIndicator _progBusy;
         private Entry _entry;
 
         public WebView()
         {
             InitializeComponent();
+
+            _progBusy = GetIndicator();
         }
 
         protected override void OnNavigatedTo(
@@ -36,8 +39,11 @@ namespace KeePass
 
             foreach (var field in _entry.CustomFields.Take(3))
             {
+                var value = field.Value;
+
                 var item = new ApplicationBarMenuItem(field.Key);
-                item.Click += (s, _) => SetValue(field.Value);
+                item.Click += (s, _) => SetValue(value);
+                
                 ApplicationBar.MenuItems.Add(item);
             }
         }
@@ -60,13 +66,14 @@ namespace KeePass
             }
         }
 
-        private void browser_LoadCompleted(object sender, NavigationEventArgs e)
+        private void browser_LoadCompleted(
+            object sender, NavigationEventArgs e)
         {
-            progBusy.IsLoading = false;
-            progBusy.Visibility = Visibility.Collapsed;
+            _progBusy.IsVisible = false;
         }
 
-        private void browser_Loaded(object sender, RoutedEventArgs e)
+        private void browser_Loaded(
+            object sender, RoutedEventArgs e)
         {
             var url = new Uri(
                 NavigationContext.QueryString["url"],
@@ -75,31 +82,36 @@ namespace KeePass
             browser.Navigate(url);
         }
 
-        private void browser_Navigated(object sender, NavigationEventArgs e)
+        private void browser_Navigated(
+            object sender, NavigationEventArgs e)
         {
-            progBusy.IsLoading = true;
-            progBusy.Visibility = Visibility.Visible;
+            _progBusy.IsVisible = true;
         }
 
-        private void cmdBack_Click(object sender, EventArgs e)
+        private void cmdBack_Click(
+            object sender, EventArgs e)
         {
             try
             {
-                browser.InvokeScript("eval", "history.go(-1)");
+                browser.InvokeScript(
+                    "eval", "history.go(-1)");
             }
             catch {}
         }
 
-        private void cmdPassword_Click(object sender, EventArgs e)
+        private void cmdPassword_Click(
+            object sender, EventArgs e)
         {
             SetValue(_entry.Password);
         }
 
-        private void cmdRefresh_Click(object sender, EventArgs e)
+        private void cmdRefresh_Click(
+            object sender, EventArgs e)
         {
             try
             {
-                browser.InvokeScript("eval", "history.go()");
+                browser.InvokeScript(
+                    "eval", "history.go()");
             }
             catch
             {
@@ -107,15 +119,20 @@ namespace KeePass
             }
         }
 
-        private void cmdUser_Click(object sender, EventArgs e)
+        private void cmdUser_Click(
+            object sender, EventArgs e)
         {
             SetValue(_entry.UserName);
         }
 
-        private void vwOverlay_Flick(object sender, FlickGestureEventArgs e)
+        private void vwOverlay_Flick(
+            object sender, FlickGestureEventArgs e)
         {
-            if (e.Direction != System.Windows.Controls.Orientation.Vertical)
+            if (e.Direction != System.Windows
+                .Controls.Orientation.Vertical)
+            {
                 return;
+            }
 
             if (e.VerticalVelocity >= 0)
                 return;

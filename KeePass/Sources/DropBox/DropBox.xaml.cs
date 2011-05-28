@@ -10,11 +10,13 @@ namespace KeePass.Sources.DropBox
     public partial class DropBox
     {
         private readonly ApplicationBarIconButton _cmdOpen;
+        private readonly ProgressIndicator _progLogin;
 
         public DropBox()
         {
             InitializeComponent();
 
+            _progLogin = GetIndicator();
             _cmdOpen = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
         }
@@ -27,7 +29,8 @@ namespace KeePass.Sources.DropBox
 
                 if (info == null)
                 {
-                    MessageBox.Show(DropBoxResources.LoginFailure,
+                    MessageBox.Show(
+                        DropBoxResources.LoginFailure,
                         DropBoxResources.LoginTitle,
                         MessageBoxButton.OK);
 
@@ -63,35 +66,40 @@ namespace KeePass.Sources.DropBox
 
         private void SetWorking(bool working)
         {
-            progLogin.IsLoading = working;
             txtEmail.IsEnabled = !working;
+            _progLogin.IsVisible = working;
             txtPassword.IsEnabled = !working;
             ApplicationBar.IsVisible = !working;
         }
 
-        private void cmdLogin_Click(object sender, EventArgs e)
+        private void cmdLogin_Click(
+            object sender, EventArgs e)
         {
             PerformLogin();
         }
 
-        private void txtEmail_KeyDown(object sender, KeyEventArgs e)
+        private void txtEmail_KeyDown(
+            object sender, KeyEventArgs e)
         {
             if (e.IsEnter())
                 txtPassword.Focus();
         }
 
-        private void txtEmail_Loaded(object sender, RoutedEventArgs e)
+        private void txtEmail_Loaded(
+            object sender, RoutedEventArgs e)
         {
             txtEmail.Focus();
         }
 
-        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        private void txtPassword_KeyDown(
+            object sender, KeyEventArgs e)
         {
             if (e.IsEnter())
                 PerformLogin();
         }
 
-        private void txt_Changed(object sender, EventArgs e)
+        private void txt_Changed(
+            object sender, EventArgs e)
         {
             var hasData = txtEmail.Text.Length > 0 &&
                 txtPassword.Password.Length > 0;
