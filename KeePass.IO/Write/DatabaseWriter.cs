@@ -20,7 +20,44 @@ namespace KeePass.IO.Write
         /// <param name="entry">The entry.</param>
         public void Details(Entry entry)
         {
-            throw new NotImplementedException();
+            if (entry == null)
+                throw new ArgumentNullException("entry");
+
+            var element = _entries[entry.ID];
+
+            element
+                .Element("History")
+                .Add(Clone(element));
+
+            var fields = entry.GetAllFields();
+            var existings = element
+                .Elements("String")
+                .ToDictionary(x => x.Element("Key").Value);
+
+            foreach (var pair in fields)
+            {
+                XElement existing;
+                if (existings.TryGetValue(pair.Key, out existing))
+                    existing.Value = pair.Value;
+                else
+                {
+                    element.Add(new XElement("String",
+                        new XElement("Key", pair.Key),
+                        new XElement("Value", pair.Value)));
+                }
+            }
+
+            var removes = existings.Keys
+                .Except(fields.Keys)
+                .ToList();
+
+            foreach (var remove in removes)
+                existings[remove].Remove();
+
+            element
+                .Element("Times")
+                .Element("LastModificationTime")
+                .Value = GetTime();
         }
 
         /// <summary>
@@ -29,7 +66,19 @@ namespace KeePass.IO.Write
         /// <param name="group">The group.</param>
         public void Details(Group group)
         {
-            throw new NotImplementedException();
+            if (group == null)
+                throw new ArgumentNullException("group");
+
+            var element = _groups[group.ID];
+
+            element
+                .Element("Name")
+                .Value = group.Name;
+
+            element
+                .Element("Times")
+                .Element("LastModificationTime")
+                .Value = GetTime();
         }
 
         /// <summary>
@@ -134,6 +183,25 @@ namespace KeePass.IO.Write
                 throw new ArgumentNullException("xml");
 
             _doc.Save(xml);
+        }
+
+        private static XElement Clone(XElement element)
+        {
+            return new XElement(element.Name,
+                element.Attributes(),
+                element.Nodes().Select(n =>
+                {
+                    var e = n as XElement;
+
+                    if (e != null)
+                    {
+                        return e.Name != "History"
+                            ? Clone(e) : null;
+                    }
+
+                    return n;
+                })
+                    .Where(x => x != null));
         }
 
         private static string GetTime()
