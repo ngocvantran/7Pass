@@ -146,6 +146,10 @@ namespace KeePass.IO.Read
             var icon = ParseIcon(reader);
             var fields = ReadFields(reader);
 
+            // Needed to ensure protected
+            // fields decryption
+            ReadHistories(reader);
+
             if (fields.Count == 0)
                 return null;
 
@@ -292,6 +296,31 @@ namespace KeePass.IO.Read
             }
 
             return value;
+        }
+
+        private List<Entry> ReadHistories(XmlReader reader)
+        {
+            var histories = new List<Entry>();
+
+            if (reader.ReadToFollowing("History"))
+            {
+                if (reader.ReadToDescendant("Entry"))
+                {
+                    while (reader.Name == "Entry")
+                    {
+                        using (var subReader = reader.ReadSubtree())
+                        {
+                            var history = ParseEntry(subReader);
+                            if (history != null)
+                                histories.Add(history);
+                        }
+
+                        reader.ReadEndElement();
+                    }
+                }
+            }
+
+            return histories;
         }
     }
 }
