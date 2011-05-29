@@ -161,7 +161,39 @@ namespace KeePass.IO.Write
         /// <param name="group">The group.</param>
         public void New(Group group)
         {
-            throw new NotImplementedException();
+            if (group == null)
+                throw new ArgumentNullException("group");
+
+            var time = GetTime();
+
+            var element = new XElement("Group",
+                new XElement("UUID", group.ID),
+                new XElement("Name", group.Name),
+                new XElement("Notes"),
+                new XElement("IconID", 0),
+                new XElement("Times",
+                    new XElement("LastModificationTime", time),
+                    new XElement("CreationTime", time),
+                    new XElement("LastAccessTime", time),
+                    new XElement("ExpiryTime", time),
+                    new XElement("Expires", false),
+                    new XElement("UsageCount", 0),
+                    new XElement("LocationChanged", time)),
+                new XElement("IsExpanded", true),
+                new XElement("DefaultAutoTypeSequence"),
+                new XElement("EnableAutoType", "null"),
+                new XElement("EnableSearching", "null"),
+                new XElement("LastTopVisibleEntry", "AAAAAAAAAAAAAAAAAAAAAA=="));
+
+            var parent = _groups[group.Parent.ID];
+            parent.Add(element);
+
+            parent
+                .Element("Times")
+                .Element("LastModificationTime")
+                .Value = GetTime();
+
+            _groups.Add(group.ID, element);
         }
 
         /// <summary>
@@ -170,7 +202,54 @@ namespace KeePass.IO.Write
         /// <param name="entry">The entry.</param>
         public void New(Entry entry)
         {
-            throw new NotImplementedException();
+            if (entry == null)
+                throw new ArgumentNullException("entry");
+
+            var time = GetTime();
+
+            var element = new XElement("Entry",
+                new XElement("UUID", entry.ID),
+                new XElement("IconID", 0),
+                new XElement("ForegroundColor"),
+                new XElement("BackgroundColor"),
+                new XElement("OverrideURL"),
+                new XElement("Tags"),
+                new XElement("Times",
+                    new XElement("LastModificationTime", time),
+                    new XElement("CreationTime", time),
+                    new XElement("LastAccessTime", time),
+                    new XElement("ExpiryTime", time),
+                    new XElement("Expires", false),
+                    new XElement("UsageCount", 0),
+                    new XElement("LocationChanged", time)));
+
+            var fields = entry.GetAllFields();
+            element.Add(fields
+                .Select(x =>
+                    new XElement("String",
+                        new XElement("Key", x.Key),
+                        new XElement("Value", x.Value, x.Key == "Password"
+                            ? new XAttribute("Protected", true)
+                            : null))));
+
+            element.Add(
+                new XElement("AutoType",
+                    new XElement("Enabled", true),
+                    new XElement("DataTransferObfuscation", 0),
+                    new XElement("Association",
+                        new XElement("Window", "Target Window"),
+                        new XElement("KeystrokeSequence", "{USERNAME}{TAB}{PASSWORD}{TAB}{ENTER}"))),
+                new XElement("History"));
+
+            var group = _groups[entry.Group.ID];
+            group.Add(element);
+
+            group
+                .Element("Times")
+                .Element("LastModificationTime")
+                .Value = GetTime();
+
+            _entries.Add(entry.ID, element);
         }
 
         /// <summary>
