@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using KeePass.IO.Data;
+using KeePass.IO.Utils;
 
 namespace KeePass.IO.Write
 {
@@ -19,7 +20,7 @@ namespace KeePass.IO.Write
     /// <item><see cref="Save"/></item>
     /// </list>
     /// </summary>
-    public class DatabaseWriter
+    internal class DatabaseWriter
     {
         private XDocument _doc;
         private IDictionary<string, XElement> _entries;
@@ -28,9 +29,30 @@ namespace KeePass.IO.Write
         /// <summary>
         /// Decrypts the protected fields.
         /// </summary>
-        public void Decrypt()
+        /// <param name="crypto">The crypto random stream.</param>
+        public void Decrypt(CryptoRandomStream crypto)
         {
-            throw new NotImplementedException();
+            if (crypto == null)
+                throw new ArgumentNullException("crypto");
+
+            var protectedValues = _doc
+                .Descendants("Value")
+                .Select(x => new
+                {
+                    x.Value,
+                    Element = x,
+                    Attribute = x.Attribute("Protected"),
+                })
+                .Where(x => x.Attribute != null &&
+                    x.Attribute.Value == "True")
+                .Where(x => !string.IsNullOrEmpty(x.Value))
+                .ToList();
+
+            foreach (var item in protectedValues)
+            {
+                item.Element.Value = crypto
+                    .Decrypt(item.Value);
+            }
         }
 
         /// <summary>

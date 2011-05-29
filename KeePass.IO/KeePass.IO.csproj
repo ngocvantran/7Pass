@@ -63,6 +63,7 @@
     <Compile Include="Data\IconData.cs" />
     <Compile Include="Data\KeyFile.cs" />
     <Compile Include="MemUtil.cs" />
+    <Compile Include="Utils\CryptoExtensions.cs" />
     <Compile Include="Utils\CryptoRandomStream.cs" />
     <Compile Include="Utils\CrsAlgorithm.cs" />
     <Compile Include="Utils\CryptoSerializer.cs" />

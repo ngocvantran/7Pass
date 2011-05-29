@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -29,7 +28,7 @@ namespace KeePass.IO.Read
             _stream = stream;
             _dispatcher = dispatcher;
         }
-        
+
         public Database Parse()
         {
             var settings = new XmlReaderSettings
@@ -243,7 +242,7 @@ namespace KeePass.IO.Read
 
                     wait.WaitOne();
                 }
-                
+
                 icons.Add(id, image);
             }
         }
@@ -269,35 +268,6 @@ namespace KeePass.IO.Read
             return fields;
         }
 
-        private static string ReadId(XmlReader reader)
-        {
-            reader.ReadToDescendant("UUID");
-            return reader.ReadElementContentAsString();
-        }
-
-        private string ReadValue(XmlReader reader)
-        {
-            var isProtected = IsProtected(reader);
-            reader.MoveToContent();
-            var value = reader.ReadElementContentAsString();
-
-            if (isProtected && !string.IsNullOrEmpty(value))
-            {
-                var encrypted = Convert
-                    .FromBase64String(value);
-                var pad = _crypto.GetRandomBytes(
-                    (uint)encrypted.Length);
-
-                for (var i = 0; i < encrypted.Length; i++)
-                    encrypted[i] ^= pad[i];
-
-                value = Encoding.UTF8.GetString(
-                    encrypted, 0, encrypted.Length);
-            }
-
-            return value;
-        }
-
         private List<Entry> ReadHistories(XmlReader reader)
         {
             var histories = new List<Entry>();
@@ -321,6 +291,24 @@ namespace KeePass.IO.Read
             }
 
             return histories;
+        }
+
+        private static string ReadId(XmlReader reader)
+        {
+            reader.ReadToDescendant("UUID");
+            return reader.ReadElementContentAsString();
+        }
+
+        private string ReadValue(XmlReader reader)
+        {
+            var isProtected = IsProtected(reader);
+            reader.MoveToContent();
+            var value = reader.ReadElementContentAsString();
+
+            if (isProtected && !string.IsNullOrEmpty(value))
+                value = _crypto.Decrypt(value);
+
+            return value;
         }
     }
 }
