@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Database.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Utils\Salsa20Cipher.cs" />
     <Compile Include="Utils\StringReplace.cs" />
     <Compile Include="Read\XmlParser.cs" />
+    <Compile Include="Write\DatabaseWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
