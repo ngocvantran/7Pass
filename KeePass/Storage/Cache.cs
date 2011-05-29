@@ -5,7 +5,7 @@ using System.Threading;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using KeePass.IO;
+using KeePass.IO.Data;
 
 namespace KeePass.Storage
 {

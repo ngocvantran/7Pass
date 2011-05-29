@@ -7,9 +7,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Xml;
+using KeePass.IO.Data;
 using KeePass.IO.Utils;
 
-namespace KeePass.IO
+namespace KeePass.IO.Read
 {
     internal class XmlParser
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Media;
 
-namespace KeePass.IO
+namespace KeePass.IO.Data
 {
     public class Database
     {

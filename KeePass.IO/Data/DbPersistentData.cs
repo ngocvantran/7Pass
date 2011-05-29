@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KeePass.IO
+namespace KeePass.IO.Data
 {
     public class DbPersistentData
     {

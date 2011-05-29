@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
-using KeePass.IO;
+using KeePass.IO.Data;
 using KeePass.Storage;
 using KeePass.Utils;
 

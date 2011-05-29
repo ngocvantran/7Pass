@@ -6,7 +6,7 @@ using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Data;
-using KeePass.IO;
+using KeePass.IO.Data;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;

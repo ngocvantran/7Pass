@@ -2,7 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
-using KeePass.IO;
+using KeePass.IO.Read;
 
 namespace KeePass.Storage
 {

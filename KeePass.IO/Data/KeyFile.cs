@@ -4,7 +4,7 @@ using System.Text;
 using System.Xml;
 using KeePassLib.Utility;
 
-namespace KeePass.IO
+namespace KeePass.IO.Data
 {
     public static class KeyFile
     {

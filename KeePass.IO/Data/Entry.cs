@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using KeePass.IO.Utils;
 
-namespace KeePass.IO
+namespace KeePass.IO.Data
 {
     [DebuggerDisplay("Entry {Title}")]
     public class Entry

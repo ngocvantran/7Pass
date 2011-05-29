@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Threading;
-using KeePass.IO;
+using KeePass.IO.Data;
 using KeePass.IO.Utils;
 using KeePass.Storage;
 using KeePass.Utils;

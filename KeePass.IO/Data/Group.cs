@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace KeePass.IO
+namespace KeePass.IO.Data
 {
     [DebuggerDisplay("Group {Name}, {Groups.Count} groups, {Entries.Count} entries")]
     public class Group

@@ -6,7 +6,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using KeePass.IO;
+using KeePass.IO.Data;
 using KeePass.Sources.DropBox.Api;
 using KeePass.Storage;
 using KeePass.Utils;

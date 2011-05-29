@@ -3,9 +3,10 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Windows.Threading;
 using ICSharpCode.SharpZipLib.GZip;
+using KeePass.IO.Data;
 using KeePass.IO.Utils;
 
-namespace KeePass.IO
+namespace KeePass.IO.Read
 {
     public static class DatabaseReader
     {

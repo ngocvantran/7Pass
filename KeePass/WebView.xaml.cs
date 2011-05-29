@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Navigation;
-using KeePass.IO;
+using KeePass.IO.Data;
 using KeePass.Storage;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;

@@ -51,16 +51,16 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database.cs" />
-    <Compile Include="DatabaseReader.cs" />
-    <Compile Include="DbPersistentData.cs" />
-    <Compile Include="Entry.cs" />
-    <Compile Include="EntrySorter.cs" />
+    <Compile Include="Data\Database.cs" />
+    <Compile Include="Read\DatabaseReader.cs" />
+    <Compile Include="Data\DbPersistentData.cs" />
+    <Compile Include="Data\Entry.cs" />
+    <Compile Include="Data\EntrySorter.cs" />
     <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="Group.cs" />
-    <Compile Include="GroupSorter.cs" />
-    <Compile Include="IconData.cs" />
-    <Compile Include="KeyFile.cs" />
+    <Compile Include="Data\Group.cs" />
+    <Compile Include="Data\GroupSorter.cs" />
+    <Compile Include="Data\IconData.cs" />
+    <Compile Include="Data\KeyFile.cs" />
     <Compile Include="MemUtil.cs" />
     <Compile Include="Utils\CryptoRandomStream.cs" />
     <Compile Include="Utils\CrsAlgorithm.cs" />
@@ -76,7 +76,7 @@
     <Compile Include="Utils\HashedBlockStream.cs" />
     <Compile Include="Utils\Salsa20Cipher.cs" />
     <Compile Include="Utils\StringReplace.cs" />
-    <Compile Include="XmlParser.cs" />
+    <Compile Include="Read\XmlParser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
