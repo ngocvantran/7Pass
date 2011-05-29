@@ -149,12 +149,10 @@ namespace KeePass.IO.Read
             if (fields.Count == 0)
                 return null;
 
-            var histories = ReadHistories(reader);
             var entry = new Entry(fields)
             {
                 ID = id,
                 Icon = icon,
-                Histories = histories,
             };
 
             return entry;
@@ -265,31 +263,6 @@ namespace KeePass.IO.Read
             }
 
             return fields;
-        }
-
-        private List<Entry> ReadHistories(XmlReader reader)
-        {
-            var histories = new List<Entry>();
-
-            if (reader.ReadToFollowing("History"))
-            {
-                if (reader.ReadToDescendant("Entry"))
-                {
-                    while (reader.Name == "Entry")
-                    {
-                        using (var subReader = reader.ReadSubtree())
-                        {
-                            var history = ParseEntry(subReader);
-                            if (history != null)
-                                histories.Add(history);
-                        }
-
-                        reader.ReadEndElement();
-                    }
-                }
-            }
-
-            return histories;
         }
 
         private static string ReadId(XmlReader reader)

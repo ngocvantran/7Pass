@@ -21,7 +21,8 @@ namespace KeePass.IO.Data
         };
 
         private readonly IDictionary<string, string> _fields;
-        private readonly string _url;
+
+        private string _url;
 
         /// <summary>
         /// Gets the custom fields.
@@ -45,12 +46,6 @@ namespace KeePass.IO.Data
         public Group Group { get; set; }
 
         /// <summary>
-        /// Gets or sets the histories.
-        /// </summary>
-        /// <value>The histories.</value>
-        public List<Entry> Histories { get; set; }
-
-        /// <summary>
         /// Gets or sets the ID.
         /// </summary>
         /// <value>The ID.</value>
@@ -65,30 +60,33 @@ namespace KeePass.IO.Data
         public IconData Icon { get; set; }
 
         /// <summary>
-        /// Gets the value of the specified key.
+        /// Gets or sets the value of the specified key.
         /// </summary>
         /// <value>Value of the specified key.</value>
         public string this[string key]
         {
-            get { return _fields[key]; }
+            get { return TryGet(key); }
+            set { _fields.AddOrSet(key, value); }
         }
 
         /// <summary>
-        /// Gets the notes.
+        /// Gets or sets the notes.
         /// </summary>
         /// <value>The notes.</value>
         public string Notes
         {
-            get { return TryGet(KEY_NOTES); }
+            get { return this[KEY_NOTES]; }
+            set { this[KEY_NOTES] = value; }
         }
 
         /// <summary>
-        /// Gets the password.
+        /// Gets or sets the password.
         /// </summary>
         /// <value>The password.</value>
         public string Password
         {
-            get { return TryGet(KEY_PASS); }
+            get { return this[KEY_PASS]; }
+            set { this[KEY_PASS] = value; }
         }
 
         /// <summary>
@@ -97,7 +95,8 @@ namespace KeePass.IO.Data
         /// <value>The title.</value>
         public string Title
         {
-            get { return TryGet(KEY_TITLE); }
+            get { return this[KEY_TITLE]; }
+            set { this[KEY_TITLE] = value; }
         }
 
         /// <summary>
@@ -107,15 +106,21 @@ namespace KeePass.IO.Data
         public string Url
         {
             get { return _url; }
+            set
+            {
+                this[KEY_URL] = value;
+                _url = GetUrl();
+            }
         }
 
         /// <summary>
-        /// Gets the name of the user.
+        /// Gets or sets the name of the user.
         /// </summary>
         /// <value>The name of the user.</value>
         public string UserName
         {
-            get { return TryGet(KEY_USER); }
+            get { return this[KEY_USER]; }
+            set { this[KEY_USER] = value; }
         }
 
         public Entry(IDictionary<string, string> fields)
@@ -129,6 +134,15 @@ namespace KeePass.IO.Data
 
         public Entry()
             : this(new Dictionary<string, string>()) {}
+
+        /// <summary>
+        /// Gets all fields.
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<string, string> GetAllFields()
+        {
+            return new Dictionary<string, string>(_fields);
+        }
 
         private static string GetPattern(string key)
         {
@@ -146,7 +160,7 @@ namespace KeePass.IO.Data
 
         private string GetUrl()
         {
-            var url = TryGet(KEY_URL);
+            var url = this[KEY_URL];
 
             if (url == null)
                 return null;
