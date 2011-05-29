@@ -121,7 +121,12 @@ namespace KeePass.IO
 
                     case "Entry":
                         using (var subReader = reader.ReadSubtree())
-                            group.Add(ParseEntry(subReader));
+                        {
+                            var entry = ParseEntry(subReader);
+                            if (entry != null)
+                                group.Add(entry);
+                        }
+
                         reader.ReadEndElement();
                         break;
 
