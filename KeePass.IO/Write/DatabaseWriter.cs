@@ -8,11 +8,30 @@ using KeePass.IO.Data;
 
 namespace KeePass.IO.Write
 {
+    /// <summary>
+    /// Implements database modification.
+    /// How to use:
+    /// <list>
+    /// <item><see cref="Load"/></item>
+    /// <item><see cref="Decrypt"/></item>
+    /// <item>Perform modifications</item>
+    /// <item><see cref="Encrypt"/></item>
+    /// <item><see cref="Save"/></item>
+    /// </list>
+    /// </summary>
     public class DatabaseWriter
     {
         private XDocument _doc;
         private IDictionary<string, XElement> _entries;
         private IDictionary<string, XElement> _groups;
+
+        /// <summary>
+        /// Decrypts the protected fields.
+        /// </summary>
+        public void Decrypt()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Updates the details of the specified entry.
@@ -79,6 +98,14 @@ namespace KeePass.IO.Write
                 .Element("Times")
                 .Element("LastModificationTime")
                 .Value = GetTime();
+        }
+
+        /// <summary>
+        /// Encrypts the protected fields.
+        /// </summary>
+        public void Encrypt()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
