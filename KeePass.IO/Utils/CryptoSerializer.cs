@@ -5,7 +5,7 @@ namespace KeePass.IO.Utils
 {
     internal static class CryptoSerializer
     {
-        public static CryptoRandomStream Deserialize(byte[] serialized)
+        public static CryptoFactory Deserialize(byte[] serialized)
         {
             using (var buffer = new MemoryStream(serialized))
             {
@@ -13,7 +13,7 @@ namespace KeePass.IO.Utils
                 var algorithm = (CrsAlgorithm)reader.ReadByte();
                 var key = reader.ReadBytes(serialized.Length - 1);
 
-                return new CryptoRandomStream(algorithm, key);
+                return new CryptoFactory(key, algorithm);
             }
         }
 

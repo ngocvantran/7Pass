@@ -64,6 +64,7 @@
     <Compile Include="Data\KeyFile.cs" />
     <Compile Include="MemUtil.cs" />
     <Compile Include="Utils\CryptoExtensions.cs" />
+    <Compile Include="Utils\CryptoFactory.cs" />
     <Compile Include="Utils\CryptoRandomStream.cs" />
     <Compile Include="Utils\CrsAlgorithm.cs" />
     <Compile Include="Utils\CryptoSerializer.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Utils\StringReplace.cs" />
     <Compile Include="Read\XmlParser.cs" />
     <Compile Include="Write\DatabaseWriter.cs" />
+    <Compile Include="Write\XmlWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />

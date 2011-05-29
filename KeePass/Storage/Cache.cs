@@ -26,6 +26,14 @@ namespace KeePass.Storage
         /// </value>
         public static Database Database { get; private set; }
 
+        /// <summary>
+        /// Gets the detailed information for <see cref="Database"/>.
+        /// </summary>
+        public static DatabaseInfo DbInfo
+        {
+            get { return _info; }
+        }
+
         static Cache()
         {
             _lckStandards = new object();

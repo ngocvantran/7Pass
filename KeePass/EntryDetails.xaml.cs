@@ -2,9 +2,12 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using KeePass.IO.Data;
+using KeePass.IO.Write;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 
 namespace KeePass
@@ -12,10 +15,14 @@ namespace KeePass
     public partial class EntryDetails
     {
         private bool _loaded;
+        private readonly ApplicationBarMenuItem _mnuSave;
 
         public EntryDetails()
         {
             InitializeComponent();
+
+            _mnuSave = (ApplicationBarMenuItem)
+                ApplicationBar.MenuItems[0];
         }
 
         protected override void OnNavigatedTo(
@@ -91,6 +98,29 @@ namespace KeePass
         {
             var item = (MenuItem)sender;
             OpenUrl((string)item.Tag, true);
+        }
+
+        private void txt_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var txt = sender as TextBox;
+
+            if (txt != null)
+                txt.SelectAll();
+        }
+
+        private void mnuSave_Click(object sender, EventArgs e)
+        {
+            var entry = (Entry)DataContext;
+            entry.Password = txtPassword.Text;
+            entry.UserName = txtUsername.Text;
+
+            var info = Cache.DbInfo;
+            DatabaseWriter.Save(info.Data, entry);
+        }
+
+        private void txt_Changed(object sender, TextChangedEventArgs e)
+        {
+            _mnuSave.IsEnabled = true;
         }
     }
 }

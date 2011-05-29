@@ -9,20 +9,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
     Style="{StaticResource KeePassPage}">
 
     <controls:Panorama Title="{Binding Title}">
         <controls:PanoramaItem Header="General">
             <StackPanel>
                 <TextBlock Text="User name" Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Text="{Binding UserName}"
-                         IsReadOnly="True" />
+                <TextBox Name="txtUsername" Text="{Binding UserName}"
+                         GotFocus="txt_GotFocus" TextChanged="txt_Changed" />
 
                 <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="txtPassword"
-                         Text="{Binding Password}"
-                         IsReadOnly="True" />
+                <TextBox Name="txtPassword" Text="{Binding Password}"
+                         GotFocus="txt_GotFocus" TextChanged="txt_Changed" />
 
                 <TextBlock Text="Url" Style="{StaticResource PhoneTextNormalStyle}" />
                 <HyperlinkButton Tag="{Binding Url}" Content="{Binding Url}"
@@ -93,6 +92,11 @@
             <shell:ApplicationBarIconButton
                 IconUri="/Images/about.png"
                 Text="About" Click="cmdAbout_Click"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem
+                    Text="Save entry" IsEnabled="False"
+                    Click="mnuSave_Click" />
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
     

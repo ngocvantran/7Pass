@@ -16,6 +16,11 @@ namespace KeePass.Storage
     internal class DatabaseInfo
     {
         /// <summary>
+        /// Gets the persistent data.
+        /// </summary>
+        public DbPersistentData Data { get; private set; }
+
+        /// <summary>
         /// Gets the database's details.
         /// </summary>
         public DatabaseDetails Details { get; private set; }
@@ -417,6 +422,7 @@ namespace KeePass.Storage
             if (Details == null)
                 LoadDetails(store);
 
+            Data = xml;
             Cache.CacheDb(this, name, database);
         }
 

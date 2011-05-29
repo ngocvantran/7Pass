@@ -60,7 +60,7 @@ namespace KeePass.IO.Read
                 var crypto = CryptoSerializer
                     .Deserialize(data.Protection);
 
-                return new XmlParser(crypto, buffer, dispatcher)
+                return new XmlParser(crypto.Create(), buffer, dispatcher)
                     .Parse();
             }
         }
