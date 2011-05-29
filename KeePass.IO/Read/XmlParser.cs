@@ -144,8 +144,6 @@ namespace KeePass.IO.Read
         {
             var id = ReadId(reader);
             var icon = ParseIcon(reader);
-
-            var lastModified = ReadLastModified(reader);
             var fields = ReadFields(reader);
 
             if (fields.Count == 0)
@@ -157,7 +155,6 @@ namespace KeePass.IO.Read
                 ID = id,
                 Icon = icon,
                 Histories = histories,
-                LastModified = lastModified,
             };
 
             return entry;
@@ -299,20 +296,6 @@ namespace KeePass.IO.Read
         {
             reader.ReadToDescendant("UUID");
             return reader.ReadElementContentAsString();
-        }
-
-        private static DateTime ReadLastModified(XmlReader reader)
-        {
-            if (reader.ReadToFollowing("Times"))
-            {
-                using (var subReader = reader.ReadSubtree())
-                {
-                    if (subReader.ReadToDescendant("LastModificationTime"))
-                        return subReader.ReadElementContentAsDateTime();
-                }
-            }
-
-            return DateTime.MinValue;
         }
 
         private string ReadValue(XmlReader reader)
