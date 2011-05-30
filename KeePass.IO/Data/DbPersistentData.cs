@@ -15,5 +15,13 @@ namespace KeePass.IO.Data
         /// </summary>
         /// <value>The XML.</value>
         public byte[] Xml { get; set; }
+
+        /// <summary>
+        /// Gets or sets the master key.
+        /// </summary>
+        /// <value>
+        /// The master key.
+        /// </value>
+        public byte[] MasterKey { get; set; }
     }
 }

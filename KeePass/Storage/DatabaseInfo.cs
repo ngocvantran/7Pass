@@ -64,7 +64,8 @@ namespace KeePass.Storage
                 using (var store = IsolatedStorageFile
                     .GetUserStoreForApplication())
                 {
-                    return store.FileExists(ParsedXmlPath);
+                    return store.FileExists(
+                        MasterPasswordPath);
                 }
             }
         }
@@ -102,6 +103,18 @@ namespace KeePass.Storage
             {
                 return Path.Combine(
                     Folder, "keyfile.bin");
+            }
+        }
+
+        /// <summary>
+        /// Gets the path to the master password file.
+        /// </summary>
+        private string MasterPasswordPath
+        {
+            get
+            {
+                return Path.Combine(Folder,
+                    "masterPassword.xml");
             }
         }
 
@@ -259,10 +272,10 @@ namespace KeePass.Storage
         }
 
         /// <summary>
-        /// Opens the key file.
+        /// Opens the database file.
         /// </summary>
         /// <param name="action">The action.</param>
-        public void OpenKeyFile(Action<Stream> action)
+        public void OpenDatabaseFile(Action<Stream> action)
         {
             if (action == null)
                 throw new ArgumentNullException("action");
@@ -270,8 +283,11 @@ namespace KeePass.Storage
             using (var store = IsolatedStorageFile
                 .GetUserStoreForApplication())
             {
-                using (var fs = store.OpenFile(KeyFilePath, FileMode.Open))
+                using (var fs = store.OpenFile(
+                    DatabasePath, FileMode.Open))
+                {
                     action(fs);
+                }
             }
         }
 
@@ -313,6 +329,33 @@ namespace KeePass.Storage
             }
         }
 
+        public void SetDatabase(Action<Stream> action)
+        {
+            if (action == null)
+                throw new ArgumentNullException("action");
+
+            using (var store = IsolatedStorageFile
+                .GetUserStoreForApplication())
+            {
+                if (!store.DirectoryExists(Folder))
+                    store.CreateDirectory(Folder);
+
+                var newDb = Path.Combine(Folder, "newDb.kdbx");
+
+                try
+                {
+                    using (var fs = store.CreateFile(newDb))
+                        action(fs);
+
+                    // TODO: Replace old database
+                }
+                finally
+                {
+                    store.DeleteFile(newDb);
+                }
+            }
+        }
+
         /// <summary>
         /// Sets the key file.
         /// </summary>
@@ -336,8 +379,9 @@ namespace KeePass.Storage
 
         private void ClearPassword(IsolatedStorageFile store)
         {
-            store.DeleteFile(ProtectionPath);
             store.DeleteFile(ParsedXmlPath);
+            store.DeleteFile(ProtectionPath);
+            store.DeleteFile(MasterPasswordPath);
         }
 
         private byte[] GetKeyFile(IsolatedStorageFile store)
@@ -363,8 +407,8 @@ namespace KeePass.Storage
         private DbPersistentData GetSavedPassword(
             IsolatedStorageFile store)
         {
-            return GetSavedPassword(store,
-                ProtectionPath, ParsedXmlPath);
+            return GetSavedPassword(store, ProtectionPath,
+                ParsedXmlPath, MasterPasswordPath);
         }
 
         /// <summary>
@@ -372,8 +416,8 @@ namespace KeePass.Storage
         /// </summary>
         /// <returns></returns>
         private static DbPersistentData GetSavedPassword(
-            IsolatedStorageFile store,
-            string protectPath, string parsedXmlPath)
+            IsolatedStorageFile store, string protectPath,
+            string parsedXmlPath, string masterPassPath)
         {
             var result = new DbPersistentData();
 
@@ -389,6 +433,13 @@ namespace KeePass.Storage
             {
                 BufferEx.CopyStream(fs, buffer);
                 result.Xml = buffer.ToArray();
+            }
+
+            using (var fs = store.OpenFile(masterPassPath, FileMode.Open))
+            using (var buffer = new MemoryStream((int)fs.Length))
+            {
+                BufferEx.CopyStream(fs, buffer);
+                result.MasterKey = buffer.ToArray();
             }
 
             return result;
@@ -446,6 +497,12 @@ namespace KeePass.Storage
             using (var fs = store.CreateFile(ParsedXmlPath))
             using (var buffer = new MemoryStream(xml.Xml))
                 BufferEx.CopyStream(buffer, fs);
+
+            using (var fs = store.CreateFile(MasterPasswordPath))
+            {
+                var data = xml.MasterKey;
+                fs.Write(data, 0, data.Length);
+            }
         }
 
         private void SaveDetails(IsolatedStorageFile store)
@@ -493,15 +550,6 @@ namespace KeePass.Storage
             }
 
             store.DeleteFile("Database.kdbx");
-
-            if (!files.Contains("Decrypted.xml"))
-                return;
-
-            var password = GetSavedPassword(store,
-                "Protection.bin", "Decrypted.xml");
-
-            info.Save(store, password);
-
             store.DeleteFile("Protection.bin");
             store.DeleteFile("Decrypted.xml");
         }

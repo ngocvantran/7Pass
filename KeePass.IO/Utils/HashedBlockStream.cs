@@ -1,22 +1,26 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace KeePass.IO.Utils
 {
     internal class HashedBlockStream : Stream
     {
+        private readonly BinaryReader _reader;
+        private readonly bool _reading;
+        private readonly BinaryWriter _writer;
+
         private Stream _baseStream;
         private byte[] _buffer;
         private uint _bufferIndex;
         private bool _eof;
         private int _position;
-        private BinaryReader _reader;
 
         public override bool CanRead
         {
-            get { return true; }
+            get { return _reading; }
         }
 
         public override bool CanSeek
@@ -26,7 +30,7 @@ namespace KeePass.IO.Utils
 
         public override bool CanWrite
         {
-            get { return false; }
+            get { return !_reading; }
         }
 
         public override long Length
@@ -40,19 +44,31 @@ namespace KeePass.IO.Utils
             set { throw new NotSupportedException(); }
         }
 
-        public HashedBlockStream(Stream stream)
+        public HashedBlockStream(Stream stream,
+            bool reading)
         {
             if (stream == null)
                 throw new ArgumentNullException("stream");
 
-            if (stream.CanRead == false)
+            if (reading)
+            {
+                if (!stream.CanRead)
+                    throw new InvalidOperationException();
+            }
+            else if (!stream.CanWrite)
                 throw new InvalidOperationException();
 
-            _buffer = new byte[0];
+            _reading = reading;
             _baseStream = stream;
+            _buffer = new byte[reading
+                ? 0 : 1024 * 1024];
 
-            _reader = new BinaryReader(stream,
-                new UTF8Encoding(false, false));
+            var utf8 = new UTF8Encoding(false, false);
+
+            if (_reading)
+                _reader = new BinaryReader(stream, utf8);
+            else
+                _writer = new BinaryWriter(stream, utf8);
         }
 
         public override void Close()
@@ -60,17 +76,37 @@ namespace KeePass.IO.Utils
             if (_baseStream == null)
                 return;
 
-            _reader.Close();
-            _reader = null;
+            if (_reading)
+                _reader.Close();
+            else
+            {
+                if (_position == 0) // No data left in buffer
+                    WriteHashedBlock(); // Write terminating block
+                else
+                {
+                    WriteHashedBlock(); // Write remaining buffered data
+                    WriteHashedBlock(); // Write terminating block
+                }
+
+                _writer.Flush();
+                _writer.Close();
+            }
 
             _baseStream.Close();
             _baseStream = null;
         }
 
-        public override void Flush() {}
+        public override void Flush()
+        {
+            if (!_reading)
+                _writer.Flush();
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
+            if (!_reading)
+                throw new InvalidOperationException();
+
             var remaining = count;
 
             while (remaining > 0)
@@ -108,7 +144,25 @@ namespace KeePass.IO.Utils
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            throw new NotSupportedException();
+            if (_reading)
+                throw new InvalidOperationException();
+
+            while (count > 0)
+            {
+                if (_position == _buffer.Length)
+                    WriteHashedBlock();
+
+                var copy = Math.Min(count,
+                    _buffer.Length - _position);
+
+                Array.Copy(buffer, offset,
+                    _buffer, _position, copy);
+
+                offset += copy;
+                _position += copy;
+
+                count -= copy;
+            }
         }
 
         private bool ReadHashedBlock()
@@ -153,6 +207,36 @@ namespace KeePass.IO.Utils
                 throw new InvalidDataException();
 
             return true;
+        }
+
+        private void WriteHashedBlock()
+        {
+            _writer.Write(_bufferIndex);
+            _bufferIndex++;
+
+            if (_position > 0)
+            {
+                var sha256 = new SHA256Managed();
+
+                var hash = sha256.ComputeHash(
+                    _buffer, 0, _position);
+
+                _writer.Write(hash);
+            }
+            else
+            {
+                _writer.Write((ulong)0); // Zero hash
+                _writer.Write((ulong)0);
+                _writer.Write((ulong)0);
+                _writer.Write((ulong)0);
+            }
+
+            _writer.Write(_position);
+
+            if (_position > 0)
+                _writer.Write(_buffer, 0, _position);
+
+            _position = 0;
         }
     }
 }

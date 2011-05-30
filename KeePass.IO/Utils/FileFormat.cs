@@ -3,9 +3,24 @@ using System.IO;
 
 namespace KeePass.IO.Utils
 {
-    public static class FileFormat
+    internal static class FileFormat
     {
-        private const ulong SIGNATURE = 0xb54bfb679aa2d903;
+        public const ulong SIGNATURE = 0xb54bfb679aa2d903;
+
+        public static Version ReadVersion(
+            BinaryReader reader)
+        {
+            var minor = reader.ReadInt16();
+            var major = reader.ReadInt16();
+
+            return new Version(major, minor);
+        }
+
+        public static bool Sign(BinaryReader reader)
+        {
+            var signature = reader.ReadUInt64();
+            return signature == SIGNATURE;
+        }
 
         public static bool Verify(Stream stream)
         {
@@ -15,18 +30,12 @@ namespace KeePass.IO.Utils
                 Version(reader);
         }
 
-        private static bool Sign(BinaryReader reader)
-        {
-            var signature = reader.ReadUInt64();
-            return signature == SIGNATURE;
-        }
-
         private static bool Version(BinaryReader reader)
         {
-            reader.ReadInt16(); // minor
-            var major = reader.ReadInt16();
+            var version = ReadVersion(reader);
 
-            return major == 2 || major == 3;
+            return version.Major == 2 ||
+                version.Major == 3;
         }
     }
 }

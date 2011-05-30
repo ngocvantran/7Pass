@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -115,7 +116,13 @@ namespace KeePass
             entry.UserName = txtUsername.Text;
 
             var info = Cache.DbInfo;
-            DatabaseWriter.Save(info.Data, entry);
+            var writer = new DatabaseWriter();
+
+            info.OpenDatabaseFile(x => writer
+                .LoadExisting(x, info.Data.MasterKey));
+
+            writer.Details(entry);
+            info.SetDatabase(writer.Save);
         }
 
         private void txt_Changed(object sender, TextChangedEventArgs e)

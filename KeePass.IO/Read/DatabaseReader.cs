@@ -30,8 +30,11 @@ namespace KeePass.IO.Read
             var headers = ReadHeaders(stream);
             headers.Verify();
 
-            var decrypted = Decrypt(stream,
+            var masterKey = GetMasterKey(
                 headers, password, keyFile);
+            var decrypted = Decrypt(stream,
+                headers, masterKey);
+
             if (decrypted == null)
                 return null;
 
@@ -42,6 +45,7 @@ namespace KeePass.IO.Read
 
                 return new DbPersistentData
                 {
+                    MasterKey = masterKey,
                     Xml = buffer.ToArray(),
                     Protection = CryptoSerializer
                         .Serialize(headers),
@@ -60,18 +64,14 @@ namespace KeePass.IO.Read
                 var crypto = CryptoSerializer
                     .Deserialize(data.Protection);
 
-                return new XmlParser(crypto.Create(), buffer, dispatcher)
+                return new XmlParser(crypto, buffer, dispatcher)
                     .Parse();
             }
         }
 
-        private static Stream Decrypt(Stream source,
-            Headers headers, string password, byte[] keyFile)
+        internal static Stream Decrypt(Stream source,
+            Headers headers, byte[] masterKey)
         {
-            var masterKey = new PasswordData(password, keyFile)
-                .TransformKey(headers.TransformSeed,
-                    headers.TransformRounds);
-
             byte[] easKey;
             using (var buffer = new MemoryStream())
             {
@@ -96,12 +96,12 @@ namespace KeePass.IO.Read
             if (!VerifyStartBytes(headers, stream))
                 return null;
 
-            stream = new HashedBlockStream(stream);
+            stream = new HashedBlockStream(stream, true);
             return headers.Compression == Compressions.GZip
                 ? new GZipInputStream(stream) : stream;
         }
 
-        private static Headers ReadHeaders(Stream stream)
+        internal static Headers ReadHeaders(Stream stream)
         {
             HeaderFields field;
             var fields = new Headers();
@@ -115,6 +115,14 @@ namespace KeePass.IO.Read
             } while (field != HeaderFields.EndOfHeader);
 
             return fields;
+        }
+
+        private static byte[] GetMasterKey(Headers headers,
+            string password, byte[] keyFile)
+        {
+            return new PasswordData(password, keyFile)
+                .TransformKey(headers.TransformSeed,
+                    headers.TransformRounds);
         }
 
         private static bool VerifyStartBytes(
