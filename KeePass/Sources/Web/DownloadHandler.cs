@@ -22,6 +22,8 @@ namespace KeePass.Sources.Web
 
         public event EventHandler Completed;
 
+        public event EventHandler NavigationFailed;
+
         public DownloadHandler(KeePassPage page, string folder)
         {
             if (page == null) throw new ArgumentNullException("page");
@@ -39,12 +41,23 @@ namespace KeePass.Sources.Web
         /// <summary>
         /// Raises the <see cref="Completed"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="System.EventArgs"/>
+        /// <param name="e">The <see cref="EventArgs"/>
         /// instance containing the event data.</param>
         protected virtual void OnCompleted(EventArgs e)
         {
             if (Completed != null)
                 Completed(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="NavigationFailed"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="EventArgs"/>
+        /// instance containing the event data.</param>
+        protected virtual void OnNavigationFailed(EventArgs e)
+        {
+            if (NavigationFailed != null)
+                NavigationFailed(this, e);
         }
 
         private static bool DetectCertificateError(
@@ -78,15 +91,29 @@ namespace KeePass.Sources.Web
             var credentials = request.Credentials as NetworkCredential
                 ?? new NetworkCredential();
 
-            _page.Dispatcher.BeginInvoke(() => _page.NavigateTo<WebBrowse>(
-                "l={0}&user={1}&password={2}&domain={3}&folder={4}",
-                sb.ToString(),
-                credentials.UserName,
-                credentials.Password,
-                credentials.Domain,
-                _folder));
+            _page.Dispatcher.BeginInvoke(() =>
+                Navigate(sb.ToString(), credentials));
 
             return true;
+        }
+
+        private void Navigate(string uri, NetworkCredential credentials)
+        {
+            try
+            {
+                _page.NavigateTo<WebBrowse>(
+                    "l={0}&user={1}&password={2}&domain={3}&folder={4}",
+                    uri, credentials.UserName, credentials.Password,
+                    credentials.Domain, _folder);
+            }
+            catch (ArgumentException)
+            {
+                MessageBox.Show(Resources.InvalidUrlPrompt,
+                    Resources.InvalidUrlTitle,
+                    MessageBoxButton.OK);
+
+                OnNavigationFailed(EventArgs.Empty);
+            }
         }
 
         private static string[] ExtractLinks(

@@ -36,6 +36,7 @@ namespace KeePass.Sources.Web
             _download = new DownloadHandler(this,
                 NavigationContext.QueryString["folder"]);
             _download.Completed += _download_Completed;
+            _download.NavigationFailed += _download_NavigationFailed;
         }
 
         private void PerformDownload()
@@ -55,6 +56,11 @@ namespace KeePass.Sources.Web
         }
 
         private void _download_Completed(object sender, EventArgs e)
+        {
+            SetWorkState(false);
+        }
+
+        private void _download_NavigationFailed(object sender, EventArgs e)
         {
             SetWorkState(false);
         }

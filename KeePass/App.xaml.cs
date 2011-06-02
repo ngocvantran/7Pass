@@ -66,8 +66,25 @@ namespace KeePass
         private static void Application_UnhandledException(
             object sender, ApplicationUnhandledExceptionEventArgs e)
         {
-            if (Debugger.IsAttached)
-                Debugger.Break();
+            if (!Debugger.IsAttached)
+            {
+                e.Handled = true;
+
+                var email = MessageBox.Show(
+                    Properties.Resources.UnhandledExPrompt,
+                    Properties.Resources.UnhandledExTitle,
+                    MessageBoxButton.OKCancel) == MessageBoxResult.OK;
+
+                if (email)
+                {
+                    ErrorReport.Report(e.ExceptionObject);
+                    return;
+                }
+
+                throw new QuitException();
+            }
+
+            Debugger.Break();
         }
 
         private void CompleteInitializePhoneApplication(

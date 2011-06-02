@@ -199,4 +199,18 @@ To set lock screen password, please go to Phone's Settings\lock &amp; wallpaper.
   <data name="GlobalPassTitle" xml:space="preserve">
     <value>7Pass Global password</value>
   </data>
+  <data name="UnhandledExPrompt" xml:space="preserve">
+    <value>7Pass has encountered an unexpected error. 7Pass will now exit.
+
+Is it ok if I create an email so that you can send to me to fix this problem?</value>
+  </data>
+  <data name="UnhandledExTitle" xml:space="preserve">
+    <value>Ooopppppps</value>
+  </data>
+  <data name="InvalidUrlPrompt" xml:space="preserve">
+    <value>The selected URL cannot be displayed. If the URL is too long (&gt; 500 characters), try to relocate your resource to another location where the URL is shorter.</value>
+  </data>
+  <data name="InvalidUrlTitle" xml:space="preserve">
+    <value>Invalid URL</value>
+  </data>
 </root>
