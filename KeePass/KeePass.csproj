@@ -143,6 +143,7 @@
     <Compile Include="Sources\Web\WebDownload.xaml.cs">
       <DependentUpon>WebDownload.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sources\Web\WebLinks.cs" />
     <Compile Include="Sources\Web\WebUpdater.cs" />
     <Compile Include="Sources\Web\WebUrlInfo.xaml.cs" />
     <Compile Include="Sources\Web\WebUtils.cs" />
@@ -392,6 +393,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\DropBox\DropBoxResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

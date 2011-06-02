@@ -185,7 +185,7 @@ Saving your database password without lock screen protection will allow anyone t
 To set lock screen password, please go to Phone's Settings\lock &amp; wallpaper.</value>
   </data>
   <data name="LinkRegex" xml:space="preserve">
-    <value>&lt;a\s+[^&gt;]?href\s?=\s?(['"])(.+?)\1</value>
+    <value>&lt;a\s+[^&gt;]?href\s?=\s?(['"])([^'"]+)</value>
   </data>
   <data name="InvalidKeyFile" xml:space="preserve">
     <value>You've selected an invalid/corrupted keyfile.</value>
