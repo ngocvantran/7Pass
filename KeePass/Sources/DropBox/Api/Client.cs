@@ -4,6 +4,7 @@ using System.Net;
 using Hammock;
 using Hammock.Authentication.OAuth;
 using Hammock.Web;
+using KeePass.IO.Utils;
 using KeePass.Sources.DropBox.Api.Serialize;
 
 namespace KeePass.Sources.DropBox.Api
@@ -12,6 +13,7 @@ namespace KeePass.Sources.DropBox.Api
     {
         private readonly RestClient _client;
         private readonly RestClient _fileClient;
+
         private LoginInfo _loginInfo;
 
         public bool IsAuthenticated
@@ -126,6 +128,42 @@ namespace KeePass.Sources.DropBox.Api
                 InitAuthenticator(data.Token, data.Secret);
                 report(data);
             });
+        }
+
+        public void UploadAsync(string path,
+            Stream file, Action<bool> report)
+        {
+            if (!IsAuthenticated)
+            {
+                throw new InvalidOperationException(
+                    "User token is missing. Login first.");
+            }
+
+            var filename = Path.GetFileName(path);
+            path = Path.GetDirectoryName(path);
+
+            path = path.Replace("\\", "/");
+
+            if (!path.StartsWith("/"))
+                path = "/" + path;
+
+            path = "files/dropbox" + path;
+
+            var request = new RestRequest
+            {
+                Path = path,
+                Method = WebMethod.Post,
+            };
+
+            var buffer = new MemoryStream();
+            BufferEx.CopyStream(file, buffer);
+            buffer.Position = 0;
+
+            request.AddParameter("file", filename);
+            _fileClient.AddFile("file", filename, buffer);
+
+            _fileClient.BeginRequest(request, (req, res, state) =>
+                report(res.StatusCode == HttpStatusCode.OK));
         }
 
         private void ClearAuthenticator()
