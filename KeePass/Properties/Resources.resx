@@ -199,4 +199,7 @@ To set lock screen password, please go to Phone's Settings\lock &amp; wallpaper.
   <data name="GlobalPassTitle" xml:space="preserve">
     <value>7Pass Global password</value>
   </data>
+  <data name="FieldsLink" xml:space="preserve">
+    <value>{0} Field(s)</value>
+  </data>
 </root>

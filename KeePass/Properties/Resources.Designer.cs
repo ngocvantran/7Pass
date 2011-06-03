@@ -129,6 +129,15 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} Field(s).
+        /// </summary>
+        internal static string FieldsLink {
+            get {
+                return ResourceManager.GetString("FieldsLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter your global password!.
         /// </summary>
         internal static string GlobalPassPrompt {

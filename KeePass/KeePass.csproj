@@ -92,6 +92,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EntryFields.xaml.cs">
+      <DependentUpon>EntryFields.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EntryNotes.xaml.cs">
       <DependentUpon>EntryNotes.xaml</DependentUpon>
     </Compile>
@@ -212,6 +215,10 @@
     <Page Include="About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EntryFields.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="EntryNotes.xaml">
       <SubType>Designer</SubType>

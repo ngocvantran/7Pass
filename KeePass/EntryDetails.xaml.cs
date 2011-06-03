@@ -68,6 +68,22 @@ namespace KeePass
             UpdateNotes(entry);
             DataContext = entry;
             lnkUrl.Content = GetUrl();
+
+            var fields = entry.CustomFields.Count;
+            if (fields == 0)
+            {
+                lnkFields.Visibility =
+                    Visibility.Collapsed;
+            }
+            else
+            {
+                lnkFields.Visibility =
+                    Visibility.Visible;
+
+                lnkFields.Content = string.Format(
+                    Properties.Resources.FieldsLink,
+                    fields);
+            }
         }
 
         private string GetUrl()
@@ -126,6 +142,12 @@ namespace KeePass
         private void cmdRoot_Click(object sender, EventArgs e)
         {
             GoBack<MainPage>();
+        }
+
+        private void lnkFields_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigateTo<EntryFields>("id={0}",
+                NavigationContext.QueryString["id"]);
         }
 
         private void lnkNotes_Click(object sender, RoutedEventArgs e)

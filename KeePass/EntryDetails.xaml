@@ -66,6 +66,12 @@
                                  HorizontalContentAlignment="Left"
                                  Style="{StaticResource HyperlinkButtonWrappingStyle}" />
 
+                <!-- Fields -->
+                <TextBlock Text=" " />
+                
+                <HyperlinkButton Name="lnkFields" Click="lnkFields_Click"
+                                 HorizontalContentAlignment="Left"
+                                 Style="{StaticResource HyperlinkButtonWrappingStyle}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>
