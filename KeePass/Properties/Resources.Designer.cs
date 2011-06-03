@@ -264,6 +264,24 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entry has been saved successfully!.
+        /// </summary>
+        internal static string SavedCaption {
+            get {
+                return ResourceManager.GetString("SavedCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Entry.
+        /// </summary>
+        internal static string SavedTitle {
+            get {
+                return ResourceManager.GetString("SavedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 7Pass has encountered an unexpected error. 7Pass will now exit.
         ///
         ///Is it ok if I create an email so that you can send to me to fix this problem?.

@@ -71,7 +71,9 @@
     </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit">
+      <HintPath>D:\Van\Projects\KeePass.Password\Libs\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="Newtonsoft.Json.Silverlight">
       <HintPath>..\Libs\Newtonsoft.Json.Silverlight.dll</HintPath>
@@ -98,7 +100,6 @@
     <Compile Include="EntryNotes.xaml.cs">
       <DependentUpon>EntryNotes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EntryState.xaml.cs" />
     <Compile Include="GlobalPass.xaml.cs">
       <DependentUpon>GlobalPass.xaml</DependentUpon>
     </Compile>

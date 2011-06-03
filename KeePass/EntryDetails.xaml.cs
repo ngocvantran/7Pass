@@ -7,23 +7,17 @@ using KeePass.IO.Data;
 using KeePass.IO.Write;
 using KeePass.Storage;
 using KeePass.Utils;
-using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 
 namespace KeePass
 {
     public partial class EntryDetails
     {
-        private readonly ApplicationBarMenuItem _mnuSave;
-
         private bool _loaded;
 
         public EntryDetails()
         {
             InitializeComponent();
-
-            _mnuSave = (ApplicationBarMenuItem)
-                ApplicationBar.MenuItems[0];
         }
 
         protected override void OnNavigatedTo(
@@ -34,18 +28,11 @@ namespace KeePass
 
             if (_loaded)
             {
-                if (EntryState.HasChanges)
-                {
-                    var entry = (Entry)DataContext;
-
-                    UpdateNotes(entry);
-                    _mnuSave.IsEnabled = true;
-                }
+                var entry = (Entry)DataContext;
+                UpdateNotes(entry);
 
                 return;
             }
-
-            EntryState.HasChanges = false;
 
             var database = Cache.Database;
             if (database == null)
@@ -172,8 +159,22 @@ namespace KeePass
             OpenUrl(true);
         }
 
+        private void mnuReset_Click(object sender, EventArgs e)
+        {
+            var entry = (Entry)DataContext;
+            entry.Reset();
+
+            DataContext = null;
+            DataContext = entry;
+
+            UpdateNotes(entry);
+        }
+
         private void mnuSave_Click(object sender, EventArgs e)
         {
+            IsEnabled = false;
+            progBusy.IsLoading = true;
+
             var entry = (Entry)DataContext;
 
             entry.Url = txtUrl.Text;
@@ -189,18 +190,19 @@ namespace KeePass
 
             writer.Details(entry);
             info.SetDatabase(writer.Save);
+
+            IsEnabled = true;
+            progBusy.IsLoading = false;
+
+            MessageBox.Show(
+                Properties.Resources.SavedCaption,
+                Properties.Resources.SavedTitle,
+                MessageBoxButton.OK);
         }
 
         private void txtUrl_Changed(object sender, TextChangedEventArgs e)
         {
-            txt_Changed(sender, e);
             lnkUrl.Content = GetUrl();
-        }
-
-        private void txt_Changed(object sender, TextChangedEventArgs e)
-        {
-            _mnuSave.IsEnabled = true;
-            EntryState.HasChanges = true;
         }
 
         private void txt_GotFocus(object sender, RoutedEventArgs e)

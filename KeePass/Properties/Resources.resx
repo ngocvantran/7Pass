@@ -216,4 +216,10 @@ Is it ok if I create an email so that you can send to me to fix this problem?</v
   <data name="FieldsLink" xml:space="preserve">
     <value>{0} Field(s)</value>
   </data>
+  <data name="SavedCaption" xml:space="preserve">
+    <value>Entry has been saved successfully!</value>
+  </data>
+  <data name="SavedTitle" xml:space="preserve">
+    <value>Save Entry</value>
+  </data>
 </root>

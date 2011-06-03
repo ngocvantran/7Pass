@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
     Style="{StaticResource KeePassPage}">
 
@@ -18,6 +19,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <controls:PerformanceProgressBarEx x:Name="progBusy" />
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="Entry" Margin="9,-7,0,0"
@@ -29,15 +31,15 @@
                 <!-- Entry details -->
                 <TextBlock Text="Title" Style="{StaticResource PhoneTextNormalStyle}" />
                 <TextBox Name="txtTitle" Text="{Binding Title}"
-                         GotFocus="txt_GotFocus" TextChanged="txt_Changed" />
+                         GotFocus="txt_GotFocus" />
 
                 <TextBlock Text="User name" Style="{StaticResource PhoneTextNormalStyle}" />
                 <TextBox Name="txtUsername" Text="{Binding UserName}"
-                         GotFocus="txt_GotFocus" TextChanged="txt_Changed" />
+                         GotFocus="txt_GotFocus" />
 
                 <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
                 <TextBox Name="txtPassword" Text="{Binding Password}"
-                         GotFocus="txt_GotFocus" TextChanged="txt_Changed" />
+                         GotFocus="txt_GotFocus" />
 
                 <!-- URL -->
                 <TextBlock Text=" " />
@@ -89,8 +91,9 @@
                 Text="About" Click="cmdAbout_Click"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem
-                    Text="Save entry" IsEnabled="False"
-                    Click="mnuSave_Click" />
+                    Text="Save entry" Click="mnuSave_Click" />
+                <shell:ApplicationBarMenuItem
+                    Text="Reset entry" Click="mnuReset_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

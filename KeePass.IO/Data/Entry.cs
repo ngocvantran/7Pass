@@ -21,6 +21,7 @@ namespace KeePass.IO.Data
         };
 
         private readonly IDictionary<string, string> _fields;
+        private readonly Dictionary<string, string> _original;
 
         /// <summary>
         /// Gets the custom fields.
@@ -123,6 +124,7 @@ namespace KeePass.IO.Data
                 throw new ArgumentNullException("fields");
 
             _fields = fields;
+            _original = new Dictionary<string, string>(fields);
         }
 
         public Entry()
@@ -160,6 +162,17 @@ namespace KeePass.IO.Data
             }
 
             return url;
+        }
+
+        /// <summary>
+        /// Resets this entry.
+        /// </summary>
+        public void Reset()
+        {
+            _fields.Clear();
+
+            foreach (var pair in _original)
+                _fields.Add(pair.Key, pair.Value);
         }
 
         private static string GetPattern(string key)

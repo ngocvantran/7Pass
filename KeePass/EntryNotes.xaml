@@ -41,6 +41,10 @@
             <shell:ApplicationBarIconButton
                 IconUri="/Images/about.png"
                 Text="About" Click="cmdAbout_Click"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem
+                    Text="Clear All" Click="mnuClear_Click" />
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

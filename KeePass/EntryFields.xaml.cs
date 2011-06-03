@@ -63,8 +63,6 @@ namespace KeePass
 
             _entry[(string)txtField.Tag] =
                 txtField.Text;
-
-            EntryState.HasChanges = true;
         }
     }
 }

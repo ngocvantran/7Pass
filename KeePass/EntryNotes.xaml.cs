@@ -48,11 +48,15 @@ namespace KeePass
             GoBack<MainPage>();
         }
 
+        private void mnuClear_Click(object sender, EventArgs e)
+        {
+            txtNotes.Text = string.Empty;
+        }
+
         private void txtNotes_Changed(
             object sender, TextChangedEventArgs e)
         {
             _entry.Notes = txtNotes.Text;
-            EntryState.HasChanges = true;
         }
     }
 }
