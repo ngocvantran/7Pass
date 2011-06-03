@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Net;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -11,7 +11,6 @@ namespace KeePass.Sources.Web
     public partial class WebBrowse
     {
         private readonly ObservableCollection<WebLinkInfo> _items;
-        private NetworkCredential _credentials;
         private DownloadHandler _download;
 
         public WebBrowse()
@@ -28,26 +27,30 @@ namespace KeePass.Sources.Web
             if (cancelled)
                 return;
 
-            _download = new DownloadHandler(this,
-                NavigationContext.QueryString["folder"]);
+            if (!WebLinks.HasData)
+            {
+                NavigationService.GoBack();
+                return;
+            }
+
+            _download = new DownloadHandler(
+                this, WebLinks.Folder);
             _download.Completed += _download_Completed;
+            _download.LinksDetected += _download_LinksDetected;
 
-            var pars = NavigationContext.QueryString;
-            _credentials = WebUtils.CreateCredentials(
-                pars["user"], pars["password"], pars["domain"]);
-
-            var links = pars["l"];
             ThreadPool.QueueUserWorkItem(
-                _ => DisplayLinks(links));
+                _ => DisplayLinks(WebLinks.Links));
         }
 
-        private void DisplayLinks(string links)
+        private void DisplayLinks(
+            IEnumerable<string> links)
         {
             var dispatcher = Dispatcher;
-            var separated = links.Split(new[] {Environment.NewLine},
-                StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (var link in separated)
+            dispatcher.BeginInvoke(
+                () => _items.Clear());
+
+            foreach (var link in links)
             {
                 var item = new WebLinkInfo(link);
                 dispatcher.BeginInvoke(() =>
@@ -63,6 +66,13 @@ namespace KeePass.Sources.Web
             progList.IsLoading = false;
         }
 
+        private void _download_LinksDetected(
+            object sender, EventArgs e)
+        {
+            ThreadPool.QueueUserWorkItem(
+                _ => DisplayLinks(WebLinks.Links));
+        }
+
         private void lstLinks_SelectionChanged(
             object sender, SelectionChangedEventArgs e)
         {
@@ -74,7 +84,8 @@ namespace KeePass.Sources.Web
             lstLinks.IsEnabled = false;
             lstLinks.SelectedItem = null;
 
-            _download.Download(item.Url, _credentials);
+            _download.Download(item.Url,
+                WebLinks.Credentials);
         }
     }
 }

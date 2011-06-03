@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Info;
 using Microsoft.Phone.Tasks;
 
@@ -12,6 +13,7 @@ namespace KeePass.Utils
             var sb = new StringBuilder();
 
             AddErrorDetails(sb, ex);
+            AddAddress(sb);
             sb.AppendLine();
 
             AddDeviceInfo(sb);
@@ -86,6 +88,19 @@ namespace KeePass.Utils
 
             sb.AppendLine("Stack Trace:");
             sb.AppendLine(ex.StackTrace);
+        }
+
+        private static void AddAddress(StringBuilder sb)
+        {
+            var page = App.Current.RootFrame.Content
+                as PhoneApplicationPage;
+
+            if (page == null)
+                return;
+
+            sb.Append("Uri: ");
+            sb.AppendLine(page.NavigationService
+                .CurrentSource.ToString());
         }
     }
 }

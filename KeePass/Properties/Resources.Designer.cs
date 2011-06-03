@@ -197,6 +197,24 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected URL cannot be displayed. If the URL is too long (&gt; 500 characters), try to relocate your resource to another location where the URL is shorter..
+        /// </summary>
+        internal static string InvalidUrlPrompt {
+            get {
+                return ResourceManager.GetString("InvalidUrlPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid URL.
+        /// </summary>
+        internal static string InvalidUrlTitle {
+            get {
+                return ResourceManager.GetString("InvalidUrlTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download KeyFile.
         /// </summary>
         internal static string KeyFileTitle {
@@ -206,7 +224,7 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;a\s+[^&gt;]?href\s?=\s?([&apos;&quot;])(.+?)\1.
+        ///   Looks up a localized string similar to &lt;a\s+[^&gt;]?href\s?=\s?([&apos;&quot;])([^&apos;&quot;]+).
         /// </summary>
         internal static string LinkRegex {
             get {
@@ -242,6 +260,26 @@ namespace KeePass.Properties {
         internal static string PasswordTitle {
             get {
                 return ResourceManager.GetString("PasswordTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 7Pass has encountered an unexpected error. 7Pass will now exit.
+        ///
+        ///Is it ok if I create an email so that you can send to me to fix this problem?.
+        /// </summary>
+        internal static string UnhandledExPrompt {
+            get {
+                return ResourceManager.GetString("UnhandledExPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ooopppppps.
+        /// </summary>
+        internal static string UnhandledExTitle {
+            get {
+                return ResourceManager.GetString("UnhandledExTitle", resourceCulture);
             }
         }
         

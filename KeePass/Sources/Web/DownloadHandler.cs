@@ -20,7 +20,15 @@ namespace KeePass.Sources.Web
         private readonly string _folder;
         private readonly KeePassPage _page;
 
+        /// <summary>
+        /// Occurs when the database has been saved.
+        /// </summary>
         public event EventHandler Completed;
+
+        /// <summary>
+        /// Occurs when web links are detected.
+        /// </summary>
+        public event EventHandler LinksDetected;
 
         public DownloadHandler(KeePassPage page, string folder)
         {
@@ -31,20 +39,33 @@ namespace KeePass.Sources.Web
             _folder = folder;
         }
 
-        public void Download(string url, ICredentials credentials)
+        public void Download(string url,
+            ICredentials credentials)
         {
-            WebUtils.Download(url, credentials, ResponseReady);
+            WebUtils.Download(url, credentials,
+                ResponseReady);
         }
 
         /// <summary>
         /// Raises the <see cref="Completed"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="System.EventArgs"/>
+        /// <param name="e">The <see cref="EventArgs"/>
         /// instance containing the event data.</param>
         protected virtual void OnCompleted(EventArgs e)
         {
             if (Completed != null)
                 Completed(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="LinksDetected"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="System.EventArgs"/>
+        /// instance containing the event data.</param>
+        protected virtual void OnLinksDetected(EventArgs e)
+        {
+            if (LinksDetected != null)
+                LinksDetected(this, e);
         }
 
         private static bool DetectCertificateError(
@@ -71,20 +92,11 @@ namespace KeePass.Sources.Web
             if (links.Length == 0)
                 return false;
 
-            var sb = new StringBuilder();
-            foreach (var link in links)
-                sb.AppendLine(link);
+            WebLinks.Links = links;
+            WebLinks.Folder = _folder;
+            WebLinks.Credentials = request.Credentials;
 
-            var credentials = request.Credentials as NetworkCredential
-                ?? new NetworkCredential();
-
-            _page.Dispatcher.BeginInvoke(() => _page.NavigateTo<WebBrowse>(
-                "l={0}&user={1}&password={2}&domain={3}&folder={4}",
-                sb.ToString(),
-                credentials.UserName,
-                credentials.Password,
-                credentials.Domain,
-                _folder));
+            OnLinksDetected(EventArgs.Empty);
 
             return true;
         }
@@ -109,9 +121,10 @@ namespace KeePass.Sources.Web
                 .Cast<Match>()
                 .Select(x => x.Groups[2].Value)
                 .Distinct()
-                .Take(30)
+                .Where(x => WebUtils.IsValidUrl(x, true))
                 .Select(x => new Uri(baseUrl, x))
                 .Select(x => x.ToString())
+                .Take(30)
                 .ToArray();
         }
 

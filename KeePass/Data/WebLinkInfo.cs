@@ -21,7 +21,15 @@ namespace KeePass.Data
         public WebLinkInfo(string url)
         {
             _url = url;
-            _name = Path.GetFileName(url);
+
+            try
+            {
+                _name = Path.GetFileName(url);
+            }
+            catch (ArgumentException)
+            {
+                _name = string.Empty;
+            }
         }
     }
 }

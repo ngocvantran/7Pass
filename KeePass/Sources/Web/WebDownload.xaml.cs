@@ -35,7 +35,9 @@ namespace KeePass.Sources.Web
 
             _download = new DownloadHandler(this,
                 NavigationContext.QueryString["folder"]);
+
             _download.Completed += _download_Completed;
+            _download.LinksDetected += _download_LinksDetected;
         }
 
         private void PerformDownload()
@@ -57,6 +59,12 @@ namespace KeePass.Sources.Web
         private void _download_Completed(object sender, EventArgs e)
         {
             SetWorkState(false);
+        }
+
+        private void _download_LinksDetected(object sender, EventArgs e)
+        {
+            Dispatcher.BeginInvoke(() =>
+                this.NavigateTo<WebBrowse>());
         }
 
         private void cmdDownload_Click(object sender, EventArgs e)
@@ -85,8 +93,8 @@ namespace KeePass.Sources.Web
         private void txtUrl_TextChanged(
             object sender, TextChangedEventArgs e)
         {
-            var isValidUrl = Uri.IsWellFormedUriString(
-                txtUrl.Text, UriKind.Absolute);
+            var isValidUrl = WebUtils
+                .IsValidUrl(txtUrl.Text, false);
 
             _cmdDownload.IsEnabled = isValidUrl;
         }
