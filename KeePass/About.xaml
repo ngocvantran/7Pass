@@ -21,45 +21,45 @@
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock Name="lblVersion" HorizontalAlignment="Center">
+        <ScrollViewer Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel Grid.Row="1" Margin="12,0,12,0">
+                <TextBlock Name="lblVersion" HorizontalAlignment="Center">
                 7Pass Version: {0}
-            </TextBlock>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <HyperlinkButton Content="Purchase"
-                             Click="lnkPurchase_Click" />
-                <TextBlock Text="/" />
-                <HyperlinkButton Content="Review"
-                             Click="lnkReview_Click" />
-            </StackPanel>
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <HyperlinkButton Content="Purchase" Click="lnkPurchase_Click" />
+                    <TextBlock Text="/" />
+                    <HyperlinkButton Content="Review" Click="lnkReview_Click" />
+                </StackPanel>
 
-            <TextBlock HorizontalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center">
                 <LineBreak />
                 Developer's Blog (News &amp; Feedback):
-            </TextBlock>
-            <HyperlinkButton Content="7pass.wordpress.com" TargetName="_blank"
-                             NavigateUri="http://7pass.wordpress.com" />
+                </TextBlock>
+                <HyperlinkButton Content="7pass.wordpress.com" TargetName="_blank"
+                                 NavigateUri="http://7pass.wordpress.com" />
 
-            <TextBlock HorizontalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center">
                 <LineBreak />
                 Source Code:
-            </TextBlock>
-            <HyperlinkButton Content="github.com/7pass/7pass" TargetName="_blank"
-                             NavigateUri="http://github.com/7pass/7pass" />
+                </TextBlock>
+                <HyperlinkButton Content="github.com/7pass/7pass" TargetName="_blank"
+                                 NavigateUri="http://github.com/7pass/7pass" />
 
-            <TextBlock HorizontalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center">
                 <LineBreak />
                 Libraries used/referenced:
-            </TextBlock>
+                </TextBlock>
 
-            <HyperlinkButton Content="KeePass" TargetName="_blank"
+                <HyperlinkButton Content="KeePass" TargetName="_blank"
                              NavigateUri="http://keepass.info" />
-            <HyperlinkButton Content="Hammock for REST" TargetName="_blank"
+                <HyperlinkButton Content="Hammock for REST" TargetName="_blank"
                              NavigateUri="http://hammock.codeplex.com" />
-            <HyperlinkButton Content="#ziplib" TargetName="_blank"
+                <HyperlinkButton Content="#ziplib" TargetName="_blank"
                              NavigateUri="http://www.icsharpcode.net/opensource/sharpziplib/" />
-            <HyperlinkButton Content="Json.NET" TargetName="_blank"
+                <HyperlinkButton Content="Json.NET" TargetName="_blank"
                              NavigateUri="http://json.codeplex.com/" />
-        </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </keepass:KeePassPage>

@@ -21,20 +21,22 @@
             <TextBlock x:Name="PageTitle" Text="Settings" Margin="9,-7,0,0"
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
-        
-        <StackPanel Grid.Row="1">
-            <toolkit:ToggleSwitch
-                Name="chkRecycleBin" Header="Hide Recycle Bin"
-                Checked="chkRecycleBin_CheckedChanged"
-                Unchecked="chkRecycleBin_CheckedChanged" />
-            <toolkit:ToggleSwitch
-                Name="chkBrowser" Header="Use integrated browser"
-                Checked="chkBrowser_CheckedChanged"
-                Unchecked="chkBrowser_CheckedChanged" />
-            <toolkit:ToggleSwitch
-                Name="chkPassword" Header="Requires Password"
-                Loaded="chkPassword_Loaded" />
-        </StackPanel>
+
+        <ScrollViewer Grid.Row="1">
+            <StackPanel>
+                <toolkit:ToggleSwitch
+                    Name="chkRecycleBin" Header="Hide Recycle Bin"
+                    Checked="chkRecycleBin_CheckedChanged"
+                    Unchecked="chkRecycleBin_CheckedChanged" />
+                <toolkit:ToggleSwitch
+                    Name="chkBrowser" Header="Use integrated browser"
+                    Checked="chkBrowser_CheckedChanged"
+                    Unchecked="chkBrowser_CheckedChanged" />
+                <toolkit:ToggleSwitch
+                    Name="chkPassword" Header="Requires Password"
+                    Loaded="chkPassword_Loaded" />
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 
 </keepass:KeePassPage>
