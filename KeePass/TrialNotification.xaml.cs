@@ -60,13 +60,12 @@ namespace KeePass
 #if !FREEWARE
             new MarketplaceDetailTask().Show();
 #else
-#endif
             new MarketplaceDetailTask
             {
                 ContentType = MarketplaceContentType.Applications,
                 ContentIdentifier = "2f1d7d92-cef4-df11-9264-00237de2db9e",
             }.Show();
-            
+#endif
         }
 
         private void popupTrial_Loaded(object sender, RoutedEventArgs e)

@@ -10,6 +10,12 @@ namespace KeePass.Utils
     {
         private static Uri _backTarget;
 
+        public KeePassPage()
+        {
+            SupportedOrientations = SupportedPageOrientation
+                .PortraitOrLandscape;
+        }
+
         public void GoBack(Uri uri)
         {
             if (!NavigationService.CanGoBack)
