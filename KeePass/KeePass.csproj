@@ -114,6 +114,7 @@
     <Compile Include="Password.xaml.cs">
       <DependentUpon>Password.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Refs\HybridOrientationChangesFrame.cs" />
     <Compile Include="Rename.xaml.cs">
       <DependentUpon>Rename.xaml</DependentUpon>
     </Compile>
