@@ -340,19 +340,38 @@ namespace KeePass.Storage
                 if (!store.DirectoryExists(Folder))
                     store.CreateDirectory(Folder);
 
-                var newDb = Path.Combine(Folder, "newDb.kdbx");
+                var dbPath = DatabasePath;
+                var backupPath = Path.Combine(Folder, "backup.kdbx");
+
+                using (var source = store.OpenFile(dbPath, FileMode.Open))
+                using (var target = store.OpenFile(backupPath, FileMode.Create))
+                {
+                    BufferEx.CopyStream(source, target);
+                }
+
+                store.DeleteFile(dbPath);
 
                 try
                 {
-                    using (var fs = store.CreateFile(newDb))
+                    using (var fs = store.OpenFile(dbPath, FileMode.Create))
                         action(fs);
-
-                    // TODO: Replace old database
                 }
-                finally
+                catch
                 {
-                    store.DeleteFile(newDb);
+                    // Restore original database
+                    using (var source = store.OpenFile(backupPath, FileMode.Open))
+                    using (var target = store.OpenFile(dbPath, FileMode.Create))
+                    {
+                        BufferEx.CopyStream(source, target);
+                    }
+
+                    throw;
                 }
+
+                store.DeleteFile(backupPath);
+
+                if (HasPassword)
+                    UpdateSavedPassword(store);
             }
         }
 
@@ -508,13 +527,27 @@ namespace KeePass.Storage
         private void SaveDetails(IsolatedStorageFile store)
         {
             using (var fs = store.CreateFile(InfoPath))
-            {
-                var writer = new StreamWriter(fs);
-                var serializer = new JsonSerializer();
-                serializer.Serialize(writer, Details);
+                SaveDetails(fs);
+        }
 
-                writer.Flush();
+        private void SaveDetails(IsolatedStorageFileStream fs)
+        {
+            var writer = new StreamWriter(fs);
+            var serializer = new JsonSerializer();
+            serializer.Serialize(writer, Details);
+
+            writer.Flush();
+        }
+
+        private void UpdateSavedPassword(IsolatedStorageFile store)
+        {
+            using (var fs = store.OpenFile(DatabasePath, FileMode.Open))
+            {
+                Data = DatabaseReader.GetXml(
+                    fs, Data.MasterKey);
             }
+
+            Save(store, Data);
         }
 
         private static void Upgrade(IsolatedStorageFile store)

@@ -16,6 +16,25 @@ namespace KeePass.IO.Read
         }
 
         public static DbPersistentData GetXml(
+            Stream stream, byte[] masterKey)
+        {
+            if (stream == null)
+                throw new ArgumentNullException("stream");
+
+            if (!CheckSignature(stream))
+            {
+                throw new FormatException(
+                    "Invalid format detected");
+            }
+
+            var headers = ReadHeaders(stream);
+            headers.Verify();
+
+            return ReadDatabase(stream,
+                headers, masterKey);
+        }
+
+        public static DbPersistentData GetXml(
             Stream stream, string password, byte[] keyFile)
         {
             if (stream == null)
@@ -32,25 +51,9 @@ namespace KeePass.IO.Read
 
             var masterKey = GetMasterKey(
                 headers, password, keyFile);
-            var decrypted = Decrypt(stream,
+
+            return ReadDatabase(stream,
                 headers, masterKey);
-
-            if (decrypted == null)
-                return null;
-
-            using (decrypted)
-            using (var buffer = new MemoryStream())
-            {
-                BufferEx.CopyStream(decrypted, buffer);
-
-                return new DbPersistentData
-                {
-                    MasterKey = masterKey,
-                    Xml = buffer.ToArray(),
-                    Protection = CryptoSerializer
-                        .Serialize(headers),
-                };
-            }
         }
 
         public static Database Load(DbPersistentData data,
@@ -123,6 +126,30 @@ namespace KeePass.IO.Read
             return new PasswordData(password, keyFile)
                 .TransformKey(headers.TransformSeed,
                     headers.TransformRounds);
+        }
+
+        private static DbPersistentData ReadDatabase(
+            Stream stream, Headers headers, byte[] masterKey)
+        {
+            var decrypted = Decrypt(stream,
+                headers, masterKey);
+
+            if (decrypted == null)
+                return null;
+
+            using (decrypted)
+            using (var buffer = new MemoryStream())
+            {
+                BufferEx.CopyStream(decrypted, buffer);
+
+                return new DbPersistentData
+                {
+                    MasterKey = masterKey,
+                    Xml = buffer.ToArray(),
+                    Protection = CryptoSerializer
+                        .Serialize(headers),
+                };
+            }
         }
 
         private static bool VerifyStartBytes(
