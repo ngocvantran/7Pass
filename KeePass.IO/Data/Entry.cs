@@ -22,8 +22,6 @@ namespace KeePass.IO.Data
 
         private readonly IDictionary<string, string> _fields;
 
-        private string _url;
-
         /// <summary>
         /// Gets the custom fields.
         /// </summary>
@@ -105,12 +103,8 @@ namespace KeePass.IO.Data
         /// <value>The Url.</value>
         public string Url
         {
-            get { return _url; }
-            set
-            {
-                this[KEY_URL] = value;
-                _url = GetUrl();
-            }
+            get { return this[KEY_URL]; }
+            set { this[KEY_URL] = value; }
         }
 
         /// <summary>
@@ -129,7 +123,6 @@ namespace KeePass.IO.Data
                 throw new ArgumentNullException("fields");
 
             _fields = fields;
-            _url = GetUrl();
         }
 
         public Entry()
@@ -144,24 +137,13 @@ namespace KeePass.IO.Data
             return new Dictionary<string, string>(_fields);
         }
 
-        private static string GetPattern(string key)
+        /// <summary>
+        /// Gets the navigatable URL.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <returns>Navigatable URL.</returns>
+        public string GetNavigateUrl(string url)
         {
-            foreach (var known in _known)
-            {
-                if (string.Equals(key, known,
-                    StringComparison.InvariantCultureIgnoreCase))
-                {
-                    return "{" + known + "}";
-                }
-            }
-
-            return "{S:" + key + "}";
-        }
-
-        private string GetUrl()
-        {
-            var url = this[KEY_URL];
-
             if (url == null)
                 return null;
 
@@ -178,6 +160,20 @@ namespace KeePass.IO.Data
             }
 
             return url;
+        }
+
+        private static string GetPattern(string key)
+        {
+            foreach (var known in _known)
+            {
+                if (string.Equals(key, known,
+                    StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return "{" + known + "}";
+                }
+            }
+
+            return "{S:" + key + "}";
         }
 
         private string TryGet(string key)

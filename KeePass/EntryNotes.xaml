@@ -1,0 +1,47 @@
+﻿<keepass:KeePassPage 
+    x:Class="KeePass.EntryNotes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:keepass="clr-namespace:KeePass.Utils"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    Style="{StaticResource KeePassPage}">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Notes" Margin="9,-7,0,0"
+                       Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <TextBox Name="txtNotes" Text="{Binding Notes}"
+                     TextWrapping="Wrap"
+                     TextChanged="txtNotes_Changed" />
+        </Grid>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True">
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/home.png"
+                Text="Home" Click="cmdHome_Click" />
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/root.png"
+                Text="Select DB" Click="cmdRoot_Click" />
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/about.png"
+                Text="About" Click="cmdAbout_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</keepass:KeePassPage>

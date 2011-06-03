@@ -92,6 +92,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EntryNotes.xaml.cs">
+      <DependentUpon>EntryNotes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EntryState.xaml.cs" />
     <Compile Include="GlobalPass.xaml.cs">
       <DependentUpon>GlobalPass.xaml</DependentUpon>
     </Compile>
@@ -206,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EntryNotes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
