@@ -122,6 +122,7 @@
     <Compile Include="Password.xaml.cs">
       <DependentUpon>Password.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Refs\HybridOrientationChangesFrame.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

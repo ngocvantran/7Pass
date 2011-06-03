@@ -37,7 +37,11 @@ namespace KeePass
             if (_initialized)
                 return;
 
-            RootFrame = new TransitionFrame();
+            RootFrame = new Delay.HybridOrientationChangesFrame
+            {
+                Duration = TimeSpan.FromSeconds(0.6)
+            };
+
             RootFrame.Navigated += CompleteInitializePhoneApplication;
             RootFrame.NavigationFailed += RootFrame_NavigationFailed;
 
