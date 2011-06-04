@@ -140,7 +140,7 @@ namespace KeePass.Sources.DropBox
             client.UploadFileAsync(path, info.Database,
                 x => report(new SyncCompleteInfo
                 {
-                    Path = path,
+                    Path = client.GetUrl(path),
                     Result = SyncResults.Conflict,
                 }),
                 x => report(new SyncCompleteInfo
@@ -169,7 +169,8 @@ namespace KeePass.Sources.DropBox
             Action<DropboxException> failure)
         {
             var fileName = Path.GetFileName(path);
-            path = Path.GetDirectoryName(path);
+            path = Path.GetDirectoryName(path)
+                .Replace('\\', '/');
 
             client.UploadFileAsync(path, fileName,
                 fileData, success, failure);
