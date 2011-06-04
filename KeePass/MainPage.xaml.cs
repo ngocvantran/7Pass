@@ -50,26 +50,46 @@ namespace KeePass
             dispatcher.BeginInvoke(() =>
                 listItem.IsUpdating = false);
 
-            if (result != SyncResults.Failed)
+            switch (result)
             {
-                dispatcher.BeginInvoke(() =>
-                    UpdateItem(listItem, true));
+                case SyncResults.NoChange:
+                case SyncResults.Downloaded:
+                    dispatcher.BeginInvoke(() =>
+                        UpdateItem(listItem, "updated"));
+                    break;
 
-                return;
+                case SyncResults.Uploaded:
+                
+                    dispatcher.BeginInvoke(() =>
+                        UpdateItem(listItem, "uploaded"));
+                    break;
+
+                case SyncResults.Conflict:
+                    dispatcher.BeginInvoke(() =>
+                    {
+                        UpdateItem(listItem, "uploaded");
+
+                        MessageBox.Show(error,
+                            Properties.Resources.ConflictTitle,
+                            MessageBoxButton.OK);
+                    });
+                    break;
+
+                case SyncResults.Failed:
+                    var msg = string.Format(
+                        Properties.Resources.UpdateFailure,
+                        info.Details.Name, error);
+
+                    dispatcher.BeginInvoke(() =>
+                    {
+                        listItem.UpdatedIcon = null;
+
+                        MessageBox.Show(msg,
+                            Properties.Resources.UpdateTitle,
+                            MessageBoxButton.OK);
+                    });
+                    break;
             }
-
-            var msg = string.Format(
-                Properties.Resources.UpdateFailure,
-                info.Details.Name, error);
-
-            dispatcher.BeginInvoke(() =>
-            {
-                listItem.UpdatedIcon = null;
-
-                MessageBox.Show(msg,
-                    Properties.Resources.UpdateTitle,
-                    MessageBoxButton.OK);
-            });
         }
 
         private void ListDatabases()
@@ -86,7 +106,7 @@ namespace KeePass
                 var local = item;
                 dispatcher.BeginInvoke(() =>
                 {
-                    UpdateItem(local, false);
+                    UpdateItem(local, null);
                     _items.Add(local);
                 });
 
@@ -125,7 +145,7 @@ namespace KeePass
         }
 
         private static void UpdateItem(
-            DatabaseItem item, bool updated)
+            DatabaseItem item, string icon)
         {
             var info = (DatabaseInfo)item.Info;
 
@@ -137,10 +157,10 @@ namespace KeePass
             else
                 item.PasswordIcon = null;
 
-            if (updated)
+            if (!string.IsNullOrEmpty(icon))
             {
                 item.UpdatedIcon = ThemeData
-                    .GetImageSource("updated");
+                    .GetImageSource(icon);
             }
             else
                 item.UpdatedIcon = null;

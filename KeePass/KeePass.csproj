@@ -301,6 +301,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\uploaded.dark.png" />
+    <Content Include="Images\uploaded.light.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <None Include="packages.config" />

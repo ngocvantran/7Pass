@@ -222,4 +222,14 @@ Is it ok if I create an email so that you can send to me to fix this problem?</v
   <data name="SavedTitle" xml:space="preserve">
     <value>Save Entry</value>
   </data>
+  <data name="Conflict" xml:space="preserve">
+    <value>7Pass has detected a conflict version of the database.
+Your local database is now uploaded at:
+[{0}]
+
+If you want to use the other database, please download it separately.</value>
+  </data>
+  <data name="ConflictTitle" xml:space="preserve">
+    <value>Database Conflict</value>
+  </data>
 </root>

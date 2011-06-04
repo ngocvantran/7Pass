@@ -72,6 +72,28 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 7Pass has detected a conflict version of the database.
+        ///Your local database is now uploaded at:
+        ///[{0}]
+        ///
+        ///If you want to use the other database, please download it separately..
+        /// </summary>
+        internal static string Conflict {
+            get {
+                return ResourceManager.GetString("Conflict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database Conflict.
+        /// </summary>
+        internal static string ConflictTitle {
+            get {
+                return ResourceManager.GetString("ConflictTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The database file is corrupted!.
         /// </summary>
         internal static string CorruptedFile {

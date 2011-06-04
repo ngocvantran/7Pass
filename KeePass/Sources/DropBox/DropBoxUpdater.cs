@@ -5,7 +5,6 @@ using DropNet.Exceptions;
 using DropNet.Models;
 using KeePass.IO.Utils;
 using KeePass.Storage;
-using RestSharp;
 
 namespace KeePass.Sources.DropBox
 {
@@ -73,15 +72,18 @@ namespace KeePass.Sources.DropBox
             var fileName = Path.GetFileNameWithoutExtension(path);
 
             fileName = string.Concat(fileName,
-                "(7Pass' conflicted copy ",
+                " (7Pass' conflicted copy ",
                 DateTime.Today.ToString("yyyy-MM-dd"),
-                ".", extension);
+                ")", extension);
 
-            return Path.Combine(dir, fileName);
+            return Path.Combine(dir, fileName)
+                .Replace('\\', '/');
         }
 
-        private static void OnFileMetaReady(DropNetClient client,
-            SyncInfo info, MetaData meta, Action<SyncCompleteInfo> report)
+        private static void OnFileMetaReady(
+            DropNetClient client,
+            SyncInfo info, MetaData meta,
+            Action<SyncCompleteInfo> report)
         {
             // No change from server side
             if (meta.Modified == info.Modified)
@@ -103,6 +105,7 @@ namespace KeePass.Sources.DropBox
                     x => report(new SyncCompleteInfo
                     {
                         Path = info.Path,
+                        Modified = x.Modified,
                         Result = SyncResults.Uploaded,
                     }),
                     x => report(new SyncCompleteInfo
@@ -123,6 +126,7 @@ namespace KeePass.Sources.DropBox
                     {
                         Path = info.Path,
                         Database = x.RawBytes,
+                        Modified = meta.Modified,
                         Result = SyncResults.Downloaded,
                     }),
                     ex => report(new SyncCompleteInfo
@@ -140,6 +144,7 @@ namespace KeePass.Sources.DropBox
             client.UploadFileAsync(path, info.Database,
                 x => report(new SyncCompleteInfo
                 {
+                    Modified = x.Modified,
                     Path = client.GetUrl(path),
                     Result = SyncResults.Conflict,
                 }),
@@ -165,15 +170,20 @@ namespace KeePass.Sources.DropBox
         private static void UploadFileAsync(
             this DropNetClient client,
             string path, byte[] fileData,
-            Action<RestResponse> success,
+            Action<MetaData> success,
             Action<DropboxException> failure)
         {
+            var orgPath = path;
+
             var fileName = Path.GetFileName(path);
             path = Path.GetDirectoryName(path)
                 .Replace('\\', '/');
 
-            client.UploadFileAsync(path, fileName,
-                fileData, success, failure);
+            client.UploadFileAsync(
+                path, fileName, fileData,
+                x => client.GetMetaDataAsync(
+                    orgPath, success, failure),
+                failure);
         }
     }
 }

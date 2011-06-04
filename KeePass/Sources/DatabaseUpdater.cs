@@ -51,6 +51,10 @@ namespace KeePass.Sources
                     details.Url = result.Path;
                     details.Modified = result.Modified;
                     info.SaveDetails();
+
+                    msg = string.Format(
+                        Properties.Resources.Conflict,
+                        new Uri(result.Path).LocalPath);
                     break;
 
                 case SyncResults.Failed:

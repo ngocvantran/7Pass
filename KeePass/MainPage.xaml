@@ -65,7 +65,7 @@
                                                   Click="mnuClear_Click" />
                                 <toolkit:MenuItem Header="rename" Tag="{Binding Info}"
                                                   Click="mnuRename_Click" />
-                                <toolkit:MenuItem Header="update" Tag="{Binding Info}"
+                                <toolkit:MenuItem Header="synchronize" Tag="{Binding Info}"
                                                   IsEnabled="{Binding CanUpdate}"
                                                   Click="mnuUpdate_Click" />
                                 <toolkit:MenuItem Header="delete" Tag="{Binding Info}"
