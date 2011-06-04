@@ -1,6 +1,6 @@
 ﻿using System;
+using DropNet.Models;
 using KeePass.Data;
-using KeePass.Sources.DropBox.Api;
 using KeePass.Utils;
 
 namespace KeePass.Sources.DropBox
@@ -8,11 +8,17 @@ namespace KeePass.Sources.DropBox
     internal class MetaListItemInfo : ListItemInfo
     {
         private readonly bool _idDir;
+        private readonly string _modified;
         private readonly string _path;
 
         public bool IsDir
         {
             get { return _idDir; }
+        }
+
+        public string Modified
+        {
+            get { return _modified; }
         }
 
         public string Path
@@ -27,10 +33,11 @@ namespace KeePass.Sources.DropBox
 
             Title = data.Name;
             _path = data.Path;
-            _idDir = data.IsDir;
+            _idDir = data.Is_Dir;
+            _modified = data.Modified;
 
             Icon = ThemeData.GetImage(
-                data.IsDir ? "folder" : "entry");
+                data.Is_Dir ? "folder" : "entry");
         }
     }
 }

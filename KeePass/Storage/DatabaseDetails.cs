@@ -6,6 +6,23 @@ namespace KeePass.Storage
     public class DatabaseDetails
     {
         /// <summary>
+        /// Gets or sets a value indicating whether
+        /// the database has local changes.
+        /// </summary>
+        /// <value><c>true</c> if the database has
+        /// local changes; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasLocalChanges { get; set; }
+
+        /// <summary>
+        /// Gets or sets the modified value.
+        /// </summary>
+        /// <value>
+        /// The modified value.
+        /// </value>
+        public string Modified { get; set; }
+
+        /// <summary>
         /// Gets or sets the name.
         /// </summary>
         /// <value>

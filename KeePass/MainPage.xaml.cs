@@ -41,7 +41,7 @@ namespace KeePass
         }
 
         private void DatabaseUpdated(DatabaseInfo info,
-            bool success, string error)
+            SyncResults result, string error)
         {
             var dispatcher = Dispatcher;
             var listItem = _items.First(
@@ -50,7 +50,7 @@ namespace KeePass
             dispatcher.BeginInvoke(() =>
                 listItem.IsUpdating = false);
 
-            if (success)
+            if (result != SyncResults.Failed)
             {
                 dispatcher.BeginInvoke(() =>
                     UpdateItem(listItem, true));

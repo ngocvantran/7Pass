@@ -6,8 +6,10 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using DropNet;
+using DropNet.Exceptions;
+using DropNet.Models;
 using KeePass.IO.Data;
-using KeePass.Sources.DropBox.Api;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
@@ -67,51 +69,56 @@ namespace KeePass.Sources.DropBox
                 _token, _secret, path, _folder);
         }
 
-        private void OnFileDownloaded(Stream file,
-            string path, string title)
+        private void OnFileDownloadFailed(DropboxException obj)
+        {
+            SetWorking(false);
+
+            Dispatcher.BeginInvoke(() =>
+                MessageBox.Show(
+                    DropBoxResources.DownloadError,
+                    DropBoxResources.ListTitle,
+                    MessageBoxButton.OK));
+        }
+
+        private void OnFileDownloaded(byte[] file,
+            string path, string title, string modified)
         {
             var dispatcher = Dispatcher;
 
             try
             {
-                if (file == null)
+                using (var buffer = new MemoryStream(file))
                 {
-                    dispatcher.BeginInvoke(() => MessageBox.Show(
-                        DropBoxResources.DownloadError,
-                        DropBoxResources.ListTitle,
-                        MessageBoxButton.OK));
-
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(_folder))
-                {
-                    if (!DatabaseVerifier.Verify(dispatcher, file))
-                        return;
-
-                    var storage = new DatabaseInfo();
-                    storage.SetDatabase(file, new DatabaseDetails
+                    if (string.IsNullOrEmpty(_folder))
                     {
-                        Url = path,
-                        Name = title,
-                        Source = DatabaseUpdater.DROPBOX_UPDATER,
-                    });
-                }
-                else
-                {
-                    var hash = KeyFile.GetKey(file);
-                    if (hash == null)
-                    {
-                        dispatcher.BeginInvoke(() => MessageBox.Show(
-                            Properties.Resources.InvalidKeyFile,
-                            Properties.Resources.KeyFileTitle,
-                            MessageBoxButton.OK));
+                        if (!DatabaseVerifier.Verify(dispatcher, buffer))
+                            return;
 
-                        return;
+                        var storage = new DatabaseInfo();
+                        storage.SetDatabase(buffer, new DatabaseDetails
+                        {
+                            Url = path,
+                            Name = title,
+                            Modified = modified,
+                            Source = DatabaseUpdater.DROPBOX_UPDATER,
+                        });
                     }
+                    else
+                    {
+                        var hash = KeyFile.GetKey(buffer);
+                        if (hash == null)
+                        {
+                            dispatcher.BeginInvoke(() => MessageBox.Show(
+                                Properties.Resources.InvalidKeyFile,
+                                Properties.Resources.KeyFileTitle,
+                                MessageBoxButton.OK));
 
-                    new DatabaseInfo(_folder)
-                        .SetKeyFile(hash);
+                            return;
+                        }
+
+                        new DatabaseInfo(_folder)
+                            .SetKeyFile(hash);
+                    }
                 }
 
                 dispatcher.BeginInvoke(
@@ -130,21 +137,11 @@ namespace KeePass.Sources.DropBox
 
             try
             {
-                if (data == null)
-                {
-                    dispatcher.BeginInvoke(() => MessageBox.Show(
-                        DropBoxResources.ListError,
-                        DropBoxResources.ListTitle,
-                        MessageBoxButton.OK));
-
-                    return;
-                }
-
                 dispatcher.BeginInvoke(
                     () => _items.Clear());
 
                 foreach (var child in data.Contents
-                    .OrderBy(x => !x.IsDir)
+                    .OrderBy(x => !x.Is_Dir)
                     .ThenBy(x => x.Name))
                 {
                     var meta = child;
@@ -164,13 +161,26 @@ namespace KeePass.Sources.DropBox
             }
         }
 
+        private void OnListFailed(DropboxException ex)
+        {
+            Dispatcher.BeginInvoke(() =>
+                MessageBox.Show(
+                    DropBoxResources.ListError,
+                    DropBoxResources.ListTitle,
+                    MessageBoxButton.OK));
+        }
+
         private void RefreshList()
         {
             progList.IsLoading = true;
             _cmdRefresh.IsEnabled = false;
 
-            new Client(_token, _secret).ListAsync(
-                _path, OnListComplete);
+            var client = new DropNetClient(
+                DropBoxInfo.KEY, DropBoxInfo.SECRET,
+                _token, _secret);
+
+            client.GetMetaDataAsync(_path,
+                OnListComplete, OnListFailed);
         }
 
         private void SetWorking(bool working)
@@ -199,15 +209,16 @@ namespace KeePass.Sources.DropBox
                     NavigateTo(meta.Path);
                 else
                 {
-                    var url = string.Format(
-                        "dropbox://{0}:{1}@dropbox.com{2}",
-                        _token, _secret, meta.Path);
-
                     SetWorking(true);
 
-                    var client = new Client(_token, _secret);
-                    client.DownloadAsync(meta.Path, x =>
-                        OnFileDownloaded(x, url, meta.Title));
+                    var client = DropBoxInfo
+                        .Create(_token, _secret);
+
+                    var url = client.GetUrl(meta.Path);
+                    client.GetFileAsync(meta.Path,
+                        x => OnFileDownloaded(x.RawBytes, url,
+                            meta.Title, meta.Modified),
+                        OnFileDownloadFailed);
                 }
             }
 

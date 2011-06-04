@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using KeePass.Sources.DropBox;
 using KeePass.Sources.Web;
 using KeePass.Storage;
@@ -14,12 +15,11 @@ namespace KeePass.Sources
             Func<DatabaseInfo, bool> queryUpdate,
             ReportUpdateResult report)
         {
-            var details = info.Details;
-            switch (details.Source)
+            switch (info.Details.Source)
             {
                 case DROPBOX_UPDATER:
-                    DropBoxUpdater.Update(info,
-                        queryUpdate, report);
+                    DropBoxUpdater.Update(info, queryUpdate,
+                        x => Report(info, x, report));
                     break;
 
                 case WEB_UPDATER:
@@ -27,6 +27,39 @@ namespace KeePass.Sources
                         queryUpdate, report);
                     break;
             }
+        }
+
+        private static void Report(DatabaseInfo info,
+            SyncCompleteInfo result, ReportUpdateResult report)
+        {
+            string msg = null;
+            var details = info.Details;
+
+            switch (result.Result)
+            {
+                case SyncResults.Downloaded:
+                    using (var buffer = new MemoryStream(result.Database))
+                        info.SetDatabase(buffer, details);
+                    break;
+
+                case SyncResults.Uploaded:
+                    details.Modified = result.Modified;
+                    info.SaveDetails();
+                    break;
+
+                case SyncResults.Conflict:
+                    details.Url = result.Path;
+                    details.Modified = result.Modified;
+                    info.SaveDetails();
+                    break;
+
+                case SyncResults.Failed:
+                    msg = Properties.Resources
+                        .DownloadError;
+                    break;
+            }
+
+            report(info, result.Result, msg);
         }
     }
 }

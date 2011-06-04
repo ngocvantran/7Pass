@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
-using KeePass.Sources.DropBox.Api;
+using DropNet;
+using DropNet.Exceptions;
+using DropNet.Models;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
 
@@ -19,23 +21,11 @@ namespace KeePass.Sources.DropBox
                 ApplicationBar.Buttons[0];
         }
 
-        private void LoginCompleted(LoginInfo info)
+        private void LoginCompleted(UserLogin info)
         {
             Dispatcher.BeginInvoke(() =>
             {
                 SetWorking(false);
-
-                if (info == null)
-                {
-                    MessageBox.Show(DropBoxResources.LoginFailure,
-                        DropBoxResources.LoginTitle,
-                        MessageBoxButton.OK);
-
-                    txtEmail.Focus();
-                    txtEmail.SelectAll();
-
-                    return;
-                }
 
                 txtPassword.Password = string.Empty;
 
@@ -48,6 +38,21 @@ namespace KeePass.Sources.DropBox
             });
         }
 
+        private void LoginFailed(DropboxException ex)
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                SetWorking(false);
+
+                MessageBox.Show(DropBoxResources.LoginFailure,
+                    DropBoxResources.LoginTitle,
+                    MessageBoxButton.OK);
+
+                txtEmail.Focus();
+                txtEmail.SelectAll();
+            });
+        }
+
         private void PerformLogin()
         {
             if (!Network.CheckNetwork())
@@ -55,10 +60,11 @@ namespace KeePass.Sources.DropBox
 
             SetWorking(true);
 
-            new Client().LoginAsync(
-                txtEmail.Text,
-                txtPassword.Password,
-                LoginCompleted);
+            var client = new DropNetClient(
+                DropBoxInfo.KEY, DropBoxInfo.SECRET);
+
+            client.LoginAsync(txtEmail.Text, txtPassword.Password,
+                LoginCompleted, LoginFailed);
         }
 
         private void SetWorking(bool working)

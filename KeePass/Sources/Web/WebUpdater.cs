@@ -34,7 +34,7 @@ namespace KeePass.Sources.Web
                 }
                 catch (WebException ex)
                 {
-                    report(info, false, ex.Message);
+                    report(info, SyncResults.Failed, ex.Message);
                     return;
                 }
 
@@ -49,12 +49,12 @@ namespace KeePass.Sources.Web
                     var error = DatabaseVerifier.VerifyUnattened(buffer);
                     if (error != null)
                     {
-                        report(info, false, error);
+                        report(info, SyncResults.Failed, error);
                         return;
                     }
 
                     info.SetDatabase(buffer, details);
-                    report(info, true, null);
+                    report(info, SyncResults.Downloaded, null);
                 }
             });
         }

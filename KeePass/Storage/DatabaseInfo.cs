@@ -370,6 +370,9 @@ namespace KeePass.Storage
 
                 store.DeleteFile(backupPath);
 
+                Details.HasLocalChanges = true;
+                SaveDetails(store);
+
                 if (HasPassword)
                     UpdateSavedPassword(store);
             }

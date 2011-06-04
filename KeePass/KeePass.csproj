@@ -66,20 +66,23 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Hammock.WindowsPhone">
-      <HintPath>..\Libs\Hammock.WindowsPhone.dll</HintPath>
+    <Reference Include="DropNet.WindowsPhone">
+      <HintPath>..\packages\DropNet.1.5.3\lib\sl3-wp\DropNet.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Phone.Controls.Toolkit">
-      <HintPath>D:\Van\Projects\KeePass.Password\Libs\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
+      <HintPath>..\packages\SilverlightToolkitWP.4.2011.2.1\lib\sl4\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Interop" />
-    <Reference Include="Newtonsoft.Json.Silverlight">
-      <HintPath>..\Libs\Newtonsoft.Json.Silverlight.dll</HintPath>
+    <Reference Include="Newtonsoft.Json.WindowsPhone, Version=4.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\DropNet.1.5.3\lib\sl3-wp\Newtonsoft.Json.WindowsPhone.dll</HintPath>
     </Reference>
-    <Reference Include="SharpZipLib.WindowsPhone7">
-      <HintPath>..\Libs\SharpZipLib.WindowsPhone7.dll</HintPath>
+    <Reference Include="RestSharp.WindowsPhone">
+      <HintPath>..\packages\DropNet.1.5.3\lib\sl3-wp\RestSharp.WindowsPhone.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpZipLib.Silverlight4">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\SL4\SharpZipLib.Silverlight4.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -138,6 +141,8 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sources\DatabaseUpdater.cs" />
+    <Compile Include="Sources\SyncCompleteInfo.cs" />
+    <Compile Include="Sources\SyncInfo.cs" />
     <Compile Include="Sources\DropBox\DropBox.xaml.cs">
       <DependentUpon>DropBox.xaml</DependentUpon>
     </Compile>
@@ -147,6 +152,7 @@
     </Compile>
     <Compile Include="Sources\DropBox\MetaListItemInfo.cs" />
     <Compile Include="Sources\ReportUpdateResult.cs" />
+    <Compile Include="Sources\SyncResults.cs" />
     <Compile Include="Sources\Web\DownloadHandler.cs" />
     <Compile Include="Sources\Web\WebAuth.xaml.cs">
       <DependentUpon>WebAuth.xaml</DependentUpon>
@@ -188,13 +194,7 @@
     <Compile Include="Sources\Download.xaml.cs">
       <DependentUpon>Download.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Sources\DropBox\Api\Client.cs" />
-    <Compile Include="Sources\DropBox\Api\DropBoxInfo.cs" />
-    <Compile Include="Sources\DropBox\Api\LoginInfo.cs" />
-    <Compile Include="Sources\DropBox\Api\MetaData.cs" />
-    <Compile Include="Sources\DropBox\Api\Serialize\JsonConventionResolver.cs" />
-    <Compile Include="Sources\DropBox\Api\Serialize\JsonSerializer.cs" />
-    <Compile Include="Sources\DropBox\Api\Serialize\SerializerBase.cs" />
+    <Compile Include="Sources\DropBox\DropBoxInfo.cs" />
     <Compile Include="Sources\DropBox\DropBoxResources.Designer.cs">
       <DependentUpon>DropBoxResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -301,6 +301,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml" />
     <Content Include="Images\about.png" />
@@ -311,6 +314,7 @@
     <Content Include="Images\updated.dark.png" />
     <Content Include="Images\updated.light.png" />
     <Content Include="Images\username.png" />
+    <Content Include="README_FIRST.txt" />
     <Content Include="Sources\Demo7Pass.kdbx" />
   </ItemGroup>
   <ItemGroup>
