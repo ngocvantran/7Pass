@@ -92,12 +92,12 @@
                 IconUri="/Images/root.png"
                 Text="Select DB" Click="cmdRoot_Click" />
             <shell:ApplicationBarIconButton
+                IconUri="/Images/save.png" IsEnabled="False"
+                Text="Save Entry" Click="cmdSave_Click" />
+            <shell:ApplicationBarIconButton
                 IconUri="/Images/about.png"
                 Text="About" Click="cmdAbout_Click"/>
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem
-                    Text="Save entry" IsEnabled="False"
-                    Click="mnuSave_Click" />
                 <shell:ApplicationBarMenuItem IsEnabled="False"
                     Text="Reset entry" Click="mnuReset_Click" />
             </shell:ApplicationBar.MenuItems>

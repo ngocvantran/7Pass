@@ -16,7 +16,7 @@ namespace KeePass
     public partial class EntryDetails
     {
         private readonly ApplicationBarMenuItem _mnuReset;
-        private readonly ApplicationBarMenuItem _mnuSave;
+        private readonly ApplicationBarIconButton _mnuSave;
 
         private EntryEx _binding;
         private Entry _entry;
@@ -26,10 +26,10 @@ namespace KeePass
         {
             InitializeComponent();
 
-            _mnuSave = (ApplicationBarMenuItem)
-                ApplicationBar.MenuItems[0];
+            _mnuSave = (ApplicationBarIconButton)
+                ApplicationBar.Buttons[2];
             _mnuReset = (ApplicationBarMenuItem)
-                ApplicationBar.MenuItems[1];
+                ApplicationBar.MenuItems[0];
         }
 
         protected override void OnNavigatedTo(
@@ -74,7 +74,7 @@ namespace KeePass
         private void DisplayEntry(Entry entry)
         {
             _entry = entry;
-            
+
             _binding = new EntryEx(entry);
             _binding.HasChangesChanged += _binding_HasChangesChanged;
             _binding.HasChanges = entry.IsNew();
@@ -127,6 +127,50 @@ namespace KeePass
             }.Show();
         }
 
+        private void Save()
+        {
+            SetWorkingState(true);
+
+            var info = Cache.DbInfo;
+            var writer = new DatabaseWriter();
+
+            info.OpenDatabaseFile(x => writer
+                .LoadExisting(x, info.Data.MasterKey));
+
+            if (_entry.ID != null)
+                writer.Details(_entry);
+            else
+            {
+                var groupId = NavigationContext
+                    .QueryString["group"];
+
+                Cache.Database
+                    .AddNew(_entry, groupId);
+
+                writer.New(_entry);
+            }
+
+            info.SetDatabase(writer.Save);
+
+            UpdateNotes();
+            SetWorkingState(false);
+
+            MessageBox.Show(
+                Properties.Resources.SavedCaption,
+                Properties.Resources.SavedTitle,
+                MessageBoxButton.OK);
+
+            ThreadPool.QueueUserWorkItem(
+                _ => Cache.AddRecent(_entry.ID));
+        }
+
+        private void SetWorkingState(bool working)
+        {
+            IsEnabled = !working;
+            progBusy.IsLoading = working;
+            ApplicationBar.IsVisible = !working;
+        }
+
         private void UpdateNotes()
         {
             var notes = _entry.Notes;
@@ -177,6 +221,11 @@ namespace KeePass
             GoBack<MainPage>();
         }
 
+        private void cmdSave_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
         private void lnkFields_Click(object sender, RoutedEventArgs e)
         {
             this.NavigateTo<EntryFields>(
@@ -213,50 +262,6 @@ namespace KeePass
             DataContext = _binding;
 
             UpdateNotes();
-        }
-
-        private void mnuSave_Click(object sender, EventArgs e)
-        {
-            IsEnabled = false;
-            progBusy.IsLoading = true;
-
-            _entry.Url = txtUrl.Text;
-            _entry.Title = txtTitle.Text;
-            _entry.Password = txtPassword.Text;
-            _entry.UserName = txtUsername.Text;
-
-            var info = Cache.DbInfo;
-            var writer = new DatabaseWriter();
-
-            info.OpenDatabaseFile(x => writer
-                .LoadExisting(x, info.Data.MasterKey));
-
-            if (_entry.ID != null)
-                writer.Details(_entry);
-            else
-            {
-                var groupId = NavigationContext
-                    .QueryString["group"];
-
-                Cache.Database
-                    .AddNew(_entry, groupId);
-
-                writer.New(_entry);
-            }
-
-            info.SetDatabase(writer.Save);
-
-            UpdateNotes();
-            IsEnabled = true;
-            progBusy.IsLoading = false;
-
-            MessageBox.Show(
-                Properties.Resources.SavedCaption,
-                Properties.Resources.SavedTitle,
-                MessageBoxButton.OK);
-
-            ThreadPool.QueueUserWorkItem(
-                _ => Cache.AddRecent(_entry.ID));
         }
 
         private void txtUrl_Changed(object sender, TextChangedEventArgs e)
