@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Navigation;
+using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.Storage;
 using Microsoft.Phone.Controls;
@@ -31,8 +32,11 @@ namespace KeePass
                 return;
             }
 
-            var id = NavigationContext.QueryString["entry"];
-            _entry = database.GetEntry(id);
+            var id = NavigationContext
+                .QueryString["entry"];
+
+            _entry = database.GetEntry(id) ??
+                CurrentEntry.Entry;
 
             foreach (var field in _entry.CustomFields.Take(3))
             {

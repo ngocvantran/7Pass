@@ -61,6 +61,15 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to «Add Notes».
+        /// </summary>
+        internal static string AddNotes {
+            get {
+                return ResourceManager.GetString("AddNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to delete database {0}?
         ///
         ///Doing so will only remove {0} from your phone, and will not delete the source file on your server..

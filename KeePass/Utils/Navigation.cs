@@ -34,7 +34,9 @@ namespace KeePass.Utils
             if (args != null && args.Length > 0)
             {
                 url = string.Format(url, args
-                    .Select(x => x.ToString())
+                    .Select(x => x != null
+                        ? x.ToString()
+                        : string.Empty)
                     .Select(Uri.EscapeDataString)
                     .ToArray());
             }

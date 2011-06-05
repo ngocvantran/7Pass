@@ -24,8 +24,7 @@
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBox Name="txtNotes" Text="{Binding Notes}"
-                     TextWrapping="Wrap"
+            <TextBox Name="txtNotes" TextWrapping="Wrap"
                      TextChanged="txtNotes_Changed" />
         </Grid>
     </Grid>

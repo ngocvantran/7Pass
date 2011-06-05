@@ -67,6 +67,26 @@ namespace KeePass.IO.Data
         }
 
         /// <summary>
+        /// Adds the new entry.
+        /// </summary>
+        /// <param name="entry">The entry.</param>
+        /// <param name="groupId">The group id.</param>
+        public void AddNew(Entry entry, string groupId)
+        {
+            if (entry == null)
+                throw new ArgumentNullException("entry");
+
+            var group = !string.IsNullOrEmpty(groupId)
+                ? _groups[groupId] : _root;
+
+            entry.ID = Uuid.NewUuid();
+            entry.Group = group;
+
+            group.Entries.Add(entry);
+            _entries.Add(entry.ID, entry);
+        }
+
+        /// <summary>
         /// Gets the specified entry.
         /// </summary>
         /// <param name="id">The entry id.</param>

@@ -60,11 +60,14 @@ namespace KeePass.IO.Write
                 .Add(Clone(element));
 
             var fields = entry.GetAllFields();
-            var existings = element
-                .Elements("String")
+            var strings = element
+                .Elements("String");
+            
+            var existings = strings
                 .ToDictionary(
                     x => x.Element("Key").Value,
                     x => x.Element("Value"));
+            var addTarget = strings.Last();
 
             foreach (var pair in fields)
             {
@@ -73,7 +76,7 @@ namespace KeePass.IO.Write
                     existing.Value = pair.Value;
                 else
                 {
-                    element.Add(new XElement("String",
+                    addTarget.AddAfterSelf(new XElement("String",
                         new XElement("Key", pair.Key),
                         new XElement("Value", pair.Value)));
                 }

@@ -2,6 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.Storage;
 using KeePass.Utils;
@@ -30,8 +31,13 @@ namespace KeePass
                 return;
             }
 
-            var id = NavigationContext.QueryString["id"];
-            DataContext = _entry = database.GetEntry(id);
+            var id = NavigationContext
+                .QueryString["id"];
+
+            _entry = database.GetEntry(id)
+                ?? CurrentEntry.Entry;
+
+            DataContext = _entry;
         }
 
         private void cmdAbout_Click(object sender, EventArgs e)
@@ -60,9 +66,13 @@ namespace KeePass
             object sender, TextChangedEventArgs e)
         {
             var txtField = (TextBox)sender;
+            var key = (string)txtField.Tag;
 
-            _entry[(string)txtField.Tag] =
-                txtField.Text;
+            if (_entry[key] == txtField.Text)
+                return;
+
+            _entry[key] = txtField.Text;
+            CurrentEntry.HasChanges = true;
         }
     }
 }

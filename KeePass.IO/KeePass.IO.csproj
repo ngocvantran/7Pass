@@ -52,6 +52,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Uuid.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Read\DatabaseReader.cs" />
     <Compile Include="Data\DbPersistentData.cs" />

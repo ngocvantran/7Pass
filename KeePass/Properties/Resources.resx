@@ -232,4 +232,7 @@ If you want to use the other database, please download it separately.</value>
   <data name="ConflictTitle" xml:space="preserve">
     <value>Database Conflict</value>
   </data>
+  <data name="AddNotes" xml:space="preserve">
+    <value>«Add Notes»</value>
+  </data>
 </root>

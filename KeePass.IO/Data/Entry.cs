@@ -123,6 +123,8 @@ namespace KeePass.IO.Data
             if (fields == null)
                 throw new ArgumentNullException("fields");
 
+            Icon = new IconData();
+            
             _fields = fields;
             _original = new Dictionary<string, string>(fields);
         }

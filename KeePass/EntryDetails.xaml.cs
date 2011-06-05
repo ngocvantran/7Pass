@@ -3,21 +3,33 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.IO.Write;
 using KeePass.Storage;
 using KeePass.Utils;
+using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 
 namespace KeePass
 {
     public partial class EntryDetails
     {
+        private readonly ApplicationBarMenuItem _mnuReset;
+        private readonly ApplicationBarMenuItem _mnuSave;
+
+        private EntryEx _binding;
+        private Entry _entry;
         private bool _loaded;
 
         public EntryDetails()
         {
             InitializeComponent();
+
+            _mnuSave = (ApplicationBarMenuItem)
+                ApplicationBar.MenuItems[0];
+            _mnuReset = (ApplicationBarMenuItem)
+                ApplicationBar.MenuItems[1];
         }
 
         protected override void OnNavigatedTo(
@@ -28,8 +40,8 @@ namespace KeePass
 
             if (_loaded)
             {
-                var entry = (Entry)DataContext;
-                UpdateNotes(entry);
+                UpdateNotes();
+                _binding.HasChanges = CurrentEntry.HasChanges;
 
                 return;
             }
@@ -41,20 +53,37 @@ namespace KeePass
                 return;
             }
 
+            string id;
+            var queries = NavigationContext.QueryString;
+
+            Entry entry;
+            if (queries.TryGetValue("id", out id))
+            {
+                entry = database.GetEntry(id);
+
+                ThreadPool.QueueUserWorkItem(
+                    _ => Cache.AddRecent(id));
+            }
+            else
+                entry = new Entry();
+
             _loaded = true;
-
-            var id = NavigationContext.QueryString["id"];
-            DisplayEntry(database.GetEntry(id));
-
-            ThreadPool.QueueUserWorkItem(
-                _ => Cache.AddRecent(id));
+            DisplayEntry(entry);
         }
 
         private void DisplayEntry(Entry entry)
         {
-            UpdateNotes(entry);
-            DataContext = entry;
-            lnkUrl.Content = GetUrl();
+            _entry = entry;
+            
+            _binding = new EntryEx(entry);
+            _binding.HasChangesChanged += _binding_HasChangesChanged;
+            _binding.HasChanges = entry.IsNew();
+
+            CurrentEntry.Entry = entry;
+            CurrentEntry.HasChanges = entry.IsNew();
+
+            UpdateNotes();
+            DataContext = _binding;
 
             var fields = entry.CustomFields.Count;
             if (fields == 0)
@@ -75,8 +104,7 @@ namespace KeePass
 
         private string GetUrl()
         {
-            var entry = (Entry)DataContext;
-            return entry.GetNavigateUrl(txtUrl.Text);
+            return _entry.GetNavigateUrl(txtUrl.Text);
         }
 
         private void OpenUrl(bool useIntegreatedBrowser)
@@ -87,8 +115,9 @@ namespace KeePass
 
             if (useIntegreatedBrowser)
             {
-                this.NavigateTo<WebView>("url={0}&entry={1}",
-                    url, NavigationContext.QueryString["id"]);
+                this.NavigateTo<WebView>(
+                    "url={0}&entry={1}", url, _entry.ID);
+
                 return;
             }
 
@@ -98,22 +127,39 @@ namespace KeePass
             }.Show();
         }
 
-        private void UpdateNotes(Entry entry)
+        private void UpdateNotes()
         {
-            var notes = entry.Notes;
+            var notes = _entry.Notes;
 
-            notes = notes
-                .Replace(Environment.NewLine, " ")
-                .TrimStart();
-
-            if (notes.Length > 60)
+            if (!string.IsNullOrEmpty(notes))
             {
                 notes = notes
-                    .Substring(0, 55)
-                    .TrimEnd() + "...";
+                    .Replace(Environment.NewLine, " ")
+                    .TrimStart();
+
+                if (notes.Length > 60)
+                {
+                    notes = notes
+                        .Substring(0, 55)
+                        .TrimEnd() + "...";
+                }
+            }
+            else
+            {
+                notes = Properties
+                    .Resources.AddNotes;
             }
 
             lnkNotes.Content = notes;
+        }
+
+        private void _binding_HasChangesChanged(object sender, EventArgs e)
+        {
+            var hasChanges = _binding.HasChanges;
+
+            _mnuSave.IsEnabled = hasChanges;
+            _mnuReset.IsEnabled = hasChanges;
+            CurrentEntry.HasChanges = hasChanges;
         }
 
         private void cmdAbout_Click(object sender, EventArgs e)
@@ -133,14 +179,14 @@ namespace KeePass
 
         private void lnkFields_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigateTo<EntryFields>("id={0}",
-                NavigationContext.QueryString["id"]);
+            this.NavigateTo<EntryFields>(
+                "id={0}", _entry.ID);
         }
 
         private void lnkNotes_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigateTo<EntryNotes>("id={0}",
-                NavigationContext.QueryString["id"]);
+            this.NavigateTo<EntryNotes>(
+                "id={0}", _entry.ID);
         }
 
         private void lnkUrl_Click(object sender, RoutedEventArgs e)
@@ -161,13 +207,12 @@ namespace KeePass
 
         private void mnuReset_Click(object sender, EventArgs e)
         {
-            var entry = (Entry)DataContext;
-            entry.Reset();
+            _binding.Reset();
 
             DataContext = null;
-            DataContext = entry;
+            DataContext = _binding;
 
-            UpdateNotes(entry);
+            UpdateNotes();
         }
 
         private void mnuSave_Click(object sender, EventArgs e)
@@ -175,12 +220,10 @@ namespace KeePass
             IsEnabled = false;
             progBusy.IsLoading = true;
 
-            var entry = (Entry)DataContext;
-
-            entry.Url = txtUrl.Text;
-            entry.Title = txtTitle.Text;
-            entry.Password = txtPassword.Text;
-            entry.UserName = txtUsername.Text;
+            _entry.Url = txtUrl.Text;
+            _entry.Title = txtTitle.Text;
+            _entry.Password = txtPassword.Text;
+            _entry.UserName = txtUsername.Text;
 
             var info = Cache.DbInfo;
             var writer = new DatabaseWriter();
@@ -188,9 +231,22 @@ namespace KeePass
             info.OpenDatabaseFile(x => writer
                 .LoadExisting(x, info.Data.MasterKey));
 
-            writer.Details(entry);
+            if (_entry.ID != null)
+                writer.Details(_entry);
+            else
+            {
+                var groupId = NavigationContext
+                    .QueryString["group"];
+
+                Cache.Database
+                    .AddNew(_entry, groupId);
+
+                writer.New(_entry);
+            }
+
             info.SetDatabase(writer.Save);
 
+            UpdateNotes();
             IsEnabled = true;
             progBusy.IsLoading = false;
 
@@ -198,6 +254,9 @@ namespace KeePass
                 Properties.Resources.SavedCaption,
                 Properties.Resources.SavedTitle,
                 MessageBoxButton.OK);
+
+            ThreadPool.QueueUserWorkItem(
+                _ => Cache.AddRecent(_entry.ID));
         }
 
         private void txtUrl_Changed(object sender, TextChangedEventArgs e)

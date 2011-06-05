@@ -9,6 +9,7 @@
     xmlns:keepass="clr-namespace:KeePass.Utils"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
+    xmlns:Binding="clr-namespace:Coding4Fun.Phone.Controls.Binding;assembly=Coding4Fun.Phone.Controls"
     mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
     Style="{StaticResource KeePassPage}">
 
@@ -30,23 +31,27 @@
             <StackPanel>
                 <!-- Entry details -->
                 <TextBlock Text="Title" Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="txtTitle" Text="{Binding Title}"
+                <TextBox Name="txtTitle" Text="{Binding Title, Mode=TwoWay}"
+                         Binding:TextBoxBinding.UpdateSourceOnChange="True"
                          GotFocus="txt_GotFocus" />
 
                 <TextBlock Text="User name" Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="txtUsername" Text="{Binding UserName}"
+                <TextBox Name="txtUsername" Text="{Binding UserName, Mode=TwoWay}"
+                         Binding:TextBoxBinding.UpdateSourceOnChange="True"
                          GotFocus="txt_GotFocus" />
 
                 <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="txtPassword" Text="{Binding Password}"
+                <TextBox Name="txtPassword" Text="{Binding Password, Mode=TwoWay}"
+                         Binding:TextBoxBinding.UpdateSourceOnChange="True"
                          GotFocus="txt_GotFocus" />
 
                 <!-- URL -->
                 <TextBlock Text=" " />
                 
                 <TextBlock Text="URL" Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="txtUrl" Text="{Binding Url}" InputScope="Url"
-                         GotFocus="txt_GotFocus" TextChanged="txtUrl_Changed" />
+                <TextBox Name="txtUrl" Text="{Binding Url, Mode=TwoWay}"
+                         Binding:TextBoxBinding.UpdateSourceOnChange="True"
+                         InputScope="Url" GotFocus="txt_GotFocus" TextChanged="txtUrl_Changed" />
                 <HyperlinkButton Name="lnkUrl" Click="lnkUrl_Click"
                                  HorizontalContentAlignment="Left"
                                  Style="{StaticResource HyperlinkButtonWrappingStyle}">
@@ -91,8 +96,9 @@
                 Text="About" Click="cmdAbout_Click"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem
-                    Text="Save entry" Click="mnuSave_Click" />
-                <shell:ApplicationBarMenuItem
+                    Text="Save entry" IsEnabled="False"
+                    Click="mnuSave_Click" />
+                <shell:ApplicationBarMenuItem IsEnabled="False"
                     Text="Reset entry" Click="mnuReset_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

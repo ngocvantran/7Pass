@@ -18,6 +18,7 @@
 */
 
 using System;
+using System.Text;
 
 namespace KeePassLib.Utility
 {
@@ -26,6 +27,45 @@ namespace KeePassLib.Utility
     /// </summary>
     public static class MemUtil
     {
+        /// <summary>
+        /// Convert a byte array to a hexadecimal string.
+        /// </summary>
+        /// <param name="pbArray">Input byte array.</param>
+        /// <returns>Returns the hexadecimal string representing the byte
+        /// array. Returns <c>null</c>, if the input byte array was <c>null</c>. Returns
+        /// an empty string, if the input byte array has length 0.</returns>
+        public static string ByteArrayToHexString(byte[] pbArray)
+        {
+            if (pbArray == null)
+                return null;
+
+            var nLen = pbArray.Length;
+            if (nLen == 0)
+                return string.Empty;
+
+            var sb = new StringBuilder();
+
+            for (var i = 0; i < nLen; ++i)
+            {
+                var bt = pbArray[i];
+                var btHigh = bt;
+                btHigh >>= 4;
+                var btLow = (byte)(bt & 0x0F);
+
+                if (btHigh >= 10)
+                    sb.Append((char)('A' + btHigh - 10));
+                else
+                    sb.Append((char)('0' + btHigh));
+
+                if (btLow >= 10)
+                    sb.Append((char)('A' + btLow - 10));
+                else
+                    sb.Append((char)('0' + btLow));
+            }
+
+            return sb.ToString();
+        }
+
         /// <summary>
         /// Convert a hexadecimal string to a byte array. The input string must be
         /// even (i.e. its length is a multiple of 2).

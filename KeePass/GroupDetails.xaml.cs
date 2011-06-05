@@ -19,8 +19,6 @@ namespace KeePass
         private readonly ObservableCollection<GroupItem> _items;
         private readonly ObservableCollection<GroupItem> _recents;
 
-        private bool _loaded;
-
         public GroupDetails()
         {
             InitializeComponent();
@@ -48,15 +46,11 @@ namespace KeePass
                 return;
             }
 
-            if (!_loaded)
-            {
-                _loaded = true;
-                var group = GetGroup(database);
-                pivotGroup.Header = group.Name;
+            var group = GetGroup(database);
+            pivotGroup.Header = group.Name;
 
-                ThreadPool.QueueUserWorkItem(_ =>
-                    ListItems(group, database.RecycleBin));
-            }
+            ThreadPool.QueueUserWorkItem(_ =>
+                ListItems(group, database.RecycleBin));
 
             _recents.Clear();
             ThreadPool.QueueUserWorkItem(_ =>
@@ -68,6 +62,7 @@ namespace KeePass
             ICollection<GroupItem> list)
         {
             var dispatcher = Dispatcher;
+            dispatcher.BeginInvoke(list.Clear);
 
             foreach (var item in items)
             {
@@ -114,7 +109,7 @@ namespace KeePass
                 var settings = AppSettings.Instance;
 
                 if (settings.HideRecycleBin)
-                    groups = groups.Except(new[] { recycleBin });
+                    groups = groups.Except(new[] {recycleBin});
             }
 
             var items = new List<GroupItem>();
@@ -166,6 +161,21 @@ namespace KeePass
         {
             _recents.Clear();
             Cache.ClearRecents();
+        }
+
+        private void mnuNewEntry_Click(object sender, EventArgs e)
+        {
+            string groupId;
+            var queries = NavigationContext.QueryString;
+
+            if (!queries.TryGetValue("id", out groupId) ||
+                groupId == null)
+            {
+                groupId = string.Empty;
+            }
+
+            this.NavigateTo<EntryDetails>(
+                "group={0}", groupId);
         }
     }
 }

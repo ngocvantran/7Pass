@@ -52,6 +52,9 @@
                 Text="About" Click="cmdAbout_Click"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem
+                    Text="New Entry"
+                    Click="mnuNewEntry_Click" />
+                <shell:ApplicationBarMenuItem
                     Text="Clear History List"
                     Click="mnuHistory_Click" />
             </shell:ApplicationBar.MenuItems>
