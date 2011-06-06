@@ -333,6 +333,25 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have unsaved changes.
+        ///Do you really want to ignore these changes?.
+        /// </summary>
+        internal static string UnsavedChange {
+            get {
+                return ResourceManager.GetString("UnsavedChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsaved change.
+        /// </summary>
+        internal static string UnsavedChangeTitle {
+            get {
+                return ResourceManager.GetString("UnsavedChangeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Updating of database {0} failed:
         ///{1}.
         /// </summary>

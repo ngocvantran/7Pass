@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,6 +31,14 @@ namespace KeePass
                 ApplicationBar.Buttons[2];
             _mnuReset = (ApplicationBarMenuItem)
                 ApplicationBar.MenuItems[0];
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            base.OnBackKeyPress(e);
+
+            if (!e.Cancel && !ConfirmNavigateAway())
+                e.Cancel = true;
         }
 
         protected override void OnNavigatedTo(
@@ -69,6 +78,32 @@ namespace KeePass
 
             _loaded = true;
             DisplayEntry(entry);
+        }
+
+        /// <summary>
+        /// Checks if 7Pass can navigate away from this page.
+        /// </summary>
+        /// <returns></returns>
+        private bool ConfirmNavigateAway()
+        {
+            if (!CurrentEntry.HasChanges)
+                return true;
+
+            var confirm = MessageBox.Show(
+                Properties.Resources.UnsavedChange,
+                Properties.Resources.UnsavedChangeTitle,
+                MessageBoxButton.OKCancel);
+
+            if (confirm != MessageBoxResult.OK)
+                return false;
+
+            if (!_entry.IsNew())
+            {
+                DataContext = null;
+                _entry.Reset();
+            }
+
+            return true;
         }
 
         private void DisplayEntry(Entry entry)
@@ -213,12 +248,14 @@ namespace KeePass
 
         private void cmdHome_Click(object sender, EventArgs e)
         {
-            GoBack<GroupDetails>();
+            if (ConfirmNavigateAway())
+                GoBack<GroupDetails>();
         }
 
         private void cmdRoot_Click(object sender, EventArgs e)
         {
-            GoBack<MainPage>();
+            if (ConfirmNavigateAway())
+                GoBack<MainPage>();
         }
 
         private void cmdSave_Click(object sender, EventArgs e)

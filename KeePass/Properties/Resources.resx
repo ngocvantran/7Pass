@@ -235,4 +235,11 @@ If you want to use the other database, please download it separately.</value>
   <data name="AddNotes" xml:space="preserve">
     <value>«Add Notes»</value>
   </data>
+  <data name="UnsavedChange" xml:space="preserve">
+    <value>You have unsaved changes.
+Do you really want to ignore these changes?</value>
+  </data>
+  <data name="UnsavedChangeTitle" xml:space="preserve">
+    <value>Unsaved change</value>
+  </data>
 </root>
