@@ -229,10 +229,10 @@ namespace KeePass.IO.Write
                     new XElement("CreationTime", time),
                     new XElement("LastAccessTime", time),
                     new XElement("ExpiryTime", time),
-                    new XElement("Expires", false),
+                    new XElement("Expires", "False"),
                     new XElement("UsageCount", 0),
                     new XElement("LocationChanged", time)),
-                new XElement("IsExpanded", true),
+                new XElement("IsExpanded", "True"),
                 new XElement("DefaultAutoTypeSequence"),
                 new XElement("EnableAutoType", "null"),
                 new XElement("EnableSearching", "null"),
@@ -272,7 +272,7 @@ namespace KeePass.IO.Write
                     new XElement("CreationTime", time),
                     new XElement("LastAccessTime", time),
                     new XElement("ExpiryTime", time),
-                    new XElement("Expires", false),
+                    new XElement("Expires", "False"),
                     new XElement("UsageCount", 0),
                     new XElement("LocationChanged", time)));
 
@@ -282,16 +282,17 @@ namespace KeePass.IO.Write
                     new XElement("String",
                         new XElement("Key", x.Key),
                         new XElement("Value", x.Value, x.Key == "Password"
-                            ? new XAttribute("Protected", true)
+                            ? new XAttribute("Protected", "True")
                             : null))));
 
             element.Add(
                 new XElement("AutoType",
-                    new XElement("Enabled", true),
+                    new XElement("Enabled", "True"),
                     new XElement("DataTransferObfuscation", 0),
                     new XElement("Association",
                         new XElement("Window", "Target Window"),
-                        new XElement("KeystrokeSequence", "{USERNAME}{TAB}{PASSWORD}{TAB}{ENTER}"))),
+                        new XElement("KeystrokeSequence",
+                            "{USERNAME}{TAB}{PASSWORD}{TAB}{ENTER}"))),
                 new XElement("History"));
 
             var group = _groups[entry.Group.ID];

@@ -1,5 +1,4 @@
 ﻿using System;
-using KeePassLib.Utility;
 
 namespace KeePass.IO
 {
@@ -8,7 +7,7 @@ namespace KeePass.IO
         public static string NewUuid()
         {
             var bytes = Guid.NewGuid().ToByteArray();
-            return MemUtil.ByteArrayToHexString(bytes);
+            return Convert.ToBase64String(bytes);
         }
     }
 }
