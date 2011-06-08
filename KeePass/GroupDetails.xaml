@@ -55,6 +55,9 @@
                     Text="New Entry"
                     Click="mnuNewEntry_Click" />
                 <shell:ApplicationBarMenuItem
+                    Text="New Group"
+                    Click="mnuNewGroup_Click" />
+                <shell:ApplicationBarMenuItem
                     Text="Clear History List"
                     Click="mnuHistory_Click" />
             </shell:ApplicationBar.MenuItems>

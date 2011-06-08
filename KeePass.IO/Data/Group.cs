@@ -64,6 +64,7 @@ namespace KeePass.IO.Data
 
         public Group()
         {
+            Icon = new IconData();
             _groups = new List<Group>();
             _entries = new List<Entry>();
         }

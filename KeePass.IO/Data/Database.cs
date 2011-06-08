@@ -87,6 +87,29 @@ namespace KeePass.IO.Data
         }
 
         /// <summary>
+        /// Adds the new group.
+        /// </summary>
+        /// <param name="parent">The parent.</param>
+        /// <param name="name">The name.</param>
+        public Group AddNew(Group parent, string name)
+        {
+            if (parent == null)
+                throw new ArgumentNullException("parent");
+
+            var group = new Group
+            {
+                Name = name,
+            };
+
+            parent.Add(group);
+            group.ID = Uuid.NewUuid();
+
+            _groups.Add(group.ID, group);
+
+            return group;
+        }
+
+        /// <summary>
         /// Gets the specified entry.
         /// </summary>
         /// <param name="id">The entry id.</param>

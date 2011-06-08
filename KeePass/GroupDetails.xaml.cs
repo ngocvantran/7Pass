@@ -5,8 +5,10 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Coding4Fun.Phone.Controls;
 using KeePass.Data;
 using KeePass.IO.Data;
+using KeePass.IO.Write;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
@@ -18,6 +20,8 @@ namespace KeePass
         private readonly ApplicationBarIconButton _cmdHome;
         private readonly ObservableCollection<GroupItem> _items;
         private readonly ObservableCollection<GroupItem> _recents;
+
+        private Group _group;
 
         public GroupDetails()
         {
@@ -46,11 +50,11 @@ namespace KeePass
                 return;
             }
 
-            var group = GetGroup(database);
-            pivotGroup.Header = group.Name;
+            _group = GetGroup(database);
+            pivotGroup.Header = _group.Name;
 
             ThreadPool.QueueUserWorkItem(_ =>
-                ListItems(group, database.RecycleBin));
+                ListItems(_group, database.RecycleBin));
 
             _recents.Clear();
             ThreadPool.QueueUserWorkItem(_ =>
@@ -124,6 +128,29 @@ namespace KeePass
                 Display(items, _items);
         }
 
+        private void NewGroup(string name)
+        {
+            IsEnabled = false;
+
+            var info = Cache.DbInfo;
+            var writer = new DatabaseWriter();
+
+            info.OpenDatabaseFile(x => writer
+                .LoadExisting(x, info.Data.MasterKey));
+
+            var database = Cache.Database;
+
+            var group = database
+                .AddNew(_group, name);
+            writer.New(group);
+
+            info.SetDatabase(writer.Save);
+
+            IsEnabled = true;
+            ThreadPool.QueueUserWorkItem(_ => ListItems(
+                _group, Cache.Database.RecycleBin));
+        }
+
         private void cmdAbout_Click(object sender, EventArgs e)
         {
             this.NavigateTo<About>();
@@ -176,6 +203,30 @@ namespace KeePass
 
             this.NavigateTo<EntryDetails>(
                 "group={0}", groupId);
+        }
+
+        private void mnuNewGroup_Click(object sender, EventArgs e)
+        {
+            var prompt = new InputPrompt
+            {
+                Title = "New Group",
+                Message = "Please enter group name"
+            };
+            prompt.Completed += prompt_Completed;
+
+            prompt.Show();
+        }
+
+        private void prompt_Completed(object sender,
+            PopUpEventArgs<string, PopUpResult> e)
+        {
+            if (e.PopUpResult != PopUpResult.Ok)
+                return;
+
+            if (string.IsNullOrEmpty(e.Result))
+                return;
+            
+            NewGroup(e.Result);
         }
     }
 }
