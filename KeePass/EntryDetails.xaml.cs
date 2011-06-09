@@ -17,7 +17,7 @@ namespace KeePass
     public partial class EntryDetails
     {
         private readonly ApplicationBarMenuItem _mnuReset;
-        private readonly ApplicationBarIconButton _mnuSave;
+        private readonly ApplicationBarIconButton _cmdSave;
 
         private EntryEx _binding;
         private Entry _entry;
@@ -27,7 +27,7 @@ namespace KeePass
         {
             InitializeComponent();
 
-            _mnuSave = (ApplicationBarIconButton)
+            _cmdSave = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[2];
             _mnuReset = (ApplicationBarMenuItem)
                 ApplicationBar.MenuItems[0];
@@ -192,6 +192,9 @@ namespace KeePass
             UpdateNotes();
             SetWorkingState(false);
 
+            _binding.HasChanges = false;
+            CurrentEntry.HasChanges = false;
+
             MessageBox.Show(
                 Properties.Resources.SavedCaption,
                 Properties.Resources.SavedTitle,
@@ -238,7 +241,7 @@ namespace KeePass
         {
             var hasChanges = _binding.HasChanges;
 
-            _mnuSave.IsEnabled = hasChanges;
+            _cmdSave.IsEnabled = hasChanges;
             _mnuReset.IsEnabled = hasChanges;
             CurrentEntry.HasChanges = hasChanges;
         }
