@@ -8,6 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:uc="clr-namespace:KeePass"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     Style="{StaticResource KeePassPage}">
 
@@ -23,15 +25,25 @@
 
         <controls:Pivot Grid.Row="1" Margin="12,0,12,0">
             <controls:PivotItem Name="pivotGroup">
-                <ListBox Name="lstGroup"
-                         Style="{StaticResource KeePassList}"
-                         SelectionChanged="lst_SelectionChanged" />
+                <ListBox Name="lstGroup" SelectionChanged="lst_SelectionChanged"
+                         toolkit:TiltEffect.IsTiltEnabled="True">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <uc:ListItemView />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </controls:PivotItem>
 
             <controls:PivotItem Header="History">
-                <ListBox Name="lstHistory"
-                         Style="{StaticResource KeePassList}"
-                         SelectionChanged="lst_SelectionChanged" />
+                <ListBox Name="lstHistory" SelectionChanged="lst_SelectionChanged"
+                         toolkit:TiltEffect.IsTiltEnabled="True">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <uc:ListItemView />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>

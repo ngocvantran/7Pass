@@ -7,7 +7,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    xmlns:uc="clr-namespace:KeePass"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+	mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     Style="{StaticResource KeePassPage}">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -34,8 +36,14 @@
                      KeyDown="txtSearch_KeyDown"
                      TextChanged="txtSearch_TextChanged" />
             <ListBox Name="lstItems" Grid.Row="1"
-                     Style="{StaticResource KeePassList}"
-                     SelectionChanged="lstItems_SelectionChanged" />
+                     toolkit:TiltEffect.IsTiltEnabled="True"
+                     SelectionChanged="lstItems_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <uc:ListItemView />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
         </Grid>
     </Grid>

@@ -7,6 +7,7 @@
     xmlns:keepass="clr-namespace:KeePass.Utils"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     Style="{StaticResource KeePassPage}">
 
@@ -25,7 +26,8 @@
 
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <ListBox ItemsSource="{Binding CustomFields}"
-                     HorizontalAlignment="Stretch">
+                     HorizontalAlignment="Stretch"
+                     toolkit:TiltEffect.IsTiltEnabled="True">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Template">

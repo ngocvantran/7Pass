@@ -4,45 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
-    xmlns:ms="clr-namespace:Microsoft.Unsupported"
-    xmlns:keepass="clr-namespace:KeePass.Utils"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone">
 
     <Application.Resources>
         <system:String x:Key="AppName">7Pass</system:String>
-        <Style x:Key="KeePassList" TargetType="ListBox">
-            <Setter Property="ms:TiltEffect.IsTiltEnabled" Value="True" />
-            <Setter Property="ItemTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal"
-                                    keepass:EaseEffect.IsEnabled="True">
-
-                            <Grid Width="50" Height="50" Visibility="{Binding IconState}">
-                                <Image Source="{Binding Icon}" Stretch="None"
-                                       VerticalAlignment="Stretch"
-                                       HorizontalAlignment="Stretch" />
-                                <Image Source="{Binding Overlay}" Stretch="None"
-                                       VerticalAlignment="Bottom"
-                                       HorizontalAlignment="Right"
-                                       Margin="0,0,8,8" />
-                            </Grid>
-
-                            <StackPanel Margin="0,0,0,17" Width="432">
-                                <TextBlock Text="{Binding Title}" TextWrapping="Wrap"
-                                           MaxHeight="120"
-                                           Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Text="{Binding Notes}" TextWrapping="Wrap"
-                                           Visibility="{Binding NotesState}"
-                                           Margin="12,-6,12,0" MaxHeight="112"
-                                           Style="{StaticResource PhoneTextSubtleStyle}">
-                                </TextBlock>
-                            </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
         
         <Style x:Key="KeePassPage" TargetType="controls:PhoneApplicationPage">
             <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}" />

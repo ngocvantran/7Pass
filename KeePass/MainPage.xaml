@@ -7,7 +7,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
-    xmlns:ms="clr-namespace:Microsoft.Unsupported"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
@@ -26,10 +25,9 @@
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <ListBox Name="lstDatabases"
-                 HorizontalAlignment="Stretch"
+        <ListBox Name="lstDatabases" HorizontalAlignment="Stretch"
                  Grid.Row="1" Margin="12,0,12,0"
-                 ms:TiltEffect.IsTiltEnabled="True"
+                 toolkit:TiltEffect.IsTiltEnabled="True"
                  SelectionChanged="lstDatabases_SelectionChanged">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
