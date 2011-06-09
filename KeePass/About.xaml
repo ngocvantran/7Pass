@@ -53,8 +53,8 @@
 
                 <HyperlinkButton Content="KeePass" TargetName="_blank"
                              NavigateUri="http://keepass.info" />
-                <HyperlinkButton Content="Hammock for REST" TargetName="_blank"
-                             NavigateUri="http://hammock.codeplex.com" />
+                <HyperlinkButton Content="DropNet" TargetName="_blank"
+                             NavigateUri="http://dkdevelopment.net/what-im-doing/dropnet/" />
                 <HyperlinkButton Content="#ziplib" TargetName="_blank"
                              NavigateUri="http://www.icsharpcode.net/opensource/sharpziplib/" />
                 <HyperlinkButton Content="Json.NET" TargetName="_blank"
