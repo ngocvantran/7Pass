@@ -10,8 +10,14 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:uc="clr-namespace:KeePass"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    xmlns:c4fControls="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls"
+	mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     Style="{StaticResource KeePassPage}">
+
+    <phone:PhoneApplicationPage.Resources>
+        <c4fControls:BooleanToVisibilityConverter
+            x:Key="BoolConverter"/>
+    </phone:PhoneApplicationPage.Resources>
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -29,7 +35,17 @@
                          toolkit:TiltEffect.IsTiltEnabled="True">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <uc:ListItemView />
+                            <uc:ListItemView>
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu>
+                                        <toolkit:MenuItem Header="delete" Tag="{Binding Data}"
+                                                          Click="mnuDelete_Click"/>
+                                        <toolkit:MenuItem
+                                            Header="rename" Tag="{Binding Data}" Click="mnuRename_Click"
+                                            Visibility="{Binding IsGroup, Converter={StaticResource BoolConverter}}" />
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
+                            </uc:ListItemView>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

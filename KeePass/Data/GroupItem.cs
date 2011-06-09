@@ -8,7 +8,18 @@ namespace KeePass.Data
 {
     public class GroupItem : ListItemInfo
     {
+        private readonly object _data;
         private readonly Uri _targetUri;
+
+        public object Data
+        {
+            get { return _data; }
+        }
+
+        public bool IsGroup
+        {
+            get { return _data is Group; }
+        }
 
         public Uri TargetUri
         {
@@ -22,8 +33,11 @@ namespace KeePass.Data
 
             Title = group.Name;
             Icon = ThemeData.GetImage("folder");
-            Overlay = Cache.GetOverlay(dispatcher, group.Icon);
 
+            Overlay = Cache.GetOverlay(
+                dispatcher, group.Icon);
+
+            _data = group;
             _targetUri = Navigation.GetPathTo
                 <GroupDetails>("id={0}", group.ID);
         }
@@ -36,8 +50,11 @@ namespace KeePass.Data
             Title = entry.Title;
             Notes = entry.Notes;
             Icon = ThemeData.GetImage("entry");
-            Overlay = Cache.GetOverlay(dispatcher, entry.Icon);
 
+            Overlay = Cache.GetOverlay(
+                dispatcher, entry.Icon);
+
+            _data = entry;
             _targetUri = Navigation.GetPathTo
                 <EntryDetails>("id={0}", entry.ID);
         }

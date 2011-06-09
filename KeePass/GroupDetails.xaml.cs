@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Coding4Fun.Phone.Controls;
@@ -11,6 +12,7 @@ using KeePass.IO.Data;
 using KeePass.IO.Write;
 using KeePass.Storage;
 using KeePass.Utils;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
 namespace KeePass
@@ -128,7 +130,7 @@ namespace KeePass
                 Display(items, _items);
         }
 
-        private void NewGroup(string name)
+        private void Save(Action<DatabaseWriter> save)
         {
             IsEnabled = false;
 
@@ -138,12 +140,7 @@ namespace KeePass
             info.OpenDatabaseFile(x => writer
                 .LoadExisting(x, info.Data.MasterKey));
 
-            var database = Cache.Database;
-
-            var group = database
-                .AddNew(_group, name);
-            writer.New(group);
-
+            save(writer);
             info.SetDatabase(writer.Save);
 
             IsEnabled = true;
@@ -171,6 +168,45 @@ namespace KeePass
             this.NavigateTo<Search>();
         }
 
+        private void dlgNewGroup_Completed(object sender,
+            PopUpEventArgs<string, PopUpResult> e)
+        {
+            if (e.PopUpResult != PopUpResult.Ok)
+                return;
+
+            if (string.IsNullOrEmpty(e.Result))
+                return;
+
+            Save(x =>
+            {
+                var database = Cache.Database;
+
+                var group = database
+                    .AddNew(_group, e.Result);
+
+                x.New(group);
+            });
+        }
+
+        private void dlgRename_Completed(object sender,
+            PopUpEventArgs<string, PopUpResult> e)
+        {
+            if (e.PopUpResult != PopUpResult.Ok)
+                return;
+
+            if (string.IsNullOrEmpty(e.Result))
+                return;
+
+            var dlgRename = (InputPrompt)sender;
+            var group = (Group)dlgRename.Tag;
+
+            Save(x =>
+            {
+                group.Name = e.Result;
+                x.Details(group);
+            });
+        }
+
         private void lst_SelectionChanged(
             object sender, SelectionChangedEventArgs e)
         {
@@ -182,6 +218,12 @@ namespace KeePass
 
             NavigationService.Navigate(item.TargetUri);
             list.SelectedItem = null;
+        }
+
+        private void mnuDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var mnuDelete = (MenuItem)sender;
+            // TODO: Delete
         }
 
         private void mnuHistory_Click(object sender, EventArgs e)
@@ -207,26 +249,33 @@ namespace KeePass
 
         private void mnuNewGroup_Click(object sender, EventArgs e)
         {
-            var prompt = new InputPrompt
+            var dlgNewGroup = new InputPrompt
             {
                 Title = "New Group",
                 Message = "Please enter group name"
             };
-            prompt.Completed += prompt_Completed;
+            dlgNewGroup.Completed += dlgNewGroup_Completed;
 
-            prompt.Show();
+            dlgNewGroup.Show();
         }
 
-        private void prompt_Completed(object sender,
-            PopUpEventArgs<string, PopUpResult> e)
+        private void mnuRename_Click(object sender, RoutedEventArgs e)
         {
-            if (e.PopUpResult != PopUpResult.Ok)
-                return;
+            var mnuRename = (MenuItem)sender;
+            var group = (Group)mnuRename.Tag;
 
-            if (string.IsNullOrEmpty(e.Result))
-                return;
-            
-            NewGroup(e.Result);
+            var dlgRename = new InputPrompt
+            {
+                Tag = group,
+                Title = "Rename",
+                Value = group.Name,
+                IsCancelVisible = true,
+                Message = "Please enter group name",
+            };
+
+            dlgRename.Completed += dlgRename_Completed;
+
+            dlgRename.Show();
         }
     }
 }
