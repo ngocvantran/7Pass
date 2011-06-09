@@ -130,6 +130,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MoveTarget.xaml.cs">
+      <DependentUpon>MoveTarget.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Password.xaml.cs">
       <DependentUpon>Password.xaml</DependentUpon>
     </Compile>
@@ -262,6 +265,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MoveTarget.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -313,6 +320,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\save.png" />
+    <Content Include="Images\up.dark.png" />
+    <Content Include="Images\up.light.png" />
     <Content Include="Images\uploaded.dark.png" />
     <Content Include="Images\uploaded.light.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />

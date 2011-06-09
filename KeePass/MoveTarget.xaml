@@ -1,0 +1,52 @@
+<keepass:KeePassPage
+    x:Class="KeePass.MoveTarget"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:keepass="clr-namespace:KeePass.Utils"
+    xmlns:uc="clr-namespace:KeePass"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+	mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
+    Style="{StaticResource KeePassPage}">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Move To" Margin="9,-7,0,0"
+                       Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <TextBlock x:Name="lblTarget" Grid.Row="1"
+                   Text="{StaticResource AppName}" TextWrapping="Wrap"
+                   Style="{StaticResource PhoneTextNormalStyle}"/>
+        
+        <ListBox Name="lstGroup" Grid.Row="2" Margin="12,0,12,0"
+                    SelectionChanged="lst_SelectionChanged"
+                    toolkit:TiltEffect.IsTiltEnabled="True">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <uc:ListItemView />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/check.png"
+                Text="Move Here" Click="cmdMove_Click" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</keepass:KeePassPage>

@@ -1,22 +1,22 @@
 ﻿<keepass:KeePassPage
-    x:Class="KeePass.GroupDetails"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:keepass="clr-namespace:KeePass.Utils"
-    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
-    xmlns:uc="clr-namespace:KeePass"
-    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:c4fControls="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls"
+	x:Class="KeePass.GroupDetails"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:keepass="clr-namespace:KeePass.Utils"
+	xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+	xmlns:uc="clr-namespace:KeePass"
+	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+	xmlns:c4fControls="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls"
 	mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    Style="{StaticResource KeePassPage}">
+	Style="{StaticResource KeePassPage}">
 
     <phone:PhoneApplicationPage.Resources>
         <c4fControls:BooleanToVisibilityConverter
-            x:Key="BoolConverter"/>
+			x:Key="BoolConverter"/>
     </phone:PhoneApplicationPage.Resources>
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -26,23 +26,26 @@
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="ApplicationTitle" Grid.Row="0"
-                   Text="{StaticResource AppName}"
-                   Style="{StaticResource PhoneTextNormalStyle}"/>
+			Text="{StaticResource AppName}"
+			Style="{StaticResource PhoneTextNormalStyle}"/>
 
         <controls:Pivot Grid.Row="1" Margin="12,0,12,0">
             <controls:PivotItem Name="pivotGroup">
                 <ListBox Name="lstGroup" SelectionChanged="lst_SelectionChanged"
-                         toolkit:TiltEffect.IsTiltEnabled="True">
+					toolkit:TiltEffect.IsTiltEnabled="True">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <uc:ListItemView>
                                 <toolkit:ContextMenuService.ContextMenu>
                                     <toolkit:ContextMenu>
+                                        <toolkit:MenuItem
+											Header="rename" Tag="{Binding Data}" Click="mnuRename_Click"
+											Visibility="{Binding IsGroup, Converter={StaticResource BoolConverter}}" />
+                                        
+                                        <toolkit:MenuItem Header="move" Tag="{Binding Data}"
+                                                          Click="mnuMove_Click" />
                                         <toolkit:MenuItem Header="delete" Tag="{Binding Data}"
                                                           Click="mnuDelete_Click"/>
-                                        <toolkit:MenuItem
-                                            Header="rename" Tag="{Binding Data}" Click="mnuRename_Click"
-                                            Visibility="{Binding IsGroup, Converter={StaticResource BoolConverter}}" />
                                     </toolkit:ContextMenu>
                                 </toolkit:ContextMenuService.ContextMenu>
                             </uc:ListItemView>
@@ -53,7 +56,7 @@
 
             <controls:PivotItem Header="History">
                 <ListBox Name="lstHistory" SelectionChanged="lst_SelectionChanged"
-                         toolkit:TiltEffect.IsTiltEnabled="True">
+					toolkit:TiltEffect.IsTiltEnabled="True">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <uc:ListItemView />
@@ -67,27 +70,27 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton
-                IconUri="/Images/home.png"
-                Text="Home" Click="cmdHome_Click" />
+				IconUri="/Images/home.png"
+				Text="Home" Click="cmdHome_Click" />
             <shell:ApplicationBarIconButton
-                IconUri="/Images/root.png"
-                Text="Select DB" Click="cmdRoot_Click" />
+				IconUri="/Images/root.png"
+				Text="Select DB" Click="cmdRoot_Click" />
             <shell:ApplicationBarIconButton
-                IconUri="/Images/search.png"
-                Text="Search" Click="cmdSearch_Click" />
+				IconUri="/Images/search.png"
+				Text="Search" Click="cmdSearch_Click" />
             <shell:ApplicationBarIconButton
-                IconUri="/Images/about.png"
-                Text="About" Click="cmdAbout_Click"/>
+				IconUri="/Images/about.png"
+				Text="About" Click="cmdAbout_Click"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem
-                    Text="New Entry"
-                    Click="mnuNewEntry_Click" />
+					Text="New Entry"
+					Click="mnuNewEntry_Click" />
                 <shell:ApplicationBarMenuItem
-                    Text="New Group"
-                    Click="mnuNewGroup_Click" />
+					Text="New Group"
+					Click="mnuNewGroup_Click" />
                 <shell:ApplicationBarMenuItem
-                    Text="Clear History List"
-                    Click="mnuHistory_Click" />
+					Text="Clear History List"
+					Click="mnuHistory_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

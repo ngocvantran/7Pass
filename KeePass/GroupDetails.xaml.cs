@@ -283,7 +283,7 @@ namespace KeePass
 
         private void cmdHome_Click(object sender, EventArgs e)
         {
-            GoBack<GroupDetails>();
+            GoBack<MoveTarget>();
         }
 
         private void cmdRoot_Click(object sender, EventArgs e)
@@ -367,6 +367,24 @@ namespace KeePass
         {
             _recents.Clear();
             Cache.ClearRecents();
+        }
+
+        private void mnuMove_Click(object sender, RoutedEventArgs e)
+        {
+            var mnuMove = (MenuItem)sender;
+
+            var entry = mnuMove.Tag as Entry;
+            if (entry != null)
+            {
+                this.NavigateTo<MoveTarget>(
+                    "entry={0}", entry.ID);
+
+                return;
+            }
+
+            var group = (Group)mnuMove.Tag;
+            this.NavigateTo<MoveTarget>(
+                "group={0}", group.ID);
         }
 
         private void mnuNewEntry_Click(object sender, EventArgs e)
