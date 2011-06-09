@@ -48,6 +48,8 @@ namespace KeePass.IO.Read
                     return null;
 
                 string recycleBinId = null;
+                var recyleBinEnabled = false;
+
                 var icons = new Dictionary<string, ImageSource>();
                 using (var subReader = reader.ReadSubtree())
                 {
@@ -62,6 +64,12 @@ namespace KeePass.IO.Read
                             case "RecycleBinUUID":
                                 recycleBinId = subReader
                                     .ReadElementContentAsString();
+                                break;
+
+                            case "RecycleBinEnabled":
+                                var value = subReader
+                                    .ReadElementContentAsString();
+                                recyleBinEnabled = value == "True";
                                 break;
 
                             case "CustomIcons":
@@ -83,7 +91,10 @@ namespace KeePass.IO.Read
                 using (var subReader = reader.ReadSubtree())
                 {
                     var root = ParseGroup(subReader);
-                    var database = new Database(root, icons);
+                    var database = new Database(root, icons)
+                    {
+                        RecycleBinEnabled = recyleBinEnabled,
+                    };
 
                     if (!string.IsNullOrEmpty(recycleBinId))
                     {

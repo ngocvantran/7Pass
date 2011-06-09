@@ -167,6 +167,7 @@ namespace KeePass
             SetWorkingState(true);
 
             var info = Cache.DbInfo;
+            var database = Cache.Database;
             var writer = new DatabaseWriter();
 
             info.OpenDatabaseFile(x => writer
@@ -179,13 +180,14 @@ namespace KeePass
                 var groupId = NavigationContext
                     .QueryString["group"];
 
-                Cache.Database
-                    .AddNew(_entry, groupId);
+                database.AddNew(
+                    _entry, groupId);
 
                 writer.New(_entry);
             }
 
-            info.SetDatabase(writer.Save);
+            info.SetDatabase(x => writer.Save(
+                x, database.RecycleBin));
 
             UpdateNotes();
             SetWorkingState(false);

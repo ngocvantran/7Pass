@@ -111,6 +111,17 @@ namespace KeePass.IO.Data
             sb.Append(Name);
         }
 
+        /// <summary>
+        /// Removes this group from its parent.
+        /// </summary>
+        public void Remove()
+        {
+            var parent = Parent;
+
+            Parent = null;
+            parent._groups.Remove(this);
+        }
+
         public void Sort()
         {
             _groups.Sort(new GroupSorter());

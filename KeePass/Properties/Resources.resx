@@ -242,4 +242,33 @@ Do you really want to ignore these changes?</value>
   <data name="UnsavedChangeTitle" xml:space="preserve">
     <value>Unsaved change</value>
   </data>
+  <data name="DeletePernamentPrompt" xml:space="preserve">
+    <value>Are you sure want to pernamently delete the selected {0} {1}?
+
+This {0} will be deleted forever and cannot be recovered.</value>
+  </data>
+  <data name="DeletePrompt" xml:space="preserve">
+    <value>Are you sure want to delete the selected {0} {1}?</value>
+  </data>
+  <data name="DeleteTitle" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Entry" xml:space="preserve">
+    <value>entry</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>group</value>
+  </data>
+  <data name="NewGroupTitle" xml:space="preserve">
+    <value>New Group</value>
+  </data>
+  <data name="PromptName" xml:space="preserve">
+    <value>Please enter group name</value>
+  </data>
+  <data name="RenameTitle" xml:space="preserve">
+    <value>Rename Group</value>
+  </data>
+  <data name="RecycleBin" xml:space="preserve">
+    <value>Recycle Bin</value>
+  </data>
 </root>

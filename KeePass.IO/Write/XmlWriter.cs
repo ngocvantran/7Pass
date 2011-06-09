@@ -9,6 +9,8 @@ using KeePass.IO.Utils;
 
 namespace KeePass.IO.Write
 {
+    // ReSharper disable PossibleNullReferenceException
+
     /// <summary>
     /// Implements database modification.
     /// How to use:
@@ -22,6 +24,7 @@ namespace KeePass.IO.Write
     /// </summary>
     internal class XmlWriter
     {
+        private XElement _deletedObjs;
         private XDocument _doc;
         private IDictionary<string, XElement> _entries;
         private IDictionary<string, XElement> _groups;
@@ -45,6 +48,45 @@ namespace KeePass.IO.Write
         }
 
         /// <summary>
+        /// Deletes the specified group.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        public void Delete(Group group)
+        {
+            if (group == null)
+                throw new ArgumentNullException("group");
+
+            var time = GetTime();
+
+            _deletedObjs.Add(new XElement("DeletedObject",
+                new XElement("UUID", group.ID),
+                new XElement("DeletionTime", time)));
+
+            _groups[group.ID].Remove();
+            Remove(group);
+        }
+
+        /// <summary>
+        /// Deletes the specified entry.
+        /// </summary>
+        /// <param name="entry">The entry.</param>
+        public void Delete(Entry entry)
+        {
+            if (entry == null)
+                throw new ArgumentNullException("entry");
+
+            var time = GetTime();
+            var element = _entries[entry.ID];
+
+            element.Remove();
+            _entries.Remove(entry.ID);
+
+            _deletedObjs.Add(new XElement("DeletedObject",
+                new XElement("UUID", entry.ID),
+                new XElement("DeletionTime", time)));
+        }
+
+        /// <summary>
         /// Updates the details of the specified entry.
         /// </summary>
         /// <param name="entry">The entry.</param>
@@ -55,6 +97,7 @@ namespace KeePass.IO.Write
 
             var element = _entries[entry.ID];
 
+
             element
                 .Element("History")
                 .Add(Clone(element));
@@ -62,7 +105,7 @@ namespace KeePass.IO.Write
             var fields = entry.GetAllFields();
             var strings = element
                 .Elements("String");
-            
+
             var existings = strings
                 .ToDictionary(
                     x => x.Element("Key").Value,
@@ -144,6 +187,10 @@ namespace KeePass.IO.Write
                 throw new ArgumentNullException("xml");
 
             _doc = XDocument.Load(xml);
+
+            _deletedObjs = _doc.Root
+                .Element("Root")
+                .Element("DeletedObjects");
 
             _groups = _doc.Descendants("Group")
                 .Select(x => new
@@ -310,10 +357,13 @@ namespace KeePass.IO.Write
         /// Saves the updated XML to the specified stream.
         /// </summary>
         /// <param name="xml">The XML.</param>
-        public void Save(Stream xml)
+        /// <param name="recycleBin">The recycle bin.</param>
+        public void Save(Stream xml, Group recycleBin)
         {
             if (xml == null)
                 throw new ArgumentNullException("xml");
+
+            SetRecycleBin(recycleBin);
 
             _doc.Save(xml);
         }
@@ -352,6 +402,37 @@ namespace KeePass.IO.Write
         {
             return XmlConvert.ToString(DateTime.Now,
                 XmlDateTimeSerializationMode.RoundtripKind);
+        }
+
+        private void Remove(Group group)
+        {
+            foreach (var entry in group.Entries)
+                _entries.Remove(entry.ID);
+
+            foreach (var child in group.Groups)
+                Remove(child);
+
+            _groups.Remove(group.ID);
+        }
+
+        private void SetRecycleBin(Group recycleBin)
+        {
+            var recycleBinId = recycleBin != null
+                ? recycleBin.ID
+                : "AAAAAAAAAAAAAAAAAAAAAA==";
+
+            var meta = _doc.Root
+                .Element("Meta");
+
+            var idElement = meta
+                .Element("RecycleBinUUID");
+
+            if (idElement.Value == recycleBinId)
+                return;
+
+            idElement.Value = recycleBinId;
+            meta.Element("RecycleBinChanged")
+                .Value = GetTime();
         }
 
         public class ProtectedValue
@@ -394,4 +475,6 @@ namespace KeePass.IO.Write
             }
         }
     }
+
+    // ReSharper restore PossibleNullReferenceException
 }

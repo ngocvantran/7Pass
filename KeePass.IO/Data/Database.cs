@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media;
 
 namespace KeePass.IO.Data
@@ -43,6 +44,15 @@ namespace KeePass.IO.Data
         /// The recycle bin.
         /// </value>
         public Group RecycleBin { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether
+        /// Recycle Bin is enabled.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if enabled; otherwise, <c>false</c>.
+        /// </value>
+        public bool RecycleBinEnabled { get; set; }
 
         /// <summary>
         /// Gets the root group.
@@ -131,6 +141,32 @@ namespace KeePass.IO.Data
             Group group;
             return _groups.TryGetValue(id, out group)
                 ? group : null;
+        }
+
+        /// <summary>
+        /// Removes the specified entry.
+        /// </summary>
+        /// <param name="entry">The entry.</param>
+        public void Remove(Entry entry)
+        {
+            entry.Remove();
+            _entries.Remove(entry.ID);
+        }
+
+        /// <summary>
+        /// Removes the specified entry.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        public void Remove(Group group)
+        {
+            foreach (var entry in group.Entries.ToList())
+                Remove(entry);
+
+            foreach (var child in group.Groups.ToList())
+                Remove(child);
+
+            group.Remove();
+            _groups.Remove(group.ID);
         }
 
         private void Index(Group group)

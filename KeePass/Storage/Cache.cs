@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
+using System.Linq;
 using System.Threading;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -141,7 +142,8 @@ namespace KeePass.Storage
         /// <returns></returns>
         public static string[] GetRecents()
         {
-            return _info.Details.Recents.ToArray();
+            return _info.Details
+                .Recents.ToArray();
         }
 
         public static void RestoreCache(Dispatcher dispatcher)
@@ -159,6 +161,24 @@ namespace KeePass.Storage
                 return;
 
             info.Open(dispatcher);
+        }
+
+        /// <summary>
+        /// Updates the recents.
+        /// </summary>
+        public static void UpdateRecents()
+        {
+            var database = Database;
+            var recents = _info.Details.Recents;
+
+            var removed = recents
+                .Where(x => database.GetEntry(x) == null)
+                .ToArray();
+
+            foreach (var entry in removed)
+                recents.Remove(entry);
+
+            _info.SaveDetails();
         }
     }
 }

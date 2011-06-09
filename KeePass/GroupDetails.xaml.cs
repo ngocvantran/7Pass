@@ -63,6 +63,89 @@ namespace KeePass
                 ListHistory(database));
         }
 
+        private static bool ConfirmDelete(
+            bool pernament, string type, string name)
+        {
+            var message = !pernament
+                ? Properties.Resources.DeletePrompt
+                : Properties.Resources.DeletePernamentPrompt;
+
+            message = string.Format(
+                message, type, name);
+
+            var confirm = MessageBox.Show(message,
+                Properties.Resources.DeleteTitle,
+                MessageBoxButton.OKCancel);
+
+            return confirm == MessageBoxResult.OK;
+        }
+
+        private void Delete(Entry entry)
+        {
+            var database = Cache.Database;
+            var pernament = IsPernamentDelete();
+
+            if (!ConfirmDelete(pernament,
+                Properties.Resources.Entry,
+                entry.Title))
+            {
+                return;
+            }
+
+            if (!pernament)
+            {
+                MoveToRecycleBin((writer, recycleBin) =>
+                {
+                    entry.Group.Entries
+                        .Remove(entry);
+                    recycleBin.Add(entry);
+
+                    writer.Location(entry);
+                });
+            }
+            else
+            {
+                Save(x =>
+                {
+                    x.Delete(entry);
+                    database.Remove(entry);
+                });
+            }
+        }
+
+        private void Delete(Group group)
+        {
+            var database = Cache.Database;
+            var pernament = IsPernamentDelete();
+
+            if (!ConfirmDelete(pernament,
+                Properties.Resources.Group,
+                group.Name))
+            {
+                return;
+            }
+
+            if (!pernament)
+            {
+                MoveToRecycleBin((writer, recycleBin) =>
+                {
+                    group.Parent.Groups
+                        .Remove(group);
+                    recycleBin.Add(group);
+
+                    writer.Location(group);
+                });
+            }
+            else
+            {
+                Save(x =>
+                {
+                    x.Delete(group);
+                    database.Remove(group);
+                });
+            }
+        }
+
         private void Display(
             IEnumerable<GroupItem> items,
             ICollection<GroupItem> list)
@@ -92,6 +175,20 @@ namespace KeePass
             return database.Root;
         }
 
+        private bool IsPernamentDelete()
+        {
+            var database = Cache.Database;
+
+            if (!database.RecycleBinEnabled)
+                return true;
+
+            var recycleBin = database.RecycleBin;
+            if (recycleBin != null && recycleBin == _group)
+                return true;
+
+            return false;
+        }
+
         private void ListHistory(Database database)
         {
             var dispatcher = Dispatcher;
@@ -101,8 +198,7 @@ namespace KeePass
                 .Select(x => new GroupItem(x, dispatcher))
                 .ToList();
 
-            if (recents.Count > 0)
-                Display(recents, _recents);
+            Display(recents, _recents);
         }
 
         private void ListItems(Group group, Group recycleBin)
@@ -126,8 +222,33 @@ namespace KeePass
                 .OrderBy(x => x.Title)
                 .Select(x => new GroupItem(x, dispatcher)));
 
-            if (items.Count > 0)
-                Display(items, _items);
+            Display(items, _items);
+        }
+
+        private void MoveToRecycleBin(
+            Action<DatabaseWriter, Group> action)
+        {
+            Save(x =>
+            {
+                var database = Cache.Database;
+
+                var recycleBin = database.RecycleBin;
+                if (recycleBin == null)
+                {
+                    recycleBin = database.AddNew(_group,
+                        Properties.Resources.RecycleBin);
+
+                    recycleBin.Icon = new IconData
+                    {
+                        Standard = 43,
+                    };
+
+                    x.New(recycleBin);
+                    database.RecycleBin = recycleBin;
+                }
+
+                action(x, recycleBin);
+            });
         }
 
         private void Save(Action<DatabaseWriter> save)
@@ -135,17 +256,24 @@ namespace KeePass
             IsEnabled = false;
 
             var info = Cache.DbInfo;
+            var database = Cache.Database;
             var writer = new DatabaseWriter();
 
             info.OpenDatabaseFile(x => writer
                 .LoadExisting(x, info.Data.MasterKey));
 
             save(writer);
-            info.SetDatabase(writer.Save);
+            info.SetDatabase(x => writer.Save(
+                x, database.RecycleBin));
 
             IsEnabled = true;
             ThreadPool.QueueUserWorkItem(_ => ListItems(
                 _group, Cache.Database.RecycleBin));
+
+            _recents.Clear();
+            Cache.UpdateRecents();
+            ThreadPool.QueueUserWorkItem(_ =>
+                ListHistory(database));
         }
 
         private void cmdAbout_Click(object sender, EventArgs e)
@@ -223,7 +351,16 @@ namespace KeePass
         private void mnuDelete_Click(object sender, RoutedEventArgs e)
         {
             var mnuDelete = (MenuItem)sender;
-            // TODO: Delete
+            var entry = mnuDelete.Tag as Entry;
+
+            if (entry != null)
+            {
+                Delete(entry);
+
+                return;
+            }
+
+            Delete((Group)mnuDelete.Tag);
         }
 
         private void mnuHistory_Click(object sender, EventArgs e)
@@ -251,8 +388,8 @@ namespace KeePass
         {
             var dlgNewGroup = new InputPrompt
             {
-                Title = "New Group",
-                Message = "Please enter group name"
+                Message = Properties.Resources.PromptName,
+                Title = Properties.Resources.NewGroupTitle,
             };
             dlgNewGroup.Completed += dlgNewGroup_Completed;
 
@@ -267,10 +404,9 @@ namespace KeePass
             var dlgRename = new InputPrompt
             {
                 Tag = group,
-                Title = "Rename",
                 Value = group.Name,
-                IsCancelVisible = true,
-                Message = "Please enter group name",
+                Title = Properties.Resources.RenameTitle,
+                Message = Properties.Resources.PromptName,
             };
 
             dlgRename.Completed += dlgRename_Completed;

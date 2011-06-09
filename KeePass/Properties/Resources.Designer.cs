@@ -121,6 +121,35 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure want to pernamently delete the selected {0} {1}?
+        ///
+        ///This {0} will be deleted forever and cannot be recovered..
+        /// </summary>
+        internal static string DeletePernamentPrompt {
+            get {
+                return ResourceManager.GetString("DeletePernamentPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure want to delete the selected {0} {1}?.
+        /// </summary>
+        internal static string DeletePrompt {
+            get {
+                return ResourceManager.GetString("DeletePrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string DeleteTitle {
+            get {
+                return ResourceManager.GetString("DeleteTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password of demo database is &quot;demo&quot;, without quotes..
         /// </summary>
         internal static string DemoDbText {
@@ -160,6 +189,15 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to entry.
+        /// </summary>
+        internal static string Entry {
+            get {
+                return ResourceManager.GetString("Entry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} Field(s).
         /// </summary>
         internal static string FieldsLink {
@@ -183,6 +221,15 @@ namespace KeePass.Properties {
         internal static string GlobalPassTitle {
             get {
                 return ResourceManager.GetString("GlobalPassTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to group.
+        /// </summary>
+        internal static string Group {
+            get {
+                return ResourceManager.GetString("Group", resourceCulture);
             }
         }
         
@@ -264,6 +311,15 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Group.
+        /// </summary>
+        internal static string NewGroupTitle {
+            get {
+                return ResourceManager.GetString("NewGroupTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No internet connection is available.
         ///Please try again later...
         /// </summary>
@@ -291,6 +347,33 @@ namespace KeePass.Properties {
         internal static string PasswordTitle {
             get {
                 return ResourceManager.GetString("PasswordTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter group name.
+        /// </summary>
+        internal static string PromptName {
+            get {
+                return ResourceManager.GetString("PromptName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recycle Bin.
+        /// </summary>
+        internal static string RecycleBin {
+            get {
+                return ResourceManager.GetString("RecycleBin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename Group.
+        /// </summary>
+        internal static string RenameTitle {
+            get {
+                return ResourceManager.GetString("RenameTitle", resourceCulture);
             }
         }
         

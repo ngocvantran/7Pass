@@ -124,7 +124,7 @@ namespace KeePass.IO.Data
                 throw new ArgumentNullException("fields");
 
             Icon = new IconData();
-            
+
             _fields = fields;
             _original = new Dictionary<string, string>(fields);
         }
@@ -164,6 +164,15 @@ namespace KeePass.IO.Data
             }
 
             return url;
+        }
+
+        /// <summary>
+        /// Removes this entry from its group.
+        /// </summary>
+        public void Remove()
+        {
+            Group.Entries
+                .Remove(this);
         }
 
         /// <summary>
