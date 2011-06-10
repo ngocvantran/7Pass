@@ -121,7 +121,7 @@ namespace KeePass.Sources.Web
                 .Cast<Match>()
                 .Select(x => x.Groups[2].Value)
                 .Distinct()
-                .Where(x => WebUtils.IsValidUrl(x, true))
+                .Where(x => WebUtils.IsValidUrl(baseUrl, x))
                 .Select(x => new Uri(baseUrl, x))
                 .Select(x => x.ToString())
                 .Take(30)
@@ -239,22 +239,35 @@ namespace KeePass.Sources.Web
             Dispatcher dispatcher, HttpWebResponse response,
             MemoryStream stream)
         {
-            var error = DatabaseVerifier.VerifyUnattened(stream);
+            var check = DatabaseVerifier
+                .VerifyUnattened(stream);
 
-            if (error == null)
+            switch (check.Result)
             {
-                SaveDatabase(request, stream);
-                return;
-            }
+                case VerifyResultTypes.Warning:
+                    dispatcher.BeginInvoke(() =>
+                        MessageBox.Show(check.Message,
+                            Resources.DownloadTitle,
+                            MessageBoxButton.OK));
 
-            // Not a database, try to extract links
-            if (response.StatusCode != HttpStatusCode.OK ||
-                !DetectLinks(stream, request))
-            {
-                dispatcher.BeginInvoke(() =>
-                    MessageBox.Show(error,
-                        Resources.DownloadTitle,
-                        MessageBoxButton.OK));
+                    SaveDatabase(request, stream);
+                    break;
+
+                case VerifyResultTypes.Pass:
+                    SaveDatabase(request, stream);
+                    break;
+
+                case VerifyResultTypes.Error:
+                    // Not a database, try to extract links
+                    if (response.StatusCode != HttpStatusCode.OK ||
+                        !DetectLinks(stream, request))
+                    {
+                        dispatcher.BeginInvoke(() =>
+                            MessageBox.Show(check.Message,
+                                Resources.DownloadTitle,
+                                MessageBoxButton.OK));
+                    }
+                    break;
             }
         }
 

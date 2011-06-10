@@ -30,20 +30,60 @@ namespace KeePass.Storage
                 return false;
             }
 
+            var oddTransforms = DatabaseReader
+                .LargeTransformRounds(file);
+
+            if (oddTransforms)
+            {
+                MessageBox.Show(
+                    Properties.Resources.LargeTransforms,
+                    Properties.Resources.LargeTransformsTitle,
+                    MessageBoxButton.OK);
+            }
+
             file.Position = 0;
             return true;
         }
 
-        public static string VerifyUnattened(Stream file)
+        public static VerifyResults VerifyUnattened(Stream file)
         {
             if (file.Length == 0)
-                return Resources.EmptyFile;
+            {
+                return new VerifyResults
+                {
+                    Message = Resources.EmptyFile,
+                    Result = VerifyResultTypes.Error,
+                };
+            }
 
             if (!DatabaseReader.CheckSignature(file))
-                return Resources.NotKdbx;
+            {
+                return new VerifyResults
+                {
+                    Message = Resources.NotKdbx,
+                    Result = VerifyResultTypes.Error,
+                };
+            }
+
+            var oddTransforms = DatabaseReader
+                .LargeTransformRounds(file);
+
+            if (oddTransforms)
+            {
+                return new VerifyResults
+                {
+                    Message = Properties.Resources
+                        .LargeTransforms,
+                    Result = VerifyResultTypes.Warning,
+                };
+            }
 
             file.Position = 0;
-            return null;
+
+            return new VerifyResults
+            {
+                Result = VerifyResultTypes.Pass,
+            };
         }
     }
 }

@@ -42,14 +42,39 @@ namespace KeePass.Sources.Web
         }
 
         public static bool IsValidUrl(
-            string url, bool allowRelative)
+            Uri baseUrl, string url)
         {
-            var kind = allowRelative
-                ? UriKind.RelativeOrAbsolute
-                : UriKind.Absolute;
-
-            if (!Uri.IsWellFormedUriString(url, kind))
+            if (!Uri.IsWellFormedUriString(url,
+                UriKind.RelativeOrAbsolute))
+            {
                 return false;
+            }
+
+            try
+            {
+                var uri = new Uri(baseUrl, url);
+                switch (uri.Scheme.ToUpper())
+                {
+                    case "HTTP":
+                    case "HTTPS":
+                        return true;
+                }
+
+                return false;
+            }
+            catch (UriFormatException)
+            {
+                return false;
+            }
+        }
+
+        public static bool IsValidUrl(string url)
+        {
+            if (!Uri.IsWellFormedUriString(
+                url, UriKind.Absolute))
+            {
+                return false;
+            }
 
             try
             {

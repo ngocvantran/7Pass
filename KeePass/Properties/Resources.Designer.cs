@@ -302,6 +302,26 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected database uses a large number of encryption transformation rounds.
+        ///
+        ///This will cause 7Pass to open the database much slower than normal..
+        /// </summary>
+        internal static string LargeTransforms {
+            get {
+                return ResourceManager.GetString("LargeTransforms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database Encryption.
+        /// </summary>
+        internal static string LargeTransformsTitle {
+            get {
+                return ResourceManager.GetString("LargeTransformsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;a\s+[^&gt;]?href\s?=\s?([&apos;&quot;])([^&apos;&quot;]+).
         /// </summary>
         internal static string LinkRegex {

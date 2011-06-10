@@ -271,4 +271,12 @@ This {0} will be deleted forever and cannot be recovered.</value>
   <data name="RecycleBin" xml:space="preserve">
     <value>Recycle Bin</value>
   </data>
+  <data name="LargeTransforms" xml:space="preserve">
+    <value>The selected database uses a large number of encryption transformation rounds.
+
+This will cause 7Pass to open the database much slower than normal.</value>
+  </data>
+  <data name="LargeTransformsTitle" xml:space="preserve">
+    <value>Database Encryption</value>
+  </data>
 </root>

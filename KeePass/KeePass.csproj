@@ -188,6 +188,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Storage\VerifyResults.cs" />
+    <Compile Include="Storage\VerifyResultTypes.cs" />
     <Compile Include="TrialNotification.xaml.cs">
       <DependentUpon>TrialNotification.xaml</DependentUpon>
     </Compile>

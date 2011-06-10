@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Security.Cryptography;
 using System.Windows.Threading;
-using ICSharpCode.SharpZipLib.GZip;
 using KeePass.IO.Data;
 using KeePass.IO.Utils;
 
@@ -27,7 +25,8 @@ namespace KeePass.IO.Read
                     "Invalid format detected");
             }
 
-            var headers = ReadHeaders(stream);
+            var headers = FileFormat
+                .ReadHeaders(stream);
             headers.Verify();
 
             return ReadDatabase(stream,
@@ -46,7 +45,8 @@ namespace KeePass.IO.Read
                     "Invalid format detected");
             }
 
-            var headers = ReadHeaders(stream);
+            var headers = FileFormat
+                .ReadHeaders(stream);
             headers.Verify();
 
             var masterKey = GetMasterKey(
@@ -54,6 +54,22 @@ namespace KeePass.IO.Read
 
             return ReadDatabase(stream,
                 headers, masterKey);
+        }
+
+        /// <summary>
+        /// Determines whether the specified database
+        /// uses a large number of transformations.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <returns><c>true</c> if the specified database uses
+        /// a large number of transformations; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool LargeTransformRounds(Stream stream)
+        {
+            var headers = FileFormat
+                .ReadHeaders(stream);
+
+            return headers.TransformRounds > 6000;
         }
 
         public static Database Load(DbPersistentData data,
@@ -72,54 +88,6 @@ namespace KeePass.IO.Read
             }
         }
 
-        internal static Stream Decrypt(Stream source,
-            Headers headers, byte[] masterKey)
-        {
-            byte[] easKey;
-            using (var buffer = new MemoryStream())
-            {
-                var masterSeed = headers.MasterSeed;
-                buffer.Write(masterSeed, 0, masterSeed.Length);
-                buffer.Write(masterKey, 0, masterKey.Length);
-
-                easKey = BufferEx.GetHash(buffer.ToArray());
-            }
-
-            var eas = new AesManaged
-            {
-                KeySize = 256,
-                Key = BufferEx.Clone(easKey),
-                IV = BufferEx.Clone(headers.EncryptionIV)
-            };
-
-            Stream stream = new CryptoStream(source,
-                eas.CreateDecryptor(),
-                CryptoStreamMode.Read);
-
-            if (!VerifyStartBytes(headers, stream))
-                return null;
-
-            stream = new HashedBlockStream(stream, true);
-            return headers.Compression == Compressions.GZip
-                ? new GZipInputStream(stream) : stream;
-        }
-
-        internal static Headers ReadHeaders(Stream stream)
-        {
-            HeaderFields field;
-            var fields = new Headers();
-            var reader = new BinaryReader(stream);
-
-            do
-            {
-                field = (HeaderFields)reader.ReadByte();
-                var size = reader.ReadInt16();
-                fields.Add(field, reader.ReadBytes(size));
-            } while (field != HeaderFields.EndOfHeader);
-
-            return fields;
-        }
-
         private static byte[] GetMasterKey(Headers headers,
             string password, byte[] keyFile)
         {
@@ -131,8 +99,8 @@ namespace KeePass.IO.Read
         private static DbPersistentData ReadDatabase(
             Stream stream, Headers headers, byte[] masterKey)
         {
-            var decrypted = Decrypt(stream,
-                headers, masterKey);
+            var decrypted = FileFormat.Decrypt(
+                stream, headers, masterKey);
 
             if (decrypted == null)
                 return null;
@@ -150,16 +118,6 @@ namespace KeePass.IO.Read
                         .Serialize(headers),
                 };
             }
-        }
-
-        private static bool VerifyStartBytes(
-            Headers headers, Stream stream)
-        {
-            var actual = new BinaryReader(stream)
-                .ReadBytes(32);
-            var expected = headers.StreamStartBytes;
-
-            return BufferEx.Equals(actual, expected);
         }
     }
 }

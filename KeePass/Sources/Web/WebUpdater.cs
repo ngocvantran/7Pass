@@ -46,10 +46,14 @@ namespace KeePass.Sources.Web
                         buffer.Position = 0;
                     }
 
-                    var error = DatabaseVerifier.VerifyUnattened(buffer);
-                    if (error != null)
+                    var check = DatabaseVerifier
+                        .VerifyUnattened(buffer);
+
+                    if (check.Result == VerifyResultTypes.Error)
                     {
-                        report(info, SyncResults.Failed, error);
+                        report(info, SyncResults.Failed,
+                            check.Message);
+
                         return;
                     }
 

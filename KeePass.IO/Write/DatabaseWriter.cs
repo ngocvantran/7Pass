@@ -3,7 +3,6 @@ using System.IO;
 using System.Security.Cryptography;
 using ICSharpCode.SharpZipLib.GZip;
 using KeePass.IO.Data;
-using KeePass.IO.Read;
 using KeePass.IO.Utils;
 
 namespace KeePass.IO.Write
@@ -67,12 +66,12 @@ namespace KeePass.IO.Write
                 .ReadVersion(reader);
 
             _masterKey = masterKey;
-            _headers = DatabaseReader
+            _headers = FileFormat
                 .ReadHeaders(existing);
 
             _xmlWriter = new XmlWriter();
 
-            using (var decrypt = DatabaseReader.Decrypt(
+            using (var decrypt = FileFormat.Decrypt(
                 existing, _headers, masterKey))
             {
                 _xmlWriter.Load(decrypt);
