@@ -74,6 +74,15 @@ namespace KeePass
         private static void Application_UnhandledException(
             object sender, ApplicationUnhandledExceptionEventArgs e)
         {
+            var ex = e.ExceptionObject;
+
+            AnalyticsTracker.Track(
+                new TrackingEvent("error")
+                {
+                    {"type", ex.GetType().FullName},
+                    {"stack", ex.StackTrace}
+                });
+
             if (!Debugger.IsAttached)
             {
                 e.Handled = true;
@@ -85,7 +94,7 @@ namespace KeePass
 
                 if (email)
                 {
-                    ErrorReport.Report(e.ExceptionObject);
+                    ErrorReport.Report(ex);
                     return;
                 }
 
