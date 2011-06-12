@@ -64,6 +64,7 @@ namespace KeePass
         private void SetWorking(bool working)
         {
             progBusy.IsLoading = working;
+            txtPassword.IsEnabled = !working;
             ApplicationBar.IsVisible = !working;
             ContentPanel.IsHitTestVisible = !working;
         }
