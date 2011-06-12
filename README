@@ -1,8 +1,7 @@
-7Pass is a KeePass 2.x database (*.kdbx) reader for Windows Phone 7.
-(As a reader, entries editing is not supported).
+7Pass is a KeePass client for Windows Phone 7 with modification support.
 
 Features:
- - Compatible with KeePass 2.x databases.
+ - Read/modify KeePass 2.x databases.
  - DropBox integration.
  - Web & WebDAV download with authentication (supports Box.net).
  - Integreated web browser.
@@ -18,6 +17,10 @@ Support Info:
  - Blog: http://7pass.wordpress.com
  - Source code: https://github.com/7pass/7pass
 
+Version 3.0:
+ - Added database modification support.
+ - Added page rotation.
+ 
 Version 2.4:
  - Supports KeePass 2.15 database format.
  - Added global password protection.
