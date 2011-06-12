@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Coding4Fun.Phone.Controls;
+using KeePass.Analytics;
 using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.IO.Write;
@@ -84,6 +85,7 @@ namespace KeePass
         {
             var database = Cache.Database;
             var pernament = IsPernamentDelete();
+            AnalyticsTracker.Track("delete_entry");
 
             if (!ConfirmDelete(pernament,
                 Properties.Resources.Entry,
@@ -117,6 +119,7 @@ namespace KeePass
         {
             var database = Cache.Database;
             var pernament = IsPernamentDelete();
+            AnalyticsTracker.Track("delete_group");
 
             if (!ConfirmDelete(pernament,
                 Properties.Resources.Group,
@@ -314,6 +317,8 @@ namespace KeePass
 
                 x.New(group);
             });
+
+            AnalyticsTracker.Track("new_group");
         }
 
         private void dlgRename_Completed(object sender,
@@ -333,6 +338,8 @@ namespace KeePass
                 group.Name = e.Result;
                 x.Details(group);
             });
+
+            AnalyticsTracker.Track("rename_group");
         }
 
         private void lst_SelectionChanged(

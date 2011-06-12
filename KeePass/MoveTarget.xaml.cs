@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using KeePass.Analytics;
 using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.IO.Write;
@@ -172,6 +173,8 @@ namespace KeePass
                     _target.Add(_entry);
                     x.Location(_entry);
                 });
+                
+                AnalyticsTracker.Track("move_entry");
             }
             else
             {
@@ -181,6 +184,8 @@ namespace KeePass
                     _target.Add(_group);
                     x.Location(_group);
                 });
+
+                AnalyticsTracker.Track("move_group");
             }
 
             NavigationService.GoBack();

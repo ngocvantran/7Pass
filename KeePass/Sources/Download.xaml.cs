@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Navigation;
+using KeePass.Analytics;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Controls;
@@ -43,6 +44,8 @@ namespace KeePass.Sources
             var demoDb = Application.GetResourceStream(
                 new Uri("Sources/Demo7Pass.kdbx", UriKind.Relative));
 
+            AnalyticsTracker.Track("new_db_demo");
+
             info.SetDatabase(demoDb.Stream, new DatabaseDetails
             {
                 Source = "Demo",
@@ -59,11 +62,13 @@ namespace KeePass.Sources
 
         private void lnkDropBox_Click(object sender, RoutedEventArgs e)
         {
+            AnalyticsTracker.Track("new_db_dropbox");
             Navigate<DropBox.DropBox>();
         }
 
         private void lnkWeb_Click(object sender, RoutedEventArgs e)
         {
+            AnalyticsTracker.Track("new_db_web");
             Navigate<Web.WebDownload>();
         }
     }

@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using KeePass.Analytics;
 using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.Storage;
@@ -68,6 +69,8 @@ namespace KeePass
             var searchText = search as string;
             if (!string.IsNullOrEmpty(searchText))
                 txtSearch.Text = searchText;
+
+            AnalyticsTracker.Track("search");
         }
 
         private void HideKeyboard()
@@ -114,7 +117,8 @@ namespace KeePass
                 return;
 
             var recycleBin = _database.RecycleBin;
-            if (recycleBin != null && AppSettings.Instance.HideRecycleBin)
+            if (recycleBin != null && AppSettings
+                .Instance.HideRecycleBin)
             {
                 entries = entries.Where(x =>
                     !IsRelated(x.Group, recycleBin));

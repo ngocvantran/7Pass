@@ -50,9 +50,7 @@ namespace KeePass.Utils
                 .GetValue("DeviceName"));
 
             sb.Append("Device ID: ");
-            sb.AppendLine(Convert.ToBase64String(
-                (byte[])DeviceExtendedProperties
-                    .GetValue("DeviceUniqueId")));
+            sb.AppendLine(DeviceData.GetDeviceId());
 
             sb.Append("Firmware: ");
             sb.AppendLine((string)DeviceExtendedProperties

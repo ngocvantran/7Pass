@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+using KeePass.Analytics;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
@@ -51,14 +52,25 @@ namespace KeePass
         private void OpenDatabase()
         {
             SetWorking(true);
+            var savePass = chkStore
+                .IsChecked == true;
 
             _wkOpen.RunWorkerAsync(new OpenArgs
             {
                 Folder = _folder,
                 Dispatcher = Dispatcher,
+                SavePassword = savePass,
                 Password = txtPassword.Password,
-                SavePassword = chkStore.IsChecked == true,
             });
+
+            AnalyticsTracker.Track(
+                new TrackingEvent("open_db")
+                {
+                    {
+                        "save_password", savePass
+                            ? "true" : "false"
+                        }
+                });
         }
 
         private void SetWorking(bool working)

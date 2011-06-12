@@ -97,6 +97,9 @@
     <Compile Include="About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Analytics\AnalyticsTracker.cs" />
+    <Compile Include="Analytics\TrackInfo.cs" />
+    <Compile Include="Analytics\TrackingEvent.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -194,6 +197,7 @@
       <DependentUpon>TrialNotification.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\AppSettings.cs" />
+    <Compile Include="Utils\DeviceData.cs" />
     <Compile Include="Utils\EaseEffect.cs" />
     <Compile Include="Utils\ErrorReport.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />

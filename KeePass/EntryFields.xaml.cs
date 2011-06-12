@@ -2,6 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using KeePass.Analytics;
 using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.Storage;
@@ -38,6 +39,7 @@ namespace KeePass
                 ?? CurrentEntry.Entry;
 
             DataContext = _entry;
+            AnalyticsTracker.Track("entry_fields");
         }
 
         private void cmdAbout_Click(object sender, EventArgs e)

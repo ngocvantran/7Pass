@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Navigation;
+using KeePass.Analytics;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Controls;
@@ -51,6 +52,8 @@ namespace KeePass
         private void Application_Activated(
             object sender, ActivatedEventArgs e)
         {
+            AnalyticsTracker.Track("activated");
+
             ThemeData.Initialize();
             Cache.RestoreCache(RootFrame.Dispatcher);
         }
@@ -64,6 +67,7 @@ namespace KeePass
         private void Application_Launching(
             object sender, LaunchingEventArgs e)
         {
+            AnalyticsTracker.Track("launch");
             ThemeData.Initialize();
         }
 

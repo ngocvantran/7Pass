@@ -4,6 +4,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using KeePass.Analytics;
 using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.IO.Write;
@@ -50,7 +51,9 @@ namespace KeePass
             if (_loaded)
             {
                 UpdateNotes();
-                _binding.HasChanges = CurrentEntry.HasChanges;
+
+                _binding.HasChanges =
+                    CurrentEntry.HasChanges;
 
                 return;
             }
@@ -78,6 +81,8 @@ namespace KeePass
 
             _loaded = true;
             DisplayEntry(entry);
+
+            AnalyticsTracker.Track("view_entry");
         }
 
         /// <summary>
@@ -150,11 +155,15 @@ namespace KeePass
 
             if (useIntegreatedBrowser)
             {
+                AnalyticsTracker.Track("int_browser");
+
                 this.NavigateTo<WebView>(
                     "url={0}&entry={1}", url, _entry.ID);
 
                 return;
             }
+
+            AnalyticsTracker.Track("open_url");
 
             new WebBrowserTask
             {
@@ -165,6 +174,9 @@ namespace KeePass
         private void Save()
         {
             SetWorkingState(true);
+
+            AnalyticsTracker.Track(_entry.ID != null
+                ? "save_entry" : "new_entry");
 
             var info = Cache.DbInfo;
             var database = Cache.Database;
@@ -299,6 +311,7 @@ namespace KeePass
         private void mnuReset_Click(object sender, EventArgs e)
         {
             _binding.Reset();
+            AnalyticsTracker.Track("reset_entry");
 
             DataContext = null;
             DataContext = _binding;
