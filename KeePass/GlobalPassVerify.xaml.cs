@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
+using KeePass.Analytics;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
 
@@ -24,6 +26,13 @@ namespace KeePass
 
             _cmdOk = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            AnalyticsTracker.Track("global_pass");
         }
 
         private void Verify()
