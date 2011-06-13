@@ -36,6 +36,12 @@ namespace KeePass
             if (cancelled)
                 return;
 
+            if (AppSettings.Instance.AllowAnalytics == null)
+            {
+                this.NavigateTo<AnalyticsSettings>();
+                return;
+            }
+
             Cache.Clear();
             RefreshDbList();
         }

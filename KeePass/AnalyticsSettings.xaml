@@ -1,0 +1,54 @@
+<keepass:KeePassPage 
+	x:Class="KeePass.AnalyticsSettings"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:keepass="clr-namespace:KeePass.Utils"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+	mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
+	Style="{StaticResource KeePassPage}">
+
+	<Grid x:Name="LayoutRoot" Background="Transparent">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+			<TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
+				Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="PageTitle" Text="Analytics" Margin="9,-7,0,0"
+				Style="{StaticResource PhoneTextTitle1Style}"/>
+		</StackPanel>
+
+		<ScrollViewer Grid.Row="1" Margin="12,0,12,0">
+			<StackPanel Grid.Row="1" Margin="12,0,12,0">
+				<TextBlock TextWrapping="Wrap">
+					7Pass collects usage information in order to continuously enhance user experience.<LineBreak />
+                    <LineBreak />
+                    The collection information will never has your database information, nor any information that can directly identify you. However:<LineBreak />
+                    - 7Pass does collect your device ID to link information sent from your device together.<LineBreak />
+                    - Usage collection uses very little network traffic, but the cost to your bill may adds up if you're on a capped plan.<LineBreak />
+                    <LineBreak />
+                    The collected information will be very useful for development of 7Pass.<LineBreak />
+                    <LineBreak />
+                    Your device ID that will be collected is:
+				</TextBlock>
+                <TextBlock Name="lblDevice" />
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True">
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/check.png"
+                Text="Allow" Click="cmdAllow_Click" />
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/close.dark.png"
+                Text="Disable" Click="cmdDisable_Click" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</keepass:KeePassPage>

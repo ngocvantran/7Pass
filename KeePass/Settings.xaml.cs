@@ -39,7 +39,8 @@ namespace KeePass
             this.NavigateTo<GlobalPass>();
         }
 
-        private void chkPassword_Loaded(object sender, RoutedEventArgs e)
+        private void chkPassword_Loaded(
+            object sender, RoutedEventArgs e)
         {
             chkPassword.Checked += chkPassword_Checked;
             chkPassword.Unchecked += chkPassword_Unchecked;
@@ -56,6 +57,12 @@ namespace KeePass
         {
             AppSettings.Instance.HideRecycleBin =
                 chkRecycleBin.IsChecked == true;
+        }
+
+        private void lnkAnalytics_Click(
+            object sender, RoutedEventArgs e)
+        {
+            this.NavigateTo<AnalyticsSettings>();
         }
     }
 }

@@ -1,18 +1,32 @@
 ﻿using System;
-using System.Net;
-using System.Threading;
+using KeePass.Utils;
 
 namespace KeePass.Analytics
 {
     internal static class AnalyticsTracker
     {
-#if DEBUG
-        private const string URI = "http://api.mixpanel.com/track?test=1&data=";
-#else
-        private const string URI = "http://api.mixpanel.com/track?data=";
-#endif
+        private static ITrackImpl _impl;
 
-        private static WebClient _client;
+        static AnalyticsTracker()
+        {
+            var allow = AppSettings
+                .Instance.AllowAnalytics;
+
+            if (allow != null && allow.Value)
+                Collect();
+            else
+                Disable();
+        }
+
+        public static void Collect()
+        {
+            _impl = new MixPanelTrack();
+        }
+
+        public static void Disable()
+        {
+            _impl = new NullTrackImpl();
+        }
 
         public static void Track(string eventName)
         {
@@ -21,28 +35,7 @@ namespace KeePass.Analytics
 
         public static void Track(TrackingEvent info)
         {
-            if (info == null)
-                throw new ArgumentNullException("info");
-
-            var json = info.ToJson();
-            ThreadPool.QueueUserWorkItem(
-                x => Send((string)x), json);
+            _impl.Track(info);
         }
-
-        private static void Send(string json)
-        {
-            if (_client == null)
-            {
-                _client = new WebClient();
-                _client.DownloadStringCompleted +=
-                    _client_DownloadStringCompleted;
-            }
-
-            var uri = new Uri(URI + json);
-            _client.DownloadStringAsync(uri);
-        }
-
-        private static void _client_DownloadStringCompleted(
-            object sender, DownloadStringCompletedEventArgs e) {}
     }
 }

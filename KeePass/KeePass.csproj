@@ -97,7 +97,13 @@
     <Compile Include="About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AnalyticsSettings.xaml.cs">
+      <DependentUpon>AnalyticsSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Analytics\AnalyticsTracker.cs" />
+    <Compile Include="Analytics\ITrackImpl.cs" />
+    <Compile Include="Analytics\MixPanelTrack.cs" />
+    <Compile Include="Analytics\NullTrackImpl.cs" />
     <Compile Include="Analytics\TrackInfo.cs" />
     <Compile Include="Analytics\TrackingEvent.cs" />
     <Compile Include="App.xaml.cs">
@@ -238,6 +244,10 @@
     <Page Include="About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AnalyticsSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="EntryFields.xaml">
       <Generator>MSBuild:Compile</Generator>

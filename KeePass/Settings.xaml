@@ -35,8 +35,13 @@
                 <toolkit:ToggleSwitch
                     Name="chkPassword" Header="Requires Password"
                     Loaded="chkPassword_Loaded" />
+
+                <TextBlock Text=" " />
+                <HyperlinkButton Content="Usage Data Collection"
+                                 Click="lnkAnalytics_Click" />
             </StackPanel>
         </ScrollViewer>
-    </Grid>
 
+        
+    </Grid>
 </keepass:KeePassPage>

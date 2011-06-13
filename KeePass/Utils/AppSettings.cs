@@ -5,6 +5,7 @@ namespace KeePass.Utils
 {
     internal class AppSettings
     {
+        private const string KEY_ANALYTICS = "Analytics";
         private const string KEY_HIDE_BIN = "HideRecycleBin";
         private const string KEY_PASSWORD = "Password";
         private const string KEY_USE_INT_BROWSER = "UseIntegratedBrowser";
@@ -12,6 +13,37 @@ namespace KeePass.Utils
         private static AppSettings _instance;
         private readonly GlobalPassHandler _globalPass;
         private readonly IsolatedStorageSettings _settings;
+
+        /// <summary>
+        /// Gets or sets the value whether user agreed
+        /// to allow analytics data collection.
+        /// </summary>
+        /// <value>
+        /// The allow analytics.
+        /// </value>
+        public bool? AllowAnalytics
+        {
+            get
+            {
+                var value = this[KEY_ANALYTICS];
+                if (string.IsNullOrEmpty(value))
+                    return null;
+
+                return value == "1";
+            }
+            set
+            {
+                var data = string.Empty;
+
+                if (value != null)
+                {
+                    data = value.Value
+                        ? "1" : "0";
+                }
+
+                this[KEY_ANALYTICS] = data;
+            }
+        }
 
         /// <summary>
         /// Gets the global password handler.
