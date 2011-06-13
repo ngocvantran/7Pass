@@ -81,8 +81,6 @@ namespace KeePass
 
             _loaded = true;
             DisplayEntry(entry);
-
-            AnalyticsTracker.Track("view_entry");
         }
 
         /// <summary>

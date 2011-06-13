@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using KeePass.Analytics;
 using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.Storage;
@@ -39,8 +38,6 @@ namespace KeePass
             
             txtNotes.Text = _entry.Notes
                 ?? string.Empty;
-
-            AnalyticsTracker.Track("view_notes");
         }
 
         private void cmdAbout_Click(object sender, EventArgs e)
