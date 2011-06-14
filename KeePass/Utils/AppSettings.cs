@@ -8,6 +8,7 @@ namespace KeePass.Utils
         private const string KEY_ANALYTICS = "Analytics";
         private const string KEY_HIDE_BIN = "HideRecycleBin";
         private const string KEY_PASSWORD = "Password";
+        private const string KEY_TOAST_SHOWNS = "ToastShowns";
         private const string KEY_USE_INT_BROWSER = "UseIntegratedBrowser";
 
         private static AppSettings _instance;
@@ -98,6 +99,24 @@ namespace KeePass.Utils
                 this[KEY_PASSWORD] = value;
                 _globalPass.GloablPassEntered();
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the number of times the toast was shown.
+        /// </summary>
+        /// <value>
+        /// The numver of times the toast was shown.
+        /// </value>
+        public int ToastShowns
+        {
+            get
+            {
+                var value = this[KEY_TOAST_SHOWNS];
+
+                return value == null
+                    ? 0 : int.Parse(value);
+            }
+            set { this[KEY_TOAST_SHOWNS] = value.ToString(); }
         }
 
         /// <summary>

@@ -279,4 +279,13 @@ This will cause 7Pass to open the database much slower than normal.</value>
   <data name="LargeTransformsTitle" xml:space="preserve">
     <value>Database Encryption</value>
   </data>
+  <data name="ToastFree" xml:space="preserve">
+    <value>This is the fully functional free version of 7Pass.
+You can support the author by tapping this notification to purchase the paid version.</value>
+  </data>
+  <data name="ToastTrial" xml:space="preserve">
+    <value>Thank you for trying 7Pass.
+This is the fully functional trial version of 7Pass.
+Click this notification to Review/Purchase 7Pass.</value>
+  </data>
 </root>

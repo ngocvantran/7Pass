@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 
@@ -69,20 +68,9 @@ namespace KeePass.Utils
             }
 
             OnNavigatedTo(cancelled, e);
-            ShowTrialNotification();
         }
 
         protected virtual void OnNavigatedTo(
             bool cancelled, NavigationEventArgs e) {}
-
-        private void ShowTrialNotification()
-        {
-            if (!TrialManager.ShouldShowPopup())
-                return;
-
-            var container = Content as Panel;
-            if (container != null)
-                container.Children.Add(new TrialNotification());
-        }
     }
 }

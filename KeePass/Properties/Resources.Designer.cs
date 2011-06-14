@@ -416,6 +416,27 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This is the fully functional free version of 7Pass.
+        ///You can support the author by tapping this notification to purchase the paid version..
+        /// </summary>
+        internal static string ToastFree {
+            get {
+                return ResourceManager.GetString("ToastFree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thank you for trying 7Pass.
+        ///This is the fully functional trial version of 7Pass.
+        ///Click this notification to Review/Purchase 7Pass..
+        /// </summary>
+        internal static string ToastTrial {
+            get {
+                return ResourceManager.GetString("ToastTrial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 7Pass has encountered an unexpected error. 7Pass will now exit.
         ///
         ///Is it ok if I create an email so that you can send to me to fix this problem?.

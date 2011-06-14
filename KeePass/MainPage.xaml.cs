@@ -19,9 +19,12 @@ namespace KeePass
         private readonly ObservableCollection<DatabaseItem> _items;
         private readonly ApplicationBarMenuItem _mnuUpdateAll;
 
+        private bool _moved;
+
         public MainPage()
         {
             InitializeComponent();
+            Loaded += OnLoaded;
 
             _items = new ObservableCollection<DatabaseItem>();
             lstDatabases.ItemsSource = _items;
@@ -33,11 +36,17 @@ namespace KeePass
         protected override void OnNavigatedTo(
             bool cancelled, NavigationEventArgs e)
         {
+            _moved = false;
+
             if (cancelled)
+            {
+                _moved = true;
                 return;
+            }
 
             if (AppSettings.Instance.AllowAnalytics == null)
             {
+                _moved = true;
                 this.NavigateTo<AnalyticsSettings>();
                 return;
             }
@@ -65,7 +74,7 @@ namespace KeePass
                     break;
 
                 case SyncResults.Uploaded:
-                
+
                     dispatcher.BeginInvoke(() =>
                         UpdateItem(listItem, "uploaded"));
                     break;
@@ -170,6 +179,12 @@ namespace KeePass
             }
             else
                 item.UpdatedIcon = null;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            if (!_moved)
+                TrialManager.CheckToastState();
         }
 
         private void lstDatabases_SelectionChanged(

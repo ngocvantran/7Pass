@@ -199,9 +199,6 @@
     </Compile>
     <Compile Include="Storage\VerifyResults.cs" />
     <Compile Include="Storage\VerifyResultTypes.cs" />
-    <Compile Include="TrialNotification.xaml.cs">
-      <DependentUpon>TrialNotification.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Utils\AppSettings.cs" />
     <Compile Include="Utils\DeviceData.cs" />
     <Compile Include="Utils\EaseEffect.cs" />
@@ -322,10 +319,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Sources\Web\WebDownload.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TrialNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
