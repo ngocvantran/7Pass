@@ -66,7 +66,7 @@ namespace KeePass
 
         private void browser_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            progBusy.IsLoading = false;
+            progBusy.IsIndeterminate = false;
             progBusy.Visibility = Visibility.Collapsed;
         }
 
@@ -81,7 +81,7 @@ namespace KeePass
 
         private void browser_Navigated(object sender, NavigationEventArgs e)
         {
-            progBusy.IsLoading = true;
+            progBusy.IsIndeterminate = true;
             progBusy.Visibility = Visibility.Visible;
         }
 

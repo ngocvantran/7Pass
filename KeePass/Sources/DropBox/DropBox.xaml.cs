@@ -25,7 +25,7 @@ namespace KeePass.Sources.DropBox
         {
             Dispatcher.BeginInvoke(() =>
             {
-                SetWorking(false);
+                progBusy.IsBusy = false;
 
                 txtPassword.Password = string.Empty;
 
@@ -42,7 +42,7 @@ namespace KeePass.Sources.DropBox
         {
             Dispatcher.BeginInvoke(() =>
             {
-                SetWorking(false);
+                progBusy.IsBusy = false;
 
                 MessageBox.Show(DropBoxResources.LoginFailure,
                     DropBoxResources.LoginTitle,
@@ -58,21 +58,13 @@ namespace KeePass.Sources.DropBox
             if (!Network.CheckNetwork())
                 return;
 
-            SetWorking(true);
+            progBusy.IsBusy = true;
 
             var client = new DropNetClient(
                 DropBoxInfo.KEY, DropBoxInfo.SECRET);
 
             client.LoginAsync(txtEmail.Text, txtPassword.Password,
                 LoginCompleted, LoginFailed);
-        }
-
-        private void SetWorking(bool working)
-        {
-            progLogin.IsLoading = working;
-            txtEmail.IsEnabled = !working;
-            txtPassword.IsEnabled = !working;
-            ApplicationBar.IsVisible = !working;
         }
 
         private void cmdLogin_Click(object sender, EventArgs e)

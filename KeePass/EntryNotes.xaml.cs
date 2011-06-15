@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Data;
@@ -68,6 +69,12 @@ namespace KeePass
 
             _entry.Notes = txtNotes.Text;
             CurrentEntry.HasChanges = true;
+        }
+
+        private void txtNotes_Loaded(
+            object sender, RoutedEventArgs e)
+        {
+            txtNotes.Focus();
         }
     }
 }

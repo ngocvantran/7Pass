@@ -62,8 +62,8 @@ namespace KeePass.Sources.Web
 
         private void _download_Completed(object sender, EventArgs e)
         {
+            progBusy.IsBusy = false;
             lstLinks.IsEnabled = true;
-            progList.IsLoading = false;
         }
 
         private void _download_LinksDetected(
@@ -80,7 +80,7 @@ namespace KeePass.Sources.Web
             if (item == null)
                 return;
 
-            progList.IsLoading = true;
+            progBusy.IsBusy = true;
             lstLinks.IsEnabled = false;
             lstLinks.SelectedItem = null;
 

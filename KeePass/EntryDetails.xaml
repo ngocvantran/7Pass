@@ -8,9 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
-    xmlns:Binding="clr-namespace:Coding4Fun.Phone.Controls.Binding;assembly=Coding4Fun.Phone.Controls"
-    mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
+    xmlns:c4f="clr-namespace:Coding4Fun.Phone.Controls.Binding;assembly=Coding4Fun.Phone.Controls"
+  xmlns:KeePass="clr-namespace:KeePass"
+  mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
     Style="{StaticResource KeePassPage}">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -20,67 +20,69 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <controls:PerformanceProgressBarEx x:Name="progBusy" />
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="Entry" Margin="9,-7,0,0"
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <ScrollViewer Grid.Row="1" Margin="12,0,12,0">
-            <StackPanel>
-                <!-- Entry details -->
-                <TextBlock Text="Title" Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="txtTitle" Text="{Binding Title, Mode=TwoWay}"
-                         Binding:TextBoxBinding.UpdateSourceOnChange="True"
-                         GotFocus="txt_GotFocus" />
+        <Grid Grid.Row="1" Margin="12,0,12,0">
+            <ScrollViewer>
+                <StackPanel>
+                    <!-- Entry details -->
+                    <TextBlock Text="Title" Style="{StaticResource PhoneTextNormalStyle}" />
+                    <TextBox Name="txtTitle" Text="{Binding Title, Mode=TwoWay}"
+                             c4f:TextBoxBinding.UpdateSourceOnChange="True"
+                             GotFocus="txt_GotFocus" />
 
-                <TextBlock Text="User name" Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="txtUsername" Text="{Binding UserName, Mode=TwoWay}"
-                         Binding:TextBoxBinding.UpdateSourceOnChange="True"
-                         GotFocus="txt_GotFocus" />
+                    <TextBlock Text="User name" Style="{StaticResource PhoneTextNormalStyle}" />
+                    <TextBox Name="txtUsername" Text="{Binding UserName, Mode=TwoWay}"
+                             c4f:TextBoxBinding.UpdateSourceOnChange="True"
+                             GotFocus="txt_GotFocus" />
 
-                <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="txtPassword" Text="{Binding Password, Mode=TwoWay}"
-                         Binding:TextBoxBinding.UpdateSourceOnChange="True"
-                         GotFocus="txt_GotFocus" />
+                    <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
+                    <TextBox Name="txtPassword" Text="{Binding Password, Mode=TwoWay}"
+                             c4f:TextBoxBinding.UpdateSourceOnChange="True"
+                             GotFocus="txt_GotFocus" />
 
-                <!-- URL -->
-                <TextBlock Text=" " />
+                    <!-- URL -->
+                    <TextBlock Text=" " />
                 
-                <TextBlock Text="URL" Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="txtUrl" Text="{Binding Url, Mode=TwoWay}"
-                         Binding:TextBoxBinding.UpdateSourceOnChange="True"
-                         InputScope="Url" GotFocus="txt_GotFocus" TextChanged="txtUrl_Changed" />
-                <HyperlinkButton Name="lnkUrl" Click="lnkUrl_Click"
-                                 HorizontalContentAlignment="Left"
-                                 Style="{StaticResource HyperlinkButtonWrappingStyle}">
-                    <toolkit:ContextMenuService.ContextMenu>
-                        <toolkit:ContextMenu>
-                            <toolkit:MenuItem Header="use phone browser"
-                                              Click="mnuBrowser_Click" />
-                            <toolkit:MenuItem Header="use integrated browser"
-                                              Click="mnuIntegrated_Click" />
-                        </toolkit:ContextMenu>
-                    </toolkit:ContextMenuService.ContextMenu>
-                </HyperlinkButton>
+                    <TextBlock Text="URL" Style="{StaticResource PhoneTextNormalStyle}" />
+                    <TextBox Name="txtUrl" Text="{Binding Url, Mode=TwoWay}"
+                             c4f:TextBoxBinding.UpdateSourceOnChange="True"
+                             InputScope="Url" GotFocus="txt_GotFocus" TextChanged="txtUrl_Changed" />
+                    <HyperlinkButton Name="lnkUrl" Click="lnkUrl_Click"
+                                     HorizontalContentAlignment="Left"
+                                     Style="{StaticResource HyperlinkButtonWrappingStyle}">
+                        <toolkit:ContextMenuService.ContextMenu>
+                            <toolkit:ContextMenu>
+                                <toolkit:MenuItem Header="use phone browser"
+                                                  Click="mnuBrowser_Click" />
+                                <toolkit:MenuItem Header="use integrated browser"
+                                                  Click="mnuIntegrated_Click" />
+                            </toolkit:ContextMenu>
+                        </toolkit:ContextMenuService.ContextMenu>
+                    </HyperlinkButton>
                 
-                <!-- Notes -->
-                <TextBlock Text=" " />
+                    <!-- Notes -->
+                    <TextBlock Text=" " />
 
-                <TextBlock Text="Notes" Style="{StaticResource PhoneTextNormalStyle}" />
-                <HyperlinkButton Name="lnkNotes" Click="lnkNotes_Click"
-                                 HorizontalContentAlignment="Left"
-                                 Style="{StaticResource HyperlinkButtonWrappingStyle}" />
+                    <TextBlock Text="Notes" Style="{StaticResource PhoneTextNormalStyle}" />
+                    <HyperlinkButton Name="lnkNotes" Click="lnkNotes_Click"
+                                     HorizontalContentAlignment="Left"
+                                     Style="{StaticResource HyperlinkButtonWrappingStyle}" />
 
-                <!-- Fields -->
-                <TextBlock Text=" " />
+                    <!-- Fields -->
+                    <TextBlock Text=" " />
                 
-                <HyperlinkButton Name="lnkFields" Click="lnkFields_Click"
-                                 HorizontalContentAlignment="Left"
-                                 Style="{StaticResource HyperlinkButtonWrappingStyle}" />
-            </StackPanel>
-        </ScrollViewer>
+                    <HyperlinkButton Name="lnkFields" Click="lnkFields_Click"
+                                     HorizontalContentAlignment="Left"
+                                     Style="{StaticResource HyperlinkButtonWrappingStyle}" />
+                </StackPanel>
+            </ScrollViewer>
+            <KeePass:ProgressOverlay x:Name="progBusy" />
+        </Grid>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>

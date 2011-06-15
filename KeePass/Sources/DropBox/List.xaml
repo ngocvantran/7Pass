@@ -6,7 +6,6 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     xmlns:keepass="clr-namespace:KeePass.Utils"
     xmlns:uc="clr-namespace:KeePass"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
@@ -20,22 +19,24 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <controls:PerformanceProgressBarEx x:Name="progList" />
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="DropBox" Margin="9,-7,0,0"
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <ListBox Name="lstBrowse" Grid.Row="1" Margin="12,0,12,0"
-                 toolkit:TiltEffect.IsTiltEnabled="True"
-                 SelectionChanged="lstBrowse_SelectionChanged">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <uc:ListItemView />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Grid Grid.Row="1" Margin="12,0,12,0">
+            <ListBox Name="lstBrowse" toolkit:TiltEffect.IsTiltEnabled="True"
+                     SelectionChanged="lstBrowse_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <uc:ListItemView />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+            <uc:ProgressOverlay x:Name="progBusy" />
+        </Grid>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>

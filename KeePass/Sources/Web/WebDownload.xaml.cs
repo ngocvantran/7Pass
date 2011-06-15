@@ -42,29 +42,21 @@ namespace KeePass.Sources.Web
 
         private void PerformDownload()
         {
-            SetWorkState(true);
+            prgBusy.IsBusy = true;
 
             _download.Download(txtUrl.Text,
                 ucAuth.GetCredentials());
         }
 
-        private void SetWorkState(bool working)
-        {
-            txtUrl.IsEnabled = !working;
-            ucAuth.IsEnabled = !working;
-            progList.IsLoading = working;
-            ApplicationBar.IsVisible = !working;
-        }
-
         private void _download_Completed(object sender, EventArgs e)
         {
-            SetWorkState(false);
+            prgBusy.IsBusy = false;
         }
 
         private void _download_LinksDetected(object sender, EventArgs e)
         {
-            Dispatcher.BeginInvoke(() =>
-                this.NavigateTo<WebBrowse>());
+            Dispatcher.BeginInvoke(
+                this.NavigateTo<WebBrowse>);
         }
 
         private void cmdDownload_Click(object sender, EventArgs e)

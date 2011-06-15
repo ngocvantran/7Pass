@@ -171,54 +171,53 @@ namespace KeePass
 
         private void Save()
         {
-            SetWorkingState(true);
+            progBusy.IsBusy = true;
 
-            AnalyticsTracker.Track(_entry.ID != null
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                AnalyticsTracker.Track(_entry.ID != null
                 ? "save_entry" : "new_entry");
 
-            var info = Cache.DbInfo;
-            var database = Cache.Database;
-            var writer = new DatabaseWriter();
+                var info = Cache.DbInfo;
+                var database = Cache.Database;
+                var writer = new DatabaseWriter();
 
-            info.OpenDatabaseFile(x => writer
-                .LoadExisting(x, info.Data.MasterKey));
+                info.OpenDatabaseFile(x => writer
+                    .LoadExisting(x, info.Data.MasterKey));
 
-            if (_entry.ID != null)
-                writer.Details(_entry);
-            else
-            {
-                var groupId = NavigationContext
-                    .QueryString["group"];
+                if (_entry.ID != null)
+                    writer.Details(_entry);
+                else
+                {
+                    var groupId = NavigationContext
+                        .QueryString["group"];
 
-                database.AddNew(
-                    _entry, groupId);
+                    database.AddNew(
+                        _entry, groupId);
 
-                writer.New(_entry);
-            }
+                    writer.New(_entry);
+                }
 
-            info.SetDatabase(x => writer.Save(
-                x, database.RecycleBin));
+                info.SetDatabase(x => writer.Save(
+                    x, database.RecycleBin));
 
-            UpdateNotes();
-            SetWorkingState(false);
+                Dispatcher.BeginInvoke(() =>
+                {
+                    UpdateNotes();
+                    progBusy.IsBusy = false;
 
-            _binding.HasChanges = false;
-            CurrentEntry.HasChanges = false;
+                    _binding.HasChanges = false;
+                    CurrentEntry.HasChanges = false;
 
-            MessageBox.Show(
-                Properties.Resources.SavedCaption,
-                Properties.Resources.SavedTitle,
-                MessageBoxButton.OK);
+                    MessageBox.Show(
+                        Properties.Resources.SavedCaption,
+                        Properties.Resources.SavedTitle,
+                        MessageBoxButton.OK);
+                });
 
-            ThreadPool.QueueUserWorkItem(
-                _ => Cache.AddRecent(_entry.ID));
-        }
-
-        private void SetWorkingState(bool working)
-        {
-            IsEnabled = !working;
-            progBusy.IsLoading = working;
-            ApplicationBar.IsVisible = !working;
+                ThreadPool.QueueUserWorkItem(
+                    __ => Cache.AddRecent(_entry.ID));
+            });
         }
 
         private void UpdateNotes()

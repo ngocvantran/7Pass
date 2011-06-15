@@ -30,8 +30,6 @@ namespace KeePass
             _cmdOpen = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
 
-            SetWorking(false);
-
             imgWarning.Source = ThemeData.GetImageSource("warning");
             imgWarning.Visibility = GlobalPassHandler.Instance.HasGlobalPass
                 ? Visibility.Collapsed : Visibility.Visible;
@@ -51,7 +49,9 @@ namespace KeePass
 
         private void OpenDatabase()
         {
-            SetWorking(true);
+            progBusy.IsBusy = true;
+            progBusy.Focus();
+
             var savePass = chkStore
                 .IsChecked == true;
 
@@ -71,14 +71,6 @@ namespace KeePass
                             ? "true" : "false"
                         }
                 });
-        }
-
-        private void SetWorking(bool working)
-        {
-            progBusy.IsLoading = working;
-            txtPassword.IsEnabled = !working;
-            ApplicationBar.IsVisible = !working;
-            ContentPanel.IsHitTestVisible = !working;
         }
 
         private void UpdatePasswordStatus()
@@ -102,7 +94,7 @@ namespace KeePass
         private void _wkOpen_RunWorkerCompleted(
             object sender, RunWorkerCompletedEventArgs e)
         {
-            SetWorking(false);
+            progBusy.IsBusy = false;
 
             if (e.Error != null)
             {

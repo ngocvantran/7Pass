@@ -7,8 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
     xmlns:web="clr-namespace:KeePass.Sources.Web"
-    xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:uc="clr-namespace:KeePass"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     Style="{StaticResource KeePassPage}">
 
@@ -19,7 +20,6 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <controls:PerformanceProgressBarEx x:Name="progList" />
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="Download" Margin="9,-7,0,0"
@@ -27,28 +27,32 @@
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <TextBlock Text="Database URL" Grid.Row="0"
-                       Style="{StaticResource PhoneTextNormalStyle}" />
-            <TextBox Name="txtUrl" Text="http://"
-                     Grid.Row="1" InputScope="Url"
-                     Loaded="txtUrl_Loaded"
-                     KeyDown="txtUrl_KeyDown" 
-                     TextChanged="txtUrl_TextChanged" />
+                <TextBlock Text="Database URL" Grid.Row="0"
+                           Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBox Name="txtUrl" Text="http://"
+                         Grid.Row="1" InputScope="Url"
+                         Loaded="txtUrl_Loaded"
+                         KeyDown="txtUrl_KeyDown" 
+                         TextChanged="txtUrl_TextChanged" />
             
-            <web:WebAuth x:Name="ucAuth" Grid.Row="2"
-                         Completed="ucAuth_Completed" />
+                <web:WebAuth x:Name="ucAuth" Grid.Row="2"
+                             Completed="ucAuth_Completed" />
 
-            <TextBlock Name="lblLinks" Grid.Row="3" Visibility="Collapsed">
-                Detected links
-            </TextBlock>
+                <TextBlock Name="lblLinks" Grid.Row="3" Visibility="Collapsed">
+                    Detected links
+                </TextBlock>
+            </Grid>
+            
+            <uc:ProgressOverlay x:Name="prgBusy" />
         </Grid>
     </Grid>
 

@@ -5,9 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
-    xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-	mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    xmlns:uc="clr-namespace:KeePass"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     Style="{StaticResource KeePassPage}">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -17,32 +17,35 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <controls:PerformanceProgressBarEx x:Name="progList" />
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="Detected Links" Margin="9,-7,0,0"
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <ListBox Name="lstLinks" Grid.Row="1" Margin="12,0,12,0"
-                 keepass:EaseEffect.IsEnabled="True"
-                 toolkit:TiltEffect.IsTiltEnabled="True"
-                 SelectionChanged="lstLinks_SelectionChanged">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="0,0,0,17" Width="432">
-                        <TextBlock Text="{Binding Name}"
-                                    TextWrapping="Wrap" MaxHeight="120"
-                                    Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                        <TextBlock Text="{Binding Url}" TextWrapping="Wrap"
-                                    Visibility="{Binding NotesState}"
-                                    Margin="12,-6,12,0" MaxHeight="112"
-                                    Style="{StaticResource PhoneTextSubtleStyle}">
-                        </TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Grid Grid.Row="1" Margin="12,0,12,0">
+            <ListBox Name="lstLinks"
+                        keepass:EaseEffect.IsEnabled="True"
+                        toolkit:TiltEffect.IsTiltEnabled="True"
+                        SelectionChanged="lstLinks_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,0,0,17" Width="432">
+                            <TextBlock Text="{Binding Name}"
+                                        TextWrapping="Wrap" MaxHeight="120"
+                                        Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                            <TextBlock Text="{Binding Url}" TextWrapping="Wrap"
+                                        Visibility="{Binding NotesState}"
+                                        Margin="12,-6,12,0" MaxHeight="112"
+                                        Style="{StaticResource PhoneTextSubtleStyle}">
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+            <uc:ProgressOverlay x:Name="progBusy" />
+        </Grid>
     </Grid>
     
 </keepass:KeePassPage>

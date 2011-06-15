@@ -71,7 +71,7 @@ namespace KeePass.Sources.DropBox
 
         private void OnFileDownloadFailed(DropboxException obj)
         {
-            SetWorking(false);
+            progBusy.IsBusy = false;
 
             Dispatcher.BeginInvoke(() =>
                 MessageBox.Show(
@@ -126,8 +126,8 @@ namespace KeePass.Sources.DropBox
             }
             finally
             {
-                dispatcher.BeginInvoke(
-                    () => SetWorking(false));
+                dispatcher.BeginInvoke(() =>
+                    progBusy.IsBusy = false);
             }
         }
 
@@ -155,7 +155,7 @@ namespace KeePass.Sources.DropBox
             {
                 dispatcher.BeginInvoke(() =>
                 {
-                    progList.IsLoading = false;
+                    progBusy.IsBusy = false;
                     _cmdRefresh.IsEnabled = true;
                 });
             }
@@ -172,7 +172,7 @@ namespace KeePass.Sources.DropBox
 
         private void RefreshList()
         {
-            progList.IsLoading = true;
+            progBusy.IsBusy = true;
             _cmdRefresh.IsEnabled = false;
 
             var client = new DropNetClient(
@@ -181,13 +181,6 @@ namespace KeePass.Sources.DropBox
 
             client.GetMetaDataAsync(_path,
                 OnListComplete, OnListFailed);
-        }
-
-        private void SetWorking(bool working)
-        {
-            progList.IsLoading = working;
-            lstBrowse.IsEnabled = !working;
-            _cmdRefresh.IsEnabled = !working;
         }
 
         private void cmdRefresh_Click(object sender, EventArgs e)
@@ -209,7 +202,7 @@ namespace KeePass.Sources.DropBox
                     NavigateTo(meta.Path);
                 else
                 {
-                    SetWorking(true);
+                    progBusy.IsBusy = true;
 
                     var client = DropBoxInfo
                         .Create(_token, _secret);
