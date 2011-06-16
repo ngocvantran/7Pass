@@ -2,8 +2,9 @@
     x:Class="KeePass.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone">
 
     <Application.Resources>
@@ -16,6 +17,12 @@
             <Setter Property="SupportedOrientations" Value="PortraitOrLandscape" />
             <Setter Property="Orientation" Value="Portrait" />
             <Setter Property="shell:SystemTray.IsVisible" Value="True" />
+        </Style>
+        
+        <Style x:Key="ControlDefaults" TargetType="Control">
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}" />
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}" />
+            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}" />
         </Style>
 
         <Style x:Key="HyperlinkButtonWrappingStyle"

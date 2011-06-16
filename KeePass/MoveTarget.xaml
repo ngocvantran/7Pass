@@ -4,12 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
-    xmlns:uc="clr-namespace:KeePass"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-	mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
+    xmlns:uc="clr-namespace:KeePass.Controls"
     Style="{StaticResource KeePassPage}">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -29,16 +26,10 @@
         <TextBlock x:Name="lblTarget" Grid.Row="1"
                    Text="{StaticResource AppName}" TextWrapping="Wrap"
                    Style="{StaticResource PhoneTextNormalStyle}"/>
-        
-        <ListBox Name="lstGroup" Grid.Row="2" Margin="12,0,12,0"
-                    SelectionChanged="lst_SelectionChanged"
-                    toolkit:TiltEffect.IsTiltEnabled="True">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <uc:ListItemView />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+
+        <uc:KeePassList x:Name="lstGroup" Grid.Row="2" Margin="12,0,12,0"
+                        SelectionChanged="lst_SelectionChanged"
+                        toolkit:TiltEffect.IsTiltEnabled="True" />
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>

@@ -4,18 +4,15 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
 	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:keepass="clr-namespace:KeePass.Utils"
 	xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
-	xmlns:uc="clr-namespace:KeePass"
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-	xmlns:c4fControls="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls"
-	mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+	xmlns:c4f="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls"
+    xmlns:uc="clr-namespace:KeePass.Controls"
 	Style="{StaticResource KeePassPage}">
 
     <phone:PhoneApplicationPage.Resources>
-        <c4fControls:BooleanToVisibilityConverter
+        <c4f:BooleanToVisibilityConverter
 			x:Key="BoolConverter"/>
     </phone:PhoneApplicationPage.Resources>
 
@@ -31,9 +28,9 @@
 
         <controls:Pivot Grid.Row="1" Margin="12,0,12,0">
             <controls:PivotItem Name="pivotGroup">
-                <ListBox Name="lstGroup" SelectionChanged="lst_SelectionChanged"
-					toolkit:TiltEffect.IsTiltEnabled="True">
-                    <ListBox.ItemTemplate>
+                <uc:KeePassListBase x:Name="lstGroup" Navigation="lstGroup_Navigation"
+                                    toolkit:TiltEffect.IsTiltEnabled="True">
+                    <uc:KeePassListBase.ItemTemplate>
                         <DataTemplate>
                             <uc:ListItemView>
                                 <toolkit:ContextMenuService.ContextMenu>
@@ -41,7 +38,7 @@
                                         <toolkit:MenuItem
 											Header="rename" Tag="{Binding Data}" Click="mnuRename_Click"
 											Visibility="{Binding IsGroup, Converter={StaticResource BoolConverter}}" />
-                                        
+
                                         <toolkit:MenuItem Header="move" Tag="{Binding Data}"
                                                           Click="mnuMove_Click" />
                                         <toolkit:MenuItem Header="delete" Tag="{Binding Data}"
@@ -50,19 +47,13 @@
                                 </toolkit:ContextMenuService.ContextMenu>
                             </uc:ListItemView>
                         </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                    </uc:KeePassListBase.ItemTemplate>
+                </uc:KeePassListBase>
             </controls:PivotItem>
 
             <controls:PivotItem Header="History">
-                <ListBox Name="lstHistory" SelectionChanged="lst_SelectionChanged"
-					toolkit:TiltEffect.IsTiltEnabled="True">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <uc:ListItemView />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <uc:KeePassList SelectionChanged="lstHistory_SelectionChanged"
+                                x:Name="lstHistory" />
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>

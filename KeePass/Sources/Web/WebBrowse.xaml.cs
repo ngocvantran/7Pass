@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Data;
 
@@ -10,15 +9,11 @@ namespace KeePass.Sources.Web
 {
     public partial class WebBrowse
     {
-        private readonly ObservableCollection<WebLinkInfo> _items;
         private DownloadHandler _download;
 
         public WebBrowse()
         {
             InitializeComponent();
-
-            _items = new ObservableCollection<WebLinkInfo>();
-            lstLinks.ItemsSource = _items;
         }
 
         protected override void OnNavigatedTo(
@@ -45,19 +40,11 @@ namespace KeePass.Sources.Web
         private void DisplayLinks(
             IEnumerable<string> links)
         {
-            var dispatcher = Dispatcher;
+            var items = links
+                .Select(x => new WebLinkInfo(x))
+                .ToList();
 
-            dispatcher.BeginInvoke(
-                () => _items.Clear());
-
-            foreach (var link in links)
-            {
-                var item = new WebLinkInfo(link);
-                dispatcher.BeginInvoke(() =>
-                    _items.Add(item));
-
-                Thread.Sleep(50);
-            }
+            lstLinks.SetItems(items);
         }
 
         private void _download_Completed(object sender, EventArgs e)
@@ -73,16 +60,15 @@ namespace KeePass.Sources.Web
                 _ => DisplayLinks(WebLinks.Links));
         }
 
-        private void lstLinks_SelectionChanged(
-            object sender, SelectionChangedEventArgs e)
+        private void lstLinks_Navigation(object sender,
+            NavigationListControl.NavigationEventArgs e)
         {
-            var item = lstLinks.SelectedItem as WebLinkInfo;
+            var item = e.Item as WebLinkInfo;
             if (item == null)
                 return;
 
             progBusy.IsBusy = true;
             lstLinks.IsEnabled = false;
-            lstLinks.SelectedItem = null;
 
             _download.Download(item.Url,
                 WebLinks.Credentials);

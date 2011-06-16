@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Analytics;
 using KeePass.Data;
@@ -19,7 +17,6 @@ namespace KeePass
     public partial class MoveTarget
     {
         private readonly ApplicationBarIconButton _cmdMove;
-        private readonly ObservableCollection<GroupItem> _items;
 
         private Database _database;
         private Entry _entry;
@@ -32,9 +29,6 @@ namespace KeePass
 
             _cmdMove = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
-
-            _items = new ObservableCollection<GroupItem>();
-            lstGroup.ItemsSource = _items;
         }
 
         protected override void OnNavigatedTo(
@@ -108,31 +102,16 @@ namespace KeePass
                     .Select(x => new GroupItem(
                         x, dispatcher)));
 
-                dispatcher.BeginInvoke(
-                    _items.Clear);
-
                 if (_target.Parent != null)
                 {
-                    var item = new GroupItem(
+                    items.Insert(0, new GroupItem(
                         _target.Parent, dispatcher)
                     {
                         Icon = ThemeData.GetImage("up"),
-                    };
-
-                    dispatcher.BeginInvoke(() =>
-                        _items.Add(item));
-
-                    Thread.Sleep(50);
+                    });
                 }
 
-                foreach (var item in items)
-                {
-                    var local = item;
-                    dispatcher.BeginInvoke(() =>
-                        _items.Add(local));
-
-                    Thread.Sleep(50);
-                }
+                lstGroup.SetItems(items);
             });
         }
 
@@ -191,12 +170,10 @@ namespace KeePass
             NavigationService.GoBack();
         }
 
-        private void lst_SelectionChanged(
-            object sender, SelectionChangedEventArgs e)
+        private void lst_SelectionChanged(object sender,
+            NavigationListControl.NavigationEventArgs e)
         {
-            var list = (ListBox)sender;
-
-            var item = list.SelectedItem as GroupItem;
+            var item = e.Item as GroupItem;
             if (item == null)
                 return;
 

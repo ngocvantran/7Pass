@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using Coding4Fun.Phone.Controls;
 using KeePass.Analytics;
@@ -21,8 +19,6 @@ namespace KeePass
     public partial class GroupDetails
     {
         private readonly ApplicationBarIconButton _cmdHome;
-        private readonly ObservableCollection<GroupItem> _items;
-        private readonly ObservableCollection<GroupItem> _recents;
 
         private Group _group;
 
@@ -32,12 +28,6 @@ namespace KeePass
 
             _cmdHome = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
-
-            _items = new ObservableCollection<GroupItem>();
-            _recents = new ObservableCollection<GroupItem>();
-
-            lstGroup.ItemsSource = _items;
-            lstHistory.ItemsSource = _recents;
         }
 
         protected override void OnNavigatedTo(
@@ -54,12 +44,12 @@ namespace KeePass
             }
 
             _group = GetGroup(database);
+            lstHistory.ItemsSource = null;
             pivotGroup.Header = _group.Name;
 
             ThreadPool.QueueUserWorkItem(_ =>
                 ListItems(_group, database.RecycleBin));
 
-            _recents.Clear();
             ThreadPool.QueueUserWorkItem(_ =>
                 ListHistory(database));
         }
@@ -149,23 +139,6 @@ namespace KeePass
             }
         }
 
-        private void Display(
-            IEnumerable<GroupItem> items,
-            ICollection<GroupItem> list)
-        {
-            var dispatcher = Dispatcher;
-            dispatcher.BeginInvoke(list.Clear);
-
-            foreach (var item in items)
-            {
-                var local = item;
-                dispatcher.BeginInvoke(() =>
-                    list.Add(local));
-
-                Thread.Sleep(50);
-            }
-        }
-
         private Group GetGroup(Database database)
         {
             string groupId;
@@ -201,7 +174,7 @@ namespace KeePass
                 .Select(x => new GroupItem(x, dispatcher))
                 .ToList();
 
-            Display(recents, _recents);
+            lstHistory.SetItems(recents);
         }
 
         private void ListItems(Group group, Group recycleBin)
@@ -225,7 +198,7 @@ namespace KeePass
                 .OrderBy(x => x.Title)
                 .Select(x => new GroupItem(x, dispatcher)));
 
-            Display(items, _items);
+            lstGroup.SetItems(items);
         }
 
         private void MoveToRecycleBin(
@@ -273,8 +246,9 @@ namespace KeePass
             ThreadPool.QueueUserWorkItem(_ => ListItems(
                 _group, Cache.Database.RecycleBin));
 
-            _recents.Clear();
             Cache.UpdateRecents();
+            lstHistory.ItemsSource = null;
+
             ThreadPool.QueueUserWorkItem(_ =>
                 ListHistory(database));
         }
@@ -342,17 +316,24 @@ namespace KeePass
             AnalyticsTracker.Track("rename_group");
         }
 
-        private void lst_SelectionChanged(
-            object sender, SelectionChangedEventArgs e)
+        private void lstGroup_Navigation(object sender,
+            NavigationListControl.NavigationEventArgs e)
         {
-            var list = (ListBox)sender;
-
-            var item = list.SelectedItem as GroupItem;
+            var item = e.Item as GroupItem;
             if (item == null)
                 return;
 
             NavigationService.Navigate(item.TargetUri);
-            list.SelectedItem = null;
+        }
+
+        private void lstHistory_SelectionChanged(object sender,
+            NavigationListControl.NavigationEventArgs e)
+        {
+            var item = e.Item as GroupItem;
+            if (item == null)
+                return;
+
+            NavigationService.Navigate(item.TargetUri);
         }
 
         private void mnuDelete_Click(object sender, RoutedEventArgs e)
@@ -372,8 +353,8 @@ namespace KeePass
 
         private void mnuHistory_Click(object sender, EventArgs e)
         {
-            _recents.Clear();
             Cache.ClearRecents();
+            lstHistory.ItemsSource = null;
         }
 
         private void mnuMove_Click(object sender, RoutedEventArgs e)

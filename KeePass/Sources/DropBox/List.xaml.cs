@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using DropNet;
 using DropNet.Exceptions;
 using DropNet.Models;
+using KeePass.Controls;
 using KeePass.IO.Data;
 using KeePass.Storage;
 using KeePass.Utils;
@@ -19,9 +17,9 @@ namespace KeePass.Sources.DropBox
     public partial class List
     {
         private readonly ApplicationBarIconButton _cmdRefresh;
-        private readonly ObservableCollection<MetaListItemInfo> _items;
-        private string _folder;
 
+        private string _folder;
+        private bool _loaded;
         private string _path;
         private string _secret;
         private string _token;
@@ -29,9 +27,6 @@ namespace KeePass.Sources.DropBox
         public List()
         {
             InitializeComponent();
-
-            _items = new ObservableCollection<MetaListItemInfo>();
-            lstBrowse.ItemsSource = _items;
 
             _cmdRefresh = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
@@ -48,8 +43,10 @@ namespace KeePass.Sources.DropBox
             if (_path != "/")
                 PageTitle.Text = Path.GetFileName(_path);
 
-            if (Network.CheckNetwork() && _items.Count == 0)
+            if (Network.CheckNetwork() && !_loaded)
                 RefreshList();
+
+            _loaded = true;
         }
 
         private void InitPars()
@@ -137,19 +134,13 @@ namespace KeePass.Sources.DropBox
 
             try
             {
-                dispatcher.BeginInvoke(
-                    () => _items.Clear());
-
-                foreach (var child in data.Contents
+                var items = data.Contents
                     .OrderBy(x => !x.Is_Dir)
-                    .ThenBy(x => x.Name))
-                {
-                    var meta = child;
-                    dispatcher.BeginInvoke(() => _items
-                        .Add(new MetaListItemInfo(meta)));
+                    .ThenBy(x => x.Name)
+                    .Select(x => new MetaListItemInfo(x))
+                    .ToList();
 
-                    Thread.Sleep(50);
-                }
+                lstBrowse.SetItems(items);
             }
             finally
             {
@@ -188,10 +179,10 @@ namespace KeePass.Sources.DropBox
             RefreshList();
         }
 
-        private void lstBrowse_SelectionChanged(
-            object sender, SelectionChangedEventArgs e)
+        private void lstBrowse_SelectionChanged(object sender,
+            NavigationListControl.NavigationEventArgs e)
         {
-            var meta = lstBrowse.SelectedItem as MetaListItemInfo;
+            var meta = e.Item as MetaListItemInfo;
 
             if (meta == null)
                 return;
@@ -214,8 +205,6 @@ namespace KeePass.Sources.DropBox
                         OnFileDownloadFailed);
                 }
             }
-
-            lstBrowse.SelectedItem = null;
         }
     }
 }

@@ -4,11 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:keepass="clr-namespace:KeePass.Utils"
-    xmlns:KeePass="clr-namespace:KeePass"
-    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    xmlns:uc="clr-namespace:KeePass.Controls"
     Style="{StaticResource KeePassPage}">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -56,7 +53,7 @@
                              KeyDown="txtPassword_KeyDown"
                              Grid.Row="1" Grid.Column="1" />
             </Grid>
-            <KeePass:ProgressOverlay x:Name="progBusy" />
+            <uc:ProgressOverlay x:Name="progBusy" />
         </Grid>
     </Grid>
 

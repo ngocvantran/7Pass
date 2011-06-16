@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using KeePass.Analytics;
+using KeePass.Controls;
 using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.Storage;
@@ -21,9 +22,11 @@ namespace KeePass
     public partial class Search
     {
         private const int MAX_ITEMS = 10;
+
         private readonly ApplicationBarIconButton _cmdSearch;
         private readonly ObservableCollection<GroupItem> _items;
         private readonly BackgroundWorker _wkSearch;
+
         private Database _database;
 
         public Search()
@@ -235,14 +238,13 @@ namespace KeePass
             HideKeyboard();
         }
 
-        private void lstItems_SelectionChanged(
-            object sender, SelectionChangedEventArgs e)
+        private void lstItems_SelectionChanged(object sender,
+            NavigationListControl.NavigationEventArgs e)
         {
-            var item = lstItems.SelectedItem as GroupItem;
+            var item = e.Item as GroupItem;
             if (item == null)
                 return;
 
-            lstItems.SelectedItem = null;
             NavigationService.Navigate(item.TargetUri);
         }
 

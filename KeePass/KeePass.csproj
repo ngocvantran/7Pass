@@ -78,6 +78,9 @@
       <HintPath>..\packages\Coding4Fun.Phone.Controls.1.4.1\lib\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="NavigationListControl">
+      <HintPath>..\Libs\NavigationListControl.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json.WindowsPhone, Version=4.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\DropNet.1.5.4\lib\sl3-wp\Newtonsoft.Json.WindowsPhone.dll</HintPath>
     </Reference>
@@ -109,6 +112,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\KeePassList.xaml.cs">
+      <DependentUpon>KeePassList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\KeePassListBase.cs" />
     <Compile Include="Data\CurrentEntry.cs" />
     <Compile Include="Data\EntryEx.cs" />
     <Compile Include="EntryFields.xaml.cs">
@@ -133,7 +140,7 @@
       <DependentUpon>GroupDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\ListItemInfo.cs" />
-    <Compile Include="ListItemView.xaml.cs">
+    <Compile Include="Controls\ListItemView.xaml.cs">
       <DependentUpon>ListItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
@@ -145,7 +152,7 @@
     <Compile Include="Password.xaml.cs">
       <DependentUpon>Password.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProgressOverlay.xaml.cs">
+    <Compile Include="Controls\ProgressOverlay.xaml.cs">
       <DependentUpon>ProgressOverlay.xaml</DependentUpon>
     </Compile>
     <Compile Include="Refs\HybridOrientationChangesFrame.cs" />
@@ -243,6 +250,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\KeePassList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EntryFields.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -267,7 +278,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListItemView.xaml">
+    <Page Include="Controls\ListItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -279,7 +290,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ProgressOverlay.xaml">
+    <Page Include="Controls\ProgressOverlay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

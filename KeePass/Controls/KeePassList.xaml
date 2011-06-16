@@ -1,0 +1,17 @@
+﻿<UserControl
+    x:Class="KeePass.Controls.KeePassList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:uc="clr-namespace:KeePass.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+	Style="{StaticResource ControlDefaults}">
+
+    <uc:KeePassListBase x:Name="lstMain" Navigation="lstMain_Navigation"
+                        toolkit:TiltEffect.IsTiltEnabled="True">
+        <uc:KeePassListBase.ItemTemplate>
+            <DataTemplate>
+                <uc:ListItemView />
+            </DataTemplate>
+        </uc:KeePassListBase.ItemTemplate>
+    </uc:KeePassListBase>
+</UserControl>

@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Data;
 using KeePass.Sources;
@@ -124,8 +123,6 @@ namespace KeePass
                     UpdateItem(local, null);
                     _items.Add(local);
                 });
-
-                Thread.Sleep(50);
             }
 
             var hasUpdatables = _items
@@ -185,34 +182,6 @@ namespace KeePass
         {
             if (!_moved)
                 TrialManager.CheckToastState();
-        }
-
-        private void lstDatabases_SelectionChanged(
-            object sender, SelectionChangedEventArgs e)
-        {
-            var item = lstDatabases.SelectedItem as DatabaseItem;
-            if (item == null)
-                return;
-
-            if (item.IsUpdating)
-                item.IsUpdating = false;
-            else
-            {
-                var database = (DatabaseInfo)item.Info;
-
-                if (!database.HasPassword)
-                {
-                    this.NavigateTo<Password>("db={0}",
-                        database.Folder);
-                }
-                else
-                {
-                    database.Open(Dispatcher);
-                    this.NavigateTo<GroupDetails>();
-                }
-            }
-
-            lstDatabases.SelectedItem = null;
         }
 
         private void mnuAbout_Click(object sender, EventArgs e)
@@ -311,6 +280,32 @@ namespace KeePass
                 (x => x.Info == database);
 
             Update(listItem);
+        }
+
+        private void lstDatabases_Navigation(object sender,
+            NavigationListControl.NavigationEventArgs e)
+        {
+            var item = e.Item as DatabaseItem;
+            if (item == null)
+                return;
+
+            if (item.IsUpdating)
+                item.IsUpdating = false;
+            else
+            {
+                var database = (DatabaseInfo)item.Info;
+
+                if (!database.HasPassword)
+                {
+                    this.NavigateTo<Password>("db={0}",
+                        database.Folder);
+                }
+                else
+                {
+                    database.Open(Dispatcher);
+                    this.NavigateTo<GroupDetails>();
+                }
+            }
         }
     }
 }

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace KeePass
+namespace KeePass.Controls
 {
     public partial class ProgressOverlay
     {
