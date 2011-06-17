@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Threading;
 
@@ -12,8 +13,6 @@ namespace KeePass.Analytics
         private const string URI = "http://api.mixpanel.com/track?data=";
 #endif
 
-        private static WebClient _client;
-
         public void Track(TrackingEvent info)
         {
             if (info == null)
@@ -26,18 +25,23 @@ namespace KeePass.Analytics
 
         private static void Send(string json)
         {
-            if (_client == null)
-            {
-                _client = new WebClient();
-                _client.DownloadStringCompleted +=
-                    _client_DownloadStringCompleted;
-            }
-
             var uri = new Uri(URI + json);
-            _client.DownloadStringAsync(uri);
+            var request = WebRequest.Create(uri);
+
+            request.BeginGetResponse(
+                ResponseReady, request);
         }
 
-        private static void _client_DownloadStringCompleted(
-            object sender, DownloadStringCompletedEventArgs e) {}
+        private static void ResponseReady(IAsyncResult ar)
+        {
+#if DEBUG
+            var request = (WebRequest)ar.AsyncState;
+            var response = request.EndGetResponse(ar);
+
+            var content = new StreamReader(
+                response.GetResponseStream())
+                .ReadToEnd();
+#endif
+        }
     }
 }
