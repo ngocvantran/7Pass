@@ -17,12 +17,11 @@ namespace KeePass
 {
     public partial class EntryDetails
     {
-        private readonly ApplicationBarMenuItem _mnuReset;
         private readonly ApplicationBarIconButton _cmdSave;
+        private readonly ApplicationBarMenuItem _mnuReset;
 
         private EntryEx _binding;
         private Entry _entry;
-        private bool _loaded;
 
         public EntryDetails()
         {
@@ -48,9 +47,10 @@ namespace KeePass
             if (cancelled)
                 return;
 
-            if (_loaded)
+            if (_entry != null)
             {
                 UpdateNotes();
+                txtPassword.Text = _entry.Password;
 
                 _binding.HasChanges =
                     CurrentEntry.HasChanges;
@@ -79,7 +79,6 @@ namespace KeePass
             else
                 entry = new Entry();
 
-            _loaded = true;
             DisplayEntry(entry);
         }
 
@@ -176,7 +175,7 @@ namespace KeePass
             ThreadPool.QueueUserWorkItem(_ =>
             {
                 AnalyticsTracker.Track(_entry.ID != null
-                ? "save_entry" : "new_entry");
+                    ? "save_entry" : "new_entry");
 
                 var info = Cache.DbInfo;
                 var database = Cache.Database;
@@ -303,6 +302,12 @@ namespace KeePass
         private void mnuIntegrated_Click(object sender, RoutedEventArgs e)
         {
             OpenUrl(true);
+        }
+
+        private void mnuPassGen_Click(object sender, EventArgs e)
+        {
+            this.NavigateTo<PassGen>(
+                "id={0}", _entry.ID);
         }
 
         private void mnuReset_Click(object sender, EventArgs e)

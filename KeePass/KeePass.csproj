@@ -124,6 +124,24 @@
     <Compile Include="EntryNotes.xaml.cs">
       <DependentUpon>EntryNotes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Generator\BracketSet.cs" />
+    <Compile Include="Generator\CharacterSetCheckBox.cs" />
+    <Compile Include="Generator\CharacterSets.cs" />
+    <Compile Include="Generator\GenerationResults.cs" />
+    <Compile Include="Generator\HighAnsiSet.cs" />
+    <Compile Include="Generator\DigitsSet.cs" />
+    <Compile Include="Generator\ICharacterSet.cs" />
+    <Compile Include="Generator\LowerCaseSet.cs" />
+    <Compile Include="Generator\MinusSet.cs" />
+    <Compile Include="Generator\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Generator\SpaceSet.cs" />
+    <Compile Include="Generator\SpecialSet.cs" />
+    <Compile Include="Generator\UnderlineSet.cs" />
+    <Compile Include="Generator\UpperCaseSet.cs" />
     <Compile Include="GlobalPass.xaml.cs">
       <DependentUpon>GlobalPass.xaml</DependentUpon>
     </Compile>
@@ -149,6 +167,9 @@
     <Compile Include="MoveTarget.xaml.cs">
       <DependentUpon>MoveTarget.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PassGen.xaml.cs">
+      <DependentUpon>PassGen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Password.xaml.cs">
       <DependentUpon>Password.xaml</DependentUpon>
     </Compile>
@@ -161,6 +182,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Refs\PhoneSlider.cs" />
     <Compile Include="Rename.xaml.cs">
       <DependentUpon>Rename.xaml</DependentUpon>
     </Compile>
@@ -293,6 +315,10 @@
     <Page Include="Controls\ProgressOverlay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PassGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Settings.xaml">
       <SubType>Designer</SubType>
@@ -452,6 +478,10 @@
     <Content Include="Images\warning.light.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Generator\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>

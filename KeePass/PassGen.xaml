@@ -1,0 +1,63 @@
+﻿<keepass:KeePassPage 
+	x:Class="KeePass.PassGen"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:keepass="clr-namespace:KeePass.Utils"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+	Style="{StaticResource KeePassPage}"
+    SupportedOrientations="Portrait">
+
+    <controls:Panorama Title="Password">
+        <controls:PanoramaItem Header="Settings">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Length of generated password" Grid.Row="0"
+                        Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <Grid Grid.Row="1">
+                        <Slider x:Name="sldLength" Minimum="0" Maximum="65"
+                                SmallChange="1" LargeChange="10"
+                                ValueChanged="sldLength_ValueChanged" />
+                        <TextBlock Name="lblLength"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Bottom" />
+                    </Grid>
+
+                    <toolkit:WrapPanel Name="pnlSets" Grid.Row="2" />
+                </Grid>
+            </ScrollViewer>
+        </controls:PanoramaItem>
+        <controls:PanoramaItem Header="Results">
+            <ListBox Name="lstResults" SelectionChanged="lstResults_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                    	<TextBlock Text="{Binding}" Style="{StaticResource PhoneTextLargeStyle}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </controls:PanoramaItem>
+    </controls:Panorama>
+
+	<phone:PhoneApplicationPage.ApplicationBar>
+		<shell:ApplicationBar IsVisible="True">
+			<shell:ApplicationBarIconButton
+				IconUri="/Images/home.png"
+				Text="Home" Click="cmdHome_Click" />
+			<shell:ApplicationBarIconButton
+				IconUri="/Images/root.png"
+				Text="Select DB" Click="cmdRoot_Click" />
+			<shell:ApplicationBarIconButton
+				IconUri="/Images/about.png"
+				Text="About" Click="cmdAbout_Click"/>
+		</shell:ApplicationBar>
+	</phone:PhoneApplicationPage.ApplicationBar>
+
+</keepass:KeePassPage>

@@ -99,6 +99,8 @@
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem IsEnabled="False"
                     Text="Reset entry" Click="mnuReset_Click" />
+                <shell:ApplicationBarMenuItem
+                    Text="Generate password" Click="mnuPassGen_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
