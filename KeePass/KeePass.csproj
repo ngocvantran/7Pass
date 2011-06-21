@@ -95,6 +95,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.xaml.cs">
@@ -182,6 +183,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Refs\MD5.cs" />
     <Compile Include="Refs\PhoneSlider.cs" />
     <Compile Include="Rename.xaml.cs">
       <DependentUpon>Rename.xaml</DependentUpon>
@@ -205,6 +207,14 @@
     <Compile Include="Sources\DropBox\MetaListItemInfo.cs" />
     <Compile Include="Sources\ReportUpdateResult.cs" />
     <Compile Include="Sources\SyncResults.cs" />
+    <Compile Include="Sources\Web\Dav\BasicAuthenticator.cs" />
+    <Compile Include="Sources\Web\Dav\DigestAuthenticator.cs" />
+    <Compile Include="Sources\Web\Dav\DigestToken.cs" />
+    <Compile Include="Sources\Web\Dav\IAuthenticator.cs" />
+    <Compile Include="Sources\Web\Dav\IWebAction.cs" />
+    <Compile Include="Sources\Web\Dav\NullAuthenticator.cs" />
+    <Compile Include="Sources\Web\Dav\WebDavClient.cs" />
+    <Compile Include="Sources\Web\Dav\WebDavRequest.cs" />
     <Compile Include="Sources\Web\DownloadHandler.cs" />
     <Compile Include="Sources\Web\WebAuth.xaml.cs">
       <DependentUpon>WebAuth.xaml</DependentUpon>
