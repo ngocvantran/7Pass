@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Xml.Linq;
 
 namespace KeePass.Sources.Web.Dav
 {
@@ -37,9 +39,41 @@ namespace KeePass.Sources.Web.Dav
                 get { return "PROPFIND"; }
             }
 
-            public void Complete(HttpWebResponse response)
+            public void Complete(string content, HttpStatusCode status)
             {
-                throw new NotImplementedException();
+                var d = (XNamespace)"DAV:";
+                var items = new List<ItemInfo>();
+                var doc = XDocument.Parse(content);
+
+                // ReSharper disable PossibleNullReferenceException
+                foreach (var item in doc.Root.Elements(d + "response"))
+                {
+                    var path = item
+                        .Element(d + "href")
+                        .Value;
+                    path = Uri.UnescapeDataString(path);
+
+                    var properties = item
+                        .Element(d + "propstat")
+                        .Element(d + "prop");
+
+                    var lastModified = properties
+                        .Element(d + "getlastmodified")
+                        .Value;
+
+                    var isDir = properties
+                        .Element(d + "resourcetype")
+                        .Element(d + "collection") != null;
+                
+
+                    items.Add(new ItemInfo
+                    {
+                        Path = path,
+                        IsDir = isDir,
+                        Modified = lastModified,
+                    });
+                }
+                // ReSharper restore PossibleNullReferenceException
             }
 
             public void Error(WebException ex)

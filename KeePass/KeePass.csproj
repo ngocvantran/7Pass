@@ -211,6 +211,7 @@
     <Compile Include="Sources\Web\Dav\DigestAuthenticator.cs" />
     <Compile Include="Sources\Web\Dav\DigestToken.cs" />
     <Compile Include="Sources\Web\Dav\IAuthenticator.cs" />
+    <Compile Include="Sources\Web\Dav\ItemInfo.cs" />
     <Compile Include="Sources\Web\Dav\IWebAction.cs" />
     <Compile Include="Sources\Web\Dav\NullAuthenticator.cs" />
     <Compile Include="Sources\Web\Dav\WebDavClient.cs" />

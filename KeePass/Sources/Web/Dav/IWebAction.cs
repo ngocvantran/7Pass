@@ -13,8 +13,9 @@ namespace KeePass.Sources.Web.Dav
         /// <summary>
         /// Handles the response.
         /// </summary>
-        /// <param name="response">The response.</param>
-        void Complete(HttpWebResponse response);
+        /// <param name="status">The status code.</param>
+        /// <param name="content">The content.</param>
+        void Complete(string content, HttpStatusCode status);
 
         /// <summary>
         /// Handles the exception.
