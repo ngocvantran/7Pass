@@ -17,7 +17,7 @@ namespace Delay
     /// <summary>
     /// PhoneApplicationFrame subclass that animates and fades between device orientation changes.
     /// </summary>
-    public class HybridOrientationChangesFrame : PhoneApplicationFrame
+    public class HybridOrientationChangesFrame : TransitionFrame
     {
         /// <summary>
         /// Stores the previous orientation.
