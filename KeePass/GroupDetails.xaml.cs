@@ -122,10 +122,9 @@ namespace KeePass
             {
                 MoveToRecycleBin((writer, recycleBin) =>
                 {
-                    group.Parent.Groups
-                        .Remove(group);
+                    group.Remove();
                     recycleBin.Add(group);
-
+                    
                     writer.Location(group);
                 });
             }
