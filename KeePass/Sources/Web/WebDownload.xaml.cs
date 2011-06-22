@@ -30,10 +30,6 @@ namespace KeePass.Sources.Web
         protected override void OnNavigatedTo(
             bool cancelled, NavigationEventArgs e)
         {
-            var client = new Dav.WebDavClient(
-                "http://demo.sabredav.org", "testuser", "test");
-            client.List("/public/");
-
             if (cancelled)
                 return;
 

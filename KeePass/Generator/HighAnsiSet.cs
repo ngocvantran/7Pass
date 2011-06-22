@@ -20,5 +20,10 @@ namespace KeePass.Generator
         {
             get { return Resources.HighAnsi; }
         }
+
+        public int Strength
+        {
+            get { return 112; }
+        }
     }
 }
