@@ -7,6 +7,7 @@
 	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:uc="clr-namespace:KeePass.Controls"
 	Style="{StaticResource KeePassPage}"
     SupportedOrientations="Portrait">
 
@@ -39,7 +40,10 @@
             <ListBox Name="lstResults" SelectionChanged="lstResults_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                    	<TextBlock Text="{Binding}" Style="{StaticResource PhoneTextLargeStyle}" />
+                        <StackPanel>
+                            <TextBlock Text="{Binding}" Style="{StaticResource PhoneTextLargeStyle}" />
+                            <uc:QualityProgressBar Password="{Binding}" />
+                        </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

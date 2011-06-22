@@ -8,7 +8,7 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:c4f="clr-namespace:Coding4Fun.Phone.Controls.Binding;assembly=Coding4Fun.Phone.Controls"
     xmlns:uc="clr-namespace:KeePass.Controls"
-    Style="{StaticResource KeePassPage}">
+    Style="{StaticResource KeePassPage}" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="728" d:DesignWidth="480">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -41,6 +41,7 @@
                     <TextBox Name="txtPassword" Text="{Binding Password, Mode=TwoWay}"
                              c4f:TextBoxBinding.UpdateSourceOnChange="True"
                              GotFocus="txt_GotFocus" />
+                    <uc:QualityProgressBar Password="{Binding Password}" />
 
                     <!-- URL -->
                     <TextBlock Text=" " />

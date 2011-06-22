@@ -13,5 +13,11 @@ namespace KeePass.Generator
         /// Gets the name.
         /// </summary>
         string Name { get; }
+
+        /// <summary>
+        /// Gets the strength value to
+        /// estimate password quality.
+        /// </summary>
+        int Strength { get; }
     }
 }
