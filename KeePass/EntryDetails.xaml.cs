@@ -172,6 +172,13 @@ namespace KeePass
         {
             progBusy.IsBusy = true;
 
+            string groupId;
+            if (!NavigationContext.QueryString
+                .TryGetValue("group", out groupId))
+            {
+                groupId = null;
+            }
+
             ThreadPool.QueueUserWorkItem(_ =>
             {
                 AnalyticsTracker.Track(_entry.ID != null
@@ -188,9 +195,6 @@ namespace KeePass
                     writer.Details(_entry);
                 else
                 {
-                    var groupId = NavigationContext
-                        .QueryString["group"];
-
                     database.AddNew(
                         _entry, groupId);
 
