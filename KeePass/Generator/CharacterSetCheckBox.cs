@@ -13,7 +13,7 @@ namespace KeePass.Generator
         /// </summary>
         public char[] Characters
         {
-            get { return _set.Charaters; }
+            get { return _set.Characters; }
         }
 
         public CharacterSetCheckBox(ICharacterSet set)
@@ -35,7 +35,7 @@ namespace KeePass.Generator
         public void LoadState(string password)
         {
             var index = password.IndexOfAny(
-                _set.Charaters);
+                _set.Characters);
 
             IsChecked = index >= 0;
         }

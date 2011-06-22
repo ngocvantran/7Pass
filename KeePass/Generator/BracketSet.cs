@@ -4,7 +4,7 @@ namespace KeePass.Generator
 {
     internal class BracketSet : ICharacterSet
     {
-        public char[] Charaters
+        public char[] Characters
         {
             get
             {

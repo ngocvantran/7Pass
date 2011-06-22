@@ -116,7 +116,6 @@ namespace KeePass.Generator
             _rnd = new Random();
             _characters = characters;
 
-
             var count = Math.Pow(
                 _characters.Length, length);
             _count = (int)Math.Min(count, 10000);
@@ -126,6 +125,19 @@ namespace KeePass.Generator
                 .Range(0, CACHE_SIZE)
                 .Select(x => new DataItem(
                     x, Generate())));
+        }
+
+        public string Generate()
+        {
+            var chars = new char[_length];
+            for (var i = 0; i < _length; i++)
+            {
+                var index = _rnd.Next(0,
+                    _characters.Length - 1);
+                chars[i] = _characters[index];
+            }
+
+            return new string(chars);
         }
 
         public int IndexOf(object value)
@@ -138,19 +150,6 @@ namespace KeePass.Generator
 
             var item = (DataItem)value;
             return item.Index;
-        }
-
-        private string Generate()
-        {
-            var chars = new char[_length];
-            for (var i = 0; i < _length; i++)
-            {
-                var index = _rnd.Next(0,
-                    _characters.Length - 1);
-                chars[i] = _characters[index];
-            }
-
-            return new string(chars);
         }
 
         public class DataItem

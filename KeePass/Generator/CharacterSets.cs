@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace KeePass.Generator
 {
@@ -18,6 +19,25 @@ namespace KeePass.Generator
                 new BracketSet(),
                 new HighAnsiSet(),
             };
+        }
+
+        /// <summary>
+        /// Generates the password for a new entry.
+        /// </summary>
+        /// <returns></returns>
+        public static string NewEntry()
+        {
+            var sets = new ICharacterSet[]
+            {
+                new UpperCaseSet(),
+                new LowerCaseSet(),
+                new DigitsSet(),
+            }
+                .SelectMany(x => x.Characters)
+                .ToArray();
+
+            return new GenerationResults(sets, 20)
+                .Generate();
         }
     }
 }

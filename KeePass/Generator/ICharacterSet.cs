@@ -7,7 +7,7 @@ namespace KeePass.Generator
         /// <summary>
         /// Gets the charaters.
         /// </summary>
-        char[] Charaters { get; }
+        char[] Characters { get; }
 
         /// <summary>
         /// Gets the name.

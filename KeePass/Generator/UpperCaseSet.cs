@@ -5,7 +5,7 @@ namespace KeePass.Generator
 {
     internal class UpperCaseSet : ICharacterSet
     {
-        public char[] Charaters
+        public char[] Characters
         {
             get
             {

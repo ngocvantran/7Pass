@@ -5,7 +5,7 @@ namespace KeePass.Generator
 {
     internal class HighAnsiSet : ICharacterSet
     {
-        public char[] Charaters
+        public char[] Characters
         {
             get
             {

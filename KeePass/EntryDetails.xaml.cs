@@ -77,7 +77,13 @@ namespace KeePass
                     _ => Cache.AddRecent(id));
             }
             else
-                entry = new Entry();
+            {
+                entry = new Entry
+                {
+                    Password = Generator
+                        .CharacterSets.NewEntry(),
+                };
+            }
 
             DisplayEntry(entry);
         }

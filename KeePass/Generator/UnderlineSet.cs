@@ -4,7 +4,7 @@ namespace KeePass.Generator
 {
     internal class UnderlineSet : ICharacterSet
     {
-        public char[] Charaters
+        public char[] Characters
         {
             get { return new[] {'_'}; }
         }
