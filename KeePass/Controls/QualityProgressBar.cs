@@ -137,6 +137,10 @@ namespace KeePass.Controls
         private void UpdateQuality()
         {
             var quality = EstimateQuality(Password);
+
+            if (quality > 1)
+                quality = 1;
+
             Value = Minimum + (Maximum - Minimum) * quality;
         }
     }
