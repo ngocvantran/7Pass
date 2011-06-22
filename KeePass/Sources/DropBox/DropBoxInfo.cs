@@ -5,6 +5,7 @@ namespace KeePass.Sources.DropBox
 {
     internal class DropBoxInfo
     {
+#warning Your DropBox info is needed
         public const string KEY = "YOUR_KEY";
         public const string SECRET = "YOUR_SECRET";
 
