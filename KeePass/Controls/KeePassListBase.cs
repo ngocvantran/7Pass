@@ -16,6 +16,12 @@ namespace KeePass.Controls
         /// <param name="items">The items.</param>
         public void SetItems<T>(IEnumerable<T> items)
         {
+            ThreadPool.QueueUserWorkItem(
+                _ => SetItemsPrivate(items));
+        }
+
+        private void SetItemsPrivate<T>(IEnumerable<T> items)
+        {
             var dispatcher = Dispatcher;
             var wait = new ManualResetEvent(false);
             var list = new ObservableCollection<T>();
