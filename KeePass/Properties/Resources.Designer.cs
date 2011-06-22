@@ -426,7 +426,8 @@ namespace KeePass.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to This is the fully functional free version of 7Pass.
-        ///You can support the author by tapping this notification to purchase the paid version..
+        ///You can support the author by tapping this
+        ///notification to purchase the paid version..
         /// </summary>
         internal static string ToastFree {
             get {
