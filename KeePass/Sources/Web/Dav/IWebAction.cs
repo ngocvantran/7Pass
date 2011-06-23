@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 
 namespace KeePass.Sources.Web.Dav
@@ -14,8 +15,8 @@ namespace KeePass.Sources.Web.Dav
         /// Handles the response.
         /// </summary>
         /// <param name="status">The status code.</param>
-        /// <param name="content">The content.</param>
-        void Complete(string content, HttpStatusCode status);
+        /// <param name="response">The response.</param>
+        void Complete(HttpStatusCode status, Stream response);
 
         /// <summary>
         /// Handles the exception.

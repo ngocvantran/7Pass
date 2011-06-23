@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Net;
 
 namespace KeePass.Sources.Web.Dav
@@ -66,15 +65,8 @@ namespace KeePass.Sources.Web.Dav
                     using (var response = (HttpWebResponse)
                         request.EndGetResponse(ar))
                     {
-                        string responseText;
                         using (var stream = response.GetResponseStream())
-                        {
-                            responseText = new StreamReader(stream)
-                                .ReadToEnd();
-                        }
-
-                        action.Complete(responseText,
-                            response.StatusCode);
+                            action.Complete(response.StatusCode, stream);
                     }
                 }
                 catch (WebException ex)
