@@ -97,6 +97,7 @@ namespace KeePass.Sources.DropBox
                             Url = path,
                             Name = title,
                             Modified = modified,
+                            Type = SourceTypes.Synchronizable,
                             Source = DatabaseUpdater.DROPBOX_UPDATER,
                         });
                     }

@@ -219,6 +219,7 @@ namespace KeePass.Sources.Web
             {
                 Url = url,
                 Name = name,
+                Type = SourceTypes.Updatable,
                 Source = DatabaseUpdater.WEB_UPDATER,
             });
 

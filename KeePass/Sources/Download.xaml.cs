@@ -50,6 +50,7 @@ namespace KeePass.Sources
             {
                 Source = "Demo",
                 Name = "Demo Database",
+                Type = SourceTypes.OneTime,
             });
 
             MessageBox.Show(

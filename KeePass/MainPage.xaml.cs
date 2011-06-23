@@ -125,7 +125,7 @@ namespace KeePass
                 });
             }
 
-            var hasUpdatables = _items
+            var hasUpdatables = items
                 .Any(x => x.CanUpdate);
 
             dispatcher.BeginInvoke(() =>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Media;
 using KeePass.Storage;
 
@@ -23,8 +24,8 @@ namespace KeePass.Data
         {
             get
             {
-                return !string.IsNullOrEmpty(
-                    _info.Details.Url);
+                return _info.Details.Type !=
+                    SourceTypes.OneTime;
             }
         }
 
@@ -84,6 +85,34 @@ namespace KeePass.Data
             {
                 _passwordIcon = value;
                 OnPropertyChanged("PasswordIcon");
+            }
+        }
+
+        public string UpdateText
+        {
+            get
+            {
+                switch (_info.Details.Type)
+                {
+                    case SourceTypes.Synchronizable:
+                        return Properties.Resources.Update_Sync;
+
+                    case SourceTypes.Updatable:
+                        return Properties.Resources.Update_Download;
+
+                    default:
+                        return string.Empty;
+                }
+            }
+        }
+
+        public Visibility UpdateVisibility
+        {
+            get
+            {
+                return CanUpdate
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
             }
         }
 

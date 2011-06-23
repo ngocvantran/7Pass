@@ -47,6 +47,14 @@ namespace KeePass.Storage
         public string Source { get; set; }
 
         /// <summary>
+        /// Gets or sets the source type.
+        /// </summary>
+        /// <value>
+        /// The source type.
+        /// </value>
+        public SourceTypes Type { get; set; }
+
+        /// <summary>
         /// Gets or sets the URL.
         /// </summary>
         /// <value>
@@ -56,6 +64,7 @@ namespace KeePass.Storage
 
         public DatabaseDetails()
         {
+            Type = SourceTypes.OneTime;
             Recents = new List<string>();
         }
     }

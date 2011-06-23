@@ -292,4 +292,10 @@ Click this notification to Review/Purchase 7Pass.</value>
   <data name="DigestRegex" xml:space="preserve">
     <value>(\w+)="([^"]+)"</value>
   </data>
+  <data name="Update_Download" xml:space="preserve">
+    <value>update</value>
+  </data>
+  <data name="Update_Sync" xml:space="preserve">
+    <value>synchronize</value>
+  </data>
 </root>

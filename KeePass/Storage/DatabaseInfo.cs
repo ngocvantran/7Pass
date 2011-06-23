@@ -579,6 +579,7 @@ namespace KeePass.Storage
                 {
                     Url = url,
                     Source = source,
+                    Type = SourceTypes.OneTime,
                     Name = "7Pass 1.x database",
                 };
 
