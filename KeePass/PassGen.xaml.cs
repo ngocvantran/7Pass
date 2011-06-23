@@ -49,6 +49,8 @@ namespace KeePass
                 ?? CurrentEntry.Entry;
 
             LoadCurrentState();
+
+            TriggerUpdate();
         }
 
         private void LoadCurrentState()
