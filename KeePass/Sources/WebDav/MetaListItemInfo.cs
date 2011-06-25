@@ -7,6 +7,7 @@ namespace KeePass.Sources.WebDav
     internal class MetaListItemInfo : ListItemInfo
     {
         private readonly ItemInfo _item;
+        private readonly string _path;
 
         public bool IsDir
         {
@@ -20,15 +21,17 @@ namespace KeePass.Sources.WebDav
 
         public string Path
         {
-            get { return _item.Path; }
+            get { return _path; }
         }
 
-        public MetaListItemInfo(ItemInfo item)
+        public MetaListItemInfo(string basePath, ItemInfo item)
         {
-            if (item == null)
-                throw new ArgumentNullException("item");
+            if (basePath == null) throw new ArgumentNullException("basePath");
+            if (item == null) throw new ArgumentNullException("item");
 
             _item = item;
+            _path = new Uri(new Uri(basePath), item.Path).ToString();
+
             var path = item.Path;
 
             try

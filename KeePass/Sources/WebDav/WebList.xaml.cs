@@ -16,13 +16,11 @@ namespace KeePass.Sources.WebDav
     public partial class WebList
     {
         private readonly ApplicationBarIconButton _cmdRefresh;
+        private WebDavClient _client;
 
         private string _folder;
         private bool _loaded;
-        private string _pass;
         private string _path;
-        private string _server;
-        private string _user;
 
         public WebList()
         {
@@ -53,18 +51,18 @@ namespace KeePass.Sources.WebDav
         {
             var pars = NavigationContext.QueryString;
 
+            _client = new WebDavClient(
+                pars["user"], pars["pass"]);
+
             _path = pars["path"];
-            _user = pars["user"];
-            _pass = pars["pass"];
-            _server = pars["server"];
             _folder = pars["folder"];
         }
 
         private void NavigateTo(string path)
         {
             this.NavigateTo<WebList>(
-                "server={0}&user={1}&pass={2}&path={3}&folder={4}",
-                _server, _user, _pass, path, _folder);
+                "user={0}&pass={1}&path={2}&folder={3}",
+                _client.User, _client.Password, path, _folder);
         }
 
         private void OnFileDownloadFailed(WebException obj)
@@ -95,9 +93,9 @@ namespace KeePass.Sources.WebDav
                         var storage = new DatabaseInfo();
                         storage.SetDatabase(buffer, new DatabaseDetails
                         {
-                            Url = path,
                             Name = title,
                             Modified = modified,
+                            Url = _client.GetUrl(path),
                             Type = SourceTypes.Synchronizable,
                             Source = DatabaseUpdater.WEBDAV_UPDATER,
                         });
@@ -137,8 +135,8 @@ namespace KeePass.Sources.WebDav
             try
             {
                 var items = itemInfos
+                    .Select(x => new MetaListItemInfo(_path, x))
                     .Where(x => x.Path != _path)
-                    .Select(x => new MetaListItemInfo(x))
                     .OrderBy(x => !x.IsDir)
                     .ThenBy(x => x.Title)
                     .ToList();
@@ -169,9 +167,7 @@ namespace KeePass.Sources.WebDav
             progBusy.IsBusy = true;
             _cmdRefresh.IsEnabled = false;
 
-            var client = new WebDavClient(
-                _server, _user, _pass);
-            client.ListAsync(_path,
+            _client.ListAsync(_path,
                 OnListComplete, OnListFailed);
         }
 
@@ -197,9 +193,7 @@ namespace KeePass.Sources.WebDav
             {
                 progBusy.IsBusy = true;
 
-                var client = new WebDavClient(
-                    _server, _user, _pass);
-                client.DownloadAsync(meta.Path, x =>
+                _client.DownloadAsync(meta.Path, x =>
                     OnFileDownloaded(x, meta.Path,
                         meta.Title, meta.Modified),
                     OnFileDownloadFailed);

@@ -42,9 +42,9 @@ namespace KeePass.Sources.WebDav
             prgBusy.IsBusy = true;
 
             this.NavigateTo<WebList>(
-                "server={0}&user={1}&pass={2}&folder={3}&path=.",
-                txtUrl.Text, txtUser.Text,
-                txtPassword.Password, _folder);
+                "user={0}&pass={1}&folder={2}&path={3}",
+                txtUser.Text, txtPassword.Password,
+                _folder, txtUrl.Text);
         }
 
         private void ValidateData()

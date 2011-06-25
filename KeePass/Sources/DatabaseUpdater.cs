@@ -2,6 +2,7 @@
 using System.IO;
 using KeePass.Sources.DropBox;
 using KeePass.Sources.Web;
+using KeePass.Sources.WebDav;
 using KeePass.Storage;
 
 namespace KeePass.Sources
@@ -20,6 +21,11 @@ namespace KeePass.Sources
             {
                 case DROPBOX_UPDATER:
                     DropBoxUpdater.Update(info, queryUpdate,
+                        x => Report(info, x, report));
+                    break;
+
+                case WEBDAV_UPDATER:
+                    WebDavUpdater.Update(info, queryUpdate,
                         x => Report(info, x, report));
                     break;
 

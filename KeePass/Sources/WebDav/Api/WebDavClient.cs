@@ -10,18 +10,23 @@ namespace KeePass.Sources.WebDav.Api
     internal class WebDavClient
     {
         private readonly WebDavRequest _client;
-        private readonly Uri _server;
+        private readonly string _password;
+        private readonly string _user;
 
-        public WebDavClient(string server,
-            string user, string password)
+        public string Password
         {
-            if (server == null)
-                throw new ArgumentNullException("server");
+            get { return _password; }
+        }
 
-            if (!server.EndsWith("/"))
-                server += "/";
+        public string User
+        {
+            get { return _user; }
+        }
 
-            _server = new Uri(server);
+        public WebDavClient(string user, string password)
+        {
+            _user = user;
+            _password = password;
             _client = new WebDavRequest(user, password);
         }
 
@@ -31,7 +36,7 @@ namespace KeePass.Sources.WebDav.Api
         {
             _client.Request(
                 new DownloadAction(complete, error),
-                GetPath(path), null);
+                new Uri(path), null);
         }
 
         public void ListAsync(string path,
@@ -40,7 +45,7 @@ namespace KeePass.Sources.WebDav.Api
         {
             _client.Request(
                 new ListAction(complete, error),
-                GetPath(path), null);
+                new Uri(path), null);
         }
 
         public void UploadAsync(string path, byte[] content,
@@ -48,12 +53,7 @@ namespace KeePass.Sources.WebDav.Api
         {
             _client.Request(
                 new UploadAction(complete, error),
-                GetPath(path), content);
-        }
-
-        private Uri GetPath(string path)
-        {
-            return new Uri(_server, path);
+                new Uri(path), content);
         }
 
         private class DownloadAction : IWebAction

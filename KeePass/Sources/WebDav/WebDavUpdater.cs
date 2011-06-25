@@ -1,24 +1,24 @@
-﻿using System;
+using System;
 using System.IO;
-using DropNet;
-using DropNet.Exceptions;
-using DropNet.Models;
+using System.Linq;
+using System.Net;
 using KeePass.IO.Utils;
+using KeePass.Sources.WebDav.Api;
 using KeePass.Storage;
 
-namespace KeePass.Sources.DropBox
+namespace KeePass.Sources.WebDav
 {
-    internal static class DropBoxUpdater
+    internal static class WebDavUpdater
     {
-        public static string GetUrl(
-            this DropNetClient client,
+        public static string GetUrl(this WebDavClient client,
             string path)
         {
-            var login = client.UserLogin;
-
-            return string.Format(
-                "dropbox://{0}:{1}@dropbox.com{2}",
-                login.Token, login.Secret, path);
+            return string.Join("\n", new[]
+            {
+                path,
+                client.User,
+                client.Password
+            });
         }
 
         public static void Update(DatabaseInfo info,
@@ -30,12 +30,14 @@ namespace KeePass.Sources.DropBox
             if (report == null) throw new ArgumentNullException("report");
 
             var details = info.Details;
-            var url = new Uri(details.Url);
-            var client = CreateClient(url.UserInfo);
+            var parts = details.Url.Split('\n');
+
+            var client = new WebDavClient(
+                parts[1], parts[2]);
 
             var syncInfo = new SyncInfo
             {
-                Path = url.LocalPath,
+                Path = parts[0],
                 Modified = details.Modified,
                 HasLocalChanges = details.HasLocalChanges,
             };
@@ -56,15 +58,6 @@ namespace KeePass.Sources.DropBox
             });
         }
 
-        private static DropNetClient CreateClient(string userInfo)
-        {
-            var parts = userInfo.Split(':');
-
-            return new DropNetClient(
-                DropBoxInfo.KEY, DropBoxInfo.SECRET,
-                parts[0], parts[1]);
-        }
-
         private static string GetNonConflictPath(string path)
         {
             var dir = Path.GetDirectoryName(path);
@@ -81,11 +74,30 @@ namespace KeePass.Sources.DropBox
         }
 
         private static void OnFileMetaReady(
-            DropNetClient client,
-            SyncInfo info, MetaData meta,
+            WebDavClient client,
+            SyncInfo info, ItemInfo meta,
             Action<SyncCompleteInfo> report)
         {
-            // TODO: Handle case when file deleted from server
+            // File deleted from server
+            if (meta == null)
+            {
+                // Has local change, upload to server
+                client.UploadFileAsync(info.Path,
+                    info.Database,
+                    x => report(new SyncCompleteInfo
+                    {
+                        Path = info.Path,
+                        Modified = x.Modified,
+                        Result = SyncResults.Uploaded,
+                    }),
+                    x => report(new SyncCompleteInfo
+                    {
+                        Path = info.Path,
+                        Result = SyncResults.Failed,
+                    }));
+
+                return;
+            }
 
             // No change from server side
             if (meta.Modified == info.Modified)
@@ -123,11 +135,11 @@ namespace KeePass.Sources.DropBox
             if (!info.HasLocalChanges)
             {
                 // Database should be updated
-                client.GetFileAsync(info.Path,
+                client.DownloadAsync(info.Path,
                     x => report(new SyncCompleteInfo
                     {
+                        Database = x,
                         Path = info.Path,
-                        Database = x.RawBytes,
                         Modified = meta.Modified,
                         Result = SyncResults.Downloaded,
                     }),
@@ -147,7 +159,7 @@ namespace KeePass.Sources.DropBox
                 x => report(new SyncCompleteInfo
                 {
                     Modified = x.Modified,
-                    Path = client.GetUrl(path),
+                    Path = GetUrl(client, path),
                     Result = SyncResults.Conflict,
                 }),
                 x => report(new SyncCompleteInfo
@@ -157,11 +169,12 @@ namespace KeePass.Sources.DropBox
                 }));
         }
 
-        private static void Synchronize(DropNetClient client,
+        private static void Synchronize(WebDavClient client,
             SyncInfo info, Action<SyncCompleteInfo> report)
         {
-            client.GetMetaDataAsync(info.Path, meta =>
-                OnFileMetaReady(client, info, meta, report),
+            client.ListAsync(info.Path, items =>
+                OnFileMetaReady(client, info,
+                    items.FirstOrDefault(), report),
                 ex => report(new SyncCompleteInfo
                 {
                     Path = info.Path,
@@ -170,21 +183,14 @@ namespace KeePass.Sources.DropBox
         }
 
         private static void UploadFileAsync(
-            this DropNetClient client,
+            this WebDavClient client,
             string path, byte[] fileData,
-            Action<MetaData> success,
-            Action<DropboxException> failure)
+            Action<ItemInfo> success,
+            Action<WebException> failure)
         {
-            var orgPath = path;
-
-            var fileName = Path.GetFileName(path);
-            path = Path.GetDirectoryName(path)
-                .Replace('\\', '/');
-
-            client.UploadFileAsync(
-                path, fileName, fileData,
-                x => client.GetMetaDataAsync(
-                    orgPath, success, failure),
+            client.UploadAsync(
+                path, fileData, () => client.ListAsync(path,
+                    y => success(y.FirstOrDefault()), failure),
                 failure);
         }
     }
