@@ -5,12 +5,12 @@ using System.Net;
 using System.Xml.Linq;
 using KeePass.IO.Utils;
 
-namespace KeePass.Sources.Web.Dav
+namespace KeePass.Sources.WebDav.Api
 {
     internal class WebDavClient
     {
         private readonly WebDavRequest _client;
-        private readonly string _server;
+        private readonly Uri _server;
 
         public WebDavClient(string server,
             string user, string password)
@@ -18,7 +18,10 @@ namespace KeePass.Sources.Web.Dav
             if (server == null)
                 throw new ArgumentNullException("server");
 
-            _server = server;
+            if (!server.EndsWith("/"))
+                server += "/";
+
+            _server = new Uri(server);
             _client = new WebDavRequest(user, password);
         }
 
@@ -50,10 +53,7 @@ namespace KeePass.Sources.Web.Dav
 
         private Uri GetPath(string path)
         {
-            return new UriBuilder(_server)
-            {
-                Path = path
-            }.Uri;
+            return new Uri(_server, path);
         }
 
         private class DownloadAction : IWebAction

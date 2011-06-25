@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace KeePass.Sources.Web.Dav
+namespace KeePass.Sources.WebDav.Api
 {
     internal class DigestAuthenticator : IAuthenticator
     {

@@ -196,6 +196,14 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sources\DatabaseUpdater.cs" />
+    <Compile Include="Sources\WebDav\WebDavResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebDavResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\WebDav\WebList.xaml.cs">
+      <DependentUpon>WebList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sources\SyncCompleteInfo.cs" />
     <Compile Include="Sources\SyncInfo.cs" />
     <Compile Include="Sources\DropBox\DropBox.xaml.cs">
@@ -208,15 +216,16 @@
     <Compile Include="Sources\DropBox\MetaListItemInfo.cs" />
     <Compile Include="Sources\ReportUpdateResult.cs" />
     <Compile Include="Sources\SyncResults.cs" />
-    <Compile Include="Sources\Web\Dav\BasicAuthenticator.cs" />
-    <Compile Include="Sources\Web\Dav\DigestAuthenticator.cs" />
-    <Compile Include="Sources\Web\Dav\DigestToken.cs" />
-    <Compile Include="Sources\Web\Dav\IAuthenticator.cs" />
-    <Compile Include="Sources\Web\Dav\ItemInfo.cs" />
-    <Compile Include="Sources\Web\Dav\IWebAction.cs" />
-    <Compile Include="Sources\Web\Dav\NullAuthenticator.cs" />
-    <Compile Include="Sources\Web\Dav\WebDavClient.cs" />
-    <Compile Include="Sources\Web\Dav\WebDavRequest.cs" />
+    <Compile Include="Sources\WebDav\Api\BasicAuthenticator.cs" />
+    <Compile Include="Sources\WebDav\Api\DigestAuthenticator.cs" />
+    <Compile Include="Sources\WebDav\Api\DigestToken.cs" />
+    <Compile Include="Sources\WebDav\Api\IAuthenticator.cs" />
+    <Compile Include="Sources\WebDav\Api\ItemInfo.cs" />
+    <Compile Include="Sources\WebDav\Api\IWebAction.cs" />
+    <Compile Include="Sources\WebDav\Api\NullAuthenticator.cs" />
+    <Compile Include="Sources\WebDav\Api\WebDavClient.cs" />
+    <Compile Include="Sources\WebDav\Api\WebDavRequest.cs" />
+    <Compile Include="Sources\WebDav\MetaListItemInfo.cs" />
     <Compile Include="Sources\Web\DownloadHandler.cs" />
     <Compile Include="Sources\Web\WebAuth.xaml.cs">
       <DependentUpon>WebAuth.xaml</DependentUpon>
@@ -224,12 +233,15 @@
     <Compile Include="Sources\Web\WebBrowse.xaml.cs">
       <DependentUpon>WebBrowse.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sources\WebDav\WebDavDownload.xaml.cs">
+      <DependentUpon>WebDavDownload.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sources\Web\WebDownload.xaml.cs">
       <DependentUpon>WebDownload.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sources\Web\WebLinks.cs" />
     <Compile Include="Sources\Web\WebUpdater.cs" />
-    <Compile Include="Sources\Web\WebUrlInfo.xaml.cs" />
+    <Compile Include="Sources\Web\WebUrlInfo.cs" />
     <Compile Include="Sources\Web\WebUtils.cs" />
     <Compile Include="Storage\Cache.cs" />
     <Compile Include="Storage\DatabaseDetails.cs" />
@@ -361,6 +373,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Sources\WebDav\WebList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Sources\Web\WebAuth.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -368,6 +384,10 @@
     <Page Include="Sources\Web\WebBrowse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sources\WebDav\WebDavDownload.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Sources\Web\WebDownload.xaml">
       <SubType>Designer</SubType>
@@ -503,6 +523,10 @@
     <EmbeddedResource Include="Sources\DropBox\DropBoxResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DropBoxResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\WebDav\WebDavResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WebDavResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Storage\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -2,7 +2,7 @@
 using System.Net;
 using System.Text;
 
-namespace KeePass.Sources.Web.Dav
+namespace KeePass.Sources.WebDav.Api
 {
     internal class BasicAuthenticator : IAuthenticator
     {
@@ -18,7 +18,7 @@ namespace KeePass.Sources.Web.Dav
             _token = string.Format("{0}:{1}",
                 user, password ?? string.Empty);
 
-            _token = Convert.ToBase64String(
+            _token = "Basic " + Convert.ToBase64String(
                 Encoding.UTF8.GetBytes(_token));
         }
 

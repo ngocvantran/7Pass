@@ -4,10 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:keepass="clr-namespace:KeePass.Utils"
-    xmlns:web="clr-namespace:KeePass.Sources.Web"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:uc="clr-namespace:KeePass.Controls"
-    Style="{StaticResource KeePassPage}">
+    xmlns:web="clr-namespace:KeePass.Sources.Web"
+	Style="{StaticResource KeePassPage}">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -42,10 +42,6 @@
             
                 <web:WebAuth x:Name="ucAuth" Grid.Row="2"
                              Completed="ucAuth_Completed" />
-
-                <TextBlock Name="lblLinks" Grid.Row="3" Visibility="Collapsed">
-                    Detected links
-                </TextBlock>
             </Grid>
             
             <uc:ProgressOverlay x:Name="prgBusy" />
@@ -58,11 +54,6 @@
                 IconUri="/Images/check.png"
                 Text="Open" IsEnabled="False"
                 Click="cmdDownload_Click" />
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem
-                    Text="Use Box.net"
-                    Click="mnuBoxNet_Click" />
-            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

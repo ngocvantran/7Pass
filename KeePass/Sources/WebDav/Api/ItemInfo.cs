@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KeePass.Sources.Web.Dav
+namespace KeePass.Sources.WebDav.Api
 {
     internal class ItemInfo
     {

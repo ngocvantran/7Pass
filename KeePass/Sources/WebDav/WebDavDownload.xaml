@@ -1,0 +1,83 @@
+<keepass:KeePassPage 
+	x:Class="KeePass.Sources.WebDav.WebDavDownload"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+	xmlns:keepass="clr-namespace:KeePass.Utils"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:uc="clr-namespace:KeePass.Controls" xmlns:shared="clr-namespace:KeePass.Sources.Web"
+	Style="{StaticResource KeePassPage}">
+
+	<Grid x:Name="LayoutRoot" Background="Transparent">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+			<TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
+				Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="PageTitle" Text="Download" Margin="9,-7,0,0"
+				Style="{StaticResource PhoneTextTitle1Style}"/>
+		</StackPanel>
+
+		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+			<Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+
+				<TextBlock Text="Database URL"
+                           Grid.Row="0" Grid.ColumnSpan="2"
+                           Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBox Name="txtUrl" Text="http://" InputScope="Url"
+                         Grid.Row="1" Grid.ColumnSpan="2"
+                         Loaded="txtUrl_Loaded"
+                         KeyDown="txtUrl_KeyDown"
+                         TextChanged="txtUrl_TextChanged" />
+                
+                <TextBlock Text="Username"
+                           Grid.Row="2" Grid.Column="0"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBox Name="txtUser" InputScope="EmailSmtpAddress"
+                         Grid.Row="2" Grid.Column="1"
+                         KeyDown="txtUser_KeyDown"
+                         TextChanged="txtUser_TextChanged" />
+
+                <TextBlock Text="Password"
+                           Grid.Row="3" Grid.Column="0"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource PhoneTextNormalStyle}" />
+                <PasswordBox Name="txtPassword"
+                             Grid.Row="3" Grid.Column="1"
+                             KeyDown="txtPassword_KeyDown" />
+			</Grid>
+            
+			<uc:ProgressOverlay x:Name="prgBusy" />
+		</Grid>
+	</Grid>
+
+	<phone:PhoneApplicationPage.ApplicationBar>
+		<shell:ApplicationBar IsVisible="True">
+			<shell:ApplicationBarIconButton
+				IconUri="/Images/check.png"
+				Text="Open" IsEnabled="False"
+				Click="cmdDownload_Click" />
+			<shell:ApplicationBar.MenuItems>
+				<shell:ApplicationBarMenuItem
+					Text="Use Box.net"
+					Click="mnuBoxNet_Click" />
+			</shell:ApplicationBar.MenuItems>
+		</shell:ApplicationBar>
+	</phone:PhoneApplicationPage.ApplicationBar>
+
+</keepass:KeePassPage>

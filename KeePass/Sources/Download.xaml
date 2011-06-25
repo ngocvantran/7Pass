@@ -21,10 +21,13 @@
         </StackPanel>
 
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <HyperlinkButton Content="Web Server" Click="lnkWeb_Click"
+            <HyperlinkButton Content="DropBox" Click="lnkDropBox_Click"
                              FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
             <TextBlock Text=" " />
-            <HyperlinkButton Content="DropBox" Click="lnkDropBox_Click"
+            <HyperlinkButton Content="WebDAV" Click="lnkWebDav_Click"
+                             FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
+            <TextBlock Text=" " />
+            <HyperlinkButton Content="Web Server" Click="lnkWeb_Click"
                              FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
             <TextBlock Text=" " />
             <HyperlinkButton x:Name="lnkDemo" Content="Demo Database" Click="lnkDemo_Click"

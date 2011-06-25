@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net;
 
-namespace KeePass.Sources.Web.Dav
+namespace KeePass.Sources.WebDav.Api
 {
     internal interface IWebAction
     {

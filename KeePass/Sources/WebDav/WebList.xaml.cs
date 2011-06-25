@@ -1,29 +1,30 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Windows;
 using System.Windows.Navigation;
-using DropNet;
-using DropNet.Exceptions;
-using DropNet.Models;
 using KeePass.IO.Data;
+using KeePass.Sources.WebDav.Api;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
 
-namespace KeePass.Sources.DropBox
+namespace KeePass.Sources.WebDav
 {
-    public partial class List
+    public partial class WebList
     {
         private readonly ApplicationBarIconButton _cmdRefresh;
 
         private string _folder;
         private bool _loaded;
+        private string _pass;
         private string _path;
-        private string _secret;
-        private string _token;
+        private string _server;
+        private string _user;
 
-        public List()
+        public WebList()
         {
             InitializeComponent();
 
@@ -39,7 +40,7 @@ namespace KeePass.Sources.DropBox
 
             InitPars();
 
-            if (_path != "/")
+            if (_path != ".")
                 PageTitle.Text = Path.GetFileName(_path);
 
             if (Network.CheckNetwork() && !_loaded)
@@ -53,26 +54,27 @@ namespace KeePass.Sources.DropBox
             var pars = NavigationContext.QueryString;
 
             _path = pars["path"];
-            _token = pars["token"];
+            _user = pars["user"];
+            _pass = pars["pass"];
+            _server = pars["server"];
             _folder = pars["folder"];
-            _secret = pars["secret"];
         }
 
         private void NavigateTo(string path)
         {
-            this.NavigateTo<List>(
-                "token={0}&secret={1}&path={2}&folder={3}",
-                _token, _secret, path, _folder);
+            this.NavigateTo<WebList>(
+                "server={0}&user={1}&pass={2}&path={3}&folder={4}",
+                _server, _user, _pass, path, _folder);
         }
 
-        private void OnFileDownloadFailed(DropboxException obj)
+        private void OnFileDownloadFailed(WebException obj)
         {
             progBusy.IsBusy = false;
 
             Dispatcher.BeginInvoke(() =>
                 MessageBox.Show(
-                    DropBoxResources.DownloadError,
-                    DropBoxResources.ListTitle,
+                    WebDavResources.DownloadError,
+                    WebDavResources.ListTitle,
                     MessageBoxButton.OK));
         }
 
@@ -97,7 +99,7 @@ namespace KeePass.Sources.DropBox
                             Name = title,
                             Modified = modified,
                             Type = SourceTypes.Synchronizable,
-                            Source = DatabaseUpdater.DROPBOX_UPDATER,
+                            Source = DatabaseUpdater.WEBDAV_UPDATER,
                         });
                     }
                     else
@@ -128,16 +130,17 @@ namespace KeePass.Sources.DropBox
             }
         }
 
-        private void OnListComplete(MetaData data)
+        private void OnListComplete(IList<ItemInfo> itemInfos)
         {
             var dispatcher = Dispatcher;
 
             try
             {
-                var items = data.Contents
-                    .OrderBy(x => !x.Is_Dir)
-                    .ThenBy(x => x.Name)
+                var items = itemInfos
+                    .Where(x => x.Path != _path)
                     .Select(x => new MetaListItemInfo(x))
+                    .OrderBy(x => !x.IsDir)
+                    .ThenBy(x => x.Title)
                     .ToList();
 
                 lstBrowse.SetItems(items);
@@ -152,12 +155,12 @@ namespace KeePass.Sources.DropBox
             }
         }
 
-        private void OnListFailed(DropboxException ex)
+        private void OnListFailed(WebException webException)
         {
             Dispatcher.BeginInvoke(() =>
                 MessageBox.Show(
-                    DropBoxResources.ListError,
-                    DropBoxResources.ListTitle,
+                    WebDavResources.ListError,
+                    WebDavResources.ListTitle,
                     MessageBoxButton.OK));
         }
 
@@ -166,11 +169,9 @@ namespace KeePass.Sources.DropBox
             progBusy.IsBusy = true;
             _cmdRefresh.IsEnabled = false;
 
-            var client = new DropNetClient(
-                DropBoxInfo.KEY, DropBoxInfo.SECRET,
-                _token, _secret);
-
-            client.GetMetaDataAsync(_path,
+            var client = new WebDavClient(
+                _server, _user, _pass);
+            client.ListAsync(_path,
                 OnListComplete, OnListFailed);
         }
 
@@ -187,23 +188,21 @@ namespace KeePass.Sources.DropBox
             if (meta == null)
                 return;
 
-            if (Network.CheckNetwork())
+            if (!Network.CheckNetwork())
+                return;
+
+            if (meta.IsDir)
+                NavigateTo(meta.Path);
+            else
             {
-                if (meta.IsDir)
-                    NavigateTo(meta.Path);
-                else
-                {
-                    progBusy.IsBusy = true;
+                progBusy.IsBusy = true;
 
-                    var client = DropBoxInfo
-                        .Create(_token, _secret);
-
-                    var url = client.GetUrl(meta.Path);
-                    client.GetFileAsync(meta.Path,
-                        x => OnFileDownloaded(x.RawBytes, url,
-                            meta.Title, meta.Modified),
-                        OnFileDownloadFailed);
-                }
+                var client = new WebDavClient(
+                    _server, _user, _pass);
+                client.DownloadAsync(meta.Path, x =>
+                    OnFileDownloaded(x, meta.Path,
+                        meta.Title, meta.Modified),
+                    OnFileDownloadFailed);
             }
         }
     }

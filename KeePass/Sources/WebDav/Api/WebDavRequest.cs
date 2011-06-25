@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace KeePass.Sources.Web.Dav
+namespace KeePass.Sources.WebDav.Api
 {
     internal class WebDavRequest
     {
@@ -23,6 +23,7 @@ namespace KeePass.Sources.Web.Dav
 
             var method = action.Method;
             request.Method = method;
+            request.UserAgent = "7Pass";
 
             var token = authenticator
                 .GetToken(uri, method);

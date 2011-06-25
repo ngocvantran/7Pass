@@ -67,6 +67,12 @@ namespace KeePass.Sources
             Navigate<DropBox.DropBox>();
         }
 
+        private void lnkWebDav_Click(object sender, RoutedEventArgs e)
+        {
+            AnalyticsTracker.Track("new_db_webdav");
+            Navigate<WebDav.WebDavDownload>();
+        }
+
         private void lnkWeb_Click(object sender, RoutedEventArgs e)
         {
             AnalyticsTracker.Track("new_db_web");

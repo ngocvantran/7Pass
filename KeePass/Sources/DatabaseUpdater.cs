@@ -10,6 +10,7 @@ namespace KeePass.Sources
     {
         public const string DROPBOX_UPDATER = "DropBox";
         public const string WEB_UPDATER = "Web";
+        public const string WEBDAV_UPDATER = "WebDAV";
 
         public static void Update(DatabaseInfo info,
             Func<DatabaseInfo, bool> queryUpdate,

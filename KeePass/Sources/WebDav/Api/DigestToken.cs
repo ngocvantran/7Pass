@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using KeePass.IO;
 
-namespace KeePass.Sources.Web.Dav
+namespace KeePass.Sources.WebDav.Api
 {
     internal class DigestToken
     {

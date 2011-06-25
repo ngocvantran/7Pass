@@ -64,12 +64,6 @@ namespace KeePass.Sources.Web
             PerformDownload();
         }
 
-        private void mnuBoxNet_Click(object sender, EventArgs e)
-        {
-            ucAuth.UseAuth = true;
-            txtUrl.Text = "https://www.box.net/dav";
-        }
-
         private void txtUrl_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.IsEnter() && _cmdDownload.IsEnabled)
