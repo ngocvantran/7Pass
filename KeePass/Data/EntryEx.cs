@@ -34,7 +34,7 @@ namespace KeePass.Data
 
         public string Password
         {
-            get { return _entry.Password; }
+            get { return _entry.Password ?? string.Empty; }
             set
             {
                 if (value == _entry.Password)
@@ -47,7 +47,7 @@ namespace KeePass.Data
 
         public string Title
         {
-            get { return _entry.Title; }
+            get { return _entry.Title ?? string.Empty; }
             set
             {
                 if (value == _entry.Title)
@@ -60,7 +60,7 @@ namespace KeePass.Data
 
         public string Url
         {
-            get { return _entry.Url; }
+            get { return _entry.Url ?? string.Empty; }
             set
             {
                 if (value == _entry.Url)
@@ -73,7 +73,7 @@ namespace KeePass.Data
 
         public string UserName
         {
-            get { return _entry.UserName; }
+            get { return _entry.UserName ?? string.Empty; }
             set
             {
                 if (value == _entry.UserName)
