@@ -4,6 +4,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Coding4Fun.Phone.Controls;
 using KeePass.Analytics;
 using KeePass.Data;
 using KeePass.IO.Data;
@@ -221,10 +222,11 @@ namespace KeePass
                     _binding.HasChanges = false;
                     CurrentEntry.HasChanges = false;
 
-                    MessageBox.Show(
-                        Properties.Resources.SavedCaption,
-                        Properties.Resources.SavedTitle,
-                        MessageBoxButton.OK);
+                    new ToastPrompt
+                    {
+                        Title = Properties.Resources.SavedTitle,
+                        Message = Properties.Resources.SavedCaption
+                    }.Show();
                 });
 
                 ThreadPool.QueueUserWorkItem(
