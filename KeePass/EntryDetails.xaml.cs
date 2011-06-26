@@ -222,11 +222,16 @@ namespace KeePass
                     _binding.HasChanges = false;
                     CurrentEntry.HasChanges = false;
 
-                    new ToastPrompt
+                    if (!info.NotifyIfNotSyncable())
                     {
-                        Title = Properties.Resources.SavedTitle,
-                        Message = Properties.Resources.SavedCaption
-                    }.Show();
+                        new ToastPrompt
+                        {
+                            Title = Properties.Resources.SavedTitle,
+                            Message = Properties.Resources.SavedCaption,
+                            TextOrientation = System.Windows.Controls
+                                .Orientation.Vertical,
+                        }.Show();
+                    }
                 });
 
                 ThreadPool.QueueUserWorkItem(

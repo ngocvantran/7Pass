@@ -124,7 +124,7 @@ namespace KeePass
                 {
                     group.Remove();
                     recycleBin.Add(group);
-                    
+
                     writer.Location(group);
                 });
             }
@@ -250,6 +250,9 @@ namespace KeePass
 
             ThreadPool.QueueUserWorkItem(_ =>
                 ListHistory(database));
+
+            Dispatcher.BeginInvoke(() =>
+                info.NotifyIfNotSyncable());
         }
 
         private void cmdAbout_Click(object sender, EventArgs e)

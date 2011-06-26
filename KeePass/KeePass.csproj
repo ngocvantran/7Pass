@@ -254,6 +254,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Storage\SaveUtils.cs" />
     <Compile Include="Storage\SourceTypes.cs" />
     <Compile Include="Storage\VerifyResults.cs" />
     <Compile Include="Storage\VerifyResultTypes.cs" />

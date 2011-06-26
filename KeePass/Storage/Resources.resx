@@ -125,4 +125,11 @@ The file is invalid or a connection problem has occured.</value>
     <value>Invalid file signature detected.
 The specified file is not a KeePass 2.x database.</value>
   </data>
+  <data name="NotSyncableCaption" xml:space="preserve">
+    <value>Changes saved but won't be synchronized
+due to source type (Web Server/Demo DB).</value>
+  </data>
+  <data name="NotSyncableTitle" xml:space="preserve">
+    <value>DB not synchronizable</value>
+  </data>
 </root>
