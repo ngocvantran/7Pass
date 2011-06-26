@@ -298,4 +298,8 @@ Click this notification to Review/Purchase 7Pass.</value>
   <data name="Update_Sync" xml:space="preserve">
     <value>synchronize</value>
   </data>
+  <data name="UriCensors" xml:space="preserve">
+    <value>(?&lt;=pass(?:word)?=)([^&amp;]+)
+(?&lt;=secret=)([^&amp;]+)</value>
+  </data>
 </root>

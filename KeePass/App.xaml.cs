@@ -71,7 +71,7 @@ namespace KeePass
             ThemeData.Initialize();
         }
 
-        private static void Application_UnhandledException(
+        private void Application_UnhandledException(
             object sender, ApplicationUnhandledExceptionEventArgs e)
         {
             var ex = e.ExceptionObject;
@@ -82,26 +82,29 @@ namespace KeePass
                     {"type", ex.GetType().FullName},
                     {"stack", ex.StackTrace}
                 });
+            
+            e.Handled = true;
 
-            if (!Debugger.IsAttached)
+            RootFrame.Dispatcher.BeginInvoke(() =>
             {
-                e.Handled = true;
-
-                var email = MessageBox.Show(
-                    Properties.Resources.UnhandledExPrompt,
-                    Properties.Resources.UnhandledExTitle,
-                    MessageBoxButton.OKCancel) == MessageBoxResult.OK;
-
-                if (email)
+                if (!Debugger.IsAttached)
                 {
-                    ErrorReport.Report(ex);
-                    return;
+                    var response = MessageBox.Show(
+                        Properties.Resources.UnhandledExPrompt,
+                        Properties.Resources.UnhandledExTitle,
+                        MessageBoxButton.OKCancel);
+
+                    if (response == MessageBoxResult.OK)
+                    {
+                        ErrorReport.Report(ex);
+                        return;
+                    }
                 }
+                else
+                    Debugger.Break();
 
                 throw new QuitException();
-            }
-
-            Debugger.Break();
+            });
         }
 
         private void CompleteInitializePhoneApplication(

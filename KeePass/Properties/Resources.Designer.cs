@@ -523,6 +523,16 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (?&lt;=pass(?:word)?=)([^&amp;]+)
+        ///(?&lt;=secret=)([^&amp;]+).
+        /// </summary>
+        internal static string UriCensors {
+            get {
+                return ResourceManager.GetString("UriCensors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please make sure that your phone&apos;s lock screen is password protected.
         ///
         ///Saving your database password without lock screen protection will allow anyone to view your passwords.

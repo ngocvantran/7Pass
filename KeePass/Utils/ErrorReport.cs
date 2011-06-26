@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Info;
 using Microsoft.Phone.Tasks;
@@ -97,8 +98,16 @@ namespace KeePass.Utils
                 return;
 
             sb.Append("Uri: ");
-            sb.AppendLine(page.NavigationService
-                .CurrentSource.ToString());
+
+            var uri = page.NavigationService
+                .CurrentSource.ToString();
+            
+            var regexs = Properties.Resources.UriCensors.Split(
+                new[] {Environment.NewLine}, StringSplitOptions.None);
+            foreach (var regex in regexs)
+                uri = Regex.Replace(uri, regex, "«Censored»");
+
+            sb.AppendLine(uri);
         }
     }
 }
