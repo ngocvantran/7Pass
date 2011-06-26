@@ -39,8 +39,6 @@ namespace KeePass.Sources.WebDav
 
         private void PerformDownload()
         {
-            prgBusy.IsBusy = true;
-
             this.NavigateTo<WebList>(
                 "user={0}&pass={1}&folder={2}&path={3}",
                 txtUser.Text, txtPassword.Password,

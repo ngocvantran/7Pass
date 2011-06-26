@@ -5,7 +5,6 @@
 	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
 	xmlns:keepass="clr-namespace:KeePass.Utils"
 	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-	xmlns:uc="clr-namespace:KeePass.Controls" xmlns:shared="clr-namespace:KeePass.Sources.Web"
 	Style="{StaticResource KeePassPage}">
 
 	<Grid x:Name="LayoutRoot" Background="Transparent">
@@ -61,8 +60,6 @@
                              Grid.Row="3" Grid.Column="1"
                              KeyDown="txtPassword_KeyDown" />
 			</Grid>
-            
-			<uc:ProgressOverlay x:Name="prgBusy" />
 		</Grid>
 	</Grid>
 
