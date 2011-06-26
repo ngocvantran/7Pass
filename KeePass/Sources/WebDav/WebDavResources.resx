@@ -121,6 +121,13 @@
     <value>Error downloading the selected file.
 Please try again later.</value>
   </data>
+  <data name="HtmlDetected" xml:space="preserve">
+    <value>The server replied 7Pass' WebDAV request with an html page.
+Do you want to explore the server as HTML pages instead?</value>
+  </data>
+  <data name="HtmlDetectedTitle" xml:space="preserve">
+    <value>HTML page detected</value>
+  </data>
   <data name="ListError" xml:space="preserve">
     <value>Error listing folder contents.
 Please try again later.</value>

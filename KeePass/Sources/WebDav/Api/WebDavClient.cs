@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Xml;
 using System.Xml.Linq;
 using KeePass.IO.Utils;
 
@@ -41,10 +42,11 @@ namespace KeePass.Sources.WebDav.Api
 
         public void ListAsync(string path,
             Action<IList<ItemInfo>> complete,
+            Action htmlDetected,
             Action<WebException> error)
         {
             _client.Request(
-                new ListAction(complete, error),
+                new ListAction(complete, htmlDetected, error),
                 new Uri(path), null);
         }
 
@@ -97,6 +99,7 @@ namespace KeePass.Sources.WebDav.Api
         {
             private readonly Action<IList<ItemInfo>> _complete;
             private readonly Action<WebException> _error;
+            private readonly Action _htmlDetected;
 
             public string Method
             {
@@ -104,22 +107,54 @@ namespace KeePass.Sources.WebDav.Api
             }
 
             public ListAction(Action<IList<ItemInfo>> complete,
-                Action<WebException> error)
+                Action htmlDetected, Action<WebException> error)
             {
                 if (complete == null) throw new ArgumentNullException("complete");
+                if (htmlDetected == null) throw new ArgumentNullException("htmlDetected");
                 if (error == null) throw new ArgumentNullException("error");
+
                 _error = error;
                 _complete = complete;
+                _htmlDetected = htmlDetected;
             }
 
             public void Complete(HttpStatusCode status, Stream response)
             {
                 var d = (XNamespace)"DAV:";
                 var items = new List<ItemInfo>();
-                var doc = XDocument.Load(response);
+
+                XElement root;
+
+                try
+                {
+                    var doc = XDocument.Load(response);
+                    root = doc.Root;
+
+                    if (root == null)
+                    {
+                        _error(new WebException(
+                            "Invalid response"));
+
+                        return;
+                    }
+                }
+                catch (XmlException ex)
+                {
+                    _error(new WebException(
+                        "Invalid response", ex));
+
+                    return;
+                }
+
+                if (string.Equals(root.Name.LocalName, "html",
+                    StringComparison.InvariantCultureIgnoreCase))
+                {
+                    _htmlDetected();
+                    return;
+                }
 
                 // ReSharper disable PossibleNullReferenceException
-                foreach (var item in doc.Root.Elements(d + "response"))
+                foreach (var item in root.Elements(d + "response"))
                 {
                     var path = item
                         .Element(d + "href")

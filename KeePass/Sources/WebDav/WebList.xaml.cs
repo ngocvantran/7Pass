@@ -128,6 +128,28 @@ namespace KeePass.Sources.WebDav
             }
         }
 
+        private void OnHtmlDetected()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                var result = MessageBox.Show(
+                    WebDavResources.HtmlDetected,
+                    WebDavResources.HtmlDetectedTitle,
+                    MessageBoxButton.OKCancel);
+
+                if (result != MessageBoxResult.OK)
+                {
+                    OnListFailed();
+                    return;
+                }
+
+                this.NavigateTo<Web.WebDownload>(
+                    "folder={0}&url={1}&user={2}&pass={3}",
+                    _folder, _path,
+                    _client.User, _client.Password);
+            });
+        }
+
         private void OnListComplete(IList<ItemInfo> itemInfos)
         {
             var dispatcher = Dispatcher;
@@ -155,6 +177,11 @@ namespace KeePass.Sources.WebDav
 
         private void OnListFailed(WebException webException)
         {
+            OnListFailed();
+        }
+
+        private void OnListFailed()
+        {
             Dispatcher.BeginInvoke(() =>
                 MessageBox.Show(
                     WebDavResources.ListError,
@@ -168,7 +195,9 @@ namespace KeePass.Sources.WebDav
             _cmdRefresh.IsEnabled = false;
 
             _client.ListAsync(_path,
-                OnListComplete, OnListFailed);
+                OnListComplete,
+                OnHtmlDetected,
+                OnListFailed);
         }
 
         private void cmdRefresh_Click(object sender, EventArgs e)

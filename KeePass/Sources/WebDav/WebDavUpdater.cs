@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Net;
 using KeePass.IO.Utils;
 using KeePass.Sources.WebDav.Api;
 using KeePass.Storage;
@@ -82,15 +81,15 @@ namespace KeePass.Sources.WebDav
             if (meta == null)
             {
                 // Has local change, upload to server
-                client.UploadFileAsync(info.Path,
-                    info.Database,
+                client.UploadFileAsync(
+                    info.Path, info.Database,
                     x => report(new SyncCompleteInfo
                     {
                         Path = info.Path,
                         Modified = x.Modified,
                         Result = SyncResults.Uploaded,
                     }),
-                    x => report(new SyncCompleteInfo
+                    () => report(new SyncCompleteInfo
                     {
                         Path = info.Path,
                         Result = SyncResults.Failed,
@@ -114,15 +113,15 @@ namespace KeePass.Sources.WebDav
                 }
 
                 // Has local change, upload to server
-                client.UploadFileAsync(info.Path,
-                    info.Database,
+                client.UploadFileAsync(
+                    info.Path, info.Database,
                     x => report(new SyncCompleteInfo
                     {
                         Path = info.Path,
                         Modified = x.Modified,
                         Result = SyncResults.Uploaded,
                     }),
-                    x => report(new SyncCompleteInfo
+                    () => report(new SyncCompleteInfo
                     {
                         Path = info.Path,
                         Result = SyncResults.Failed,
@@ -155,14 +154,15 @@ namespace KeePass.Sources.WebDav
             // Conflict
             var path = GetNonConflictPath(info.Path);
 
-            client.UploadFileAsync(path, info.Database,
+            client.UploadFileAsync(
+                path, info.Database,
                 x => report(new SyncCompleteInfo
                 {
                     Modified = x.Modified,
                     Path = GetUrl(client, path),
                     Result = SyncResults.Conflict,
                 }),
-                x => report(new SyncCompleteInfo
+                () => report(new SyncCompleteInfo
                 {
                     Path = info.Path,
                     Result = SyncResults.Failed,
@@ -175,6 +175,11 @@ namespace KeePass.Sources.WebDav
             client.ListAsync(info.Path, items =>
                 OnFileMetaReady(client, info,
                     items.FirstOrDefault(), report),
+                () => report(new SyncCompleteInfo
+                {
+                    Path = info.Path,
+                    Result = SyncResults.Failed,
+                }),
                 ex => report(new SyncCompleteInfo
                 {
                     Path = info.Path,
@@ -186,12 +191,15 @@ namespace KeePass.Sources.WebDav
             this WebDavClient client,
             string path, byte[] fileData,
             Action<ItemInfo> success,
-            Action<WebException> failure)
+            Action failure)
         {
             client.UploadAsync(
-                path, fileData, () => client.ListAsync(path,
-                    y => success(y.FirstOrDefault()), failure),
-                failure);
+                path, fileData,
+                () => client.ListAsync(path,
+                    y => success(y.FirstOrDefault()),
+                    failure,
+                    _ => failure()),
+                _ => failure());
         }
     }
 }

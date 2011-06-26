@@ -10,10 +10,22 @@ namespace KeePass.Sources.Web
     {
         public event EventHandler Completed;
 
+        public string Password
+        {
+            get { return txtPassword.Password; }
+            set { txtPassword.Password = value; }
+        }
+
         public bool UseAuth
         {
             get { return chkAuth.IsChecked == true; }
             set { chkAuth.IsChecked = value; }
+        }
+
+        public string User
+        {
+            get { return txtUser.Text; }
+            set { txtUser.Text = value; }
         }
 
         public WebAuth()
@@ -23,7 +35,7 @@ namespace KeePass.Sources.Web
 
         public void ClearPassword()
         {
-            txtPassword.Password = string.Empty;
+            Password = string.Empty;
         }
 
         public NetworkCredential GetCredentials()

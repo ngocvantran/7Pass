@@ -71,6 +71,25 @@ namespace KeePass.Sources.WebDav {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The server replied 7Pass&apos; WebDAV request with an html page.
+        ///Do you want to explore the server as HTML pages instead?.
+        /// </summary>
+        internal static string HtmlDetected {
+            get {
+                return ResourceManager.GetString("HtmlDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HTML page detected.
+        /// </summary>
+        internal static string HtmlDetectedTitle {
+            get {
+                return ResourceManager.GetString("HtmlDetectedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error listing folder contents.
         ///Please try again later..
         /// </summary>

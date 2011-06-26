@@ -38,6 +38,32 @@ namespace KeePass.Sources.Web
 
             _download.Completed += _download_Completed;
             _download.LinksDetected += _download_LinksDetected;
+
+            LoadQueries();
+        }
+
+        private void LoadQueries()
+        {
+            string value;
+            var queries = NavigationContext.QueryString;
+
+            if (!queries.TryGetValue("url", out value))
+                return;
+
+            txtUrl.Text = value;
+
+            if (!queries.TryGetValue("user", out value))
+                return;
+
+            ucAuth.UseAuth = true;
+            ucAuth.User = value;
+
+            if (!queries.TryGetValue("pass", out value))
+                return;
+
+            ucAuth.Password = value;
+
+            PerformDownload();
         }
 
         private void PerformDownload()
