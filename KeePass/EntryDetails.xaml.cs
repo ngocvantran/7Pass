@@ -83,6 +83,9 @@ namespace KeePass
                     Password = Generator
                         .CharacterSets.NewEntry(),
                 };
+
+                txtTitle.Loaded += (sender, e1) =>
+                    txtTitle.Focus();
             }
 
             DisplayEntry(entry);
