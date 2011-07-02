@@ -170,6 +170,7 @@ namespace KeePass
 
             var recents = Cache.GetRecents()
                 .Select(database.GetEntry)
+                .Where(x => x != null)
                 .Select(x => new GroupItem(x, dispatcher))
                 .ToList();
 
