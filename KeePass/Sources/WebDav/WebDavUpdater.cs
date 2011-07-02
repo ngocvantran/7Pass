@@ -59,17 +59,20 @@ namespace KeePass.Sources.WebDav
 
         private static string GetNonConflictPath(string path)
         {
-            var dir = Path.GetDirectoryName(path);
-            var extension = Path.GetExtension(path);
-            var fileName = Path.GetFileNameWithoutExtension(path);
+            var local = new Uri(path).LocalPath;
+            var dir = Path.GetDirectoryName(local);
+            var extension = Path.GetExtension(local);
+            var fileName = Path.GetFileNameWithoutExtension(local);
 
             fileName = string.Concat(fileName,
                 " (7Pass' conflicted copy ",
                 DateTime.Today.ToString("yyyy-MM-dd"),
                 ")", extension);
 
-            return Path.Combine(dir, fileName)
+            var newPath = Path.Combine(dir, fileName)
                 .Replace('\\', '/');
+
+            return path.Replace(local, newPath);
         }
 
         private static void OnFileMetaReady(
