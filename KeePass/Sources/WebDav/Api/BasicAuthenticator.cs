@@ -40,10 +40,17 @@ namespace KeePass.Sources.WebDav.Api
                 string.IsNullOrEmpty(header))
                 return null;
 
-            var digest = new DigestToken(header,
-                _user, _password);
+            if (header.StartsWith("Digest ",
+                StringComparison.InvariantCultureIgnoreCase))
+            {
+                var digest = new DigestToken(header,
+                    _user, _password);
 
-            return new DigestAuthenticator(digest);
+                return new DigestAuthenticator(digest);
+            }
+
+            // Probably bad username/password
+            return null;
         }
     }
 }

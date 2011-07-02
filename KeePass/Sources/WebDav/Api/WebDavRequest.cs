@@ -19,7 +19,11 @@ namespace KeePass.Sources.WebDav.Api
             Uri uri, byte[] content)
         {
             var authenticator = _auth;
-            var request = WebRequest.CreateHttp(uri);
+            if (authenticator == null)
+                return;
+
+            var request = WebRequest
+                .CreateHttp(uri);
 
             var method = action.Method;
             request.Method = method;
@@ -81,11 +85,12 @@ namespace KeePass.Sources.WebDav.Api
 
                     // Do we have any alternative?
                     var next = _auth.Next(ex);
-                    if (next == null)
-                        action.Error(ex);
-
                     _auth = next;
-                    Request(action, uri, content);
+
+                    if (next != null)
+                        Request(action, uri, content);
+                    else
+                        action.Error(ex);
                 }
             };
         }
