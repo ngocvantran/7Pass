@@ -122,7 +122,7 @@
 Please try again later.</value>
   </data>
   <data name="ListError" xml:space="preserve">
-    <value>Error listing folder contents.
+    <value>Error listing folder content.
 Please try again later.</value>
   </data>
   <data name="ListTitle" xml:space="preserve">

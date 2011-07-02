@@ -183,10 +183,14 @@ namespace KeePass.Sources.WebDav
         private void OnListFailed()
         {
             Dispatcher.BeginInvoke(() =>
+            {
                 MessageBox.Show(
                     WebDavResources.ListError,
                     WebDavResources.ListTitle,
-                    MessageBoxButton.OK));
+                    MessageBoxButton.OK);
+
+                NavigationService.GoBack();
+            });
         }
 
         private void RefreshList()

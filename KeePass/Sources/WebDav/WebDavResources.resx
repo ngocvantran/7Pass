@@ -129,8 +129,8 @@ Do you want to explore the server as HTML pages instead?</value>
     <value>HTML page detected</value>
   </data>
   <data name="ListError" xml:space="preserve">
-    <value>Error listing folder contents.
-Please try again later.</value>
+    <value>Error listing folder content.
+Please make sure your username/password is valid and try again.</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
     <value>WebDAV Browser</value>

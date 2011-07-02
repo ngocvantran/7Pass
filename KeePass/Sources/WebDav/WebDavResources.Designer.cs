@@ -90,8 +90,8 @@ namespace KeePass.Sources.WebDav {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error listing folder contents.
-        ///Please try again later..
+        ///   Looks up a localized string similar to Error listing folder content.
+        ///Please make sure your username/password is valid and try again..
         /// </summary>
         internal static string ListError {
             get {
