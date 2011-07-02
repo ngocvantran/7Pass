@@ -1,10 +1,10 @@
-7Pass is a KeePass client for Windows Phone 7 with modification support.
+7Pass is a unofficial KeePass client for Windows Phone 7 with database modification support.
 
 Features:
  - Read/modify KeePass 2.x databases.
  - DropBox integration.
  - Web & WebDAV download with authentication (supports Box.net).
- - Integreated web browser.
+ - Integreated web browser with landscape layout.
  - Supports keyfile and master password.
  - Multiple databases.
  - Supports custom fields, (protected & not protected).
@@ -20,6 +20,8 @@ Support Info:
 Version 3.0:
  - Added database modification support.
  - Added page rotation.
+ - Added DropBox & WebDAV synchronization.
+ - Easier username/password copying.
  
 Version 2.4:
  - Supports KeePass 2.15 database format.
@@ -28,4 +30,4 @@ Version 2.4:
 If you don't have a web server to download your database to your phone, you can use Java Mini Web Server from http://www.jibble.org/miniwebserver/, or any personal web server.
 
 Keywords:
-7Pass KeePass password encrypt encryption privacy dropbox webdav
+7Pass KeePass password encrypt encryption privacy dropbox webdav synchronize
