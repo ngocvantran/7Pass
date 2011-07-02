@@ -50,12 +50,14 @@ namespace KeePass.Sources
                     break;
 
                 case SyncResults.Uploaded:
+                    details.HasLocalChanges = false;
                     details.Modified = result.Modified;
                     info.SaveDetails();
                     break;
 
                 case SyncResults.Conflict:
                     details.Url = result.Path;
+                    details.HasLocalChanges = false;
                     details.Modified = result.Modified;
                     info.SaveDetails();
 
