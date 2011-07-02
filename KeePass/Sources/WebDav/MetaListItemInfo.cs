@@ -1,6 +1,7 @@
 ﻿using System;
 using KeePass.Data;
 using KeePass.Sources.WebDav.Api;
+using KeePass.Utils;
 
 namespace KeePass.Sources.WebDav
 {
@@ -30,7 +31,11 @@ namespace KeePass.Sources.WebDav
             if (item == null) throw new ArgumentNullException("item");
 
             _item = item;
-            _path = new Uri(new Uri(basePath), item.Path).ToString();
+            _path = new Uri(new Uri(basePath),
+                item.Path).ToString();
+
+            Icon = ThemeData.GetImage(
+                item.IsDir ? "folder" : "entry");
 
             var path = item.Path;
 
