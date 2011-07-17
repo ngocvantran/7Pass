@@ -68,6 +68,14 @@ namespace KeePass.Sources.Web
 
         private void PerformDownload()
         {
+            if (!_cmdDownload.IsEnabled)
+            {
+                txtUrl.SelectAll();
+                txtUrl.Focus();
+
+                return;
+            }
+
             prgBusy.IsBusy = true;
 
             _download.Download(txtUrl.Text,
