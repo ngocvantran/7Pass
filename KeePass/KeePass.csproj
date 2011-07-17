@@ -196,6 +196,7 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sources\DatabaseUpdater.cs" />
+    <Compile Include="Sources\SourceCapabilityUpdater.cs" />
     <Compile Include="Sources\WebDav\WebDavUpdater.cs" />
     <Compile Include="Sources\WebDav\WebDavResources.Designer.cs">
       <AutoGen>True</AutoGen>

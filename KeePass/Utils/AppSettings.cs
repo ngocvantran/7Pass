@@ -85,6 +85,30 @@ namespace KeePass.Utils
             }
         }
 
+        public string this[string key]
+        {
+            get
+            {
+                string value;
+                if (!_settings.TryGetValue(key, out value))
+                    value = null;
+
+                return value;
+            }
+            set
+            {
+                string current;
+                if (!_settings.TryGetValue(key, out current))
+                    _settings.Add(key, value);
+                else if (value != current)
+                    _settings[key] = value;
+                else
+                    return;
+
+                _settings.Save();
+            }
+        }
+
         /// <summary>
         /// Gets or sets the password to open 7Pass.
         /// </summary>
@@ -135,30 +159,6 @@ namespace KeePass.Utils
                 return value == null || value == "1";
             }
             set { this[KEY_USE_INT_BROWSER] = value ? "1" : "0"; }
-        }
-
-        private string this[string key]
-        {
-            get
-            {
-                string value;
-                if (!_settings.TryGetValue(key, out value))
-                    value = null;
-
-                return value;
-            }
-            set
-            {
-                string current;
-                if (!_settings.TryGetValue(key, out current))
-                    _settings.Add(key, value);
-                else if (value != current)
-                    _settings[key] = value;
-                else
-                    return;
-
-                _settings.Save();
-            }
         }
 
         public AppSettings(IsolatedStorageSettings settings)

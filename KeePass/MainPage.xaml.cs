@@ -43,6 +43,8 @@ namespace KeePass
                 return;
             }
 
+            SourceCapabilityUpdater.Update();
+
             if (AppSettings.Instance.AllowAnalytics == null)
             {
                 _moved = true;
@@ -184,6 +186,32 @@ namespace KeePass
                 TrialManager.CheckToastState();
         }
 
+        private void lstDatabases_Navigation(object sender,
+            NavigationListControl.NavigationEventArgs e)
+        {
+            var item = e.Item as DatabaseItem;
+            if (item == null)
+                return;
+
+            if (item.IsUpdating)
+                item.IsUpdating = false;
+            else
+            {
+                var database = (DatabaseInfo)item.Info;
+
+                if (!database.HasPassword)
+                {
+                    this.NavigateTo<Password>("db={0}",
+                        database.Folder);
+                }
+                else
+                {
+                    database.Open(Dispatcher);
+                    this.NavigateTo<GroupDetails>();
+                }
+            }
+        }
+
         private void mnuAbout_Click(object sender, EventArgs e)
         {
             this.NavigateTo<About>();
@@ -280,32 +308,6 @@ namespace KeePass
                 (x => x.Info == database);
 
             Update(listItem);
-        }
-
-        private void lstDatabases_Navigation(object sender,
-            NavigationListControl.NavigationEventArgs e)
-        {
-            var item = e.Item as DatabaseItem;
-            if (item == null)
-                return;
-
-            if (item.IsUpdating)
-                item.IsUpdating = false;
-            else
-            {
-                var database = (DatabaseInfo)item.Info;
-
-                if (!database.HasPassword)
-                {
-                    this.NavigateTo<Password>("db={0}",
-                        database.Folder);
-                }
-                else
-                {
-                    database.Open(Dispatcher);
-                    this.NavigateTo<GroupDetails>();
-                }
-            }
         }
     }
 }
