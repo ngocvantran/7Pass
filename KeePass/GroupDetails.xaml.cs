@@ -263,7 +263,7 @@ namespace KeePass
 
         private void cmdHome_Click(object sender, EventArgs e)
         {
-            GoBack<MoveTarget>();
+            GoBack<GroupDetails>();
         }
 
         private void cmdRoot_Click(object sender, EventArgs e)
