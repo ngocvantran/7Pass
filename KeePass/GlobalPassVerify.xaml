@@ -19,8 +19,8 @@
 			<TextBlock x:Name="PageTitle" Text="Global Password" Margin="9,-7,0,0"
 			           Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
-        
-		<StackPanel Grid.Row="1">
+
+        <StackPanel Grid.Row="1" Margin="12,0,12,0">
             <TextBlock Style="{StaticResource PhoneTextNormalStyle}">
                 Please enter your password to unlock 7Pass
             </TextBlock>
