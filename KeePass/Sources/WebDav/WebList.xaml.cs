@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Navigation;
+using System.Windows.Threading;
 using KeePass.IO.Data;
 using KeePass.Sources.WebDav.Api;
 using KeePass.Storage;
@@ -67,13 +68,15 @@ namespace KeePass.Sources.WebDav
 
         private void OnFileDownloadFailed(WebException obj)
         {
-            progBusy.IsBusy = false;
-
             Dispatcher.BeginInvoke(() =>
+            {
+                progBusy.IsBusy = false;
+
                 MessageBox.Show(
                     WebDavResources.DownloadError,
                     WebDavResources.ListTitle,
-                    MessageBoxButton.OK));
+                    MessageBoxButton.OK);
+            });
         }
 
         private void OnFileDownloaded(byte[] file,
@@ -152,8 +155,6 @@ namespace KeePass.Sources.WebDav
 
         private void OnListComplete(IList<ItemInfo> itemInfos)
         {
-            var dispatcher = Dispatcher;
-
             try
             {
                 var items = itemInfos
@@ -167,7 +168,7 @@ namespace KeePass.Sources.WebDav
             }
             finally
             {
-                dispatcher.BeginInvoke(() =>
+                Dispatcher.BeginInvoke(() =>
                 {
                     progBusy.IsBusy = false;
                     _cmdRefresh.IsEnabled = true;
