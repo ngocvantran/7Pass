@@ -23,10 +23,16 @@ namespace KeePass
 
         private void cmdAllow_Click(object sender, EventArgs e)
         {
-            AppSettings.Instance
-                .AllowAnalytics = true;
+            var settings = AppSettings.Instance;
+            var justInstalled = settings.AllowAnalytics == null;
 
+
+            settings.AllowAnalytics = true;
             AnalyticsTracker.Collect();
+
+            if (justInstalled)
+                AnalyticsTracker.Track("new_instance");
+
             NavigationService.GoBack();
         }
 
