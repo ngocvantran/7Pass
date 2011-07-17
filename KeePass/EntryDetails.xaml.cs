@@ -51,7 +51,8 @@ namespace KeePass
             if (_entry != null)
             {
                 UpdateNotes();
-                txtPassword.Text = _entry.Password;
+                txtPassword.Text = _entry.Password
+                    ?? string.Empty;
 
                 _binding.HasChanges =
                     CurrentEntry.HasChanges;
