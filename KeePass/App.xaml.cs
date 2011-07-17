@@ -75,6 +75,8 @@ namespace KeePass
             object sender, ApplicationUnhandledExceptionEventArgs e)
         {
             var ex = e.ExceptionObject;
+            if (ex is QuitException)
+                return;
 
             AnalyticsTracker.Track(
                 new TrackingEvent("error")
