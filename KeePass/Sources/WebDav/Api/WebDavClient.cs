@@ -138,6 +138,13 @@ namespace KeePass.Sources.WebDav.Api
                         return;
                     }
                 }
+                catch (NotSupportedException ex)
+                {
+                    _error(new WebException(
+                        "Invalid response", ex));
+
+                    return;
+                }
                 catch (XmlException ex)
                 {
                     _error(new WebException(
