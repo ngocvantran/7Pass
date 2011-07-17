@@ -113,7 +113,7 @@ namespace KeePass.Sources.Web
         private void txtUrl_TextChanged(
             object sender, TextChangedEventArgs e)
         {
-            var isValidUrl = WebUtils
+            var isValidUrl = UrlUtils
                 .IsValidUrl(txtUrl.Text);
 
             _cmdDownload.IsEnabled = isValidUrl;

@@ -344,7 +344,11 @@ namespace KeePass
 
         private void txtUrl_Changed(object sender, TextChangedEventArgs e)
         {
-            lnkUrl.Content = GetUrl();
+            var url = GetUrl();
+            lnkUrl.Content = url;
+
+            lnkUrl.IsEnabled = UrlUtils
+                .IsValidUrl(url);
         }
 
         private void txt_GotFocus(object sender, RoutedEventArgs e)

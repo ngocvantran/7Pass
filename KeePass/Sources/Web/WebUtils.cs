@@ -40,60 +40,7 @@ namespace KeePass.Sources.Web
                     request.EndGetResponse(ar)),
                 null);
         }
-
-        public static bool IsValidUrl(
-            Uri baseUrl, string url)
-        {
-            if (!Uri.IsWellFormedUriString(url,
-                UriKind.RelativeOrAbsolute))
-            {
-                return false;
-            }
-
-            try
-            {
-                var uri = new Uri(baseUrl, url);
-                switch (uri.Scheme.ToUpper())
-                {
-                    case "HTTP":
-                    case "HTTPS":
-                        return true;
-                }
-
-                return false;
-            }
-            catch (UriFormatException)
-            {
-                return false;
-            }
-        }
-
-        public static bool IsValidUrl(string url)
-        {
-            if (!Uri.IsWellFormedUriString(
-                url, UriKind.Absolute))
-            {
-                return false;
-            }
-
-            try
-            {
-                var uri = new Uri(url);
-                switch (uri.Scheme.ToUpper())
-                {
-                    case "HTTP":
-                    case "HTTPS":
-                        return true;
-                }
-
-                return false;
-            }
-            catch (UriFormatException)
-            {
-                return false;
-            }
-        }
-
+        
         public static string Serialize(WebRequest request)
         {
             if (request == null)

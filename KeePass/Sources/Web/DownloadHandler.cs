@@ -121,7 +121,7 @@ namespace KeePass.Sources.Web
                 .Cast<Match>()
                 .Select(x => x.Groups[2].Value)
                 .Distinct()
-                .Where(x => WebUtils.IsValidUrl(baseUrl, x))
+                .Where(x => UrlUtils.IsValidUrl(baseUrl, x))
                 .Select(x => new Uri(baseUrl, x))
                 .Select(x => x.ToString())
                 .Take(30)

@@ -282,6 +282,7 @@
     <Compile Include="Utils\TrialManager.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utils\UrlUtils.cs" />
     <Compile Include="WebView.xaml.cs">
       <DependentUpon>WebView.xaml</DependentUpon>
     </Compile>

@@ -47,7 +47,7 @@ namespace KeePass.Sources.WebDav
 
         private void ValidateData()
         {
-            var isValidUrl = WebUtils
+            var isValidUrl = UrlUtils
                 .IsValidUrl(txtUrl.Text);
 
             var hasData = isValidUrl &&
