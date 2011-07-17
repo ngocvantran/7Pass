@@ -35,10 +35,11 @@ namespace KeePass.Storage
 
             if (oddTransforms)
             {
-                MessageBox.Show(
-                    Properties.Resources.LargeTransforms,
-                    Properties.Resources.LargeTransformsTitle,
-                    MessageBoxButton.OK);
+                dispatcher.BeginInvoke(() =>
+                    MessageBox.Show(
+                        Properties.Resources.LargeTransforms,
+                        Properties.Resources.LargeTransformsTitle,
+                        MessageBoxButton.OK));
             }
 
             file.Position = 0;
