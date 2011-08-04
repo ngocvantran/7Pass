@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -28,6 +29,18 @@ namespace KeePass
 
             _cmdHome = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            base.OnBackKeyPress(e);
+
+            var fromTile = NavigationContext
+                .QueryString
+                .ContainsKey("fromTile");
+
+            if (fromTile)
+                this.ClearBackStack();
         }
 
         protected override void OnNavigatedTo(

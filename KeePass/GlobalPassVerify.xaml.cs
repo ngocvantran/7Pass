@@ -44,11 +44,10 @@ namespace KeePass
                 txtPass.Password);
         }
 
-        private void KeePassPage_BackKeyPress(
-            object sender, CancelEventArgs e)
+        protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            e.Cancel = true;
-            this.Quit();
+            base.OnBackKeyPress(e);
+            this.ClearBackStack();
         }
 
         private static void _wkVerify_DoWork(

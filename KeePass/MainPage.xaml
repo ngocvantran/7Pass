@@ -58,6 +58,8 @@
                                 <toolkit:MenuItem Header="clear keyfile" Tag="{Binding Info}"
                                                   IsEnabled="{Binding HasKeyFile}"
                                                   Click="mnuClearKeyFile_Click" />
+                                <toolkit:MenuItem Header="pin database" Tag="{Binding Info}"
+                                                  Click="mnuPin_Click" />
                             </toolkit:ContextMenu>
                         </toolkit:ContextMenuService.ContextMenu>
 

@@ -18,18 +18,13 @@ namespace KeePass.Utils
             page.BackTo<GroupDetails>();
         }
 
-        public static void Quit(
+        public static void ClearBackStack(
             this PhoneApplicationPage page)
         {
-            if (page == null)
-                throw new ArgumentNullException("page");
-
             var service = page.NavigationService;
 
             while (service.BackStack.Any())
                 service.RemoveBackEntry();
-
-            service.GoBack();
         }
     }
 }

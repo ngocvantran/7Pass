@@ -15,11 +15,12 @@ namespace KeePass.Utils
             if (page == null)
                 throw new ArgumentNullException("page");
 
-            var path = GetPathTo<T>();
+            var path = GetPathTo<T>().ToString();
             var service = page.NavigationService;
 
             var entries = service.BackStack
                 .Select(x => x.Source)
+                .Select(x => x.GetUntilPath())
                 .ToList();
 
             var index = entries.LastIndexOf(path);

@@ -4,6 +4,16 @@ namespace KeePass.Utils
 {
     public static class UrlUtils
     {
+        public static string GetUntilPath(this Uri uri)
+        {
+            var full = uri.ToString();
+            var index = full.IndexOf('?');
+
+            return index != -1
+                ? full.Substring(0, index)
+                : full;
+        }
+
         public static bool IsValidUrl(
             Uri baseUrl, string url)
         {

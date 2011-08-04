@@ -53,7 +53,10 @@ namespace KeePass
             }
 
             Cache.Clear();
-            RefreshDbList();
+
+            var checkTileOpen = e.NavigationMode !=
+                NavigationMode.Back;
+            RefreshDbList(checkTileOpen);
         }
 
         private void DatabaseUpdated(DatabaseInfo info,
@@ -108,11 +111,24 @@ namespace KeePass
             }
         }
 
-        private void ListDatabases()
+        private void ListDatabases(string tile)
         {
             var dispatcher = Dispatcher;
+            var databases = DatabaseInfo.GetAll();
 
-            var items = DatabaseInfo.GetAll()
+            var open = tile == null ? null
+                : databases.FirstOrDefault(
+                    x => x.Folder == tile);
+
+            if (open != null)
+            {
+                dispatcher.BeginInvoke(
+                    () => Open(open, true));
+
+                return;
+            }
+
+            var items = databases
                 .Select(x => new DatabaseItem(x))
                 .OrderBy(x => x.Name)
                 .ToList();
@@ -134,12 +150,50 @@ namespace KeePass
                 _mnuUpdateAll.IsEnabled = hasUpdatables);
         }
 
-        private void RefreshDbList()
+        private void Open(DatabaseInfo database,
+            bool fromTile)
+        {
+            if (!fromTile)
+            {
+                if (!database.HasPassword)
+                {
+                    this.NavigateTo<Password>(
+                        "db={0}", database.Folder);
+                }
+                else
+                {
+                    database.Open(Dispatcher);
+                    this.NavigateTo<GroupDetails>();
+                }
+            }
+            else
+            {
+                if (!database.HasPassword)
+                {
+                    this.NavigateTo<Password>(
+                        "db={0}&fromTile=1", database.Folder);
+                }
+                else
+                {
+                    database.Open(Dispatcher);
+                    this.NavigateTo<GroupDetails>("fromTile=1");
+                }
+            }
+        }
+
+        private void RefreshDbList(bool checkTileOpen)
         {
             _items.Clear();
 
+            string tile;
+            if (!checkTileOpen || !NavigationContext
+                .QueryString.TryGetValue("tile", out tile))
+            {
+                tile = null;
+            }
+
             ThreadPool.QueueUserWorkItem(
-                _ => ListDatabases());
+                _ => ListDatabases(tile));
         }
 
         private void Update(DatabaseItem item)
@@ -196,20 +250,7 @@ namespace KeePass
             if (item.IsUpdating)
                 item.IsUpdating = false;
             else
-            {
-                var database = (DatabaseInfo)item.Info;
-
-                if (!database.HasPassword)
-                {
-                    this.NavigateTo<Password>("db={0}",
-                        database.Folder);
-                }
-                else
-                {
-                    database.Open(Dispatcher);
-                    this.NavigateTo<GroupDetails>();
-                }
-            }
+                Open((DatabaseInfo)item.Info, false);
         }
 
         private void mnuAbout_Click(object sender, EventArgs e)
@@ -259,7 +300,9 @@ namespace KeePass
                 return;
 
             database.Delete();
-            RefreshDbList();
+            TilesManager.Deleted(database);
+
+            RefreshDbList(false);
         }
 
         private void mnuKeyFile_Click(object sender, RoutedEventArgs e)
@@ -273,6 +316,20 @@ namespace KeePass
         private void mnuNew_Click(object sender, EventArgs e)
         {
             this.NavigateTo<Download>("folder=");
+        }
+
+        private void mnuPin_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MenuItem)sender;
+            var database = (DatabaseInfo)item.Tag;
+
+            if (TilesManager.Pin(database))
+                return;
+
+            MessageBox.Show(
+                Properties.Resources.AlreadyPinned,
+                Properties.Resources.PinDatabase,
+                MessageBoxButton.OK);
         }
 
         private void mnuRename_Click(object sender, RoutedEventArgs e)

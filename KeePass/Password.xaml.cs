@@ -113,7 +113,19 @@ namespace KeePass
             {
                 case OpenDbResults.Success:
                     txtPassword.Password = string.Empty;
-                    this.NavigateTo<GroupDetails>();
+
+                    string fromTile;
+                    if (!NavigationContext.QueryString
+                        .TryGetValue("fromTile", out fromTile))
+                    {
+                        this.NavigateTo<GroupDetails>();
+                    }
+                    else
+                    {
+                        this.NavigateTo<GroupDetails>(
+                            "fromTile={0}", fromTile);
+                    }
+
                     break;
 
                 case OpenDbResults.IncorrectPassword:

@@ -302,4 +302,10 @@ Click this notification to Review/Purchase 7Pass.</value>
     <value>(?&lt;=pass(?:word)?=)([^&amp;]+)
 (?&lt;=secret=)([^&amp;]+)</value>
   </data>
+  <data name="AlreadyPinned" xml:space="preserve">
+    <value>The selected database has already been pinned to the main screen.</value>
+  </data>
+  <data name="PinDatabase" xml:space="preserve">
+    <value>Pin Database</value>
+  </data>
 </root>
