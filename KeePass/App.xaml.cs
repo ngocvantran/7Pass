@@ -52,6 +52,9 @@ namespace KeePass
         private void Application_Activated(
             object sender, ActivatedEventArgs e)
         {
+            if (e.IsApplicationInstancePreserved)
+                return;
+
             AnalyticsTracker.Track("activated");
 
             ThemeData.Initialize();
