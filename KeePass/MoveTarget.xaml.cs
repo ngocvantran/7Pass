@@ -40,7 +40,7 @@ namespace KeePass
             _database = Cache.Database;
             if (_database == null)
             {
-                GoBack<MainPage>();
+                this.BackToDBs();
                 return;
             }
 

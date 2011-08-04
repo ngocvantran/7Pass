@@ -170,7 +170,8 @@ namespace KeePass.Sources.Web
 
                             new WebBrowserTask
                             {
-                                URL = Resources.InvalidCertificateUrl
+                                Uri = new Uri(Resources
+                                    .InvalidCertificateUrl),
                             }.Show();
                         });
                     }
@@ -224,7 +225,7 @@ namespace KeePass.Sources.Web
             });
 
             _page.Dispatcher.BeginInvoke(
-                _page.GoBack<MainPage>);
+                _page.BackToDBs);
         }
 
         private void SaveKeyFile(byte[] hash)
@@ -233,7 +234,7 @@ namespace KeePass.Sources.Web
 
             info.SetKeyFile(hash);
             _page.Dispatcher.BeginInvoke(
-                _page.GoBack<MainPage>);
+                _page.BackToDBs);
         }
 
         private void VerifyAndSaveDb(HttpWebRequest request,

@@ -60,6 +60,14 @@ namespace KeePass.Utils
         }
 
         /// <summary>
+        /// Resets the global pass enter state.
+        /// </summary>
+        public void Reset()
+        {
+            _globalPassEntered = false;
+        }
+
+        /// <summary>
         /// Verifies if the specified global password is correct.
         /// </summary>
         /// <param name="password">The global password.</param>

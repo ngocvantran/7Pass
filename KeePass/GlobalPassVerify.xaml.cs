@@ -48,7 +48,7 @@ namespace KeePass
             object sender, CancelEventArgs e)
         {
             e.Cancel = true;
-            throw new QuitException();
+            this.Quit();
         }
 
         private static void _wkVerify_DoWork(

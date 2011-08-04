@@ -5,6 +5,7 @@ using System.Windows.Navigation;
 using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.Storage;
+using KeePass.Utils;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -28,7 +29,7 @@ namespace KeePass
             var database = Cache.Database;
             if (database == null)
             {
-                GoBack<MainPage>();
+                this.BackToDBs();
                 return;
             }
 

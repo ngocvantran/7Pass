@@ -122,7 +122,7 @@ namespace KeePass.Sources.WebDav
                 }
 
                 dispatcher.BeginInvoke(
-                    GoBack<MainPage>);
+                    this.BackToDBs);
             }
             finally
             {

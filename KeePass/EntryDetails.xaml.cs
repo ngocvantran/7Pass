@@ -63,7 +63,7 @@ namespace KeePass
             var database = Cache.Database;
             if (database == null)
             {
-                GoBack<MainPage>();
+                this.BackToDBs();
                 return;
             }
 
@@ -175,7 +175,7 @@ namespace KeePass
 
             new WebBrowserTask
             {
-                URL = url,
+                Uri = new Uri(url),
             }.Show();
         }
 
@@ -283,13 +283,13 @@ namespace KeePass
         private void cmdHome_Click(object sender, EventArgs e)
         {
             if (ConfirmNavigateAway())
-                GoBack<GroupDetails>();
+                this.BackToRoot();
         }
 
         private void cmdRoot_Click(object sender, EventArgs e)
         {
             if (ConfirmNavigateAway())
-                GoBack<MainPage>();
+                this.BackToDBs();
         }
 
         private void cmdSave_Click(object sender, EventArgs e)

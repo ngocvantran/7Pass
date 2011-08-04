@@ -260,6 +260,7 @@
     <Compile Include="Storage\VerifyResults.cs" />
     <Compile Include="Storage\VerifyResultTypes.cs" />
     <Compile Include="Utils\AppSettings.cs" />
+    <Compile Include="Utils\BackTargets.cs" />
     <Compile Include="Utils\DeviceData.cs" />
     <Compile Include="Utils\EaseEffect.cs" />
     <Compile Include="Utils\ErrorReport.cs" />
@@ -278,7 +279,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Utils\Network.cs" />
-    <Compile Include="Utils\QuitException.cs" />
     <Compile Include="Utils\ThemeData.cs" />
     <Compile Include="Utils\TrialManager.cs">
       <SubType>Code</SubType>

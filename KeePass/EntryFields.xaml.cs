@@ -27,7 +27,7 @@ namespace KeePass
             var database = Cache.Database;
             if (database == null)
             {
-                GoBack<MainPage>();
+                this.BackToDBs();
                 return;
             }
 
@@ -47,12 +47,12 @@ namespace KeePass
 
         private void cmdHome_Click(object sender, EventArgs e)
         {
-            GoBack<GroupDetails>();
+            this.BackToRoot();
         }
 
         private void cmdRoot_Click(object sender, EventArgs e)
         {
-            GoBack<MainPage>();
+            this.BackToDBs();
         }
 
         private void txtField_GotFocus(

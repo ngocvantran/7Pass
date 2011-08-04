@@ -78,8 +78,6 @@ namespace KeePass
             object sender, ApplicationUnhandledExceptionEventArgs e)
         {
             var ex = e.ExceptionObject;
-            if (ex is QuitException)
-                return;
 
             AnalyticsTracker.Track(
                 new TrackingEvent("error")
@@ -87,7 +85,7 @@ namespace KeePass
                     {"type", ex.GetType().FullName},
                     {"stack", ex.StackTrace}
                 });
-            
+
             e.Handled = true;
 
             RootFrame.Dispatcher.BeginInvoke(() =>
@@ -107,8 +105,6 @@ namespace KeePass
                 }
                 else
                     Debugger.Break();
-
-                throw new QuitException();
             });
         }
 

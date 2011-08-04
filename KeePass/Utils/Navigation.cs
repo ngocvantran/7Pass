@@ -4,9 +4,33 @@ using Microsoft.Phone.Controls;
 
 namespace KeePass.Utils
 {
-    public static class Navigation
+    internal static class Navigation
     {
         private const string BASE_NS = "KeePass";
+
+        public static void BackTo<T>(
+            this PhoneApplicationPage page)
+            where T : PhoneApplicationPage
+        {
+            if (page == null)
+                throw new ArgumentNullException("page");
+
+            var path = GetPathTo<T>();
+            var service = page.NavigationService;
+
+            var entries = service.BackStack
+                .Select(x => x.Source)
+                .ToList();
+
+            var index = entries.LastIndexOf(path);
+            if (index < 0)
+                return;
+
+            for (var i = 0; i < index; i++)
+                service.RemoveBackEntry();
+
+            service.GoBack();
+        }
 
         public static Uri GetPathTo<T>()
             where T : PhoneApplicationPage
