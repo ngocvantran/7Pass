@@ -4,6 +4,10 @@ Support Info:
  - Blog: http://7pass.wordpress.com
  - Source code: https://github.com/7pass/7pass
 
+Version 3.2:
+ - Added navigation transitions.
+ - Added pining of databases.
+
 Version 3.1:
  - Bug fixes.
 

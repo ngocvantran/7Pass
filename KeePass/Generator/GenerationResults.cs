@@ -118,7 +118,7 @@ namespace KeePass.Generator
 
             var count = Math.Pow(
                 _characters.Length, length);
-            _count = (int)Math.Min(count, 10000);
+            _count = (int)Math.Min(count, 100);
 
             // Initialize cache
             _simpleCache = new Queue<DataItem>(Enumerable

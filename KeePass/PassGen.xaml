@@ -11,8 +11,9 @@
 	Style="{StaticResource KeePassPage}"
     SupportedOrientations="Portrait">
 
-    <controls:Panorama Title="Password">
-        <controls:PanoramaItem Header="Settings">
+    <controls:Panorama Name="panMain" Title="Password"
+                       SelectionChanged="panMain_SelectionChanged">
+        <controls:PanoramaItem Name="panSettings" Header="Settings">
             <ScrollViewer>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -36,7 +37,7 @@
                 </Grid>
             </ScrollViewer>
         </controls:PanoramaItem>
-        <controls:PanoramaItem Header="Results">
+        <controls:PanoramaItem Name="panResults" Header="Results">
             <ListBox Name="lstResults" SelectionChanged="lstResults_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -57,7 +58,10 @@
 
 	<phone:PhoneApplicationPage.ApplicationBar>
 		<shell:ApplicationBar IsVisible="True">
-			<shell:ApplicationBarIconButton
+            <shell:ApplicationBarIconButton
+				IconUri="/Images/password.png"
+				Text="Generate" Click="cmdGenerate_Click"/>
+            <shell:ApplicationBarIconButton
 				IconUri="/Images/home.png"
 				Text="Home" Click="cmdHome_Click" />
 			<shell:ApplicationBarIconButton

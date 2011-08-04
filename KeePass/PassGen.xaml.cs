@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -15,7 +14,6 @@ namespace KeePass
     public partial class PassGen
     {
         private const int MIN_LENGTH = 4;
-        private readonly Timer _tmrUpdate;
 
         private CharacterSetCheckBox[] _checks;
         private Entry _entry;
@@ -23,10 +21,6 @@ namespace KeePass
         public PassGen()
         {
             InitializeComponent();
-
-            _tmrUpdate = new Timer(
-                _ => UpdateSettings());
-            LayoutUpdated += OnLayoutUpdated;
         }
 
         protected override void OnNavigatedTo(
@@ -49,8 +43,6 @@ namespace KeePass
                 ?? CurrentEntry.Entry;
 
             LoadCurrentState();
-
-            TriggerUpdate();
         }
 
         private void LoadCurrentState()
@@ -79,59 +71,43 @@ namespace KeePass
             foreach (var check in _checks)
             {
                 check.LoadState(password);
-                check.Checked += OnSettingsChanged;
-                check.Unchecked += OnSettingsChanged;
                 pnlSets.Children.Add(check);
             }
-
-            sldLength.ValueChanged += OnSettingsChanged;
         }
 
         private void TriggerUpdate()
         {
-            _tmrUpdate.Change(1000,
-                Timeout.Infinite);
+            Dispatcher.BeginInvoke(
+                UpdateSettings);
         }
 
         private void UpdateSettings()
         {
-            var dispatcher = Dispatcher;
+            var length = (int)sldLength.Value;
 
-            dispatcher.BeginInvoke(() =>
-            {
-                var length = (int)sldLength.Value;
+            var characters = _checks
+                .Where(x => x.IsChecked != null &&
+                    x.IsChecked.Value)
+                .SelectMany(x => x.Characters)
+                .ToArray();
 
-                var characters = _checks
-                    .Where(x => x.IsChecked != null &&
-                        x.IsChecked.Value)
-                    .SelectMany(x => x.Characters)
-                    .ToArray();
+            var results = new GenerationResults(
+                characters, length);
 
-                ThreadPool.QueueUserWorkItem(_ =>
-                {
-                    var results = new GenerationResults(
-                        characters, length);
-
-                    dispatcher.BeginInvoke(() =>
-                        lstResults.ItemsSource = results);
-                });
-            });
-        }
-
-        private void OnLayoutUpdated(object sender, EventArgs e)
-        {
-            LayoutUpdated -= OnLayoutUpdated;
-            TriggerUpdate();
-        }
-
-        private void OnSettingsChanged(object sender, EventArgs e)
-        {
-            TriggerUpdate();
+            lstResults.ItemsSource = results;
         }
 
         private void cmdAbout_Click(object sender, EventArgs e)
         {
             this.NavigateTo<About>();
+        }
+
+        private void cmdGenerate_Click(object sender, EventArgs e)
+        {
+            if (panMain.SelectedItem != panResults)
+                panMain.DefaultItem = panResults;
+            else
+                TriggerUpdate();
         }
 
         private void cmdHome_Click(object sender, EventArgs e)
@@ -157,6 +133,13 @@ namespace KeePass
             _entry.Password = item.Password;
 
             NavigationService.GoBack();
+        }
+
+        private void panMain_SelectionChanged(
+            object sender, SelectionChangedEventArgs e)
+        {
+            if (panMain.SelectedItem == panResults)
+                TriggerUpdate();
         }
 
         private void sldLength_ValueChanged(object sender,
