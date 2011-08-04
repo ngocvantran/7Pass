@@ -21,7 +21,9 @@ namespace KeePass.Utils
 
             if (!globalPass.ShouldPromptGlobalPass)
             {
+                SetTransition();
                 OnNavigatedTo(false, e);
+
                 return;
             }
 
@@ -31,5 +33,34 @@ namespace KeePass.Utils
 
         protected virtual void OnNavigatedTo(
             bool cancelled, NavigationEventArgs e) {}
+
+        private void SetTransition()
+        {
+            TransitionService.SetNavigationInTransition(
+                this, new NavigationInTransition
+                {
+                    Backward = new TurnstileTransition
+                    {
+                        Mode = TurnstileTransitionMode.BackwardIn,
+                    },
+                    Forward = new TurnstileTransition
+                    {
+                        Mode = TurnstileTransitionMode.ForwardIn,
+                    }
+                });
+
+            TransitionService.SetNavigationOutTransition(
+                this, new NavigationOutTransition
+                {
+                    Backward = new TurnstileTransition
+                    {
+                        Mode = TurnstileTransitionMode.BackwardOut,
+                    },
+                    Forward = new TurnstileTransition
+                    {
+                        Mode = TurnstileTransitionMode.ForwardOut,
+                    }
+                });
+        }
     }
 }
