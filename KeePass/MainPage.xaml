@@ -43,23 +43,23 @@
 
                         <toolkit:ContextMenuService.ContextMenu>
                             <toolkit:ContextMenu>
-                                <toolkit:MenuItem Header="clear password" Tag="{Binding Info}"
-                                                  IsEnabled="{Binding HasPassword}"
-                                                  Click="mnuClear_Click" />
-                                <toolkit:MenuItem Header="rename" Tag="{Binding Info}"
-                                                  Click="mnuRename_Click" />
                                 <toolkit:MenuItem Header="{Binding UpdateText}" Tag="{Binding Info}"
                                                   Visibility="{Binding UpdateVisibility}"
                                                   Click="mnuUpdate_Click" />
+                                <toolkit:MenuItem Header="pin database" Tag="{Binding Info}"
+                                                  Click="mnuPin_Click" />
+                                <toolkit:MenuItem Header="rename" Tag="{Binding Info}"
+                                                  Click="mnuRename_Click" />
                                 <toolkit:MenuItem Header="delete" Tag="{Binding Info}"
                                                   Click="mnuDelete_Click" />
+                                <toolkit:MenuItem Header="clear password" Tag="{Binding Info}"
+                                                  IsEnabled="{Binding HasPassword}"
+                                                  Click="mnuClear_Click" />
                                 <toolkit:MenuItem Header="download keyfile" Tag="{Binding Info}"
                                                   Click="mnuKeyFile_Click" />
                                 <toolkit:MenuItem Header="clear keyfile" Tag="{Binding Info}"
                                                   IsEnabled="{Binding HasKeyFile}"
                                                   Click="mnuClearKeyFile_Click" />
-                                <toolkit:MenuItem Header="pin database" Tag="{Binding Info}"
-                                                  Click="mnuPin_Click" />
                             </toolkit:ContextMenu>
                         </toolkit:ContextMenuService.ContextMenu>
 

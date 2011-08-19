@@ -29,17 +29,17 @@
                     <!-- Entry details -->
                     <TextBlock Text="Title" Style="{StaticResource PhoneTextNormalStyle}" />
                     <TextBox Name="txtTitle" Text="{Binding Title, Mode=TwoWay}"
-                             c4f:TextBoxBinding.UpdateSourceOnChange="True"
+                             c4f:TextBinding.UpdateSourceOnChange="True"
                              GotFocus="txt_GotFocus" />
 
                     <TextBlock Text="User name" Style="{StaticResource PhoneTextNormalStyle}" />
                     <TextBox Name="txtUsername" Text="{Binding UserName, Mode=TwoWay}"
-                             c4f:TextBoxBinding.UpdateSourceOnChange="True"
+                             c4f:TextBinding.UpdateSourceOnChange="True"
                              GotFocus="txt_GotFocus" />
 
                     <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
                     <TextBox Name="txtPassword" Text="{Binding Password, Mode=TwoWay}"
-                             c4f:TextBoxBinding.UpdateSourceOnChange="True"
+                             c4f:TextBinding.UpdateSourceOnChange="True"
                              GotFocus="txt_GotFocus" />
                     <uc:QualityProgressBar Password="{Binding Password}" />
 
@@ -48,7 +48,7 @@
                 
                     <TextBlock Text="URL" Style="{StaticResource PhoneTextNormalStyle}" />
                     <TextBox Name="txtUrl" Text="{Binding Url, Mode=TwoWay}"
-                             c4f:TextBoxBinding.UpdateSourceOnChange="True"
+                             c4f:TextBinding.UpdateSourceOnChange="True"
                              InputScope="Url" GotFocus="txt_GotFocus" TextChanged="txtUrl_Changed" />
                     <HyperlinkButton Name="lnkUrl" Click="lnkUrl_Click"
                                      HorizontalContentAlignment="Left"

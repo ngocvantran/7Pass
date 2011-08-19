@@ -66,26 +66,26 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Coding4Fun.Phone.Controls, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Coding4Fun.Phone.Controls.1.4.1\lib\Coding4Fun.Phone.Controls.dll</HintPath>
+    <Reference Include="Coding4Fun.Phone.Controls">
+      <HintPath>..\Libs\Coding4Fun.Phone.Controls.dll</HintPath>
     </Reference>
     <Reference Include="DropNet.WindowsPhone, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DropNet.1.5.4\lib\sl3-wp\DropNet.WindowsPhone.dll</HintPath>
+      <HintPath>..\packages\DropNet.1.5.5\lib\sl4-WindowsPhone71\DropNet.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Coding4Fun.Phone.Controls.1.4.1\lib\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
+      <HintPath>..\packages\SilverlightToolkitWP.4.2011.8.17\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="NavigationListControl">
       <HintPath>..\Libs\NavigationListControl.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json.WindowsPhone, Version=4.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\DropNet.1.5.4\lib\sl3-wp\Newtonsoft.Json.WindowsPhone.dll</HintPath>
+      <HintPath>..\packages\DropNet.1.5.5\lib\sl4-WindowsPhone71\Newtonsoft.Json.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp.WindowsPhone, Version=101.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DropNet.1.5.4\lib\sl3-wp\RestSharp.WindowsPhone.dll</HintPath>
+      <HintPath>..\packages\DropNet.1.5.5\lib\sl4-WindowsPhone71\RestSharp.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="SharpZipLib.Silverlight4">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\SL4\SharpZipLib.Silverlight4.dll</HintPath>
@@ -409,6 +409,11 @@
     <Content Include="Images\up.light.png" />
     <Content Include="Images\uploaded.dark.png" />
     <Content Include="Images\uploaded.light.png" />
+    <Resource Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Resource Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Resource Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Resource Include="Toolkit.Content\ApplicationBar.Select.png" />
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml" />
@@ -420,7 +425,10 @@
     <Content Include="Images\updated.dark.png" />
     <Content Include="Images\updated.light.png" />
     <Content Include="Images\username.png" />
+    <Content Include="README_FIRST.txt" />
     <Content Include="Sources\Demo7Pass.kdbx" />
+    <None Include="Thumbs.db" />
+    <None Include="Toolkit.Content\Thumbs.db" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.png">
