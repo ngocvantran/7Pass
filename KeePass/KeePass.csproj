@@ -409,14 +409,16 @@
     <Content Include="Images\up.light.png" />
     <Content Include="Images\uploaded.dark.png" />
     <Content Include="Images\uploaded.light.png" />
-    <Resource Include="Toolkit.Content\ApplicationBar.Cancel.png" />
-    <Resource Include="Toolkit.Content\ApplicationBar.Check.png" />
-    <Resource Include="Toolkit.Content\ApplicationBar.Delete.png" />
-    <Resource Include="Toolkit.Content\ApplicationBar.Select.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
-    <None Include="Properties\WMAppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Images\about.png" />
     <Content Include="Images\back.png" />
     <Content Include="Images\password.png" />
@@ -425,10 +427,8 @@
     <Content Include="Images\updated.dark.png" />
     <Content Include="Images\updated.light.png" />
     <Content Include="Images\username.png" />
-    <Content Include="README_FIRST.txt" />
     <Content Include="Sources\Demo7Pass.kdbx" />
     <None Include="Thumbs.db" />
-    <None Include="Toolkit.Content\Thumbs.db" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.png">
