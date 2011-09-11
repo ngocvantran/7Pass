@@ -23,6 +23,7 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <TextBox Name="txtNotes" TextWrapping="Wrap"
                      TextChanged="txtNotes_Changed"
+                     AcceptsReturn="True"
                      Loaded="txtNotes_Loaded" />
         </Grid>
     </Grid>
