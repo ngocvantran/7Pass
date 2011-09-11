@@ -185,7 +185,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Refs\MD5.cs" />
-    <Compile Include="Refs\PhoneSlider.cs" />
     <Compile Include="Rename.xaml.cs">
       <DependentUpon>Rename.xaml</DependentUpon>
     </Compile>
