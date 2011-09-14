@@ -21,7 +21,7 @@ namespace KeePass.Utils
                         basePath + folder, true);
                 }
 
-                var files = store.GetFileNames(basePath);
+                var files = store.GetFileNames(basePath + "*");
                 foreach (var file in files)
                     store.DeleteFile(basePath + file);
             }
