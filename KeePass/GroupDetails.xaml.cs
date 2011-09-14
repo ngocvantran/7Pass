@@ -269,24 +269,36 @@ namespace KeePass
                 info.NotifyIfNotSyncable());
         }
 
-        private void cmdAbout_Click(object sender, EventArgs e)
-        {
-            this.NavigateTo<About>();
-        }
-
         private void cmdHome_Click(object sender, EventArgs e)
         {
             this.BackToRoot();
         }
 
-        private void cmdRoot_Click(object sender, EventArgs e)
+        private void cmdNewEntry_Click(object sender, EventArgs e)
         {
-            this.BackToDBs();
+            string groupId;
+            var queries = NavigationContext.QueryString;
+
+            if (!queries.TryGetValue("id", out groupId) ||
+                groupId == null)
+            {
+                groupId = string.Empty;
+            }
+
+            this.NavigateTo<EntryDetails>(
+                "group={0}", groupId);
         }
 
-        private void cmdSearch_Click(object sender, EventArgs e)
+        private void cmdNewGroup_Click(object sender, EventArgs e)
         {
-            this.NavigateTo<Search>();
+            var dlgNewGroup = new InputPrompt
+            {
+                Message = Properties.Resources.PromptName,
+                Title = Properties.Resources.NewGroupTitle,
+            };
+            dlgNewGroup.Completed += dlgNewGroup_Completed;
+
+            dlgNewGroup.Show();
         }
 
         private void dlgNewGroup_Completed(object sender,
@@ -352,6 +364,11 @@ namespace KeePass
             NavigationService.Navigate(item.TargetUri);
         }
 
+        private void mnuAbout_Click(object sender, EventArgs e)
+        {
+            this.NavigateTo<About>();
+        }
+
         private void mnuDelete_Click(object sender, RoutedEventArgs e)
         {
             var mnuDelete = (MenuItem)sender;
@@ -391,33 +408,6 @@ namespace KeePass
                 "group={0}", group.ID);
         }
 
-        private void mnuNewEntry_Click(object sender, EventArgs e)
-        {
-            string groupId;
-            var queries = NavigationContext.QueryString;
-
-            if (!queries.TryGetValue("id", out groupId) ||
-                groupId == null)
-            {
-                groupId = string.Empty;
-            }
-
-            this.NavigateTo<EntryDetails>(
-                "group={0}", groupId);
-        }
-
-        private void mnuNewGroup_Click(object sender, EventArgs e)
-        {
-            var dlgNewGroup = new InputPrompt
-            {
-                Message = Properties.Resources.PromptName,
-                Title = Properties.Resources.NewGroupTitle,
-            };
-            dlgNewGroup.Completed += dlgNewGroup_Completed;
-
-            dlgNewGroup.Show();
-        }
-
         private void mnuRename_Click(object sender, RoutedEventArgs e)
         {
             var mnuRename = (MenuItem)sender;
@@ -434,6 +424,16 @@ namespace KeePass
             dlgRename.Completed += dlgRename_Completed;
 
             dlgRename.Show();
+        }
+
+        private void mnuRoot_Click(object sender, EventArgs e)
+        {
+            this.BackToDBs();
+        }
+
+        private void mnuSearch_Click(object sender, EventArgs e)
+        {
+            this.NavigateTo<Search>();
         }
     }
 }

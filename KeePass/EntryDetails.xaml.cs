@@ -18,8 +18,8 @@ namespace KeePass
 {
     public partial class EntryDetails
     {
+        private readonly ApplicationBarIconButton _cmdReset;
         private readonly ApplicationBarIconButton _cmdSave;
-        private readonly ApplicationBarMenuItem _mnuReset;
 
         private EntryEx _binding;
         private Entry _entry;
@@ -30,8 +30,8 @@ namespace KeePass
 
             _cmdSave = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[2];
-            _mnuReset = (ApplicationBarMenuItem)
-                ApplicationBar.MenuItems[0];
+            _cmdReset = (ApplicationBarIconButton)
+                ApplicationBar.Buttons[3];
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)
@@ -271,13 +271,8 @@ namespace KeePass
             var hasChanges = _binding.HasChanges;
 
             _cmdSave.IsEnabled = hasChanges;
-            _mnuReset.IsEnabled = hasChanges;
+            _cmdReset.IsEnabled = hasChanges;
             CurrentEntry.HasChanges = hasChanges;
-        }
-
-        private void cmdAbout_Click(object sender, EventArgs e)
-        {
-            this.NavigateTo<About>();
         }
 
         private void cmdHome_Click(object sender, EventArgs e)
@@ -286,10 +281,21 @@ namespace KeePass
                 this.BackToRoot();
         }
 
-        private void cmdRoot_Click(object sender, EventArgs e)
+        private void cmdPassGen_Click(object sender, EventArgs e)
         {
-            if (ConfirmNavigateAway())
-                this.BackToDBs();
+            this.NavigateTo<PassGen>(
+                "id={0}", _entry.ID);
+        }
+
+        private void cmdReset_Click(object sender, EventArgs e)
+        {
+            _binding.Reset();
+            AnalyticsTracker.Track("reset_entry");
+
+            DataContext = null;
+            DataContext = _binding;
+
+            UpdateNotes();
         }
 
         private void cmdSave_Click(object sender, EventArgs e)
@@ -315,6 +321,11 @@ namespace KeePass
             OpenUrl(settings.UseIntBrowser);
         }
 
+        private void mnuAbout_Click(object sender, EventArgs e)
+        {
+            this.NavigateTo<About>();
+        }
+
         private void mnuBrowser_Click(object sender, RoutedEventArgs e)
         {
             OpenUrl(false);
@@ -325,21 +336,10 @@ namespace KeePass
             OpenUrl(true);
         }
 
-        private void mnuPassGen_Click(object sender, EventArgs e)
+        private void mnuRoot_Click(object sender, EventArgs e)
         {
-            this.NavigateTo<PassGen>(
-                "id={0}", _entry.ID);
-        }
-
-        private void mnuReset_Click(object sender, EventArgs e)
-        {
-            _binding.Reset();
-            AnalyticsTracker.Track("reset_entry");
-
-            DataContext = null;
-            DataContext = _binding;
-
-            UpdateNotes();
+            if (ConfirmNavigateAway())
+                this.BackToDBs();
         }
 
         private void txtUrl_Changed(object sender, TextChangedEventArgs e)
