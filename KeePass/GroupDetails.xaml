@@ -64,10 +64,10 @@
 				IconUri="/Images/home.png"
 				Text="Home" Click="cmdHome_Click" />
             <shell:ApplicationBarIconButton
-				IconUri="/Images/folder.dark.png"
+				IconUri="/Images/entry.dark.png"
 				Text="New Entry" Click="cmdNewEntry_Click" />
             <shell:ApplicationBarIconButton
-				IconUri="/Images/entry.dark.png"
+				IconUri="/Images/folder.dark.png"
 				Text="New Group" Click="cmdNewGroup_Click" />
             <shell:ApplicationBarIconButton
 				IconUri="/Images/search.png"
