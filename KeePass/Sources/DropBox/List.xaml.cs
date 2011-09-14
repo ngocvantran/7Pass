@@ -94,8 +94,8 @@ namespace KeePass.Sources.DropBox
                         storage.SetDatabase(buffer, new DatabaseDetails
                         {
                             Url = path,
-                            Name = title,
                             Modified = modified,
+                            Name = title.RemoveKdbx(),
                             Type = SourceTypes.Synchronizable,
                             Source = DatabaseUpdater.DROPBOX_UPDATER,
                         });

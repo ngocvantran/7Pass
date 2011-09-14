@@ -96,8 +96,8 @@ namespace KeePass.Sources.WebDav
                         var storage = new DatabaseInfo();
                         storage.SetDatabase(buffer, new DatabaseDetails
                         {
-                            Name = title,
                             Modified = modified,
+                            Name = title.RemoveKdbx(),
                             Url = _client.GetUrl(path),
                             Type = SourceTypes.Synchronizable,
                             Source = DatabaseUpdater.WEBDAV_UPDATER,

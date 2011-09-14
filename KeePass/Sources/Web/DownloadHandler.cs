@@ -219,7 +219,7 @@ namespace KeePass.Sources.Web
             info.SetDatabase(stream, new DatabaseDetails
             {
                 Url = url,
-                Name = name,
+                Name = name.RemoveKdbx(),
                 Type = SourceTypes.Updatable,
                 Source = DatabaseUpdater.WEB_UPDATER,
             });

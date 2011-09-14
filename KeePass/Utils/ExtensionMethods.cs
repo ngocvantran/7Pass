@@ -34,5 +34,19 @@ namespace KeePass.Utils
             return e.Key == Key.Enter ||
                 e.PlatformKeyCode == 0x0A;
         }
+
+        public static string RemoveKdbx(this string title)
+        {
+            const string extention = ".kdbx";
+
+            if (title.EndsWith(extention, StringComparison
+                .InvariantCultureIgnoreCase))
+            {
+                title = title.Substring(0,
+                    title.Length - extention.Length);
+            }
+
+            return title;
+        }
     }
 }
