@@ -404,6 +404,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\save.png" />
+    <Content Include="Images\search.action.png" />
     <Content Include="Images\up.dark.png" />
     <Content Include="Images\up.light.png" />
     <Content Include="Images\uploaded.dark.png" />

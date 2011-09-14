@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:keepass="clr-namespace:KeePass.Utils"
     xmlns:uc="clr-namespace:KeePass.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     Style="{StaticResource KeePassPage}">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -27,10 +28,12 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBox Name="txtSearch" Grid.Row="0"
-                     Loaded="txtSearch_Loaded"
-                     KeyDown="txtSearch_KeyDown"
-                     TextChanged="txtSearch_TextChanged" />
+            <toolkit:PhoneTextBox Name="txtSearch" Grid.Row="0"
+                                  ActionIcon="/Images/search.action.png"
+                                  Loaded="txtSearch_Loaded"
+                                  KeyDown="txtSearch_KeyDown"
+                                  TextChanged="txtSearch_TextChanged"
+                                  ActionIconTapped="txtSearch_ActionIconTapped" />
             <uc:KeePassList x:Name="lstItems" Grid.Row="1"
                             SelectionChanged="lstItems_SelectionChanged" />
         </Grid>
@@ -38,9 +41,6 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True">
-            <shell:ApplicationBarIconButton
-                IconUri="/Images/check.png" IsEnabled="False"
-                Text="Search" Click="cmdSearch_Click" />
             <shell:ApplicationBarIconButton
                 IconUri="/Images/home.png"
                 Text="Home" Click="cmdHome_Click" />

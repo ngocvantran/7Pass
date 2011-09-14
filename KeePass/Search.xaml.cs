@@ -10,7 +10,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using KeePass.Analytics;
-using KeePass.Controls;
 using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.Storage;
@@ -233,11 +232,6 @@ namespace KeePass
             this.BackToDBs();
         }
 
-        private void cmdSearch_Click(object sender, EventArgs e)
-        {
-            HideKeyboard();
-        }
-
         private void lstItems_SelectionChanged(object sender,
             NavigationListControl.NavigationEventArgs e)
         {
@@ -246,6 +240,11 @@ namespace KeePass
                 return;
 
             NavigationService.Navigate(item.TargetUri);
+        }
+
+        private void txtSearch_ActionIconTapped(object sender, EventArgs e)
+        {
+            HideKeyboard();
         }
 
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
