@@ -28,12 +28,9 @@
                         <StackPanel Margin="0,0,0,17" Width="432"
                                     keepass:EaseEffect.IsEnabled="True">
                             <TextBlock Text="{Binding Name}"
-                                        TextWrapping="Wrap" MaxHeight="120"
-                                        Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                       Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                             <TextBlock Text="{Binding Url}" TextWrapping="Wrap"
-                                        Visibility="{Binding NotesState}"
-                                        Margin="12,-6,12,0" MaxHeight="112"
-                                        Style="{StaticResource PhoneTextSubtleStyle}">
+                                       Style="{StaticResource PhoneTextSubtleStyle}">
                             </TextBlock>
                         </StackPanel>
                     </DataTemplate>

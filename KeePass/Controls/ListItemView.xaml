@@ -15,13 +15,11 @@
                    VerticalAlignment="Bottom" HorizontalAlignment="Right" />
         </Grid>
 
-        <StackPanel Margin="0,0,0,17" Width="432">
-            <TextBlock Text="{Binding Title}" TextWrapping="Wrap" MaxHeight="120"
+        <StackPanel>
+            <TextBlock Text="{Binding Title}"
                        Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-            <TextBlock Text="{Binding Notes}" Visibility="{Binding NotesState}"
-                       Margin="12,-6,12,0" MaxHeight="112" TextWrapping="Wrap"
-                       Style="{StaticResource PhoneTextSubtleStyle}">
-            </TextBlock>
+            <TextBlock Text="{Binding Notes}"
+                       Style="{StaticResource PhoneTextSubtleStyle}" />
         </StackPanel>
     </StackPanel>
 </UserControl>

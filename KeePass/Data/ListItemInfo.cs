@@ -39,22 +39,6 @@ namespace KeePass.Data
         public string Notes { get; set; }
 
         /// <summary>
-        /// Gets the state of the notes.
-        /// </summary>
-        /// <value>
-        /// The state of the notes.
-        /// </value>
-        public Visibility NotesState
-        {
-            get
-            {
-                return string.IsNullOrEmpty(Notes)
-                    ? Visibility.Collapsed
-                    : Visibility.Visible;
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the overlay icon.
         /// </summary>
         /// <value>
