@@ -48,7 +48,7 @@ namespace KeePass.Data
             if (dispatcher == null) throw new ArgumentNullException("dispatcher");
 
             Title = entry.Title;
-            Notes = entry.Notes;
+            Notes = entry.UserName;
             Icon = ThemeData.GetImage("entry");
 
             Overlay = Cache.GetOverlay(
