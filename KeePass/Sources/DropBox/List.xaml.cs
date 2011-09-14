@@ -187,23 +187,23 @@ namespace KeePass.Sources.DropBox
             if (meta == null)
                 return;
 
-            if (Network.CheckNetwork())
+            if (!Network.CheckNetwork())
+                return;
+
+            if (meta.IsDir)
+                NavigateTo(meta.Path);
+            else
             {
-                if (meta.IsDir)
-                    NavigateTo(meta.Path);
-                else
-                {
-                    progBusy.IsBusy = true;
+                progBusy.IsBusy = true;
 
-                    var client = DropBoxInfo
-                        .Create(_token, _secret);
+                var client = DropBoxInfo
+                    .Create(_token, _secret);
 
-                    var url = client.GetUrl(meta.Path);
-                    client.GetFileAsync(meta.Path,
-                        x => OnFileDownloaded(x.RawBytes, url,
-                            meta.Title, meta.Modified),
-                        OnFileDownloadFailed);
-                }
+                var url = client.GetUrl(meta.Path);
+                client.GetFileAsync(meta.Path,
+                    x => OnFileDownloaded(x.RawBytes, url,
+                        meta.Title, meta.Modified),
+                    OnFileDownloadFailed);
             }
         }
     }
