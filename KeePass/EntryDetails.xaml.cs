@@ -163,7 +163,8 @@ namespace KeePass
 
             if (useIntegreatedBrowser)
             {
-                AnalyticsTracker.Track("int_browser");
+                AnalyticsTracker.Track(
+                    "browser", "integrated");
 
                 this.NavigateTo<WebView>(
                     "url={0}&entry={1}", url, _entry.ID);
@@ -171,7 +172,8 @@ namespace KeePass
                 return;
             }
 
-            AnalyticsTracker.Track("open_url");
+            AnalyticsTracker.Track(
+                "browser", "external");
 
             new WebBrowserTask
             {
@@ -192,8 +194,10 @@ namespace KeePass
 
             ThreadPool.QueueUserWorkItem(_ =>
             {
-                AnalyticsTracker.Track(_entry.ID != null
-                    ? "save_entry" : "new_entry");
+                AnalyticsTracker.Track("modify",
+                    _entry.ID != null
+                        ? "save_entry"
+                        : "new_entry");
 
                 var info = Cache.DbInfo;
                 var database = Cache.Database;
@@ -290,7 +294,8 @@ namespace KeePass
         private void cmdReset_Click(object sender, EventArgs e)
         {
             _binding.Reset();
-            AnalyticsTracker.Track("reset_entry");
+            AnalyticsTracker.Track(
+                "modify", "reset_entry");
 
             DataContext = null;
             DataContext = _binding;

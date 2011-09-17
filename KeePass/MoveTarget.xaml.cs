@@ -153,7 +153,8 @@ namespace KeePass
                     x.Location(_entry);
                 });
                 
-                AnalyticsTracker.Track("move_entry");
+                AnalyticsTracker.Track(
+                    "modify", "move_entry");
             }
             else
             {
@@ -164,7 +165,8 @@ namespace KeePass
                     x.Location(_group);
                 });
 
-                AnalyticsTracker.Track("move_group");
+                AnalyticsTracker.Track(
+                    "modify", "move_group");
             }
 
             NavigationService.GoBack();

@@ -88,7 +88,8 @@ namespace KeePass
         {
             var database = Cache.Database;
             var pernament = IsPernamentDelete();
-            AnalyticsTracker.Track("delete_entry");
+            AnalyticsTracker.Track(
+                "modify", "delete_entry");
 
             if (!ConfirmDelete(pernament,
                 Properties.Resources.Entry,
@@ -122,7 +123,8 @@ namespace KeePass
         {
             var database = Cache.Database;
             var pernament = IsPernamentDelete();
-            AnalyticsTracker.Track("delete_group");
+            AnalyticsTracker.Track(
+                "modify", "delete_group");
 
             if (!ConfirmDelete(pernament,
                 Properties.Resources.Group,
@@ -320,7 +322,8 @@ namespace KeePass
                 x.New(group);
             });
 
-            AnalyticsTracker.Track("new_group");
+            AnalyticsTracker.Track(
+                "modify", "new_group");
         }
 
         private void dlgRename_Completed(object sender,
@@ -341,7 +344,8 @@ namespace KeePass
                 x.Details(group);
             });
 
-            AnalyticsTracker.Track("rename_group");
+            AnalyticsTracker.Track(
+                "modify", "rename_group");
         }
 
         private void lstGroup_Navigation(object sender,

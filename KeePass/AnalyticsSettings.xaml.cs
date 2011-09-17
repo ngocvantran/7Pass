@@ -31,7 +31,10 @@ namespace KeePass
             AnalyticsTracker.Collect();
 
             if (justInstalled)
-                AnalyticsTracker.Track("new_instance");
+            {
+                AnalyticsTracker.Track(
+                    "new_instance");
+            }
 
             NavigationService.GoBack();
         }

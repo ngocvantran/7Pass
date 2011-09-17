@@ -55,7 +55,8 @@ namespace KeePass
             if (e.IsApplicationInstancePreserved)
                 return;
 
-            AnalyticsTracker.Track("activated");
+            AnalyticsTracker.Track(
+                "start", "activated");
 
             ThemeData.Initialize();
             Cache.RestoreCache(RootFrame.Dispatcher);
@@ -70,7 +71,8 @@ namespace KeePass
         private void Application_Launching(
             object sender, LaunchingEventArgs e)
         {
-            AnalyticsTracker.Track("launch");
+            AnalyticsTracker.Track(
+                "start", "launch");
             ThemeData.Initialize();
         }
 

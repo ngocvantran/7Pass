@@ -33,6 +33,14 @@ namespace KeePass.Analytics
             Track(new TrackingEvent(eventName));
         }
 
+        public static void Track(string eventName, string subEvent)
+        {
+            Track(new TrackingEvent(eventName)
+            {
+                {"subEvent", subEvent}
+            });
+        }
+
         public static void Track(TrackingEvent info)
         {
             _impl.Track(info);
