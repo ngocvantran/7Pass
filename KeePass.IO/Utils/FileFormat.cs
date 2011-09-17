@@ -44,8 +44,15 @@ namespace KeePass.IO.Utils
         {
             var reader = new BinaryReader(stream);
 
-            return Sign(reader) &&
-                Version(reader);
+            try
+            {
+                return Sign(reader) &&
+                    Version(reader);
+            }
+            catch (IOException)
+            {
+                return false;
+            }
         }
 
         private static bool Version(BinaryReader reader)

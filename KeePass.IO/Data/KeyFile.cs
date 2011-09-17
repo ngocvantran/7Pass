@@ -44,9 +44,9 @@ namespace KeePass.IO.Data
                 IgnoreProcessingInstructions = true,
             };
 
-            using (var reader = XmlReader.Create(data, settings))
+            try
             {
-                try
+                using (var reader = XmlReader.Create(data, settings))
                 {
                     if (!reader.ReadToFollowing("KeyFile"))
                         return null;
@@ -60,10 +60,14 @@ namespace KeePass.IO.Data
                     var base64 = reader.ReadElementContentAsString();
                     return Convert.FromBase64String(base64);
                 }
-                catch (XmlException)
-                {
-                    return null;
-                }
+            }
+            catch (XmlException)
+            {
+                return null;
+            }
+            catch (NotSupportedException)
+            {
+                return null;
             }
         }
     }

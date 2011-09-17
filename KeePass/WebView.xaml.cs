@@ -108,7 +108,10 @@ namespace KeePass
             }
             catch
             {
-                browser.Navigate(browser.Source);
+                var uri = browser.Source;
+
+                if (uri != null)
+                    browser.Navigate(uri);
             }
         }
 

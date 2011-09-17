@@ -428,7 +428,6 @@
     <Content Include="Images\updated.light.png" />
     <Content Include="Images\username.png" />
     <Content Include="Sources\Demo7Pass.kdbx" />
-    <None Include="Thumbs.db" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.png">

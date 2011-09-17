@@ -62,10 +62,12 @@ namespace KeePass
         private void DatabaseUpdated(DatabaseInfo info,
             SyncResults result, string error)
         {
-            var dispatcher = Dispatcher;
-            var listItem = _items.First(
+            var listItem = _items.FirstOrDefault(
                 x => x.Info == info);
-
+            if (listItem == null)
+                return;
+            
+            var dispatcher = Dispatcher;
             dispatcher.BeginInvoke(() =>
                 listItem.IsUpdating = false);
 
@@ -128,7 +130,11 @@ namespace KeePass
                 return;
             }
 
+            foreach (var db in databases)
+                db.LoadDetails();
+
             var items = databases
+                .Where(x => x.Details != null)
                 .Select(x => new DatabaseItem(x))
                 .OrderBy(x => x.Name)
                 .ToList();
