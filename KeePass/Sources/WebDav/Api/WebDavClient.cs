@@ -160,35 +160,43 @@ namespace KeePass.Sources.WebDav.Api
                     return;
                 }
 
-                // ReSharper disable PossibleNullReferenceException
-                foreach (var item in root.Elements(d + "response"))
+                try
                 {
-                    var path = item
-                        .Element(d + "href")
-                        .Value;
-                    path = Uri.UnescapeDataString(path);
-
-                    var properties = item
-                        .Element(d + "propstat")
-                        .Element(d + "prop");
-
-                    var lastModified = properties
-                        .Element(d + "getlastmodified")
-                        .Value;
-
-                    var isDir = properties
-                        .Element(d + "resourcetype")
-                        .Element(d + "collection") != null;
-
-
-                    items.Add(new ItemInfo
+                    foreach (var item in root.Elements(d + "response"))
                     {
-                        Path = path,
-                        IsDir = isDir,
-                        Modified = lastModified,
-                    });
+                        var path = item
+                            .Element(d + "href")
+                            .Value;
+                        path = Uri.UnescapeDataString(path);
+
+                        var properties = item
+                            .Element(d + "propstat")
+                            .Element(d + "prop");
+
+                        var lastModified = properties
+                            .Element(d + "getlastmodified")
+                            .Value;
+
+                        var isDir = properties
+                            .Element(d + "resourcetype")
+                            .Element(d + "collection") != null;
+
+
+                        items.Add(new ItemInfo
+                        {
+                            Path = path,
+                            IsDir = isDir,
+                            Modified = lastModified,
+                        });
+                    }
                 }
-                // ReSharper restore PossibleNullReferenceException
+                catch (NullReferenceException ex)
+                {
+                    _error(new WebException(
+                        "Invalid response", ex));
+
+                    return;
+                }
 
                 _complete(items);
             }
