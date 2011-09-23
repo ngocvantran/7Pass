@@ -38,9 +38,16 @@
                              GotFocus="txt_GotFocus" />
 
                     <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
-                    <TextBox Name="txtPassword" Text="{Binding Password, Mode=TwoWay}"
-                             c4f:TextBinding.UpdateSourceOnChange="True"
-                             GotFocus="txt_GotFocus" />
+                    <Grid>
+                        <TextBox Name="txtPassword" Text="{Binding Password, Mode=TwoWay}"
+                                 c4f:TextBinding.UpdateSourceOnChange="True"
+                                 LostFocus="txtPassword_LostFocus"
+                                 GotFocus="txtPassword_GotFocus" />
+                        <PasswordBox Name="txtMask" Password="{Binding Password}"
+                                     Loaded="txtMask_Loaded"
+                                     IsHitTestVisible="False" />
+                    </Grid>
+                    
                     <uc:QualityProgressBar Password="{Binding Password}" />
 
                     <!-- URL -->

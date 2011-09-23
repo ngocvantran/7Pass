@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Navigation;
 using Coding4Fun.Phone.Controls;
 using KeePass.Analytics;
@@ -345,6 +346,31 @@ namespace KeePass
         {
             if (ConfirmNavigateAway())
                 this.BackToDBs();
+        }
+
+        private void txtMask_Loaded(object sender, RoutedEventArgs e)
+        {
+            var brush = txtMask.Background as SolidColorBrush;
+            if (brush == null)
+                return;
+
+            brush.Opacity = 1;
+            
+            var color = brush.Color;
+            brush.Color = Color.FromArgb(byte.MaxValue,
+                color.R, color.G, color.B);
+        }
+
+        private void txtPassword_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtMask.Visibility = Visibility.Collapsed;
+            txt_GotFocus(sender, e);
+        }
+
+        private void txtPassword_LostFocus(
+            object sender, RoutedEventArgs e)
+        {
+            txtMask.Visibility = Visibility.Visible;
         }
 
         private void txtUrl_Changed(object sender, TextChangedEventArgs e)
