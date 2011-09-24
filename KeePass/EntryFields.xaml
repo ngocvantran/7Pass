@@ -28,12 +28,7 @@
                                 toolkit:TiltEffect.IsTiltEnabled="True">
                 <uc:KeePassListBase.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
+                        <StackPanel>
                             <TextBlock Text="{Binding Key}" Grid.Column="0"
                                        VerticalAlignment="Center"
                                        Style="{StaticResource PhoneTextNormalStyle}" />
@@ -41,7 +36,7 @@
                                      Grid.Column="1" TextWrapping="Wrap"
                                      GotFocus="txtField_GotFocus"
                                      TextChanged="txtField_TextChanged" />
-                        </Grid>
+                        </StackPanel>
                     </DataTemplate>
                 </uc:KeePassListBase.ItemTemplate>
             </uc:KeePassListBase>
