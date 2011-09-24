@@ -5,6 +5,7 @@
     xmlns:keepass="clr-namespace:KeePass.Utils"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     Style="{StaticResource KeePassPage}">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -20,12 +21,12 @@
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBox Name="txtNotes" TextWrapping="Wrap"
-                     TextChanged="txtNotes_Changed"
-                     AcceptsReturn="True"
-                     Loaded="txtNotes_Loaded" />
-        </Grid>
+        <ScrollViewer x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <toolkit:PhoneTextBox Name="txtNotes" TextWrapping="Wrap"
+                                  TextChanged="txtNotes_Changed"
+                                  AcceptsReturn="True"
+                                  Loaded="txtNotes_Loaded" />
+        </ScrollViewer>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
