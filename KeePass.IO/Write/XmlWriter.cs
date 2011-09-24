@@ -56,7 +56,7 @@ namespace KeePass.IO.Write
             if (group == null)
                 throw new ArgumentNullException("group");
 
-            var time = GetTime();
+            var time = GetTime(DateTime.Now);
 
             _deletedObjs.Add(new XElement("DeletedObject",
                 new XElement("UUID", group.ID),
@@ -75,7 +75,7 @@ namespace KeePass.IO.Write
             if (entry == null)
                 throw new ArgumentNullException("entry");
 
-            var time = GetTime();
+            var time = GetTime(DateTime.Now);
             var element = _entries[entry.ID];
 
             element.Remove();
@@ -132,10 +132,13 @@ namespace KeePass.IO.Write
             foreach (var remove in removes)
                 existings[remove].Remove();
 
+            var time = DateTime.Now;
+            entry.LastModified = time;
+
             element
                 .Element("Times")
                 .Element("LastModificationTime")
-                .Value = GetTime();
+                .Value = GetTime(time);
         }
 
         /// <summary>
@@ -153,10 +156,13 @@ namespace KeePass.IO.Write
                 .Element("Name")
                 .Value = group.Name;
 
+            var time = DateTime.Now;
+            group.LastModified = time;
+
             element
                 .Element("Times")
                 .Element("LastModificationTime")
-                .Value = GetTime();
+                .Value = GetTime(time);
         }
 
         /// <summary>
@@ -228,10 +234,13 @@ namespace KeePass.IO.Write
             var parent = _groups[entry.Group.ID];
             parent.Add(element);
 
+            var time = DateTime.Now;
+            entry.LastModified = time;
+
             element
                 .Element("Times")
                 .Element("LocationChanged")
-                .Value = GetTime();
+                .Value = GetTime(time);
         }
 
         /// <summary>
@@ -249,10 +258,13 @@ namespace KeePass.IO.Write
             var parent = _groups[group.Parent.ID];
             parent.Add(element);
 
+            var time = DateTime.Now;
+            group.LastModified = time;
+
             element
                 .Element("Times")
                 .Element("LocationChanged")
-                .Value = GetTime();
+                .Value = GetTime(time);
         }
 
         /// <summary>
@@ -264,21 +276,23 @@ namespace KeePass.IO.Write
             if (group == null)
                 throw new ArgumentNullException("group");
 
-            var time = GetTime();
+            var time = DateTime.Now;
+            group.LastModified = time;
 
+            var timeValue = GetTime(time);
             var element = new XElement("Group",
                 new XElement("UUID", group.ID),
                 new XElement("Name", group.Name),
                 new XElement("Notes"),
                 new XElement("IconID", 0),
                 new XElement("Times",
-                    new XElement("LastModificationTime", time),
-                    new XElement("CreationTime", time),
-                    new XElement("LastAccessTime", time),
-                    new XElement("ExpiryTime", time),
+                    new XElement("LastModificationTime", timeValue),
+                    new XElement("CreationTime", timeValue),
+                    new XElement("LastAccessTime", timeValue),
+                    new XElement("ExpiryTime", timeValue),
                     new XElement("Expires", "False"),
                     new XElement("UsageCount", 0),
-                    new XElement("LocationChanged", time)),
+                    new XElement("LocationChanged", timeValue)),
                 new XElement("IsExpanded", "True"),
                 new XElement("DefaultAutoTypeSequence"),
                 new XElement("EnableAutoType", "null"),
@@ -291,7 +305,7 @@ namespace KeePass.IO.Write
             parent
                 .Element("Times")
                 .Element("LastModificationTime")
-                .Value = GetTime();
+                .Value = timeValue;
 
             _groups.Add(group.ID, element);
         }
@@ -305,8 +319,10 @@ namespace KeePass.IO.Write
             if (entry == null)
                 throw new ArgumentNullException("entry");
 
-            var time = GetTime();
+            var time = DateTime.Now;
+            entry.LastModified = time;
 
+            var timeValue = GetTime(time);
             var element = new XElement("Entry",
                 new XElement("UUID", entry.ID),
                 new XElement("IconID", 0),
@@ -315,13 +331,13 @@ namespace KeePass.IO.Write
                 new XElement("OverrideURL"),
                 new XElement("Tags"),
                 new XElement("Times",
-                    new XElement("LastModificationTime", time),
-                    new XElement("CreationTime", time),
-                    new XElement("LastAccessTime", time),
-                    new XElement("ExpiryTime", time),
+                    new XElement("LastModificationTime", timeValue),
+                    new XElement("CreationTime", timeValue),
+                    new XElement("LastAccessTime", timeValue),
+                    new XElement("ExpiryTime", timeValue),
                     new XElement("Expires", "False"),
                     new XElement("UsageCount", 0),
-                    new XElement("LocationChanged", time)));
+                    new XElement("LocationChanged", timeValue)));
 
             var fields = entry.GetAllFields();
             element.Add(fields
@@ -348,7 +364,7 @@ namespace KeePass.IO.Write
             group
                 .Element("Times")
                 .Element("LastModificationTime")
-                .Value = GetTime();
+                .Value = timeValue;
 
             _entries.Add(entry.ID, element);
         }
@@ -398,9 +414,9 @@ namespace KeePass.IO.Write
                 .ToList();
         }
 
-        private static string GetTime()
+        private static string GetTime(DateTime time)
         {
-            return XmlConvert.ToString(DateTime.Now,
+            return XmlConvert.ToString(time,
                 XmlDateTimeSerializationMode.RoundtripKind);
         }
 
@@ -432,7 +448,7 @@ namespace KeePass.IO.Write
 
             idElement.Value = recycleBinId;
             meta.Element("RecycleBinChanged")
-                .Value = GetTime();
+                .Value = GetTime(DateTime.Now);
         }
 
         public class ProtectedValue

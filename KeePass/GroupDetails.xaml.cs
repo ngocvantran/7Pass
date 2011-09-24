@@ -22,11 +22,14 @@ namespace KeePass
         private readonly ApplicationBarIconButton _cmdHome;
 
         private Group _group;
+        private IList<string> _ids;
+        private DateTime _lastModified;
 
         public GroupDetails()
         {
             InitializeComponent();
 
+            _ids = new List<string>();
             _cmdHome = (ApplicationBarIconButton)
                 ApplicationBar.Buttons[0];
         }
@@ -179,6 +182,32 @@ namespace KeePass
             return false;
         }
 
+        private bool IsSameData(ICollection<Group> groups,
+            ICollection<Entry> entries)
+        {
+            var lastModified = groups
+                .Select(x => x.LastModified)
+                .Union(entries.Select(x => x.LastModified))
+                .OrderByDescending(x => x)
+                .FirstOrDefault();
+
+            var ids = groups
+                .Select(x => x.ID)
+                .Union(entries.Select(x => x.ID))
+                .ToList();
+
+            var sameIds = ids.Intersect(_ids)
+                .Count() == ids.Count;
+
+            if (sameIds && lastModified == _lastModified)
+                return true;
+
+            _ids = ids;
+            _lastModified = lastModified;
+
+            return false;
+        }
+
         private void ListHistory(Database database)
         {
             var dispatcher = Dispatcher;
@@ -195,15 +224,18 @@ namespace KeePass
         private void ListItems(Group group, Group recycleBin)
         {
             var dispatcher = Dispatcher;
-            var groups = group.Groups.AsEnumerable();
+            var groups = group.Groups.ToList();
 
             if (recycleBin != null)
             {
                 var settings = AppSettings.Instance;
 
                 if (settings.HideRecycleBin)
-                    groups = groups.Except(new[] {recycleBin});
+                    groups.Remove(recycleBin);
             }
+
+            if (IsSameData(groups, group.Entries))
+                return;
 
             var items = new List<GroupItem>();
             items.AddRange(groups
