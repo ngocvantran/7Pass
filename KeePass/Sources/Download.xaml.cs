@@ -44,7 +44,7 @@ namespace KeePass.Sources
             var demoDb = Application.GetResourceStream(
                 new Uri("Sources/Demo7Pass.kdbx", UriKind.Relative));
 
-            AnalyticsTracker.Track("new_db_demo");
+            AnalyticsTracker.Track("new_db", "demo");
 
             info.SetDatabase(demoDb.Stream, new DatabaseDetails
             {
@@ -63,19 +63,19 @@ namespace KeePass.Sources
 
         private void lnkDropBox_Click(object sender, RoutedEventArgs e)
         {
-            AnalyticsTracker.Track("new_db_dropbox");
+            AnalyticsTracker.Track("new_db", "dropbox");
             Navigate<DropBox.DropBox>();
         }
 
         private void lnkWebDav_Click(object sender, RoutedEventArgs e)
         {
-            AnalyticsTracker.Track("new_db_webdav");
+            AnalyticsTracker.Track("new_db", "webdav");
             Navigate<WebDav.WebDavDownload>();
         }
 
         private void lnkWeb_Click(object sender, RoutedEventArgs e)
         {
-            AnalyticsTracker.Track("new_db_web");
+            AnalyticsTracker.Track("new_db", "web");
             Navigate<Web.WebDownload>();
         }
     }
