@@ -69,6 +69,14 @@ namespace KeePass.IO.Data
         }
 
         /// <summary>
+        /// Gets or sets the last modified time.
+        /// </summary>
+        /// <value>
+        /// The last modified time.
+        /// </value>
+        public DateTime LastModified { get; set; }
+
+        /// <summary>
         /// Gets or sets the notes.
         /// </summary>
         /// <value>The notes.</value>

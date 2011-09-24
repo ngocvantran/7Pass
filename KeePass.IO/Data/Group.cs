@@ -30,7 +30,8 @@ namespace KeePass.IO.Data
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="Group"/> is hidden.
+        /// Gets or sets a value indicating whether
+        /// this <see cref="Group"/> is hidden.
         /// </summary>
         /// <value>
         ///   <c>true</c> if hidden; otherwise, <c>false</c>.
@@ -50,6 +51,14 @@ namespace KeePass.IO.Data
         /// The icon data.
         /// </value>
         public IconData Icon { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last modified.
+        /// </summary>
+        /// <value>
+        /// The last modified.
+        /// </value>
+        public DateTime LastModified { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
