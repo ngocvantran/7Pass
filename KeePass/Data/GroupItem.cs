@@ -32,6 +32,7 @@ namespace KeePass.Data
             if (dispatcher == null) throw new ArgumentNullException("dispatcher");
 
             Title = group.Name;
+            Notes = group.Notes;
             Icon = ThemeData.GetImage("folder");
 
             Overlay = Cache.GetOverlay(

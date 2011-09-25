@@ -67,6 +67,14 @@ namespace KeePass.IO.Data
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the notes.
+        /// </summary>
+        /// <value>
+        /// The notes.
+        /// </value>
+        public string Notes { get; set; }
+
+        /// <summary>
         /// Gets the parent group.
         /// </summary>
         public Group Parent { get; private set; }

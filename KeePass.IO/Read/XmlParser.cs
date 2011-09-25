@@ -184,6 +184,13 @@ namespace KeePass.IO.Read
             var name = reader
                 .ReadElementContentAsString();
 
+            var notes = string.Empty;
+            if (reader.Name == "Notes" ||
+                reader.ReadToNextSibling("Notes"))
+            {
+                notes = reader.ReadElementContentAsString();
+            }
+
             var icon = ParseIcon(reader);
             var lastModified = ReadLastModified(reader);
 
@@ -192,6 +199,7 @@ namespace KeePass.IO.Read
                 ID = id,
                 Name = name,
                 Icon = icon,
+                Notes = notes,
                 LastModified = lastModified,
             };
 
