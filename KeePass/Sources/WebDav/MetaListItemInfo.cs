@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using KeePass.Data;
 using KeePass.Sources.WebDav.Api;
 using KeePass.Utils;
@@ -34,18 +35,36 @@ namespace KeePass.Sources.WebDav
             _path = new Uri(new Uri(basePath),
                 item.Path).ToString();
 
-            Icon = ThemeData.GetImage(
-                item.IsDir ? "folder" : "entry");
+            Title = GetTitle(item);
+            Notes = GetRelativeTime(item);
+            Icon = ThemeData.GetImage(item.IsDir
+                ? "folder" : "entry");
+        }
 
-            var path = item.Path;
-
+        private static string GetRelativeTime(ItemInfo item)
+        {
             try
             {
-                Title = System.IO.Path.GetFileName(path);
+                return XmlConvert.ToDateTime(item.Modified,
+                    XmlDateTimeSerializationMode.RoundtripKind)
+                    .ToRelative();
+            }
+            catch (XmlException)
+            {
+                return string.Empty;
+            }
+        }
+
+        private static string GetTitle(ItemInfo item)
+        {
+            try
+            {
+                return System.IO.Path
+                    .GetFileName(item.Path);
             }
             catch (ArgumentException)
             {
-                Title = path;
+                return item.Path;
             }
         }
     }

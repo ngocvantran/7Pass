@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using DropNet.Models;
 using KeePass.Data;
 using KeePass.Utils;
@@ -36,10 +37,23 @@ namespace KeePass.Sources.DropBox
             _modified = data.Modified;
 
             Title = data.Name;
+            Notes = GetRelativeTime(data);
             Icon = ThemeData.GetImage(
                 data.Is_Dir ? "folder" : "entry");
-            Notes = data.Modified.GetRelativeTime(
-                "ddd, dd MMM yyyy HH:mm:ss +ffff");
+        }
+
+        private static string GetRelativeTime(MetaData data)
+        {
+            DateTime date;
+            var parsed = DateTime.TryParseExact(
+                data.Modified,
+                "ddd, dd MMM yyyy HH:mm:ss +ffff",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out date);
+
+            return parsed
+                ? date.ToRelative()
+                : string.Empty;
         }
     }
 }
