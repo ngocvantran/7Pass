@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Globalization;
 using System.IO.IsolatedStorage;
 using System.Windows.Input;
+using Microsoft.Phone.Controls;
 
 namespace KeePass.Utils
 {
@@ -27,6 +29,23 @@ namespace KeePass.Utils
             }
 
             store.DeleteDirectory(path);
+        }
+
+        public static string GetRelativeTime(
+            this string dateValue, string format)
+        {
+            DateTime date;
+            var parsed = DateTime.TryParseExact(dateValue,
+                format, CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out date);
+
+            if (!parsed)
+                return string.Empty;
+
+            date = date.ToLocalTime();
+            return (string)new RelativeTimeConverter()
+                .Convert(date, typeof(string),
+                    null, CultureInfo.CurrentUICulture);
         }
 
         public static bool IsEnter(this KeyEventArgs e)

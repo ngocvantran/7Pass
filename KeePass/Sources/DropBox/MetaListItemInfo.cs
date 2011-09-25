@@ -31,13 +31,15 @@ namespace KeePass.Sources.DropBox
             if (data == null)
                 throw new ArgumentNullException("data");
 
-            Title = data.Name;
             _path = data.Path;
             _idDir = data.Is_Dir;
             _modified = data.Modified;
 
+            Title = data.Name;
             Icon = ThemeData.GetImage(
                 data.Is_Dir ? "folder" : "entry");
+            Notes = data.Modified.GetRelativeTime(
+                "ddd, dd MMM yyyy HH:mm:ss +ffff");
         }
     }
 }
