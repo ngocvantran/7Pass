@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
-using KeePass.Sources.Web;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
 
@@ -56,15 +55,15 @@ namespace KeePass.Sources.WebDav
             _cmdDownload.IsEnabled = hasData;
         }
 
-        private void cmdDownload_Click(object sender, EventArgs e)
-        {
-            PerformDownload();
-        }
-
-        private void mnuBoxNet_Click(object sender, EventArgs e)
+        private void cmdBoxNet_Click(object sender, EventArgs e)
         {
             txtUrl.Text = "https://www.box.net/dav";
             txtUser.Focus();
+        }
+
+        private void cmdDownload_Click(object sender, EventArgs e)
+        {
+            PerformDownload();
         }
 
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)

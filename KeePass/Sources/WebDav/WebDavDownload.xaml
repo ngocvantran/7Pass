@@ -69,11 +69,10 @@
 				IconUri="/Images/check.png"
 				Text="Open" IsEnabled="False"
 				Click="cmdDownload_Click" />
-			<shell:ApplicationBar.MenuItems>
-				<shell:ApplicationBarMenuItem
-					Text="Use Box.net"
-					Click="mnuBoxNet_Click" />
-			</shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton
+				IconUri="/Images/box.png"
+				Text="Box.net"
+				Click="cmdBoxNet_Click" />
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
 
