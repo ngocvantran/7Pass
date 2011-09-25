@@ -267,17 +267,17 @@ namespace KeePass.IO.Read
         {
             var fields = new Dictionary<string, string>();
 
-            if (reader.ReadToFollowing("String"))
+            if (reader.Name != "String")
+                reader.ReadToFollowing("String");
+            
+            while (reader.Name == "String")
             {
-                while (reader.Name == "String")
-                {
-                    reader.Read();
+                reader.Read();
 
-                    var name = reader.ReadElementContentAsString();
-                    fields.Add(name, ReadValue(reader));
+                var name = reader.ReadElementContentAsString();
+                fields.Add(name, ReadValue(reader));
 
-                    reader.ReadEndElement();
-                }
+                reader.ReadEndElement();
             }
 
             return fields;
