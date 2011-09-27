@@ -24,6 +24,14 @@ namespace KeePass.IO.Data
         private readonly Dictionary<string, string> _original;
 
         /// <summary>
+        /// Gets or sets the attachments.
+        /// </summary>
+        /// <value>
+        /// The attachments.
+        /// </value>
+        public Attachment[] Attachments { get; set; }
+
+        /// <summary>
         /// Gets the custom fields.
         /// </summary>
         /// <returns></returns>

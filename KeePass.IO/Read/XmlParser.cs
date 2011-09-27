@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using System.Xml;
 using KeePass.IO.Data;
 using KeePass.IO.Utils;
+using KeePassLib.Utility;
 
 namespace KeePass.IO.Read
 {
@@ -50,7 +51,9 @@ namespace KeePass.IO.Read
                 string recycleBinId = null;
                 var recyleBinEnabled = false;
 
+                var binaries = new Dictionary<int, byte[]>();
                 var icons = new Dictionary<string, ImageSource>();
+
                 using (var subReader = reader.ReadSubtree())
                 {
                     subReader.ReadToFollowing("Generator");
@@ -73,7 +76,13 @@ namespace KeePass.IO.Read
                                 break;
 
                             case "CustomIcons":
-                                ParseIcons(subReader, _dispatcher, icons);
+                                using (var iconReader = subReader.ReadSubtree())
+                                    ParseIcons(iconReader, _dispatcher, icons);
+                                break;
+
+                            case "Binaries":
+                                using (var binReader = subReader.ReadSubtree())
+                                    binaries = ReadBinaries(binReader);
                                 break;
                         }
                     }
@@ -90,7 +99,7 @@ namespace KeePass.IO.Read
 
                 using (var subReader = reader.ReadSubtree())
                 {
-                    var root = ParseGroup(subReader);
+                    var root = ParseGroup(subReader, binaries);
                     var database = new Database(root, icons)
                     {
                         RecycleBinEnabled = recyleBinEnabled,
@@ -118,7 +127,8 @@ namespace KeePass.IO.Read
             return reader.Value == "True";
         }
 
-        private void ParseChildren(XmlReader reader, Group group)
+        private void ParseChildren(XmlReader reader, Group group,
+            IDictionary<int, byte[]> binaries)
         {
             while (reader.NodeType == XmlNodeType.Element)
             {
@@ -126,14 +136,17 @@ namespace KeePass.IO.Read
                 {
                     case "Group":
                         using (var subReader = reader.ReadSubtree())
-                            group.Add(ParseGroup(subReader));
+                            group.Add(ParseGroup(subReader, binaries));
+
                         reader.ReadEndElement();
                         break;
 
                     case "Entry":
                         using (var subReader = reader.ReadSubtree())
                         {
-                            var entry = ParseEntry(subReader);
+                            var entry = ParseEntry(
+                                subReader, binaries);
+
                             if (entry != null)
                                 group.Add(entry);
                         }
@@ -150,16 +163,18 @@ namespace KeePass.IO.Read
             group.Sort();
         }
 
-        private Entry ParseEntry(XmlReader reader)
+        private Entry ParseEntry(XmlReader reader,
+            IDictionary<int, byte[]> binaries)
         {
             var id = ReadId(reader);
             var icon = ParseIcon(reader);
             var lastModified = ReadLastModified(reader);
             var fields = ReadFields(reader);
+            var attachments = ReadAttachments(reader, binaries);
 
             // Needed to ensure protected
             // fields decryption
-            ReadHistories(reader);
+            ReadHistories(reader, binaries);
 
             if (fields.Count == 0)
                 return null;
@@ -168,13 +183,15 @@ namespace KeePass.IO.Read
             {
                 ID = id,
                 Icon = icon,
+                Attachments = attachments,
                 LastModified = lastModified,
             };
 
             return entry;
         }
 
-        private Group ParseGroup(XmlReader reader)
+        private Group ParseGroup(XmlReader reader,
+            IDictionary<int, byte[]> binaries)
         {
             var id = ReadId(reader);
 
@@ -203,7 +220,7 @@ namespace KeePass.IO.Read
                 LastModified = lastModified,
             };
 
-            ParseChildren(reader, group);
+            ParseChildren(reader, group, binaries);
 
             return group;
         }
@@ -270,6 +287,63 @@ namespace KeePass.IO.Read
             }
         }
 
+        private Attachment[] ReadAttachments(XmlReader reader,
+            IDictionary<int, byte[]> binaries)
+        {
+            var result = new List<Attachment>();
+
+            while (reader.Name == "Binary")
+            {
+                reader.Read();
+                var name = reader.ReadElementContentAsString();
+
+                reader.MoveToAttribute("Ref");
+                var id = XmlConvert.ToInt32(reader.Value);
+
+                byte[] value;
+                if (binaries.TryGetValue(id, out value))
+                {
+                    result.Add(new Attachment
+                    {
+                        ID = id,
+                        Name = name,
+                        Value = value,
+                    });
+                }
+
+                reader.Read();
+                reader.ReadEndElement();
+            }
+
+            return result.ToArray();
+        }
+
+        private static Dictionary<int, byte[]>
+            ReadBinaries(XmlReader reader)
+        {
+            var binaries = new Dictionary<int, byte[]>();
+
+            while (reader.ReadToFollowing("Binary"))
+            {
+                reader.MoveToAttribute("ID");
+                var id = XmlConvert.ToInt32(reader.Value);
+
+                reader.MoveToAttribute("Compressed");
+                var compressed = reader.Value == "True";
+
+                reader.MoveToContent();
+                var binary = Convert.FromBase64String(
+                    reader.ReadElementContentAsString());
+
+                if (compressed)
+                    binary = MemUtil.Decompress(binary);
+
+                binaries.Add(id, binary);
+            }
+
+            return binaries;
+        }
+
         private Dictionary<string, string>
             ReadFields(XmlReader reader)
         {
@@ -277,7 +351,7 @@ namespace KeePass.IO.Read
 
             if (reader.Name != "String")
                 reader.ReadToFollowing("String");
-            
+
             while (reader.Name == "String")
             {
                 reader.Read();
@@ -291,7 +365,8 @@ namespace KeePass.IO.Read
             return fields;
         }
 
-        private List<Entry> ReadHistories(XmlReader reader)
+        private List<Entry> ReadHistories(XmlReader reader,
+            IDictionary<int, byte[]> binaries)
         {
             var histories = new List<Entry>();
 
@@ -303,7 +378,9 @@ namespace KeePass.IO.Read
                     {
                         using (var subReader = reader.ReadSubtree())
                         {
-                            var history = ParseEntry(subReader);
+                            var history = ParseEntry(
+                                subReader, binaries);
+
                             if (history != null)
                                 histories.Add(history);
                         }
@@ -326,7 +403,7 @@ namespace KeePass.IO.Read
         {
             if (reader.Name != "Times")
                 reader.ReadToFollowing("Times");
-            
+
             DateTime result;
             using (var subReader = reader.ReadSubtree())
             {

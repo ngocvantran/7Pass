@@ -18,7 +18,9 @@
 */
 
 using System;
-using System.Text;
+using System.IO;
+using ICSharpCode.SharpZipLib.GZip;
+using KeePass.IO.Utils;
 
 namespace KeePassLib.Utility
 {
@@ -27,6 +29,24 @@ namespace KeePassLib.Utility
     /// </summary>
     public static class MemUtil
     {
+        public static byte[] Decompress(byte[] compressed)
+        {
+            // Modified from KeePass source code
+
+            if (compressed == null)
+                throw new ArgumentNullException("compressed");
+            if (compressed.Length == 0)
+                return compressed;
+
+            using (var buffer = new MemoryStream(compressed))
+            using (var gz = new GZipInputStream(buffer))
+            using (var decompressed = new MemoryStream())
+            {
+                BufferEx.CopyStream(gz, decompressed);
+                return decompressed.ToArray();
+            }
+        }
+
         /// <summary>
         /// Convert a hexadecimal string to a byte array. The input string must be
         /// even (i.e. its length is a multiple of 2).
@@ -46,7 +66,7 @@ namespace KeePassLib.Utility
             if ((nStrLen & 1) != 0)
                 return null; // Only even strings supported
 
-            var pb = new byte[nStrLen / 2];
+            var pb = new byte[nStrLen/2];
 
             for (var i = 0; i < nStrLen; ++i)
             {
@@ -77,7 +97,7 @@ namespace KeePassLib.Utility
                 else if ((ch >= 'A') && (ch <= 'F'))
                     bt += (byte)(ch - 'A' + 10);
 
-                pb[i / 2] = bt;
+                pb[i/2] = bt;
             }
 
             return pb;
