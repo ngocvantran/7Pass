@@ -28,25 +28,22 @@
                 <StackPanel>
                     <!-- Entry details -->
                     <TextBlock Text="Title" Style="{StaticResource PhoneTextNormalStyle}" />
-                    <TextBox Name="txtTitle" Text="{Binding Title, Mode=TwoWay}"
-                             c4f:TextBinding.UpdateSourceOnChange="True"
-                             GotFocus="txt_GotFocus" />
+                    <uc:ProtectedTextBox x:Name="txtTitle"
+                                         GotFocus="txt_GotFocus"
+                                         Text="{Binding Title, Mode=TwoWay}"
+                                         c4f:TextBinding.UpdateSourceOnChange="True" />
 
                     <TextBlock Text="User name" Style="{StaticResource PhoneTextNormalStyle}" />
-                    <TextBox Name="txtUsername" Text="{Binding UserName, Mode=TwoWay}"
-                             c4f:TextBinding.UpdateSourceOnChange="True"
-                             GotFocus="txt_GotFocus" />
+                    <uc:ProtectedTextBox x:Name="txtUsername"
+                                         GotFocus="txt_GotFocus"
+                                         Text="{Binding UserName, Mode=TwoWay}"
+                                         c4f:TextBinding.UpdateSourceOnChange="True" />
 
                     <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
-                    <Grid>
-                        <TextBox Name="txtPassword" Text="{Binding Password, Mode=TwoWay}"
-                                 c4f:TextBinding.UpdateSourceOnChange="True"
-                                 LostFocus="txtPassword_LostFocus"
-                                 GotFocus="txtPassword_GotFocus" />
-                        <PasswordBox Name="txtMask" Password="{Binding Password}"
-                                     Loaded="txtMask_Loaded"
-                                     IsHitTestVisible="False" />
-                    </Grid>
+                    <uc:ProtectedTextBox x:Name="txtPassword"
+                                         GotFocus="txt_GotFocus"
+                                         Text="{Binding Password, Mode=TwoWay}"
+                                         c4f:TextBinding.UpdateSourceOnChange="True" />
                     
                     <uc:QualityProgressBar Password="{Binding Password}" />
 

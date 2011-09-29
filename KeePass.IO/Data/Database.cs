@@ -10,8 +10,12 @@ namespace KeePass.IO.Data
         private readonly IDictionary<string, ImageSource> _customIcons;
         private readonly IDictionary<string, Entry> _entries;
         private readonly IDictionary<string, Group> _groups;
-
         private readonly Group _root;
+
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
+        public DatabaseConfiguration Configuration { get; set; }
 
         /// <summary>
         /// Gets all entries.
@@ -70,6 +74,7 @@ namespace KeePass.IO.Data
 
             _root = root;
             _customIcons = customIcons;
+            Configuration = new DatabaseConfiguration();
             _groups = new Dictionary<string, Group>();
             _entries = new Dictionary<string, Entry>();
 

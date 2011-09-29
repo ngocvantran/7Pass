@@ -50,6 +50,7 @@ namespace KeePass.IO.Read
                 string recycleBinId = null;
                 var recyleBinEnabled = false;
 
+                var config = new DatabaseConfiguration();
                 var icons = new Dictionary<string, ImageSource>();
                 using (var subReader = reader.ReadSubtree())
                 {
@@ -61,9 +62,19 @@ namespace KeePass.IO.Read
 
                         switch (subReader.Name)
                         {
-                            case "RecycleBinUUID":
-                                recycleBinId = subReader
+                            case "DefaultUserName":
+                                config.DefaultUserName = subReader
                                     .ReadElementContentAsString();
+                                break;
+
+                            case "MemoryProtection":
+                                using (var configReader = subReader.ReadSubtree())
+                                    ParseProtection(configReader, config);
+                                break;
+
+                            case "CustomIcons":
+                                using (var iconsReader = subReader.ReadSubtree())
+                                    ParseIcons(iconsReader, _dispatcher, icons);
                                 break;
 
                             case "RecycleBinEnabled":
@@ -72,9 +83,9 @@ namespace KeePass.IO.Read
                                 recyleBinEnabled = value == "True";
                                 break;
 
-                            case "CustomIcons":
-                                using (var iconsReader = subReader.ReadSubtree())
-                                    ParseIcons(iconsReader, _dispatcher, icons);
+                            case "RecycleBinUUID":
+                                recycleBinId = subReader
+                                    .ReadElementContentAsString();
                                 break;
                         }
                     }
@@ -94,6 +105,7 @@ namespace KeePass.IO.Read
                     var root = ParseGroup(subReader);
                     var database = new Database(root, icons)
                     {
+                        Configuration = config,
                         RecycleBinEnabled = recyleBinEnabled,
                     };
 
@@ -271,6 +283,40 @@ namespace KeePass.IO.Read
             }
         }
 
+        private static void ParseProtection(XmlReader reader,
+            DatabaseConfiguration config)
+        {
+            if (reader.Name != "MemoryProtection")
+                reader.Read();
+
+            reader.Read();
+
+            while (reader.NodeType != XmlNodeType.EndElement)
+            {
+                switch (reader.Name)
+                {
+                    case "ProtectTitle":
+                        config.ProtectTitle = reader
+                            .ReadElementContentAsString() == "True";
+                        break;
+
+                    case "ProtectUserName":
+                        config.ProtectUserName = reader
+                            .ReadElementContentAsString() == "True";
+                        break;
+
+                    case "ProtectPassword":
+                        config.ProtectPassword = reader
+                            .ReadElementContentAsString() == "True";
+                        break;
+
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+        }
+
         private Dictionary<string, string>
             ReadFields(XmlReader reader)
         {
@@ -278,7 +324,7 @@ namespace KeePass.IO.Read
 
             if (reader.Name != "String")
                 reader.ReadToFollowing("String");
-            
+
             while (reader.Name == "String")
             {
                 reader.Read();
@@ -327,7 +373,7 @@ namespace KeePass.IO.Read
         {
             if (reader.Name != "Times")
                 reader.ReadToFollowing("Times");
-            
+
             DateTime result;
             using (var subReader = reader.ReadSubtree())
             {

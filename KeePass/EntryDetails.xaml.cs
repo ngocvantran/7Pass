@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Navigation;
 using Coding4Fun.Phone.Controls;
 using KeePass.Analytics;
+using KeePass.Controls;
 using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.IO.Write;
@@ -68,6 +69,11 @@ namespace KeePass
                 return;
             }
 
+            var config = database.Configuration;
+            txtTitle.IsProtected = config.ProtectTitle;
+            txtPassword.IsProtected = config.ProtectPassword;
+            txtUsername.IsProtected = config.ProtectUserName;
+
             string id;
             var queries = NavigationContext.QueryString;
 
@@ -85,6 +91,7 @@ namespace KeePass
                 {
                     Password = Generator
                         .CharacterSets.NewEntry(),
+                    UserName = config.DefaultUserName,
                 };
 
                 txtTitle.Loaded += (sender, e1) =>
@@ -348,31 +355,6 @@ namespace KeePass
                 this.BackToDBs();
         }
 
-        private void txtMask_Loaded(object sender, RoutedEventArgs e)
-        {
-            var brush = txtMask.Background as SolidColorBrush;
-            if (brush == null)
-                return;
-
-            brush.Opacity = 1;
-            
-            var color = brush.Color;
-            brush.Color = Color.FromArgb(byte.MaxValue,
-                color.R, color.G, color.B);
-        }
-
-        private void txtPassword_GotFocus(object sender, RoutedEventArgs e)
-        {
-            txtMask.Visibility = Visibility.Collapsed;
-            txt_GotFocus(sender, e);
-        }
-
-        private void txtPassword_LostFocus(
-            object sender, RoutedEventArgs e)
-        {
-            txtMask.Visibility = Visibility.Visible;
-        }
-
         private void txtUrl_Changed(object sender, TextChangedEventArgs e)
         {
             var url = GetUrl();
@@ -387,7 +369,14 @@ namespace KeePass
             var txt = sender as TextBox;
 
             if (txt != null)
+            {
                 txt.SelectAll();
+                return;
+            }
+
+            var protect = sender as ProtectedTextBox;
+            if (protect != null)
+                protect.SelectAll();
         }
     }
 }

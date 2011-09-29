@@ -117,6 +117,9 @@
       <DependentUpon>KeePassList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\KeePassListBase.cs" />
+    <Compile Include="Controls\ProtectedTextBox.xaml.cs">
+      <DependentUpon>ProtectedTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\QualityProgressBar.cs" />
     <Compile Include="Data\CurrentEntry.cs" />
     <Compile Include="Data\EntryEx.cs" />
@@ -302,6 +305,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\KeePassList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ProtectedTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
