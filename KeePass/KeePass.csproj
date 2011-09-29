@@ -113,6 +113,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AttachmentDetails.xaml.cs">
+      <DependentUpon>AttachmentDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\KeePassList.xaml.cs">
       <DependentUpon>KeePassList.xaml</DependentUpon>
     </Compile>
@@ -300,6 +303,10 @@
     <Page Include="AnalyticsSettings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AttachmentDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\KeePassList.xaml">
       <SubType>Designer</SubType>

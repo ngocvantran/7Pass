@@ -8,7 +8,7 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:c4f="clr-namespace:Coding4Fun.Phone.Controls.Binding;assembly=Coding4Fun.Phone.Controls"
     xmlns:uc="clr-namespace:KeePass.Controls"
-    Style="{StaticResource KeePassPage}" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="728" d:DesignWidth="480">
+    Style="{StaticResource KeePassPage}">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -82,6 +82,16 @@
                     <TextBlock Text=" " />
                 
                     <HyperlinkButton Name="lnkFields" Click="lnkFields_Click"
+                                     HorizontalContentAlignment="Left"
+                                     Style="{StaticResource HyperlinkButtonWrappingStyle}" />
+
+                    <!-- Attachments -->
+                    <TextBlock Text=" " />
+
+                    <HyperlinkButton Name="lnkAttach" Click="lnkAttach_Click"
+                                     HorizontalContentAlignment="Left"
+                                     Style="{StaticResource HyperlinkButtonWrappingStyle}" />
+                    <HyperlinkButton Name="lnkAttach2" Click="lnkAttach2_Click"
                                      HorizontalContentAlignment="Left"
                                      Style="{StaticResource HyperlinkButtonWrappingStyle}" />
                 </StackPanel>

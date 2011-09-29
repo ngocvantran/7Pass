@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -78,6 +79,18 @@ namespace KeePass
 
                 ThreadPool.QueueUserWorkItem(
                     _ => Cache.AddRecent(id));
+
+                var attachment = entry.Attachments
+                    .FirstOrDefault();
+                if (attachment != null)
+                    lnkAttach.Content = attachment.Name;
+
+                attachment = entry.Attachments
+                    .Skip(1)
+                    .FirstOrDefault();
+                
+                if (attachment != null)
+                    lnkAttach2.Content = attachment.Name;
             }
             else
             {
@@ -309,6 +322,12 @@ namespace KeePass
             Save();
         }
 
+        private void lnkAttach_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigateTo<AttachmentDetails>(
+                "id={0}&att=0", _entry.ID);
+        }
+
         private void lnkFields_Click(object sender, RoutedEventArgs e)
         {
             this.NavigateTo<EntryFields>(
@@ -355,7 +374,7 @@ namespace KeePass
                 return;
 
             brush.Opacity = 1;
-            
+
             var color = brush.Color;
             brush.Color = Color.FromArgb(byte.MaxValue,
                 color.R, color.G, color.B);
@@ -388,6 +407,12 @@ namespace KeePass
 
             if (txt != null)
                 txt.SelectAll();
+        }
+
+        private void lnkAttach2_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigateTo<AttachmentDetails>(
+                "id={0}&att=1", _entry.ID);
         }
     }
 }
