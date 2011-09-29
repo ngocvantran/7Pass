@@ -73,7 +73,8 @@ namespace KeePass.IO.Read
                                 break;
 
                             case "CustomIcons":
-                                ParseIcons(subReader, _dispatcher, icons);
+                                using (var iconsReader = subReader.ReadSubtree())
+                                    ParseIcons(iconsReader, _dispatcher, icons);
                                 break;
                         }
                     }
