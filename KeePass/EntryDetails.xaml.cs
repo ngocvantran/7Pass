@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Navigation;
 using Coding4Fun.Phone.Controls;
 using KeePass.Analytics;
@@ -25,6 +24,7 @@ namespace KeePass
 
         private EntryEx _binding;
         private Entry _entry;
+        private bool _hasChanges;
 
         public EntryDetails()
         {
@@ -50,22 +50,18 @@ namespace KeePass
             if (cancelled)
                 return;
 
-            if (_entry != null)
-            {
-                UpdateNotes();
-                txtPassword.Text = _entry.Password
-                    ?? string.Empty;
-
-                _binding.HasChanges =
-                    CurrentEntry.HasChanges;
-
-                return;
-            }
-
             var database = Cache.Database;
             if (database == null)
             {
                 this.BackToDBs();
+                return;
+            }
+
+            if (_binding != null)
+            {
+                _binding.Password = _entry.Password
+                    ?? string.Empty;
+
                 return;
             }
 
@@ -101,6 +97,11 @@ namespace KeePass
             DisplayEntry(entry);
         }
 
+        private void CheckChangeState()
+        {
+            UpdateChangeState(_binding.DetectChanges());
+        }
+
         /// <summary>
         /// Checks if 7Pass can navigate away from this page.
         /// </summary>
@@ -130,32 +131,15 @@ namespace KeePass
         private void DisplayEntry(Entry entry)
         {
             _entry = entry;
-
             _binding = new EntryEx(entry);
-            _binding.HasChangesChanged += _binding_HasChangesChanged;
-            _binding.HasChanges = entry.IsNew();
+            _binding.FieldChanged += _binding_Changed;
+            _binding.PropertyChanged += _binding_Changed;
 
             CurrentEntry.Entry = entry;
             CurrentEntry.HasChanges = entry.IsNew();
 
-            UpdateNotes();
             DataContext = _binding;
-
-            var fields = entry.CustomFields.Count;
-            if (fields == 0)
-            {
-                lnkFields.Visibility =
-                    Visibility.Collapsed;
-            }
-            else
-            {
-                lnkFields.Visibility =
-                    Visibility.Visible;
-
-                lnkFields.Content = string.Format(
-                    Properties.Resources.FieldsLink,
-                    fields);
-            }
+            UpdateChangeState(entry.IsNew());
         }
 
         private string GetUrl()
@@ -214,6 +198,7 @@ namespace KeePass
                 info.OpenDatabaseFile(x => writer
                     .LoadExisting(x, info.Data.MasterKey));
 
+                _binding.Save();
                 if (_entry.ID != null)
                     writer.Details(_entry);
                 else
@@ -229,10 +214,9 @@ namespace KeePass
 
                 Dispatcher.BeginInvoke(() =>
                 {
-                    UpdateNotes();
                     progBusy.IsBusy = false;
+                    UpdateChangeState(false);
 
-                    _binding.HasChanges = false;
                     CurrentEntry.HasChanges = false;
 
                     if (!info.NotifyIfNotSyncable())
@@ -252,39 +236,20 @@ namespace KeePass
             });
         }
 
-        private void UpdateNotes()
+        private void UpdateChangeState(bool state)
         {
-            var notes = _entry.Notes;
+            if (state == _hasChanges)
+                return;
 
-            if (!string.IsNullOrEmpty(notes))
-            {
-                notes = notes
-                    .Replace(Environment.NewLine, " ")
-                    .TrimStart();
-
-                if (notes.Length > 60)
-                {
-                    notes = notes
-                        .Substring(0, 55)
-                        .TrimEnd() + "...";
-                }
-            }
-            else
-            {
-                notes = Properties
-                    .Resources.AddNotes;
-            }
-
-            lnkNotes.Content = notes;
+            _hasChanges = state;
+            _cmdSave.IsEnabled = _hasChanges;
+            _cmdReset.IsEnabled = _hasChanges;
+            CurrentEntry.HasChanges = _hasChanges;
         }
 
-        private void _binding_HasChangesChanged(object sender, EventArgs e)
+        private void _binding_Changed(object sender, EventArgs e)
         {
-            var hasChanges = _binding.HasChanges;
-
-            _cmdSave.IsEnabled = hasChanges;
-            _cmdReset.IsEnabled = hasChanges;
-            CurrentEntry.HasChanges = hasChanges;
+            CheckChangeState();
         }
 
         private void cmdHome_Click(object sender, EventArgs e)
@@ -301,31 +266,22 @@ namespace KeePass
 
         private void cmdReset_Click(object sender, EventArgs e)
         {
-            _binding.Reset();
-            AnalyticsTracker.Track(
-                "modify", "reset_entry");
+            Focus();
 
-            DataContext = null;
-            DataContext = _binding;
+            Dispatcher.BeginInvoke(() =>
+            {
+                _binding.Reset();
+                AnalyticsTracker.Track(
+                    "modify", "reset_entry");
 
-            UpdateNotes();
+                DataContext = null;
+                DataContext = _binding;
+            });
         }
 
         private void cmdSave_Click(object sender, EventArgs e)
         {
             Save();
-        }
-
-        private void lnkFields_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigateTo<EntryFields>(
-                "id={0}", _entry.ID);
-        }
-
-        private void lnkNotes_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigateTo<EntryNotes>(
-                "id={0}", _entry.ID);
         }
 
         private void lnkUrl_Click(object sender, RoutedEventArgs e)
@@ -355,6 +311,13 @@ namespace KeePass
                 this.BackToDBs();
         }
 
+        private void txtNotes_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var expression = txtNotes.GetBindingExpression(TextBox.TextProperty);
+            if (expression != null)
+                expression.UpdateSource();
+        }
+
         private void txtUrl_Changed(object sender, TextChangedEventArgs e)
         {
             var url = GetUrl();
@@ -366,6 +329,12 @@ namespace KeePass
 
         private void txt_GotFocus(object sender, RoutedEventArgs e)
         {
+            pivot.IsLocked = true;
+            /* TODO: Problem: when the pivot is locked
+             * and user tap on the tab headers area, an exception
+             * is thrown
+             * */
+
             var txt = sender as TextBox;
 
             if (txt != null)
@@ -377,6 +346,11 @@ namespace KeePass
             var protect = sender as ProtectedTextBox;
             if (protect != null)
                 protect.SelectAll();
+        }
+
+        private void txt_LostFocus(object sender, RoutedEventArgs e)
+        {
+            pivot.IsLocked = false;
         }
     }
 }

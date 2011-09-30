@@ -123,12 +123,8 @@
     <Compile Include="Controls\QualityProgressBar.cs" />
     <Compile Include="Data\CurrentEntry.cs" />
     <Compile Include="Data\EntryEx.cs" />
-    <Compile Include="EntryFields.xaml.cs">
-      <DependentUpon>EntryFields.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EntryNotes.xaml.cs">
-      <DependentUpon>EntryNotes.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Data\FieldChangedEventArgs.cs" />
+    <Compile Include="Data\FieldChangedEventHandler.cs" />
     <Compile Include="Generator\BracketSet.cs" />
     <Compile Include="Generator\CharacterSetCheckBox.cs" />
     <Compile Include="Generator\CharacterSets.cs" />
@@ -309,14 +305,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ProtectedTextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EntryFields.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="EntryNotes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

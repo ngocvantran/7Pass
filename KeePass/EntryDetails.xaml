@@ -8,81 +8,90 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:c4f="clr-namespace:Coding4Fun.Phone.Controls.Binding;assembly=Coding4Fun.Phone.Controls"
     xmlns:uc="clr-namespace:KeePass.Controls"
-    Style="{StaticResource KeePassPage}" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="728" d:DesignWidth="480">
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:data="clr-namespace:KeePass.Data"
+    Style="{StaticResource KeePassPage}"
+    mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
+    d:DataContext="{d:DesignInstance Type=data:EntryEx}">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
-                       Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Entry" Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
-
         <Grid Grid.Row="1" Margin="12,0,12,0">
-            <ScrollViewer>
-                <StackPanel>
-                    <!-- Entry details -->
-                    <TextBlock Text="Title" Style="{StaticResource PhoneTextNormalStyle}" />
-                    <uc:ProtectedTextBox x:Name="txtTitle"
-                                         GotFocus="txt_GotFocus"
-                                         Text="{Binding Title, Mode=TwoWay}"
-                                         c4f:TextBinding.UpdateSourceOnChange="True" />
+            <toolkit:LockablePivot Title="{StaticResource AppName}" Name="pivot">
+                <controls:PivotItem Header="Details">
+                    <ScrollViewer>
+                        <StackPanel>
+                            <!-- Entry details -->
+                            <TextBlock Text="Title" Style="{StaticResource PhoneTextNormalStyle}" />
+                            <uc:ProtectedTextBox x:Name="txtTitle"
+                                                 GotFocus="txt_GotFocus" LostFocus="txt_LostFocus"
+                                                 Text="{Binding Title, Mode=TwoWay}"
+                                                 c4f:TextBinding.UpdateSourceOnChange="True" />
 
-                    <TextBlock Text="User name" Style="{StaticResource PhoneTextNormalStyle}" />
-                    <uc:ProtectedTextBox x:Name="txtUsername"
-                                         GotFocus="txt_GotFocus"
-                                         Text="{Binding UserName, Mode=TwoWay}"
-                                         c4f:TextBinding.UpdateSourceOnChange="True" />
+                            <TextBlock Text="User name" Style="{StaticResource PhoneTextNormalStyle}" />
+                            <uc:ProtectedTextBox x:Name="txtUsername"
+                                                 GotFocus="txt_GotFocus" LostFocus="txt_LostFocus"
+                                                 Text="{Binding UserName, Mode=TwoWay}"
+                                                 c4f:TextBinding.UpdateSourceOnChange="True" />
 
-                    <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
-                    <uc:ProtectedTextBox x:Name="txtPassword"
-                                         GotFocus="txt_GotFocus"
-                                         Text="{Binding Password, Mode=TwoWay}"
-                                         c4f:TextBinding.UpdateSourceOnChange="True" />
-                    
-                    <uc:QualityProgressBar Password="{Binding Password}" />
+                            <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
+                            <uc:ProtectedTextBox x:Name="txtPassword"
+                                                 GotFocus="txt_GotFocus" LostFocus="txt_LostFocus"
+                                                 Text="{Binding Password, Mode=TwoWay}"
+                                                 c4f:TextBinding.UpdateSourceOnChange="True" />
 
-                    <!-- URL -->
-                    <TextBlock Text=" " />
-                
-                    <TextBlock Text="URL" Style="{StaticResource PhoneTextNormalStyle}" />
-                    <TextBox Name="txtUrl" Text="{Binding Url, Mode=TwoWay}"
-                             c4f:TextBinding.UpdateSourceOnChange="True"
-                             InputScope="Url" GotFocus="txt_GotFocus" TextChanged="txtUrl_Changed" />
-                    <HyperlinkButton Name="lnkUrl" Click="lnkUrl_Click"
+                            <uc:QualityProgressBar Password="{Binding Password}" />
+
+                            <!-- URL -->
+                            <TextBlock Text=" " />
+
+                            <TextBlock Text="URL" Style="{StaticResource PhoneTextNormalStyle}" />
+                            <TextBox Name="txtUrl" Text="{Binding Url, Mode=TwoWay}"
+                                     GotFocus="txt_GotFocus" LostFocus="txt_LostFocus"
+                                     c4f:TextBinding.UpdateSourceOnChange="True"
+                                     InputScope="Url" TextChanged="txtUrl_Changed" />
+                            <HyperlinkButton Name="lnkUrl" Click="lnkUrl_Click"
                                      HorizontalContentAlignment="Left"
                                      Style="{StaticResource HyperlinkButtonWrappingStyle}">
-                        <toolkit:ContextMenuService.ContextMenu>
-                            <toolkit:ContextMenu>
-                                <toolkit:MenuItem Header="use phone browser"
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu>
+                                        <toolkit:MenuItem Header="use phone browser"
                                                   Click="mnuBrowser_Click" />
-                                <toolkit:MenuItem Header="use integrated browser"
+                                        <toolkit:MenuItem Header="use integrated browser"
                                                   Click="mnuIntegrated_Click" />
-                            </toolkit:ContextMenu>
-                        </toolkit:ContextMenuService.ContextMenu>
-                    </HyperlinkButton>
-                
-                    <!-- Notes -->
-                    <TextBlock Text=" " />
-
-                    <TextBlock Text="Notes" Style="{StaticResource PhoneTextNormalStyle}" />
-                    <HyperlinkButton Name="lnkNotes" Click="lnkNotes_Click"
-                                     HorizontalContentAlignment="Left"
-                                     Style="{StaticResource HyperlinkButtonWrappingStyle}" />
-
-                    <!-- Fields -->
-                    <TextBlock Text=" " />
-                
-                    <HyperlinkButton Name="lnkFields" Click="lnkFields_Click"
-                                     HorizontalContentAlignment="Left"
-                                     Style="{StaticResource HyperlinkButtonWrappingStyle}" />
-                </StackPanel>
-            </ScrollViewer>
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
+                            </HyperlinkButton>
+                        </StackPanel>
+                    </ScrollViewer>
+                </controls:PivotItem>
+                <controls:PivotItem Header="Notes">
+                    <ScrollViewer>
+                        <toolkit:PhoneTextBox Name="txtNotes" TextChanged="txtNotes_TextChanged"
+                                              GotFocus="txt_GotFocus" LostFocus="txt_LostFocus"
+                                              Text="{Binding Notes, Mode=TwoWay}"
+                                              TextWrapping="Wrap" AcceptsReturn="True" />
+                    </ScrollViewer>
+                </controls:PivotItem>
+                <controls:PivotItem Header="Fields" Name="vwFields">
+                    <uc:KeePassListBase ItemsSource="{Binding Fields}"
+                                        HorizontalAlignment="Stretch"
+                                        toolkit:TiltEffect.IsTiltEnabled="True">
+                        <uc:KeePassListBase.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Key}"
+                                               Style="{StaticResource PhoneTextNormalStyle}" />
+                                    <TextBox Text="{Binding Value, Mode=TwoWay}"
+                                             c4f:TextBinding.UpdateSourceOnChange="True"
+                                             GotFocus="txt_GotFocus" LostFocus="txt_LostFocus" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </uc:KeePassListBase.ItemTemplate>
+                    </uc:KeePassListBase>
+                </controls:PivotItem>
+            </toolkit:LockablePivot>
             <uc:ProgressOverlay x:Name="progBusy" />
         </Grid>
     </Grid>
