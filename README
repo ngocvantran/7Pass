@@ -7,6 +7,8 @@ Support Info:
 Version 3.2:
  - Added navigation transitions.
  - Added pining of databases.
+ - Supports password, title and username hiding.
+ - Bug fixes & UI improvements.
 
 Version 3.1:
  - Bug fixes.
