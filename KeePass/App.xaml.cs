@@ -52,11 +52,11 @@ namespace KeePass
         private void Application_Activated(
             object sender, ActivatedEventArgs e)
         {
-            if (e.IsApplicationInstancePreserved)
-                return;
-
             AnalyticsTracker.Track(
                 "start", "activated");
+
+            if (e.IsApplicationInstancePreserved)
+                return;
 
             ThemeData.Initialize();
             Cache.RestoreCache(RootFrame.Dispatcher);
