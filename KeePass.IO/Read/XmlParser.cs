@@ -317,10 +317,22 @@ namespace KeePass.IO.Read
             }
         }
 
-        private Dictionary<string, string>
-            ReadFields(XmlReader reader)
+        private string ReadFieldValue(
+            XmlReader reader, out bool isProtected)
         {
-            var fields = new Dictionary<string, string>();
+            isProtected = IsProtected(reader);
+            reader.MoveToContent();
+            var value = reader.ReadElementContentAsString();
+
+            if (isProtected && !string.IsNullOrEmpty(value))
+                value = _crypto.Decrypt(value);
+
+            return value;
+        }
+
+        private IList<Field> ReadFields(XmlReader reader)
+        {
+            var fields = new List<Field>();
 
             if (reader.Name != "String")
                 reader.ReadToFollowing("String");
@@ -329,8 +341,16 @@ namespace KeePass.IO.Read
             {
                 reader.Read();
 
+                bool isProtected;
                 var name = reader.ReadElementContentAsString();
-                fields.Add(name, ReadValue(reader));
+                var value = ReadFieldValue(reader, out isProtected);
+
+                fields.Add(new Field
+                {
+                    Name = name,
+                    Value = value,
+                    Protected = isProtected,
+                });
 
                 reader.ReadEndElement();
             }
@@ -338,7 +358,7 @@ namespace KeePass.IO.Read
             return fields;
         }
 
-        private List<Entry> ReadHistories(XmlReader reader)
+        private IList<Entry> ReadHistories(XmlReader reader)
         {
             var histories = new List<Entry>();
 
@@ -386,18 +406,6 @@ namespace KeePass.IO.Read
             reader.ReadEndElement();
 
             return result;
-        }
-
-        private string ReadValue(XmlReader reader)
-        {
-            var isProtected = IsProtected(reader);
-            reader.MoveToContent();
-            var value = reader.ReadElementContentAsString();
-
-            if (isProtected && !string.IsNullOrEmpty(value))
-                value = _crypto.Decrypt(value);
-
-            return value;
         }
     }
 }

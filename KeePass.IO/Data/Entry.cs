@@ -20,19 +20,21 @@ namespace KeePass.IO.Data
             KEY_USER, KEY_PASS, KEY_NOTES, KEY_TITLE, KEY_URL
         };
 
-        private readonly IDictionary<string, string> _fields;
-        private readonly Dictionary<string, string> _original;
+        private readonly IDictionary<string, Field> _fields;
+        private readonly Dictionary<string, Field> _original;
+        private readonly EntryProtects _protects;
 
         /// <summary>
         /// Gets the custom fields.
         /// </summary>
         /// <returns></returns>
-        public IDictionary<string, string> CustomFields
+        public IList<Field> CustomFields
         {
             get
             {
                 return _fields.Keys.Except(_known)
-                    .ToDictionary(x => x, x => _fields[x]);
+                    .Select(x => _fields[x])
+                    .ToList();
             }
         }
 
@@ -65,7 +67,21 @@ namespace KeePass.IO.Data
         public string this[string key]
         {
             get { return TryGet(key); }
-            set { _fields.AddOrSet(key, value); }
+            set
+            {
+                Field field;
+                if (_fields.TryGetValue(key, out field))
+                {
+                    field.Value = value;
+                    return;
+                }
+
+                _fields.Add(key, new Field
+                {
+                    Name = key,
+                    Value = value,
+                });
+            }
         }
 
         /// <summary>
@@ -94,6 +110,14 @@ namespace KeePass.IO.Data
         {
             get { return this[KEY_PASS]; }
             set { this[KEY_PASS] = value; }
+        }
+
+        /// <summary>
+        /// Gets the protections settings.
+        /// </summary>
+        public EntryProtects Protections
+        {
+            get { return _protects; }
         }
 
         /// <summary>
@@ -126,27 +150,28 @@ namespace KeePass.IO.Data
             set { this[KEY_USER] = value; }
         }
 
-        public Entry(IDictionary<string, string> fields)
+        public Entry(IEnumerable<Field> fields)
         {
             if (fields == null)
                 throw new ArgumentNullException("fields");
 
             Icon = new IconData();
 
-            _fields = fields;
-            _original = new Dictionary<string, string>(fields);
+            _fields = fields.ToDictionary(x => x.Name);
+            _original = new Dictionary<string, Field>(_fields);
+            _protects = new EntryProtects(_fields);
         }
 
         public Entry()
-            : this(new Dictionary<string, string>()) {}
+            : this(new Field[0]) {}
 
         /// <summary>
         /// Gets all fields.
         /// </summary>
         /// <returns></returns>
-        public IDictionary<string, string> GetAllFields()
+        public IList<Field> GetAllFields()
         {
-            return new Dictionary<string, string>(_fields);
+            return _fields.Values.ToList();
         }
 
         /// <summary>
@@ -166,8 +191,8 @@ namespace KeePass.IO.Data
             {
                 var pattern = GetPattern(key);
 
-                url = StringReplace.Replace(url,
-                    pattern, _fields[key], StringComparison
+                url = StringReplace.Replace(url, pattern,
+                    TryGet(key), StringComparison
                         .InvariantCultureIgnoreCase);
             }
 
@@ -210,9 +235,84 @@ namespace KeePass.IO.Data
 
         private string TryGet(string key)
         {
-            string value;
-            return _fields.TryGetValue(key, out value)
-                ? value : null;
+            Field field;
+            return _fields.TryGetValue(key, out field)
+                ? field.Value : null;
+        }
+
+        public class EntryProtects
+        {
+            private readonly IDictionary<string, Field> _fields;
+
+            /// <summary>
+            /// Gets or sets a value indicating
+            /// whether password field is protected.
+            /// </summary>
+            /// <value>
+            ///   <c>true</c> if protected; otherwise, <c>false</c>.
+            /// </value>
+            public bool Password
+            {
+                get { return IsProtected(KEY_PASS); }
+                set { Set(KEY_PASS, value); }
+            }
+
+            /// <summary>
+            /// Gets or sets a value indicating
+            /// whether title field is protected.
+            /// </summary>
+            /// <value>
+            ///   <c>true</c> if protected; otherwise, <c>false</c>.
+            /// </value>
+            public bool Title
+            {
+                get { return IsProtected(KEY_TITLE); }
+                set { Set(KEY_TITLE, value); }
+            }
+
+            /// <summary>
+            /// Gets or sets a value indicating
+            /// whether username field is protected.
+            /// </summary>
+            /// <value>
+            ///   <c>true</c> if protected; otherwise, <c>false</c>.
+            /// </value>
+            public bool UserName
+            {
+                get { return IsProtected(KEY_USER); }
+                set { Set(KEY_USER, value); }
+            }
+
+            public EntryProtects(IDictionary<string, Field> fields)
+            {
+                if (fields == null)
+                    throw new ArgumentNullException("fields");
+
+                _fields = fields;
+            }
+
+            private bool IsProtected(string key)
+            {
+                Field field;
+                return _fields.TryGetValue(key, out field) &&
+                    field.Protected;
+            }
+
+            private void Set(string key, bool isProtected)
+            {
+                Field field;
+                if (!_fields.TryGetValue(key, out field))
+                {
+                    field = new Field
+                    {
+                        Name = key,
+                    };
+
+                    _fields.Add(key, field);
+                }
+
+                field.Protected = isProtected;
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -13,6 +14,11 @@ namespace KeePass.Controls
 
         public static DependencyProperty TextProperty = DependencyProperty
             .Register("Text", typeof(string), typeof(ProtectedTextBox), null);
+
+        /// <summary>
+        /// Occurs when value of <see cref="Text"/> has changed.
+        /// </summary>
+        public event TextChangedEventHandler TextChanged;
 
         public bool IsProtected
         {
@@ -44,6 +50,17 @@ namespace KeePass.Controls
         public void SelectAll()
         {
             txtPassword.SelectAll();
+        }
+
+        /// <summary>
+        /// Raises the <see cref="TextChanged"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="TextChangedEventArgs"/>
+        /// instance containing the event data.</param>
+        protected virtual void OnTextChanged(TextChangedEventArgs e)
+        {
+            if (TextChanged != null)
+                TextChanged(this, e);
         }
 
         private static void OnIsProtectedChanged(DependencyObject d,
@@ -82,6 +99,12 @@ namespace KeePass.Controls
             var color = brush.Color;
             brush.Color = Color.FromArgb(byte.MaxValue,
                 color.R, color.G, color.B);
+        }
+
+        private void txtPassword_TextChanged(
+            object sender, TextChangedEventArgs e)
+        {
+            OnTextChanged(e);
         }
     }
 }

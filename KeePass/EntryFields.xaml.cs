@@ -2,6 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using KeePass.Controls;
 using KeePass.Data;
 using KeePass.IO.Data;
 using KeePass.Storage;
@@ -58,14 +59,14 @@ namespace KeePass
         private void txtField_GotFocus(
             object sender, RoutedEventArgs e)
         {
-            var txtField = (TextBox)sender;
+            var txtField = (ProtectedTextBox)sender;
             txtField.SelectAll();
         }
 
         private void txtField_TextChanged(
             object sender, TextChangedEventArgs e)
         {
-            var txtField = (TextBox)sender;
+            var txtField = (ProtectedTextBox)sender;
             var key = (string)txtField.Tag;
 
             if (_entry[key] == txtField.Text)

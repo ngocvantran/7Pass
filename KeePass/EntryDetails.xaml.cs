@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Navigation;
 using Coding4Fun.Phone.Controls;
 using KeePass.Analytics;
@@ -69,11 +68,6 @@ namespace KeePass
                 return;
             }
 
-            var config = database.Configuration;
-            txtTitle.IsProtected = config.ProtectTitle;
-            txtPassword.IsProtected = config.ProtectPassword;
-            txtUsername.IsProtected = config.ProtectUserName;
-
             string id;
             var queries = NavigationContext.QueryString;
 
@@ -87,11 +81,19 @@ namespace KeePass
             }
             else
             {
+                var config = database.Configuration;
+
                 entry = new Entry
                 {
                     Password = Generator
                         .CharacterSets.NewEntry(),
                     UserName = config.DefaultUserName,
+                    Protections =
+                        {
+                            Title = config.ProtectTitle,
+                            UserName = config.ProtectUserName,
+                            Password = config.ProtectPassword,
+                        }
                 };
 
                 txtTitle.Loaded += (sender, e1) =>
@@ -130,6 +132,11 @@ namespace KeePass
         private void DisplayEntry(Entry entry)
         {
             _entry = entry;
+
+            var config = entry.Protections;
+            txtTitle.IsProtected = config.Title;
+            txtPassword.IsProtected = config.Password;
+            txtUsername.IsProtected = config.UserName;
 
             _binding = new EntryEx(entry);
             _binding.HasChangesChanged += _binding_HasChangesChanged;

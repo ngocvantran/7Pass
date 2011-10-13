@@ -41,8 +41,11 @@ namespace KeePass
 
             foreach (var field in _entry.CustomFields.Take(3))
             {
-                var item = new ApplicationBarMenuItem(field.Key);
-                item.Click += (s, _) => SetValue(field.Value);
+                var local = field;
+
+                var item = new ApplicationBarMenuItem(local.Name);
+                item.Click += (s, _) => SetValue(local.Value);
+                
                 ApplicationBar.MenuItems.Add(item);
             }
         }

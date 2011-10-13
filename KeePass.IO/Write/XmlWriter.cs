@@ -24,6 +24,8 @@ namespace KeePass.IO.Write
     /// </summary>
     internal class XmlWriter
     {
+        private const string EMPTY_ID = "AAAAAAAAAAAAAAAAAAAAAA==";
+
         private XElement _deletedObjs;
         private XDocument _doc;
         private IDictionary<string, XElement> _entries;
@@ -97,40 +99,11 @@ namespace KeePass.IO.Write
 
             var element = _entries[entry.ID];
 
-
             element
                 .Element("History")
                 .Add(Clone(element));
 
-            var fields = entry.GetAllFields();
-            var strings = element
-                .Elements("String");
-
-            var existings = strings
-                .ToDictionary(
-                    x => x.Element("Key").Value,
-                    x => x.Element("Value"));
-            var addTarget = strings.Last();
-
-            foreach (var pair in fields)
-            {
-                XElement existing;
-                if (existings.TryGetValue(pair.Key, out existing))
-                    existing.Value = pair.Value;
-                else
-                {
-                    addTarget.AddAfterSelf(new XElement("String",
-                        new XElement("Key", pair.Key),
-                        new XElement("Value", pair.Value)));
-                }
-            }
-
-            var removes = existings.Keys
-                .Except(fields.Keys)
-                .ToList();
-
-            foreach (var remove in removes)
-                existings[remove].Remove();
+            SetFields(element, entry.GetAllFields());
 
             var time = DateTime.Now;
             entry.LastModified = time;
@@ -297,7 +270,7 @@ namespace KeePass.IO.Write
                 new XElement("DefaultAutoTypeSequence"),
                 new XElement("EnableAutoType", "null"),
                 new XElement("EnableSearching", "null"),
-                new XElement("LastTopVisibleEntry", "AAAAAAAAAAAAAAAAAAAAAA=="));
+                new XElement("LastTopVisibleEntry", EMPTY_ID));
 
             var parent = _groups[group.Parent.ID];
             parent.Add(element);
@@ -339,14 +312,7 @@ namespace KeePass.IO.Write
                     new XElement("UsageCount", 0),
                     new XElement("LocationChanged", timeValue)));
 
-            var fields = entry.GetAllFields();
-            element.Add(fields
-                .Select(x =>
-                    new XElement("String",
-                        new XElement("Key", x.Key),
-                        new XElement("Value", x.Value, x.Key == "Password"
-                            ? new XAttribute("Protected", "True")
-                            : null))));
+            SetFields(element, entry.GetAllFields());
 
             element.Add(
                 new XElement("AutoType",
@@ -431,11 +397,43 @@ namespace KeePass.IO.Write
             _groups.Remove(group.ID);
         }
 
+        private static void SetFields(XContainer element,
+            IEnumerable<Field> fields)
+        {
+            var existing = element
+                .Elements("String")
+                .ToList();
+
+            foreach (var field in existing)
+                field.Remove();
+
+            var addAfter = element
+                .Element("Times");
+
+            addAfter.AddAfterSelf(fields
+                .Select(x =>
+                {
+                    var value = new XElement(
+                        "Value", x.Value);
+
+                    if (x.Protected)
+                    {
+                        value.Add(new XAttribute(
+                            "Protected", "True"));
+                    }
+
+                    return new XElement("String",
+                        new XElement("Key", x.Name),
+                        value);
+                })
+                .ToArray());
+        }
+
         private void SetRecycleBin(Group recycleBin)
         {
             var recycleBinId = recycleBin != null
                 ? recycleBin.ID
-                : "AAAAAAAAAAAAAAAAAAAAAA==";
+                : EMPTY_ID;
 
             var meta = _doc.Root
                 .Element("Meta");

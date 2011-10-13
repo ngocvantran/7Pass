@@ -7,6 +7,7 @@
         <TextBox Name="txtPassword"
                  GotFocus="OnFocusChanged"
                  LostFocus="OnFocusChanged"
+                 TextChanged="txtPassword_TextChanged"
                  Text="{Binding Text, Mode=TwoWay}"
                  c4f:TextBinding.UpdateSourceOnChange="True" />
         <PasswordBox Name="txtMask" Password="{Binding Text}"

@@ -29,13 +29,14 @@
                 <uc:KeePassListBase.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="{Binding Key}" Grid.Column="0"
+                            <TextBlock Text="{Binding Name}" Grid.Column="0"
                                        VerticalAlignment="Center"
                                        Style="{StaticResource PhoneTextNormalStyle}" />
-                            <TextBox Text="{Binding Value}" Tag="{Binding Key}"
-                                     Grid.Column="1" TextWrapping="Wrap"
-                                     GotFocus="txtField_GotFocus"
-                                     TextChanged="txtField_TextChanged" />
+                            <uc:ProtectedTextBox Text="{Binding Value}"
+                                                 Tag="{Binding Name}"
+                                                 IsProtected="{Binding Protected}"
+                                                 Grid.Column="1" GotFocus="txtField_GotFocus"
+                                                 TextChanged="txtField_TextChanged" />
                         </StackPanel>
                     </DataTemplate>
                 </uc:KeePassListBase.ItemTemplate>
