@@ -5,7 +5,6 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Data;
 using KeePass.Generator;
-using KeePass.IO.Data;
 using KeePass.Storage;
 using KeePass.Utils;
 
@@ -16,7 +15,7 @@ namespace KeePass
         private const int MIN_LENGTH = 4;
 
         private CharacterSetCheckBox[] _checks;
-        private Entry _entry;
+        private EntryBinding _entry;
 
         public PassGen()
         {
@@ -36,11 +35,7 @@ namespace KeePass
                 return;
             }
 
-            var id = NavigationContext
-                .QueryString["id"];
-
-            _entry = database.GetEntry(id)
-                ?? CurrentEntry.Entry;
+            _entry = CurrentEntry.Entry;
 
             LoadCurrentState();
         }
@@ -129,7 +124,7 @@ namespace KeePass
             if (item == null)
                 return;
 
-            CurrentEntry.HasChanges = true;
+            _entry.HasChanges = true;
             _entry.Password = item.Password;
 
             NavigationService.GoBack();

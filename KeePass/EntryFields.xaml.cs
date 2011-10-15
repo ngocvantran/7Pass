@@ -1,10 +1,11 @@
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Controls;
 using KeePass.Data;
-using KeePass.IO.Data;
 using KeePass.Storage;
 using KeePass.Utils;
 
@@ -12,7 +13,8 @@ namespace KeePass
 {
     public partial class EntryFields
     {
-        private Entry _entry;
+        private EntryBinding _entry;
+        private ObservableCollection<FieldBinding> _fields;
 
         public EntryFields()
         {
@@ -32,18 +34,25 @@ namespace KeePass
                 return;
             }
 
-            var id = NavigationContext
-                .QueryString["id"];
+            _entry = CurrentEntry.Entry;
+            _fields = new ObservableCollection
+                <FieldBinding>(_entry.GetFields()
+                    .Select(x => new FieldBinding(x)));
 
-            _entry = database.GetEntry(id)
-                ?? CurrentEntry.Entry;
-
-            DataContext = _entry;
+            lstFields.ItemsSource = _fields;
         }
 
         private void cmdAbout_Click(object sender, EventArgs e)
         {
             this.NavigateTo<About>();
+        }
+
+        private void cmdAdd_Click(object sender, EventArgs e)
+        {
+            _entry.HasChanges = true;
+            
+            var field = _entry.AddField();
+            _fields.Add(new FieldBinding(field));
         }
 
         private void cmdHome_Click(object sender, EventArgs e)
@@ -67,13 +76,32 @@ namespace KeePass
             object sender, TextChangedEventArgs e)
         {
             var txtField = (ProtectedTextBox)sender;
-            var key = (string)txtField.Tag;
+            var field = (FieldBinding)txtField.Tag;
 
-            if (_entry[key] == txtField.Text)
+            if (field.Value == txtField.Text)
                 return;
 
-            _entry[key] = txtField.Text;
-            CurrentEntry.HasChanges = true;
+            _entry.HasChanges = true;
+            field.Value = txtField.Text;
+        }
+
+        private void txtName_GotFocus(
+            object sender, RoutedEventArgs e)
+        {
+            ((TextBox)sender).SelectAll();
+        }
+
+        private void txtName_TextChanged(
+            object sender, TextChangedEventArgs e)
+        {
+            var txtName = (TextBox)sender;
+            var field = (FieldBinding)txtName.Tag;
+
+            if (field.Name == txtName.Text)
+                return;
+
+            _entry.HasChanges = true;
+            field.Name = txtName.Text;
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Navigation;
 using KeePass.Data;
-using KeePass.IO.Data;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Controls;
@@ -13,7 +12,7 @@ namespace KeePass
 {
     public partial class WebView
     {
-        private Entry _entry;
+        private EntryBinding _entry;
 
         public WebView()
         {
@@ -33,19 +32,15 @@ namespace KeePass
                 return;
             }
 
-            var id = NavigationContext
-                .QueryString["entry"];
+            _entry = CurrentEntry.Entry;
 
-            _entry = database.GetEntry(id) ??
-                CurrentEntry.Entry;
-
-            foreach (var field in _entry.CustomFields.Take(3))
+            foreach (var field in _entry.GetFields().Take(3))
             {
                 var local = field;
 
                 var item = new ApplicationBarMenuItem(local.Name);
                 item.Click += (s, _) => SetValue(local.Value);
-                
+
                 ApplicationBar.MenuItems.Add(item);
             }
         }

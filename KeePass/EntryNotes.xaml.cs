@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Data;
-using KeePass.IO.Data;
 using KeePass.Storage;
 using KeePass.Utils;
 
@@ -11,7 +10,7 @@ namespace KeePass
 {
     public partial class EntryNotes
     {
-        private Entry _entry;
+        private EntryBinding _entry;
 
         public EntryNotes()
         {
@@ -31,12 +30,8 @@ namespace KeePass
                 return;
             }
 
-            var id = NavigationContext
-                .QueryString["id"];
+            _entry = CurrentEntry.Entry;
 
-            _entry = database.GetEntry(id)
-                ?? CurrentEntry.Entry;
-            
             txtNotes.Text = _entry.Notes
                 ?? string.Empty;
         }
@@ -67,8 +62,8 @@ namespace KeePass
             if (txtNotes.Text == _entry.Notes)
                 return;
 
+            _entry.HasChanges = true;
             _entry.Notes = txtNotes.Text;
-            CurrentEntry.HasChanges = true;
         }
 
         private void txtNotes_Loaded(

@@ -213,9 +213,6 @@ Is it ok if I create an email so that you can send to me to fix this problem?</v
   <data name="InvalidUrlTitle" xml:space="preserve">
     <value>Invalid URL</value>
   </data>
-  <data name="FieldsLink" xml:space="preserve">
-    <value>{0} Field(s)</value>
-  </data>
   <data name="SavedCaption" xml:space="preserve">
     <value>Entry has been saved successfully!</value>
   </data>
@@ -307,5 +304,14 @@ Click this notification to Review/Purchase 7Pass.</value>
   </data>
   <data name="PinDatabase" xml:space="preserve">
     <value>Pin Database</value>
+  </data>
+  <data name="FieldsMenuItem" xml:space="preserve">
+    <value>View/Edit Fields ({0})</value>
+  </data>
+  <data name="Field_Protected" xml:space="preserve">
+    <value>Expand to view/edit.</value>
+  </data>
+  <data name="EmptyField" xml:space="preserve">
+    <value>New Field</value>
   </data>
 </root>

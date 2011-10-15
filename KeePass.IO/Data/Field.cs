@@ -7,7 +7,9 @@ namespace KeePass.IO.Data
     public class Field
     {
         public string Name { get; set; }
+
         public bool Protected { get; set; }
+
         public string Value { get; set; }
     }
 }

@@ -8,7 +8,10 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:c4f="clr-namespace:Coding4Fun.Phone.Controls.Binding;assembly=Coding4Fun.Phone.Controls"
     xmlns:uc="clr-namespace:KeePass.Controls"
-    Style="{StaticResource KeePassPage}" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="728" d:DesignWidth="480">
+    Style="{StaticResource KeePassPage}"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -53,7 +56,8 @@
                     <TextBlock Text="URL" Style="{StaticResource PhoneTextNormalStyle}" />
                     <TextBox Name="txtUrl" Text="{Binding Url, Mode=TwoWay}"
                              c4f:TextBinding.UpdateSourceOnChange="True"
-                             InputScope="Url" GotFocus="txt_GotFocus" TextChanged="txtUrl_Changed" />
+                             InputScope="Url" GotFocus="txt_GotFocus"
+                             TextChanged="txtUrl_Changed" />
                     <HyperlinkButton Name="lnkUrl" Click="lnkUrl_Click"
                                      HorizontalContentAlignment="Left"
                                      Style="{StaticResource HyperlinkButtonWrappingStyle}">
@@ -72,13 +76,6 @@
 
                     <TextBlock Text="Notes" Style="{StaticResource PhoneTextNormalStyle}" />
                     <HyperlinkButton Name="lnkNotes" Click="lnkNotes_Click"
-                                     HorizontalContentAlignment="Left"
-                                     Style="{StaticResource HyperlinkButtonWrappingStyle}" />
-
-                    <!-- Fields -->
-                    <TextBlock Text=" " />
-                
-                    <HyperlinkButton Name="lnkFields" Click="lnkFields_Click"
                                      HorizontalContentAlignment="Left"
                                      Style="{StaticResource HyperlinkButtonWrappingStyle}" />
                 </StackPanel>
@@ -102,6 +99,8 @@
                 IconUri="/Images/refresh.png"  IsEnabled="False"
                 Text="Reset Entry" Click="cmdReset_Click"/>
             <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem
+                    Text="Fields" Click="mnuFields_Click" />
                 <shell:ApplicationBarMenuItem
                     Text="Select DB" Click="mnuRoot_Click" />
                 <shell:ApplicationBarMenuItem

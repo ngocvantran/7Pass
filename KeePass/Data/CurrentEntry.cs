@@ -11,16 +11,7 @@ namespace KeePass.Data
         /// <value>
         /// The entry.
         /// </value>
-        public static Entry Entry { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating
-        /// whether <see cref="Entry"/> has changes.
-        /// </summary>
-        /// <value><c>true</c> if <see cref="Entry"/>
-        /// has changes; otherwise, <c>false</c>.
-        /// </value>
-        public static bool HasChanges { get; set; }
+        public static EntryBinding Entry { get; set; }
 
         /// <summary>
         /// Determines whether the specified entry is new.

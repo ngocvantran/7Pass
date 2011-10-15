@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using KeePass.IO.Data;
 
 namespace KeePass.Data
 {
-    public class EntryEx : INotifyPropertyChanged
+    public class EntryBinding : INotifyPropertyChanged
     {
+        private readonly List<Field> _addedFields;
         private readonly Entry _entry;
+
         private bool _hasChanges;
 
         /// <summary>
@@ -29,6 +33,19 @@ namespace KeePass.Data
 
                 _hasChanges = value;
                 OnHasChangesChanged(EventArgs.Empty);
+            }
+        }
+
+        public string Notes
+        {
+            get { return _entry.Notes ?? string.Empty; }
+            set
+            {
+                if (value == _entry.Notes)
+                    return;
+
+                _entry.Notes = value;
+                OnPropertyChanged("Notes");
             }
         }
 
@@ -84,18 +101,43 @@ namespace KeePass.Data
             }
         }
 
-        public EntryEx(Entry entry)
+        public EntryBinding(Entry entry)
         {
             if (entry == null)
                 throw new ArgumentNullException("entry");
 
             _entry = entry;
+            _addedFields = new List<Field>();
+        }
+
+        public Field AddField()
+        {
+            var field = new Field();
+            _addedFields.Add(field);
+
+            return field;
+        }
+
+        public IList<Field> GetFields()
+        {
+            return _entry.CustomFields;
         }
 
         public void Reset()
         {
             _entry.Reset();
+            _addedFields.Clear();
+
             HasChanges = false;
+        }
+
+        public void Save()
+        {
+            foreach (var field in _addedFields
+                .Where(x => !string.IsNullOrEmpty(x.Name)))
+            {
+                _entry.Add(field);
+            }
         }
 
         /// <summary>

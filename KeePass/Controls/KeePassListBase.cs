@@ -22,6 +22,7 @@ namespace KeePass.Controls
 
         private void SetItemsPrivate<T>(IEnumerable<T> items)
         {
+            items = items.ToList();
             var dispatcher = Dispatcher;
             var wait = new ManualResetEvent(false);
             var list = new ObservableCollection<T>();

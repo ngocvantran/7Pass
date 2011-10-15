@@ -125,7 +125,8 @@
     </Compile>
     <Compile Include="Controls\QualityProgressBar.cs" />
     <Compile Include="Data\CurrentEntry.cs" />
-    <Compile Include="Data\EntryEx.cs" />
+    <Compile Include="Data\EntryBinding.cs" />
+    <Compile Include="Data\FieldBinding.cs" />
     <Compile Include="EntryFields.xaml.cs">
       <DependentUpon>EntryFields.xaml</DependentUpon>
     </Compile>

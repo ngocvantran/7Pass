@@ -23,21 +23,45 @@
 		</StackPanel>
 
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <uc:KeePassListBase ItemsSource="{Binding CustomFields}"
+            <uc:KeePassListBase x:Name="lstFields"
                                 HorizontalAlignment="Stretch"
-                                toolkit:TiltEffect.IsTiltEnabled="True">
+                                toolkit:TiltEffect.SuppressTilt="True">
                 <uc:KeePassListBase.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Name}" Grid.Column="0"
-                                       VerticalAlignment="Center"
-                                       Style="{StaticResource PhoneTextNormalStyle}" />
-                            <uc:ProtectedTextBox Text="{Binding Value}"
-                                                 Tag="{Binding Name}"
-                                                 IsProtected="{Binding Protected}"
-                                                 Grid.Column="1" GotFocus="txtField_GotFocus"
-                                                 TextChanged="txtField_TextChanged" />
-                        </StackPanel>
+                        <toolkit:ExpanderView Header="{Binding }"
+                                              Expander="{Binding }"
+                                              ItemsSource="{Binding Items}">
+                            <toolkit:ExpanderView.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"
+                                               FontSize="{StaticResource PhoneFontSizeLarge}" />
+                                </DataTemplate>
+                            </toolkit:ExpanderView.HeaderTemplate>
+
+                            <toolkit:ExpanderView.ExpanderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Preview}" />
+                                </DataTemplate>
+                            </toolkit:ExpanderView.ExpanderTemplate>
+
+                            <toolkit:ExpanderView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBox Text="{Binding Name}" Tag="{Binding .}"
+                                                 GotFocus="txtName_GotFocus"
+                                                 TextChanged="txtName_TextChanged" />
+                                        <uc:ProtectedTextBox
+                                            Text="{Binding Value}" Tag="{Binding .}"
+                                            IsProtected="{Binding Protected}"
+                                            GotFocus="txtField_GotFocus"
+                                            TextChanged="txtField_TextChanged" />
+                                        <toolkit:ToggleSwitch
+                                            Content="Protection"
+                                            IsChecked="{Binding Protected, Mode=TwoWay}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </toolkit:ExpanderView.ItemTemplate>
+                        </toolkit:ExpanderView>
                     </DataTemplate>
                 </uc:KeePassListBase.ItemTemplate>
             </uc:KeePassListBase>
@@ -52,6 +76,9 @@
 			<shell:ApplicationBarIconButton
                 IconUri="/Images/root.png"
                 Text="Select DB" Click="cmdRoot_Click" />
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/new.png"
+                Text="Add" Click="cmdAdd_Click" />
 			<shell:ApplicationBarIconButton
                 IconUri="/Images/about.png"
                 Text="About" Click="cmdAbout_Click"/>

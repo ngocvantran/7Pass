@@ -22,7 +22,7 @@ namespace KeePass
         private readonly ApplicationBarIconButton _cmdReset;
         private readonly ApplicationBarIconButton _cmdSave;
 
-        private EntryEx _binding;
+        private EntryBinding _binding;
         private Entry _entry;
 
         public EntryDetails()
@@ -49,14 +49,12 @@ namespace KeePass
             if (cancelled)
                 return;
 
-            if (_entry != null)
+            if (_binding != null)
             {
-                UpdateNotes();
-                txtPassword.Text = _entry.Password
-                    ?? string.Empty;
+                _binding.Save();
 
-                _binding.HasChanges =
-                    CurrentEntry.HasChanges;
+                UpdateNotes();
+                txtPassword.Text = _binding.Password;
 
                 return;
             }
@@ -109,7 +107,7 @@ namespace KeePass
         /// <returns></returns>
         private bool ConfirmNavigateAway()
         {
-            if (!CurrentEntry.HasChanges)
+            if (!_binding.HasChanges)
                 return true;
 
             var confirm = MessageBox.Show(
@@ -138,31 +136,21 @@ namespace KeePass
             txtPassword.IsProtected = config.Password;
             txtUsername.IsProtected = config.UserName;
 
-            _binding = new EntryEx(entry);
+            var mnuFields = (ApplicationBarMenuItem)
+                ApplicationBar.MenuItems[0];
+            mnuFields.Text = string.Format(
+                Properties.Resources.FieldsMenuItem,
+                entry.CustomFields.Count);
+
+            _binding = new EntryBinding(entry);
             _binding.HasChangesChanged += _binding_HasChangesChanged;
             _binding.HasChanges = entry.IsNew();
 
-            CurrentEntry.Entry = entry;
-            CurrentEntry.HasChanges = entry.IsNew();
+            CurrentEntry.Entry = _binding;
+            _binding.HasChanges = entry.IsNew();
 
             UpdateNotes();
             DataContext = _binding;
-
-            var fields = entry.CustomFields.Count;
-            if (fields == 0)
-            {
-                lnkFields.Visibility =
-                    Visibility.Collapsed;
-            }
-            else
-            {
-                lnkFields.Visibility =
-                    Visibility.Visible;
-
-                lnkFields.Content = string.Format(
-                    Properties.Resources.FieldsLink,
-                    fields);
-            }
         }
 
         private string GetUrl()
@@ -182,7 +170,7 @@ namespace KeePass
                     "browser", "integrated");
 
                 this.NavigateTo<WebView>(
-                    "url={0}&entry={1}", url, _entry.ID);
+                    "url={0}", url);
 
                 return;
             }
@@ -238,9 +226,7 @@ namespace KeePass
                 {
                     UpdateNotes();
                     progBusy.IsBusy = false;
-
                     _binding.HasChanges = false;
-                    CurrentEntry.HasChanges = false;
 
                     if (!info.NotifyIfNotSyncable())
                     {
@@ -261,7 +247,7 @@ namespace KeePass
 
         private void UpdateNotes()
         {
-            var notes = _entry.Notes;
+            var notes = _binding.Notes;
 
             if (!string.IsNullOrEmpty(notes))
             {
@@ -285,13 +271,13 @@ namespace KeePass
             lnkNotes.Content = notes;
         }
 
-        private void _binding_HasChangesChanged(object sender, EventArgs e)
+        private void _binding_HasChangesChanged(
+            object sender, EventArgs e)
         {
             var hasChanges = _binding.HasChanges;
 
             _cmdSave.IsEnabled = hasChanges;
             _cmdReset.IsEnabled = hasChanges;
-            CurrentEntry.HasChanges = hasChanges;
         }
 
         private void cmdHome_Click(object sender, EventArgs e)
@@ -302,8 +288,7 @@ namespace KeePass
 
         private void cmdPassGen_Click(object sender, EventArgs e)
         {
-            this.NavigateTo<PassGen>(
-                "id={0}", _entry.ID);
+            this.NavigateTo<PassGen>();
         }
 
         private void cmdReset_Click(object sender, EventArgs e)
@@ -323,16 +308,9 @@ namespace KeePass
             Save();
         }
 
-        private void lnkFields_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigateTo<EntryFields>(
-                "id={0}", _entry.ID);
-        }
-
         private void lnkNotes_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigateTo<EntryNotes>(
-                "id={0}", _entry.ID);
+            this.NavigateTo<EntryNotes>();
         }
 
         private void lnkUrl_Click(object sender, RoutedEventArgs e)
@@ -349,6 +327,11 @@ namespace KeePass
         private void mnuBrowser_Click(object sender, RoutedEventArgs e)
         {
             OpenUrl(false);
+        }
+
+        private void mnuFields_Click(object sender, EventArgs e)
+        {
+            this.NavigateTo<EntryFields>();
         }
 
         private void mnuIntegrated_Click(object sender, RoutedEventArgs e)
