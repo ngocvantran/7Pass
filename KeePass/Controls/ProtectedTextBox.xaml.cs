@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace KeePass.Controls
 {
@@ -10,7 +9,7 @@ namespace KeePass.Controls
     {
         public static DependencyProperty IsProtectedProperty = DependencyProperty
             .Register("IsProtected", typeof(bool), typeof(ProtectedTextBox),
-                new PropertyMetadata(OnIsProtectedChanged));
+                new PropertyMetadata(true, OnIsProtectedChanged));
 
         public static DependencyProperty TextProperty = DependencyProperty
             .Register("Text", typeof(string), typeof(ProtectedTextBox), null);
@@ -74,31 +73,31 @@ namespace KeePass.Controls
         {
             if (!IsProtected)
             {
-                txtMask.Visibility = Visibility.Collapsed;
+                txtMask.Opacity = 0;
+                txtPassword.Opacity = 1;
+
                 return;
             }
 
             var focused = FocusManager.GetFocusedElement();
-            txtMask.Visibility = ReferenceEquals(focused, txtPassword)
-                ? Visibility.Collapsed : Visibility.Visible;
+            var editing = ReferenceEquals(focused, txtPassword);
+
+            txtMask.Opacity = editing ? 0 : 1;
+            txtPassword.Opacity = editing ? 1 : 0;
         }
 
-        private void OnFocusChanged(object sender, RoutedEventArgs e)
+        private void txtPassword_GotFocus(object sender, RoutedEventArgs e)
         {
+            txtPassword.Opacity = 1;
             UpdateProtectState();
         }
 
-        private void txtMask_Loaded(object sender, RoutedEventArgs e)
+        private void txtPassword_LostFocus(object sender, RoutedEventArgs e)
         {
-            var brush = txtMask.Background as SolidColorBrush;
-            if (brush == null)
-                return;
+            if (IsProtected)
+                txtPassword.Opacity = 0;
 
-            brush.Opacity = 1;
-
-            var color = brush.Color;
-            brush.Color = Color.FromArgb(byte.MaxValue,
-                color.R, color.G, color.B);
+            UpdateProtectState();
         }
 
         private void txtPassword_TextChanged(

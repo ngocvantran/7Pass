@@ -4,14 +4,14 @@
     xmlns:c4f="clr-namespace:Coding4Fun.Phone.Controls.Binding;assembly=Coding4Fun.Phone.Controls">
 
     <Grid>
-        <TextBox Name="txtPassword"
-                 GotFocus="OnFocusChanged"
-                 LostFocus="OnFocusChanged"
+        <TextBox Name="txtPassword" Opacity="0"
+                 GotFocus="txtPassword_GotFocus"
+                 LostFocus="txtPassword_LostFocus"
                  TextChanged="txtPassword_TextChanged"
                  Text="{Binding Text, Mode=TwoWay}"
                  c4f:TextBinding.UpdateSourceOnChange="True" />
+        
         <PasswordBox Name="txtMask" Password="{Binding Text}"
-                     Loaded="txtMask_Loaded"
                      IsHitTestVisible="False" />
     </Grid>
 </UserControl>
