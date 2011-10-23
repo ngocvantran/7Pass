@@ -54,6 +54,7 @@ namespace KeePass
                 _binding.Save();
 
                 UpdateNotes();
+                UpdateFieldsCount(_entry);
                 txtPassword.Text = _binding.Password;
 
                 return;
@@ -99,6 +100,7 @@ namespace KeePass
             }
 
             DisplayEntry(entry);
+            UpdateFieldsCount(entry);
         }
 
         /// <summary>
@@ -136,12 +138,6 @@ namespace KeePass
             txtPassword.IsProtected = config.Password;
             txtUsername.IsProtected = config.UserName;
 
-            var mnuFields = (ApplicationBarMenuItem)
-                ApplicationBar.MenuItems[0];
-            mnuFields.Text = string.Format(
-                Properties.Resources.FieldsMenuItem,
-                entry.CustomFields.Count);
-
             _binding = new EntryBinding(entry);
             _binding.HasChangesChanged += _binding_HasChangesChanged;
             _binding.HasChanges = entry.IsNew();
@@ -151,6 +147,15 @@ namespace KeePass
 
             UpdateNotes();
             DataContext = _binding;
+        }
+
+        private void UpdateFieldsCount(Entry entry)
+        {
+            var mnuFields = (ApplicationBarMenuItem)
+                ApplicationBar.MenuItems[0];
+            mnuFields.Text = string.Format(
+                Properties.Resources.FieldsMenuItem,
+                entry.CustomFields.Count);
         }
 
         private string GetUrl()
@@ -301,6 +306,7 @@ namespace KeePass
             DataContext = _binding;
 
             UpdateNotes();
+            UpdateFieldsCount(_entry);
         }
 
         private void cmdSave_Click(object sender, EventArgs e)
