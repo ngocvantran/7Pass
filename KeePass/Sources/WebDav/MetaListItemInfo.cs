@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Xml;
 using KeePass.Data;
 using KeePass.Sources.WebDav.Api;
@@ -45,13 +46,25 @@ namespace KeePass.Sources.WebDav
         {
             try
             {
-                return XmlConvert.ToDateTime(item.Modified,
-                    XmlDateTimeSerializationMode.RoundtripKind)
-                    .ToRelative();
+                DateTime time;
+
+                try
+                {
+                    time = XmlConvert.ToDateTime(item.Modified,
+                        XmlDateTimeSerializationMode.RoundtripKind);
+                }
+                catch (FormatException)
+                {
+                    time = DateTime.ParseExact(item.Modified,
+                        "ddd, dd MMM yyyy HH:mm:ss 'GMT'",
+                        CultureInfo.InvariantCulture);
+                }
+                
+                return time.ToRelative();
             }
-            catch (XmlException)
+            catch
             {
-                return string.Empty;
+                return item.Modified;
             }
         }
 
