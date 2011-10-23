@@ -21,7 +21,7 @@ namespace KeePass.IO.Data
         };
 
         private readonly IDictionary<string, Field> _fields;
-        private readonly Dictionary<string, Field> _original;
+        private readonly ICollection<Field> _original;
         private readonly EntryProtects _protects;
 
         /// <summary>
@@ -150,15 +150,17 @@ namespace KeePass.IO.Data
             set { this[KEY_USER] = value; }
         }
 
-        public Entry(IEnumerable<Field> fields)
+        public Entry(ICollection<Field> fields)
         {
             if (fields == null)
                 throw new ArgumentNullException("fields");
 
             Icon = new IconData();
 
-            _fields = fields.ToDictionary(x => x.Name);
-            _original = new Dictionary<string, Field>(_fields);
+            _original = fields;
+            _fields = fields.ToDictionary(
+                x => x.Name, x => x.Clone());
+
             _protects = new EntryProtects(_fields);
         }
 
@@ -223,8 +225,8 @@ namespace KeePass.IO.Data
         {
             _fields.Clear();
 
-            foreach (var pair in _original)
-                _fields.Add(pair.Key, pair.Value);
+            foreach (var field in _original)
+                _fields.Add(field.Name, field.Clone());
         }
 
         private static string GetPattern(string key)

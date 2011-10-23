@@ -11,5 +11,10 @@ namespace KeePass.IO.Data
         public bool Protected { get; set; }
 
         public string Value { get; set; }
+
+        public Field Clone()
+        {
+            return (Field)MemberwiseClone();
+        }
     }
 }

@@ -7,7 +7,9 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:uc="clr-namespace:KeePass.Controls"
-	Style="{StaticResource KeePassPage}">
+    xmlns:c4f="clr-namespace:Coding4Fun.Phone.Controls;assembly=Coding4Fun.Phone.Controls"
+    xmlns:c4fb="clr-namespace:Coding4Fun.Phone.Controls.Binding;assembly=Coding4Fun.Phone.Controls"
+    Style="{StaticResource KeePassPage}">
 
 	<Grid x:Name="LayoutRoot" Background="Transparent">
 		<Grid.RowDefinitions>
@@ -23,48 +25,63 @@
 		</StackPanel>
 
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <uc:KeePassListBase x:Name="lstFields"
-                                HorizontalAlignment="Stretch"
-                                toolkit:TiltEffect.SuppressTilt="True">
-                <uc:KeePassListBase.ItemTemplate>
+            <ListBox x:Name="lstFields"
+                     HorizontalAlignment="Stretch"
+                     toolkit:TiltEffect.SuppressTilt="True">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <ContentPresenter HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Stretch"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <toolkit:ExpanderView Header="{Binding }"
-                                              Expander="{Binding }"
-                                              ItemsSource="{Binding Items}">
-                            <toolkit:ExpanderView.HeaderTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}"
-                                               FontSize="{StaticResource PhoneFontSizeLarge}" />
-                                </DataTemplate>
-                            </toolkit:ExpanderView.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
 
-                            <toolkit:ExpanderView.ExpanderTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Preview}" />
-                                </DataTemplate>
-                            </toolkit:ExpanderView.ExpanderTemplate>
+                            <TextBlock Text="{Binding Name}"
+                                       VerticalAlignment="Center"
+                                       Visibility="{Binding NameLabelVisibility}"
+                                       FontSize="{StaticResource PhoneFontSizeLarge}" />
 
-                            <toolkit:ExpanderView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <TextBox Text="{Binding Name}" Tag="{Binding .}"
-                                                 GotFocus="txtName_GotFocus"
-                                                 TextChanged="txtName_TextChanged" />
-                                        <uc:ProtectedTextBox
-                                            Text="{Binding Value}" Tag="{Binding .}"
-                                            IsProtected="{Binding Protected}"
-                                            GotFocus="txtField_GotFocus"
-                                            TextChanged="txtField_TextChanged" />
-                                        <toolkit:ToggleSwitch
-                                            Content="Protection"
-                                            IsChecked="{Binding Protected, Mode=TwoWay}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </toolkit:ExpanderView.ItemTemplate>
-                        </toolkit:ExpanderView>
+                            <toolkit:PhoneTextBox Text="{Binding Name, Mode=TwoWay}"
+                                                  Tag="{Binding }" Visibility="{Binding EditVisibility}"
+                                                  c4fb:TextBinding.UpdateSourceOnChange="True"
+                                                  Grid.ColumnSpan="2" KeyDown="txtName_KeyDown"
+                                                  ActionIcon="/Images/check.action.png"
+                                                  TextChanged="txtName_Changed"
+                                                  SizeChanged="txtName_SizeChanged"
+                                                  ActionIconTapped="txtName_ActionIconTapped"/>
+
+                            <c4f:RoundButton ImageSource="{Binding EditImage}"
+                                             Grid.Column="1" Tag="{Binding }"
+                                             VerticalAlignment="Center"
+                                             Visibility="{Binding NameLabelVisibility}"
+                                             Tap="cmdRename_Tap"/>
+
+                            <uc:ProtectedTextBox Text="{Binding Value}" Tag="{Binding }"
+                                                 Grid.Row="1" Grid.ColumnSpan="2"
+                                                 IsProtected="{Binding Protected}"
+                                                 GotFocus="txtField_GotFocus"
+                                                 TextChanged="txtField_TextChanged" />
+                        </Grid>
                     </DataTemplate>
-                </uc:KeePassListBase.ItemTemplate>
-            </uc:KeePassListBase>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
 	</Grid>
 

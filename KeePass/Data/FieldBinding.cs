@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows;
+using System.Windows.Media;
 using KeePass.IO.Data;
 using KeePass.Properties;
+using KeePass.Utils;
 
 namespace KeePass.Data
 {
@@ -11,10 +14,42 @@ namespace KeePass.Data
         private readonly Field _field;
         private readonly IList<FieldBinding> _items;
 
+        private bool _editing;
+
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public ImageSource EditImage
+        {
+            get { return ThemeData.GetImageSource("edit"); }
+        }
+
+        public Visibility EditVisibility
+        {
+            get
+            {
+                return _editing
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
+            }
+        }
+
+        public bool IsEditing
+        {
+            get { return _editing; }
+            set
+            {
+                if (value == _editing)
+                    return;
+
+                _editing = value;
+                OnPropertyChanged("IsEditing");
+                OnPropertyChanged("EditVisibility");
+                OnPropertyChanged("NameLabelVisibility");
+            }
+        }
 
         public IList<FieldBinding> Items
         {
@@ -35,13 +70,13 @@ namespace KeePass.Data
             }
         }
 
-        public string Preview
+        public Visibility NameLabelVisibility
         {
             get
             {
-                return !_field.Protected
-                    ? (_field.Value ?? " ")
-                    : Resources.Field_Protected;
+                return _editing
+                    ? Visibility.Collapsed
+                    : Visibility.Visible;
             }
         }
 
@@ -55,7 +90,6 @@ namespace KeePass.Data
 
                 _field.Protected = value;
                 OnPropertyChanged("Protected");
-                OnPropertyChanged("Preview");
             }
         }
 
@@ -69,7 +103,6 @@ namespace KeePass.Data
 
                 _field.Value = value;
                 OnPropertyChanged("Value");
-                OnPropertyChanged("Preview");
             }
         }
 
