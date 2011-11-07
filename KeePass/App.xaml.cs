@@ -56,7 +56,20 @@ namespace KeePass
                 "start", "activated");
 
             if (e.IsApplicationInstancePreserved)
+            {
+                var global = GlobalPassHandler.Instance;
+                global.Reset();
+
+                if (global.ShouldPromptGlobalPass)
+                {
+                    var root = RootFrame;
+                    root.Dispatcher.BeginInvoke(() =>
+                        root.Navigate(Navigation.GetPathTo
+                            <GlobalPassVerify>()));
+                }
+
                 return;
+            }
 
             ThemeData.Initialize();
             Cache.RestoreCache(RootFrame.Dispatcher);
