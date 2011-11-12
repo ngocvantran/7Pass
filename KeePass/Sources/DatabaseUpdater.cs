@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using KeePass.Sources.DropBox;
 using KeePass.Sources.Web;
 using KeePass.Sources.WebDav;
@@ -10,23 +9,27 @@ namespace KeePass.Sources
     internal static class DatabaseUpdater
     {
         public const string DROPBOX_UPDATER = "DropBox";
-        public const string WEB_UPDATER = "Web";
         public const string WEBDAV_UPDATER = "WebDAV";
+        public const string WEB_UPDATER = "Web";
 
-        public static void Update(DatabaseInfo info,
+        public static void Update(this DatabaseInfo info,
             Func<DatabaseInfo, bool> queryUpdate,
             ReportUpdateResult report)
         {
             switch (info.Details.Source)
             {
                 case DROPBOX_UPDATER:
-                    DropBoxUpdater.Update(info, queryUpdate,
-                        x => Report(info, x, report));
+                    var dropbox = new Synchronizer(info,
+                        new DropBoxAdapter(), queryUpdate);
+
+                    dropbox.Synchronize(report);
                     break;
 
                 case WEBDAV_UPDATER:
-                    WebDavUpdater.Update(info, queryUpdate,
-                        x => Report(info, x, report));
+                    var webdav = new Synchronizer(info,
+                        new WebDavAdapter(), queryUpdate);
+
+                    webdav.Synchronize(report);
                     break;
 
                 case WEB_UPDATER:
@@ -34,45 +37,6 @@ namespace KeePass.Sources
                         queryUpdate, report);
                     break;
             }
-        }
-
-        private static void Report(DatabaseInfo info,
-            SyncCompleteInfo result, ReportUpdateResult report)
-        {
-            string msg = null;
-            var details = info.Details;
-
-            switch (result.Result)
-            {
-                case SyncResults.Downloaded:
-                    using (var buffer = new MemoryStream(result.Database))
-                        info.SetDatabase(buffer, details);
-                    break;
-
-                case SyncResults.Uploaded:
-                    details.HasLocalChanges = false;
-                    details.Modified = result.Modified;
-                    info.SaveDetails();
-                    break;
-
-                case SyncResults.Conflict:
-                    details.Url = result.Path;
-                    details.HasLocalChanges = false;
-                    details.Modified = result.Modified;
-                    info.SaveDetails();
-
-                    msg = string.Format(
-                        Properties.Resources.Conflict,
-                        new Uri(result.Path).LocalPath);
-                    break;
-
-                case SyncResults.Failed:
-                    msg = Properties.Resources
-                        .DownloadError;
-                    break;
-            }
-
-            report(info, result.Result, msg);
         }
     }
 }

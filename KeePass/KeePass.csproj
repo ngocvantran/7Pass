@@ -243,8 +243,16 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sources\DatabaseUpdater.cs" />
+    <Compile Include="Sources\DropBox\DropBoxAdapter.cs" />
+    <Compile Include="Sources\IServiceAdapter.cs" />
+    <Compile Include="Sources\ListItem.cs" />
+    <Compile Include="Sources\ServiceAdapterBase.cs" />
     <Compile Include="Sources\SourceCapabilityUpdater.cs" />
-    <Compile Include="Sources\WebDav\WebDavUpdater.cs" />
+    <Compile Include="Sources\SynchronizeErrorEventArgs.cs" />
+    <Compile Include="Sources\SynchronizeErrorEventHandler.cs" />
+    <Compile Include="Sources\SynchronizeException.cs" />
+    <Compile Include="Sources\Synchronizer.cs" />
+    <Compile Include="Sources\WebDav\WebDavAdapter.cs" />
     <Compile Include="Sources\WebDav\WebDavResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -258,7 +266,6 @@
     <Compile Include="Sources\DropBox\DropBox.xaml.cs">
       <DependentUpon>DropBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Sources\DropBox\DropBoxUpdater.cs" />
     <Compile Include="Sources\DropBox\List.xaml.cs">
       <DependentUpon>List.xaml</DependentUpon>
     </Compile>

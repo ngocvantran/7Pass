@@ -40,6 +40,14 @@ namespace KeePass.Sources.WebDav.Api
                 new Uri(path), null);
         }
 
+        public string GetUrl(string path)
+        {
+            return string.Join("\n", new[]
+            {
+                path, _user, _password
+            });
+        }
+
         public void ListAsync(string path,
             Action<IList<ItemInfo>> complete,
             Action htmlDetected,

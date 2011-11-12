@@ -213,8 +213,7 @@ namespace KeePass
             item.IsUpdating = true;
             var database = (DatabaseInfo)item.Info;
 
-            DatabaseUpdater.Update(database,
-                _ => item.IsUpdating,
+            database.Update(_ => item.IsUpdating,
                 DatabaseUpdated);
         }
 
