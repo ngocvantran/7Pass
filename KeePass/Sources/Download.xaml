@@ -24,6 +24,9 @@
             <HyperlinkButton Content="DropBox" Click="lnkDropBox_Click"
                              FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
             <TextBlock Text=" " />
+            <HyperlinkButton Content="SkyDrive" Click="lnkSkyDrive_Click"
+                             FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
+            <TextBlock Text=" " />
             <HyperlinkButton Content="WebDAV" Click="lnkWebDav_Click"
                              FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
             <TextBlock Text=" " />

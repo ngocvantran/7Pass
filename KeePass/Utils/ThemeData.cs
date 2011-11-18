@@ -7,8 +7,9 @@ namespace KeePass.Utils
 {
     internal static class ThemeData
     {
-        private static bool _isDarkTheme;
         private static string _suffix;
+
+        public static bool IsDarkTheme { get; private set; }
 
         public static string GetImage(string name)
         {
@@ -25,9 +26,9 @@ namespace KeePass.Utils
         {
             var v = (Visibility)Application.Current
                 .Resources["PhoneLightThemeVisibility"];
-            _isDarkTheme = v != Visibility.Visible;
+            IsDarkTheme = v != Visibility.Visible;
 
-            _suffix = _isDarkTheme
+            _suffix = IsDarkTheme
                 ? ".dark.png" : ".light.png";
         }
     }

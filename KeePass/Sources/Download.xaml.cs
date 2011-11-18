@@ -67,6 +67,12 @@ namespace KeePass.Sources
             Navigate<DropBox.DropBox>();
         }
 
+        private void lnkSkyDrive_Click(object sender, RoutedEventArgs e)
+        {
+            AnalyticsTracker.Track("new_db", "skydrive");
+            Navigate<SkyDrive.LiveAuth>();
+        }
+
         private void lnkWebDav_Click(object sender, RoutedEventArgs e)
         {
             AnalyticsTracker.Track("new_db", "webdav");

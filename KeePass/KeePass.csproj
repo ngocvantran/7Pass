@@ -247,6 +247,18 @@
     <Compile Include="Sources\IServiceAdapter.cs" />
     <Compile Include="Sources\ListItem.cs" />
     <Compile Include="Sources\ServiceAdapterBase.cs" />
+    <Compile Include="Sources\SkyDrive\List.xaml.cs">
+      <DependentUpon>List.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\SkyDrive\LiveAuth.xaml.cs">
+      <DependentUpon>LiveAuth.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\SkyDrive\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\SkyDrive\SkyDriveInfo.cs" />
     <Compile Include="Sources\SourceCapabilityUpdater.cs" />
     <Compile Include="Sources\SynchronizeErrorEventArgs.cs" />
     <Compile Include="Sources\SynchronizeErrorEventHandler.cs" />
@@ -436,6 +448,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Sources\SkyDrive\List.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sources\SkyDrive\LiveAuth.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Sources\WebDav\WebList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -472,6 +492,7 @@
     <Content Include="Images\up.light.png" />
     <Content Include="Images\uploaded.dark.png" />
     <Content Include="Images\uploaded.light.png" />
+    <None Include="Resources\AuthUrl.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
@@ -598,6 +619,10 @@
     <EmbeddedResource Include="Sources\DropBox\DropBoxResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DropBoxResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\SkyDrive\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\WebDav\WebDavResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
