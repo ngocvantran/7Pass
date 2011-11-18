@@ -4,20 +4,17 @@ Support Info:
  - Blog: http://7pass.wordpress.com
  - Source code: https://github.com/7pass/7pass
 
+Version 3.3:
+ - Fixed WebDAV bug.
+ - Fixed global pass not displayed on app switch.
+ - Added field editing and asterisks support.
+ - Fixed protected field textbox display in light theme.
+
 Version 3.2:
  - Added navigation transitions.
  - Added pining of databases.
  - Supports password, title and username hiding.
  - Bug fixes & UI improvements.
 
-Version 3.1:
- - Bug fixes.
-
-Version 3.0:
- - Added database modification support.
- - Added page rotation.
- - Added DropBox & WebDAV synchronization.
- - Easier username/password copying.
-
 Keywords:
-7Pass KeePass password encrypt encryption privacy dropbox webdav synchronize
+KeePass password dropbox encrypt 7Pass encryption privacy webdav synchronize
