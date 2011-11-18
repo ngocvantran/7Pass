@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Windows.Navigation;
 using KeePass.Utils;
 using Microsoft.Phone.Controls;
 
@@ -8,15 +9,6 @@ namespace KeePass.Sources.SkyDrive
     public partial class LiveAuth
     {
         private bool _attemptLogout;
-
-        /// <summary>
-        /// Gets or sets a value indicating whether
-        /// this page should log user out.
-        /// </summary>
-        /// <value><c>true</c> to log user out;
-        /// otherwise, <c>false</c>.
-        /// </value>
-        public static bool AttemptLogout { get; set; }
 
         public LiveAuth()
         {
@@ -36,6 +28,13 @@ namespace KeePass.Sources.SkyDrive
                 this.NavigateTo<List>("token={0}", token);
         }
 
+        protected override void OnNavigatedTo(
+            bool cancelled, NavigationEventArgs e)
+        {
+            _attemptLogout = e.NavigationMode ==
+                NavigationMode.Back;
+        }
+
         private void ShowLogin()
         {
             var theme = ThemeData.IsDarkTheme
@@ -51,9 +50,6 @@ namespace KeePass.Sources.SkyDrive
         private void browser_Loaded(object sender,
             System.Windows.RoutedEventArgs e)
         {
-            _attemptLogout = AttemptLogout;
-            AttemptLogout = false;
-
             if (!_attemptLogout)
                 ShowLogin();
             else

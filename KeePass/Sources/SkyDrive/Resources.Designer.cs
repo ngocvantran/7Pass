@@ -68,5 +68,14 @@ namespace KeePass.Sources.SkyDrive {
                 return ResourceManager.GetString("AuthUrl", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://apis.live.net/v5.0/me?access_token={0}.
+        /// </summary>
+        internal static string UserInfo {
+            get {
+                return ResourceManager.GetString("UserInfo", resourceCulture);
+            }
+        }
     }
 }

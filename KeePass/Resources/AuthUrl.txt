@@ -1,1 +1,1 @@
-﻿https://oauth.live.com/authorize?client_id={0}&redirect_uri={1}&scope=wl.skydrive_update&response_type=token&display=Touch&theme={2}
+﻿https://oauth.live.com/authorize?client_id={0}&redirect_uri={1}&scope=wl.skydrive_update%20wl.emails&response_type=token&display=Touch&theme={2}
