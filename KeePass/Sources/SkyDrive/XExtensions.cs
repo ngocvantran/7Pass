@@ -24,5 +24,12 @@ namespace KeePass.Sources.SkyDrive
 
             return property(node);
         }
+
+        public static string GetValue(
+            this XElement node, params string[] path)
+        {
+            return GetValue(node,
+                x => x.Value, path);
+        }
     }
 }

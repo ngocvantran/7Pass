@@ -253,11 +253,14 @@
     <Compile Include="Sources\SkyDrive\LiveAuth.xaml.cs">
       <DependentUpon>LiveAuth.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sources\SkyDrive\MetaListItemInfo.cs" />
+    <Compile Include="Sources\SkyDrive\ParentItem.cs" />
     <Compile Include="Sources\SkyDrive\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Sources\SkyDrive\SkyDriveClient.cs" />
     <Compile Include="Sources\SkyDrive\SkyDriveInfo.cs" />
     <Compile Include="Sources\SkyDrive\XExtensions.cs" />
     <Compile Include="Sources\SourceCapabilityUpdater.cs" />

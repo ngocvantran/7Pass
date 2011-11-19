@@ -23,11 +23,19 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-            <uc:KeePassList x:Name="lstItems"
-                            Grid.ColumnSpan="2" />
+            <uc:KeePassList x:Name="lstItems" Grid.ColumnSpan="2"
+                            SelectionChanged="lstItems_SelectionChanged" />
             
             <TextBlock Name="lblEmail" Grid.Row="1" />
+            <HyperlinkButton Content="Refresh"
+                             Grid.Row="1" Grid.Column="1"
+                             Click="lnkRefresh_Click" />
         </Grid>
     </Grid>
 </keepass:KeePassPage>
