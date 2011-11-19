@@ -1,5 +1,5 @@
 using System;
-using System.Xml;
+using System.Globalization;
 using System.Xml.Linq;
 using KeePass.Data;
 using KeePass.Utils;
@@ -62,8 +62,9 @@ namespace KeePass.Sources.SkyDrive
         {
             try
             {
-                var date = XmlConvert.ToDateTime(time,
-                    XmlDateTimeSerializationMode.RoundtripKind);
+                var date = DateTime.ParseExact(time,
+                    "yyyy-MM-ddTHH:mm:sszzzz",
+                    CultureInfo.InvariantCulture);
 
                 return date.ToRelative();
             }

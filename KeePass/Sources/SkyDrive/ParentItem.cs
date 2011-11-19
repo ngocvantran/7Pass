@@ -19,9 +19,8 @@ namespace KeePass.Sources.SkyDrive
                 throw new ArgumentNullException("path");
 
             _path = path;
-            Title = "..";
-            Notes = "Parent Folder";
-            Icon = ThemeData.GetImage("folder");
+            Title = "Parent Folder";
+            Icon = ThemeData.GetImage("parent");
         }
     }
 }

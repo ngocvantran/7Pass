@@ -490,6 +490,8 @@
     <Content Include="Images\check.action.png" />
     <Content Include="Images\edit.dark.png" />
     <Content Include="Images\edit.light.png" />
+    <Content Include="Images\parent.dark.png" />
+    <Content Include="Images\parent.light.png" />
     <Content Include="Images\save.png" />
     <Content Include="Images\search.action.png" />
     <Content Include="Images\up.dark.png" />

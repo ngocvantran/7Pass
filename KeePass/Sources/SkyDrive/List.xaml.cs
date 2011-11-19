@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Navigation;
 using KeePass.Data;
+using KeePass.IO.Data;
+using KeePass.Storage;
+using KeePass.Utils;
 
 namespace KeePass.Sources.SkyDrive
 {
@@ -10,6 +14,7 @@ namespace KeePass.Sources.SkyDrive
     {
         private SkyDriveClient _client;
         private string _current;
+        private string _folder;
 
         public List()
         {
@@ -22,10 +27,12 @@ namespace KeePass.Sources.SkyDrive
             if (cancelled)
                 return;
 
-            var token = NavigationContext
-                .QueryString["token"];
+            var pars = NavigationContext
+                .QueryString;
 
-            _client = new SkyDriveClient(token);
+            _client = new SkyDriveClient(
+                pars["token"]);
+            _folder = pars["folder"];
 
             RefreshList(null);
             DisplayEmail();
@@ -41,6 +48,58 @@ namespace KeePass.Sources.SkyDrive
                         lblEmail.Text = email);
                 }
             });
+        }
+
+        private void OnFileDownloaded(MetaListItemInfo item,
+            string path, byte[] bytes)
+        {
+            var dispatcher = Dispatcher;
+
+            try
+            {
+                using (var buffer = new MemoryStream(bytes))
+                {
+                    if (string.IsNullOrEmpty(_folder))
+                    {
+                        if (!DatabaseVerifier.Verify(dispatcher, buffer))
+                            return;
+
+                        var storage = new DatabaseInfo();
+                        storage.SetDatabase(buffer, new DatabaseDetails
+                        {
+                            Url = path,
+                            Modified = item.Modified,
+                            Name = item.Title.RemoveKdbx(),
+                            Type = SourceTypes.Synchronizable,
+                            Source = DatabaseUpdater.SKYDRIVE_UPDATER,
+                        });
+                    }
+                    else
+                    {
+                        var hash = KeyFile.GetKey(buffer);
+                        if (hash == null)
+                        {
+                            dispatcher.BeginInvoke(() => MessageBox.Show(
+                                Properties.Resources.InvalidKeyFile,
+                                Properties.Resources.KeyFileTitle,
+                                MessageBoxButton.OK));
+
+                            return;
+                        }
+
+                        new DatabaseInfo(_folder)
+                            .SetKeyFile(hash);
+                    }
+                }
+
+                dispatcher.BeginInvoke(
+                    this.BackToDBs);
+            }
+            finally
+            {
+                /*dispatcher.BeginInvoke(() =>
+                    progBusy.IsBusy = false);*/
+            }
         }
 
         private void RefreshList(string path)
@@ -76,7 +135,15 @@ namespace KeePass.Sources.SkyDrive
 
             if (item != null)
             {
-                RefreshList(item.Path);
+                if (item.IsDir)
+                {
+                    RefreshList(item.Path);
+                    return;
+                }
+
+                _client.Download(item.Path,
+                    OnFileDownloaded);
+
                 return;
             }
 

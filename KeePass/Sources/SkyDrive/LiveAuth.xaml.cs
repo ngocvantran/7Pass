@@ -15,6 +15,13 @@ namespace KeePass.Sources.SkyDrive
             InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(
+            bool cancelled, NavigationEventArgs e)
+        {
+            _attemptLogout = e.NavigationMode ==
+                NavigationMode.Back;
+        }
+
         private void CheckToken(Uri uri)
         {
             var parts = uri.Fragment
@@ -24,15 +31,15 @@ namespace KeePass.Sources.SkyDrive
                 .ToDictionary(x => x[0], x => x[1]);
 
             string token;
-            if (parts.TryGetValue("access_token", out token))
-                this.NavigateTo<List>("token={0}", token);
-        }
+            if (!parts.TryGetValue("access_token", out token))
+                return;
 
-        protected override void OnNavigatedTo(
-            bool cancelled, NavigationEventArgs e)
-        {
-            _attemptLogout = e.NavigationMode ==
-                NavigationMode.Back;
+            var folder = NavigationContext
+                .QueryString["folder"];
+
+            this.NavigateTo<List>(
+                "token={0}&folder={1}",
+                token, folder);
         }
 
         private void ShowLogin()
