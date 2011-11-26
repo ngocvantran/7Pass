@@ -8,8 +8,8 @@ namespace KeePass.Sources.SkyDrive
 {
     internal class SkyDriveClient
     {
-        private readonly string _token;
         private readonly RestClient _client;
+        private readonly string _token;
 
         public SkyDriveClient(string token)
         {
@@ -145,6 +145,17 @@ namespace KeePass.Sources.SkyDrive
                 waitParent.WaitOne();
                 complete(parent, items);
             });
+        }
+
+        public static SkyDriveClient ParsePath(
+            string url, out string id)
+        {
+            var parts = url.Split(
+                new[] {Environment.NewLine},
+                StringSplitOptions.None);
+
+            id = parts[0];
+            return new SkyDriveClient(parts[1]);
         }
 
         private static RestRequest Request(string resource)
