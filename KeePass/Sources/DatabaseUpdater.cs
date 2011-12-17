@@ -1,5 +1,6 @@
 ﻿using System;
 using KeePass.Sources.DropBox;
+using KeePass.Sources.SkyDrive;
 using KeePass.Sources.Web;
 using KeePass.Sources.WebDav;
 using KeePass.Storage;
@@ -31,6 +32,13 @@ namespace KeePass.Sources
                         new WebDavAdapter(), queryUpdate);
 
                     webdav.Synchronize(report);
+                    break;
+
+                case SKYDRIVE_UPDATER:
+                    var skyDrive = new Synchronizer(info,
+                        new SkyDriveAdapter(), queryUpdate);
+
+                    skyDrive.Synchronize(report);
                     break;
 
                 case WEB_UPDATER:

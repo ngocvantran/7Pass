@@ -18,9 +18,32 @@ namespace KeePass.Sources.SkyDrive
 
             _token = token;
             _client = new RestClient(
-                "https://beta.apis.live.net/v5.0/");
+                "https://apis.live.net/v5.0/");
             _client.AddDefaultParameter("token",
                 token, ParameterType.UrlSegment);
+        }
+
+        public void Upload(string path, byte[] content)
+        {
+            path = string.Concat(path,
+                "/content/?access_token={token}&overwrite=false");
+
+            var request = new RestRequest
+            {
+                Resource = path,
+                Method = Method.PUT,
+                RequestFormat = DataFormat.Json,
+            };
+
+            request.
+
+            request.AddParameter("file", content,
+                ParameterType.RequestBody);
+
+            _client.ExecuteAsync(request, x =>
+            {
+                throw new NotImplementedException();
+            });
         }
 
         public void Download(string path,

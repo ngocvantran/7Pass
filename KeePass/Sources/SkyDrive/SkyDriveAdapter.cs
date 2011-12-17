@@ -1,14 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+using System.Linq;
 using KeePass.IO.Utils;
 using KeePass.Storage;
 
@@ -65,14 +58,49 @@ namespace KeePass.Sources.SkyDrive
         public override void List(Action<ListItem> ready)
         {
             _client.List(_info.Path, (parent, items) =>
-            {
-                throw new NotImplementedException();
-            });
+                ready(Translate(items)));
         }
 
-        public override void Upload(ListItem item, Action<ListItem> uploaded)
+        private static ListItem Translate(
+            IEnumerable<MetaListItemInfo> items)
         {
-            throw new NotImplementedException();
+            var item = items
+                .FirstOrDefault();
+
+            var info = new ListItem
+            {
+                Tag = item,
+            };
+
+            if (item != null)
+                info.Timestamp = item.Modified;
+
+            return info;
+        }
+
+        public override void Upload(ListItem item,
+            Action<ListItem> uploaded)
+        {
+            _client.Upload(_info.Path, _info.Database);
+        }
+
+        private string GetNonConflictPath()
+        {
+            var path = _info.Path;
+            var local = new Uri(path).LocalPath;
+            var dir = Path.GetDirectoryName(local);
+            var extension = Path.GetExtension(local);
+            var fileName = Path.GetFileNameWithoutExtension(local);
+
+            fileName = string.Concat(fileName,
+                " (7Pass' conflicted copy ",
+                DateTime.Today.ToString("yyyy-MM-dd"),
+                ")", extension);
+
+            var newPath = Path.Combine(dir, fileName)
+                .Replace('\\', '/');
+
+            return path.Replace(local, newPath);
         }
     }
 }
