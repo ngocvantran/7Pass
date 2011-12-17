@@ -107,8 +107,8 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Coding4Fun.Phone.Controls">
-      <HintPath>..\packages\Coding4Fun.Phone.Controls.1.4.6\lib\Coding4Fun.Phone.Controls.dll</HintPath>
+    <Reference Include="Coding4Fun.Phone.Controls, Version=1.4.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Coding4Fun.Phone.Controls.1.4.8\lib\Coding4Fun.Phone.Controls.dll</HintPath>
     </Reference>
     <Reference Include="DropNet.WindowsPhone">
       <HintPath>..\packages\DropNet.1.6\lib\sl4-WindowsPhone71\DropNet.WindowsPhone.dll</HintPath>
@@ -116,17 +116,17 @@
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
-      <HintPath>..\packages\SilverlightToolkitWP.4.2011.8.17\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+      <HintPath>..\packages\SilverlightToolkitWP.4.2011.12.13\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="NavigationListControl">
       <HintPath>..\Libs\NavigationListControl.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json.WindowsPhone">
-      <HintPath>..\packages\Newtonsoft.Json.4.0.2\lib\sl3-wp\Newtonsoft.Json.WindowsPhone.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.0.5.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.5\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp.WindowsPhone">
-      <HintPath>..\packages\RestSharp.101.3\lib\sl3-wp\RestSharp.WindowsPhone.dll</HintPath>
+    <Reference Include="RestSharp.WindowsPhone, Version=102.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.102.5\lib\sl4-wp71\RestSharp.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="SharpZipLib.Silverlight4">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\SL4\SharpZipLib.Silverlight4.dll</HintPath>
@@ -499,12 +499,12 @@
     <Content Include="Images\up.light.png" />
     <Content Include="Images\uploaded.dark.png" />
     <Content Include="Images\uploaded.light.png" />
+    <Resource Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Resource Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Resource Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Resource Include="Toolkit.Content\ApplicationBar.Select.png" />
     <None Include="Resources\AuthUrl.txt" />
     <None Include="Resources\UserInfo.txt" />
-    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
