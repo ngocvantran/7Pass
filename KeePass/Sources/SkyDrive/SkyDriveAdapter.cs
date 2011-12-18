@@ -13,7 +13,22 @@ namespace KeePass.Sources.SkyDrive
         public override void Conflict(ListItem item,
             Action<ListItem, string> uploaded)
         {
-            throw new NotImplementedException();
+            var meta = (MetaListItemInfo)item.Tag;
+            var name = GetNonConflictName(meta.Title);
+
+            _client.Upload(meta.Parent, name,
+                _info.Database, x => uploaded(item, x));
+        }
+
+        private static string GetNonConflictName(string name)
+        {
+            var extension = Path.GetExtension(name);
+            var fileName = Path.GetFileNameWithoutExtension(name);
+
+            return string.Concat(fileName,
+                " (7Pass' conflicted copy ",
+                DateTime.Today.ToString("yyyy-MM-dd"),
+                ")", extension);
         }
 
         public override void Download(ListItem item,
@@ -63,8 +78,12 @@ namespace KeePass.Sources.SkyDrive
             Action<ListItem> uploaded)
         {
             var meta = (MetaListItemInfo)item.Tag;
-            _client.Upload(meta.Parent,
-                meta.Title, _info.Database);
+            _client.Upload(meta.Parent, meta.Title,
+                _info.Database, x =>
+                {
+                    _info.Path = x;
+                    uploaded(item);
+                });
         }
 
         private static ListItem Translate(

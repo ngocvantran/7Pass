@@ -110,7 +110,7 @@
     <Reference Include="Coding4Fun.Phone.Controls, Version=1.4.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Coding4Fun.Phone.Controls.1.4.8\lib\Coding4Fun.Phone.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="DropNet.WindowsPhone">
+    <Reference Include="DropNet.WindowsPhone, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DropNet.1.6\lib\sl4-WindowsPhone71\DropNet.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone" />
