@@ -4,6 +4,9 @@ Support Info:
  - Blog: http://7pass.wordpress.com
  - Source code: https://github.com/7pass/7pass
 
+Version 3.4:
+ - Added SkyDrive support.
+
 Version 3.3:
  - Fixed WebDAV bug.
  - Fixed global pass not displayed on app switch.
