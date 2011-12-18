@@ -12,20 +12,32 @@ namespace KeePass
             InitializeComponent();
         }
 
+        protected override void OnBackKeyPress(
+            System.ComponentModel.CancelEventArgs e)
+        {
+            var settings = AppSettings.Instance;
+            var justInstalled = settings.AllowAnalytics == null;
+
+            if (justInstalled)
+                this.ClearBackStack();
+
+            base.OnBackKeyPress(e);
+        }
+
         protected override void OnNavigatedTo(
             bool cancelled, NavigationEventArgs e)
         {
             if (cancelled)
                 return;
 
-            lblDevice.Text = DeviceData.GetDeviceId();
+            var settings = AppSettings.Instance;
+            lblDevice.Text = settings.InstanceID;
         }
 
         private void cmdAllow_Click(object sender, EventArgs e)
         {
             var settings = AppSettings.Instance;
             var justInstalled = settings.AllowAnalytics == null;
-
 
             settings.AllowAnalytics = true;
             AnalyticsTracker.Collect();

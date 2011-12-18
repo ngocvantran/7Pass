@@ -50,8 +50,8 @@ namespace KeePass.Utils
             sb.AppendLine((string)DeviceExtendedProperties
                 .GetValue("DeviceName"));
 
-            sb.Append("Device ID: ");
-            sb.AppendLine(DeviceData.GetDeviceId());
+            sb.Append("Instance ID: ");
+            sb.AppendLine(AppSettings.Instance.InstanceID);
 
             sb.Append("Firmware: ");
             sb.AppendLine((string)DeviceExtendedProperties

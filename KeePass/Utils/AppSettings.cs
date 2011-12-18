@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO.IsolatedStorage;
 
 namespace KeePass.Utils
@@ -7,12 +8,14 @@ namespace KeePass.Utils
     {
         private const string KEY_ANALYTICS = "Analytics";
         private const string KEY_HIDE_BIN = "HideRecycleBin";
+        private const string KEY_INSTANCE_ID = "InstanceId";
         private const string KEY_PASSWORD = "Password";
         private const string KEY_TOAST_SHOWNS = "ToastShowns";
         private const string KEY_USE_INT_BROWSER = "UseIntegratedBrowser";
 
         private static AppSettings _instance;
         private readonly GlobalPassHandler _globalPass;
+        private readonly string _instanceId;
         private readonly IsolatedStorageSettings _settings;
 
         /// <summary>
@@ -85,6 +88,14 @@ namespace KeePass.Utils
             }
         }
 
+        /// <summary>
+        /// Gets the 7Pass installation ID.
+        /// </summary>
+        public string InstanceID
+        {
+            get { return _instanceId; }
+        }
+
         public string this[string key]
         {
             get
@@ -140,7 +151,11 @@ namespace KeePass.Utils
                 return value == null
                     ? 0 : int.Parse(value);
             }
-            set { this[KEY_TOAST_SHOWNS] = value.ToString(); }
+            set
+            {
+                this[KEY_TOAST_SHOWNS] = value.ToString(
+                    CultureInfo.InvariantCulture);
+            }
         }
 
         /// <summary>
@@ -168,6 +183,15 @@ namespace KeePass.Utils
 
             _settings = settings;
             _globalPass = new GlobalPassHandler(this);
+
+            if (!_settings.Contains(KEY_INSTANCE_ID))
+            {
+                _instanceId = Guid.NewGuid().ToString("N");
+                _settings[KEY_INSTANCE_ID] = _instanceId;
+                _settings.Save();
+            }
+            else
+                _instanceId = (string)_settings[KEY_INSTANCE_ID];
         }
     }
 }

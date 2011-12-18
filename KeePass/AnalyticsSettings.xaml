@@ -26,12 +26,12 @@
 					7Pass collects usage information in order to continuously enhance user experience.<LineBreak />
                     <LineBreak />
                     The collection information will never have your database information, or any information that can directly identify you. However:<LineBreak />
-                    - 7Pass does collect your device ID to link information sent from your device together.<LineBreak />
+                    - 7Pass does collect your installation ID to link information sent from your device together. This changes everytime 7Pass is installed.<LineBreak />
                     - Usage collection uses very little network traffic, but the cost to your bill may add up if you're on a capped plan.<LineBreak />
                     <LineBreak />
                     The collected information will be very useful for development of 7Pass.<LineBreak />
                     <LineBreak />
-                    Your device ID that will be collected is:
+                    Your installation ID that will be collected is:
 				</TextBlock>
                 <TextBlock Name="lblDevice" />
 			</StackPanel>

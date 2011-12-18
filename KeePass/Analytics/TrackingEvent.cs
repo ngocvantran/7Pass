@@ -42,8 +42,9 @@ namespace KeePass.Analytics
             values.AddOrSet("mp_source", _source);
             values.AddOrSet("token", TrackInfo.TOKEN);
 
+            var settings = AppSettings.Instance;
             values.AddOrSet("distinct_id",
-                DeviceData.GetDeviceId());
+                settings.InstanceID);
 
             var properties = values.Select(x =>
                 new JProperty(x.Key, x.Value))

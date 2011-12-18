@@ -332,7 +332,6 @@
     <Compile Include="Storage\VerifyResultTypes.cs" />
     <Compile Include="Utils\AppSettings.cs" />
     <Compile Include="Utils\BackTargets.cs" />
-    <Compile Include="Utils\DeviceData.cs" />
     <Compile Include="Utils\EaseEffect.cs" />
     <Compile Include="Utils\ErrorReport.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
