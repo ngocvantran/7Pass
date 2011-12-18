@@ -29,10 +29,16 @@ namespace KeePass
         {
             InitializeComponent();
 
-            _cmdSave = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[2];
-            _cmdReset = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[3];
+            _cmdSave = AppButton(2);
+            _cmdReset = AppButton(3);
+
+            AppButton(0).Text = Langs.App.Home;
+            AppButton(1).Text = Langs.EntryDetails.GeneratePassword;
+            _cmdSave.Text = Langs.EntryDetails.Save;
+            _cmdReset.Text = Langs.EntryDetails.Reset;
+
+            AppMenuItem(1).Text = Langs.App.SelectDb;
+            AppMenuItem(2).Text = Langs.App.About;
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)
@@ -113,8 +119,8 @@ namespace KeePass
                 return true;
 
             var confirm = MessageBox.Show(
-                Properties.Resources.UnsavedChange,
-                Properties.Resources.UnsavedChangeTitle,
+                Langs.EntryDetails.UnsavedChange,
+                Langs.EntryDetails.UnsavedChangeTitle,
                 MessageBoxButton.OKCancel);
 
             if (confirm != MessageBoxResult.OK)
@@ -151,10 +157,9 @@ namespace KeePass
 
         private void UpdateFieldsCount(Entry entry)
         {
-            var mnuFields = (ApplicationBarMenuItem)
-                ApplicationBar.MenuItems[0];
+            var mnuFields = AppMenuItem(0);
             mnuFields.Text = string.Format(
-                Properties.Resources.FieldsMenuItem,
+                Langs.EntryDetails.Fields,
                 entry.CustomFields.Count);
         }
 
@@ -237,8 +242,8 @@ namespace KeePass
                     {
                         new ToastPrompt
                         {
-                            Title = Properties.Resources.SavedTitle,
-                            Message = Properties.Resources.SavedCaption,
+                            Title = Langs.EntryDetails.SavedTitle,
+                            Message = Langs.EntryDetails.SavedCaption,
                             TextOrientation = System.Windows.Controls
                                 .Orientation.Vertical,
                         }.Show();
@@ -269,8 +274,7 @@ namespace KeePass
             }
             else
             {
-                notes = Properties
-                    .Resources.AddNotes;
+                notes = Langs.EntryDetails.AddNotes;
             }
 
             lnkNotes.Content = notes;

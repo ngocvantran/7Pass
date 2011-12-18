@@ -61,15 +61,6 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to «Add Notes».
-        /// </summary>
-        internal static string AddNotes {
-            get {
-                return ResourceManager.GetString("AddNotes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The selected database has already been pinned to the main screen..
         /// </summary>
         internal static string AlreadyPinned {
@@ -230,15 +221,6 @@ namespace KeePass.Properties {
         internal static string Field_Protected {
             get {
                 return ResourceManager.GetString("Field_Protected", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View/Edit Fields ({0}).
-        /// </summary>
-        internal static string FieldsMenuItem {
-            get {
-                return ResourceManager.GetString("FieldsMenuItem", resourceCulture);
             }
         }
         
@@ -443,24 +425,6 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Entry has been saved successfully!.
-        /// </summary>
-        internal static string SavedCaption {
-            get {
-                return ResourceManager.GetString("SavedCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save Entry.
-        /// </summary>
-        internal static string SavedTitle {
-            get {
-                return ResourceManager.GetString("SavedTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This is the fully functional free version of 7Pass.
         ///You can support the author by tapping this
         ///notification to purchase the paid version..
@@ -499,25 +463,6 @@ namespace KeePass.Properties {
         internal static string UnhandledExTitle {
             get {
                 return ResourceManager.GetString("UnhandledExTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You have unsaved changes.
-        ///Do you really want to ignore these changes?.
-        /// </summary>
-        internal static string UnsavedChange {
-            get {
-                return ResourceManager.GetString("UnsavedChange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unsaved change.
-        /// </summary>
-        internal static string UnsavedChangeTitle {
-            get {
-                return ResourceManager.GetString("UnsavedChangeTitle", resourceCulture);
             }
         }
         

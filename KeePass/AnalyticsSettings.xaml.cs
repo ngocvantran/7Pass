@@ -2,7 +2,6 @@ using System;
 using System.Windows.Navigation;
 using KeePass.Analytics;
 using KeePass.Utils;
-using Microsoft.Phone.Shell;
 
 namespace KeePass
 {
@@ -12,10 +11,8 @@ namespace KeePass
         {
             InitializeComponent();
 
-            ((ApplicationBarIconButton)ApplicationBar.Buttons[0])
-                .Text = Langs.AnalyticsSettings.Allow;
-            ((ApplicationBarIconButton)ApplicationBar.Buttons[1])
-                .Text = Langs.AnalyticsSettings.Disable;
+            AppButton(0).Text = Langs.AnalyticsSettings.Allow;
+            AppButton(1).Text = Langs.AnalyticsSettings.Disable;
         }
 
         protected override void OnBackKeyPress(

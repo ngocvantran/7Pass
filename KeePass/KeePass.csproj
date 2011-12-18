@@ -221,10 +221,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AnalyticsSettings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Langs\Strings.Designer.cs">
+    <Compile Include="Langs\App.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Strings.resx</DependentUpon>
+      <DependentUpon>App.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Langs\EntryDetails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntryDetails.resx</DependentUpon>
     </Compile>
     <Compile Include="Langs\StringsProvider.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -642,9 +647,13 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AnalyticsSettings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Langs\Strings.resx">
+    <EmbeddedResource Include="Langs\App.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <LastGenOutput>App.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Langs\EntryDetails.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EntryDetails.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

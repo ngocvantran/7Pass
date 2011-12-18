@@ -22,27 +22,30 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Entry" Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"
+                       Text="{Binding Entry.PageTitle, Source={StaticResource Strings}}" />
         </StackPanel>
 
         <Grid Grid.Row="1" Margin="12,0,12,0">
             <ScrollViewer>
                 <StackPanel>
                     <!-- Entry details -->
-                    <TextBlock Text="Title" Style="{StaticResource PhoneTextNormalStyle}" />
+                    <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
+                               Text="{Binding Entry.Title, Source={StaticResource Strings}}" />
                     <uc:ProtectedTextBox x:Name="txtTitle"
                                          GotFocus="txt_GotFocus"
                                          Text="{Binding Title, Mode=TwoWay}"
                                          c4f:TextBinding.UpdateSourceOnChange="True" />
 
-                    <TextBlock Text="User name" Style="{StaticResource PhoneTextNormalStyle}" />
+                    <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
+                               Text="{Binding Entry.Username, Source={StaticResource Strings}}" />
                     <uc:ProtectedTextBox x:Name="txtUsername"
                                          GotFocus="txt_GotFocus"
                                          Text="{Binding UserName, Mode=TwoWay}"
                                          c4f:TextBinding.UpdateSourceOnChange="True" />
 
-                    <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
+                    <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
+                               Text="{Binding Entry.Password, Source={StaticResource Strings}}" />
                     <uc:ProtectedTextBox x:Name="txtPassword"
                                          GotFocus="txt_GotFocus"
                                          Text="{Binding Password, Mode=TwoWay}"
@@ -53,7 +56,8 @@
                     <!-- URL -->
                     <TextBlock Text=" " />
                 
-                    <TextBlock Text="URL" Style="{StaticResource PhoneTextNormalStyle}" />
+                    <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
+                               Text="{Binding Entry.Url, Source={StaticResource Strings}}" />
                     <TextBox Name="txtUrl" Text="{Binding Url, Mode=TwoWay}"
                              c4f:TextBinding.UpdateSourceOnChange="True"
                              InputScope="Url" GotFocus="txt_GotFocus"
@@ -63,9 +67,9 @@
                                      Style="{StaticResource HyperlinkButtonWrappingStyle}">
                         <toolkit:ContextMenuService.ContextMenu>
                             <toolkit:ContextMenu>
-                                <toolkit:MenuItem Header="use phone browser"
+                                <toolkit:MenuItem Header="{Binding Entry.Browser_External, Source={StaticResource Strings}}"
                                                   Click="mnuBrowser_Click" />
-                                <toolkit:MenuItem Header="use integrated browser"
+                                <toolkit:MenuItem Header="{Binding Entry.Browser_Integrated, Source={StaticResource Strings}}"
                                                   Click="mnuIntegrated_Click" />
                             </toolkit:ContextMenu>
                         </toolkit:ContextMenuService.ContextMenu>
@@ -74,7 +78,8 @@
                     <!-- Notes -->
                     <TextBlock Text=" " />
 
-                    <TextBlock Text="Notes" Style="{StaticResource PhoneTextNormalStyle}" />
+                    <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
+                               Text="{Binding Entry.Notes, Source={StaticResource Strings}}" />
                     <HyperlinkButton Name="lnkNotes" Click="lnkNotes_Click"
                                      HorizontalContentAlignment="Left"
                                      Style="{StaticResource HyperlinkButtonWrappingStyle}" />

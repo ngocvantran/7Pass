@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 
 namespace KeePass.Utils
 {
@@ -10,6 +11,18 @@ namespace KeePass.Utils
         {
             SupportedOrientations = SupportedPageOrientation
                 .PortraitOrLandscape;
+        }
+
+        protected ApplicationBarIconButton AppButton(int index)
+        {
+            return (ApplicationBarIconButton)
+                ApplicationBar.Buttons[index];
+        }
+
+        protected ApplicationBarMenuItem AppMenuItem(int index)
+        {
+            return (ApplicationBarMenuItem)
+                ApplicationBar.MenuItems[index];
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

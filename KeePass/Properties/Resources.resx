@@ -213,12 +213,6 @@ Is it ok if I create an email so that you can send to me to fix this problem?</v
   <data name="InvalidUrlTitle" xml:space="preserve">
     <value>Invalid URL</value>
   </data>
-  <data name="SavedCaption" xml:space="preserve">
-    <value>Entry has been saved successfully!</value>
-  </data>
-  <data name="SavedTitle" xml:space="preserve">
-    <value>Save Entry</value>
-  </data>
   <data name="Conflict" xml:space="preserve">
     <value>7Pass has detected a conflict version of the database.
 Your local database is now uploaded at:
@@ -228,16 +222,6 @@ If you want to use the other database, please download it separately.</value>
   </data>
   <data name="ConflictTitle" xml:space="preserve">
     <value>Database Conflict</value>
-  </data>
-  <data name="AddNotes" xml:space="preserve">
-    <value>«Add Notes»</value>
-  </data>
-  <data name="UnsavedChange" xml:space="preserve">
-    <value>You have unsaved changes.
-Do you really want to ignore these changes?</value>
-  </data>
-  <data name="UnsavedChangeTitle" xml:space="preserve">
-    <value>Unsaved change</value>
   </data>
   <data name="DeletePernamentPrompt" xml:space="preserve">
     <value>Are you sure want to pernamently delete the selected {0} {1}?
@@ -304,9 +288,6 @@ Click this notification to Review/Purchase 7Pass.</value>
   </data>
   <data name="PinDatabase" xml:space="preserve">
     <value>Pin Database</value>
-  </data>
-  <data name="FieldsMenuItem" xml:space="preserve">
-    <value>View/Edit Fields ({0})</value>
   </data>
   <data name="Field_Protected" xml:space="preserve">
     <value>Expand to view/edit.</value>
