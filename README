@@ -6,6 +6,7 @@ Support Info:
 
 Version 3.4:
  - Added SkyDrive support.
+ - Removed usage of device ID.
 
 Version 3.3:
  - Fixed WebDAV bug.

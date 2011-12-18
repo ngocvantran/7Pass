@@ -3,7 +3,7 @@
   <App xmlns="" ProductID="{607307a5-bd5a-4d39-9150-5e016c231373}"
        Title="7Pass"
        RuntimeType="Silverlight"
-       Version="3.2.0.0"
+       Version="3.4.0.0"
        Genre="apps.normal"
        Author="Tran Ngoc Van"
        Description="KeePass for Windows Phone"
