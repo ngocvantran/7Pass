@@ -46,6 +46,7 @@ namespace KeePass.Sources.SkyDrive
         {
             var theme = ThemeData.IsDarkTheme
                 ? "Dark" : "Light";
+            
             var url = string.Format(
                 SkyDrive.Resources.AuthUrl,
                 SkyDriveInfo.CLIENT_ID,

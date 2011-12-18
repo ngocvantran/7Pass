@@ -17,33 +17,14 @@ namespace KeePass.Sources.SkyDrive
                 throw new ArgumentNullException("token");
 
             _token = token;
-            _client = new RestClient(
-                "https://apis.live.net/v5.0/");
-            _client.AddDefaultParameter("token",
-                token, ParameterType.UrlSegment);
-        }
-
-        public void Upload(string path, byte[] content)
-        {
-            path = string.Concat(path,
-                "/content/?access_token={token}&overwrite=false");
-
-            var request = new RestRequest
+            _client = new RestClient
             {
-                Resource = path,
-                Method = Method.PUT,
-                RequestFormat = DataFormat.Json,
+                UserAgent = "7Pass",
+                BaseUrl = "https://apis.live.net/v5.0/",
             };
 
-            request.
-
-            request.AddParameter("file", content,
-                ParameterType.RequestBody);
-
-            _client.ExecuteAsync(request, x =>
-            {
-                throw new NotImplementedException();
-            });
+            _client.AddDefaultParameter("token",
+                token, ParameterType.UrlSegment);
         }
 
         public void Download(string path,
@@ -105,6 +86,25 @@ namespace KeePass.Sources.SkyDrive
                     "emails", "preferred");
 
                 complete(email);
+            });
+        }
+
+        public void GetFileMeta(string path,
+            Action<MetaListItemInfo> complete)
+        {
+            _client.ExecuteAsync(Request(path), x =>
+            {
+                var root = JsonConvert
+                    .DeserializeXNode(x.Content, "root")
+                    .Root;
+
+                if (root == null)
+                {
+                    complete(null);
+                    return;
+                }
+
+                complete(new MetaListItemInfo(root));
             });
         }
 
@@ -179,6 +179,27 @@ namespace KeePass.Sources.SkyDrive
 
             id = parts[0];
             return new SkyDriveClient(parts[1]);
+        }
+
+        public void Upload(string folder,
+            string name, byte[] content)
+        {
+            var safeName = name;
+            if (!name.EndsWith(".doc", StringComparison
+                .InvariantCultureIgnoreCase))
+            {
+                safeName += ".doc";
+            }
+
+            var request = Request("{folder}/files/");
+            request.Method = Method.POST;
+            request.AddUrlSegment("folder", folder);
+            request.AddFile("file", content, safeName);
+
+            _client.ExecuteAsync(request, x =>
+            {
+                throw new NotImplementedException();
+            });
         }
 
         private static RestRequest Request(string resource)

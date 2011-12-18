@@ -113,10 +113,7 @@ namespace KeePass
                         MessageBoxButton.OKCancel);
 
                     if (response == MessageBoxResult.OK)
-                    {
                         ErrorReport.Report(ex);
-                        return;
-                    }
                 }
                 else
                     Debugger.Break();
