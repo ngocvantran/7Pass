@@ -22,14 +22,14 @@ namespace KeePass.Langs {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class About {
+    public class AnalyticsSettings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal About() {
+        internal AnalyticsSettings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace KeePass.Langs {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KeePass.Langs.About", typeof(About).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KeePass.Langs.AnalyticsSettings", typeof(AnalyticsSettings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,86 +61,44 @@ namespace KeePass.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///Developer&apos;s Blog (News &amp; Feedback):.
+        ///   Looks up a localized string similar to Allow.
         /// </summary>
-        public static string Blog {
+        public static string Allow {
             get {
-                return ResourceManager.GetString("Blog", resourceCulture);
+                return ResourceManager.GetString("Allow", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 7Pass.WordPress.com.
+        ///   Looks up a localized string similar to 7Pass collects usage information in order to continuously enhance user experience.
+        ///
+        ///The collection information will never have your database information, or any information that can directly identify you. However:
+        /// - 7Pass does collect your installation ID to link information sent from your device together. This changes everytime 7Pass is installed.
+        /// - Usage collection uses very little network traffic, but the cost to your bill may add up if you&apos;re on a capped plan.
+        ///
+        ///The collected information will be  [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string BlogLink {
+        public static string Description {
             get {
-                return ResourceManager.GetString("BlogLink", resourceCulture);
+                return ResourceManager.GetString("Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About.
+        ///   Looks up a localized string similar to Disable.
+        /// </summary>
+        public static string Disable {
+            get {
+                return ResourceManager.GetString("Disable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analytics.
         /// </summary>
         public static string PageTitle {
             get {
                 return ResourceManager.GetString("PageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Purchase.
-        /// </summary>
-        public static string Purchase {
-            get {
-                return ResourceManager.GetString("Purchase", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Review.
-        /// </summary>
-        public static string Review {
-            get {
-                return ResourceManager.GetString("Review", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 
-        ///Source Code:.
-        /// </summary>
-        public static string Source {
-            get {
-                return ResourceManager.GetString("Source", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to GitHub.com/7Pass/7Pass.
-        /// </summary>
-        public static string SourceLink {
-            get {
-                return ResourceManager.GetString("SourceLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 
-        ///Libraries used/referenced:.
-        /// </summary>
-        public static string UsedLibs {
-            get {
-                return ResourceManager.GetString("UsedLibs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 7Pass Version: {0}.
-        /// </summary>
-        public static string Version {
-            get {
-                return ResourceManager.GetString("Version", resourceCulture);
             }
         }
     }

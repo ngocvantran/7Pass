@@ -117,34 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Blog" xml:space="preserve">
-    <value>
-Developer's Blog (News &amp; Feedback):</value>
+  <data name="Allow" xml:space="preserve">
+    <value>Allow</value>
   </data>
-  <data name="BlogLink" xml:space="preserve">
-    <value>7Pass.WordPress.com</value>
+  <data name="Description" xml:space="preserve">
+    <value>7Pass collects usage information in order to continuously enhance user experience.
+
+The collection information will never have your database information, or any information that can directly identify you. However:
+ - 7Pass does collect your installation ID to link information sent from your device together. This changes everytime 7Pass is installed.
+ - Usage collection uses very little network traffic, but the cost to your bill may add up if you're on a capped plan.
+
+The collected information will be very useful for development of 7Pass.
+
+Your installation ID that will be collected is:</value>
+  </data>
+  <data name="Disable" xml:space="preserve">
+    <value>Disable</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>About</value>
-  </data>
-  <data name="Purchase" xml:space="preserve">
-    <value>Purchase</value>
-  </data>
-  <data name="Review" xml:space="preserve">
-    <value>Review</value>
-  </data>
-  <data name="Source" xml:space="preserve">
-    <value>
-Source Code:</value>
-  </data>
-  <data name="SourceLink" xml:space="preserve">
-    <value>GitHub.com/7Pass/7Pass</value>
-  </data>
-  <data name="UsedLibs" xml:space="preserve">
-    <value>
-Libraries used/referenced:</value>
-  </data>
-  <data name="Version" xml:space="preserve">
-    <value>7Pass Version: {0}</value>
+    <value>Analytics</value>
   </data>
 </root>

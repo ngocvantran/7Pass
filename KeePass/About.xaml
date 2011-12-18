@@ -14,8 +14,8 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="About" Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"
+                       Text="{Binding About.PageTitle, Source={StaticResource Strings}}" />
         </StackPanel>
 
         <ScrollViewer Grid.Row="1" Margin="12,0,12,0">

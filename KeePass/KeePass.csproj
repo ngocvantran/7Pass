@@ -216,6 +216,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>About.resx</DependentUpon>
     </Compile>
+    <Compile Include="Langs\AnalyticsSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnalyticsSettings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Langs\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -632,6 +637,10 @@
     <EmbeddedResource Include="Langs\About.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>About.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Langs\AnalyticsSettings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AnalyticsSettings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Langs\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

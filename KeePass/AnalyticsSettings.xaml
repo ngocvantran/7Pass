@@ -16,23 +16,14 @@
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
 			<TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
 				Style="{StaticResource PhoneTextNormalStyle}"/>
-			<TextBlock x:Name="PageTitle" Text="Analytics" Margin="9,-7,0,0"
-				Style="{StaticResource PhoneTextTitle1Style}"/>
+			<TextBlock x:Name="PageTitle" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"
+                       Text="{Binding Analytics.PageTitle, Source={StaticResource Strings}}" />
 		</StackPanel>
 
 		<ScrollViewer Grid.Row="1" Margin="12,0,12,0">
 			<StackPanel Grid.Row="1" Margin="12,0,12,0">
-				<TextBlock TextWrapping="Wrap">
-					7Pass collects usage information in order to continuously enhance user experience.<LineBreak />
-                    <LineBreak />
-                    The collection information will never have your database information, or any information that can directly identify you. However:<LineBreak />
-                    - 7Pass does collect your installation ID to link information sent from your device together. This changes everytime 7Pass is installed.<LineBreak />
-                    - Usage collection uses very little network traffic, but the cost to your bill may add up if you're on a capped plan.<LineBreak />
-                    <LineBreak />
-                    The collected information will be very useful for development of 7Pass.<LineBreak />
-                    <LineBreak />
-                    Your installation ID that will be collected is:
-				</TextBlock>
+                <TextBlock TextWrapping="Wrap"
+                           Text="{Binding Analytics.Description, Source={StaticResource Strings}}" />
                 <TextBlock Name="lblDevice" />
 			</StackPanel>
 		</ScrollViewer>
