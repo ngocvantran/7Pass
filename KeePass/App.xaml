@@ -4,9 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone">
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:Langs="clr-namespace:KeePass.Langs">
 
     <Application.Resources>
+        <Langs:StringsProvider x:Key="Strings" />
         <system:String x:Key="AppName">7Pass</system:String>
         
         <Style x:Key="KeePassPage" TargetType="controls:PhoneApplicationPage">

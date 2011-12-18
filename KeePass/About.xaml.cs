@@ -16,7 +16,7 @@ namespace KeePass
             var version = parts[1].Split('=')[1];
 
             lblVersion.Text = string.Format(
-                lblVersion.Text, version);
+                Langs.About.Version, version);
         }
 
         private void lnkPurchase_Click(

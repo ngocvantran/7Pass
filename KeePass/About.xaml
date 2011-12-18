@@ -20,33 +20,28 @@
 
         <ScrollViewer Grid.Row="1" Margin="12,0,12,0">
             <StackPanel Grid.Row="1" Margin="12,0,12,0">
-                <TextBlock Name="lblVersion" HorizontalAlignment="Center">
-                7Pass Version: {0}
-                </TextBlock>
+                <TextBlock Name="lblVersion" HorizontalAlignment="Center"
+                           Text="{Binding About.Version, Source={StaticResource Strings}}" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <HyperlinkButton Content="Purchase" Click="lnkPurchase_Click" />
+                    <HyperlinkButton Click="lnkPurchase_Click"
+                                     Content="{Binding About.Purchase, Source={StaticResource Strings}}"/>
                     <TextBlock Text="/" />
-                    <HyperlinkButton Content="Review" Click="lnkReview_Click" />
+                    <HyperlinkButton Click="lnkReview_Click"
+                                     Content="{Binding About.Review, Source={StaticResource Strings}}"/>
                 </StackPanel>
 
-                <TextBlock HorizontalAlignment="Center">
-                <LineBreak />
-                Developer's Blog (News &amp; Feedback):
-                </TextBlock>
-                <HyperlinkButton Content="7pass.wordpress.com" TargetName="_blank"
-                                 NavigateUri="http://7pass.wordpress.com" />
+                <TextBlock HorizontalAlignment="Center"
+                           Text="{Binding About.Blog, Source={StaticResource Strings}}" />
+                <HyperlinkButton NavigateUri="http://7pass.wordpress.com" TargetName="_blank"
+                                 Content="{Binding About.BlogLink, Source={StaticResource Strings}}"/>
 
-                <TextBlock HorizontalAlignment="Center">
-                <LineBreak />
-                Source Code:
-                </TextBlock>
-                <HyperlinkButton Content="github.com/7pass/7pass" TargetName="_blank"
-                                 NavigateUri="http://github.com/7pass/7pass" />
+                <TextBlock HorizontalAlignment="Center"
+                           Text="{Binding About.Source, Source={StaticResource Strings}}" />
+                <HyperlinkButton NavigateUri="http://github.com/7pass/7pass" TargetName="_blank"
+                                 Content="{Binding About.SourceLink, Source={StaticResource Strings}}" />
 
-                <TextBlock HorizontalAlignment="Center">
-                <LineBreak />
-                Libraries used/referenced:
-                </TextBlock>
+                <TextBlock HorizontalAlignment="Center"
+                           Text="{Binding About.UsedLibs, Source={StaticResource Strings}}" />
 
                 <HyperlinkButton Content="KeePass" TargetName="_blank"
                              NavigateUri="http://keepass.info" />
@@ -56,6 +51,8 @@
                              NavigateUri="http://www.icsharpcode.net/opensource/sharpziplib/" />
                 <HyperlinkButton Content="Json.NET" TargetName="_blank"
                              NavigateUri="http://json.codeplex.com/" />
+                <HyperlinkButton Content="RestSharp" TargetName="_blank"
+                             NavigateUri="http://restsharp.org/" />
             </StackPanel>
         </ScrollViewer>
     </Grid>
