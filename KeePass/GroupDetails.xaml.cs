@@ -30,8 +30,17 @@ namespace KeePass
             InitializeComponent();
 
             _ids = new List<string>();
-            _cmdHome = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
+            
+            _cmdHome = AppButton(0);
+            _cmdHome.Text = Langs.App.Home;
+
+            AppButton(1).Text = Langs.Group.NewEntry;
+            AppButton(2).Text = Langs.Group.NewGroup;
+            AppButton(3).Text = Langs.Group.Search;
+
+            AppMenuItem(0).Text = Langs.App.SelectDb;
+            AppMenuItem(1).Text = Langs.Group.ClearHistory;
+            AppMenuItem(2).Text = Langs.App.About;
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)

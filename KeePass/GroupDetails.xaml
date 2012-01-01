@@ -35,14 +35,14 @@
                             <uc:ListItemView>
                                 <toolkit:ContextMenuService.ContextMenu>
                                     <toolkit:ContextMenu>
-                                        <toolkit:MenuItem
-											Header="rename" Tag="{Binding Data}" Click="mnuRename_Click"
-											Visibility="{Binding IsGroup, Converter={StaticResource BoolConverter}}" />
+                                        <toolkit:MenuItem Tag="{Binding Data}" Click="mnuRename_Click"
+                                                          Header="{Binding Group.Rename, Source={StaticResource Strings}}"
+                                                          Visibility="{Binding IsGroup, Converter={StaticResource BoolConverter}}" />
 
-                                        <toolkit:MenuItem Header="move" Tag="{Binding Data}"
-                                                          Click="mnuMove_Click" />
-                                        <toolkit:MenuItem Header="delete" Tag="{Binding Data}"
-                                                          Click="mnuDelete_Click"/>
+                                        <toolkit:MenuItem Tag="{Binding Data}" Click="mnuMove_Click"
+                                                          Header="{Binding Group.Move, Source={StaticResource Strings}}" />
+                                        <toolkit:MenuItem Tag="{Binding Data}" Click="mnuDelete_Click"
+                                                          Header="{Binding Group.Delete, Source={StaticResource Strings}}" />
                                     </toolkit:ContextMenu>
                                 </toolkit:ContextMenuService.ContextMenu>
                             </uc:ListItemView>
@@ -51,9 +51,8 @@
                 </uc:KeePassListBase>
             </controls:PivotItem>
 
-            <controls:PivotItem Header="History">
-                <uc:KeePassList SelectionChanged="lstHistory_SelectionChanged"
-                                x:Name="lstHistory" />
+            <controls:PivotItem Header="{Binding Group.History, Source={StaticResource Strings}}">
+                <uc:KeePassList SelectionChanged="lstHistory_SelectionChanged" x:Name="lstHistory" />
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
@@ -62,25 +61,25 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton
 				IconUri="/Images/home.png"
-				Text="Home" Click="cmdHome_Click" />
+				Text="[Home]" Click="cmdHome_Click" />
             <shell:ApplicationBarIconButton
 				IconUri="/Images/entry.dark.png"
-				Text="New Entry" Click="cmdNewEntry_Click" />
+				Text="[New Entry]" Click="cmdNewEntry_Click" />
             <shell:ApplicationBarIconButton
 				IconUri="/Images/folder.dark.png"
-				Text="New Group" Click="cmdNewGroup_Click" />
+				Text="[New Group]" Click="cmdNewGroup_Click" />
             <shell:ApplicationBarIconButton
 				IconUri="/Images/search.png"
-				Text="Search" Click="mnuSearch_Click" />
+				Text="[Search]" Click="mnuSearch_Click" />
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem
-					Text="Select DB"
+					Text="[Select DB]"
 					Click="mnuRoot_Click" />
                 <shell:ApplicationBarMenuItem
-					Text="Clear History List"
+					Text="[Clear History List]"
 					Click="mnuHistory_Click" />
                 <shell:ApplicationBarMenuItem
-					Text="About"
+					Text="[About]"
 					Click="mnuAbout_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

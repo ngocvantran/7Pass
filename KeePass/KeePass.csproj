@@ -231,6 +231,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Entry.resx</DependentUpon>
     </Compile>
+    <Compile Include="Langs\Group.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Group.resx</DependentUpon>
+    </Compile>
     <Compile Include="Langs\StringsProvider.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -654,6 +659,10 @@
     <EmbeddedResource Include="Langs\Entry.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Entry.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Langs\Group.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Group.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
