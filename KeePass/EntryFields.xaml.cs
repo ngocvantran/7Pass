@@ -24,6 +24,11 @@ namespace KeePass
         public EntryFields()
         {
             InitializeComponent();
+            
+            AppButton(0).Text = Langs.App.Home;
+            AppButton(1).Text = Langs.App.SelectDb;
+            AppButton(2).Text = Langs.Entry.AddField;
+            AppButton(3).Text = Langs.App.About;
         }
 
         protected override void OnNavigatedTo(

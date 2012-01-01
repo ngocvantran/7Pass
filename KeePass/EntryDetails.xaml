@@ -23,7 +23,7 @@
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"
-                       Text="{Binding Entry.PageTitle, Source={StaticResource Strings}}" />
+                       Text="{Binding Entry.EntryPageTitle, Source={StaticResource Strings}}" />
         </StackPanel>
 
         <Grid Grid.Row="1" Margin="12,0,12,0">
@@ -93,23 +93,23 @@
         <shell:ApplicationBar IsVisible="True">
             <shell:ApplicationBarIconButton
                 IconUri="/Images/home.png"
-                Text="Home" Click="cmdHome_Click" />
+                Text="[Home]" Click="cmdHome_Click" />
             <shell:ApplicationBarIconButton
                 IconUri="/Images/password.png"
-                Text="Generate Password" Click="cmdPassGen_Click"/>
+                Text="[Generate Password]" Click="cmdPassGen_Click"/>
             <shell:ApplicationBarIconButton
                 IconUri="/Images/save.png" IsEnabled="False"
-                Text="Save Entry" Click="cmdSave_Click" />
+                Text="[Save Entry]" Click="cmdSave_Click" />
             <shell:ApplicationBarIconButton
                 IconUri="/Images/refresh.png"  IsEnabled="False"
-                Text="Reset Entry" Click="cmdReset_Click"/>
+                Text="[Reset Entry]" Click="cmdReset_Click"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem
-                    Text="Fields" Click="mnuFields_Click" />
+                    Text="[Fields]" Click="mnuFields_Click" />
                 <shell:ApplicationBarMenuItem
-                    Text="Select DB" Click="mnuRoot_Click" />
+                    Text="[Select DB]" Click="mnuRoot_Click" />
                 <shell:ApplicationBarMenuItem
-                    Text="About" Click="mnuAbout_Click" />
+                    Text="[About]" Click="mnuAbout_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

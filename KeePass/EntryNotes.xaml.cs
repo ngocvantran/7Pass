@@ -15,6 +15,11 @@ namespace KeePass
         public EntryNotes()
         {
             InitializeComponent();
+
+            AppButton(0).Text = Langs.App.Home;
+            AppButton(1).Text = Langs.App.SelectDb;
+            AppButton(2).Text = Langs.App.About;
+            AppMenuItem(0).Text = Langs.Entry.ClearNotes;
         }
 
         protected override void OnNavigatedTo(

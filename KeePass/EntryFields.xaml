@@ -20,9 +20,9 @@
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
 			<TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
 			           Style="{StaticResource PhoneTextNormalStyle}"/>
-			<TextBlock x:Name="PageTitle" Text="Fields" Margin="9,-7,0,0"
-			           Style="{StaticResource PhoneTextTitle1Style}"/>
-		</StackPanel>
+            <TextBlock x:Name="PageTitle" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"
+                       Text="{Binding Entry.FieldsPageTitle, Source={StaticResource Strings}}" />
+        </StackPanel>
 
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <ListBox x:Name="lstFields"
@@ -96,16 +96,16 @@
 		<shell:ApplicationBar IsVisible="True">
 			<shell:ApplicationBarIconButton
                 IconUri="/Images/home.png"
-                Text="Home" Click="cmdHome_Click" />
+                Text="[Home]" Click="cmdHome_Click" />
 			<shell:ApplicationBarIconButton
                 IconUri="/Images/root.png"
-                Text="Select DB" Click="cmdRoot_Click" />
+                Text="[Select DB]" Click="cmdRoot_Click" />
             <shell:ApplicationBarIconButton
                 IconUri="/Images/new.png"
-                Text="Add" Click="cmdAdd_Click" />
+                Text="[Add]" Click="cmdAdd_Click" />
 			<shell:ApplicationBarIconButton
                 IconUri="/Images/about.png"
-                Text="About" Click="cmdAbout_Click"/>
+                Text="[About]" Click="cmdAbout_Click"/>
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
 

@@ -22,14 +22,14 @@ namespace KeePass.Langs {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class EntryDetails {
+    public class Entry {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal EntryDetails() {
+        internal Entry() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace KeePass.Langs {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KeePass.Langs.EntryDetails", typeof(EntryDetails).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KeePass.Langs.Entry", typeof(Entry).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,15 @@ namespace KeePass.Langs {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string AddField {
+            get {
+                return ResourceManager.GetString("AddField", resourceCulture);
             }
         }
         
@@ -88,11 +97,38 @@ namespace KeePass.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear All.
+        /// </summary>
+        public static string ClearNotes {
+            get {
+                return ResourceManager.GetString("ClearNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entry.
+        /// </summary>
+        public static string EntryPageTitle {
+            get {
+                return ResourceManager.GetString("EntryPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View/Edit Fields ({0}).
         /// </summary>
         public static string Fields {
             get {
                 return ResourceManager.GetString("Fields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fields.
+        /// </summary>
+        public static string FieldsPageTitle {
+            get {
+                return ResourceManager.GetString("FieldsPageTitle", resourceCulture);
             }
         }
         
@@ -115,11 +151,11 @@ namespace KeePass.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Entry.
+        ///   Looks up a localized string similar to Notes.
         /// </summary>
-        public static string PageTitle {
+        public static string NotesPageTitle {
             get {
-                return ResourceManager.GetString("PageTitle", resourceCulture);
+                return ResourceManager.GetString("NotesPageTitle", resourceCulture);
             }
         }
         

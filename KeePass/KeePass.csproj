@@ -226,11 +226,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>App.resx</DependentUpon>
     </Compile>
-    <Compile Include="Langs\EntryDetails.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntryDetails.resx</DependentUpon>
-    </Compile>
     <Compile Include="Langs\StringsProvider.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -651,9 +646,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>App.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Langs\EntryDetails.resx">
+    <EmbeddedResource Include="Langs\Entry.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>EntryDetails.Designer.cs</LastGenOutput>
+      <LastGenOutput>Entry.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

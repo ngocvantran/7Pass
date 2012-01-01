@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddField" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="AddNotes" xml:space="preserve">
     <value>«Add Notes»</value>
   </data>
@@ -126,8 +129,17 @@
   <data name="Browser_Integrated" xml:space="preserve">
     <value>use integrated browser</value>
   </data>
+  <data name="ClearNotes" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="EntryPageTitle" xml:space="preserve">
+    <value>Entry</value>
+  </data>
   <data name="Fields" xml:space="preserve">
     <value>View/Edit Fields ({0})</value>
+  </data>
+  <data name="FieldsPageTitle" xml:space="preserve">
+    <value>Fields</value>
   </data>
   <data name="GeneratePassword" xml:space="preserve">
     <value>Generate Password</value>
@@ -135,8 +147,8 @@
   <data name="Notes" xml:space="preserve">
     <value>Notes</value>
   </data>
-  <data name="PageTitle" xml:space="preserve">
-    <value>Entry</value>
+  <data name="NotesPageTitle" xml:space="preserve">
+    <value>Notes</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>

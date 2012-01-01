@@ -6,7 +6,7 @@ namespace KeePass.Langs
     {
         private readonly About _about;
         private readonly AnalyticsSettings _analytics;
-        private readonly EntryDetails _entry;
+        private readonly Entry _entry;
         private readonly App _resources;
 
         public About About
@@ -24,7 +24,7 @@ namespace KeePass.Langs
             get { return _resources; }
         }
 
-        public EntryDetails Entry
+        public Entry Entry
         {
             get { return _entry; }
         }
@@ -32,8 +32,8 @@ namespace KeePass.Langs
         public StringsProvider()
         {
             _about = new About();
+            _entry = new Entry();
             _resources = new App();
-            _entry = new EntryDetails();
             _analytics = new AnalyticsSettings();
         }
     }

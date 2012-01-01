@@ -33,9 +33,9 @@ namespace KeePass
             _cmdReset = AppButton(3);
 
             AppButton(0).Text = Langs.App.Home;
-            AppButton(1).Text = Langs.EntryDetails.GeneratePassword;
-            _cmdSave.Text = Langs.EntryDetails.Save;
-            _cmdReset.Text = Langs.EntryDetails.Reset;
+            AppButton(1).Text = Langs.Entry.GeneratePassword;
+            _cmdSave.Text = Langs.Entry.Save;
+            _cmdReset.Text = Langs.Entry.Reset;
 
             AppMenuItem(1).Text = Langs.App.SelectDb;
             AppMenuItem(2).Text = Langs.App.About;
@@ -119,8 +119,8 @@ namespace KeePass
                 return true;
 
             var confirm = MessageBox.Show(
-                Langs.EntryDetails.UnsavedChange,
-                Langs.EntryDetails.UnsavedChangeTitle,
+                Langs.Entry.UnsavedChange,
+                Langs.Entry.UnsavedChangeTitle,
                 MessageBoxButton.OKCancel);
 
             if (confirm != MessageBoxResult.OK)
@@ -159,7 +159,7 @@ namespace KeePass
         {
             var mnuFields = AppMenuItem(0);
             mnuFields.Text = string.Format(
-                Langs.EntryDetails.Fields,
+                Langs.Entry.Fields,
                 entry.CustomFields.Count);
         }
 
@@ -242,8 +242,8 @@ namespace KeePass
                     {
                         new ToastPrompt
                         {
-                            Title = Langs.EntryDetails.SavedTitle,
-                            Message = Langs.EntryDetails.SavedCaption,
+                            Title = Langs.Entry.SavedTitle,
+                            Message = Langs.Entry.SavedCaption,
                             TextOrientation = System.Windows.Controls
                                 .Orientation.Vertical,
                         }.Show();
@@ -274,7 +274,7 @@ namespace KeePass
             }
             else
             {
-                notes = Langs.EntryDetails.AddNotes;
+                notes = Langs.Entry.AddNotes;
             }
 
             lnkNotes.Content = notes;
