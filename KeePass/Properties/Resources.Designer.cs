@@ -467,24 +467,6 @@ namespace KeePass.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to update.
-        /// </summary>
-        internal static string Update_Download {
-            get {
-                return ResourceManager.GetString("Update_Download", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to synchronize.
-        /// </summary>
-        internal static string Update_Sync {
-            get {
-                return ResourceManager.GetString("Update_Sync", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Updating of database {0} failed:
         ///{1}.
         /// </summary>

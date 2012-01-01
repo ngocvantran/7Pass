@@ -28,8 +28,12 @@ namespace KeePass
             _items = new ObservableCollection<DatabaseItem>();
             lstDatabases.ItemsSource = _items;
 
-            _mnuUpdateAll = (ApplicationBarMenuItem)
-                ApplicationBar.MenuItems[0];
+            _mnuUpdateAll = AppMenuItem(0);
+            _mnuUpdateAll.Text = Langs.Group.SynchronizeAll;
+
+            AppButton(0).Text = Langs.Group.NewDb;
+            AppButton(1).Text = Langs.App.Settings;
+            AppButton(2).Text = Langs.App.About;
         }
 
         protected override void OnNavigatedTo(

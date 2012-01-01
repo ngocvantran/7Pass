@@ -120,8 +120,20 @@
   <data name="ClearHistory" xml:space="preserve">
     <value>Clear History</value>
   </data>
+  <data name="ClearKeyfile" xml:space="preserve">
+    <value>clear keyfile</value>
+  </data>
+  <data name="ClearPassword" xml:space="preserve">
+    <value>clear password</value>
+  </data>
+  <data name="DbsPageTitle" xml:space="preserve">
+    <value>Databases</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>delete</value>
+  </data>
+  <data name="DownloadKeyfile" xml:space="preserve">
+    <value>download keyfile</value>
   </data>
   <data name="History" xml:space="preserve">
     <value>History</value>
@@ -129,16 +141,37 @@
   <data name="Move" xml:space="preserve">
     <value>move</value>
   </data>
+  <data name="MoveHere" xml:space="preserve">
+    <value>Move Here</value>
+  </data>
+  <data name="MovePageTitle" xml:space="preserve">
+    <value>Move To</value>
+  </data>
+  <data name="NewDb" xml:space="preserve">
+    <value>Add New</value>
+  </data>
   <data name="NewEntry" xml:space="preserve">
     <value>New Entry</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
     <value>New Group</value>
   </data>
+  <data name="Pin" xml:space="preserve">
+    <value>pin database</value>
+  </data>
   <data name="Rename" xml:space="preserve">
     <value>rename</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="Synchronize" xml:space="preserve">
+    <value>synchronize</value>
+  </data>
+  <data name="SynchronizeAll" xml:space="preserve">
+    <value>Synchronize/Update all</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>update</value>
   </data>
 </root>

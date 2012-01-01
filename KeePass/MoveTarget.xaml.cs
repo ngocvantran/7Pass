@@ -27,8 +27,8 @@ namespace KeePass
         {
             InitializeComponent();
 
-            _cmdMove = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
+            _cmdMove = AppButton(0);
+            _cmdMove.Text = Langs.Group.MoveHere;
         }
 
         protected override void OnNavigatedTo(

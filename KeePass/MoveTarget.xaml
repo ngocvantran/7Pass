@@ -19,7 +19,8 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Move To" Margin="9,-7,0,0"
+            <TextBlock x:Name="PageTitle" Margin="9,-7,0,0"
+                       Text="{Binding Group.MovePageTitle, Source={StaticResource Strings}}"
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
@@ -36,7 +37,7 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton
                 IconUri="/Images/check.png"
-                Text="Move Here" Click="cmdMove_Click" />
+                Text="[Move Here]" Click="cmdMove_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

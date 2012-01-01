@@ -95,10 +95,10 @@ namespace KeePass.Data
                 switch (_info.Details.Type)
                 {
                     case SourceTypes.Synchronizable:
-                        return Properties.Resources.Update_Sync;
+                        return Langs.Group.Synchronize;
 
                     case SourceTypes.Updatable:
-                        return Properties.Resources.Update_Download;
+                        return Langs.Group.Update;
 
                     default:
                         return string.Empty;

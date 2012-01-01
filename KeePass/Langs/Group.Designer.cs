@@ -70,11 +70,47 @@ namespace KeePass.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to clear keyfile.
+        /// </summary>
+        public static string ClearKeyfile {
+            get {
+                return ResourceManager.GetString("ClearKeyfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to clear password.
+        /// </summary>
+        public static string ClearPassword {
+            get {
+                return ResourceManager.GetString("ClearPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Databases.
+        /// </summary>
+        public static string DbsPageTitle {
+            get {
+                return ResourceManager.GetString("DbsPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to delete.
         /// </summary>
         public static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to download keyfile.
+        /// </summary>
+        public static string DownloadKeyfile {
+            get {
+                return ResourceManager.GetString("DownloadKeyfile", resourceCulture);
             }
         }
         
@@ -97,6 +133,33 @@ namespace KeePass.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Move Here.
+        /// </summary>
+        public static string MoveHere {
+            get {
+                return ResourceManager.GetString("MoveHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move To.
+        /// </summary>
+        public static string MovePageTitle {
+            get {
+                return ResourceManager.GetString("MovePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New.
+        /// </summary>
+        public static string NewDb {
+            get {
+                return ResourceManager.GetString("NewDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Entry.
         /// </summary>
         public static string NewEntry {
@@ -115,6 +178,15 @@ namespace KeePass.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to pin database.
+        /// </summary>
+        public static string Pin {
+            get {
+                return ResourceManager.GetString("Pin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to rename.
         /// </summary>
         public static string Rename {
@@ -129,6 +201,33 @@ namespace KeePass.Langs {
         public static string Search {
             get {
                 return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to synchronize.
+        /// </summary>
+        public static string Synchronize {
+            get {
+                return ResourceManager.GetString("Synchronize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronize/Update all.
+        /// </summary>
+        public static string SynchronizeAll {
+            get {
+                return ResourceManager.GetString("SynchronizeAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to update.
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
             }
         }
     }
