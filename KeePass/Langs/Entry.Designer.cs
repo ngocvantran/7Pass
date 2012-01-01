@@ -142,6 +142,33 @@ namespace KeePass.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Length of generated password.
+        /// </summary>
+        public static string GenerationLength {
+            get {
+                return ResourceManager.GetString("GenerationLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Results.
+        /// </summary>
+        public static string GenerationResult {
+            get {
+                return ResourceManager.GetString("GenerationResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string GenerationSettings {
+            get {
+                return ResourceManager.GetString("GenerationSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notes.
         /// </summary>
         public static string Notes {
@@ -156,6 +183,15 @@ namespace KeePass.Langs {
         public static string NotesPageTitle {
             get {
                 return ResourceManager.GetString("NotesPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string PassGenPageTitle {
+            get {
+                return ResourceManager.GetString("PassGenPageTitle", resourceCulture);
             }
         }
         

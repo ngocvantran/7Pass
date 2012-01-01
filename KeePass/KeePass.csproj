@@ -226,6 +226,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>App.resx</DependentUpon>
     </Compile>
+    <Compile Include="Langs\Entry.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entry.resx</DependentUpon>
+    </Compile>
     <Compile Include="Langs\StringsProvider.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

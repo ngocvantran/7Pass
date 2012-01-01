@@ -20,6 +20,11 @@ namespace KeePass
         public PassGen()
         {
             InitializeComponent();
+
+            AppButton(0).Text = Langs.Entry.GeneratePassword;
+            AppButton(1).Text = Langs.App.Home;
+            AppButton(2).Text = Langs.App.SelectDb;
+            AppButton(3).Text = Langs.App.About;
         }
 
         protected override void OnNavigatedTo(

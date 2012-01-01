@@ -11,9 +11,10 @@
 	Style="{StaticResource KeePassPage}"
     SupportedOrientations="Portrait">
 
-    <controls:Panorama Name="panMain" Title="Password"
-                       SelectionChanged="panMain_SelectionChanged">
-        <controls:PanoramaItem Name="panSettings" Header="Settings">
+    <controls:Panorama Name="panMain" SelectionChanged="panMain_SelectionChanged"
+                       Title="{Binding Entry.PassGenPageTitle, Source={StaticResource Strings}}">
+        <controls:PanoramaItem Name="panSettings"
+                               Header="{Binding Entry.GenerationSettings, Source={StaticResource Strings}}">
             <ScrollViewer>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -22,8 +23,8 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Length of generated password" Grid.Row="0"
-                        Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock Grid.Row="0" Style="{StaticResource PhoneTextNormalStyle}"
+                               Text="{Binding Entry.GenerationLength, Source={StaticResource Strings}}" />
                     <Grid Grid.Row="1">
                         <Slider x:Name="sldLength" Minimum="0" Maximum="65"
                                 SmallChange="1" LargeChange="10"
@@ -37,7 +38,8 @@
                 </Grid>
             </ScrollViewer>
         </controls:PanoramaItem>
-        <controls:PanoramaItem Name="panResults" Header="Results">
+        <controls:PanoramaItem Name="panResults"
+                               Header="{Binding Entry.GenerationResult, Source={StaticResource Strings}}">
             <ListBox Name="lstResults" SelectionChanged="lstResults_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -60,16 +62,16 @@
 		<shell:ApplicationBar IsVisible="True">
             <shell:ApplicationBarIconButton
 				IconUri="/Images/password.png"
-				Text="Generate" Click="cmdGenerate_Click"/>
+				Text="[Generate]" Click="cmdGenerate_Click"/>
             <shell:ApplicationBarIconButton
 				IconUri="/Images/home.png"
-				Text="Home" Click="cmdHome_Click" />
+				Text="[Home]" Click="cmdHome_Click" />
 			<shell:ApplicationBarIconButton
 				IconUri="/Images/root.png"
-				Text="Select DB" Click="cmdRoot_Click" />
+				Text="[Select DB]" Click="cmdRoot_Click" />
 			<shell:ApplicationBarIconButton
 				IconUri="/Images/about.png"
-				Text="About" Click="cmdAbout_Click"/>
+				Text="[About]" Click="cmdAbout_Click"/>
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
 

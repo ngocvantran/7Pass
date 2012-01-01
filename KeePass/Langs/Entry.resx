@@ -144,11 +144,23 @@
   <data name="GeneratePassword" xml:space="preserve">
     <value>Generate Password</value>
   </data>
+  <data name="GenerationLength" xml:space="preserve">
+    <value>Length of generated password</value>
+  </data>
+  <data name="GenerationResult" xml:space="preserve">
+    <value>Results</value>
+  </data>
+  <data name="GenerationSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="Notes" xml:space="preserve">
     <value>Notes</value>
   </data>
   <data name="NotesPageTitle" xml:space="preserve">
     <value>Notes</value>
+  </data>
+  <data name="PassGenPageTitle" xml:space="preserve">
+    <value>Password</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
