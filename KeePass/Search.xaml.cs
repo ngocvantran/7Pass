@@ -96,6 +96,35 @@ namespace KeePass
             return IsRelated(parent, target);
         }
 
+        private static bool Matches(
+            Entry entry, string text)
+        {
+            return Matches(text, new[]
+            {
+                entry.Title,
+                entry.UserName,
+                entry.Notes,
+            });
+        }
+
+        private static bool Matches(
+            Group group, string text)
+        {
+            return Matches(text, new[]
+            {
+                group.Name,
+                group.Notes,
+            });
+        }
+
+        private static bool Matches(string text,
+            IEnumerable<string> fields)
+        {
+            return fields
+                .Select(x => x.ToUpperInvariant())
+                .Any(x => x.Contains(text));
+        }
+
         private void PerformSearch()
         {
             if (!_wkSearch.IsBusy)
@@ -113,9 +142,8 @@ namespace KeePass
             foreach (var condition in conditions)
             {
                 var local = condition;
-                entries = entries.Where(x =>
-                    x.Title.ToUpperInvariant()
-                        .Contains(local));
+                entries = entries.Where(
+                    x => Matches(x, local));
             }
 
             if (_wkSearch.CancellationPending)
@@ -159,9 +187,8 @@ namespace KeePass
             foreach (var condition in conditions)
             {
                 var local = condition;
-                groups = groups.Where(x =>
-                    x.Name.ToUpperInvariant()
-                        .Contains(local));
+                groups = groups.Where(
+                    x => Matches(x, local));
             }
 
             if (_wkSearch.CancellationPending)
