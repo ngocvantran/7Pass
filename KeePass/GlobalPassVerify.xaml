@@ -32,11 +32,11 @@
 		<shell:ApplicationBar IsVisible="True">
 			<shell:ApplicationBarIconButton
                 IconUri="/Images/check.png"
-                Text="OK" IsEnabled="False"
+                Text="[OK]" IsEnabled="False"
                 Click="cmdOK_Click" />
 			<shell:ApplicationBarIconButton
                 IconUri="/Images/close.dark.png"
-                Text="Clear" Click="cmdClear_Click" />
+                Text="[Clear]" Click="cmdClear_Click" />
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
 

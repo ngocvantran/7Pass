@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Navigation;
 using KeePass.Data;
+using KeePass.I18n;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Controls;
@@ -17,6 +18,11 @@ namespace KeePass
         public WebView()
         {
             InitializeComponent();
+
+            AppButton(0).Text = Strings.Refresh;
+            AppButton(1).Text = Strings.WebView_GoBack;
+            AppButton(2).Text = Strings.WebView_Username;
+            AppButton(3).Text = Strings.WebView_Password;
         }
 
         protected override void OnNavigatedTo(

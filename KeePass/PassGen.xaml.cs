@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Data;
 using KeePass.Generator;
+using KeePass.I18n;
 using KeePass.Storage;
 using KeePass.Utils;
 
@@ -20,6 +21,11 @@ namespace KeePass
         public PassGen()
         {
             InitializeComponent();
+
+            AppButton(0).Text = Strings.PassGen_Generate;
+            AppButton(1).Text = Strings.App_Home;
+            AppButton(2).Text = Strings.App_Databases;
+            AppButton(3).Text = Strings.App_About;
         }
 
         protected override void OnNavigatedTo(

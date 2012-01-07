@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using KeePass.I18n;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
 
@@ -16,9 +17,9 @@ namespace KeePass.Sources.Web
         public WebDownload()
         {
             InitializeComponent();
-
-            _cmdDownload = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
+            
+            _cmdDownload = AppButton(0);
+            _cmdDownload.Text = Strings.WebDownload_Open;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

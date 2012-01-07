@@ -1,4 +1,4 @@
-﻿<keepass:KeePassPage 
+<keepass:KeePassPage 
     x:Class="KeePass.Rename"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -34,10 +34,10 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True">
             <shell:ApplicationBarIconButton
-                IconUri="/Images/check.png" Text="Rename"
+                IconUri="/Images/check.png" Text="[Rename]"
                 Click="cmdRename_Click" />
             <shell:ApplicationBarIconButton
-                IconUri="/Images/close.dark.png" Text="Clear"
+                IconUri="/Images/close.dark.png" Text="[Clear]"
                 Click="cmdClear_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

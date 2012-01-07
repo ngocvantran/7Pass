@@ -1,4 +1,4 @@
-﻿<keepass:KeePassPage 
+<keepass:KeePassPage 
     x:Class="KeePass.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -83,16 +83,16 @@
         <shell:ApplicationBar>
             <shell:ApplicationBarIconButton
                 IconUri="/Images/new.png"
-                Text="Add New" Click="mnuNew_Click"/>
+                Text="[Add New]" Click="mnuNew_Click"/>
             <shell:ApplicationBarIconButton
                 IconUri="/Images/settings.png"
-                Text="Settings" Click="mnuSettings_Click"/>
+                Text="[Settings]" Click="mnuSettings_Click"/>
             <shell:ApplicationBarIconButton
                 IconUri="/Images/about.png"
-                Text="About" Click="mnuAbout_Click"/>
+                Text="[About]" Click="mnuAbout_Click"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem
-                    Text="Synchronize/Update all" IsEnabled="False"
+                    Text="[Synchronize/Update all]" IsEnabled="False"
                     Click="mnuUpdateAll_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

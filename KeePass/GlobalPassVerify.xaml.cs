@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using KeePass.Analytics;
+using KeePass.I18n;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
 
@@ -19,13 +20,14 @@ namespace KeePass
         {
             InitializeComponent();
 
+            _cmdOk = this.AppButton(0);
+            _cmdOk.Text = Strings.GlobalPassVerify_OK;
+            this.AppButton(1).Text = Strings.Clear;
+
             _wkVerify = new BackgroundWorker();
             _wkVerify.DoWork += _wkVerify_DoWork;
             _wkVerify.RunWorkerCompleted +=
                 _wkVerify_RunWorkerCompleted;
-
-            _cmdOk = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

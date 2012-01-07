@@ -127,6 +127,24 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allow.
+        /// </summary>
+        public static string AnalyticsSettings_Allow {
+            get {
+                return ResourceManager.GetString("AnalyticsSettings_Allow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable.
+        /// </summary>
+        public static string AnalyticsSettings_Disable {
+            get {
+                return ResourceManager.GetString("AnalyticsSettings_Disable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analytics.
         /// </summary>
         public static string AnalyticsSettings_PageTitle {
@@ -147,6 +165,42 @@ namespace KeePass.I18n {
         public static string AnalyticsSettings_Policy {
             get {
                 return ResourceManager.GetString("AnalyticsSettings_Policy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string App_About {
+            get {
+                return ResourceManager.GetString("App_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select DB.
+        /// </summary>
+        public static string App_Databases {
+            get {
+                return ResourceManager.GetString("App_Databases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string App_Home {
+            get {
+                return ResourceManager.GetString("App_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string Clear {
+            get {
+                return ResourceManager.GetString("Clear", resourceCulture);
             }
         }
         
@@ -187,6 +241,15 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string DropBox_Login {
+            get {
+                return ResourceManager.GetString("DropBox_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string DropBox_Password {
@@ -201,6 +264,24 @@ namespace KeePass.I18n {
         public static string EntryDetails_ExternalBrowser {
             get {
                 return ResourceManager.GetString("EntryDetails_ExternalBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fields.
+        /// </summary>
+        public static string EntryDetails_Fields {
+            get {
+                return ResourceManager.GetString("EntryDetails_Fields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate Password.
+        /// </summary>
+        public static string EntryDetails_GeneratePassword {
+            get {
+                return ResourceManager.GetString("EntryDetails_GeneratePassword", resourceCulture);
             }
         }
         
@@ -241,6 +322,24 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset Entry.
+        /// </summary>
+        public static string EntryDetails_ResetEntry {
+            get {
+                return ResourceManager.GetString("EntryDetails_ResetEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Entry.
+        /// </summary>
+        public static string EntryDetails_SaveEntry {
+            get {
+                return ResourceManager.GetString("EntryDetails_SaveEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string EntryDetails_Title {
@@ -268,11 +367,29 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string EntryFields_Add {
+            get {
+                return ResourceManager.GetString("EntryFields_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fields.
         /// </summary>
         public static string EntryFields_PageTitle {
             get {
                 return ResourceManager.GetString("EntryFields_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear All.
+        /// </summary>
+        public static string EntryNotes_ClearAll {
+            get {
+                return ResourceManager.GetString("EntryNotes_ClearAll", resourceCulture);
             }
         }
         
@@ -313,6 +430,24 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set.
+        /// </summary>
+        public static string GlobalPass_Set {
+            get {
+                return ResourceManager.GetString("GlobalPass_Set", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string GlobalPassVerify_OK {
+            get {
+                return ResourceManager.GetString("GlobalPassVerify_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Global Password.
         /// </summary>
         public static string GlobalPassVerify_PageTitle {
@@ -327,6 +462,15 @@ namespace KeePass.I18n {
         public static string GlobalPassVerify_Prompt {
             get {
                 return ResourceManager.GetString("GlobalPassVerify_Prompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear History List.
+        /// </summary>
+        public static string GroupDetails_ClearHistory {
+            get {
+                return ResourceManager.GetString("GroupDetails_ClearHistory", resourceCulture);
             }
         }
         
@@ -358,6 +502,24 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Entry.
+        /// </summary>
+        public static string GroupDetails_NewEntry {
+            get {
+                return ResourceManager.GetString("GroupDetails_NewEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Group.
+        /// </summary>
+        public static string GroupDetails_NewGroup {
+            get {
+                return ResourceManager.GetString("GroupDetails_NewGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to rename.
         /// </summary>
         public static string GroupDetails_Rename {
@@ -367,11 +529,29 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string GroupDetails_Search {
+            get {
+                return ResourceManager.GetString("GroupDetails_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading.
         /// </summary>
         public static string Loading {
             get {
                 return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New.
+        /// </summary>
+        public static string MainPage_AddNew {
+            get {
+                return ResourceManager.GetString("MainPage_AddNew", resourceCulture);
             }
         }
         
@@ -439,11 +619,47 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string MainPage_Settings {
+            get {
+                return ResourceManager.GetString("MainPage_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronize/Update all.
+        /// </summary>
+        public static string MainPage_SyncAll {
+            get {
+                return ResourceManager.GetString("MainPage_SyncAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Here.
+        /// </summary>
+        public static string MoveTarget_MoveHere {
+            get {
+                return ResourceManager.GetString("MoveTarget_MoveHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Move To.
         /// </summary>
         public static string MoveTarget_PageTitle {
             get {
                 return ResourceManager.GetString("MoveTarget_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate.
+        /// </summary>
+        public static string PassGen_Generate {
+            get {
+                return ResourceManager.GetString("PassGen_Generate", resourceCulture);
             }
         }
         
@@ -484,6 +700,15 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string Password_Open {
+            get {
+                return ResourceManager.GetString("Password_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Master Key.
         /// </summary>
         public static string Password_PageTitle {
@@ -511,6 +736,15 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rename.
         /// </summary>
         public static string Rename_PageTitle {
@@ -525,6 +759,15 @@ namespace KeePass.I18n {
         public static string Rename_Prompt {
             get {
                 return ResourceManager.GetString("Rename_Prompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename.
+        /// </summary>
+        public static string Rename_Rename {
+            get {
+                return ResourceManager.GetString("Rename_Rename", resourceCulture);
             }
         }
         
@@ -583,15 +826,6 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Refresh.
-        /// </summary>
-        public static string SkyDriveList_Refresh {
-            get {
-                return ResourceManager.GetString("SkyDriveList_Refresh", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Server requires authentication.
         /// </summary>
         public static string WebAuth_Authentication {
@@ -637,6 +871,15 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string WebDavDownload_Open {
+            get {
+                return ResourceManager.GetString("WebDavDownload_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download.
         /// </summary>
         public static string WebDavDownload_PageTitle {
@@ -673,6 +916,15 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string WebDownload_Open {
+            get {
+                return ResourceManager.GetString("WebDownload_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download.
         /// </summary>
         public static string WebDownload_PageTitle {
@@ -687,6 +939,33 @@ namespace KeePass.I18n {
         public static string WebDownload_Url {
             get {
                 return ResourceManager.GetString("WebDownload_Url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go Back.
+        /// </summary>
+        public static string WebView_GoBack {
+            get {
+                return ResourceManager.GetString("WebView_GoBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string WebView_Password {
+            get {
+                return ResourceManager.GetString("WebView_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username.
+        /// </summary>
+        public static string WebView_Username {
+            get {
+                return ResourceManager.GetString("WebView_Username", resourceCulture);
             }
         }
     }

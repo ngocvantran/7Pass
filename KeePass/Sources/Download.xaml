@@ -1,4 +1,4 @@
-﻿<keepass:KeePassPage 
+<keepass:KeePassPage 
     x:Class="KeePass.Sources.Download"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -42,7 +42,7 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem
-                    Text="Demo Database"
+                    Text="[Demo Database]"
                     Click="lnkDemo_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

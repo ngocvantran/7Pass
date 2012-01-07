@@ -36,7 +36,7 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton
                 IconUri="/Images/check.png"
-                Text="Move Here" Click="cmdMove_Click" />
+                Text="[Move Here]" Click="cmdMove_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

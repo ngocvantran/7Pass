@@ -55,7 +55,7 @@
 		<shell:ApplicationBar IsVisible="True">
 			<shell:ApplicationBarIconButton
 				IconUri="/Images/check.png"
-				Text="Open" IsEnabled="False"
+				Text="[Open]" IsEnabled="False"
 				Click="cmdDownload_Click" />
             <shell:ApplicationBarIconButton
 				IconUri="/Images/box.png"

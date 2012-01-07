@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows;
@@ -8,6 +8,7 @@ using Coding4Fun.Phone.Controls;
 using KeePass.Analytics;
 using KeePass.Controls;
 using KeePass.Data;
+using KeePass.I18n;
 using KeePass.IO.Data;
 using KeePass.IO.Write;
 using KeePass.Storage;
@@ -29,10 +30,16 @@ namespace KeePass
         {
             InitializeComponent();
 
-            _cmdSave = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[2];
-            _cmdReset = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[3];
+            _cmdSave = AppButton(2);
+            _cmdReset = AppButton(3);
+
+            AppMenu(0).Text = Strings.EntryDetails_Fields;
+            AppMenu(1).Text = Strings.App_Databases;
+            AppMenu(2).Text = Strings.App_About;
+            AppButton(0).Text = Strings.App_Home;
+            AppButton(1).Text = Strings.EntryDetails_GeneratePassword;
+            _cmdSave.Text = Strings.EntryDetails_SaveEntry;
+            _cmdReset.Text = Strings.EntryDetails_ResetEntry;
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)
@@ -151,8 +158,7 @@ namespace KeePass
 
         private void UpdateFieldsCount(Entry entry)
         {
-            var mnuFields = (ApplicationBarMenuItem)
-                ApplicationBar.MenuItems[0];
+            var mnuFields = AppMenu(0);
             mnuFields.Text = string.Format(
                 Properties.Resources.FieldsMenuItem,
                 entry.CustomFields.Count);

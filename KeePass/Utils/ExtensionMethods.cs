@@ -3,11 +3,26 @@ using System.Globalization;
 using System.IO.IsolatedStorage;
 using System.Windows.Input;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 
 namespace KeePass.Utils
 {
     internal static class ExtensionMethods
     {
+        public static ApplicationBarIconButton AppButton(
+            this PhoneApplicationPage page, int index)
+        {
+            return (ApplicationBarIconButton)
+                page.ApplicationBar.Buttons[index];
+        }
+
+        public static ApplicationBarMenuItem AppMenu(
+            this PhoneApplicationPage page, int index)
+        {
+            return (ApplicationBarMenuItem)
+                page.ApplicationBar.MenuItems[index];
+        }
+
         public static void DeleteDirectory(
             this IsolatedStorageFile store,
             string path, bool recursive)

@@ -33,10 +33,10 @@
         <shell:ApplicationBar IsVisible="True">
             <shell:ApplicationBarIconButton
                 IconUri="/Images/check.png"
-                Text="Allow" Click="cmdAllow_Click" />
+                Text="[Allow]" Click="cmdAllow_Click" />
             <shell:ApplicationBarIconButton
                 IconUri="/Images/close.dark.png"
-                Text="Disable" Click="cmdDisable_Click" />
+                Text="[Disable]" Click="cmdDisable_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </keepass:KeePassPage>

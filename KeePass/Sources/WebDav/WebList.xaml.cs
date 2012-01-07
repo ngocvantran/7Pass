@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Navigation;
-using System.Windows.Threading;
+using KeePass.I18n;
 using KeePass.IO.Data;
 using KeePass.Sources.WebDav.Api;
 using KeePass.Storage;
@@ -26,9 +26,9 @@ namespace KeePass.Sources.WebDav
         public WebList()
         {
             InitializeComponent();
-
-            _cmdRefresh = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
+            
+            _cmdRefresh = AppButton(0);
+            _cmdRefresh.Text = Strings.Refresh;
         }
 
         protected override void OnNavigatedTo(

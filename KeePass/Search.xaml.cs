@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using KeePass.Analytics;
 using KeePass.Data;
+using KeePass.I18n;
 using KeePass.IO.Data;
 using KeePass.Storage;
 using KeePass.Utils;
@@ -32,11 +33,13 @@ namespace KeePass
         {
             InitializeComponent();
 
+            _cmdSearch = AppButton(0);
+            _cmdSearch.Text = Strings.App_Home;
+            AppButton(1).Text = Strings.App_Databases;
+
             _items = new ObservableCollection<GroupItem>();
             lstItems.ItemsSource = _items;
 
-            _cmdSearch = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
 
             _wkSearch = new BackgroundWorker
             {

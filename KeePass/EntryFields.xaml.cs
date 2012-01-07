@@ -9,6 +9,7 @@ using System.Windows.Navigation;
 using Coding4Fun.Phone.Controls;
 using KeePass.Controls;
 using KeePass.Data;
+using KeePass.I18n;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Controls;
@@ -24,6 +25,11 @@ namespace KeePass
         public EntryFields()
         {
             InitializeComponent();
+
+            AppButton(0).Text = Strings.App_Home;
+            AppButton(1).Text = Strings.App_Databases;
+            AppButton(2).Text = Strings.EntryFields_Add;
+            AppButton(3).Text = Strings.App_About;
         }
 
         protected override void OnNavigatedTo(

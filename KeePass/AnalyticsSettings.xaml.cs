@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Navigation;
 using KeePass.Analytics;
+using KeePass.I18n;
 using KeePass.Utils;
 
 namespace KeePass
@@ -10,6 +11,8 @@ namespace KeePass
         public AnalyticsSettings()
         {
             InitializeComponent();
+            AppButton(0).Text = Strings.AnalyticsSettings_Allow;
+            AppButton(1).Text = Strings.AnalyticsSettings_Disable;
         }
 
         protected override void OnBackKeyPress(

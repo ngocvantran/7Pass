@@ -1,4 +1,4 @@
-﻿<keepass:KeePassPage 
+<keepass:KeePassPage 
     x:Class="KeePass.Sources.DropBox.List"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -31,7 +31,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton
-                IconUri="/Images/refresh.png" Text="Refresh"
+                IconUri="/Images/refresh.png" Text="[Refresh]"
                 Click="cmdRefresh_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

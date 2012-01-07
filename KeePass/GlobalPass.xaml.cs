@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Input;
+using KeePass.I18n;
 using KeePass.IO.Utils;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
@@ -14,9 +15,10 @@ namespace KeePass
         public GlobalPass()
         {
             InitializeComponent();
-
-            _cmdSet = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
+            
+            _cmdSet = AppButton(0);
+            _cmdSet.Text = Strings.GlobalPass_Set;
+            AppButton(1).Text = Strings.Clear;
         }
 
         private void SetPassword()

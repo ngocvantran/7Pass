@@ -1,4 +1,4 @@
-﻿<keepass:KeePassPage 
+<keepass:KeePassPage 
     x:Class="KeePass.WebView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -42,16 +42,16 @@
                               IsMenuEnabled="True"
                               Opacity="0.25">
             <shell:ApplicationBarIconButton
-                IconUri="/Images/refresh.png" Text="Refresh"
+                IconUri="/Images/refresh.png" Text="[Refresh]"
                 Click="cmdRefresh_Click" />
             <shell:ApplicationBarIconButton
-                IconUri="/Images/back.png" Text="Go Back"
+                IconUri="/Images/back.png" Text="[Go Back]"
                 Click="cmdBack_Click" />
             <shell:ApplicationBarIconButton
-                IconUri="/Images/username.png" Text="Username"
+                IconUri="/Images/username.png" Text="[Username]"
                 Click="cmdUser_Click" />
             <shell:ApplicationBarIconButton
-                IconUri="/Images/password.png" Text="Password"
+                IconUri="/Images/password.png" Text="[Password]"
                 Click="cmdPassword_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

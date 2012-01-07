@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows.Navigation;
 using KeePass.Analytics;
 using KeePass.Data;
+using KeePass.I18n;
 using KeePass.IO.Data;
 using KeePass.IO.Write;
 using KeePass.Storage;
@@ -26,9 +27,9 @@ namespace KeePass
         public MoveTarget()
         {
             InitializeComponent();
-
-            _cmdMove = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
+            
+            _cmdMove = AppButton(0);
+            _cmdMove.Text = Strings.MoveTarget_MoveHere;
         }
 
         protected override void OnNavigatedTo(
@@ -68,7 +69,7 @@ namespace KeePass
             {
                 group = group.Parent;
 
-                sb.Insert(0, " » ");
+                sb.Insert(0, " ï¿½ ");
                 sb.Insert(0, group.Name);
             }
 

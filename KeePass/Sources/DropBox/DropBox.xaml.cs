@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Input;
 using DropNet;
 using DropNet.Exceptions;
 using DropNet.Models;
+using KeePass.I18n;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
 
@@ -17,8 +18,8 @@ namespace KeePass.Sources.DropBox
         {
             InitializeComponent();
 
-            _cmdOpen = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
+            _cmdOpen = AppButton(0);
+            _cmdOpen.Text = Strings.DropBox_Login;
         }
 
         private void LoginCompleted(UserLogin info)

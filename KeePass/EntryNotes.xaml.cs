@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using KeePass.Data;
+using KeePass.I18n;
 using KeePass.Storage;
 using KeePass.Utils;
 
@@ -15,6 +16,11 @@ namespace KeePass
         public EntryNotes()
         {
             InitializeComponent();
+
+            AppMenu(0).Text = Strings.EntryNotes_ClearAll;
+            AppButton(0).Text = Strings.App_Home;
+            AppButton(1).Text = Strings.App_Databases;
+            AppButton(2).Text = Strings.App_About;
         }
 
         protected override void OnNavigatedTo(

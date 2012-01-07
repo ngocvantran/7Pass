@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using KeePass.I18n;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
 
@@ -16,9 +17,9 @@ namespace KeePass.Sources.WebDav
         public WebDavDownload()
         {
             InitializeComponent();
-
-            _cmdDownload = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
+            
+            _cmdDownload = AppButton(0);
+            _cmdDownload.Text = Strings.WebDavDownload_Open;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

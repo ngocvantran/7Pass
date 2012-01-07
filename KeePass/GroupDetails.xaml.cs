@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -14,6 +14,7 @@ using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using KeePass.I18n;
 
 namespace KeePass
 {
@@ -29,9 +30,16 @@ namespace KeePass
         {
             InitializeComponent();
 
+            _cmdHome = AppButton(0);
             _ids = new List<string>();
-            _cmdHome = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
+
+            _cmdHome.Text = Strings.App_Databases;
+            AppMenu(1).Text = Strings.GroupDetails_ClearHistory;
+            AppMenu(2).Text = Strings.App_About;
+            AppButton(0).Text = Strings.App_Home;
+            AppButton(1).Text = Strings.GroupDetails_NewEntry;
+            AppButton(2).Text = Strings.GroupDetails_NewGroup;
+            AppButton(3).Text = Strings.GroupDetails_Search;
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)

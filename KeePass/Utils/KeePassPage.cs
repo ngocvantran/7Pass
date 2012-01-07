@@ -15,14 +15,12 @@ namespace KeePass.Utils
 
         protected ApplicationBarIconButton AppButton(int index)
         {
-            return (ApplicationBarIconButton)
-                ApplicationBar.Buttons[index];
+            return ExtensionMethods.AppButton(this, index);
         }
 
         protected ApplicationBarMenuItem AppMenu(int index)
         {
-            return (ApplicationBarMenuItem)
-                ApplicationBar.MenuItems[index];
+            return ExtensionMethods.AppMenu(this, index);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

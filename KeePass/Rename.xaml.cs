@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using KeePass.I18n;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
@@ -18,9 +19,10 @@ namespace KeePass
         public Rename()
         {
             InitializeComponent();
-
-            _cmdRename = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
+            
+            _cmdRename = AppButton(0);
+            _cmdRename.Text = Strings.Rename_Rename;
+            AppButton(1).Text = Strings.Clear;
         }
 
         protected override void OnNavigatedTo(

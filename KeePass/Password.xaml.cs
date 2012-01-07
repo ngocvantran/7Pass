@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using KeePass.Analytics;
+using KeePass.I18n;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Shell;
@@ -22,13 +23,15 @@ namespace KeePass
         public Password()
         {
             InitializeComponent();
+            
+            _cmdOpen = AppButton(0);
+            _cmdOpen.Text = Strings.Password_Open;
+            AppButton(1).Text = Strings.Clear;
 
             _wkOpen = new BackgroundWorker();
             _wkOpen.DoWork += _wkOpen_DoWork;
             _wkOpen.RunWorkerCompleted += _wkOpen_RunWorkerCompleted;
 
-            _cmdOpen = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
 
             imgWarning.Source = ThemeData.GetImageSource("warning");
             imgWarning.Visibility = GlobalPassHandler.Instance.HasGlobalPass

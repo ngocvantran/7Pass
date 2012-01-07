@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Navigation;
 using KeePass.Data;
+using KeePass.I18n;
 using KeePass.Sources;
 using KeePass.Storage;
 using KeePass.Utils;
@@ -23,13 +24,17 @@ namespace KeePass
         public MainPage()
         {
             InitializeComponent();
-            Loaded += OnLoaded;
+
+            AppMenu(0).Text = Strings.MainPage_SyncAll;
+            AppButton(0).Text = Strings.MainPage_AddNew;
+            AppButton(1).Text = Strings.MainPage_Settings;
+            AppButton(2).Text = Strings.App_About;
 
             _items = new ObservableCollection<DatabaseItem>();
             lstDatabases.ItemsSource = _items;
 
-            _mnuUpdateAll = (ApplicationBarMenuItem)
-                ApplicationBar.MenuItems[0];
+            Loaded += OnLoaded;
+            _mnuUpdateAll = AppMenu(0);
         }
 
         protected override void OnNavigatedTo(

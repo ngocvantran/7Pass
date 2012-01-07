@@ -1,4 +1,4 @@
-﻿<keepass:KeePassPage 
+<keepass:KeePassPage 
     x:Class="KeePass.Search"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -43,10 +43,10 @@
         <shell:ApplicationBar IsVisible="True">
             <shell:ApplicationBarIconButton
                 IconUri="/Images/home.png"
-                Text="Home" Click="cmdHome_Click" />
+                Text="[Home]" Click="cmdHome_Click" />
             <shell:ApplicationBarIconButton
                 IconUri="/Images/root.png"
-                Text="Select DB" Click="cmdRoot_Click" />
+                Text="[Select DB]" Click="cmdRoot_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

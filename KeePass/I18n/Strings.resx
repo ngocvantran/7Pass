@@ -289,120 +289,244 @@ Your installation ID that will be collected is:</value>
     <value>pin database</value>
     <comment>Pop up menu item to pin database to phone's Start screen</comment>
   </data>
-  <data name="MoveTarget_PageTitle">
-    <value xml:space="preserve">Move To</value>
+  <data name="MoveTarget_PageTitle" xml:space="preserve">
+    <value>Move To</value>
     <comment>Move target select page title</comment>
   </data>
-  <data name="PassGen_Settings">
-    <value xml:space="preserve">Settings</value>
+  <data name="PassGen_Settings" xml:space="preserve">
+    <value>Settings</value>
     <comment>Pivot title for password generation settings</comment>
   </data>
-  <data name="PassGen_PageTitle">
-    <value xml:space="preserve">Password</value>
+  <data name="PassGen_PageTitle" xml:space="preserve">
+    <value>Password</value>
     <comment>Password generation page title</comment>
   </data>
-  <data name="PassGen_Length">
-    <value xml:space="preserve">Length of generated password</value>
+  <data name="PassGen_Length" xml:space="preserve">
+    <value>Length of generated password</value>
     <comment>Password generation length slider caption</comment>
   </data>
-  <data name="PassGen_Results">
-    <value xml:space="preserve">Results</value>
+  <data name="PassGen_Results" xml:space="preserve">
+    <value>Results</value>
     <comment>Pivot title for generated passwords list</comment>
   </data>
-  <data name="Password_PageTitle">
-    <value xml:space="preserve">Master Key</value>
+  <data name="Password_PageTitle" xml:space="preserve">
+    <value>Master Key</value>
     <comment>Master password to open database page title</comment>
   </data>
-  <data name="Password_Password">
-    <value xml:space="preserve">Master Password</value>
+  <data name="Password_Password" xml:space="preserve">
+    <value>Master Password</value>
     <comment>Password field caption</comment>
   </data>
-  <data name="Password_Remember">
-    <value xml:space="preserve">Remember my Password</value>
+  <data name="Password_Remember" xml:space="preserve">
+    <value>Remember my Password</value>
     <comment>Remember password toggle caption</comment>
   </data>
-  <data name="Loading">
-    <value xml:space="preserve">Loading</value>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading</value>
     <comment>Loading generic text</comment>
   </data>
-  <data name="Rename_PageTitle">
-    <value xml:space="preserve">Rename</value>
+  <data name="Rename_PageTitle" xml:space="preserve">
+    <value>Rename</value>
     <comment>Entry/group rename page title</comment>
   </data>
-  <data name="Rename_Prompt">
-    <value xml:space="preserve">Please enter new name for {0}:</value>
+  <data name="Rename_Prompt" xml:space="preserve">
+    <value>Please enter new name for {0}:</value>
     <comment>Prompt to enter new entry/group name</comment>
   </data>
-  <data name="Search_PageTitle">
-    <value xml:space="preserve">Search</value>
+  <data name="Search_PageTitle" xml:space="preserve">
+    <value>Search</value>
     <comment>Search page title</comment>
   </data>
-  <data name="Download_PageTitle">
-    <value xml:space="preserve">Add Database</value>
+  <data name="Download_PageTitle" xml:space="preserve">
+    <value>Add Database</value>
     <comment>Add new database page title</comment>
   </data>
-  <data name="Download_Web">
-    <value xml:space="preserve">Web Server</value>
+  <data name="Download_Web" xml:space="preserve">
+    <value>Web Server</value>
     <comment>Web server source link text</comment>
   </data>
-  <data name="Download_Demo">
-    <value xml:space="preserve">Demo Database</value>
+  <data name="Download_Demo" xml:space="preserve">
+    <value>Demo Database</value>
     <comment>Demo database link text</comment>
   </data>
-  <data name="WebDavDownload_PageTitle">
-    <value xml:space="preserve">Download</value>
+  <data name="WebDavDownload_PageTitle" xml:space="preserve">
+    <value>Download</value>
     <comment>WebDAV authentication page title</comment>
   </data>
-  <data name="WebDavDownload_Url">
-    <value xml:space="preserve">Database URL</value>
+  <data name="WebDavDownload_Url" xml:space="preserve">
+    <value>Database URL</value>
     <comment>URL to database field caption</comment>
   </data>
-  <data name="WebDavDownload_Username">
-    <value xml:space="preserve">Username</value>
+  <data name="WebDavDownload_Username" xml:space="preserve">
+    <value>Username</value>
     <comment>Username field caption</comment>
   </data>
-  <data name="WebDavDownload_Password">
-    <value xml:space="preserve">Password</value>
+  <data name="WebDavDownload_Password" xml:space="preserve">
+    <value>Password</value>
     <comment>Password field caption</comment>
   </data>
-  <data name="WebAuth_Authentication">
-    <value xml:space="preserve">Server requires authentication</value>
+  <data name="WebAuth_Authentication" xml:space="preserve">
+    <value>Server requires authentication</value>
     <comment>Check box to enable/disable authentication caption</comment>
   </data>
-  <data name="WebAuth_User">
-    <value xml:space="preserve">User</value>
+  <data name="WebAuth_User" xml:space="preserve">
+    <value>User</value>
     <comment>Username field caption</comment>
   </data>
-  <data name="WebAuth_Password">
-    <value xml:space="preserve">Password</value>
+  <data name="WebAuth_Password" xml:space="preserve">
+    <value>Password</value>
     <comment>Password field caption</comment>
   </data>
-  <data name="WebAuth_Domain">
-    <value xml:space="preserve">Domain</value>
+  <data name="WebAuth_Domain" xml:space="preserve">
+    <value>Domain</value>
     <comment>Domain field caption</comment>
   </data>
-  <data name="WebBrowse_PageTitle">
-    <value xml:space="preserve">Detected Links</value>
+  <data name="WebBrowse_PageTitle" xml:space="preserve">
+    <value>Detected Links</value>
     <comment>Web links list page title</comment>
   </data>
-  <data name="WebDownload_PageTitle">
-    <value xml:space="preserve">Download</value>
+  <data name="WebDownload_PageTitle" xml:space="preserve">
+    <value>Download</value>
     <comment>Web link download page title</comment>
   </data>
-  <data name="WebDownload_Url">
-    <value xml:space="preserve">Database URL</value>
+  <data name="WebDownload_Url" xml:space="preserve">
+    <value>Database URL</value>
     <comment>URL to database field caption</comment>
   </data>
-  <data name="SkyDriveList_Refresh">
-    <value xml:space="preserve">Refresh</value>
-    <comment>Folder refresh link caption</comment>
-  </data>
-  <data name="DropBox_Email">
-    <value xml:space="preserve">Email</value>
+  <data name="DropBox_Email" xml:space="preserve">
+    <value>Email</value>
     <comment>Email field caption</comment>
   </data>
-  <data name="DropBox_Password">
-    <value xml:space="preserve">Password</value>
+  <data name="DropBox_Password" xml:space="preserve">
+    <value>Password</value>
     <comment>Password field caption</comment>
+  </data>
+  <data name="AnalyticsSettings_Allow" xml:space="preserve">
+    <value>Allow</value>
+    <comment>Allow analytics data sending button caption</comment>
+  </data>
+  <data name="AnalyticsSettings_Disable" xml:space="preserve">
+    <value>Disable</value>
+    <comment>Disable analytics data sending button caption</comment>
+  </data>
+  <data name="EntryDetails_Fields" xml:space="preserve">
+    <value>Fields</value>
+    <comment>Link to Fields page</comment>
+  </data>
+  <data name="App_Databases" xml:space="preserve">
+    <value>Select DB</value>
+    <comment>Link to Databases select page</comment>
+  </data>
+  <data name="App_About" xml:space="preserve">
+    <value>About</value>
+    <comment>Link to About page</comment>
+  </data>
+  <data name="App_Home" xml:space="preserve">
+    <value>Home</value>
+    <comment>Link to Root group page</comment>
+  </data>
+  <data name="EntryDetails_GeneratePassword" xml:space="preserve">
+    <value>Generate Password</value>
+    <comment>Generate password button caption</comment>
+  </data>
+  <data name="EntryDetails_SaveEntry" xml:space="preserve">
+    <value>Save Entry</value>
+    <comment>Save entry button caption</comment>
+  </data>
+  <data name="EntryDetails_ResetEntry" xml:space="preserve">
+    <value>Reset Entry</value>
+    <comment>Reset entry button caption</comment>
+  </data>
+  <data name="EntryFields_Add" xml:space="preserve">
+    <value>Add</value>
+    <comment>Add new field button caption</comment>
+  </data>
+  <data name="EntryNotes_ClearAll" xml:space="preserve">
+    <value>Clear All</value>
+    <comment>Clear all notes button caption</comment>
+  </data>
+  <data name="GlobalPass_Set" xml:space="preserve">
+    <value>Set</value>
+    <comment>Sets global password button caption</comment>
+  </data>
+  <data name="GlobalPassVerify_OK" xml:space="preserve">
+    <value>OK</value>
+    <comment>Verifies global password button caption</comment>
+  </data>
+  <data name="GroupDetails_ClearHistory" xml:space="preserve">
+    <value>Clear History List</value>
+    <comment>Clear history list button caption</comment>
+  </data>
+  <data name="GroupDetails_NewEntry" xml:space="preserve">
+    <value>New Entry</value>
+    <comment>Add new entry button caption</comment>
+  </data>
+  <data name="GroupDetails_NewGroup" xml:space="preserve">
+    <value>New Group</value>
+    <comment>Add new group button caption</comment>
+  </data>
+  <data name="GroupDetails_Search" xml:space="preserve">
+    <value>Search</value>
+    <comment>Link to Search page</comment>
+  </data>
+  <data name="MainPage_SyncAll" xml:space="preserve">
+    <value>Synchronize/Update all</value>
+    <comment>Synchronize (or update if sync is not available) all databases caption button</comment>
+  </data>
+  <data name="MainPage_AddNew" xml:space="preserve">
+    <value>Add New</value>
+    <comment>Add new database button caption</comment>
+  </data>
+  <data name="MainPage_Settings" xml:space="preserve">
+    <value>Settings</value>
+    <comment>Link to Settings page</comment>
+  </data>
+  <data name="MoveTarget_MoveHere" xml:space="preserve">
+    <value>Move Here</value>
+    <comment>Perform entry/group move button caption</comment>
+  </data>
+  <data name="PassGen_Generate" xml:space="preserve">
+    <value>Generate</value>
+    <comment>Gernerate password button caption</comment>
+  </data>
+  <data name="Password_Open" xml:space="preserve">
+    <value>Open</value>
+    <comment>Open the database button caption</comment>
+  </data>
+  <data name="Rename_Rename" xml:space="preserve">
+    <value>Rename</value>
+    <comment>Perform rename button caption</comment>
+  </data>
+  <data name="WebView_GoBack" xml:space="preserve">
+    <value>Go Back</value>
+    <comment>Nagivates backward button caption</comment>
+  </data>
+  <data name="WebView_Username" xml:space="preserve">
+    <value>Username</value>
+    <comment>Auto-type username button caption</comment>
+  </data>
+  <data name="WebView_Password" xml:space="preserve">
+    <value>Password</value>
+    <comment>Auto-type password button caption</comment>
+  </data>
+  <data name="WebDavDownload_Open" xml:space="preserve">
+    <value>Open</value>
+    <comment>WebDAV server connect button caption</comment>
+  </data>
+  <data name="WebDownload_Open" xml:space="preserve">
+    <value>Open</value>
+    <comment>Download database button caption</comment>
+  </data>
+  <data name="DropBox_Login" xml:space="preserve">
+    <value>Login</value>
+    <comment>Login button caption</comment>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+    <comment>Generic Clear button caption</comment>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+    <comment>Generic Refresh button caption</comment>
   </data>
 </root>

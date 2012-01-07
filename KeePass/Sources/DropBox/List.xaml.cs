@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -6,6 +6,7 @@ using System.Windows.Navigation;
 using DropNet;
 using DropNet.Exceptions;
 using DropNet.Models;
+using KeePass.I18n;
 using KeePass.IO.Data;
 using KeePass.Storage;
 using KeePass.Utils;
@@ -27,8 +28,8 @@ namespace KeePass.Sources.DropBox
         {
             InitializeComponent();
 
-            _cmdRefresh = (ApplicationBarIconButton)
-                ApplicationBar.Buttons[0];
+            _cmdRefresh = AppButton(0);
+            _cmdRefresh.Text = Strings.Refresh;
         }
 
         protected override void OnNavigatedTo(
