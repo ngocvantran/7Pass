@@ -17,7 +17,7 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="DropBox Login" Margin="9,-7,0,0"
+            <TextBlock x:Name="PageTitle" Text="DropBox" Margin="9,-7,0,0"
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
@@ -33,26 +33,19 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
-                           Style="{StaticResource PhoneTextNormalStyle}">
-                    Email
-                </TextBlock>
-                <TextBox Name="txtEmail"
-                         TextChanged="txt_Changed"
-                         Loaded="txtEmail_Loaded"
-                         KeyDown="txtEmail_KeyDown"
-                         InputScope="EmailSmtpAddress"
-                         Grid.Row="0" Grid.Column="1" />
+                <TextBlock Text="{Binding Path=Strings.DropBox_Email, Source={StaticResource UiStrings}}"
+                           Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
+                           Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBox Name="txtEmail" InputScope="EmailSmtpAddress" Grid.Row="0" Grid.Column="1"
+                         TextChanged="txt_Changed" Loaded="txtEmail_Loaded" KeyDown="txtEmail_KeyDown" />
 
-                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
-                           Style="{StaticResource PhoneTextNormalStyle}">
-                    Password
-                </TextBlock>
-                <PasswordBox Name="txtPassword"
-                             PasswordChanged="txt_Changed"
-                             KeyDown="txtPassword_KeyDown"
-                             Grid.Row="1" Grid.Column="1" />
+                <TextBlock Text="{Binding Path=Strings.DropBox_Password, Source={StaticResource UiStrings}}"
+                           Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
+                           Style="{StaticResource PhoneTextNormalStyle}" />
+                <PasswordBox Name="txtPassword" Grid.Row="1" Grid.Column="1"
+                             PasswordChanged="txt_Changed" KeyDown="txtPassword_KeyDown" />
             </Grid>
+            
             <uc:ProgressOverlay x:Name="progBusy" />
         </Grid>
     </Grid>

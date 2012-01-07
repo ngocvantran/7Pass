@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Navigation;
 using KeePass.Analytics;
+using KeePass.I18n;
 using KeePass.Storage;
 using KeePass.Utils;
 using Microsoft.Phone.Controls;
@@ -15,6 +16,7 @@ namespace KeePass.Sources
         public Download()
         {
             InitializeComponent();
+            AppMenu(0).Text = Strings.Download_Demo;
         }
 
         protected override void OnNavigatedTo(

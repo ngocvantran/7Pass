@@ -8,6 +8,7 @@
 
     <Application.Resources>
         <system:String x:Key="AppName">7Pass</system:String>
+        <i18n:UiStrings xmlns:i18n="clr-namespace:KeePass.I18n" x:Key="UiStrings" />
         
         <Style x:Key="KeePassPage" TargetType="controls:PhoneApplicationPage">
             <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}" />

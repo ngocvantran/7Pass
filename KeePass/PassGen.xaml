@@ -11,9 +11,10 @@
 	Style="{StaticResource KeePassPage}"
     SupportedOrientations="Portrait">
 
-    <controls:Panorama Name="panMain" Title="Password"
+    <controls:Panorama Name="panMain" Title="{Binding Path=Strings.PassGen_PageTitle, Source={StaticResource UiStrings}}"
                        SelectionChanged="panMain_SelectionChanged">
-        <controls:PanoramaItem Name="panSettings" Header="Settings">
+        <controls:PanoramaItem Name="panSettings"
+                               Header="{Binding Path=Strings.PassGen_Settings, Source={StaticResource UiStrings}}">
             <ScrollViewer>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -22,8 +23,8 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Length of generated password" Grid.Row="0"
-                        Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock Text="{Binding Path=Strings.PassGen_Length, Source={StaticResource UiStrings}}"
+                               Grid.Row="0" Style="{StaticResource PhoneTextNormalStyle}"/>
                     <Grid Grid.Row="1">
                         <Slider x:Name="sldLength" Minimum="0" Maximum="65"
                                 SmallChange="1" LargeChange="10"
@@ -37,7 +38,8 @@
                 </Grid>
             </ScrollViewer>
         </controls:PanoramaItem>
-        <controls:PanoramaItem Name="panResults" Header="Results">
+        <controls:PanoramaItem Name="panResults"
+                               Header="{Binding Path=Strings.PassGen_Results, Source={StaticResource UiStrings}}">
             <ListBox Name="lstResults" SelectionChanged="lstResults_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

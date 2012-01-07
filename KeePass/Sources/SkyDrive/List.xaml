@@ -33,9 +33,8 @@
                             SelectionChanged="lstItems_SelectionChanged" />
             
             <TextBlock Name="lblEmail" Grid.Row="1" />
-            <HyperlinkButton Content="Refresh"
-                             Grid.Row="1" Grid.Column="1"
-                             Click="lnkRefresh_Click" />
+            <HyperlinkButton Content="{Binding Path=Strings.SkyDriveList_Refresh, Source={StaticResource UiStrings}}"
+                             Grid.Row="1" Grid.Column="1" Click="lnkRefresh_Click" />
         </Grid>
     </Grid>
 </keepass:KeePassPage>

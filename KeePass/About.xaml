@@ -14,39 +14,35 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="About" Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"
+                       Text="{Binding Path=Strings.About_PageTitle, Source={StaticResource UiStrings}}" />
         </StackPanel>
 
         <ScrollViewer Grid.Row="1" Margin="12,0,12,0">
             <StackPanel Grid.Row="1" Margin="12,0,12,0">
-                <TextBlock Name="lblVersion" HorizontalAlignment="Center">
-                7Pass Version: {0}
-                </TextBlock>
+                <TextBlock Name="lblVersion" HorizontalAlignment="Center"
+                           Text="{Binding Path=Strings.About_Version, Source={StaticResource UiStrings}}" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <HyperlinkButton Content="Purchase" Click="lnkPurchase_Click" />
+                    <HyperlinkButton Content="{Binding Path=Strings.About_Purchase, Source={StaticResource UiStrings}}"
+                                     Click="lnkPurchase_Click" />
+                    
                     <TextBlock Text="/" />
-                    <HyperlinkButton Content="Review" Click="lnkReview_Click" />
+                    <HyperlinkButton Content="{Binding Path=Strings.About_Review, Source={StaticResource UiStrings}}"
+                                     Click="lnkReview_Click" />
                 </StackPanel>
 
-                <TextBlock HorizontalAlignment="Center">
-                <LineBreak />
-                Developer's Blog (News &amp; Feedback):
-                </TextBlock>
+                <TextBlock HorizontalAlignment="Center"
+                           Text="{Binding Path=Strings.About_Blog, Source={StaticResource UiStrings}}" />
                 <HyperlinkButton Content="7pass.wordpress.com" TargetName="_blank"
                                  NavigateUri="http://7pass.wordpress.com" />
 
-                <TextBlock HorizontalAlignment="Center">
-                <LineBreak />
-                Source Code:
-                </TextBlock>
+                <TextBlock Text="{Binding Path=Strings.About_Source_Code, Source={StaticResource UiStrings}}"
+                           HorizontalAlignment="Center" />
                 <HyperlinkButton Content="github.com/7pass/7pass" TargetName="_blank"
                                  NavigateUri="http://github.com/7pass/7pass" />
 
-                <TextBlock HorizontalAlignment="Center">
-                <LineBreak />
-                Libraries used/referenced:
-                </TextBlock>
+                <TextBlock Text="{Binding Path=Strings.About_Libraries, Source={StaticResource UiStrings}}"
+                           HorizontalAlignment="Center" />
 
                 <HyperlinkButton Content="KeePass" TargetName="_blank"
                              NavigateUri="http://keepass.info" />

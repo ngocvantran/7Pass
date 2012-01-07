@@ -16,21 +16,18 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Global Password" Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"
+                       Text="{Binding Path=Strings.GlobalPass_PageTitle, Source={StaticResource UiStrings}}" />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock Text="Global password"
+            <TextBlock Text="{Binding Path=Strings.GlobalPass_Password, Source={StaticResource UiStrings}}"
                        Style="{StaticResource PhoneTextNormalStyle}" />
-            <PasswordBox Name="txtPass" Loaded="txtPass_Loaded"
-                         KeyDown="txtPass_KeyDown" />
+            <PasswordBox Name="txtPass" Loaded="txtPass_Loaded" KeyDown="txtPass_KeyDown" />
 
-            <TextBlock Text="Confirm your password"
+            <TextBlock Text="{Binding Path=Strings.GlobalPass_Confirm, Source={StaticResource UiStrings}}"
                        Style="{StaticResource PhoneTextNormalStyle}" />
-            <PasswordBox Name="txtConfirm"
-                         KeyDown="txtConfirm_KeyDown"
-                         PasswordChanged="txtConfirm_PasswordChanged" />
+            <PasswordBox Name="txtConfirm" KeyDown="txtConfirm_KeyDown" PasswordChanged="txtConfirm_PasswordChanged" />
         </StackPanel>
     </Grid>
 

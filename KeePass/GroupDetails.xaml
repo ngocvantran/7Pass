@@ -35,13 +35,13 @@
                             <uc:ListItemView>
                                 <toolkit:ContextMenuService.ContextMenu>
                                     <toolkit:ContextMenu>
-                                        <toolkit:MenuItem
-											Header="rename" Tag="{Binding Data}" Click="mnuRename_Click"
-											Visibility="{Binding IsGroup, Converter={StaticResource BoolConverter}}" />
+                                        <toolkit:MenuItem Header="{Binding Path=Strings.GroupDetails_Rename, Source={StaticResource UiStrings}}"
+                                                          Tag="{Binding Data}" Click="mnuRename_Click"
+                                                          Visibility="{Binding IsGroup, Converter={StaticResource BoolConverter}}" />
 
-                                        <toolkit:MenuItem Header="move" Tag="{Binding Data}"
-                                                          Click="mnuMove_Click" />
-                                        <toolkit:MenuItem Header="delete" Tag="{Binding Data}"
+                                        <toolkit:MenuItem Header="{Binding Path=Strings.GroupDetails_Move, Source={StaticResource UiStrings}}"
+                                                          Tag="{Binding Data}" Click="mnuMove_Click" />
+                                        <toolkit:MenuItem Header="{Binding Path=Strings.GroupDetails_Delete, Source={StaticResource UiStrings}}" Tag="{Binding Data}"
                                                           Click="mnuDelete_Click"/>
                                     </toolkit:ContextMenu>
                                 </toolkit:ContextMenuService.ContextMenu>
@@ -51,9 +51,8 @@
                 </uc:KeePassListBase>
             </controls:PivotItem>
 
-            <controls:PivotItem Header="History">
-                <uc:KeePassList SelectionChanged="lstHistory_SelectionChanged"
-                                x:Name="lstHistory" />
+            <controls:PivotItem Header="{Binding Path=Strings.GroupDetails_History, Source={StaticResource UiStrings}}">
+                <uc:KeePassList SelectionChanged="lstHistory_SelectionChanged" x:Name="lstHistory" />
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>

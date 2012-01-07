@@ -16,8 +16,8 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Add Database" Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"
+                       Text="{Binding Path=Strings.Download_PageTitle, Source={StaticResource UiStrings}}" />
         </StackPanel>
 
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
@@ -30,11 +30,11 @@
             <HyperlinkButton Content="WebDAV" Click="lnkWebDav_Click"
                              FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
             <TextBlock Text=" " />
-            <HyperlinkButton Content="Web Server" Click="lnkWeb_Click"
-                             FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
+            <HyperlinkButton Content="{Binding Path=Strings.Download_Web, Source={StaticResource UiStrings}}"
+                             Click="lnkWeb_Click" FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
             <TextBlock Text=" " />
-            <HyperlinkButton x:Name="lnkDemo" Content="Demo Database" Click="lnkDemo_Click"
-                             FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
+            <HyperlinkButton x:Name="lnkDemo" Click="lnkDemo_Click" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                             Content="{Binding Path=Strings.Download_Demo, Source={StaticResource UiStrings}}" />
         </StackPanel>
     </Grid>
 

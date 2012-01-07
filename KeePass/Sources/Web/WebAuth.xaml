@@ -16,34 +16,28 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <CheckBox Name="chkAuth" Grid.ColumnSpan="2"
-                  Checked="chkAuth_CheckedChanged"
-                  Unchecked="chkAuth_CheckedChanged"
-                  Content="Server requires authentication" />
+        <CheckBox Name="chkAuth" Grid.ColumnSpan="2" Checked="chkAuth_CheckedChanged" Unchecked="chkAuth_CheckedChanged"
+                  Content="{Binding Path=Strings.WebAuth_Authentication, Source={StaticResource UiStrings}}" />
 
-        <TextBlock Name="lblUser" Text="User"
-                   Grid.Column="0" Grid.Row="1"
+        <TextBlock Name="lblUser" Grid.Column="0" Grid.Row="1"
+                   Text="{Binding Path=Strings.WebAuth_User, Source={StaticResource UiStrings}}"
                    VerticalAlignment="Center" Visibility="Collapsed"
                    Style="{StaticResource PhoneTextNormalStyle}" />
-        <TextBox Name="txtUser" Visibility="Collapsed"
-                 InputScope="EmailSmtpAddress"
-                 Grid.Column="1" Grid.Row="1"
-                 KeyDown="txtUser_KeyDown" />
+        <TextBox Name="txtUser" Visibility="Collapsed" InputScope="EmailSmtpAddress"
+                 Grid.Column="1" Grid.Row="1" KeyDown="txtUser_KeyDown" />
 
-        <TextBlock Name="lblPassword" Text="Password"
-                   Grid.Column="0" Grid.Row="2"
+        <TextBlock Name="lblPassword" Grid.Column="0" Grid.Row="2"
+                   Text="{Binding Path=Strings.WebAuth_Password, Source={StaticResource UiStrings}}"
                    VerticalAlignment="Center" Visibility="Collapsed"
                    Style="{StaticResource PhoneTextNormalStyle}" />
         <PasswordBox Name="txtPassword" Visibility="Collapsed"
-                     Grid.Column="1" Grid.Row="2"
-                     KeyDown="txtPassword_KeyDown" />
+                     Grid.Column="1" Grid.Row="2" KeyDown="txtPassword_KeyDown" />
 
-        <TextBlock Name="lblDomain" Text="Domain"
-                   Grid.Column="0" Grid.Row="3"
+        <TextBlock Name="lblDomain" Grid.Column="0" Grid.Row="3"
+                   Text="{Binding Path=Strings.WebAuth_Domain, Source={StaticResource UiStrings}}"
                    VerticalAlignment="Center" Visibility="Collapsed"
                    Style="{StaticResource PhoneTextNormalStyle}" />
         <TextBox Name="txtDomain" Visibility="Collapsed"
-                 Grid.Column="1" Grid.Row="3"
-                 KeyDown="txtDomain_KeyDown" />
+                 Grid.Column="1" Grid.Row="3" KeyDown="txtDomain_KeyDown" />
     </Grid>
 </UserControl>

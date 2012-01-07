@@ -18,8 +18,8 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Databases" Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"
+                       Text="{Binding Path=Strings.MainPage_PageTitle, Source={StaticResource UiStrings}}" />
         </StackPanel>
 
         <uc:KeePassListBase x:Name="lstDatabases" HorizontalAlignment="Stretch"
@@ -44,22 +44,19 @@
                         <toolkit:ContextMenuService.ContextMenu>
                             <toolkit:ContextMenu>
                                 <toolkit:MenuItem Header="{Binding UpdateText}" Tag="{Binding Info}"
-                                                  Visibility="{Binding UpdateVisibility}"
-                                                  Click="mnuUpdate_Click" />
-                                <toolkit:MenuItem Header="pin database" Tag="{Binding Info}"
-                                                  Click="mnuPin_Click" />
-                                <toolkit:MenuItem Header="rename" Tag="{Binding Info}"
-                                                  Click="mnuRename_Click" />
-                                <toolkit:MenuItem Header="delete" Tag="{Binding Info}"
-                                                  Click="mnuDelete_Click" />
-                                <toolkit:MenuItem Header="clear password" Tag="{Binding Info}"
-                                                  IsEnabled="{Binding HasPassword}"
-                                                  Click="mnuClear_Click" />
-                                <toolkit:MenuItem Header="download keyfile" Tag="{Binding Info}"
-                                                  Click="mnuKeyFile_Click" />
-                                <toolkit:MenuItem Header="clear keyfile" Tag="{Binding Info}"
-                                                  IsEnabled="{Binding HasKeyFile}"
-                                                  Click="mnuClearKeyFile_Click" />
+                                                  Visibility="{Binding UpdateVisibility}" Click="mnuUpdate_Click" />
+                                <toolkit:MenuItem Header="{Binding Path=Strings.MainPage_Pin, Source={StaticResource UiStrings}}"
+                                                  Tag="{Binding Info}" Click="mnuPin_Click" />
+                                <toolkit:MenuItem Header="{Binding Path=Strings.MainPage_Rename, Source={StaticResource UiStrings}}"
+                                                  Tag="{Binding Info}" Click="mnuRename_Click" />
+                                <toolkit:MenuItem Header="{Binding Path=Strings.MainPage_Delete, Source={StaticResource UiStrings}}"
+                                                  Tag="{Binding Info}" Click="mnuDelete_Click" />
+                                <toolkit:MenuItem Header="{Binding Path=Strings.MainPage_ClearPassword, Source={StaticResource UiStrings}}"
+                                                  Tag="{Binding Info}" IsEnabled="{Binding HasPassword}" Click="mnuClear_Click" />
+                                <toolkit:MenuItem Header="{Binding Path=Strings.MainPage_DownloadKeyfile, Source={StaticResource UiStrings}}"
+                                                  Tag="{Binding Info}" Click="mnuKeyFile_Click" />
+                                <toolkit:MenuItem Header="{Binding Path=Strings.MainPage_ClearKeyfile, Source={StaticResource UiStrings}}"
+                                                  Tag="{Binding Info}" IsEnabled="{Binding HasKeyFile}" Click="mnuClearKeyFile_Click" />
                             </toolkit:ContextMenu>
                         </toolkit:ContextMenuService.ContextMenu>
 

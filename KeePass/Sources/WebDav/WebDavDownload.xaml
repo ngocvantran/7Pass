@@ -16,8 +16,8 @@
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
 			<TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
 				Style="{StaticResource PhoneTextNormalStyle}"/>
-			<TextBlock x:Name="PageTitle" Text="Download" Margin="9,-7,0,0"
-				Style="{StaticResource PhoneTextTitle1Style}"/>
+			<TextBlock x:Name="PageTitle" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"
+                       Text="{Binding Path=Strings.WebDavDownload_PageTitle, Source={StaticResource UiStrings}}" />
 		</StackPanel>
 
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
@@ -34,31 +34,19 @@
 					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
 
-				<TextBlock Text="Database URL"
-                           Grid.Row="0" Grid.ColumnSpan="2"
-                           Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="txtUrl" Text="http://" InputScope="Url"
-                         Grid.Row="1" Grid.ColumnSpan="2"
-                         Loaded="txtUrl_Loaded"
-                         KeyDown="txtUrl_KeyDown"
-                         TextChanged="txtUrl_TextChanged" />
+				<TextBlock Text="{Binding Path=Strings.WebDavDownload_Url, Source={StaticResource UiStrings}}"
+                           Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBox Name="txtUrl" Text="http://" InputScope="Url" Grid.Row="1" Grid.ColumnSpan="2"
+                         Loaded="txtUrl_Loaded" KeyDown="txtUrl_KeyDown" TextChanged="txtUrl_TextChanged" />
                 
-                <TextBlock Text="Username"
-                           Grid.Row="2" Grid.Column="0"
-                           VerticalAlignment="Center"
-                           Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="txtUser" InputScope="EmailSmtpAddress"
-                         Grid.Row="2" Grid.Column="1"
-                         KeyDown="txtUser_KeyDown"
-                         TextChanged="txtUser_TextChanged" />
+                <TextBlock Text="{Binding Path=Strings.WebDavDownload_Username, Source={StaticResource UiStrings}}"
+                           Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBox Name="txtUser" InputScope="EmailSmtpAddress" Grid.Row="2" Grid.Column="1"
+                         KeyDown="txtUser_KeyDown" TextChanged="txtUser_TextChanged" />
 
-                <TextBlock Text="Password"
-                           Grid.Row="3" Grid.Column="0"
-                           VerticalAlignment="Center"
-                           Style="{StaticResource PhoneTextNormalStyle}" />
-                <PasswordBox Name="txtPassword"
-                             Grid.Row="3" Grid.Column="1"
-                             KeyDown="txtPassword_KeyDown" />
+                <TextBlock Text="{Binding Path=Strings.WebDavDownload_Password, Source={StaticResource UiStrings}}"
+                           Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource PhoneTextNormalStyle}" />
+                <PasswordBox Name="txtPassword" Grid.Row="3" Grid.Column="1" KeyDown="txtPassword_KeyDown" />
 			</Grid>
 		</Grid>
 	</Grid>

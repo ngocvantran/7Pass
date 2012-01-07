@@ -20,7 +20,7 @@
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
 			<TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
 			           Style="{StaticResource PhoneTextNormalStyle}"/>
-			<TextBlock x:Name="PageTitle" Text="Fields" Margin="9,-7,0,0"
+			<TextBlock x:Name="PageTitle" Text="{Binding Path=Strings.EntryFields_PageTitle, Source={StaticResource UiStrings}}" Margin="9,-7,0,0"
 			           Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 

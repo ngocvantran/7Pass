@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Settings_PageTitle" xml:space="preserve">
+    <value>Settings</value>
+    <comment>Settings page title</comment>
+  </data>
+  <data name="Settings_HideRecycleBin" xml:space="preserve">
+    <value>Hide Recycle Bin</value>
+    <comment>Hide Recycle Bin toggle caption</comment>
+  </data>
+  <data name="Settings_IntegratedBrwoser" xml:space="preserve">
+    <value>Use integrated browser</value>
+    <comment>Integrated browser toggle caption</comment>
+  </data>
+  <data name="Settings_GlobalPass" xml:space="preserve">
+    <value>Requires Password</value>
+    <comment>Global pass toggle caption</comment>
+  </data>
+  <data name="Settings_Analytics" xml:space="preserve">
+    <value>Usage Data Collection</value>
+    <comment>Link to Analytics settings caption</comment>
+  </data>
+  <data name="About_PageTitle" xml:space="preserve">
+    <value>About</value>
+    <comment>About page title</comment>
+  </data>
+  <data name="About_Blog" xml:space="preserve">
+    <value>
+Developer's Blog (News &amp; Feedback):</value>
+    <comment>Description for link to 7Pass blog</comment>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>7Pass Version: {0}</value>
+    <comment>Format string for 7Pass version text
+      0: version number</comment>
+  </data>
+  <data name="About_Purchase" xml:space="preserve">
+    <value>Purchase</value>
+    <comment>Purchase link caption</comment>
+  </data>
+  <data name="About_Review" xml:space="preserve">
+    <value>Review</value>
+    <comment>Review link caption</comment>
+  </data>
+  <data name="About_Source_Code" xml:space="preserve">
+    <value>
+Source Code:</value>
+    <comment>Description for link to source code</comment>
+  </data>
+  <data name="About_Libraries" xml:space="preserve">
+    <value>
+Libraries used/referenced:</value>
+    <comment>Description for links to used/referenced</comment>
+  </data>
+  <data name="AnalyticsSettings_PageTitle" xml:space="preserve">
+    <value>Analytics</value>
+    <comment>Analytics page title</comment>
+  </data>
+  <data name="AnalyticsSettings_Policy" xml:space="preserve">
+    <value>7Pass collects usage information in order to continuously enhance user experience.
+
+The collection information will never have your database information, or any information that can directly identify you. However:
+- 7Pass does collect your installation ID to link information sent from your device together. This changes everytime 7Pass is installed.
+- Usage collection uses very little network traffic, but the cost to your bill may add up if you're on a capped plan.
+
+The collected information will be very useful for development of 7Pass.
+
+Your installation ID that will be collected is:</value>
+    <comment>Analytics policy</comment>
+  </data>
+  <data name="EntryDetails_PageTitle" xml:space="preserve">
+    <value>Entry</value>
+    <comment>Entry page title</comment>
+  </data>
+  <data name="EntryDetails_Title" xml:space="preserve">
+    <value>Title</value>
+    <comment>Entry title field caption</comment>
+  </data>
+  <data name="EntryDetails_Username" xml:space="preserve">
+    <value>User name</value>
+    <comment>User name field caption</comment>
+  </data>
+  <data name="EntryDetails_Password" xml:space="preserve">
+    <value>Password</value>
+    <comment>Password field caption</comment>
+  </data>
+  <data name="EntryDetails_Url" xml:space="preserve">
+    <value>URL</value>
+    <comment>Url field caption</comment>
+  </data>
+  <data name="EntryDetails_ExternalBrowser" xml:space="preserve">
+    <value>use phone browser</value>
+    <comment>Popup menu item to use OS' browser to browse parsed URL</comment>
+  </data>
+  <data name="EntryDetails_IntegratedBrowser" xml:space="preserve">
+    <value>use integrated browser</value>
+    <comment>Popup menu item to use integrated browser to browse parsed URL</comment>
+  </data>
+  <data name="EntryDetails_Notes" xml:space="preserve">
+    <value>Notes</value>
+    <comment>Notes field caption</comment>
+  </data>
+  <data name="EntryFields_PageTitle" xml:space="preserve">
+    <value>Fields</value>
+    <comment>Entry fields page title</comment>
+  </data>
+  <data name="EntryNotes_PageTitle" xml:space="preserve">
+    <value>Notes</value>
+    <comment>Entry notes page title</comment>
+  </data>
+  <data name="GlobalPass_PageTitle" xml:space="preserve">
+    <value>Global Password</value>
+    <comment>Set global password page title</comment>
+  </data>
+  <data name="GlobalPass_Password" xml:space="preserve">
+    <value>Global password</value>
+    <comment>Password field caption</comment>
+  </data>
+  <data name="GlobalPass_Confirm" xml:space="preserve">
+    <value>Confirm your password</value>
+    <comment>Password confirm field caption</comment>
+  </data>
+  <data name="GlobalPassVerify_PageTitle" xml:space="preserve">
+    <value>Global Password</value>
+    <comment>Global pass verify page title</comment>
+  </data>
+  <data name="GlobalPassVerify_Prompt" xml:space="preserve">
+    <value>Please enter your password to unlock 7Pass</value>
+    <comment>Prompt to ask user to enter global password</comment>
+  </data>
+  <data name="GroupDetails_History" xml:space="preserve">
+    <value>History</value>
+    <comment>Pivot title for recently viewed entries</comment>
+  </data>
+  <data name="GroupDetails_Delete" xml:space="preserve">
+    <value>delete</value>
+    <comment>Pop up menu item to delete entry/group text</comment>
+  </data>
+  <data name="GroupDetails_Move" xml:space="preserve">
+    <value>move</value>
+    <comment>Pop up menu item to move entry/group text</comment>
+  </data>
+  <data name="GroupDetails_Rename" xml:space="preserve">
+    <value>rename</value>
+    <comment>Pop up menu item to rename entry/group text</comment>
+  </data>
+  <data name="MainPage_PageTitle" xml:space="preserve">
+    <value>Databases</value>
+    <comment>Database select page title</comment>
+  </data>
+  <data name="MainPage_ClearKeyfile" xml:space="preserve">
+    <value>clear keyfile</value>
+    <comment>Pop up menu item to clear keyfile text</comment>
+  </data>
+  <data name="MainPage_DownloadKeyfile" xml:space="preserve">
+    <value>download keyfile</value>
+    <comment>Pop up menu item to download keyfile text</comment>
+  </data>
+  <data name="MainPage_ClearPassword" xml:space="preserve">
+    <value>clear password</value>
+    <comment>Pop up menu item to clear remembered password text</comment>
+  </data>
+  <data name="MainPage_Delete" xml:space="preserve">
+    <value>delete</value>
+    <comment>Pop up menu item to delete database text</comment>
+  </data>
+  <data name="MainPage_Rename" xml:space="preserve">
+    <value>rename</value>
+    <comment>Pop up menu item to rename database text</comment>
+  </data>
+  <data name="MainPage_Pin" xml:space="preserve">
+    <value>pin database</value>
+    <comment>Pop up menu item to pin database to phone's Start screen</comment>
+  </data>
+  <data name="MoveTarget_PageTitle">
+    <value xml:space="preserve">Move To</value>
+    <comment>Move target select page title</comment>
+  </data>
+  <data name="PassGen_Settings">
+    <value xml:space="preserve">Settings</value>
+    <comment>Pivot title for password generation settings</comment>
+  </data>
+  <data name="PassGen_PageTitle">
+    <value xml:space="preserve">Password</value>
+    <comment>Password generation page title</comment>
+  </data>
+  <data name="PassGen_Length">
+    <value xml:space="preserve">Length of generated password</value>
+    <comment>Password generation length slider caption</comment>
+  </data>
+  <data name="PassGen_Results">
+    <value xml:space="preserve">Results</value>
+    <comment>Pivot title for generated passwords list</comment>
+  </data>
+  <data name="Password_PageTitle">
+    <value xml:space="preserve">Master Key</value>
+    <comment>Master password to open database page title</comment>
+  </data>
+  <data name="Password_Password">
+    <value xml:space="preserve">Master Password</value>
+    <comment>Password field caption</comment>
+  </data>
+  <data name="Password_Remember">
+    <value xml:space="preserve">Remember my Password</value>
+    <comment>Remember password toggle caption</comment>
+  </data>
+  <data name="Loading">
+    <value xml:space="preserve">Loading</value>
+    <comment>Loading generic text</comment>
+  </data>
+  <data name="Rename_PageTitle">
+    <value xml:space="preserve">Rename</value>
+    <comment>Entry/group rename page title</comment>
+  </data>
+  <data name="Rename_Prompt">
+    <value xml:space="preserve">Please enter new name for {0}:</value>
+    <comment>Prompt to enter new entry/group name</comment>
+  </data>
+  <data name="Search_PageTitle">
+    <value xml:space="preserve">Search</value>
+    <comment>Search page title</comment>
+  </data>
+  <data name="Download_PageTitle">
+    <value xml:space="preserve">Add Database</value>
+    <comment>Add new database page title</comment>
+  </data>
+  <data name="Download_Web">
+    <value xml:space="preserve">Web Server</value>
+    <comment>Web server source link text</comment>
+  </data>
+  <data name="Download_Demo">
+    <value xml:space="preserve">Demo Database</value>
+    <comment>Demo database link text</comment>
+  </data>
+  <data name="WebDavDownload_PageTitle">
+    <value xml:space="preserve">Download</value>
+    <comment>WebDAV authentication page title</comment>
+  </data>
+  <data name="WebDavDownload_Url">
+    <value xml:space="preserve">Database URL</value>
+    <comment>URL to database field caption</comment>
+  </data>
+  <data name="WebDavDownload_Username">
+    <value xml:space="preserve">Username</value>
+    <comment>Username field caption</comment>
+  </data>
+  <data name="WebDavDownload_Password">
+    <value xml:space="preserve">Password</value>
+    <comment>Password field caption</comment>
+  </data>
+  <data name="WebAuth_Authentication">
+    <value xml:space="preserve">Server requires authentication</value>
+    <comment>Check box to enable/disable authentication caption</comment>
+  </data>
+  <data name="WebAuth_User">
+    <value xml:space="preserve">User</value>
+    <comment>Username field caption</comment>
+  </data>
+  <data name="WebAuth_Password">
+    <value xml:space="preserve">Password</value>
+    <comment>Password field caption</comment>
+  </data>
+  <data name="WebAuth_Domain">
+    <value xml:space="preserve">Domain</value>
+    <comment>Domain field caption</comment>
+  </data>
+  <data name="WebBrowse_PageTitle">
+    <value xml:space="preserve">Detected Links</value>
+    <comment>Web links list page title</comment>
+  </data>
+  <data name="WebDownload_PageTitle">
+    <value xml:space="preserve">Download</value>
+    <comment>Web link download page title</comment>
+  </data>
+  <data name="WebDownload_Url">
+    <value xml:space="preserve">Database URL</value>
+    <comment>URL to database field caption</comment>
+  </data>
+  <data name="SkyDriveList_Refresh">
+    <value xml:space="preserve">Refresh</value>
+    <comment>Folder refresh link caption</comment>
+  </data>
+  <data name="DropBox_Email">
+    <value xml:space="preserve">Email</value>
+    <comment>Email field caption</comment>
+  </data>
+  <data name="DropBox_Password">
+    <value xml:space="preserve">Password</value>
+    <comment>Password field caption</comment>
+  </data>
+</root>

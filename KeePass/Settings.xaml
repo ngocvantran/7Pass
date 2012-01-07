@@ -6,7 +6,7 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     Style="{StaticResource KeePassPage}">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -15,26 +15,24 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Settings" Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Style="{StaticResource PhoneTextTitle1Style}" Margin="9,-7,0,0"
+                       Text="{Binding Path=Strings.Settings_PageTitle, Source={StaticResource UiStrings}}" />
         </StackPanel>
 
         <ScrollViewer Grid.Row="1">
             <StackPanel>
                 <toolkit:ToggleSwitch
-                    Name="chkRecycleBin" Header="Hide Recycle Bin"
-                    Checked="chkRecycleBin_CheckedChanged"
-                    Unchecked="chkRecycleBin_CheckedChanged" />
+                    Name="chkRecycleBin" Checked="chkRecycleBin_CheckedChanged" Unchecked="chkRecycleBin_CheckedChanged"
+                    Header="{Binding Path=Strings.Settings_HideRecycleBin, Source={StaticResource UiStrings}}" />
                 <toolkit:ToggleSwitch
-                    Name="chkBrowser" Header="Use integrated browser"
-                    Checked="chkBrowser_CheckedChanged"
-                    Unchecked="chkBrowser_CheckedChanged" />
+                    Name="chkBrowser" Checked="chkBrowser_CheckedChanged" Unchecked="chkBrowser_CheckedChanged"
+                    Header="{Binding Path=Strings.Settings_IntegratedBrwoser, Source={StaticResource UiStrings}}" />
                 <toolkit:ToggleSwitch
-                    Name="chkPassword" Header="Requires Password"
-                    Loaded="chkPassword_Loaded" />
+                    Name="chkPassword" Loaded="chkPassword_Loaded"
+                    Header="{Binding Path=Strings.Settings_GlobalPass, Source={StaticResource UiStrings}}" />
 
                 <TextBlock Text=" " />
-                <HyperlinkButton Content="Usage Data Collection"
+                <HyperlinkButton Content="{Binding Path=Strings.Settings_Analytics, Source={StaticResource UiStrings}}"
                                  Click="lnkAnalytics_Click" />
             </StackPanel>
         </ScrollViewer>

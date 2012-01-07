@@ -8,8 +8,8 @@
     <c4f:ProgressOverlay Name="pnlMain" IsEnabled="False" Visibility="Collapsed">
         <c4f:ProgressOverlay.Content>
             <StackPanel>
-                <TextBlock HorizontalAlignment="Center"
-                           Name="lblText" Text="Loading"/>
+                <TextBlock HorizontalAlignment="Center" Name="lblText"
+                           Text="{Binding Path=Strings.Loading, Source={StaticResource UiStrings}}"/>
                 <toolkit:PerformanceProgressBar Name="progBusy" />
             </StackPanel>
         </c4f:ProgressOverlay.Content>

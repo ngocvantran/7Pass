@@ -18,8 +18,8 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{StaticResource AppName}"
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Download" Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"
+                       Text="{Binding Path=Strings.WebDownload_PageTitle, Source={StaticResource UiStrings}}" />
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
@@ -32,13 +32,10 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Database URL" Grid.Row="0"
-                           Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="txtUrl" Text="http://"
-                         Grid.Row="1" InputScope="Url"
-                         Loaded="txtUrl_Loaded"
-                         KeyDown="txtUrl_KeyDown" 
-                         TextChanged="txtUrl_TextChanged" />
+                <TextBlock Text="{Binding Path=Strings.WebDownload_Url, Source={StaticResource UiStrings}}"
+                           Grid.Row="0" Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBox Name="txtUrl" Text="http://" Grid.Row="1" InputScope="Url"
+                         Loaded="txtUrl_Loaded" KeyDown="txtUrl_KeyDown" TextChanged="txtUrl_TextChanged" />
             
                 <web:WebAuth x:Name="ucAuth" Grid.Row="2"
                              Completed="ucAuth_Completed" />
