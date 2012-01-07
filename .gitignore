@@ -9,3 +9,4 @@
 *.suo
 [Bb]in
 [Oo]bj
+*.dotCover
