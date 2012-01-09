@@ -33,10 +33,11 @@ namespace KeePass
             _cmdHome = AppButton(0);
             _ids = new List<string>();
 
-            _cmdHome.Text = Strings.App_Databases;
+            AppMenu(0).Text = Strings.App_Databases;
             AppMenu(1).Text = Strings.GroupDetails_ClearHistory;
             AppMenu(2).Text = Strings.App_About;
-            AppButton(0).Text = Strings.App_Home;
+            
+            _cmdHome.Text = Strings.App_Home;
             AppButton(1).Text = Strings.GroupDetails_NewEntry;
             AppButton(2).Text = Strings.GroupDetails_NewGroup;
             AppButton(3).Text = Strings.GroupDetails_Search;

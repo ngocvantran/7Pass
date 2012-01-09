@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ConfirmDeleteDb" xml:space="preserve">
+    <value>Soll die Datenbank {0} gelöscht werden?
+
+Die würde die Datenbank auf dem Telefon löschen aber nicht die Quelle auf dem Server.</value>
+  </data>
+  <data name="CorruptedFile" xml:space="preserve">
+    <value>Die Datenbankdatei ist beschädigt!</value>
+  </data>
+  <data name="DeleteDbTitle" xml:space="preserve">
+    <value>Datenbank löschen</value>
+  </data>
+  <data name="DemoDbText" xml:space="preserve">
+    <value>Das Passwort der Demo-Datenbank lautet "demo", ohne die Anführungszeichen.</value>
+  </data>
+  <data name="DemoDbTitle" xml:space="preserve">
+    <value>Datenbankkennwort</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Fehler beim herunterladen der Datenbank.
+Bitte stell sicher, dass der URL korrekt ist.
+
+</value>
+  </data>
+  <data name="DownloadTitle" xml:space="preserve">
+    <value>Datenbank-Download</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Sie haben ein falsches Passwort angegeben.
+
+Achtung: 7Pass unterstützt keine Windows-Anmeldung oder eigene Passwort-Anbieter für das Hauptpasswort.</value>
+  </data>
+  <data name="InvalidCertificate" xml:space="preserve">
+    <value>
+
+Es ist möglich, dass ihr Telefon dem SSL Zertifikat nicht vertraut.
+Wollen Sie mehr darüber erfahren?</value>
+  </data>
+  <data name="InvalidCertificateUrl" xml:space="preserve">
+    <value>http://7pass.wordpress.com/2011/01/09/faq-updated-why-7pass-says-my-database-signature-is-invalid/</value>
+  </data>
+  <data name="NoNetwork" xml:space="preserve">
+    <value>Es steht keine Internetverbindung zur Verfügung.
+Bitte später erneut versuchen.</value>
+  </data>
+  <data name="ParseError" xml:space="preserve">
+    <value>Das Passwort ist korrekt und die Datenbank ist in Ordnung.
+Leider ist aber dennoch ein Fehler aufgetreten beim Lesen der Datenbank.
+
+Möchten Sie dem Entwickler eine Fehlerbeschreibung senden, so das der Fehler in der nächsten Versiopn behoben werden kann?</value>
+  </data>
+  <data name="PasswordTitle" xml:space="preserve">
+    <value>Hauptschlüssel</value>
+  </data>
+  <data name="UpdateFailure" xml:space="preserve">
+    <value>Das Update von Datenbank {0} ist fehlgeschlagen:
+{1}</value>
+  </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value>Datenbankaktualisierung</value>
+  </data>
+  <data name="WarningStorePassword" xml:space="preserve">
+    <value>Bitte stellen Sie sicher, dass der Startbildschirm Ihres Telefons passwortgeschützt ist.
+
+Das Speichern des Passworts ohne Schutz des Startbildschirmes, erlaubt jeder beliebigen Person EInsicht in Ihre Passwörter.</value>
+  </data>
+  <data name="LinkRegex" xml:space="preserve">
+    <value>&lt;a\s+[^&gt;]?href\s?=\s?(['"])([^'"]+)</value>
+  </data>
+  <data name="InvalidKeyFile" xml:space="preserve">
+    <value>Sie haben eine ungültige/beschädigte Keydatei ausgewählt.</value>
+  </data>
+  <data name="KeyFileTitle" xml:space="preserve">
+    <value>Download Keydatei</value>
+  </data>
+  <data name="GlobalPassPrompt" xml:space="preserve">
+    <value>Bitte geben Sie Ihr globales Passwort an!</value>
+  </data>
+  <data name="GlobalPassTitle" xml:space="preserve">
+    <value>7Pass globales Passwort</value>
+  </data>
+  <data name="UnhandledExPrompt" xml:space="preserve">
+    <value>In 7Pass ist ein unerwarteter Fehler aufgetreten. 7Pass wird nun beendet.
+
+Ist es in Ordnung, wenn eine E-Mail erstellt wird, so das dieser Fehler an den Entwickler übermittelt wird, um ihn schnellstmöglich zu beheben?</value>
+  </data>
+  <data name="UnhandledExTitle" xml:space="preserve">
+    <value>Ooopppppps</value>
+  </data>
+  <data name="InvalidUrlPrompt" xml:space="preserve">
+    <value>Der ausgewählte URL kann nicht angezeigt werden. Wenn der URL zu lang ist (&gt; 500 Zeichen), versuchen Sie eine andere Quelle, wo der URL kürzer ist.</value>
+  </data>
+  <data name="InvalidUrlTitle" xml:space="preserve">
+    <value>Ungültiger URL</value>
+  </data>
+  <data name="SavedCaption" xml:space="preserve">
+    <value>Eintrag erfolgreich gespeichert!</value>
+  </data>
+  <data name="SavedTitle" xml:space="preserve">
+    <value>Eintrag wird gespeichert</value>
+  </data>
+  <data name="Conflict" xml:space="preserve">
+    <value>7Pass hat einen Datenbank-Konflikt entdeckt.
+Die lokale Datenbank ist nun hochgeladen nach:
+[{0}]
+
+Wenn Sie diese neue Datenbank nutzen möchten, müssen sie diese separat herunterladen.</value>
+  </data>
+  <data name="ConflictTitle" xml:space="preserve">
+    <value>Datenbank-Konflikt</value>
+  </data>
+  <data name="AddNotes" xml:space="preserve">
+    <value>«Notizen hinzufügen»</value>
+  </data>
+  <data name="UnsavedChange" xml:space="preserve">
+    <value>Sie haben ungesicherte Änderungen.
+Wollen Sie diese Änderungen wirklich ignorieren?</value>
+  </data>
+  <data name="UnsavedChangeTitle" xml:space="preserve">
+    <value>Ungespeicherte Änderungen</value>
+  </data>
+  <data name="DeletePernamentPrompt" xml:space="preserve">
+    <value>Sind Sie sich sicher, das die aus gewählte {0} {1} dauerhaft gelöscht werden soll?
+
+{0} wird für immer gelöscht und kann auch nicht weiderhergestellt werden.</value>
+  </data>
+  <data name="DeletePrompt" xml:space="preserve">
+    <value>Sind Sie sich sicher, dass Sie die ausgewählte {0} {1} löschen wollen?</value>
+  </data>
+  <data name="DeleteTitle" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Entry" xml:space="preserve">
+    <value>Eintrag</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Gruppe</value>
+  </data>
+  <data name="NewGroupTitle" xml:space="preserve">
+    <value>Neue Gruppe</value>
+  </data>
+  <data name="PromptName" xml:space="preserve">
+    <value>Bitte geben Sie einen Gruppennamen ein</value>
+  </data>
+  <data name="RenameTitle" xml:space="preserve">
+    <value>Gruppe umbenennen</value>
+  </data>
+  <data name="RecycleBin" xml:space="preserve">
+    <value>Papierkorb</value>
+  </data>
+  <data name="LargeTransforms" xml:space="preserve">
+    <value>Sie ausgewählte Datenbank verwendet eine sehr große Anzahl an Verschlüsselungsrunden.
+
+Dies führt dazu, das 7Pass die Datenbank nur noch sehr langsam öffnen kann.</value>
+  </data>
+  <data name="LargeTransformsTitle" xml:space="preserve">
+    <value>Datenbank-Verschlüsselung</value>
+  </data>
+  <data name="ToastFree" xml:space="preserve">
+    <value>Dies ist die voll funktionsfähige freie Version von 7Pass.
+Sie können den Entwickler unterstützen, wenn Sie auf diese Benachrichtigung klicken, um die Vollversion zu kaufen.</value>
+  </data>
+  <data name="ToastTrial" xml:space="preserve">
+    <value>Danke für das testen von 7Pass.
+Dies ist die voll funktionsfähige freie Version von 7Pass.
+Klicken Sie diese Benachrichtigung an um 7Pass zu beurteilen/kaufen.</value>
+  </data>
+  <data name="DigestRegex" xml:space="preserve">
+    <value>(\w+)="([^"]+)"</value>
+  </data>
+  <data name="Update_Download" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Update_Sync" xml:space="preserve">
+    <value>Synchronisieren</value>
+  </data>
+  <data name="UriCensors" xml:space="preserve">
+    <value>(?&lt;=pass(?:word)?=)([^&amp;]+)
+(?&lt;=secret=)([^&amp;]+)</value>
+  </data>
+  <data name="AlreadyPinned" xml:space="preserve">
+    <value>Die ausgewählte Datenbank wurde bereits auf dem Hauptbildschirm angeheftet.</value>
+  </data>
+  <data name="PinDatabase" xml:space="preserve">
+    <value>Pin Datenbank</value>
+  </data>
+  <data name="FieldsMenuItem" xml:space="preserve">
+    <value>Anzeigen/Bearbeiten der Felder ({0})</value>
+  </data>
+  <data name="Field_Protected" xml:space="preserve">
+    <value>Erweitern zum anzeigen/bearbeiten.</value>
+  </data>
+  <data name="EmptyField" xml:space="preserve">
+    <value>Neues Feld</value>
+  </data>
+</root>
