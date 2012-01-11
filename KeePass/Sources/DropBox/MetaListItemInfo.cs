@@ -6,15 +6,21 @@ using KeePass.Utils;
 
 namespace KeePass.Sources.DropBox
 {
-    internal class MetaListItemInfo : ListItemInfo
+    internal interface IListItem
     {
-        private readonly bool _idDir;
+        bool IsDir { get; }
+        string Path { get; }
+    }
+
+    internal class MetaListItemInfo : ListItemInfo, IListItem
+    {
+        private readonly bool _isDir;
         private readonly string _modified;
         private readonly string _path;
 
         public bool IsDir
         {
-            get { return _idDir; }
+            get { return _isDir; }
         }
 
         public string Modified
@@ -33,13 +39,26 @@ namespace KeePass.Sources.DropBox
                 throw new ArgumentNullException("data");
 
             _path = data.Path;
-            _idDir = data.Is_Dir;
+            _isDir = data.Is_Dir;
             _modified = data.Modified;
 
             Title = data.Name;
             Notes = GetRelativeTime(data);
             Icon = ThemeData.GetImage(
                 data.Is_Dir ? "folder" : "entry");
+        }
+
+        public MetaListItemInfo(string path)
+        {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
+            _path = path;
+            _isDir = true;
+            _modified = string.Empty;
+
+            Title = "Parent Folder";
+            Icon = ThemeData.GetImage("parent");
         }
 
         private static string GetRelativeTime(MetaData data)

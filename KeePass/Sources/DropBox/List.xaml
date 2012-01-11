@@ -21,9 +21,9 @@
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <Grid Grid.Row="1" Margin="12,0,12,0">
-            <uc:KeePassList x:Name="lstBrowse"
-                            SelectionChanged="lstBrowse_SelectionChanged" />
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <uc:KeePassList x:Name="lstItems"
+                            SelectionChanged="lstItems_SelectionChanged" />
             <uc:ProgressOverlay x:Name="progBusy" />
         </Grid>
     </Grid>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Windows.Navigation;
 using KeePass.Utils;
 using Microsoft.Phone.Controls;
 
@@ -8,18 +7,9 @@ namespace KeePass.Sources.SkyDrive
 {
     public partial class LiveAuth
     {
-        private bool _attemptLogout;
-
         public LiveAuth()
         {
             InitializeComponent();
-        }
-
-        protected override void OnNavigatedTo(
-            bool cancelled, NavigationEventArgs e)
-        {
-            _attemptLogout = e.NavigationMode ==
-                NavigationMode.Back;
         }
 
         private void CheckToken(Uri uri)
@@ -46,7 +36,7 @@ namespace KeePass.Sources.SkyDrive
         {
             var theme = ThemeData.IsDarkTheme
                 ? "Dark" : "Light";
-            
+
             var url = string.Format(
                 SkyDrive.Resources.AuthUrl,
                 SkyDriveInfo.CLIENT_ID,
@@ -58,13 +48,8 @@ namespace KeePass.Sources.SkyDrive
         private void browser_Loaded(object sender,
             System.Windows.RoutedEventArgs e)
         {
-            if (!_attemptLogout)
-                ShowLogin();
-            else
-            {
-                browser.Navigate(new Uri(
-                    "http://login.live.com/logout.srf"));
-            }
+            browser.Navigate(new Uri(
+                "http://login.live.com/logout.srf"));
         }
 
         private void browser_Navigating(
@@ -79,7 +64,7 @@ namespace KeePass.Sources.SkyDrive
                 return;
             }
 
-            if (!_attemptLogout || uri.Host.Contains("live.com"))
+            if (uri.Host.Contains("live.com"))
                 return;
 
             e.Cancel = true;

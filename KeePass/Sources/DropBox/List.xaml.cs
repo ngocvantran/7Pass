@@ -53,7 +53,7 @@ namespace KeePass.Sources.DropBox
         {
             var pars = NavigationContext.QueryString;
 
-            _path = pars["path"];
+            _path = "/";
             _token = pars["token"];
             _folder = pars["folder"];
             _secret = pars["secret"];
@@ -61,20 +61,21 @@ namespace KeePass.Sources.DropBox
 
         private void NavigateTo(string path)
         {
-            this.NavigateTo<List>(
-                "token={0}&secret={1}&path={2}&folder={3}",
-                _token, _secret, path, _folder);
+            _path = path;
+            RefreshList();
         }
 
         private void OnFileDownloadFailed(DropboxException obj)
         {
-            progBusy.IsBusy = false;
-
             Dispatcher.BeginInvoke(() =>
+            {
+                progBusy.IsBusy = false;
+
                 MessageBox.Show(
                     DropBoxResources.DownloadError,
                     DropBoxResources.ListTitle,
-                    MessageBoxButton.OK));
+                    MessageBoxButton.OK);
+            });
         }
 
         private void OnFileDownloaded(byte[] file,
@@ -141,7 +142,19 @@ namespace KeePass.Sources.DropBox
                     .Select(x => new MetaListItemInfo(x))
                     .ToList();
 
-                lstBrowse.SetItems(items);
+                if (data.Path != "/")
+                {
+                    var sepIndex = data.Path.LastIndexOf(
+                        "/", StringComparison.Ordinal);
+
+                    if (sepIndex == 0)
+                        sepIndex = 1;
+
+                    var grandParent = data.Path.Remove(sepIndex);
+                    items.Insert(0, new MetaListItemInfo(grandParent));
+                }
+
+                lstItems.SetItems(items);
             }
             finally
             {
@@ -180,7 +193,7 @@ namespace KeePass.Sources.DropBox
             RefreshList();
         }
 
-        private void lstBrowse_SelectionChanged(object sender,
+        private void lstItems_SelectionChanged(object sender,
             NavigationListControl.NavigationEventArgs e)
         {
             var meta = e.Item as MetaListItemInfo;
@@ -192,20 +205,21 @@ namespace KeePass.Sources.DropBox
                 return;
 
             if (meta.IsDir)
-                NavigateTo(meta.Path);
-            else
             {
-                progBusy.IsBusy = true;
-
-                var client = DropBoxInfo
-                    .Create(_token, _secret);
-
-                var url = client.GetUrl(meta.Path);
-                client.GetFileAsync(meta.Path,
-                    x => OnFileDownloaded(x.RawBytes, url,
-                        meta.Title, meta.Modified),
-                    OnFileDownloadFailed);
+                NavigateTo(meta.Path);
+                return;
             }
+
+            progBusy.IsBusy = true;
+
+            var client = DropBoxInfo
+                .Create(_token, _secret);
+
+            var url = client.GetUrl(meta.Path);
+            client.GetFileAsync(meta.Path,
+                x => OnFileDownloaded(x.RawBytes, url,
+                    meta.Title, meta.Modified),
+                OnFileDownloadFailed);
         }
     }
 }

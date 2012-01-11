@@ -66,7 +66,7 @@ namespace KeePass.Sources
         private void lnkDropBox_Click(object sender, RoutedEventArgs e)
         {
             AnalyticsTracker.Track("new_db", "dropbox");
-            Navigate<DropBox.DropBox>();
+            Navigate<DropBox.DropBoxAuth>();
         }
 
         private void lnkSkyDrive_Click(object sender, RoutedEventArgs e)

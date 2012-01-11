@@ -1,0 +1,21 @@
+Der inoffizielle KeePass Passwort Manager, kompatibel mit KeePass 2.x für Windows (Desktop).
+
+Support Informationen:
+- Blog: http://7pass.wordpress.com
+- Quelltext: https://github.com/7pass/7pass
+
+Version 3.4:
+ - Added SkyDrive support.
+ - Removed usage of device ID.
+
+Version 3.3:
+- Behoben: WebDAV Fehler.
+- Behoben: Globales Passwort wird bei Umschalten der App nicht angezeigt.
+- Behoben: Darstellung der geschützten Felder mit hellen Themes. 
+- Hinzugefügt: Editieren von Zusatzfeldern und Asterisk Support
+
+Version 3.2:
+- Hinzugefügt: Animierte Übergänge bei Navigation.
+- Hinzugefügt: Anpinnen der Datenbank an Startmenü.
+- Hinzugefügt: Verstecken von Passwort, Titel und Benutzername.
+- Fehlerbereinigungen und Verbesserung der Oberfläche.

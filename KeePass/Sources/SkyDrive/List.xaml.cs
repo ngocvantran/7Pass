@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Navigation;
 using KeePass.Data;
+using KeePass.I18n;
 using KeePass.IO.Data;
 using KeePass.Storage;
 using KeePass.Utils;
@@ -19,6 +20,7 @@ namespace KeePass.Sources.SkyDrive
         public List()
         {
             InitializeComponent();
+            AppButton(0).Text = Strings.Refresh;
         }
 
         protected override void OnNavigatedTo(
@@ -35,19 +37,6 @@ namespace KeePass.Sources.SkyDrive
             _folder = pars["folder"];
 
             RefreshList(null);
-            DisplayEmail();
-        }
-
-        private void DisplayEmail()
-        {
-            _client.GetEmail(email =>
-            {
-                if (!string.IsNullOrEmpty(email))
-                {
-                    Dispatcher.BeginInvoke(() =>
-                        lblEmail.Text = email);
-                }
-            });
         }
 
         private void OnFileDownloaded(MetaListItemInfo item,
@@ -97,33 +86,43 @@ namespace KeePass.Sources.SkyDrive
             }
             finally
             {
-                /*dispatcher.BeginInvoke(() =>
-                    progBusy.IsBusy = false);*/
+                dispatcher.BeginInvoke(() =>
+                    progBusy.IsBusy = false);
             }
         }
 
         private void RefreshList(string path)
         {
+            progBusy.IsBusy = true;
+
             _client.List(path, (parent, items) =>
             {
-                _current = path;
-
-                var grandParent = parent != null
-                    ? parent.Parent : null;
-
-                if (!string.IsNullOrEmpty(grandParent))
+                try
                 {
-                    var list = new List<ListItemInfo>(items);
-                    list.Insert(0, new ParentItem(grandParent));
+                    _current = path;
 
-                    lstItems.SetItems(list);
+                    var grandParent = parent != null
+                        ? parent.Parent : null;
+
+                    if (!string.IsNullOrEmpty(grandParent))
+                    {
+                        var list = new List<ListItemInfo>(items);
+                        list.Insert(0, new ParentItem(grandParent));
+
+                        lstItems.SetItems(list);
+                    }
+                    else
+                        lstItems.SetItems(items);
                 }
-                else
-                    lstItems.SetItems(items);
+                finally
+                {
+                    Dispatcher.BeginInvoke(() =>
+                        progBusy.IsBusy = false);
+                }
             });
         }
 
-        private void lnkRefresh_Click(object sender, RoutedEventArgs e)
+        private void cmdRefresh_Click(object sender, EventArgs e)
         {
             RefreshList(_current);
         }
@@ -131,6 +130,9 @@ namespace KeePass.Sources.SkyDrive
         private void lstItems_SelectionChanged(object sender,
             NavigationListControl.NavigationEventArgs e)
         {
+            if (!Network.CheckNetwork())
+                return;
+
             var item = e.Item as MetaListItemInfo;
 
             if (item != null)
@@ -141,6 +143,7 @@ namespace KeePass.Sources.SkyDrive
                     return;
                 }
 
+                progBusy.IsBusy = true;
                 _client.Download(item.Path,
                     OnFileDownloaded);
 

@@ -106,12 +106,11 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Coding4Fun.Phone.Controls, Version=1.4.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Coding4Fun.Phone.Controls.1.4.8\lib\Coding4Fun.Phone.Controls.dll</HintPath>
+    <Reference Include="Coding4Fun.Phone.Controls, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Coding4Fun.Phone.Controls.1.5.1\lib\Coding4Fun.Phone.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="DropNet.WindowsPhone, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DropNet.1.6\lib\sl4-WindowsPhone71\DropNet.WindowsPhone.dll</HintPath>
-    </Reference>
+    <Reference Include="DropNet.WindowsPhone, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
@@ -121,12 +120,11 @@
     <Reference Include="NavigationListControl">
       <HintPath>..\Libs\NavigationListControl.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.0.5.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.4.0.5\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.0.4.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp.WindowsPhone, Version=102.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.102.5\lib\sl4-wp71\RestSharp.WindowsPhone.dll</HintPath>
-    </Reference>
+    <Reference Include="RestSharp.WindowsPhone, Version=102.5.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="SharpZipLib.Silverlight4">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\SL4\SharpZipLib.Silverlight4.dll</HintPath>
     </Reference>
@@ -249,6 +247,9 @@
     </Compile>
     <Compile Include="Sources\DatabaseUpdater.cs" />
     <Compile Include="Sources\DropBox\DropBoxAdapter.cs" />
+    <Compile Include="Sources\DropBox\DropBoxAuth.xaml.cs">
+      <DependentUpon>DropBoxAuth.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sources\IServiceAdapter.cs" />
     <Compile Include="Sources\ListItem.cs" />
     <Compile Include="Sources\ServiceAdapterBase.cs" />
@@ -285,9 +286,6 @@
     </Compile>
     <Compile Include="Sources\SyncCompleteInfo.cs" />
     <Compile Include="Sources\SyncInfo.cs" />
-    <Compile Include="Sources\DropBox\DropBox.xaml.cs">
-      <DependentUpon>DropBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Sources\DropBox\List.xaml.cs">
       <DependentUpon>List.xaml</DependentUpon>
     </Compile>
@@ -449,7 +447,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Sources\DropBox\DropBox.xaml">
+    <Page Include="Sources\DropBox\DropBoxAuth.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
