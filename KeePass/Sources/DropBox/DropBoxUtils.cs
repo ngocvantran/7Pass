@@ -1,24 +1,25 @@
 using System;
 using DropNet;
+using KeePass.Utils;
 
 namespace KeePass.Sources.DropBox
 {
-    internal static class DropBoxInfo
+    internal static class DropBoxUtils
     {
-#warning Your DropBox info is needed
-        public const string KEY = "YOUR_KEY";
-        public const string SECRET = "YOUR_SECRET";
-
         public static DropNetClient Create()
         {
-            return new DropNetClient(KEY, SECRET);
+            return new DropNetClient(
+                ApiKeys.DROPBOX_KEY,
+                ApiKeys.DROPBOX_SECRET);
         }
 
         public static DropNetClient Create(
             string token, string secret)
         {
             return new DropNetClient(
-                KEY, SECRET, token, secret);
+                ApiKeys.DROPBOX_KEY,
+                ApiKeys.DROPBOX_SECRET,
+                token, secret);
         }
 
         public static string GetUrl(

@@ -121,17 +121,15 @@
     <value>Error downloading the selected file.
 Please try again later.</value>
   </data>
+  <data name="GetTokenError" xml:space="preserve">
+    <value>Network connection error.
+Please try again...</value>
+  </data>
   <data name="ListError" xml:space="preserve">
     <value>Error listing folder content.
 Please try again later.</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
     <value>DropBox Browser</value>
-  </data>
-  <data name="LoginFailure" xml:space="preserve">
-    <value>You've specified an invalid e-mail or password.</value>
-  </data>
-  <data name="LoginTitle" xml:space="preserve">
-    <value>DropBox Authentication</value>
   </data>
 </root>

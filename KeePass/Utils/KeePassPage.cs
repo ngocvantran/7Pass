@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Navigation;
+using KeePass.I18n;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -7,10 +8,29 @@ namespace KeePass.Utils
 {
     public class KeePassPage : PhoneApplicationPage
     {
+        private ProgressIndicator _indicator;
+
         public KeePassPage()
         {
             SupportedOrientations = SupportedPageOrientation
                 .PortraitOrLandscape;
+        }
+
+        protected ProgressIndicator AddIndicator()
+        {
+            if (_indicator == null)
+            {
+                _indicator = new ProgressIndicator
+                {
+                    IsVisible = false,
+                    IsIndeterminate = true,
+                    Text = Strings.Loading,
+                };
+
+                SystemTray.SetProgressIndicator(this, _indicator);
+            }
+
+            return _indicator;
         }
 
         protected ApplicationBarIconButton AppButton(int index)

@@ -40,7 +40,7 @@ namespace KeePass.Analytics
                 <string, string>(this);
 
             values.AddOrSet("mp_source", _source);
-            values.AddOrSet("token", TrackInfo.TOKEN);
+            values.AddOrSet("token", ApiKeys.MIXPANEL_TOKEN);
 
             var settings = AppSettings.Instance;
             values.AddOrSet("distinct_id",

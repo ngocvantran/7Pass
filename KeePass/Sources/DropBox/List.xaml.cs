@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Navigation;
-using DropNet;
 using DropNet.Exceptions;
 using DropNet.Models;
 using KeePass.I18n;
@@ -180,8 +179,7 @@ namespace KeePass.Sources.DropBox
             progBusy.IsBusy = true;
             _cmdRefresh.IsEnabled = false;
 
-            var client = new DropNetClient(
-                DropBoxInfo.KEY, DropBoxInfo.SECRET,
+            var client = DropBoxUtils.Create(
                 _token, _secret);
 
             client.GetMetaDataAsync(_path,
@@ -212,7 +210,7 @@ namespace KeePass.Sources.DropBox
 
             progBusy.IsBusy = true;
 
-            var client = DropBoxInfo
+            var client = DropBoxUtils
                 .Create(_token, _secret);
 
             var url = client.GetUrl(meta.Path);

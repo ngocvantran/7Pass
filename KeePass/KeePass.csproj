@@ -149,7 +149,6 @@
     <Compile Include="Analytics\ITrackImpl.cs" />
     <Compile Include="Analytics\MixPanelTrack.cs" />
     <Compile Include="Analytics\NullTrackImpl.cs" />
-    <Compile Include="Analytics\TrackInfo.cs" />
     <Compile Include="Analytics\TrackingEvent.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -267,7 +266,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Sources\SkyDrive\SkyDriveClient.cs" />
-    <Compile Include="Sources\SkyDrive\SkyDriveInfo.cs" />
     <Compile Include="Sources\SkyDrive\SkyDriveAdapter.cs" />
     <Compile Include="Sources\SkyDrive\XExtensions.cs" />
     <Compile Include="Sources\SourceCapabilityUpdater.cs" />
@@ -333,6 +331,7 @@
     <Compile Include="Storage\SourceTypes.cs" />
     <Compile Include="Storage\VerifyResults.cs" />
     <Compile Include="Storage\VerifyResultTypes.cs" />
+    <Compile Include="Utils\ApiKeys.cs" />
     <Compile Include="Utils\AppSettings.cs" />
     <Compile Include="Utils\BackTargets.cs" />
     <Compile Include="Utils\EaseEffect.cs" />
@@ -345,7 +344,7 @@
     <Compile Include="Sources\Download.xaml.cs">
       <DependentUpon>Download.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Sources\DropBox\DropBoxInfo.cs" />
+    <Compile Include="Sources\DropBox\DropBoxUtils.cs" />
     <Compile Include="Sources\DropBox\DropBoxResources.Designer.cs">
       <DependentUpon>DropBoxResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>

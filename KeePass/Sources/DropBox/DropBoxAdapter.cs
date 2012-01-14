@@ -74,9 +74,8 @@ namespace KeePass.Sources.DropBox
         private static DropNetClient CreateClient(string userInfo)
         {
             var parts = userInfo.Split(':');
-
-            return new DropNetClient(
-                DropBoxInfo.KEY, DropBoxInfo.SECRET,
+            
+            return DropBoxUtils.Create(
                 parts[0], parts[1]);
         }
 
