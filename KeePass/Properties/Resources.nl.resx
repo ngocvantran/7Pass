@@ -118,197 +118,200 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfirmDeleteDb" xml:space="preserve">
-    <value>Soll die Datenbank {0} gelöscht werden?
+    <value>Wilt u de database {0} verwijderen?
 
-Dies würde die Datenbank auf dem Telefon löschen aber nicht die Quelle auf dem Server.</value>
+Het bestand zal alleen {0} van uw telefoon worden verwijderd, maar niet van uw server.</value>
   </data>
   <data name="CorruptedFile" xml:space="preserve">
-    <value>Die Datenbankdatei ist beschädigt!</value>
+    <value>Het databasebestand is beschadigd!</value>
   </data>
   <data name="DeleteDbTitle" xml:space="preserve">
-    <value>Datenbank löschen</value>
+    <value>Database Verwijderen</value>
   </data>
   <data name="DemoDbText" xml:space="preserve">
-    <value>Das Passwort der Demo-Datenbank lautet "demo", ohne Anführungszeichen.</value>
+    <value>Het wachtwoord van de demo database is "demo", zonder aanhalingstekens.</value>
   </data>
   <data name="DemoDbTitle" xml:space="preserve">
-    <value>Datenbankpasswort</value>
+    <value>Databasewachtwoord</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
-    <value>Fehler beim Herunterladen der Datenbank.
-Bitte stell sicher, dass der URL korrekt ist.
+    <value>Fout tijdens downloaden van uw database.
+Controleer of de url klopt.
 
 </value>
   </data>
   <data name="DownloadTitle" xml:space="preserve">
-    <value>Datenbank-Download</value>
+    <value>Database downloaden</value>
   </data>
   <data name="IncorrectPassword" xml:space="preserve">
-    <value>Sie haben ein falsches Passwort angegeben.
+    <value>U heeft een verkeerd wachtwoord ingevoerd.
 
-Achtung: 7Pass unterstützt keine Windows-Anmeldung oder eigene Passwort-Anbieter für das Hauptpasswort.</value>
+Let op dat 7Pass Windows account of eigen wachtwoord leveranciers voor het hoofdwachtwoord niet ondersteund.</value>
   </data>
   <data name="InvalidCertificate" xml:space="preserve">
     <value>
 
-Es ist möglich, dass ihr Telefon dem SSL Zertifikat nicht vertraut.
-Wollen Sie mehr darüber erfahren?</value>
+Het is mogelijk dat uw telefoon het SSL certificaat van de server niet vertrouwd.
+Wilt u hierover meer lezen?</value>
   </data>
   <data name="InvalidCertificateUrl" xml:space="preserve">
     <value>http://7pass.wordpress.com/2011/01/09/faq-updated-why-7pass-says-my-database-signature-is-invalid/</value>
   </data>
   <data name="NoNetwork" xml:space="preserve">
-    <value>Es steht keine Internetverbindung zur Verfügung.
-Bitte versuchen Sie es später erneut.</value>
+    <value>Geen internetverbinding beschikbaar.
+Probeer het later nog eens..</value>
   </data>
   <data name="ParseError" xml:space="preserve">
-    <value>Das Passwort ist korrekt und die Datenbank ist in Ordnung.
-Leider ist aber dennoch ein Fehler aufgetreten beim Lesen der Datenbank.
+    <value>Het wachtwoord is goed en de database lijkt geldig.
+Helaas is er een fout opgetreden tijdens het lezen van de database.
 
-Möchten Sie dem Entwickler eine Fehlerbeschreibung senden, so dass der Fehler in der nächsten Version behoben werden kann?</value>
+Wilt u een rapport naar de ontwikkelaar versturen zodat deze bug in de volgende versie kan worden opgelost? </value>
   </data>
   <data name="PasswordTitle" xml:space="preserve">
-    <value>Hauptschlüssel</value>
+    <value>Hoofdsleutel</value>
   </data>
   <data name="UpdateFailure" xml:space="preserve">
-    <value>Das Update von Datenbank {0} ist fehlgeschlagen:
+    <value>Bijwerken van database {0} mislukt:
 {1}</value>
   </data>
   <data name="UpdateTitle" xml:space="preserve">
-    <value>Datenbankaktualisierung</value>
+    <value>Database Bijwerken</value>
   </data>
   <data name="WarningStorePassword" xml:space="preserve">
-    <value>Bitte stellen Sie sicher, dass der Startbildschirm Ihres Telefons passwortgeschützt ist.
+    <value>Verzeker uzelf dat het vergrendelingsscherm met een wachtwoord is beschermd.
 
-Das Speichern des Passworts ohne Schutz des Startbildschirmes, erlaubt jeder beliebigen Person Einsicht in Ihre Passwörter.</value>
+Opslaan van het databasewachtwoord zonder beveiliging van het vergrendelingsscherm maakt het voor iedereen mogelijk uw wachtwoorden in te zien.
+
+Ga naar Telefoon Instellingen&#xB;ergrendelingsscherm om het wachtwoord van het vergrendelingsscherm in te schakelen.</value>
   </data>
   <data name="LinkRegex" xml:space="preserve">
     <value>&lt;a\s+[^&gt;]?href\s?=\s?(['"])([^'"]+)</value>
   </data>
   <data name="InvalidKeyFile" xml:space="preserve">
-    <value>Sie haben eine ungültige/beschädigte Keydatei ausgewählt.</value>
+    <value>U hebt een ongeldig/beschadigd sleutelbestand geselecteerd.</value>
   </data>
   <data name="KeyFileTitle" xml:space="preserve">
-    <value>Download Keydatei</value>
+    <value>Sleutelbestand Downloaden</value>
   </data>
   <data name="GlobalPassPrompt" xml:space="preserve">
-    <value>Bitte geben Sie Ihr globales Passwort an!</value>
+    <value>Voer uw globale wachtwoord in!</value>
   </data>
   <data name="GlobalPassTitle" xml:space="preserve">
-    <value>7Pass Globales Passwort</value>
+    <value>7Pass Globaal wachtwoord</value>
   </data>
   <data name="UnhandledExPrompt" xml:space="preserve">
-    <value>In 7Pass ist ein unerwarteter Fehler aufgetreten. 7Pass wird nun beendet.
+    <value>Er heeft een onverwachte fout opgetreden. 7Pass zal nu afsluiten.
 
-Ist es in Ordnung, wenn eine E-Mail erstellt und der Fehler an den Entwickler übermittelt wird, um ihn schnellstmöglich zu beheben?</value>
+Is het goed als ik een e-mail maak die u naar mij kan versturen zodat het probleem kan worden opgelost?</value>
   </data>
   <data name="UnhandledExTitle" xml:space="preserve">
-    <value>Ooopppppps</value>
+    <value>Ooepppppps</value>
   </data>
   <data name="InvalidUrlPrompt" xml:space="preserve">
-    <value>Der ausgewählte URL kann nicht angezeigt werden. Wenn der URL zu lang ist (&gt; 500 Zeichen), versuchen Sie eine andere Quelle, wo der URL kürzer ist.</value>
+    <value>De geselecteerde URL kan niet worden getoond. Als de URL te lang is (&gt; 500 karakters) probeer dan de bron naar een lokatie te verplaatsen waarvan de URL korter is.</value>
   </data>
   <data name="InvalidUrlTitle" xml:space="preserve">
-    <value>Ungültiger URL</value>
+    <value>Ongeldige URL</value>
   </data>
   <data name="SavedCaption" xml:space="preserve">
-    <value>Eintrag erfolgreich gespeichert!</value>
+    <value>Invoer is met succes opgeslagen!</value>
   </data>
   <data name="SavedTitle" xml:space="preserve">
-    <value>Eintrag wird gespeichert</value>
+    <value>Invoer Opslaan</value>
   </data>
   <data name="Conflict" xml:space="preserve">
-    <value>7Pass hat einen Datenbank-Konflikt entdeckt.
-Die lokale Datenbank ist nun hochgeladen nach:
+    <value>7Pass heeft een versieconflict tussen de databases ontdekt.
+De lokale database is nu geupload naar:
 [{0}]
 
-Wenn Sie diese neue Datenbank nutzen möchten, müssen sie diese separat herunterladen.</value>
+Als u de andere database wilt gebruiken moet u die appart downloaden.</value>
   </data>
   <data name="ConflictTitle" xml:space="preserve">
-    <value>Datenbank-Konflikt</value>
+    <value>Database Conflict</value>
   </data>
   <data name="AddNotes" xml:space="preserve">
-    <value>«Notizen hinzufügen»</value>
+    <value>«Notities Toevoegen»</value>
   </data>
   <data name="UnsavedChange" xml:space="preserve">
-    <value>Sie haben ungesicherte Änderungen.
-Wollen Sie diese Änderungen wirklich ignorieren?</value>
+    <value>U heeft niet opgeslagen wijzigingen.
+Wilt u deze wijzigingen echt weggooien?</value>
   </data>
   <data name="UnsavedChangeTitle" xml:space="preserve">
-    <value>Ungesicherte Änderungen</value>
+    <value>Niet-opgeslagen wijzigen</value>
   </data>
   <data name="DeletePernamentPrompt" xml:space="preserve">
-    <value>Sind Sie sich sicher, das die aus gewählte {0} {1} dauerhaft gelöscht werden soll?
+    <value>Weet u zeker dat u de geselecteerd {0} {1} permanent wil verwijderen?
 
-{0} wird für immer gelöscht und kann auch nicht weiderhergestellt werden.</value>
+De {0} zal voor eeuwig worden verwijderd en kan niet worden hersteld.</value>
   </data>
   <data name="DeletePrompt" xml:space="preserve">
-    <value>Möchten Sie wirklich {0} {1} löschen?</value>
+    <value>Bent u zeker dat u de geselecteerde {0} {1} wilt verwijderen?</value>
   </data>
   <data name="DeleteTitle" xml:space="preserve">
-    <value>Löschen</value>
+    <value>Verwijderen</value>
   </data>
   <data name="Entry" xml:space="preserve">
-    <value>den Eintrag</value>
+    <value>invoer</value>
   </data>
   <data name="Group" xml:space="preserve">
-    <value>die Gruppe</value>
+    <value>groep</value>
   </data>
   <data name="NewGroupTitle" xml:space="preserve">
-    <value>Neue Gruppe</value>
+    <value>Nieuwe Groep</value>
   </data>
   <data name="PromptName" xml:space="preserve">
-    <value>Bitte geben Sie einen Gruppennamen ein</value>
+    <value>Voer de groepsnaam in</value>
   </data>
   <data name="RenameTitle" xml:space="preserve">
-    <value>Gruppe umbenennen</value>
+    <value>Groep Hernoemen</value>
   </data>
   <data name="RecycleBin" xml:space="preserve">
-    <value>Papierkorb</value>
+    <value>Prullenbak</value>
   </data>
   <data name="LargeTransforms" xml:space="preserve">
-    <value>Sie ausgewählte Datenbank verwendet eine sehr große Anzahl an Verschlüsselungstransformationen.
+    <value>De geselecteerde database gebruikt een groot aantal encryptie transformatie rondes.
 
-Dies führt dazu, das 7Pass die Datenbank nur sehr langsam öffnen kann.</value>
+Het openen van de database door 7Pass zal veel langer duren dan normaal.</value>
   </data>
   <data name="LargeTransformsTitle" xml:space="preserve">
-    <value>Datenbank-Verschlüsselung</value>
+    <value>Database Encryptie</value>
   </data>
   <data name="ToastFree" xml:space="preserve">
-    <value>Dies ist die voll funktionsfähige freie Version von 7Pass.
-Sie können den Entwickler unterstützen, wenn Sie auf diese Benachrichtigung klicken, um die Vollversion zu kaufen.</value>
+    <value>Dit is de volledig functionele gratis versie van 7Pass.
+U kunt de ontwikkelaar ondersteunen door via deze 
+notificatie de betaalde versie aan te schaffen.</value>
   </data>
   <data name="ToastTrial" xml:space="preserve">
-    <value>Danke für das Testen von 7Pass.
-Dies ist die voll funktionsfähige freie Version von 7Pass.
-Klicken Sie auf diese Benachrichtigung, um 7Pass zu beurteilen/kaufen.</value>
+    <value>Bedankt dat u 7Pass geprobeerd heeft.
+Dit is de volledig functionele probeerversie van 7Pass.
+Klik deze notificatie om 7Pass te Beoordelen/Kopen.</value>
   </data>
   <data name="DigestRegex" xml:space="preserve">
     <value>(\w+)="([^"]+)"</value>
   </data>
   <data name="Update_Download" xml:space="preserve">
-    <value>Update</value>
+    <value>bijwerken</value>
   </data>
   <data name="Update_Sync" xml:space="preserve">
-    <value>Synchronisieren</value>
+    <value>synchroniseren</value>
   </data>
   <data name="UriCensors" xml:space="preserve">
-    <value>(?&lt;=pass(?:word)?=)([^&amp;]+)
-(?&lt;=secret=)([^&amp;]+)</value>
+    <value>(?&lt;=wacht(?:woord)?=)([^&amp;]+)
+(?&lt;=geheim=)([^&amp;]+)</value>
   </data>
   <data name="AlreadyPinned" xml:space="preserve">
-    <value>Die ausgewählte Datenbank wurde bereits auf der Startseite angeheftet.</value>
+    <value>De geselecteerde database is al aan het startscherm vastgemaakt.</value>
   </data>
   <data name="PinDatabase" xml:space="preserve">
-    <value>Datenbank anheften</value>
+    <value>Database aan startscherm vastmaken</value>
   </data>
   <data name="FieldsMenuItem" xml:space="preserve">
-    <value>Felder Bearbeiten ({0})</value>
+    <value>Bekijken/Bewerken Velden ({0})</value>
   </data>
   <data name="Field_Protected" xml:space="preserve">
-    <value>Erweitern zum anzeigen/bearbeiten.</value>
+    <value>Uitklappen naar weergeven/bewerken.</value>
   </data>
   <data name="EmptyField" xml:space="preserve">
-    <value>Neues Feld</value>
+    <value>Nieuw Veld</value>
   </data>
 </root>

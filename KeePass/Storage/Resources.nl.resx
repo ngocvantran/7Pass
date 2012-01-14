@@ -117,21 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DownloadError" xml:space="preserve">
-    <value>Fehler beim Herunterladen der ausgewählten Datei.
-Bitte versuchen Sie es später erneut.</value>
+  <data name="EmptyFile" xml:space="preserve">
+    <value>Leeg bestand.
+Het bestand is ongeldig of er was een probleem met de verbinding.</value>
   </data>
-  <data name="ListError" xml:space="preserve">
-    <value>Fehler beim Auflisten des Verzeichnisses.
-Bitte versuchen Sie es später erneut.</value>
+  <data name="NotKdbx" xml:space="preserve">
+    <value>Ongeldige bestandshandtekening.
+Het aangegeven bestand is geen KeePass 2.x database.</value>
   </data>
-  <data name="ListTitle" xml:space="preserve">
-    <value>DropBox Browser</value>
+  <data name="NotSyncableCaption" xml:space="preserve">
+    <value>Aanpassingen opgeslagen, maar zullen niet worden 
+gesynchroniseerd door brontype (Web Server/Demo DB).</value>
   </data>
-  <data name="LoginFailure" xml:space="preserve">
-    <value>Sie haben eine ungültige E-Mail-Adresse oder Passwort angegeben.</value>
-  </data>
-  <data name="LoginTitle" xml:space="preserve">
-    <value>DropBox Authentifizierung</value>
+  <data name="NotSyncableTitle" xml:space="preserve">
+    <value>DB niet te synchroniseren</value>
   </data>
 </root>

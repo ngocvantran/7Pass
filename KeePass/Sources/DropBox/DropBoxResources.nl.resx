@@ -118,20 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DownloadError" xml:space="preserve">
-    <value>Fehler beim Herunterladen der ausgewählten Datei.
-Bitte versuchen Sie es später erneut.</value>
+    <value>Probleem bij downloaden van het geselecteerde bestand.
+Probeer het later nog eens.</value>
   </data>
   <data name="ListError" xml:space="preserve">
-    <value>Fehler beim Auflisten des Verzeichnisses.
-Bitte versuchen Sie es später erneut.</value>
+    <value>Probleem bij tonen van mapinhoud.
+Probeer het later nog eens.</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
     <value>DropBox Browser</value>
   </data>
   <data name="LoginFailure" xml:space="preserve">
-    <value>Sie haben eine ungültige E-Mail-Adresse oder Passwort angegeben.</value>
+    <value>U hebt een ongeldig e-mailadres of wachtwoord opgegeven.</value>
   </data>
   <data name="LoginTitle" xml:space="preserve">
-    <value>DropBox Authentifizierung</value>
+    <value>DropBox Authenticatie</value>
   </data>
 </root>

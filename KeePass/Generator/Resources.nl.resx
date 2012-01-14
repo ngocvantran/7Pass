@@ -117,21 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DownloadError" xml:space="preserve">
-    <value>Fehler beim Herunterladen der ausgewählten Datei.
-Bitte versuchen Sie es später erneut.</value>
+  <data name="Brackets" xml:space="preserve">
+    <value>Haakjes ([, ], {, }, (, ), &lt;, &gt;)</value>
   </data>
-  <data name="ListError" xml:space="preserve">
-    <value>Fehler beim Auflisten des Verzeichnisses.
-Bitte versuchen Sie es später erneut.</value>
+  <data name="Digits" xml:space="preserve">
+    <value>Cijfers (0, 1, 2,...)</value>
   </data>
-  <data name="ListTitle" xml:space="preserve">
-    <value>DropBox Browser</value>
+  <data name="HighAnsi" xml:space="preserve">
+    <value>Hoge ANSI-tekens</value>
   </data>
-  <data name="LoginFailure" xml:space="preserve">
-    <value>Sie haben eine ungültige E-Mail-Adresse oder Passwort angegeben.</value>
+  <data name="Lower" xml:space="preserve">
+    <value>Kleine letters (a, b, c, …)</value>
   </data>
-  <data name="LoginTitle" xml:space="preserve">
-    <value>DropBox Authentifizierung</value>
+  <data name="Minus" xml:space="preserve">
+    <value>Min (-)</value>
+  </data>
+  <data name="Space" xml:space="preserve">
+    <value>Spatie ( )</value>
+  </data>
+  <data name="Special" xml:space="preserve">
+    <value>Speciaal (!, $, %, &amp;, …)</value>
+  </data>
+  <data name="Underline" xml:space="preserve">
+    <value>Onderstreping (_)</value>
+  </data>
+  <data name="Upper" xml:space="preserve">
+    <value>Hoofdletters (A, B, C,...)</value>
   </data>
 </root>

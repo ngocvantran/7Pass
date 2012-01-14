@@ -118,20 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DownloadError" xml:space="preserve">
-    <value>Fehler beim Herunterladen der ausgewählten Datei.
-Bitte versuchen Sie es später erneut.</value>
+    <value>Probleem bij downloaden van het geselecteerde bestand.
+Probeer het later nog eens.</value>
+  </data>
+  <data name="HtmlDetected" xml:space="preserve">
+    <value>De server reageerde met een html pagina op het WebDAV verzoek van 7Pass.
+Wilt u de server daarom als HTML pagina's bekijken?</value>
+  </data>
+  <data name="HtmlDetectedTitle" xml:space="preserve">
+    <value>HTML-pagina gedetecteerd</value>
   </data>
   <data name="ListError" xml:space="preserve">
-    <value>Fehler beim Auflisten des Verzeichnisses.
-Bitte versuchen Sie es später erneut.</value>
+    <value>Fout bij tonen mapinhoud.
+Controleer uw gebruikersnaam/wachtwoord en probeer opnieuw.</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
-    <value>DropBox Browser</value>
+    <value>WebDAV Browser</value>
   </data>
   <data name="LoginFailure" xml:space="preserve">
-    <value>Sie haben eine ungültige E-Mail-Adresse oder Passwort angegeben.</value>
+    <value>U hebt een ongeldige gebruikersnaam of wachtwoord opgegeven.</value>
   </data>
   <data name="LoginTitle" xml:space="preserve">
-    <value>DropBox Authentifizierung</value>
+    <value>WebDAV Authenticatie</value>
   </data>
 </root>
