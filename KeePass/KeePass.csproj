@@ -47,7 +47,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Free|AnyCPU' ">
-    <OutputPath>bin\Freeware\</OutputPath>
+    <OutputPath>bin\Free\</OutputPath>
     <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE;FREEWARE</DefineConstants>
     <Optimize>true</Optimize>
     <NoStdLib>true</NoStdLib>
@@ -110,7 +110,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Coding4Fun.Phone.Controls.1.5.1\lib\Coding4Fun.Phone.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="DropNet.WindowsPhone, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="DropNet.WindowsPhone">
+      <HintPath>..\Libs\DropNet.WindowsPhone.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
@@ -121,10 +123,11 @@
       <HintPath>..\Libs\NavigationListControl.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.0.4.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp.WindowsPhone, Version=102.5.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="RestSharp.WindowsPhone">
+      <HintPath>..\Libs\RestSharp.WindowsPhone.dll</HintPath>
+    </Reference>
     <Reference Include="SharpZipLib.Silverlight4">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\SL4\SharpZipLib.Silverlight4.dll</HintPath>
     </Reference>
