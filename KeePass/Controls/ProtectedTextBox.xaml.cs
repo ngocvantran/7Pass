@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace KeePass.Controls
 {
@@ -10,6 +11,10 @@ namespace KeePass.Controls
         public static DependencyProperty IsProtectedProperty = DependencyProperty
             .Register("IsProtected", typeof(bool), typeof(ProtectedTextBox),
                 new PropertyMetadata(true, OnIsProtectedChanged));
+
+        public static DependencyProperty MonoSpacedProperty = DependencyProperty
+            .Register("MonoSpaced", typeof(bool), typeof(ProtectedTextBox),
+                new PropertyMetadata(false, OnMonoSpacedChanged));
 
         public static DependencyProperty TextProperty = DependencyProperty
             .Register("Text", typeof(string), typeof(ProtectedTextBox), null);
@@ -23,6 +28,12 @@ namespace KeePass.Controls
         {
             get { return (bool)GetValue(IsProtectedProperty); }
             set { SetValue(IsProtectedProperty, value); }
+        }
+
+        public bool MonoSpaced
+        {
+            get { return (bool)GetValue(MonoSpacedProperty); }
+            set { SetValue(MonoSpacedProperty, value); }
         }
 
         /// <summary>
@@ -67,6 +78,18 @@ namespace KeePass.Controls
         {
             var protect = (ProtectedTextBox)d;
             protect.UpdateProtectState();
+        }
+
+        private static void OnMonoSpacedChanged(DependencyObject d,
+            DependencyPropertyChangedEventArgs e)
+        {
+            var protect = (ProtectedTextBox)d;
+
+            if (protect.MonoSpaced)
+            {
+                protect.txtPassword.FontFamily =
+                    new FontFamily("Courier New");
+            }
         }
 
         private void UpdateProtectState()

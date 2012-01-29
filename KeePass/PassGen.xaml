@@ -44,7 +44,8 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="{Binding}" Style="{StaticResource PhoneTextLargeStyle}" />
+                            <TextBlock Text="{Binding}" FontFamily="Courier New"
+                                       Style="{StaticResource PhoneTextLargeStyle}" />
                             <uc:QualityProgressBar Password="{Binding}" />
                         </StackPanel>
                     </DataTemplate>
