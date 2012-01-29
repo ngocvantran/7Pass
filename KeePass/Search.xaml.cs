@@ -121,6 +121,7 @@ namespace KeePass
             IEnumerable<string> fields)
         {
             return fields
+                .Where(x => !string.IsNullOrEmpty(x))
                 .Select(x => x.ToUpperInvariant())
                 .Any(x => x.Contains(text));
         }
