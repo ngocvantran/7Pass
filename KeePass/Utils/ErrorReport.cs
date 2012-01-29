@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Text.RegularExpressions;
+using Coding4Fun.Phone.Controls.Data;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Info;
 using Microsoft.Phone.Tasks;
@@ -13,14 +14,14 @@ namespace KeePass.Utils
         {
             var sb = new StringBuilder();
 
+            AddAppInfo(sb);
+            sb.AppendLine();
+
             AddErrorDetails(sb, ex);
             AddAddress(sb);
             sb.AppendLine();
 
             AddDeviceInfo(sb);
-            sb.AppendLine();
-
-            AddAppInfo(sb);
 
             new EmailComposeTask
             {
@@ -35,7 +36,7 @@ namespace KeePass.Utils
             sb.AppendLine("7Pass info:");
 
             sb.Append("Version: ");
-            sb.AppendLine(typeof(ErrorReport).Assembly.FullName);
+            sb.AppendLine(PhoneHelper.GetAppAttribute("Version"));
         }
 
         private static void AddDeviceInfo(StringBuilder sb)

@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Reflection;
 using System.Windows;
+using Coding4Fun.Phone.Controls.Data;
 using Microsoft.Phone.Tasks;
 
 namespace KeePass
@@ -11,9 +11,8 @@ namespace KeePass
         {
             InitializeComponent();
 
-            var asm = Assembly.GetExecutingAssembly();
-            var parts = asm.FullName.Split(',');
-            var version = parts[1].Split('=')[1];
+            var version = PhoneHelper
+                .GetAppAttribute("Version");
 
             lblVersion.Text = string.Format(
                 lblVersion.Text, version);
