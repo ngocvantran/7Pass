@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using KeePass.Utils;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -18,22 +17,23 @@ namespace KeePass.Sources.SkyDrive
 
         private void CheckToken(Uri uri)
         {
-            var parts = uri.Fragment
-                .Substring(1)
-                .Split('&')
-                .Select(x => x.Split('='))
-                .ToDictionary(x => x[0], x => x[1]);
+            const string prefix = "?code=";
 
-            string token;
-            if (!parts.TryGetValue("access_token", out token))
+            var query = uri.Query;
+            if (!query.StartsWith(prefix,
+                StringComparison.InvariantCultureIgnoreCase))
                 return;
 
-            var folder = NavigationContext
-                .QueryString["folder"];
+            var code = query.Substring(prefix.Length);
+            SkyDriveClient.GetToken(code, token =>
+            {
+                var folder = NavigationContext
+                    .QueryString["folder"];
 
-            this.NavigateTo<List>(
-                "token={0}&folder={1}",
-                token, folder);
+                this.NavigateTo<List>(
+                    "token={0}&folder={1}",
+                    token, folder);
+            });
         }
 
         private void ShowLogin()
@@ -73,9 +73,7 @@ namespace KeePass.Sources.SkyDrive
                 if (uri.ToString().StartsWith(
                     ApiKeys.SKYDRIVE_REDIRECT))
                 {
-                    e.Cancel = true;
                     CheckToken(uri);
-
                     return;
                 }
 

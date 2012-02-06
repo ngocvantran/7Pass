@@ -70,8 +70,9 @@ namespace KeePass.Sources.SkyDrive
 
         public override void List(Action<ListItem> ready)
         {
-            _client.GetFileMeta(_info.Path, x =>
-                ready(Translate(x)));
+            _client.RefreshToken(() =>
+                _client.GetFileMeta(_info.Path, x =>
+                    ready(Translate(x))));
         }
 
         public override void Upload(ListItem item,

@@ -32,9 +32,8 @@ namespace KeePass.Sources.SkyDrive
             var pars = NavigationContext
                 .QueryString;
 
-            _client = new SkyDriveClient(
-                pars["token"]);
             _folder = pars["folder"];
+            _client = new SkyDriveClient(pars["token"]);
 
             RefreshList(null);
         }

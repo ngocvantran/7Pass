@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading;
+using KeePass.Utils;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -9,22 +11,23 @@ namespace KeePass.Sources.SkyDrive
     internal class SkyDriveClient
     {
         private readonly RestClient _client;
-        private readonly string _token;
+        private AccessTokenData _token;
 
-        public SkyDriveClient(string token)
+        public SkyDriveClient(string tokenData)
+            : this(Parse(tokenData)) {}
+
+        private SkyDriveClient(AccessTokenData token)
         {
             if (token == null)
                 throw new ArgumentNullException("token");
 
-            _token = token;
             _client = new RestClient
             {
                 UserAgent = "7Pass",
                 BaseUrl = "https://apis.live.net/v5.0/",
             };
 
-            _client.AddDefaultParameter("token",
-                token, ParameterType.UrlSegment);
+            SetToken(token);
         }
 
         public void Download(string path,
@@ -106,6 +109,21 @@ namespace KeePass.Sources.SkyDrive
             });
         }
 
+        public static void GetToken(
+            string code, Action<string> complete)
+        {
+            var url = string.Format(
+                Resources.GetAuthCodeUrl,
+                ApiKeys.SKYDRIVE_CLIENT_ID,
+                ApiKeys.SKYDRIVE_REDIRECT,
+                ApiKeys.SKYDRIVE_SECRET, code);
+
+            var client = new WebClient();
+            client.DownloadStringCompleted +=
+                (sender, args) => complete(args.Result);
+            client.DownloadStringAsync(new Uri(url));
+        }
+
         public void List(string path, Action<MetaListItemInfo,
             MetaListItemInfo[]> complete)
         {
@@ -171,12 +189,29 @@ namespace KeePass.Sources.SkyDrive
         public static SkyDriveClient ParsePath(
             string url, out string id)
         {
-            var parts = url.Split(
-                new[] {Environment.NewLine},
-                StringSplitOptions.None);
+            var data = JsonConvert
+                .DeserializeObject<PathData>(url);
 
-            id = parts[0];
-            return new SkyDriveClient(parts[1]);
+            id = data.ID;
+            return new SkyDriveClient(data.Token);
+        }
+
+        public void RefreshToken(Action completed)
+        {
+            var client = new WebClient();
+            client.DownloadStringCompleted += (sender, args) =>
+            {
+                SetToken(Parse(args.Result));
+                completed();
+            };
+
+            var url = string.Format(
+                Resources.TokenRefreshUrl,
+                ApiKeys.SKYDRIVE_CLIENT_ID,
+                ApiKeys.SKYDRIVE_SECRET,
+                ApiKeys.SKYDRIVE_REDIRECT,
+                _token.refresh_token);
+            client.DownloadStringAsync(new Uri(url));
         }
 
         public void Upload(string folder,
@@ -219,8 +254,18 @@ namespace KeePass.Sources.SkyDrive
 
         private string GetSyncPath(string id)
         {
-            return string.Concat(id,
-                Environment.NewLine, _token);
+            return JsonConvert.SerializeObject(
+                new PathData
+                {
+                    ID = id,
+                    Token = _token
+                });
+        }
+
+        private static AccessTokenData Parse(string tokenData)
+        {
+            return JsonConvert.DeserializeObject
+                <AccessTokenData>(tokenData);
         }
 
         private void Rename(string path, string name,
@@ -254,6 +299,14 @@ namespace KeePass.Sources.SkyDrive
             {
                 RequestFormat = DataFormat.Json,
             };
+        }
+
+        private void SetToken(AccessTokenData token)
+        {
+            _token = token;
+            _client.AddDefaultParameter("token",
+                token.access_token,
+                ParameterType.UrlSegment);
         }
 
         private class StupidAssemblyRedirectWorkAround : RestSharp.Serializers.ISerializer
