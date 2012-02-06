@@ -826,6 +826,16 @@ namespace KeePass.I18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Due to SkyDrive limitation, your database has to be renamed to &quot;.doc&quot; extension.
+        ///Do you want 7Pass to append &quot;.doc&quot; to your database name and then download it?.
+        /// </summary>
+        public static string SkyDrive_Unsupported {
+            get {
+                return ResourceManager.GetString("SkyDrive_Unsupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Server requires authentication.
         /// </summary>
         public static string WebAuth_Authentication {

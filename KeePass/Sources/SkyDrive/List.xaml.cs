@@ -38,6 +38,12 @@ namespace KeePass.Sources.SkyDrive
             RefreshList(null);
         }
 
+        private static bool IsSupportedFormat(string name)
+        {
+            return name.EndsWith(".doc",
+                StringComparison.InvariantCultureIgnoreCase);
+        }
+
         private void OnFileDownloaded(MetaListItemInfo item,
             string path, byte[] bytes)
         {
@@ -52,12 +58,20 @@ namespace KeePass.Sources.SkyDrive
                         if (!DatabaseVerifier.Verify(dispatcher, buffer))
                             return;
 
+                        var name = item.Title;
+                        if (IsSupportedFormat(name))
+                        {
+                            name = Path.ChangeExtension(
+                                name, null);
+                        }
+                        name = name.RemoveKdbx();
+
                         var storage = new DatabaseInfo();
                         storage.SetDatabase(buffer, new DatabaseDetails
                         {
                             Url = path,
+                            Name = name,
                             Modified = item.Modified,
-                            Name = item.Title.RemoveKdbx(),
                             Type = SourceTypes.Synchronizable,
                             Source = DatabaseUpdater.SKYDRIVE_UPDATER,
                         });
@@ -139,6 +153,25 @@ namespace KeePass.Sources.SkyDrive
                 if (item.IsDir)
                 {
                     RefreshList(item.Path);
+                    return;
+                }
+
+                if (!IsSupportedFormat(item.Title))
+                {
+                    var result = MessageBox.Show(
+                        Strings.SkyDrive_Unsupported,
+                        "SkyDrive", MessageBoxButton.OKCancel);
+
+                    if (result != MessageBoxResult.OK)
+                        return;
+
+                    progBusy.IsBusy = true;
+                    var name = item.Title + ".doc";
+
+                    _client.Rename(item.Path, name,
+                        path => _client.Download(path,
+                            OnFileDownloaded));
+
                     return;
                 }
 

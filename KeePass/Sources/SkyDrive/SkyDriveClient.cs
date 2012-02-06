@@ -200,21 +200,41 @@ namespace KeePass.Sources.SkyDrive
             client.DownloadStringAsync(new Uri(url));
         }
 
+        public void Rename(string path, string name,
+            Action<string> completed)
+        {
+            var request = new RestRequest(path)
+            {
+                Method = Method.PUT,
+                RequestFormat = DataFormat.Json,
+            };
+
+            request.AddHeader("Authorization",
+                "Bearer " + _token.access_token);
+            
+            request.JsonSerializer = new
+                StupidAssemblyRedirectWorkAround(name);
+            request.AddBody(new object());
+
+            _client.ExecuteAsync(request, x =>
+            {
+                var root = JsonConvert
+                    .DeserializeXNode(x.Content, "root")
+                    .Root;
+
+                if (root != null)
+                    completed(root.GetValue("id"));
+            });
+        }
+
         public void Upload(string folder,
             string name, byte[] content,
             Action<string> completed)
         {
-            var safeName = name;
-            if (!name.EndsWith(".doc", StringComparison
-                .InvariantCultureIgnoreCase))
-            {
-                safeName += ".doc";
-            }
-
             var request = Request("{folder}/files/");
             request.Method = Method.POST;
             request.AddUrlSegment("folder", folder);
-            request.AddFile("file", content, safeName);
+            request.AddFile("file", content, name);
 
             _client.ExecuteAsync(request, x =>
             {
@@ -226,15 +246,8 @@ namespace KeePass.Sources.SkyDrive
                     return;
 
                 var path = root.GetValue("id");
-
-                if (safeName == name)
-                {
-                    path = GetSyncPath(path);
-                    completed(path);
-                }
-
-                // Rename & overwrite
-                Rename(path, name, completed);
+                path = GetSyncPath(path);
+                completed(path);
             });
         }
 
@@ -252,30 +265,6 @@ namespace KeePass.Sources.SkyDrive
         {
             return JsonConvert.DeserializeObject
                 <AccessTokenData>(tokenData);
-        }
-
-        private void Rename(string path, string name,
-            Action<string> completed)
-        {
-            var request = Request(path);
-            request.Method = Method.PUT;
-
-            request.JsonSerializer = new
-                StupidAssemblyRedirectWorkAround(name);
-            request.AddBody(new object());
-
-            _client.ExecuteAsync(request, x =>
-            {
-                var root = JsonConvert
-                    .DeserializeXNode(x.Content, "root")
-                    .Root;
-
-                if (root == null)
-                    return;
-
-                var id = root.GetValue("id");
-                completed(GetSyncPath(id));
-            });
         }
 
         private static RestRequest Request(string resource)
@@ -310,6 +299,7 @@ namespace KeePass.Sources.SkyDrive
 
                 _json = string.Format(
                     "{{name: \"{0}\"}}", name);
+                ContentType = "application/json";
             }
 
             public string Serialize(object obj)

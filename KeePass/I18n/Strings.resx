@@ -529,4 +529,8 @@ Your installation ID that will be collected is:</value>
     <value>Refresh</value>
     <comment>Generic Refresh button caption</comment>
   </data>
+  <data name="SkyDrive_Unsupported" xml:space="preserve">
+    <value>Due to SkyDrive limitation, your database has to be renamed to ".doc" extension.
+Do you want 7Pass to append ".doc" to your database name and then download it?</value>
+  </data>
 </root>

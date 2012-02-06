@@ -58,8 +58,7 @@ namespace KeePass.Sources.SkyDrive
         private void browser_Loaded(object sender,
             System.Windows.RoutedEventArgs e)
         {
-            browser.Navigate(new Uri(
-                "http://login.live.com/logout.srf"));
+            ShowLogin();
         }
 
         private void browser_Navigating(
