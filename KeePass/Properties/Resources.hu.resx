@@ -118,200 +118,180 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfirmDeleteDb" xml:space="preserve">
-    <value>Wilt u de database {0} verwijderen?
+    <value>Tényleg ki akarja törölni az adatokat {0}?
 
-Het bestand {0} zal alleen van uw telefoon worden verwijderd, maar niet van de server.</value>
+A forrásfájl a szerverről nem törlődik, csak {0} a telefonról.</value>
   </data>
   <data name="CorruptedFile" xml:space="preserve">
-    <value>Het databasebestand is beschadigd!</value>
+    <value>Az adatbázis megsérült.</value>
   </data>
   <data name="DeleteDbTitle" xml:space="preserve">
-    <value>Database Verwijderen</value>
+    <value>Adatbázis törlése</value>
   </data>
   <data name="DemoDbText" xml:space="preserve">
-    <value>Het wachtwoord van de demo database is "demo", zonder aanhalingstekens.</value>
+    <value>A példa adatbázis jelszava "demo" (idézőjelek nélkül).</value>
   </data>
   <data name="DemoDbTitle" xml:space="preserve">
-    <value>Databasewachtwoord</value>
+    <value>Adatbázisjelszó</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
-    <value>Fout tijdens downloaden van uw database.
-Controleer of de url klopt.
+    <value>Az adatbázis letöltése nem sikerült.
+Ellenőrizze, hogy a megadott URL helyes-e.
 
 </value>
   </data>
   <data name="DownloadTitle" xml:space="preserve">
-    <value>Database downloaden</value>
+    <value>Adatbázis letöltése</value>
   </data>
   <data name="IncorrectPassword" xml:space="preserve">
-    <value>U heeft een verkeerd wachtwoord ingevoerd.
+    <value>Rossz jelszót adott meg!
 
-Let op dat 7Pass Windows account of eigen wachtwoord leveranciers voor het hoofdwachtwoord niet ondersteund.</value>
+7Pass nem támogatja a Windows felhasználói fiókok vagy más jelszó ellenőrzési rendszerek használatát a mesterjelszó ellenőrzésére.</value>
   </data>
   <data name="InvalidCertificate" xml:space="preserve">
     <value>
 
-Het is mogelijk dat uw telefoon het SSL certificaat van de server niet vertrouwd.
-Wilt u hierover meer lezen?</value>
+Lehetséges, hogy az Ön telefonja nem tartja megbízhatónak a szerver SSL biztonsági tanúsítványát.
+Szeretne a problémáról többet megtudni?</value>
   </data>
   <data name="InvalidCertificateUrl" xml:space="preserve">
     <value>http://7pass.wordpress.com/2011/01/09/faq-updated-why-7pass-says-my-database-signature-is-invalid/</value>
   </data>
   <data name="NoNetwork" xml:space="preserve">
-    <value>Geen internetverbinding beschikbaar.
-Probeer het later nog eens..</value>
+    <value>Nincs elérhető internet kapcsolat.
+Próbálja meg később!</value>
   </data>
   <data name="ParseError" xml:space="preserve">
-    <value>Het wachtwoord is goed en de database lijkt geldig.
-Helaas is er een fout opgetreden tijdens het lezen van de database.
+    <value>Az Ön jelszava helyes és az adabázis is érvényesnek tűnik.
+Sajnos a 7Pass mégsem tudta betölteni az adatbázist. .
 
-Wilt u een rapport naar de ontwikkelaar versturen zodat deze bug in de volgende versie kan worden opgelost? </value>
+Küldene egy hibajelentést a fejlesztőnek, hogy a következő verzióban ki tudja javítani ezt a hibát?</value>
   </data>
   <data name="PasswordTitle" xml:space="preserve">
-    <value>Hoofdsleutel</value>
+    <value>Mesterkulcs</value>
   </data>
   <data name="UpdateFailure" xml:space="preserve">
-    <value>Bijwerken van database {0} mislukt:
+    <value>Nem sikerült frissíteni a(z) {0} adatbázist:
 {1}</value>
   </data>
   <data name="UpdateTitle" xml:space="preserve">
-    <value>Database Bijwerken</value>
+    <value>Adatbázis frissítés</value>
   </data>
   <data name="WarningStorePassword" xml:space="preserve">
-    <value>Verzeker uzelf dat het vergrendelingsscherm met een wachtwoord is beschermd.
-
-Opslaan van het databasewachtwoord zonder beveiliging van het vergrendelingsscherm maakt het voor iedereen mogelijk uw wachtwoorden in te zien.
-
-Ga naar Telefoon Instellingen&#xB;ergrendelingsscherm om het wachtwoord van het vergrendelingsscherm in te schakelen.</value>
+    <value />
   </data>
   <data name="LinkRegex" xml:space="preserve">
-    <value>&lt;a\s+[^&gt;]?href\s?=\s?(['"])([^'"]+)</value>
+    <value />
   </data>
   <data name="InvalidKeyFile" xml:space="preserve">
-    <value>U hebt een ongeldig/beschadigd sleutelbestand geselecteerd.</value>
+    <value />
   </data>
   <data name="KeyFileTitle" xml:space="preserve">
-    <value>Sleutelbestand Downloaden</value>
+    <value />
   </data>
   <data name="GlobalPassPrompt" xml:space="preserve">
-    <value>Voer uw globale wachtwoord in!</value>
+    <value />
   </data>
   <data name="GlobalPassTitle" xml:space="preserve">
-    <value>7Pass Globaal wachtwoord</value>
+    <value />
   </data>
   <data name="UnhandledExPrompt" xml:space="preserve">
-    <value>Er heeft een onverwachte fout opgetreden. 7Pass zal nu afsluiten.
-
-Is het goed als ik een e-mail maak die u naar mij kan versturen zodat het probleem kan worden opgelost?</value>
+    <value />
   </data>
   <data name="UnhandledExTitle" xml:space="preserve">
-    <value>Ooepppppps</value>
+    <value />
   </data>
   <data name="InvalidUrlPrompt" xml:space="preserve">
-    <value>De geselecteerde URL kan niet worden getoond. Als de URL te lang is (&gt; 500 karakters) probeer dan de bron naar een lokatie te verplaatsen waarvan de URL korter is.</value>
+    <value />
   </data>
   <data name="InvalidUrlTitle" xml:space="preserve">
-    <value>Ongeldige URL</value>
+    <value />
   </data>
   <data name="SavedCaption" xml:space="preserve">
-    <value>Invoer is met succes opgeslagen!</value>
+    <value />
   </data>
   <data name="SavedTitle" xml:space="preserve">
-    <value>Invoer Opslaan</value>
+    <value />
   </data>
   <data name="Conflict" xml:space="preserve">
-    <value>7Pass heeft een versieconflict tussen de databases ontdekt.
-De lokale database is nu geupload naar:
-[{0}]
-
-Als u de andere database wilt gebruiken moet u die appart downloaden.</value>
+    <value />
   </data>
   <data name="ConflictTitle" xml:space="preserve">
-    <value>Database Conflict</value>
+    <value />
   </data>
   <data name="AddNotes" xml:space="preserve">
-    <value>«Notities Toevoegen»</value>
+    <value />
   </data>
   <data name="UnsavedChange" xml:space="preserve">
-    <value>U heeft niet-opgeslagen wijzigingen.
-Wilt u deze wijzigingen echt weggooien?</value>
+    <value />
   </data>
   <data name="UnsavedChangeTitle" xml:space="preserve">
-    <value>Niet-opgeslagen wijzigen</value>
+    <value />
   </data>
   <data name="DeletePernamentPrompt" xml:space="preserve">
-    <value>Weet u zeker dat u de geselecteerde {0} {1} permanent wil verwijderen?
-
-De {0} zal voor altijd worden verwijderd en kan niet worden hersteld.</value>
+    <value />
   </data>
   <data name="DeletePrompt" xml:space="preserve">
-    <value>Weet u zeker dat u de geselecteerde {0} {1} wilt verwijderen?</value>
+    <value />
   </data>
   <data name="DeleteTitle" xml:space="preserve">
-    <value>Verwijderen</value>
+    <value />
   </data>
   <data name="Entry" xml:space="preserve">
-    <value>invoer</value>
+    <value />
   </data>
   <data name="Group" xml:space="preserve">
-    <value>groep</value>
+    <value />
   </data>
   <data name="NewGroupTitle" xml:space="preserve">
-    <value>Nieuwe Groep</value>
+    <value />
   </data>
   <data name="PromptName" xml:space="preserve">
-    <value>Voer de groepsnaam in</value>
+    <value />
   </data>
   <data name="RenameTitle" xml:space="preserve">
-    <value>Groep Hernoemen</value>
+    <value />
   </data>
   <data name="RecycleBin" xml:space="preserve">
-    <value>Prullenbak</value>
+    <value />
   </data>
   <data name="LargeTransforms" xml:space="preserve">
-    <value>De geselecteerde database gebruikt een groot aantal encryptie transformatie rondes.
-
-Het openen van de database door 7Pass zal veel langer duren dan normaal.</value>
+    <value />
   </data>
   <data name="LargeTransformsTitle" xml:space="preserve">
-    <value>Database Encryptie</value>
+    <value />
   </data>
   <data name="ToastFree" xml:space="preserve">
-    <value>Dit is de volledig functionele gratis versie van 7Pass.
-U kunt de ontwikkelaar ondersteunen door via deze 
-notificatie de betaalde versie aan te schaffen.</value>
+    <value />
   </data>
   <data name="ToastTrial" xml:space="preserve">
-    <value>Bedankt dat u 7Pass geprobeerd heeft.
-Dit is de volledig functionele probeerversie van 7Pass.
-Klik deze notificatie om 7Pass te Beoordelen/Kopen.</value>
+    <value />
   </data>
   <data name="DigestRegex" xml:space="preserve">
-    <value>(\w+)="([^"]+)"</value>
+    <value />
   </data>
   <data name="Update_Download" xml:space="preserve">
-    <value>bijwerken</value>
+    <value />
   </data>
   <data name="Update_Sync" xml:space="preserve">
-    <value>synchroniseren</value>
+    <value />
   </data>
   <data name="UriCensors" xml:space="preserve">
-    <value>(?&lt;=wacht(?:woord)?=)([^&amp;]+)
-(?&lt;=geheim=)([^&amp;]+)</value>
+    <value />
   </data>
   <data name="AlreadyPinned" xml:space="preserve">
-    <value>De geselecteerde database is al aan het startscherm vastgemaakt.</value>
+    <value />
   </data>
   <data name="PinDatabase" xml:space="preserve">
-    <value>Database aan startscherm vastmaken</value>
+    <value />
   </data>
   <data name="FieldsMenuItem" xml:space="preserve">
-    <value>Bekijken/Bewerken Velden ({0})</value>
+    <value />
   </data>
   <data name="Field_Protected" xml:space="preserve">
-    <value>Uitklappen naar weergeven/bewerken.</value>
+    <value />
   </data>
   <data name="EmptyField" xml:space="preserve">
-    <value>Nieuw Veld</value>
+    <value />
   </data>
 </root>

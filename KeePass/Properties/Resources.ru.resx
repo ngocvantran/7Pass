@@ -118,200 +118,193 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfirmDeleteDb" xml:space="preserve">
-    <value>Wilt u de database {0} verwijderen?
+    <value>Вы действительно хотите удалить базу {0}?
 
-Het bestand {0} zal alleen van uw telefoon worden verwijderd, maar niet van de server.</value>
+Делая это, вы удалите базу {0} только с телефона. Версия на сервере останется без изменений. </value>
   </data>
   <data name="CorruptedFile" xml:space="preserve">
-    <value>Het databasebestand is beschadigd!</value>
+    <value>База повреждена!</value>
   </data>
   <data name="DeleteDbTitle" xml:space="preserve">
-    <value>Database Verwijderen</value>
+    <value>Удалить базу</value>
   </data>
   <data name="DemoDbText" xml:space="preserve">
-    <value>Het wachtwoord van de demo database is "demo", zonder aanhalingstekens.</value>
+    <value>Пароль тестовой базы данных "demo" без кавычек</value>
   </data>
   <data name="DemoDbTitle" xml:space="preserve">
-    <value>Databasewachtwoord</value>
+    <value>Пароль базы</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
-    <value>Fout tijdens downloaden van uw database.
-Controleer of de url klopt.
-
+    <value>Ошибка загрузки базы
+Пожалуйста, проверьте правильно URL.
 </value>
   </data>
   <data name="DownloadTitle" xml:space="preserve">
-    <value>Database downloaden</value>
+    <value>Загрузить базу</value>
   </data>
   <data name="IncorrectPassword" xml:space="preserve">
-    <value>U heeft een verkeerd wachtwoord ingevoerd.
+    <value>Вы указали неверный пароль
 
-Let op dat 7Pass Windows account of eigen wachtwoord leveranciers voor het hoofdwachtwoord niet ondersteund.</value>
+Учтите, что 7Pass не потдерживает авторизацию Windows аккаунтом или другим провайдером авторизации. </value>
   </data>
   <data name="InvalidCertificate" xml:space="preserve">
     <value>
 
-Het is mogelijk dat uw telefoon het SSL certificaat van de server niet vertrouwd.
-Wilt u hierover meer lezen?</value>
+Возможно, что сертификат SLL сервера не является доверенным для вашего телефона. Желаете узнать больше?</value>
   </data>
   <data name="InvalidCertificateUrl" xml:space="preserve">
     <value>http://7pass.wordpress.com/2011/01/09/faq-updated-why-7pass-says-my-database-signature-is-invalid/</value>
   </data>
   <data name="NoNetwork" xml:space="preserve">
-    <value>Geen internetverbinding beschikbaar.
-Probeer het later nog eens..</value>
+    <value>Нет доступного соединения с интернет.
+Попробуйте позже..</value>
   </data>
   <data name="ParseError" xml:space="preserve">
-    <value>Het wachtwoord is goed en de database lijkt geldig.
-Helaas is er een fout opgetreden tijdens het lezen van de database.
+    <value>Ваш пароль верен и база выглядит не поврежденной.
+К сожалению, в 7Pass произошла ошибка при чтении базы.
 
-Wilt u een rapport naar de ontwikkelaar versturen zodat deze bug in de volgende versie kan worden opgelost? </value>
+Желаете ли вы отправить сообщение об ошибке автору программы?</value>
   </data>
   <data name="PasswordTitle" xml:space="preserve">
-    <value>Hoofdsleutel</value>
+    <value>Главный ключ</value>
   </data>
   <data name="UpdateFailure" xml:space="preserve">
-    <value>Bijwerken van database {0} mislukt:
+    <value>Обновление базы {0} неудачно:
 {1}</value>
   </data>
   <data name="UpdateTitle" xml:space="preserve">
-    <value>Database Bijwerken</value>
+    <value>Обновление базы данных</value>
   </data>
   <data name="WarningStorePassword" xml:space="preserve">
-    <value>Verzeker uzelf dat het vergrendelingsscherm met een wachtwoord is beschermd.
+    <value>Пожалуйста, убедитесь что ваш экран блокировки телефона защищен паролем. 
+Постронние люди смогут посмотреть ваши пароли, если вы не сделаете этого
 
-Opslaan van het databasewachtwoord zonder beveiliging van het vergrendelingsscherm maakt het voor iedereen mogelijk uw wachtwoorden in te zien.
-
-Ga naar Telefoon Instellingen&#xB;ergrendelingsscherm om het wachtwoord van het vergrendelingsscherm in te schakelen.</value>
+Чтобы установить пароль блокировки перейдите в Настройки\блокировка+фон</value>
   </data>
   <data name="LinkRegex" xml:space="preserve">
     <value>&lt;a\s+[^&gt;]?href\s?=\s?(['"])([^'"]+)</value>
   </data>
   <data name="InvalidKeyFile" xml:space="preserve">
-    <value>U hebt een ongeldig/beschadigd sleutelbestand geselecteerd.</value>
+    <value>Вы выбрали некоректный/поврежденный ключевой файл</value>
   </data>
   <data name="KeyFileTitle" xml:space="preserve">
-    <value>Sleutelbestand Downloaden</value>
+    <value>Скачать ключевой файл</value>
   </data>
   <data name="GlobalPassPrompt" xml:space="preserve">
-    <value>Voer uw globale wachtwoord in!</value>
+    <value>Пожалуйста, введите ваш глобальный пароль!</value>
   </data>
   <data name="GlobalPassTitle" xml:space="preserve">
-    <value>7Pass Globaal wachtwoord</value>
+    <value>Глобальный пароль 7Pass</value>
   </data>
   <data name="UnhandledExPrompt" xml:space="preserve">
-    <value>Er heeft een onverwachte fout opgetreden. 7Pass zal nu afsluiten.
+    <value>7Pass has encountered an unexpected error. 7Pass will now exit.
 
-Is het goed als ik een e-mail maak die u naar mij kan versturen zodat het probleem kan worden opgelost?</value>
+Is it ok if I create an email so that you can send to me to fix this problem?</value>
   </data>
   <data name="UnhandledExTitle" xml:space="preserve">
-    <value>Ooepppppps</value>
+    <value>Упппссс</value>
   </data>
   <data name="InvalidUrlPrompt" xml:space="preserve">
-    <value>De geselecteerde URL kan niet worden getoond. Als de URL te lang is (&gt; 500 karakters) probeer dan de bron naar een lokatie te verplaatsen waarvan de URL korter is.</value>
+    <value>Выбранный адрес недоступен. Если URL очень длинный(&gt; 500 символов), попробуйте переместить переместить ресурс в другое место, где URL будет короче.</value>
   </data>
   <data name="InvalidUrlTitle" xml:space="preserve">
-    <value>Ongeldige URL</value>
+    <value>Неверный URL</value>
   </data>
   <data name="SavedCaption" xml:space="preserve">
-    <value>Invoer is met succes opgeslagen!</value>
+    <value>Запись успешно сохранена!</value>
   </data>
   <data name="SavedTitle" xml:space="preserve">
-    <value>Invoer Opslaan</value>
+    <value>Сохранить</value>
   </data>
   <data name="Conflict" xml:space="preserve">
-    <value>7Pass heeft een versieconflict tussen de databases ontdekt.
-De lokale database is nu geupload naar:
-[{0}]
+    <value>7Pass обнаружил конфликт в версиях баз.
+Ваша база теперь загружена как: [{0}]
 
-Als u de andere database wilt gebruiken moet u die appart downloaden.</value>
+Если вы хотите использовать другую базу, пожалуйста, загрузите ее отдельно</value>
   </data>
   <data name="ConflictTitle" xml:space="preserve">
-    <value>Database Conflict</value>
+    <value>Конфликт баз</value>
   </data>
   <data name="AddNotes" xml:space="preserve">
-    <value>«Notities Toevoegen»</value>
+    <value>«Добавить заметки»</value>
   </data>
   <data name="UnsavedChange" xml:space="preserve">
-    <value>U heeft niet-opgeslagen wijzigingen.
-Wilt u deze wijzigingen echt weggooien?</value>
+    <value>Имеются несохраненные изменения.
+Вы дейсвительно хотите продолжить?</value>
   </data>
   <data name="UnsavedChangeTitle" xml:space="preserve">
-    <value>Niet-opgeslagen wijzigen</value>
+    <value>Несохраненные изменения</value>
   </data>
   <data name="DeletePernamentPrompt" xml:space="preserve">
-    <value>Weet u zeker dat u de geselecteerde {0} {1} permanent wil verwijderen?
-
-De {0} zal voor altijd worden verwijderd en kan niet worden hersteld.</value>
+    <value>undefined</value>
   </data>
   <data name="DeletePrompt" xml:space="preserve">
-    <value>Weet u zeker dat u de geselecteerde {0} {1} wilt verwijderen?</value>
+    <value>Вы действительно хотите удалить {0} {1}?</value>
   </data>
   <data name="DeleteTitle" xml:space="preserve">
-    <value>Verwijderen</value>
+    <value>Удалить</value>
   </data>
   <data name="Entry" xml:space="preserve">
-    <value>invoer</value>
+    <value>запись</value>
   </data>
   <data name="Group" xml:space="preserve">
-    <value>groep</value>
+    <value>группа</value>
   </data>
   <data name="NewGroupTitle" xml:space="preserve">
-    <value>Nieuwe Groep</value>
+    <value>Новая группа</value>
   </data>
   <data name="PromptName" xml:space="preserve">
-    <value>Voer de groepsnaam in</value>
+    <value>Введите имя группы</value>
   </data>
   <data name="RenameTitle" xml:space="preserve">
-    <value>Groep Hernoemen</value>
+    <value>Переименовать группу</value>
   </data>
   <data name="RecycleBin" xml:space="preserve">
-    <value>Prullenbak</value>
+    <value>Корзина</value>
   </data>
   <data name="LargeTransforms" xml:space="preserve">
-    <value>De geselecteerde database gebruikt een groot aantal encryptie transformatie rondes.
+    <value>Выбранная база используют большое количество раудов шифрования.
 
-Het openen van de database door 7Pass zal veel langer duren dan normaal.</value>
+7Pass будет открывать эту базу медленнее чем обычно.</value>
   </data>
   <data name="LargeTransformsTitle" xml:space="preserve">
-    <value>Database Encryptie</value>
+    <value>Шифрование базы</value>
   </data>
   <data name="ToastFree" xml:space="preserve">
-    <value>Dit is de volledig functionele gratis versie van 7Pass.
-U kunt de ontwikkelaar ondersteunen door via deze 
-notificatie de betaalde versie aan te schaffen.</value>
+    <value>Это полнофункциональная версия 7Pass.
+Вы можете поддержать автора: нажмите на это сообщения и приобретите платной версии. </value>
   </data>
   <data name="ToastTrial" xml:space="preserve">
-    <value>Bedankt dat u 7Pass geprobeerd heeft.
-Dit is de volledig functionele probeerversie van 7Pass.
-Klik deze notificatie om 7Pass te Beoordelen/Kopen.</value>
+    <value>Спасибо за использование 7Pass.
+Это полнофункциональная триальная версия 7Pass.
+Нажмите на это сообщения чтобы оценить или приобрести 7Pass.</value>
   </data>
   <data name="DigestRegex" xml:space="preserve">
     <value>(\w+)="([^"]+)"</value>
   </data>
   <data name="Update_Download" xml:space="preserve">
-    <value>bijwerken</value>
+    <value>обновить</value>
   </data>
   <data name="Update_Sync" xml:space="preserve">
-    <value>synchroniseren</value>
+    <value>синхронизировать</value>
   </data>
   <data name="UriCensors" xml:space="preserve">
-    <value>(?&lt;=wacht(?:woord)?=)([^&amp;]+)
-(?&lt;=geheim=)([^&amp;]+)</value>
+    <value>(?&lt;=pass(?:word)?=)([^&amp;]+)
+(?&lt;=secret=)([^&amp;]+)</value>
   </data>
   <data name="AlreadyPinned" xml:space="preserve">
-    <value>De geselecteerde database is al aan het startscherm vastgemaakt.</value>
+    <value>Выбранная база уже закреплена на главном экране.</value>
   </data>
   <data name="PinDatabase" xml:space="preserve">
-    <value>Database aan startscherm vastmaken</value>
+    <value>Pin Database</value>
   </data>
   <data name="FieldsMenuItem" xml:space="preserve">
-    <value>Bekijken/Bewerken Velden ({0})</value>
+    <value>Посмотреть/Редактировать ({0})</value>
   </data>
   <data name="Field_Protected" xml:space="preserve">
-    <value>Uitklappen naar weergeven/bewerken.</value>
+    <value>Раскрыть</value>
   </data>
   <data name="EmptyField" xml:space="preserve">
-    <value>Nieuw Veld</value>
+    <value>Новая запись</value>
   </data>
 </root>

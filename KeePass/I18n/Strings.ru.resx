@@ -118,314 +118,312 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Settings_PageTitle" xml:space="preserve">
-    <value>Instellingen</value>
+    <value>Настройки</value>
   </data>
   <data name="Settings_HideRecycleBin" xml:space="preserve">
-    <value>Prullenbak Verbergen</value>
+    <value>Скрыть корзину</value>
   </data>
   <data name="Settings_IntegratedBrwoser" xml:space="preserve">
-    <value>Gebruik geïntegreerde browser</value>
+    <value>Использовать встроенный браузер</value>
   </data>
   <data name="Settings_GlobalPass" xml:space="preserve">
-    <value>Wachtwoord Vereist</value>
+    <value>Необходим пароль</value>
   </data>
   <data name="Settings_Analytics" xml:space="preserve">
-    <value>Gebruik gegevensverzameling</value>
+    <value>Сбор данных об использовании</value>
   </data>
   <data name="About_PageTitle" xml:space="preserve">
-    <value>Over</value>
+    <value>О программе</value>
   </data>
   <data name="About_Blog" xml:space="preserve">
     <value>
-Ontwikkelaars' Blog (Nieuws &amp; Terugkoppeling):</value>
+Блог разработчика (новости и отзывы): </value>
   </data>
   <data name="About_Version" xml:space="preserve">
-    <value>7Pass Versie: {0}</value>
+    <value>Версия 7Pass: {0}</value>
   </data>
   <data name="About_Purchase" xml:space="preserve">
-    <value>Kopen</value>
+    <value>Приобрести</value>
   </data>
   <data name="About_Review" xml:space="preserve">
-    <value>Beoordeling</value>
+    <value>Оценки</value>
   </data>
   <data name="About_Source_Code" xml:space="preserve">
     <value>
-Broncode:</value>
+Исходный код</value>
   </data>
   <data name="About_Libraries" xml:space="preserve">
     <value>
-Gebruikte/gerefereerde bibliotheken:</value>
+Используемые библиотеки: </value>
   </data>
   <data name="AnalyticsSettings_PageTitle" xml:space="preserve">
-    <value>Analytics</value>
+    <value>Аналитика</value>
   </data>
   <data name="AnalyticsSettings_Policy" xml:space="preserve">
-    <value>Om de gebruikerservaring steeds te kunen verbeteren verzameld 7 Pass gebruiksgegevens.
+    <value>7Pass собирает информацию об использовании для улучшения качества приложения.
 
-De verzamelde informatie bevat nooit uw databasegegevens of enige andere informatie waarmee u direct geïdentificeerd kan worden. Echter:
-- 7Pass geeft uw installatie ID door om gegevens die van uw telefoon verstuurd zijn te relateren. Dit ID is iedere keer dat 7Pass geïnstalleerd wordt anders.
-- Het verzamelen van gebruiksgegevens kost niet veel netwerkverkeer, maar de kosten kunnen oplopen als u een beperkt data-abonnement heeft.
+Собираемая информация не содержит информации о ваших базах, или любую другую информацию, по которой вас можно идентефицировать. Однако:
+- 7Pass does collect your installation ID to link information sent from your device together. This changes everytime 7Pass is installed.
+ - Usage collection uses very little network traffic, but the cost to your bill may add up if you're on a capped plan.⏎ ⏎ The collected information will be very useful for development of 7Pass.
 
-De verzamelde informatie is heel nuttig voor het ontwikkelen van 7Pass.
-
-Het installatie ID dat doorgegeven wordt is:</value>
+Your installation ID that will be collected is:</value>
   </data>
   <data name="EntryDetails_PageTitle" xml:space="preserve">
-    <value>Invoer</value>
+    <value>Запись</value>
   </data>
   <data name="EntryDetails_Title" xml:space="preserve">
-    <value>Titel</value>
+    <value>Заголовок</value>
   </data>
   <data name="EntryDetails_Username" xml:space="preserve">
-    <value>Gebruikersnaam</value>
+    <value>Пользователь</value>
   </data>
   <data name="EntryDetails_Password" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Пароль</value>
   </data>
   <data name="EntryDetails_Url" xml:space="preserve">
     <value>URL</value>
   </data>
   <data name="EntryDetails_ExternalBrowser" xml:space="preserve">
-    <value>telefoonbrowser gebruiken</value>
+    <value>использовать браузер телефона</value>
   </data>
   <data name="EntryDetails_IntegratedBrowser" xml:space="preserve">
-    <value>geïntegreerde browser gebruiken</value>
+    <value>использовать встроенный браузер</value>
   </data>
   <data name="EntryDetails_Notes" xml:space="preserve">
-    <value>Notities</value>
+    <value>Заметки</value>
   </data>
   <data name="EntryFields_PageTitle" xml:space="preserve">
-    <value>Velden</value>
+    <value>Поля</value>
   </data>
   <data name="EntryNotes_PageTitle" xml:space="preserve">
-    <value>Notities</value>
+    <value>Заметки</value>
   </data>
   <data name="GlobalPass_PageTitle" xml:space="preserve">
-    <value>Globaal Wachtwoord</value>
+    <value>Глобальный пароль</value>
   </data>
   <data name="GlobalPass_Password" xml:space="preserve">
-    <value>Globaal Wachtwoord</value>
+    <value>Глобальный пароль</value>
   </data>
   <data name="GlobalPass_Confirm" xml:space="preserve">
-    <value>Bevestig uw wachtwoord</value>
+    <value>Подтвердите ваш пароль</value>
   </data>
   <data name="GlobalPassVerify_PageTitle" xml:space="preserve">
-    <value>Globaal Wachtwoord</value>
+    <value>Глобальный пароль</value>
   </data>
   <data name="GlobalPassVerify_Prompt" xml:space="preserve">
-    <value>Voer uw wachtwoord in om 7Pass te ontgrendelen</value>
+    <value>Пожалуйста, введите ваш пароль для разблокировки 7Pass</value>
   </data>
   <data name="GroupDetails_History" xml:space="preserve">
-    <value>Geschiedenis</value>
+    <value>История</value>
   </data>
   <data name="GroupDetails_Delete" xml:space="preserve">
-    <value>verwijderen</value>
+    <value>удалить</value>
   </data>
   <data name="GroupDetails_Move" xml:space="preserve">
-    <value>verplaatsen</value>
+    <value>переместить</value>
   </data>
   <data name="GroupDetails_Rename" xml:space="preserve">
-    <value>naam wijzigen</value>
+    <value>переименовать</value>
   </data>
   <data name="MainPage_PageTitle" xml:space="preserve">
-    <value>Databases</value>
+    <value>Базы данных</value>
   </data>
   <data name="MainPage_ClearKeyfile" xml:space="preserve">
-    <value>sleutelbestand wissen</value>
+    <value>стереть ключевой файл</value>
   </data>
   <data name="MainPage_DownloadKeyfile" xml:space="preserve">
-    <value>sleutelbestand downloaden</value>
+    <value>Скачать keyfil</value>
   </data>
   <data name="MainPage_ClearPassword" xml:space="preserve">
-    <value>wachtwoord wissen</value>
+    <value>очистить пароль</value>
   </data>
   <data name="MainPage_Delete" xml:space="preserve">
-    <value>verwijderen</value>
+    <value>удалить</value>
   </data>
   <data name="MainPage_Rename" xml:space="preserve">
-    <value>naam wijzigen</value>
+    <value>переименовать</value>
   </data>
   <data name="MainPage_Pin" xml:space="preserve">
-    <value>aan startscherm vastmaken</value>
+    <value>pin database</value>
   </data>
   <data name="MoveTarget_PageTitle" xml:space="preserve">
-    <value>Verpl. Naar</value>
+    <value>Переместить в</value>
   </data>
   <data name="PassGen_Settings" xml:space="preserve">
-    <value>Instellingen</value>
+    <value>Настройки</value>
   </data>
   <data name="PassGen_PageTitle" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Пароль</value>
   </data>
   <data name="PassGen_Length" xml:space="preserve">
-    <value>Lengte van gegenereerde wachtwoord</value>
+    <value>Длинна генерируемых паролей</value>
   </data>
   <data name="PassGen_Results" xml:space="preserve">
-    <value>Resultaten</value>
+    <value>Результаты</value>
   </data>
   <data name="Password_PageTitle" xml:space="preserve">
-    <value>Hoofdsleutel</value>
+    <value>Главный ключ</value>
   </data>
   <data name="Password_Password" xml:space="preserve">
-    <value>Hoofdwachtwoord</value>
+    <value>Главный пароль</value>
   </data>
   <data name="Password_Remember" xml:space="preserve">
-    <value>Onthoud mijn wachtwoord</value>
+    <value>Сохранить пароль</value>
   </data>
   <data name="Loading" xml:space="preserve">
-    <value>Laden</value>
+    <value>Загрузка</value>
   </data>
   <data name="Rename_PageTitle" xml:space="preserve">
-    <value>Naam wijzigen</value>
+    <value>Переименовать</value>
   </data>
   <data name="Rename_Prompt" xml:space="preserve">
-    <value>Voer nieuwe naam in voor {0}:</value>
+    <value>Введите новое имя для {0}:</value>
   </data>
   <data name="Search_PageTitle" xml:space="preserve">
-    <value>Zoek</value>
+    <value>Поиск</value>
   </data>
   <data name="Download_PageTitle" xml:space="preserve">
-    <value>Database Toevoegen</value>
+    <value>Добавить базу</value>
   </data>
   <data name="Download_Web" xml:space="preserve">
-    <value>Webserver</value>
+    <value>Web сервер</value>
   </data>
   <data name="Download_Demo" xml:space="preserve">
-    <value>Voorbeelddatabase</value>
+    <value>Демо</value>
   </data>
   <data name="WebDavDownload_PageTitle" xml:space="preserve">
-    <value>Downloaden</value>
+    <value>Загрузить</value>
   </data>
   <data name="WebDavDownload_Url" xml:space="preserve">
-    <value>Database URL</value>
+    <value>URL базы</value>
   </data>
   <data name="WebDavDownload_Username" xml:space="preserve">
-    <value>Gebruikersnaam</value>
+    <value>Пользователь</value>
   </data>
   <data name="WebDavDownload_Password" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Пароль</value>
   </data>
   <data name="WebAuth_Authentication" xml:space="preserve">
-    <value>Server authenticatie is vereist</value>
+    <value>Сервер требует авторизации</value>
   </data>
   <data name="WebAuth_User" xml:space="preserve">
-    <value>Gebruiker</value>
+    <value>Пользователь</value>
   </data>
   <data name="WebAuth_Password" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Пароль</value>
   </data>
   <data name="WebAuth_Domain" xml:space="preserve">
-    <value>Domein</value>
+    <value>Домен</value>
   </data>
   <data name="WebBrowse_PageTitle" xml:space="preserve">
-    <value>Gedetecteerde Links</value>
+    <value>Detected Links</value>
   </data>
   <data name="WebDownload_PageTitle" xml:space="preserve">
-    <value>Downloaden</value>
+    <value>Загрузить</value>
   </data>
   <data name="WebDownload_Url" xml:space="preserve">
-    <value>Database URL</value>
+    <value>URL базы</value>
   </data>
   <data name="DropBox_Email" xml:space="preserve">
-    <value>E-mail</value>
+    <value>Email</value>
   </data>
   <data name="DropBox_Password" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Пароль</value>
   </data>
   <data name="AnalyticsSettings_Allow" xml:space="preserve">
-    <value>Toestaan</value>
+    <value>Разрешить</value>
   </data>
   <data name="AnalyticsSettings_Disable" xml:space="preserve">
-    <value>Uitschakelen</value>
+    <value>Отключить</value>
   </data>
   <data name="EntryDetails_Fields" xml:space="preserve">
-    <value>Velden</value>
+    <value>Поля</value>
   </data>
   <data name="App_Databases" xml:space="preserve">
-    <value>Selecteer DB</value>
+    <value>Выберите базу</value>
   </data>
   <data name="App_About" xml:space="preserve">
-    <value>Over</value>
+    <value>О программе</value>
   </data>
   <data name="App_Home" xml:space="preserve">
-    <value>Home</value>
+    <value>Домой</value>
   </data>
   <data name="EntryDetails_GeneratePassword" xml:space="preserve">
-    <value>Wachtwoord Genereren</value>
+    <value>Генерировать пароль</value>
   </data>
   <data name="EntryDetails_SaveEntry" xml:space="preserve">
-    <value>Invoer Opslaan</value>
+    <value>Сохранить</value>
   </data>
   <data name="EntryDetails_ResetEntry" xml:space="preserve">
-    <value>Invoer Herstellen</value>
+    <value>Сбросить</value>
   </data>
   <data name="EntryFields_Add" xml:space="preserve">
-    <value>Toevoegen</value>
+    <value>Добавить</value>
   </data>
   <data name="EntryNotes_ClearAll" xml:space="preserve">
-    <value>Alles Wissen</value>
+    <value>Стереть все</value>
   </data>
   <data name="GlobalPass_Set" xml:space="preserve">
-    <value>Instellen</value>
+    <value>Установить?</value>
   </data>
   <data name="GlobalPassVerify_OK" xml:space="preserve">
-    <value>OK</value>
+    <value>ОК</value>
   </data>
   <data name="GroupDetails_ClearHistory" xml:space="preserve">
-    <value>Geschiedenis Wissen</value>
+    <value>Стереть историю</value>
   </data>
   <data name="GroupDetails_NewEntry" xml:space="preserve">
-    <value>Nieuwe Invoer</value>
+    <value>Добавить пароль</value>
   </data>
   <data name="GroupDetails_NewGroup" xml:space="preserve">
-    <value>Nieuwe Groep</value>
+    <value>Добавить группу</value>
   </data>
   <data name="GroupDetails_Search" xml:space="preserve">
-    <value>Zoek</value>
+    <value>Поиск</value>
   </data>
   <data name="MainPage_SyncAll" xml:space="preserve">
-    <value>Alles Synchroniseren/Bijwerken</value>
+    <value>Обновить</value>
   </data>
   <data name="MainPage_AddNew" xml:space="preserve">
-    <value>Nieuwe Toevoegen</value>
+    <value>Добавить</value>
   </data>
   <data name="MainPage_Settings" xml:space="preserve">
-    <value>Instellingen</value>
+    <value>Настройки</value>
   </data>
   <data name="MoveTarget_MoveHere" xml:space="preserve">
-    <value>Hier Verplaatsen</value>
+    <value>Переместить сюда</value>
   </data>
   <data name="PassGen_Generate" xml:space="preserve">
-    <value>Genereren</value>
+    <value>Генерировать</value>
   </data>
   <data name="Password_Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Открыть</value>
   </data>
   <data name="Rename_Rename" xml:space="preserve">
-    <value>Naam wijzigen</value>
+    <value>Переименовать</value>
   </data>
   <data name="WebView_GoBack" xml:space="preserve">
-    <value>Ga Terug</value>
+    <value>Назад</value>
   </data>
   <data name="WebView_Username" xml:space="preserve">
-    <value>Gebruikersnaam</value>
+    <value>Пользователь</value>
   </data>
   <data name="WebView_Password" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Пароль</value>
   </data>
   <data name="WebDavDownload_Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Открыть</value>
   </data>
   <data name="WebDownload_Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Открыть</value>
   </data>
   <data name="DropBox_Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Логин</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Wissen</value>
+    <value>Стереть</value>
   </data>
   <data name="Refresh" xml:space="preserve">
-    <value>Vernieuwen</value>
+    <value>Обновить</value>
   </data>
 </root>

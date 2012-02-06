@@ -118,314 +118,314 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Settings_PageTitle" xml:space="preserve">
-    <value>Instellingen</value>
+    <value>Ustawienia</value>
   </data>
   <data name="Settings_HideRecycleBin" xml:space="preserve">
-    <value>Prullenbak Verbergen</value>
+    <value>Ukryj Kosz</value>
   </data>
   <data name="Settings_IntegratedBrwoser" xml:space="preserve">
-    <value>Gebruik geïntegreerde browser</value>
+    <value>Używaj zintegrowanej przeglądaki</value>
   </data>
   <data name="Settings_GlobalPass" xml:space="preserve">
-    <value>Wachtwoord Vereist</value>
+    <value>Wymaga hasła</value>
   </data>
   <data name="Settings_Analytics" xml:space="preserve">
-    <value>Gebruik gegevensverzameling</value>
+    <value>Zbieranie danych użycia</value>
   </data>
   <data name="About_PageTitle" xml:space="preserve">
-    <value>Over</value>
+    <value>O programie</value>
   </data>
   <data name="About_Blog" xml:space="preserve">
     <value>
-Ontwikkelaars' Blog (Nieuws &amp; Terugkoppeling):</value>
+Blog Autora (Wiadomości i Kontakt)</value>
   </data>
   <data name="About_Version" xml:space="preserve">
-    <value>7Pass Versie: {0}</value>
+    <value>Wersja 7Pass : {0}</value>
   </data>
   <data name="About_Purchase" xml:space="preserve">
-    <value>Kopen</value>
+    <value>Kup</value>
   </data>
   <data name="About_Review" xml:space="preserve">
-    <value>Beoordeling</value>
+    <value>Oceń</value>
   </data>
   <data name="About_Source_Code" xml:space="preserve">
     <value>
-Broncode:</value>
+Kod Źródłowy:</value>
   </data>
   <data name="About_Libraries" xml:space="preserve">
     <value>
-Gebruikte/gerefereerde bibliotheken:</value>
+Użyte bliblioteki/referencje:</value>
   </data>
   <data name="AnalyticsSettings_PageTitle" xml:space="preserve">
-    <value>Analytics</value>
+    <value>Analizy</value>
   </data>
   <data name="AnalyticsSettings_Policy" xml:space="preserve">
-    <value>Om de gebruikerservaring steeds te kunen verbeteren verzameld 7 Pass gebruiksgegevens.
+    <value>7Pass zbiera informacje o użyciu aby nieustannie poprawiać doświadczenia użytkowników.
 
-De verzamelde informatie bevat nooit uw databasegegevens of enige andere informatie waarmee u direct geïdentificeerd kan worden. Echter:
-- 7Pass geeft uw installatie ID door om gegevens die van uw telefoon verstuurd zijn te relateren. Dit ID is iedere keer dat 7Pass geïnstalleerd wordt anders.
-- Het verzamelen van gebruiksgegevens kost niet veel netwerkverkeer, maar de kosten kunnen oplopen als u een beperkt data-abonnement heeft.
+Zebrane informacje nigny nie zawierają informacji o Twojej bazie danych, ani żadnych informacji mogących zostać użyte w celu Twojej identyfikacji. Jednakże:
+- 7Pass zawiera informację o Twoim identyfikatorze instalacji aby powiązać wysyłane informacje z Twojego telefonu. Ten numer zmienia się po każdorazowej instalacji 7Pass.
+- Dane użycia zużywają niewielką ilość łącza, ale rachunek za zsumowane pakiety może okazać się znaczący, jeżeli masz limitowany pakiet danych.
 
-De verzamelde informatie is heel nuttig voor het ontwikkelen van 7Pass.
+Pobrane informacje będą bardzo przydatne przy tworzeniu 7Pass.
 
-Het installatie ID dat doorgegeven wordt is:</value>
+Twój identyfikator instalacji to:</value>
   </data>
   <data name="EntryDetails_PageTitle" xml:space="preserve">
-    <value>Invoer</value>
+    <value>Wpis</value>
   </data>
   <data name="EntryDetails_Title" xml:space="preserve">
-    <value>Titel</value>
+    <value>Tytuł</value>
   </data>
   <data name="EntryDetails_Username" xml:space="preserve">
-    <value>Gebruikersnaam</value>
+    <value>Nazwa użytkownika</value>
   </data>
   <data name="EntryDetails_Password" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Hasło</value>
   </data>
   <data name="EntryDetails_Url" xml:space="preserve">
-    <value>URL</value>
+    <value>ADRES URL</value>
   </data>
   <data name="EntryDetails_ExternalBrowser" xml:space="preserve">
-    <value>telefoonbrowser gebruiken</value>
+    <value>używaj przeglądarki telefonu</value>
   </data>
   <data name="EntryDetails_IntegratedBrowser" xml:space="preserve">
-    <value>geïntegreerde browser gebruiken</value>
+    <value>używaj wbudowanej przeglądarki</value>
   </data>
   <data name="EntryDetails_Notes" xml:space="preserve">
-    <value>Notities</value>
+    <value>Notatki</value>
   </data>
   <data name="EntryFields_PageTitle" xml:space="preserve">
-    <value>Velden</value>
+    <value>Pola</value>
   </data>
   <data name="EntryNotes_PageTitle" xml:space="preserve">
-    <value>Notities</value>
+    <value>Notatki</value>
   </data>
   <data name="GlobalPass_PageTitle" xml:space="preserve">
-    <value>Globaal Wachtwoord</value>
+    <value>Główne hasło</value>
   </data>
   <data name="GlobalPass_Password" xml:space="preserve">
-    <value>Globaal Wachtwoord</value>
+    <value>Główne hasło</value>
   </data>
   <data name="GlobalPass_Confirm" xml:space="preserve">
-    <value>Bevestig uw wachtwoord</value>
+    <value>Potwierdź hasło</value>
   </data>
   <data name="GlobalPassVerify_PageTitle" xml:space="preserve">
-    <value>Globaal Wachtwoord</value>
+    <value>Główne hasło</value>
   </data>
   <data name="GlobalPassVerify_Prompt" xml:space="preserve">
-    <value>Voer uw wachtwoord in om 7Pass te ontgrendelen</value>
+    <value>Wprowadź hasło do odblokowania 7Pass</value>
   </data>
   <data name="GroupDetails_History" xml:space="preserve">
-    <value>Geschiedenis</value>
+    <value>Historia</value>
   </data>
   <data name="GroupDetails_Delete" xml:space="preserve">
-    <value>verwijderen</value>
+    <value>usuń</value>
   </data>
   <data name="GroupDetails_Move" xml:space="preserve">
-    <value>verplaatsen</value>
+    <value>przenieś</value>
   </data>
   <data name="GroupDetails_Rename" xml:space="preserve">
-    <value>naam wijzigen</value>
+    <value>zmiań nazwę</value>
   </data>
   <data name="MainPage_PageTitle" xml:space="preserve">
-    <value>Databases</value>
+    <value>Bazy danych</value>
   </data>
   <data name="MainPage_ClearKeyfile" xml:space="preserve">
-    <value>sleutelbestand wissen</value>
+    <value>wyczyść plik z kluczami</value>
   </data>
   <data name="MainPage_DownloadKeyfile" xml:space="preserve">
-    <value>sleutelbestand downloaden</value>
+    <value>pobierz plik z kluczami</value>
   </data>
   <data name="MainPage_ClearPassword" xml:space="preserve">
-    <value>wachtwoord wissen</value>
+    <value>wyczyść hasło</value>
   </data>
   <data name="MainPage_Delete" xml:space="preserve">
-    <value>verwijderen</value>
+    <value>usuń</value>
   </data>
   <data name="MainPage_Rename" xml:space="preserve">
-    <value>naam wijzigen</value>
+    <value>zmień nazwę</value>
   </data>
   <data name="MainPage_Pin" xml:space="preserve">
-    <value>aan startscherm vastmaken</value>
+    <value>przypnij bazę danych</value>
   </data>
   <data name="MoveTarget_PageTitle" xml:space="preserve">
-    <value>Verpl. Naar</value>
+    <value>Przenieś do</value>
   </data>
   <data name="PassGen_Settings" xml:space="preserve">
-    <value>Instellingen</value>
+    <value>Ustawienia</value>
   </data>
   <data name="PassGen_PageTitle" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Hasło</value>
   </data>
   <data name="PassGen_Length" xml:space="preserve">
-    <value>Lengte van gegenereerde wachtwoord</value>
+    <value>Długość wygenerowanego hasła</value>
   </data>
   <data name="PassGen_Results" xml:space="preserve">
-    <value>Resultaten</value>
+    <value>Wyniki</value>
   </data>
   <data name="Password_PageTitle" xml:space="preserve">
-    <value>Hoofdsleutel</value>
+    <value>Klucz główny</value>
   </data>
   <data name="Password_Password" xml:space="preserve">
-    <value>Hoofdwachtwoord</value>
+    <value>Hasło główne</value>
   </data>
   <data name="Password_Remember" xml:space="preserve">
-    <value>Onthoud mijn wachtwoord</value>
+    <value>Pamiętaj hasło</value>
   </data>
   <data name="Loading" xml:space="preserve">
-    <value>Laden</value>
+    <value>Trwa ładowanie</value>
   </data>
   <data name="Rename_PageTitle" xml:space="preserve">
-    <value>Naam wijzigen</value>
+    <value>Zmień nazwę</value>
   </data>
   <data name="Rename_Prompt" xml:space="preserve">
-    <value>Voer nieuwe naam in voor {0}:</value>
+    <value>Wprowadź nową nazwę dla elementu {0}:</value>
   </data>
   <data name="Search_PageTitle" xml:space="preserve">
-    <value>Zoek</value>
+    <value>Szukaj</value>
   </data>
   <data name="Download_PageTitle" xml:space="preserve">
-    <value>Database Toevoegen</value>
+    <value>Dodaj bazę danych</value>
   </data>
   <data name="Download_Web" xml:space="preserve">
-    <value>Webserver</value>
+    <value>Serwer sieci Web</value>
   </data>
   <data name="Download_Demo" xml:space="preserve">
-    <value>Voorbeelddatabase</value>
+    <value>Demonstracyjna baza danych</value>
   </data>
   <data name="WebDavDownload_PageTitle" xml:space="preserve">
-    <value>Downloaden</value>
+    <value>Pobierz</value>
   </data>
   <data name="WebDavDownload_Url" xml:space="preserve">
-    <value>Database URL</value>
+    <value>Baza adresów URL</value>
   </data>
   <data name="WebDavDownload_Username" xml:space="preserve">
-    <value>Gebruikersnaam</value>
+    <value>Nazwa użytkownika</value>
   </data>
   <data name="WebDavDownload_Password" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Hasło</value>
   </data>
   <data name="WebAuth_Authentication" xml:space="preserve">
-    <value>Server authenticatie is vereist</value>
+    <value>Serwer wymaga uwierzytelnienia</value>
   </data>
   <data name="WebAuth_User" xml:space="preserve">
-    <value>Gebruiker</value>
+    <value>Użytkownik</value>
   </data>
   <data name="WebAuth_Password" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Hasło</value>
   </data>
   <data name="WebAuth_Domain" xml:space="preserve">
-    <value>Domein</value>
+    <value>Domena</value>
   </data>
   <data name="WebBrowse_PageTitle" xml:space="preserve">
-    <value>Gedetecteerde Links</value>
+    <value>Wykryte łącza</value>
   </data>
   <data name="WebDownload_PageTitle" xml:space="preserve">
-    <value>Downloaden</value>
+    <value>Pobierz</value>
   </data>
   <data name="WebDownload_Url" xml:space="preserve">
-    <value>Database URL</value>
+    <value>Baza adresów URL</value>
   </data>
   <data name="DropBox_Email" xml:space="preserve">
-    <value>E-mail</value>
+    <value>Adres e-mail</value>
   </data>
   <data name="DropBox_Password" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Hasło</value>
   </data>
   <data name="AnalyticsSettings_Allow" xml:space="preserve">
-    <value>Toestaan</value>
+    <value>Zezwalaj</value>
   </data>
   <data name="AnalyticsSettings_Disable" xml:space="preserve">
-    <value>Uitschakelen</value>
+    <value>Wyłącz</value>
   </data>
   <data name="EntryDetails_Fields" xml:space="preserve">
-    <value>Velden</value>
+    <value>Pola</value>
   </data>
   <data name="App_Databases" xml:space="preserve">
-    <value>Selecteer DB</value>
+    <value>Wybierz BD</value>
   </data>
   <data name="App_About" xml:space="preserve">
-    <value>Over</value>
+    <value>O programie</value>
   </data>
   <data name="App_Home" xml:space="preserve">
-    <value>Home</value>
+    <value>Strona główna</value>
   </data>
   <data name="EntryDetails_GeneratePassword" xml:space="preserve">
-    <value>Wachtwoord Genereren</value>
+    <value>Generuj hasło</value>
   </data>
   <data name="EntryDetails_SaveEntry" xml:space="preserve">
-    <value>Invoer Opslaan</value>
+    <value>Zapisz wpis</value>
   </data>
   <data name="EntryDetails_ResetEntry" xml:space="preserve">
-    <value>Invoer Herstellen</value>
+    <value>Resetuj wpis</value>
   </data>
   <data name="EntryFields_Add" xml:space="preserve">
-    <value>Toevoegen</value>
+    <value>Dodaj</value>
   </data>
   <data name="EntryNotes_ClearAll" xml:space="preserve">
-    <value>Alles Wissen</value>
+    <value>Wyczyść wszystko</value>
   </data>
   <data name="GlobalPass_Set" xml:space="preserve">
-    <value>Instellen</value>
+    <value>Ustaw</value>
   </data>
   <data name="GlobalPassVerify_OK" xml:space="preserve">
-    <value>OK</value>
+    <value>Ok</value>
   </data>
   <data name="GroupDetails_ClearHistory" xml:space="preserve">
-    <value>Geschiedenis Wissen</value>
+    <value>Wyczyść historię</value>
   </data>
   <data name="GroupDetails_NewEntry" xml:space="preserve">
-    <value>Nieuwe Invoer</value>
+    <value>Nowy wpis</value>
   </data>
   <data name="GroupDetails_NewGroup" xml:space="preserve">
-    <value>Nieuwe Groep</value>
+    <value>Nowa grupa</value>
   </data>
   <data name="GroupDetails_Search" xml:space="preserve">
-    <value>Zoek</value>
+    <value>Szukaj</value>
   </data>
   <data name="MainPage_SyncAll" xml:space="preserve">
-    <value>Alles Synchroniseren/Bijwerken</value>
+    <value>Synchronizuj/Aktualizuj wszystko</value>
   </data>
   <data name="MainPage_AddNew" xml:space="preserve">
-    <value>Nieuwe Toevoegen</value>
+    <value>Dodaj nowy</value>
   </data>
   <data name="MainPage_Settings" xml:space="preserve">
-    <value>Instellingen</value>
+    <value>Ustawienia</value>
   </data>
   <data name="MoveTarget_MoveHere" xml:space="preserve">
-    <value>Hier Verplaatsen</value>
+    <value>Przenieś tutaj</value>
   </data>
   <data name="PassGen_Generate" xml:space="preserve">
-    <value>Genereren</value>
+    <value>Generuj</value>
   </data>
   <data name="Password_Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Otwórz</value>
   </data>
   <data name="Rename_Rename" xml:space="preserve">
-    <value>Naam wijzigen</value>
+    <value>Zmień nazwę</value>
   </data>
   <data name="WebView_GoBack" xml:space="preserve">
-    <value>Ga Terug</value>
+    <value>Wróć</value>
   </data>
   <data name="WebView_Username" xml:space="preserve">
-    <value>Gebruikersnaam</value>
+    <value>Nazwa użytkownika</value>
   </data>
   <data name="WebView_Password" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Hasło</value>
   </data>
   <data name="WebDavDownload_Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Otwórz</value>
   </data>
   <data name="WebDownload_Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Otwórz</value>
   </data>
   <data name="DropBox_Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Zaloguj się</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Wissen</value>
+    <value>Wyczyść</value>
   </data>
   <data name="Refresh" xml:space="preserve">
-    <value>Vernieuwen</value>
+    <value>Odśwież</value>
   </data>
 </root>
