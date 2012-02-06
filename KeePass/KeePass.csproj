@@ -512,7 +512,6 @@
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
     <None Include="Resources\AuthUrl.txt" />
-    <None Include="Resources\UserInfo.txt" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />

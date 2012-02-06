@@ -61,7 +61,7 @@ namespace KeePass.Sources.SkyDrive {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://oauth.live.com/authorize?client_id={0}&amp;redirect_uri={1}&amp;scope=wl.skydrive_update%20wl.emails%20wl.offline_access&amp;response_type=code&amp;display=Touch&amp;theme={2}.
+        ///   Looks up a localized string similar to https://oauth.live.com/authorize?client_id={0}&amp;redirect_uri={1}&amp;scope=wl.skydrive_update%20wl.offline_access&amp;response_type=code&amp;display=Touch&amp;theme={2}.
         /// </summary>
         internal static string AuthUrl {
             get {
@@ -84,15 +84,6 @@ namespace KeePass.Sources.SkyDrive {
         internal static string TokenRefreshUrl {
             get {
                 return ResourceManager.GetString("TokenRefreshUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://apis.live.net/v5.0/me?access_token={0}.
-        /// </summary>
-        internal static string UserInfo {
-            get {
-                return ResourceManager.GetString("UserInfo", resourceCulture);
             }
         }
     }

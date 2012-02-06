@@ -76,20 +76,6 @@ namespace KeePass.Sources.SkyDrive
             });
         }
 
-        public void GetEmail(Action<string> complete)
-        {
-            _client.ExecuteAsync(Request("me"), x =>
-            {
-                var doc = JsonConvert.DeserializeXNode(
-                    x.Content, "root");
-
-                var email = doc.Root.GetValue(
-                    "emails", "preferred");
-
-                complete(email);
-            });
-        }
-
         public void GetFileMeta(string path,
             Action<MetaListItemInfo> complete)
         {

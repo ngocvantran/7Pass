@@ -127,7 +127,4 @@
   <data name="TokenRefreshUrl" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\..\Resources\TokenRefreshUrl.txt;System.String, mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e;utf-8</value>
   </data>
-  <data name="UserInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\Resources\UserInfo.txt;System.String, mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e;utf-8</value>
-  </data>
 </root>
