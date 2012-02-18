@@ -126,10 +126,10 @@
 Выбранный файл не база данных KeePass 2.x.</value>
   </data>
   <data name="NotSyncableCaption" xml:space="preserve">
-    <value>Изменения сохранены но не синхронизированы
-по причине источника (Web сервер / Демо база)</value>
+    <value>Изменения сохранены, но не синхронизированы
+из-за источника (Web сервер / Демо база)</value>
   </data>
   <data name="NotSyncableTitle" xml:space="preserve">
-    <value>База не синхронизируема</value>
+    <value>База данных не синхронизируема</value>
   </data>
 </root>

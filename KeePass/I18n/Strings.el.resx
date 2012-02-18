@@ -118,314 +118,314 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Settings_PageTitle" xml:space="preserve">
-    <value>Настройки</value>
+    <value>Ρυθμίσεις</value>
   </data>
   <data name="Settings_HideRecycleBin" xml:space="preserve">
-    <value>Скрыть корзину</value>
+    <value>Απόκρυψη Κάδου Ανακύκλωσης</value>
   </data>
   <data name="Settings_IntegratedBrwoser" xml:space="preserve">
-    <value>Использовать встроенный браузер</value>
+    <value>Χρήση ενσωματωμένου προγράμματος περιήγησης</value>
   </data>
   <data name="Settings_GlobalPass" xml:space="preserve">
-    <value>Необходим пароль</value>
+    <value>Απαιτεί κωδικό πρόσβασης</value>
   </data>
   <data name="Settings_Analytics" xml:space="preserve">
-    <value>Сбор данных об использовании</value>
+    <value>Συλλογή δεδομένων χρήσης</value>
   </data>
   <data name="About_PageTitle" xml:space="preserve">
-    <value>О программе</value>
+    <value>Σχετικά</value>
   </data>
   <data name="About_Blog" xml:space="preserve">
     <value>
-Блог разработчика (новости и отзывы): </value>
+Blog δημιουργού (Νέα &amp; Aνατροφοδότηση)</value>
   </data>
   <data name="About_Version" xml:space="preserve">
-    <value>Версия 7Pass: {0}</value>
+    <value>7Pass Έκδοση: {0}</value>
   </data>
   <data name="About_Purchase" xml:space="preserve">
-    <value>Приобрести</value>
+    <value>Αγορά</value>
   </data>
   <data name="About_Review" xml:space="preserve">
-    <value>Оценки</value>
+    <value>Παρουσίαση</value>
   </data>
   <data name="About_Source_Code" xml:space="preserve">
     <value>
-Исходный код:</value>
+Πηγαίος Κώδικας:</value>
   </data>
   <data name="About_Libraries" xml:space="preserve">
     <value>
-Используемые библиотеки: </value>
+Βιβλιοθήκης σε χρήση:</value>
   </data>
   <data name="AnalyticsSettings_PageTitle" xml:space="preserve">
-    <value>Аналитика</value>
+    <value>Στατιστικά</value>
   </data>
   <data name="AnalyticsSettings_Policy" xml:space="preserve">
-    <value>7Pass собирает информацию об использовании для улучшения качества приложения.
+    <value>Το 7Pass συλλέγει πληροφορίες χρήσης, προκειμένου να βελτιώνει συνεχώς την εμπειρία του χρήστη.
 
-Собираемая информация не содержит данных о вас, или любых других данных, непосредственно идентифицирующих вас. Однако:
-- 7Pass сохраняет идентификатор установки приложения и связывает его с передаваемой вашим устройством информацией. Этот идентификатор обновляется при каждой установке 7Pass.
-- Хотя передаваемая приложением информация очень незначительна, она в любом случае увеличивает ваш сетевой трафик и может быть причиной превышения вашего тарифного плана.
+Η συλλογή πληροφοριών δεν περιλαμβάνει πληροφορίες της βάσης δεδομένων σας, ή οποιαδήποτε πληροφορία που μπορεί να σας προσδιορίσει άμεσα. Ωστόσο:
+- Το 7Pass συλλέγει αναγνωριστικό εγκατάστασης σας για να συνδέσει με αυτό τις πληροφορίες που αποστέλλονται από τη συσκευή σας. Αυτό αλλάζει κάθε φορά 7Pass εγκαθίσταται.
+- Η συλλογή στατιστικών χρήσης χρησιμοποιεί πολύ λίγη κίνηση στο δίκτυο, αλλά μπορεί να ανεβάσει το κόστος του λογαρισμού σας εάν δεν έχετε αγοράσει κάποιο πακέτο χρήσης.
 
-Собираемая информация будет очень полезна для дальнейшей разработки 7Pass.
+Οι συλλεγόμενες πληροφορίες είναι πολύ χρήσιμες για την ανάπτυξη του 7Pass.
 
-Ваш идентификатор установки приложения:</value>
+Το αναγνωριστικό εγκατάστασης που θα συλλεχθεί είναι:</value>
   </data>
   <data name="EntryDetails_PageTitle" xml:space="preserve">
-    <value>Запись</value>
+    <value>Καταχώρηση</value>
   </data>
   <data name="EntryDetails_Title" xml:space="preserve">
-    <value>Заголовок</value>
+    <value>Τίτλος</value>
   </data>
   <data name="EntryDetails_Username" xml:space="preserve">
-    <value>Пользователь</value>
+    <value>Όνομα χρήστη</value>
   </data>
   <data name="EntryDetails_Password" xml:space="preserve">
-    <value>Пароль</value>
+    <value>Κωδικός πρόσβασης</value>
   </data>
   <data name="EntryDetails_Url" xml:space="preserve">
     <value>URL</value>
   </data>
   <data name="EntryDetails_ExternalBrowser" xml:space="preserve">
-    <value>использовать браузер телефона</value>
+    <value>χρήση προγράμματος περιήγησης του τηλεφώνου</value>
   </data>
   <data name="EntryDetails_IntegratedBrowser" xml:space="preserve">
-    <value>использовать встроенный браузер</value>
+    <value>χρησιμοποιήστε του ενσωματωμένου προγράμματος περιήγησης</value>
   </data>
   <data name="EntryDetails_Notes" xml:space="preserve">
-    <value>Заметки</value>
+    <value>Σημειώσεις</value>
   </data>
   <data name="EntryFields_PageTitle" xml:space="preserve">
-    <value>Поля</value>
+    <value>Πεδία</value>
   </data>
   <data name="EntryNotes_PageTitle" xml:space="preserve">
-    <value>Заметки</value>
+    <value>Σημειώσεις</value>
   </data>
   <data name="GlobalPass_PageTitle" xml:space="preserve">
-    <value>Глобальный пароль</value>
+    <value>Κεντρικός κωδικός πρόσβασης</value>
   </data>
   <data name="GlobalPass_Password" xml:space="preserve">
-    <value>Глобальный пароль</value>
+    <value>Κεντρικός κωδικός πρόσβασης</value>
   </data>
   <data name="GlobalPass_Confirm" xml:space="preserve">
-    <value>Подтвердите ваш пароль</value>
+    <value>Επιβεβαίωση κωδικού πρόσβασης</value>
   </data>
   <data name="GlobalPassVerify_PageTitle" xml:space="preserve">
-    <value>Глобальный пароль</value>
+    <value>Κεντρικός κωδικός πρόσβασης</value>
   </data>
   <data name="GlobalPassVerify_Prompt" xml:space="preserve">
-    <value>Пожалуйста, введите ваш пароль для разблокировки 7Pass</value>
+    <value>Πληκτρολογήστε τον κωδικό πρόσβασης για να ξεκλειδώσετε το 7Pass</value>
   </data>
   <data name="GroupDetails_History" xml:space="preserve">
-    <value>История</value>
+    <value>Ιστορικό</value>
   </data>
   <data name="GroupDetails_Delete" xml:space="preserve">
-    <value>удалить</value>
+    <value>διαγραφή</value>
   </data>
   <data name="GroupDetails_Move" xml:space="preserve">
-    <value>переместить</value>
+    <value>μετακίνηση</value>
   </data>
   <data name="GroupDetails_Rename" xml:space="preserve">
-    <value>переименовать</value>
+    <value>μετονομασία</value>
   </data>
   <data name="MainPage_PageTitle" xml:space="preserve">
-    <value>Базы данных</value>
+    <value>βάσεις δεδομένων</value>
   </data>
   <data name="MainPage_ClearKeyfile" xml:space="preserve">
-    <value>стереть файл ключей</value>
+    <value>εκκαθάριση του keyfile</value>
   </data>
   <data name="MainPage_DownloadKeyfile" xml:space="preserve">
-    <value>скачать файл ключей</value>
+    <value>λήψη του keyfile</value>
   </data>
   <data name="MainPage_ClearPassword" xml:space="preserve">
-    <value>очистить пароль</value>
+    <value>κατάργηση του κωδικού πρόσβασης</value>
   </data>
   <data name="MainPage_Delete" xml:space="preserve">
-    <value>удалить</value>
+    <value>διαγραφή</value>
   </data>
   <data name="MainPage_Rename" xml:space="preserve">
-    <value>переименовать</value>
+    <value>μετονομασία</value>
   </data>
   <data name="MainPage_Pin" xml:space="preserve">
-    <value>вынести базу данных на рабочий стол</value>
+    <value>καρφίτσωμα βάσης δεδομένων</value>
   </data>
   <data name="MoveTarget_PageTitle" xml:space="preserve">
-    <value>Переместить в</value>
+    <value>Μετακίνηση</value>
   </data>
   <data name="PassGen_Settings" xml:space="preserve">
-    <value>Настройки</value>
+    <value>Ρυθμίσεις</value>
   </data>
   <data name="PassGen_PageTitle" xml:space="preserve">
-    <value>Пароль</value>
+    <value>Κωδικός πρόσβασης</value>
   </data>
   <data name="PassGen_Length" xml:space="preserve">
-    <value>Длина генерируемого пароля</value>
+    <value>Μήκος του δημιουργηθέντος κωδικού πρόσβασης</value>
   </data>
   <data name="PassGen_Results" xml:space="preserve">
-    <value>Результаты</value>
+    <value>Αποτελέσματα</value>
   </data>
   <data name="Password_PageTitle" xml:space="preserve">
-    <value>Главный ключ</value>
+    <value>Πρωτεύον κλειδί</value>
   </data>
   <data name="Password_Password" xml:space="preserve">
-    <value>Главный пароль</value>
+    <value>Πρωτεύων κωδικός</value>
   </data>
   <data name="Password_Remember" xml:space="preserve">
-    <value>Сохранить мой пароль</value>
+    <value>Απομνημόνευση του κωδικού πρόσβασης</value>
   </data>
   <data name="Loading" xml:space="preserve">
-    <value>Загрузка</value>
+    <value>Φόρτωση</value>
   </data>
   <data name="Rename_PageTitle" xml:space="preserve">
-    <value>Переименовать</value>
+    <value>Μετονομασία</value>
   </data>
   <data name="Rename_Prompt" xml:space="preserve">
-    <value>Введите новое имя для {0}:</value>
+    <value>Πληκτρολογήστε νέο όνομα για το {0}:</value>
   </data>
   <data name="Search_PageTitle" xml:space="preserve">
-    <value>Поиск</value>
+    <value>Αναζήτηση</value>
   </data>
   <data name="Download_PageTitle" xml:space="preserve">
-    <value>Добавить базу</value>
+    <value>Προσθήκη βάσης δεδομένων</value>
   </data>
   <data name="Download_Web" xml:space="preserve">
-    <value>Web сервер</value>
+    <value>Διακομιστής Web</value>
   </data>
   <data name="Download_Demo" xml:space="preserve">
-    <value>Демо</value>
+    <value>Βάση δεδομένων επίδειξης</value>
   </data>
   <data name="WebDavDownload_PageTitle" xml:space="preserve">
-    <value>Загрузить</value>
+    <value>Λήψη</value>
   </data>
   <data name="WebDavDownload_Url" xml:space="preserve">
-    <value>URL базы</value>
+    <value>Διεύθυνση URL βάσης δεδομένων</value>
   </data>
   <data name="WebDavDownload_Username" xml:space="preserve">
-    <value>Пользователь</value>
+    <value>Όνομα χρήστη</value>
   </data>
   <data name="WebDavDownload_Password" xml:space="preserve">
-    <value>Пароль</value>
+    <value>Κωδικός πρόσβασης</value>
   </data>
   <data name="WebAuth_Authentication" xml:space="preserve">
-    <value>Сервер требует авторизации</value>
+    <value>Ο διακομιστής απαιτεί έλεγχο ταυτότητας</value>
   </data>
   <data name="WebAuth_User" xml:space="preserve">
-    <value>Пользователь</value>
+    <value>Χρήστης</value>
   </data>
   <data name="WebAuth_Password" xml:space="preserve">
-    <value>Пароль</value>
+    <value>Κωδικός πρόσβασης</value>
   </data>
   <data name="WebAuth_Domain" xml:space="preserve">
-    <value>Домен</value>
+    <value>Τομέας</value>
   </data>
   <data name="WebBrowse_PageTitle" xml:space="preserve">
-    <value>Обнаруженные связи</value>
+    <value>Συνδέσεις που εντοπίστηκαν</value>
   </data>
   <data name="WebDownload_PageTitle" xml:space="preserve">
-    <value>Загрузить</value>
+    <value>Λήψη</value>
   </data>
   <data name="WebDownload_Url" xml:space="preserve">
-    <value>URL базы</value>
+    <value>Διεύθυνση URL βάσης δεδομένων</value>
   </data>
   <data name="DropBox_Email" xml:space="preserve">
-    <value>Email</value>
+    <value>Ηλεκτρονικό ταχυδρομείο</value>
   </data>
   <data name="DropBox_Password" xml:space="preserve">
-    <value>Пароль</value>
+    <value>Κωδικός πρόσβασης</value>
   </data>
   <data name="AnalyticsSettings_Allow" xml:space="preserve">
-    <value>Разрешить</value>
+    <value>Επιτρέπεται</value>
   </data>
   <data name="AnalyticsSettings_Disable" xml:space="preserve">
-    <value>Запретить</value>
+    <value>Απενεργοποίηση</value>
   </data>
   <data name="EntryDetails_Fields" xml:space="preserve">
-    <value>Поля</value>
+    <value>Πεδία</value>
   </data>
   <data name="App_Databases" xml:space="preserve">
-    <value>Выберите базу</value>
+    <value>Επιλέξτε ΒΔ</value>
   </data>
   <data name="App_About" xml:space="preserve">
-    <value>О программе</value>
+    <value>Σχετικά</value>
   </data>
   <data name="App_Home" xml:space="preserve">
-    <value>Домой</value>
+    <value>Αρχική σελίδα</value>
   </data>
   <data name="EntryDetails_GeneratePassword" xml:space="preserve">
-    <value>Генерировать пароль</value>
+    <value>Δημιουργία κωδικού πρόσβασης</value>
   </data>
   <data name="EntryDetails_SaveEntry" xml:space="preserve">
-    <value>Сохранить запись</value>
+    <value>Αποθήκευση εγγραφής</value>
   </data>
   <data name="EntryDetails_ResetEntry" xml:space="preserve">
-    <value>Сбросить запись</value>
+    <value>Επαναφορά εγγραφής</value>
   </data>
   <data name="EntryFields_Add" xml:space="preserve">
-    <value>Добавить</value>
+    <value>Προσθήκη</value>
   </data>
   <data name="EntryNotes_ClearAll" xml:space="preserve">
-    <value>Стереть все</value>
+    <value>Απαλοιφή όλων</value>
   </data>
   <data name="GlobalPass_Set" xml:space="preserve">
-    <value>Установить</value>
+    <value>Καθορισμός</value>
   </data>
   <data name="GlobalPassVerify_OK" xml:space="preserve">
-    <value>ОК</value>
+    <value>OK</value>
   </data>
   <data name="GroupDetails_ClearHistory" xml:space="preserve">
-    <value>Очистить историю</value>
+    <value>Καταργήστε τη λίστα του Ιστορικού</value>
   </data>
   <data name="GroupDetails_NewEntry" xml:space="preserve">
-    <value>Новая запись</value>
+    <value>Νέα καταχώρηση</value>
   </data>
   <data name="GroupDetails_NewGroup" xml:space="preserve">
-    <value>Новая группа</value>
+    <value>Νέα ομάδα</value>
   </data>
   <data name="GroupDetails_Search" xml:space="preserve">
-    <value>Поиск</value>
+    <value>Αναζήτηση</value>
   </data>
   <data name="MainPage_SyncAll" xml:space="preserve">
-    <value>Обновить все</value>
+    <value>Συγχρονισμός/Ενημέρωση όλων</value>
   </data>
   <data name="MainPage_AddNew" xml:space="preserve">
-    <value>Добавить</value>
+    <value>Προσθήκη νέας</value>
   </data>
   <data name="MainPage_Settings" xml:space="preserve">
-    <value>Настройки</value>
+    <value>Ρυθμίσεις</value>
   </data>
   <data name="MoveTarget_MoveHere" xml:space="preserve">
-    <value>Переместить сюда</value>
+    <value>Μετακίνηση εδώ</value>
   </data>
   <data name="PassGen_Generate" xml:space="preserve">
-    <value>Генерировать</value>
+    <value>Δημιουργία</value>
   </data>
   <data name="Password_Open" xml:space="preserve">
-    <value>Открыть</value>
+    <value>Άνοιγμα</value>
   </data>
   <data name="Rename_Rename" xml:space="preserve">
-    <value>Переименовать</value>
+    <value>Μετονομασία</value>
   </data>
   <data name="WebView_GoBack" xml:space="preserve">
-    <value>Назад</value>
+    <value>Πήγαινε πίσω</value>
   </data>
   <data name="WebView_Username" xml:space="preserve">
-    <value>Пользователь</value>
+    <value>Όνομα χρήστη</value>
   </data>
   <data name="WebView_Password" xml:space="preserve">
-    <value>Пароль</value>
+    <value>Κωδικός πρόσβασης</value>
   </data>
   <data name="WebDavDownload_Open" xml:space="preserve">
-    <value>Открыть</value>
+    <value>Άνοιγμα</value>
   </data>
   <data name="WebDownload_Open" xml:space="preserve">
-    <value>Открыть</value>
+    <value>Άνοιγμα</value>
   </data>
   <data name="DropBox_Login" xml:space="preserve">
-    <value>Логин</value>
+    <value>Σύνδεση</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Стереть</value>
+    <value>Εκκαθάριση</value>
   </data>
   <data name="Refresh" xml:space="preserve">
-    <value>Обновить</value>
+    <value>Ανανέωση</value>
   </data>
 </root>

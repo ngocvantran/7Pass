@@ -127,7 +127,7 @@
     <value>Верхние ANSI-символы</value>
   </data>
   <data name="Lower" xml:space="preserve">
-    <value>Прописные (а, b, c, …)</value>
+    <value>Строчные (а, b, c, …)</value>
   </data>
   <data name="Minus" xml:space="preserve">
     <value>Минус (-)</value>
@@ -142,6 +142,6 @@
     <value>Подчеркивание (_)</value>
   </data>
   <data name="Upper" xml:space="preserve">
-    <value>Строчные (A, B, C,...)</value>
+    <value>Прописные (A, B, C,...)</value>
   </data>
 </root>

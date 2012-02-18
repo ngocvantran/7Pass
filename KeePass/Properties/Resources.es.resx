@@ -118,199 +118,201 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfirmDeleteDb" xml:space="preserve">
-    <value>Effacer la base de données {0}?
+    <value>¿Desea borrar la base de datos {0}?
 
-Dans ce cas {0} sera uniquement enlevée de votre téléphone et ne sera pas supprimer du serveur.</value>
+
+
+Esto solo borrará la base de datos {0} de su teléfono, pero no borrará el archivo fuente del servidor.</value>
   </data>
   <data name="CorruptedFile" xml:space="preserve">
-    <value>Fichier de base de données corrompu !</value>
+    <value>La base de datos está corrupta!</value>
   </data>
   <data name="DeleteDbTitle" xml:space="preserve">
-    <value>Supprimer base de données</value>
+    <value>Borrar la Base de Datos</value>
   </data>
   <data name="DemoDbText" xml:space="preserve">
-    <value>Mot de passe pour BD de démo est "demo" sans guillemets.</value>
+    <value>La contraseña de la base de datos "demo" es "demo", sin las comillas.</value>
   </data>
   <data name="DemoDbTitle" xml:space="preserve">
-    <value>Mot de passe de base de données</value>
+    <value>Contraseña de la Base de Datos</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
-    <value>Erreur de téléchargement de votre DB.
-Vérifiez que l'URL soit correcte.
+    <value>Error al descargar su Base de Datos.
+Asegúrese que la URL es correcta.
 
 </value>
   </data>
   <data name="DownloadTitle" xml:space="preserve">
-    <value>Téléchargement de base de données</value>
+    <value>Descargar Base de Datos</value>
   </data>
   <data name="IncorrectPassword" xml:space="preserve">
-    <value>Mot de passe précisé incorrect.
+    <value>Usted especificó una contraseña incorrecta.
 
-Attention: 7Pass ne supporte pas les fournisseurs de mots de passe de compte Windows ni ceux personnalisés pour le mot de passe maître.</value>
+Note que 7Pass no soporta el usar una cuenta de Windows o una contraseña para terceros para la contraseña maestra.</value>
   </data>
   <data name="InvalidCertificate" xml:space="preserve">
     <value>
 
-Il est possible que le certificat SSL de votre serveur ne soit pas de confiance pour votre téléphone. Voulez-vous en savoir plus?</value>
+Es posible que el certificado SSL del servidor no provenga de una entidad certificadora en la que confíe.
+¿Desea leer más acerca de esto?</value>
   </data>
   <data name="InvalidCertificateUrl" xml:space="preserve">
     <value>http://7pass.wordpress.com/2011/01/09/faq-updated-why-7pass-says-my-database-signature-is-invalid/</value>
   </data>
   <data name="NoNetwork" xml:space="preserve">
-    <value>Pas de connexion Internet disponible.
-Essayez encore plus tard.</value>
+    <value>No hay una conexión a internet disponible.
+Intente de nuevo más tarde..</value>
   </data>
   <data name="ParseError" xml:space="preserve">
-    <value>Votre mot de passe est correct et la BD valide.
-Malheureusement 7Pass a rencontré une erreur lors de la lecture de la BD.
+    <value>Su contraseña es correct y la Base de Datos parece válida.
+Desafortunadamente, 7Pass encontró un error mientras se leía la Base de Datos.
 
-Envoyer un rapport à l'auteur pour corriger ce bug dans une prochaine version?</value>
+¿Desea enviar al autor un reporte a fin que el error sea corregido en la siguiente versión?</value>
   </data>
   <data name="PasswordTitle" xml:space="preserve">
-    <value>Clé principale</value>
+    <value>Contraseña Maestra</value>
   </data>
   <data name="UpdateFailure" xml:space="preserve">
-    <value>Mise-à-jour de la BD {0} a échoué:
+    <value>La actualización de la Base de Datos {0} falló:
 {1}</value>
   </data>
   <data name="UpdateTitle" xml:space="preserve">
-    <value>Mise-à-jour base de données</value>
+    <value>Actualizar la Base de Datos</value>
   </data>
   <data name="WarningStorePassword" xml:space="preserve">
-    <value>Vérifiez que votre écran de verrouillage possède un mot de passe.
+    <value>Asegúrese que el teléfono esté protegido con contraseña.
 
-Sauvegarder votre BD de mots de passe sans verrouillage de l'écran permettra à quiconque de voir vos mots de passe!
+Salvar su Base de Datos sin que su teléfono tenga una contraseña podría permitir que alguien pueda apoderarse de sus contraseñas.
 
-Pour mettre un mot de passe sur l'écran de verrouillage, allez dans les Paramètres du téléphone\Ecran de verrouillage &amp; Mot de passe.</value>
+Coloque una contraseña de pantalla a su teléfono a través de &gt; configuración &gt; bloqueo y fondo de pantalla.</value>
   </data>
   <data name="LinkRegex" xml:space="preserve">
     <value>&lt;a\s+[^&gt;]?href\s?=\s?(['"])([^'"]+)</value>
   </data>
   <data name="InvalidKeyFile" xml:space="preserve">
-    <value>Vous avez sélectionné un fichier de clés invalide ou corrompu.</value>
+    <value>Ha seleccionada un archivo de llaves inválido ó corrupto</value>
   </data>
   <data name="KeyFileTitle" xml:space="preserve">
-    <value>Télécharger fichier de clés</value>
+    <value>Descargar el Archivo de llaves</value>
   </data>
   <data name="GlobalPassPrompt" xml:space="preserve">
-    <value>Entrez votre mot de passe général !</value>
+    <value>Por favor inserte su contraseña global!</value>
   </data>
   <data name="GlobalPassTitle" xml:space="preserve">
-    <value>Mot de passe Général de 7Pass</value>
+    <value>Contraseña Global de 7Pass</value>
   </data>
   <data name="UnhandledExPrompt" xml:space="preserve">
-    <value>7Pass a rencontré une erreur inattendue. 7Pass va maintenant quitter.
+    <value>7Pass ha encontrado un error inesperado. 7Pass saldrá ahora.
 
-Puis-je créer un e-mail pour me l'envoyer pour régler le problème?</value>
+¿Desea crear un correo electrónico para que el problema sea resuelto?</value>
   </data>
   <data name="UnhandledExTitle" xml:space="preserve">
-    <value>Ooopppppps</value>
+    <value>Uuuuuuyyyyyyyyyy</value>
   </data>
   <data name="InvalidUrlPrompt" xml:space="preserve">
-    <value>L'URL sélectionnée ne peut être affichée. Si l'URL est trop longue (&gt; 500 caractères), essayez de déplacer vos fichiers à un autre endroit où l'URL est plus courte.</value>
+    <value>La URL seleccionada no puede ser desplegada. Si la URL es demasiado larga (más de 500 caracteres), intente ubicar su recurso en una ubicación donde la URL sea más corta.</value>
   </data>
   <data name="InvalidUrlTitle" xml:space="preserve">
-    <value>URL non valide</value>
+    <value>URL inválida</value>
   </data>
   <data name="SavedCaption" xml:space="preserve">
-    <value>Entrée enregistrée avec succès !</value>
+    <value>La entrada ha sido guardada de manera exitosa!</value>
   </data>
   <data name="SavedTitle" xml:space="preserve">
-    <value>Enregistrer l'entrée</value>
+    <value>Guardar Entrada</value>
   </data>
   <data name="Conflict" xml:space="preserve">
-    <value>7Pass a détecté un conflit de version de la BD.
-Votre BD locale est maintenant téléchargée vers:
+    <value>7Pass ha detectado un conflicto en la versión de la base de datos.
+Su base de datos local ha sido cargada a:
 [{0}]
 
-Si vous voulez utiliser une autre BD, téléchargez la séparément.</value>
+Si desea utilizar la otra base de datos, por favor descárguela por separado.</value>
   </data>
   <data name="ConflictTitle" xml:space="preserve">
-    <value>Conflit de la base de données</value>
+    <value>Conflicto de Base de Datos</value>
   </data>
   <data name="AddNotes" xml:space="preserve">
-    <value>« Ajouter des Notes »</value>
+    <value>«Adicionar Notas»</value>
   </data>
   <data name="UnsavedChange" xml:space="preserve">
-    <value>Vous avez des modifications non sauvegardées.
-Voulez-vous renoncer à ces changements ?</value>
+    <value>Usted tiene cambios que no han sido guardados.
+¿Está seguro que desea descartar dichos cambios?</value>
   </data>
   <data name="UnsavedChangeTitle" xml:space="preserve">
-    <value>Modification non enregistrée</value>
+    <value>Cambio no guardado</value>
   </data>
   <data name="DeletePernamentPrompt" xml:space="preserve">
-    <value>Êtes-vous sûr de supprimer définitivement {0} {1} ?
+    <value>¿Está seguro que desea borrar de manera permanente  {0} {1}?
 
-{0} sera définitivement supprimé et ne pourra être récupéré.</value>
+Esto hará que {0} sea borrado definitivamente y no pueda ser recuperado.</value>
   </data>
   <data name="DeletePrompt" xml:space="preserve">
-    <value>Êtes-vous sûr de supprimer définitivement {0} {1} ?</value>
+    <value>¿Está seguro de que desea eliminar seleccionados {0} {1}?</value>
   </data>
   <data name="DeleteTitle" xml:space="preserve">
-    <value>Supprimer</value>
+    <value>Eliminar</value>
   </data>
   <data name="Entry" xml:space="preserve">
-    <value>entrée</value>
+    <value>entrada</value>
   </data>
   <data name="Group" xml:space="preserve">
-    <value>Groupe</value>
+    <value>grupo</value>
   </data>
   <data name="NewGroupTitle" xml:space="preserve">
-    <value>Nouveau groupe</value>
+    <value>Nuevo Grupo</value>
   </data>
   <data name="PromptName" xml:space="preserve">
-    <value>Entrez le nom de groupe</value>
+    <value>Introduzca un nombre de grupo</value>
   </data>
   <data name="RenameTitle" xml:space="preserve">
-    <value>Renommer groupe</value>
+    <value>Renombrar el grupo</value>
   </data>
   <data name="RecycleBin" xml:space="preserve">
-    <value>Corbeille</value>
+    <value>Papelera de reciclaje</value>
   </data>
   <data name="LargeTransforms" xml:space="preserve">
-    <value>BD sélectionnée utilise un grand nombre de cycles de cryptage.
+    <value>La base de datos seleccionada utiliza un número mayor rondas de transformación de ciframiento.
 
-7Pass mettra plus de temps pour ouvrir la base de données.</value>
+Esto hará que 7Pass tome más tiempo que el normal al abrir la base de datos.</value>
   </data>
   <data name="LargeTransformsTitle" xml:space="preserve">
-    <value>Cryptage de la base de données</value>
+    <value>Cifrado de la base de datos</value>
   </data>
   <data name="ToastFree" xml:space="preserve">
-    <value>Il s'agit de la version gratuite totalement fonctionnelle de 7Pass.
-Vous pouvez soutenir l'auteur en tapant cette
-notification pour acheter la version payante.</value>
+    <value>Esta es la versión completa de 7Pass.
+Usted puede soportar al autor de la aplicación siguiendo el enlace y comprar la versión completa de la aplicación.</value>
   </data>
   <data name="ToastTrial" xml:space="preserve">
-    <value>Merci pour votre essai de 7Pass.
-Il s'agit de la version d'essai totalement fonctionnelle de 7Pass.
-Cliquez sur cette notification pour Noter/Acheter 7Pass.</value>
+    <value>Gracias por probar 7Pass.
+Esta es la versión completa de 7Pass.
+Siga esta notificación para Calificar/Comprar 7Pass.</value>
   </data>
   <data name="DigestRegex" xml:space="preserve">
     <value>(\w+)="([^"]+)"</value>
   </data>
   <data name="Update_Download" xml:space="preserve">
-    <value>mise-à-jour</value>
+    <value>actualización</value>
   </data>
   <data name="Update_Sync" xml:space="preserve">
-    <value>synchroniser</value>
+    <value>sincronizar</value>
   </data>
   <data name="UriCensors" xml:space="preserve">
     <value>(?&lt;=pass(?:word)?=)([^&amp;]+)
-(?&lt;=secret=)([^&amp;]+)</value>
+(?&lt;=secreto=)([^&amp;]+)</value>
   </data>
   <data name="AlreadyPinned" xml:space="preserve">
-    <value>La base de données sélectionnée a déjà été épinglée sur l'écran principal.</value>
+    <value>La base de datos seleccionada ha sido anclada a la pantalla principal</value>
   </data>
   <data name="PinDatabase" xml:space="preserve">
-    <value>Epingler base de données.</value>
+    <value>Pin de la Base de Datos</value>
   </data>
   <data name="FieldsMenuItem" xml:space="preserve">
-    <value>Voir/Editer les champs ({0})</value>
+    <value>Ver/Editar Campos ({0})</value>
   </data>
   <data name="Field_Protected" xml:space="preserve">
-    <value>Développer pour Voir/Editer.</value>
+    <value>Expandir para ver o modificar.</value>
   </data>
   <data name="EmptyField" xml:space="preserve">
-    <value>Nouveau champ</value>
+    <value>Nuevo campo</value>
   </data>
 </root>

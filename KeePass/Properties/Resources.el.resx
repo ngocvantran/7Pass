@@ -118,199 +118,200 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfirmDeleteDb" xml:space="preserve">
-    <value>Effacer la base de données {0}?
+    <value>Θέλετε να διαγράψετε τη βάση δεδομένων {0};
 
-Dans ce cas {0} sera uniquement enlevée de votre téléphone et ne sera pas supprimer du serveur.</value>
+Κάνοντάς το αυτό θα διαγραφεί μόνο το {0} από το τηλέφωνο, ενώ το αρχείο θα παραμείνει στον server.</value>
   </data>
   <data name="CorruptedFile" xml:space="preserve">
-    <value>Fichier de base de données corrompu !</value>
+    <value>Είναι κατεστραμμένο το αρχείο της βάσης δεδομένων!</value>
   </data>
   <data name="DeleteDbTitle" xml:space="preserve">
-    <value>Supprimer base de données</value>
+    <value>Διαγραφή βάσης δεδομένων</value>
   </data>
   <data name="DemoDbText" xml:space="preserve">
-    <value>Mot de passe pour BD de démo est "demo" sans guillemets.</value>
+    <value>Ο κωδικός πρόσβασης της δοκιμαστικής βάσης είναι "demo", δίχως τα εισαγωγικά.</value>
   </data>
   <data name="DemoDbTitle" xml:space="preserve">
-    <value>Mot de passe de base de données</value>
+    <value>Κωδικό πρόσβασης της βάσης δεδομένων</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
-    <value>Erreur de téléchargement de votre DB.
-Vérifiez que l'URL soit correcte.
+    <value>Σφάλμα κατά τη μεταφόρτωση της βάσης δεδομένων.
+Παρακαλώ ελέγξτε ότι το url είναι σωστό.
 
 </value>
   </data>
   <data name="DownloadTitle" xml:space="preserve">
-    <value>Téléchargement de base de données</value>
+    <value>Λήψη της βάσης δεδομένων</value>
   </data>
   <data name="IncorrectPassword" xml:space="preserve">
-    <value>Mot de passe précisé incorrect.
+    <value>Έχετε καθορίσει μια λάθος κωδικό.
 
-Attention: 7Pass ne supporte pas les fournisseurs de mots de passe de compte Windows ni ceux personnalisés pour le mot de passe maître.</value>
+Παρακαλώ σημειώστε ότι το 7Pass δεν υποστιρίζει τη χρήση του λογαριασμού των Windows ή άλλους παρόχους κωδικών για τον κύριο κωδικό πρόσβασης.</value>
   </data>
   <data name="InvalidCertificate" xml:space="preserve">
     <value>
 
-Il est possible que le certificat SSL de votre serveur ne soit pas de confiance pour votre téléphone. Voulez-vous en savoir plus?</value>
+Είναι πιθανό ότι το SSL πιστοποιητικό του διακομιστή δεν είναι αξιόπιστο.
+Θέλετε να διαβάσετε περισσότερα σχετικά με αυτό;</value>
   </data>
   <data name="InvalidCertificateUrl" xml:space="preserve">
     <value>http://7pass.wordpress.com/2011/01/09/faq-updated-why-7pass-says-my-database-signature-is-invalid/</value>
   </data>
   <data name="NoNetwork" xml:space="preserve">
-    <value>Pas de connexion Internet disponible.
-Essayez encore plus tard.</value>
+    <value>Δεν υπάρχει διαθέσιμη σύνδεση με το διαδίκτυο.
+Παρακαλώ δοκιμάστε αργότερα..</value>
   </data>
   <data name="ParseError" xml:space="preserve">
-    <value>Votre mot de passe est correct et la BD valide.
-Malheureusement 7Pass a rencontré une erreur lors de la lecture de la BD.
+    <value>Ο κωδικός πρόσβασής σας είναι σωστός και η βάση δεδομένων φαίνεται να είναι έγκυρη.
+Δυστυχώς, το 7Pass αντιμετώπισε ένα σφάλμα κατά την ανάγνωση της βάσης δεδομένων.
 
-Envoyer un rapport à l'auteur pour corriger ce bug dans une prochaine version?</value>
+Θέλετε να στείλετε στον δημιουργό μια έκθεση, έτσι ώστε αυτό το σφάλμα να μπορεί να διορθωθεί στην επόμενη έκδοση;</value>
   </data>
   <data name="PasswordTitle" xml:space="preserve">
-    <value>Clé principale</value>
+    <value>Πρωτεύον κλειδί</value>
   </data>
   <data name="UpdateFailure" xml:space="preserve">
-    <value>Mise-à-jour de la BD {0} a échoué:
+    <value>Η ανανέωση της βάσης δεδομένων {0} απέτυχε:
 {1}</value>
   </data>
   <data name="UpdateTitle" xml:space="preserve">
-    <value>Mise-à-jour base de données</value>
+    <value>Ενημέρωση βάσης δεδομένων</value>
   </data>
   <data name="WarningStorePassword" xml:space="preserve">
-    <value>Vérifiez que votre écran de verrouillage possède un mot de passe.
+    <value>Παρακαλώ βεβαιωθείτε ότι η οθόνη κλειδώματος του τηλεφώνου σας είναι προστατευμένη με κωδικό πρόσβασης.
 
-Sauvegarder votre BD de mots de passe sans verrouillage de l'écran permettra à quiconque de voir vos mots de passe!
+Η αποθήκευση του κωδικού πρόσβασής της βάσης δεδομένων σας χωρίς την προστασία της οθόνη κλειδώματος μπορεί να επιτρέψει σε κάποιον να δείτε τους κωδικούς πρόσβασης σας.
 
-Pour mettre un mot de passe sur l'écran de verrouillage, allez dans les Paramètres du téléphone\Ecran de verrouillage &amp; Mot de passe.</value>
+Για να ορίσετε τον κωδικό κλειδώματος της οθόνης, παρακαλώ πηγαίνετε στις Ρυθμίσεις του τηλεφώνου\Κλείδωμα &amp; ταπετσαρία.</value>
   </data>
   <data name="LinkRegex" xml:space="preserve">
     <value>&lt;a\s+[^&gt;]?href\s?=\s?(['"])([^'"]+)</value>
   </data>
   <data name="InvalidKeyFile" xml:space="preserve">
-    <value>Vous avez sélectionné un fichier de clés invalide ou corrompu.</value>
+    <value>Έχετε επιλέξει ένα με έγκυρο/κατεστραμμένο keyfile.</value>
   </data>
   <data name="KeyFileTitle" xml:space="preserve">
-    <value>Télécharger fichier de clés</value>
+    <value>Λήψη του KeyFile</value>
   </data>
   <data name="GlobalPassPrompt" xml:space="preserve">
-    <value>Entrez votre mot de passe général !</value>
+    <value>Παρακαλώ εισάγετε τον γενικό κωδικό πρόσβασης!</value>
   </data>
   <data name="GlobalPassTitle" xml:space="preserve">
-    <value>Mot de passe Général de 7Pass</value>
+    <value>Γενικός κωδικός πρόσβασης του 7Pass</value>
   </data>
   <data name="UnhandledExPrompt" xml:space="preserve">
-    <value>7Pass a rencontré une erreur inattendue. 7Pass va maintenant quitter.
+    <value>Το 7Pass αντιμετώπισε ένα μη αναμενόμενο σφάλμα. Το 7Pass θα τερματιστεί τώρα.
 
-Puis-je créer un e-mail pour me l'envoyer pour régler le problème?</value>
+Θα είναι εντάξει, αν δημιουργήσω ένα e-mail ώστε να μπορείτε να το στείλετε σε μένα για να διορθώσω αυτό το πρόβλημα;</value>
   </data>
   <data name="UnhandledExTitle" xml:space="preserve">
-    <value>Ooopppppps</value>
+    <value>Ουουουουπς</value>
   </data>
   <data name="InvalidUrlPrompt" xml:space="preserve">
-    <value>L'URL sélectionnée ne peut être affichée. Si l'URL est trop longue (&gt; 500 caractères), essayez de déplacer vos fichiers à un autre endroit où l'URL est plus courte.</value>
+    <value>Η επιλεγμένη διεύθυνση URL δεν μπορεί να εμφανιστεί. Εάν η διεύθυνση URL είναι πολύ μεγάλη (&gt; 500 χαρακτήρες), προσπαθήστε να μεταφέρετε τους πόρους σας σε άλλη θέση, όπου η διεύθυνση URL είναι μικρότερη.</value>
   </data>
   <data name="InvalidUrlTitle" xml:space="preserve">
-    <value>URL non valide</value>
+    <value>Μη έγκυρη διεύθυνση URL</value>
   </data>
   <data name="SavedCaption" xml:space="preserve">
-    <value>Entrée enregistrée avec succès !</value>
+    <value>Η εγγραφή έχει αποθηκευτεί με επιτυχία!</value>
   </data>
   <data name="SavedTitle" xml:space="preserve">
-    <value>Enregistrer l'entrée</value>
+    <value>Αποθήκευση εγγραφής</value>
   </data>
   <data name="Conflict" xml:space="preserve">
-    <value>7Pass a détecté un conflit de version de la BD.
-Votre BD locale est maintenant téléchargée vers:
+    <value>Το 7Pass εντόπισε μια διένεξη της έκδοσης της βάσης δεδομένων.
+Η τοπική βάση δεδομένων σας που είναι τώρα φορτωμένη είναι η:
 [{0}]
 
-Si vous voulez utiliser une autre BD, téléchargez la séparément.</value>
+Αν θέλετε να χρησιμοποιήσετε την άλλη βάση δεδομένων, παρακαλούμε να την κατεβάσετε ξεχωριστά.</value>
   </data>
   <data name="ConflictTitle" xml:space="preserve">
-    <value>Conflit de la base de données</value>
+    <value>Διένεξη βάσης δεδομένων</value>
   </data>
   <data name="AddNotes" xml:space="preserve">
-    <value>« Ajouter des Notes »</value>
+    <value>«Προσθέστε σημειώσεις»</value>
   </data>
   <data name="UnsavedChange" xml:space="preserve">
-    <value>Vous avez des modifications non sauvegardées.
-Voulez-vous renoncer à ces changements ?</value>
+    <value>Έχετε μη αποθηκευμένες αλλαγές.
+Θέλετε πραγματικά να αγνοήσετε αυτές τις αλλαγές;</value>
   </data>
   <data name="UnsavedChangeTitle" xml:space="preserve">
-    <value>Modification non enregistrée</value>
+    <value>Μη αποθηκευμένες αλλαγές</value>
   </data>
   <data name="DeletePernamentPrompt" xml:space="preserve">
-    <value>Êtes-vous sûr de supprimer définitivement {0} {1} ?
+    <value>Είστε βέβαιοι ότι θέλετε να διαγράψετε μόνιμα το επιλεγμένο {0} {1};
 
-{0} sera définitivement supprimé et ne pourra être récupéré.</value>
+Αυτό {0} θα διαγραφεί για πάντα και δεν μπρεί να ανακτηθεί.</value>
   </data>
   <data name="DeletePrompt" xml:space="preserve">
-    <value>Êtes-vous sûr de supprimer définitivement {0} {1} ?</value>
+    <value>Είστε βέβαιοι ότι θέλετε να διαγράψετε το επιλεγμένο {0} {1};</value>
   </data>
   <data name="DeleteTitle" xml:space="preserve">
-    <value>Supprimer</value>
+    <value>Διαγραφή</value>
   </data>
   <data name="Entry" xml:space="preserve">
-    <value>entrée</value>
+    <value>καταχώρηση</value>
   </data>
   <data name="Group" xml:space="preserve">
-    <value>Groupe</value>
+    <value>ομάδα</value>
   </data>
   <data name="NewGroupTitle" xml:space="preserve">
-    <value>Nouveau groupe</value>
+    <value>Νέα ομάδα</value>
   </data>
   <data name="PromptName" xml:space="preserve">
-    <value>Entrez le nom de groupe</value>
+    <value>Παρακαλώ εισάγετε το όνομα της ομάδας</value>
   </data>
   <data name="RenameTitle" xml:space="preserve">
-    <value>Renommer groupe</value>
+    <value>Μετονομασία ομάδας</value>
   </data>
   <data name="RecycleBin" xml:space="preserve">
-    <value>Corbeille</value>
+    <value>Κάδος ανακύκλωσης</value>
   </data>
   <data name="LargeTransforms" xml:space="preserve">
-    <value>BD sélectionnée utilise un grand nombre de cycles de cryptage.
+    <value>Η επιλεγμένη βάση δεδομένων χρησιμοποιεί ένα μεγάλο αριθμό γύρων κρυπτογράφησης.
 
-7Pass mettra plus de temps pour ouvrir la base de données.</value>
+Αυτό θα κάντει το 7Pass να ανοίξει τη βάση δεδομένων πολύ πιο αργά από το κανονικό.</value>
   </data>
   <data name="LargeTransformsTitle" xml:space="preserve">
-    <value>Cryptage de la base de données</value>
+    <value>Κρυπτογράφηση βάσης δεδομένων</value>
   </data>
   <data name="ToastFree" xml:space="preserve">
-    <value>Il s'agit de la version gratuite totalement fonctionnelle de 7Pass.
-Vous pouvez soutenir l'auteur en tapant cette
-notification pour acheter la version payante.</value>
+    <value>Αυτή είναι μια πλήρως λειτουργική δωρεάν έκδοση του 7Pass.
+Μπορείτε να υποστιρίξετε τον δημιουργό της πατώντας αυτή
+την ειδοποίηση ώστε να αγοράσετε την επί πληρωμή έκδοση.</value>
   </data>
   <data name="ToastTrial" xml:space="preserve">
-    <value>Merci pour votre essai de 7Pass.
-Il s'agit de la version d'essai totalement fonctionnelle de 7Pass.
-Cliquez sur cette notification pour Noter/Acheter 7Pass.</value>
+    <value>Ευχαριστώ που δοκιμάσατε το 7Pass.
+Αυτή είναι μια πλήρως λειτουργική δοκιμαστική έκδοση του 7Pass.
+Κάντε κλικ σε αυτή την ειδοποίηση για την Παρουσίαση/Αγορά του 7Pass.</value>
   </data>
   <data name="DigestRegex" xml:space="preserve">
     <value>(\w+)="([^"]+)"</value>
   </data>
   <data name="Update_Download" xml:space="preserve">
-    <value>mise-à-jour</value>
+    <value>η ενημερωμένη έκδοση</value>
   </data>
   <data name="Update_Sync" xml:space="preserve">
-    <value>synchroniser</value>
+    <value>συγχρονισμός</value>
   </data>
   <data name="UriCensors" xml:space="preserve">
     <value>(?&lt;=pass(?:word)?=)([^&amp;]+)
 (?&lt;=secret=)([^&amp;]+)</value>
   </data>
   <data name="AlreadyPinned" xml:space="preserve">
-    <value>La base de données sélectionnée a déjà été épinglée sur l'écran principal.</value>
+    <value>Η επιλεγμένη βάση δεδομένων έχει ήδη καρφιτσωθεί στην κύρια οθόνη.</value>
   </data>
   <data name="PinDatabase" xml:space="preserve">
-    <value>Epingler base de données.</value>
+    <value>Καρφίτσωμα βάσης δεδομένων</value>
   </data>
   <data name="FieldsMenuItem" xml:space="preserve">
-    <value>Voir/Editer les champs ({0})</value>
+    <value>Προβολή/Επεξεργασία πεδίων ({0})</value>
   </data>
   <data name="Field_Protected" xml:space="preserve">
-    <value>Développer pour Voir/Editer.</value>
+    <value>Επέκταση σε προβολή/επεξεργασία.</value>
   </data>
   <data name="EmptyField" xml:space="preserve">
-    <value>Nouveau champ</value>
+    <value>Νέο πεδίο</value>
   </data>
 </root>

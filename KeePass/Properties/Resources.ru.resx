@@ -120,7 +120,7 @@
   <data name="ConfirmDeleteDb" xml:space="preserve">
     <value>Вы действительно хотите удалить базу {0}?
 
-Делая это, вы удалите базу {0} только с телефона. Версия на сервере останется без изменений. </value>
+Делая это, вы удалите базу {0} только с телефона. Версия на сервере останется без изменений.</value>
   </data>
   <data name="CorruptedFile" xml:space="preserve">
     <value>База повреждена!</value>
@@ -136,7 +136,7 @@
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Ошибка загрузки базы
-Пожалуйста, проверьте правильно URL.
+Проверьте правильность URL.
 </value>
   </data>
   <data name="DownloadTitle" xml:space="preserve">
@@ -145,12 +145,13 @@
   <data name="IncorrectPassword" xml:space="preserve">
     <value>Вы указали неверный пароль
 
-Учтите, что 7Pass не потдерживает авторизацию Windows аккаунтом или другим провайдером авторизации. </value>
+Учтите, что 7Pass не поддерживает авторизацию Windows аккаунтом или другим провайдером авторизации для главного пароля. </value>
   </data>
   <data name="InvalidCertificate" xml:space="preserve">
     <value>
 
-Возможно, что сертификат SLL сервера не является доверенным для вашего телефона. Желаете узнать больше?</value>
+Возможно, что сертификат SLL сервера не является доверенным для вашего телефона.
+Желаете узнать больше?</value>
   </data>
   <data name="InvalidCertificateUrl" xml:space="preserve">
     <value>http://7pass.wordpress.com/2011/01/09/faq-updated-why-7pass-says-my-database-signature-is-invalid/</value>
@@ -160,10 +161,10 @@
 Попробуйте позже..</value>
   </data>
   <data name="ParseError" xml:space="preserve">
-    <value>Ваш пароль верен и база выглядит не поврежденной.
+    <value>Ваш пароль верен и база выглядит неповрежденной.
 К сожалению, в 7Pass произошла ошибка при чтении базы.
 
-Желаете ли вы отправить сообщение об ошибке автору программы?</value>
+Желаете отправить сообщение об ошибке автору программы для ее устранения в следующей версии?</value>
   </data>
   <data name="PasswordTitle" xml:space="preserve">
     <value>Главный ключ</value>
@@ -177,35 +178,36 @@
   </data>
   <data name="WarningStorePassword" xml:space="preserve">
     <value>Пожалуйста, убедитесь что ваш экран блокировки телефона защищен паролем. 
-Постронние люди смогут посмотреть ваши пароли, если вы не сделаете этого
 
-Чтобы установить пароль блокировки перейдите в Настройки\блокировка+фон</value>
+Постронние смогут увидеть ваши пароли, если вы не сделаете этого.
+
+Чтобы установить пароль блокировки, перейдите в Настройки\блокировка+фон</value>
   </data>
   <data name="LinkRegex" xml:space="preserve">
     <value>&lt;a\s+[^&gt;]?href\s?=\s?(['"])([^'"]+)</value>
   </data>
   <data name="InvalidKeyFile" xml:space="preserve">
-    <value>Вы выбрали некоректный/поврежденный ключевой файл</value>
+    <value>Вы выбрали некоректный/поврежденный файл ключей</value>
   </data>
   <data name="KeyFileTitle" xml:space="preserve">
-    <value>Скачать ключевой файл</value>
+    <value>Скачать файл ключей</value>
   </data>
   <data name="GlobalPassPrompt" xml:space="preserve">
-    <value>Пожалуйста, введите ваш глобальный пароль!</value>
+    <value>Введите глобальный пароль!</value>
   </data>
   <data name="GlobalPassTitle" xml:space="preserve">
     <value>Глобальный пароль 7Pass</value>
   </data>
   <data name="UnhandledExPrompt" xml:space="preserve">
-    <value>7Pass has encountered an unexpected error. 7Pass will now exit.
+    <value>При выполнении 7Pass произошла неизвестная ошибка. Приложение 7Pass будет закрыто.
 
-Is it ok if I create an email so that you can send to me to fix this problem?</value>
+Хотите написать письмо автору для решения этой проблемы?</value>
   </data>
   <data name="UnhandledExTitle" xml:space="preserve">
-    <value>Упппссс</value>
+    <value>Ой!</value>
   </data>
   <data name="InvalidUrlPrompt" xml:space="preserve">
-    <value>Выбранный адрес недоступен. Если URL очень длинный(&gt; 500 символов), попробуйте переместить переместить ресурс в другое место, где URL будет короче.</value>
+    <value>Выбранный URL не может быть отображен. Если URL очень длинный (&gt;500 символов), попробуйте переместить ресурс в другое место, где URL будет короче.</value>
   </data>
   <data name="InvalidUrlTitle" xml:space="preserve">
     <value>Неверный URL</value>
@@ -214,23 +216,23 @@ Is it ok if I create an email so that you can send to me to fix this problem?</v
     <value>Запись успешно сохранена!</value>
   </data>
   <data name="SavedTitle" xml:space="preserve">
-    <value>Сохранить</value>
+    <value>Сохранить запись</value>
   </data>
   <data name="Conflict" xml:space="preserve">
-    <value>7Pass обнаружил конфликт в версиях баз.
+    <value>7Pass обнаружил конфликт версий баз данных.
 Ваша база теперь загружена как: [{0}]
 
-Если вы хотите использовать другую базу, пожалуйста, загрузите ее отдельно</value>
+Если вы хотите использовать другую базу, загрузите ее отдельно</value>
   </data>
   <data name="ConflictTitle" xml:space="preserve">
-    <value>Конфликт баз</value>
+    <value>Конфликт баз данных</value>
   </data>
   <data name="AddNotes" xml:space="preserve">
     <value>«Добавить заметки»</value>
   </data>
   <data name="UnsavedChange" xml:space="preserve">
     <value>Имеются несохраненные изменения.
-Вы дейсвительно хотите продолжить?</value>
+Вы действительно хотите продолжить?</value>
   </data>
   <data name="UnsavedChangeTitle" xml:space="preserve">
     <value>Несохраненные изменения</value>
@@ -263,21 +265,21 @@ Is it ok if I create an email so that you can send to me to fix this problem?</v
     <value>Корзина</value>
   </data>
   <data name="LargeTransforms" xml:space="preserve">
-    <value>Выбранная база используют большое количество раудов шифрования.
+    <value>Выбранная база использует очень много шифрующих преобразований.
 
-7Pass будет открывать эту базу медленнее чем обычно.</value>
+Из-за этого 7Pass будет открывать эту базу намного медленнее, чем обычно.</value>
   </data>
   <data name="LargeTransformsTitle" xml:space="preserve">
     <value>Шифрование базы</value>
   </data>
   <data name="ToastFree" xml:space="preserve">
-    <value>Это полнофункциональная версия 7Pass.
-Вы можете поддержать автора: нажмите на это сообщения и приобретите платной версии. </value>
+    <value>Это полнофункциональная бесплатная версия 7Pass.
+Вы можете поддержать автора: нажмите на это сообщения и купите платную версию. </value>
   </data>
   <data name="ToastTrial" xml:space="preserve">
     <value>Спасибо за использование 7Pass.
-Это полнофункциональная триальная версия 7Pass.
-Нажмите на это сообщения чтобы оценить или приобрести 7Pass.</value>
+Это полнофункциональная пробная версия 7Pass.
+Нажмите на это сообщения чтобы оценить/приобрести 7Pass.</value>
   </data>
   <data name="DigestRegex" xml:space="preserve">
     <value>(\w+)="([^"]+)"</value>
@@ -293,18 +295,18 @@ Is it ok if I create an email so that you can send to me to fix this problem?</v
 (?&lt;=secret=)([^&amp;]+)</value>
   </data>
   <data name="AlreadyPinned" xml:space="preserve">
-    <value>Выбранная база уже закреплена на главном экране.</value>
+    <value>Выбранная база уже закреплена на рабочем столе.</value>
   </data>
   <data name="PinDatabase" xml:space="preserve">
-    <value>Pin Database</value>
+    <value>Закрепить базу данных на рабочем столе</value>
   </data>
   <data name="FieldsMenuItem" xml:space="preserve">
-    <value>Посмотреть/Редактировать ({0})</value>
+    <value>Просмотреть/Редактировать поля ({0})</value>
   </data>
   <data name="Field_Protected" xml:space="preserve">
     <value>Раскрыть</value>
   </data>
   <data name="EmptyField" xml:space="preserve">
-    <value>Новая запись</value>
+    <value>Новое поле</value>
   </data>
 </root>

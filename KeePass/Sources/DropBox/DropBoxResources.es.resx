@@ -118,27 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DownloadError" xml:space="preserve">
-    <value>Erreur lors du téléchargement du fichier choisi.
-Essayez de nouveau plus tard.</value>
-  </data>
-  <data name="HtmlDetected" xml:space="preserve">
-    <value>Le serveur a répondu avec une page HTML à la requête WebDAV de 7Pass.
-Voulez-vous explorer le serveur comme des pages HTML à la place?</value>
-  </data>
-  <data name="HtmlDetectedTitle" xml:space="preserve">
-    <value>Page HTML détectée</value>
+    <value>Se presentó un error al descargar el archivo seleccionado.
+Por favor intente mas tarde</value>
   </data>
   <data name="ListError" xml:space="preserve">
-    <value>Erreur lors de l'affichage du contenu du dossier.
-Vérifiez le nom d'utilisateur et le mot de passe et recommencez.</value>
+    <value>Se produjo un error al listar el contenido de la carpeta.
+Por favor intente de nuevo.</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
-    <value>Navigateur WebDAV</value>
+    <value>Navegador Dropbox</value>
   </data>
   <data name="LoginFailure" xml:space="preserve">
-    <value>Nom utilisateur ou mot de passe invalide.</value>
+    <value>Se especificó una contraseña o una dirección de correo electrónica inválida.</value>
   </data>
   <data name="LoginTitle" xml:space="preserve">
-    <value>Authentification WebDAV</value>
+    <value>Autenticación DropBox</value>
   </data>
 </root>

@@ -129,8 +129,8 @@
     <value>Обнаружена HTML страница.</value>
   </data>
   <data name="ListError" xml:space="preserve">
-    <value>Ошибка открытия папки.
-Пожалуйста, убедитесь что логин и пароль корректы и попробуйте еще раз.</value>
+    <value>Ошибка чтения папки.
+Пожалуйста, убедитесь что логин и пароль корректны и попробуйте еще раз.</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
     <value>WebDAV браузер.</value>

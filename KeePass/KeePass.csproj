@@ -625,6 +625,12 @@
     <EmbeddedResource Include="Generator\Resources.de.resx">
       <DependentUpon>Resources.resx</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Generator\Resources.el.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generator\Resources.es.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Generator\Resources.fr.resx">
       <DependentUpon>Resources.resx</DependentUpon>
     </EmbeddedResource>
@@ -647,6 +653,12 @@
     <EmbeddedResource Include="I18n\Strings.de.resx">
       <DependentUpon>Strings.resx</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="I18n\Strings.el.resx">
+      <DependentUpon>Strings.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="I18n\Strings.es.resx">
+      <DependentUpon>Strings.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="I18n\Strings.fr.resx">
       <DependentUpon>Strings.resx</DependentUpon>
@@ -671,6 +683,12 @@
     <EmbeddedResource Include="Properties\Resources.de.resx">
       <DependentUpon>Resources.resx</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.el.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.es.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.fr.resx">
       <DependentUpon>Resources.resx</DependentUpon>
     </EmbeddedResource>
@@ -692,6 +710,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\DropBox\DropBoxResources.de.resx">
+      <DependentUpon>DropBoxResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\DropBox\DropBoxResources.el.resx">
+      <DependentUpon>DropBoxResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\DropBox\DropBoxResources.es.resx">
       <DependentUpon>DropBoxResources.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\DropBox\DropBoxResources.fr.resx">
@@ -720,6 +744,12 @@
     <EmbeddedResource Include="Sources\WebDav\WebDavResources.de.resx">
       <DependentUpon>WebDavResources.resx</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sources\WebDav\WebDavResources.el.resx">
+      <DependentUpon>WebDavResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\WebDav\WebDavResources.es.resx">
+      <DependentUpon>WebDavResources.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sources\WebDav\WebDavResources.fr.resx">
       <DependentUpon>WebDavResources.resx</DependentUpon>
     </EmbeddedResource>
@@ -740,6 +770,12 @@
       <DependentUpon>WebDavResources.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Storage\Resources.de.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Storage\Resources.el.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Storage\Resources.es.resx">
       <DependentUpon>Resources.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Storage\Resources.fr.resx">

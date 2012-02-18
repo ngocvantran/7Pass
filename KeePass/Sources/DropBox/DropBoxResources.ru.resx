@@ -123,10 +123,10 @@
   </data>
   <data name="ListError" xml:space="preserve">
     <value>Ошибка чтения папки.
-Попробуйте позже. </value>
+Попробуйте позже.</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
-    <value>браузер DropBox</value>
+    <value>Браузер DropBox</value>
   </data>
   <data name="LoginFailure" xml:space="preserve">
     <value>Вы указали неверный e-mail или пароль</value>

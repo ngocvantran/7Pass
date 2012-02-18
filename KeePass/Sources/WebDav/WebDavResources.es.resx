@@ -118,27 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DownloadError" xml:space="preserve">
-    <value>Erreur lors du téléchargement du fichier choisi.
-Essayez de nouveau plus tard.</value>
+    <value>Error al descargar el archivo especificado.
+Por favor intente mas tarde.</value>
   </data>
   <data name="HtmlDetected" xml:space="preserve">
-    <value>Le serveur a répondu avec une page HTML à la requête WebDAV de 7Pass.
-Voulez-vous explorer le serveur comme des pages HTML à la place?</value>
+    <value>La respuesta WebDAV del servidor devolvió la solicitud con una página html.
+¿Desea explorar el servidor como páginas HTML en cambio?</value>
   </data>
   <data name="HtmlDetectedTitle" xml:space="preserve">
-    <value>Page HTML détectée</value>
+    <value>Página HTML detectada</value>
   </data>
   <data name="ListError" xml:space="preserve">
-    <value>Erreur lors de l'affichage du contenu du dossier.
-Vérifiez le nom d'utilisateur et le mot de passe et recommencez.</value>
+    <value>Se presentó un error al mostrar el listado de la carpeta.
+Por favor asegúrese que le usuario y la contraseña son válidas e intente de nuevo.</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
-    <value>Navigateur WebDAV</value>
+    <value>Navegador WebDAV</value>
   </data>
   <data name="LoginFailure" xml:space="preserve">
-    <value>Nom utilisateur ou mot de passe invalide.</value>
+    <value>Ha especificado un usuario/contraseña inválida.</value>
   </data>
   <data name="LoginTitle" xml:space="preserve">
-    <value>Authentification WebDAV</value>
+    <value>Autenticación WebDAV</value>
   </data>
 </root>

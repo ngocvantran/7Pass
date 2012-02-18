@@ -118,27 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DownloadError" xml:space="preserve">
-    <value>Erreur lors du téléchargement du fichier choisi.
-Essayez de nouveau plus tard.</value>
+    <value>Σφάλμα κατά τη λήψη του επιλεγμένου αρχείου.
+Παρακαλώ δοκιμάστε ξανά αργότερα.</value>
   </data>
   <data name="HtmlDetected" xml:space="preserve">
-    <value>Le serveur a répondu avec une page HTML à la requête WebDAV de 7Pass.
-Voulez-vous explorer le serveur comme des pages HTML à la place?</value>
+    <value>Ο διακομιστής WebDAV απάντησε στην αίτηση του 7Pass με μια σελίδα HTML.
+Θέλετε να εξερευνήσετε το διακομιστή ως σελίδες HTML αντ 'αυτού;</value>
   </data>
   <data name="HtmlDetectedTitle" xml:space="preserve">
-    <value>Page HTML détectée</value>
+    <value>Σελίδα HTML εντοπίστηκε</value>
   </data>
   <data name="ListError" xml:space="preserve">
-    <value>Erreur lors de l'affichage du contenu du dossier.
-Vérifiez le nom d'utilisateur et le mot de passe et recommencez.</value>
+    <value>Σφάλμα κατά τη δημιουργία λίστας των περιεχομένων του φακέλου.
+Παραλακώ βεβαιωθείτε ότι το όνομα χρήστη και ο κωδικός πρόσβασης είναι έγκυρα και δοκιμάστε ξανά.</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
-    <value>Navigateur WebDAV</value>
+    <value>Πρόγραμμα περιήγησης WebDAV</value>
   </data>
   <data name="LoginFailure" xml:space="preserve">
-    <value>Nom utilisateur ou mot de passe invalide.</value>
+    <value>Έχετε καθορίσει ένα μη έγκυρο όνομα χρήστη ή κωδικό πρόσβασης.</value>
   </data>
   <data name="LoginTitle" xml:space="preserve">
-    <value>Authentification WebDAV</value>
+    <value>Αυθεντικποίηση WebDAV</value>
   </data>
 </root>

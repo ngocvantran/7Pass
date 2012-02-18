@@ -117,28 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DownloadError" xml:space="preserve">
-    <value>Erreur lors du téléchargement du fichier choisi.
-Essayez de nouveau plus tard.</value>
+  <data name="Brackets" xml:space="preserve">
+    <value>Αγκύλες ([,], {,}, (,), &lt;, &gt;)</value>
   </data>
-  <data name="HtmlDetected" xml:space="preserve">
-    <value>Le serveur a répondu avec une page HTML à la requête WebDAV de 7Pass.
-Voulez-vous explorer le serveur comme des pages HTML à la place?</value>
+  <data name="Digits" xml:space="preserve">
+    <value>Ψηφία (0, 1, 2, …)</value>
   </data>
-  <data name="HtmlDetectedTitle" xml:space="preserve">
-    <value>Page HTML détectée</value>
+  <data name="HighAnsi" xml:space="preserve">
+    <value>'Υψηλοί' ANSI χαρακτήρες</value>
   </data>
-  <data name="ListError" xml:space="preserve">
-    <value>Erreur lors de l'affichage du contenu du dossier.
-Vérifiez le nom d'utilisateur et le mot de passe et recommencez.</value>
+  <data name="Lower" xml:space="preserve">
+    <value>Πεζά (a, b, c, …)</value>
   </data>
-  <data name="ListTitle" xml:space="preserve">
-    <value>Navigateur WebDAV</value>
+  <data name="Minus" xml:space="preserve">
+    <value>Μείον (-)</value>
   </data>
-  <data name="LoginFailure" xml:space="preserve">
-    <value>Nom utilisateur ou mot de passe invalide.</value>
+  <data name="Space" xml:space="preserve">
+    <value>Κενό ( )</value>
   </data>
-  <data name="LoginTitle" xml:space="preserve">
-    <value>Authentification WebDAV</value>
+  <data name="Special" xml:space="preserve">
+    <value>Ειδικοί (!, $, %, &amp;, …)</value>
+  </data>
+  <data name="Underline" xml:space="preserve">
+    <value>Υπογράμμιση (_)</value>
+  </data>
+  <data name="Upper" xml:space="preserve">
+    <value>Κεφαλαία (A, B, C,...)</value>
   </data>
 </root>

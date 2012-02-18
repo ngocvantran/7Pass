@@ -121,13 +121,13 @@
     <value>Paramètres</value>
   </data>
   <data name="Settings_HideRecycleBin" xml:space="preserve">
-    <value>Masquer la corbeille</value>
+    <value>Masquer corbeille</value>
   </data>
   <data name="Settings_IntegratedBrwoser" xml:space="preserve">
     <value>Utiliser navigateur intégré</value>
   </data>
   <data name="Settings_GlobalPass" xml:space="preserve">
-    <value>Nécessite le mot de passe</value>
+    <value>Nécessite mot de passe</value>
   </data>
   <data name="Settings_Analytics" xml:space="preserve">
     <value>Utilisation des données recueillies</value>
@@ -137,7 +137,7 @@
   </data>
   <data name="About_Blog" xml:space="preserve">
     <value>
-Blog du développeur (News et support)</value>
+Blog développeur (News et support)</value>
   </data>
   <data name="About_Version" xml:space="preserve">
     <value>7Pass Version: {0}</value>
@@ -177,7 +177,7 @@ Votre ID d'installation collectée sera:</value>
     <value>Titre</value>
   </data>
   <data name="EntryDetails_Username" xml:space="preserve">
-    <value>Nom d'utilisateur</value>
+    <value>Nom utilisateur</value>
   </data>
   <data name="EntryDetails_Password" xml:space="preserve">
     <value>Mot de passe</value>
@@ -186,10 +186,10 @@ Votre ID d'installation collectée sera:</value>
     <value>URL</value>
   </data>
   <data name="EntryDetails_ExternalBrowser" xml:space="preserve">
-    <value>Utiliser le navigateur du téléphone</value>
+    <value>Utiliser navigateur du téléphone</value>
   </data>
   <data name="EntryDetails_IntegratedBrowser" xml:space="preserve">
-    <value>Utiliser le navigateur intégré</value>
+    <value>Utiliser navigateur intégré</value>
   </data>
   <data name="EntryDetails_Notes" xml:space="preserve">
     <value>Notes</value>
@@ -207,13 +207,13 @@ Votre ID d'installation collectée sera:</value>
     <value>Mot de passe général</value>
   </data>
   <data name="GlobalPass_Confirm" xml:space="preserve">
-    <value>Confirmez votre mot de passe</value>
+    <value>Confirmez mot de passe</value>
   </data>
   <data name="GlobalPassVerify_PageTitle" xml:space="preserve">
     <value>Mot de passe général</value>
   </data>
   <data name="GlobalPassVerify_Prompt" xml:space="preserve">
-    <value>Entrez votre mot de passe pour déverrouiller 7Pass</value>
+    <value>Entrez mot de passe pour déverrouiller 7Pass</value>
   </data>
   <data name="GroupDetails_History" xml:space="preserve">
     <value>Historique</value>
@@ -231,13 +231,13 @@ Votre ID d'installation collectée sera:</value>
     <value>Bases de données</value>
   </data>
   <data name="MainPage_ClearKeyfile" xml:space="preserve">
-    <value>effacer le fichier-clé</value>
+    <value>effacer fichier-clé</value>
   </data>
   <data name="MainPage_DownloadKeyfile" xml:space="preserve">
-    <value>télécharger le fichier-clé</value>
+    <value>télécharger fichier-clé</value>
   </data>
   <data name="MainPage_ClearPassword" xml:space="preserve">
-    <value>effacer le mot de passe</value>
+    <value>effacer mot de passe</value>
   </data>
   <data name="MainPage_Delete" xml:space="preserve">
     <value>supprimer</value>
@@ -246,7 +246,7 @@ Votre ID d'installation collectée sera:</value>
     <value>renommer</value>
   </data>
   <data name="MainPage_Pin" xml:space="preserve">
-    <value>base de données de code pin</value>
+    <value>épingler base de données</value>
   </data>
   <data name="MoveTarget_PageTitle" xml:space="preserve">
     <value>Déplacer vers</value>
@@ -258,7 +258,7 @@ Votre ID d'installation collectée sera:</value>
     <value>Mot de passe</value>
   </data>
   <data name="PassGen_Length" xml:space="preserve">
-    <value>Longueur du mot de passe généré</value>
+    <value>Longueur mot de passe généré</value>
   </data>
   <data name="PassGen_Results" xml:space="preserve">
     <value>Résultats</value>
@@ -270,7 +270,7 @@ Votre ID d'installation collectée sera:</value>
     <value>Mot de passe principal</value>
   </data>
   <data name="Password_Remember" xml:space="preserve">
-    <value>Mémoriser le mot de passe</value>
+    <value>Mémoriser mot de passe</value>
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Chargement</value>
@@ -279,13 +279,13 @@ Votre ID d'installation collectée sera:</value>
     <value>Renommer</value>
   </data>
   <data name="Rename_Prompt" xml:space="preserve">
-    <value>Entrez un nouveau nom pour {0} :</value>
+    <value>Entrez nouveau nom pour {0} :</value>
   </data>
   <data name="Search_PageTitle" xml:space="preserve">
     <value>Chercher</value>
   </data>
   <data name="Download_PageTitle" xml:space="preserve">
-    <value>Ajouter une base de données</value>
+    <value>Ajouter base de données</value>
   </data>
   <data name="Download_Web" xml:space="preserve">
     <value>Serveur Web</value>
@@ -300,13 +300,13 @@ Votre ID d'installation collectée sera:</value>
     <value>URL de la base de données</value>
   </data>
   <data name="WebDavDownload_Username" xml:space="preserve">
-    <value>Nom d'utilisateur</value>
+    <value>Nom utilisateur</value>
   </data>
   <data name="WebDavDownload_Password" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
   <data name="WebAuth_Authentication" xml:space="preserve">
-    <value>Serveur nécessite une authentification</value>
+    <value>Serveur nécessite authentification</value>
   </data>
   <data name="WebAuth_User" xml:space="preserve">
     <value>Utilisateur</value>
@@ -384,7 +384,7 @@ Votre ID d'installation collectée sera:</value>
     <value>Chercher</value>
   </data>
   <data name="MainPage_SyncAll" xml:space="preserve">
-    <value>Tout synchroniser/mettre à jour</value>
+    <value>Tout synchroniser/MàJ</value>
   </data>
   <data name="MainPage_AddNew" xml:space="preserve">
     <value>Ajouter nouveau</value>
@@ -408,7 +408,7 @@ Votre ID d'installation collectée sera:</value>
     <value>Retour</value>
   </data>
   <data name="WebView_Username" xml:space="preserve">
-    <value>Nom d'utilisateur</value>
+    <value>Nom utilisateur</value>
   </data>
   <data name="WebView_Password" xml:space="preserve">
     <value>Mot de passe</value>

@@ -117,28 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DownloadError" xml:space="preserve">
-    <value>Erreur lors du téléchargement du fichier choisi.
-Essayez de nouveau plus tard.</value>
+  <data name="EmptyFile" xml:space="preserve">
+    <value>Archivo vacío detectado.
+El archivo es inválido o un error en la conexión ha ocurrido.</value>
   </data>
-  <data name="HtmlDetected" xml:space="preserve">
-    <value>Le serveur a répondu avec une page HTML à la requête WebDAV de 7Pass.
-Voulez-vous explorer le serveur comme des pages HTML à la place?</value>
+  <data name="NotKdbx" xml:space="preserve">
+    <value>Firma inválida detectada.
+El archivo especificado no es una base de datos KeePass 2.x.</value>
   </data>
-  <data name="HtmlDetectedTitle" xml:space="preserve">
-    <value>Page HTML détectée</value>
+  <data name="NotSyncableCaption" xml:space="preserve">
+    <value>Los cambios se salvaron pero no serán sincronizados
+por el sitio que están localizados (Servidor Web/BD de Demostración).</value>
   </data>
-  <data name="ListError" xml:space="preserve">
-    <value>Erreur lors de l'affichage du contenu du dossier.
-Vérifiez le nom d'utilisateur et le mot de passe et recommencez.</value>
-  </data>
-  <data name="ListTitle" xml:space="preserve">
-    <value>Navigateur WebDAV</value>
-  </data>
-  <data name="LoginFailure" xml:space="preserve">
-    <value>Nom utilisateur ou mot de passe invalide.</value>
-  </data>
-  <data name="LoginTitle" xml:space="preserve">
-    <value>Authentification WebDAV</value>
+  <data name="NotSyncableTitle" xml:space="preserve">
+    <value>La BD no es sincronizable</value>
   </data>
 </root>
