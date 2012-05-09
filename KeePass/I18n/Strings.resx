@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Settings_PageTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>settings</value>
     <comment>Settings page title</comment>
   </data>
   <data name="Settings_HideRecycleBin" xml:space="preserve">
-    <value>Hide Recycle Bin</value>
+    <value>Hide recycle bin</value>
     <comment>Hide Recycle Bin toggle caption</comment>
   </data>
   <data name="Settings_IntegratedBrwoser" xml:space="preserve">
@@ -130,7 +130,7 @@
     <comment>Integrated browser toggle caption</comment>
   </data>
   <data name="Settings_GlobalPass" xml:space="preserve">
-    <value>Requires Password</value>
+    <value>Requires password</value>
     <comment>Global pass toggle caption</comment>
   </data>
   <data name="Settings_Analytics" xml:space="preserve">
@@ -138,7 +138,7 @@
     <comment>Link to Analytics settings caption</comment>
   </data>
   <data name="About_PageTitle" xml:space="preserve">
-    <value>About</value>
+    <value>about</value>
     <comment>About page title</comment>
   </data>
   <data name="About_Blog" xml:space="preserve">
@@ -170,7 +170,7 @@ Libraries used/referenced:</value>
     <comment>Description for links to used/referenced</comment>
   </data>
   <data name="AnalyticsSettings_PageTitle" xml:space="preserve">
-    <value>Analytics</value>
+    <value>analytics</value>
     <comment>Analytics page title</comment>
   </data>
   <data name="AnalyticsSettings_Policy" xml:space="preserve">
@@ -186,7 +186,7 @@ Your installation ID that will be collected is:</value>
     <comment>Analytics policy</comment>
   </data>
   <data name="EntryDetails_PageTitle" xml:space="preserve">
-    <value>Entry</value>
+    <value>entry</value>
     <comment>Entry page title</comment>
   </data>
   <data name="EntryDetails_Title" xml:space="preserve">
@@ -218,15 +218,15 @@ Your installation ID that will be collected is:</value>
     <comment>Notes field caption</comment>
   </data>
   <data name="EntryFields_PageTitle" xml:space="preserve">
-    <value>Fields</value>
+    <value>fields</value>
     <comment>Entry fields page title</comment>
   </data>
   <data name="EntryNotes_PageTitle" xml:space="preserve">
-    <value>Notes</value>
+    <value>notes</value>
     <comment>Entry notes page title</comment>
   </data>
   <data name="GlobalPass_PageTitle" xml:space="preserve">
-    <value>Global Password</value>
+    <value>global password</value>
     <comment>Set global password page title</comment>
   </data>
   <data name="GlobalPass_Password" xml:space="preserve">
@@ -238,7 +238,7 @@ Your installation ID that will be collected is:</value>
     <comment>Password confirm field caption</comment>
   </data>
   <data name="GlobalPassVerify_PageTitle" xml:space="preserve">
-    <value>Global Password</value>
+    <value>global password</value>
     <comment>Global pass verify page title</comment>
   </data>
   <data name="GlobalPassVerify_Prompt" xml:space="preserve">
@@ -246,7 +246,7 @@ Your installation ID that will be collected is:</value>
     <comment>Prompt to ask user to enter global password</comment>
   </data>
   <data name="GroupDetails_History" xml:space="preserve">
-    <value>History</value>
+    <value>history</value>
     <comment>Pivot title for recently viewed entries</comment>
   </data>
   <data name="GroupDetails_Delete" xml:space="preserve">
@@ -262,7 +262,7 @@ Your installation ID that will be collected is:</value>
     <comment>Pop up menu item to rename entry/group text</comment>
   </data>
   <data name="MainPage_PageTitle" xml:space="preserve">
-    <value>Databases</value>
+    <value>databases</value>
     <comment>Database select page title</comment>
   </data>
   <data name="MainPage_ClearKeyfile" xml:space="preserve">
@@ -290,15 +290,15 @@ Your installation ID that will be collected is:</value>
     <comment>Pop up menu item to pin database to phone's Start screen</comment>
   </data>
   <data name="MoveTarget_PageTitle" xml:space="preserve">
-    <value>Move To</value>
+    <value>move to</value>
     <comment>Move target select page title</comment>
   </data>
   <data name="PassGen_Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>settings</value>
     <comment>Pivot title for password generation settings</comment>
   </data>
   <data name="PassGen_PageTitle" xml:space="preserve">
-    <value>Password</value>
+    <value>password</value>
     <comment>Password generation page title</comment>
   </data>
   <data name="PassGen_Length" xml:space="preserve">
@@ -306,19 +306,19 @@ Your installation ID that will be collected is:</value>
     <comment>Password generation length slider caption</comment>
   </data>
   <data name="PassGen_Results" xml:space="preserve">
-    <value>Results</value>
+    <value>results</value>
     <comment>Pivot title for generated passwords list</comment>
   </data>
   <data name="Password_PageTitle" xml:space="preserve">
-    <value>Master Key</value>
+    <value>master key</value>
     <comment>Master password to open database page title</comment>
   </data>
   <data name="Password_Password" xml:space="preserve">
-    <value>Master Password</value>
+    <value>Master password</value>
     <comment>Password field caption</comment>
   </data>
   <data name="Password_Remember" xml:space="preserve">
-    <value>Remember my Password</value>
+    <value>Remember my password</value>
     <comment>Remember password toggle caption</comment>
   </data>
   <data name="Loading" xml:space="preserve">
@@ -326,7 +326,7 @@ Your installation ID that will be collected is:</value>
     <comment>Loading generic text</comment>
   </data>
   <data name="Rename_PageTitle" xml:space="preserve">
-    <value>Rename</value>
+    <value>rename</value>
     <comment>Entry/group rename page title</comment>
   </data>
   <data name="Rename_Prompt" xml:space="preserve">
@@ -334,11 +334,11 @@ Your installation ID that will be collected is:</value>
     <comment>Prompt to enter new entry/group name</comment>
   </data>
   <data name="Search_PageTitle" xml:space="preserve">
-    <value>Search</value>
+    <value>search</value>
     <comment>Search page title</comment>
   </data>
   <data name="Download_PageTitle" xml:space="preserve">
-    <value>Add Database</value>
+    <value>add database</value>
     <comment>Add new database page title</comment>
   </data>
   <data name="Download_Web" xml:space="preserve">
@@ -350,7 +350,7 @@ Your installation ID that will be collected is:</value>
     <comment>Demo database link text</comment>
   </data>
   <data name="WebDavDownload_PageTitle" xml:space="preserve">
-    <value>Download</value>
+    <value>download</value>
     <comment>WebDAV authentication page title</comment>
   </data>
   <data name="WebDavDownload_Url" xml:space="preserve">
@@ -382,11 +382,11 @@ Your installation ID that will be collected is:</value>
     <comment>Domain field caption</comment>
   </data>
   <data name="WebBrowse_PageTitle" xml:space="preserve">
-    <value>Detected Links</value>
+    <value>detected links</value>
     <comment>Web links list page title</comment>
   </data>
   <data name="WebDownload_PageTitle" xml:space="preserve">
-    <value>Download</value>
+    <value>download</value>
     <comment>Web link download page title</comment>
   </data>
   <data name="WebDownload_Url" xml:space="preserve">
@@ -470,7 +470,7 @@ Your installation ID that will be collected is:</value>
     <comment>Link to Search page</comment>
   </data>
   <data name="MainPage_SyncAll" xml:space="preserve">
-    <value>Synchronize/Update all</value>
+    <value>synchronize / update all</value>
     <comment>Synchronize (or update if sync is not available) all databases caption button</comment>
   </data>
   <data name="MainPage_AddNew" xml:space="preserve">
@@ -478,7 +478,7 @@ Your installation ID that will be collected is:</value>
     <comment>Add new database button caption</comment>
   </data>
   <data name="MainPage_Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>settings</value>
     <comment>Link to Settings page</comment>
   </data>
   <data name="MoveTarget_MoveHere" xml:space="preserve">
@@ -486,7 +486,7 @@ Your installation ID that will be collected is:</value>
     <comment>Perform entry/group move button caption</comment>
   </data>
   <data name="PassGen_Generate" xml:space="preserve">
-    <value>Generate</value>
+    <value>generate</value>
     <comment>Gernerate password button caption</comment>
   </data>
   <data name="Password_Open" xml:space="preserve">

@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone">
 
     <Application.Resources>
-        <system:String x:Key="AppName">7Pass</system:String>
+        <system:String x:Key="AppName">7PASS</system:String>
         <i18n:UiStrings xmlns:i18n="clr-namespace:KeePass.I18n" x:Key="UiStrings" />
         
         <Style x:Key="KeePassPage" TargetType="controls:PhoneApplicationPage">
