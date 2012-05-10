@@ -106,9 +106,9 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Coding4Fun.Phone.Controls, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Coding4Fun.Phone.Controls, Version=1.5.6.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Coding4Fun.Phone.Controls.1.5.1\lib\Coding4Fun.Phone.Controls.dll</HintPath>
+      <HintPath>..\packages\Coding4Fun.Phone.Controls.1.5.6\lib\sl4-windowsphone71\Coding4Fun.Phone.Controls.dll</HintPath>
     </Reference>
     <Reference Include="DropNet.WindowsPhone">
       <HintPath>..\Libs\DropNet.WindowsPhone.dll</HintPath>
@@ -219,6 +219,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MetroGridHelper.cs" />
     <Compile Include="MoveTarget.xaml.cs">
       <DependentUpon>MoveTarget.xaml</DependentUpon>
     </Compile>
