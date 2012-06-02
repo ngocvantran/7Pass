@@ -279,9 +279,18 @@ namespace KeePass.Sources.SkyDrive
         private void SetToken(AccessTokenData token)
         {
             _token = token;
-            _client.AddDefaultParameter("token",
-                token.access_token,
-                ParameterType.UrlSegment);
+
+            var tokenPar = _client.DefaultParameters
+                .FirstOrDefault(x => x.Name == "token");
+            
+            if (tokenPar != null)
+                tokenPar.Value = token.access_token;
+            else
+            {
+                _client.AddDefaultParameter("token",
+                    token.access_token,
+                    ParameterType.UrlSegment);
+            }
         }
 
         private class StupidAssemblyRedirectWorkAround : RestSharp.Serializers.ISerializer

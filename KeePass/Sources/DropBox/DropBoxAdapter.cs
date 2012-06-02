@@ -13,12 +13,13 @@ namespace KeePass.Sources.DropBox
         private SyncInfo _info;
 
         public override void Conflict(ListItem item,
-            Action<ListItem, string> uploaded)
+            Action<ListItem, string, string> uploaded)
         {
             var path = GetNonConflictPath();
 
             UploadFileAsync(path, x => uploaded(
-                Translate(x), _client.GetUrl(path)));
+                Translate(x), _client.GetUrl(path),
+                new Uri(path).LocalPath));
         }
 
         public override void Download(ListItem item,

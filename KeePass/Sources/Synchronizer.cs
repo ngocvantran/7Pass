@@ -45,8 +45,8 @@ namespace KeePass.Sources
             Try(x => x.List(Listed));
         }
 
-        private void ConflictUploaded(
-            ListItem item, string path)
+        private void ConflictUploaded(ListItem item,
+            string path, string conflictPath)
         {
             if (Aborted)
                 return;
@@ -55,6 +55,7 @@ namespace KeePass.Sources
             {
                 Path = path,
                 Modified = item.Timestamp,
+                ConflictPath = conflictPath,
                 Result = SyncResults.Conflict,
             });
         }
@@ -156,7 +157,7 @@ namespace KeePass.Sources
 
                     msg = string.Format(
                         Properties.Resources.Conflict,
-                        new Uri(result.Path).LocalPath);
+                        result.ConflictPath);
                     break;
 
                 case SyncResults.Failed:

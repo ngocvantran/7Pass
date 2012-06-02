@@ -8,7 +8,7 @@ namespace KeePass.Sources
         public event SynchronizeErrorEventHandler Error;
 
         public abstract void Conflict(ListItem item,
-            Action<ListItem, string> uploaded);
+            Action<ListItem, string, string> uploaded);
 
         public abstract void Download(ListItem item,
             Action<ListItem, byte[]> downloaded);

@@ -14,12 +14,13 @@ namespace KeePass.Sources.WebDav
         private SyncInfo _info;
 
         public override void Conflict(ListItem item,
-            Action<ListItem, string> uploaded)
+            Action<ListItem, string, string> uploaded)
         {
             var path = GetNonConflictPath();
 
             UploadFileAsync(path, x =>
-                uploaded(x, _client.GetUrl(path)));
+                uploaded(x, _client.GetUrl(path),
+                new Uri(path).LocalPath));
         }
 
         public override void Download(ListItem item,

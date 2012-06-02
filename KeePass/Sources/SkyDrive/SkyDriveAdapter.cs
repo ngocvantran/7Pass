@@ -11,13 +11,13 @@ namespace KeePass.Sources.SkyDrive
         private SyncInfo _info;
 
         public override void Conflict(ListItem item,
-            Action<ListItem, string> uploaded)
+            Action<ListItem, string, string> uploaded)
         {
             var meta = (MetaListItemInfo)item.Tag;
             var name = GetNonConflictName(meta.Title);
 
-            _client.Upload(meta.Parent, name,
-                _info.Database, x => uploaded(item, x));
+            _client.Upload(meta.Parent, name, _info.Database,
+                x => uploaded(item, x, name));
         }
 
         private static string GetNonConflictName(string name)

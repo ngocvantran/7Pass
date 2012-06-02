@@ -8,5 +8,6 @@ namespace KeePass.Sources
         public string Modified { get; set; }
         public string Path { get; set; }
         public SyncResults Result { get; set; }
+        public string ConflictPath { get; set; }
     }
 }
