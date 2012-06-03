@@ -17,7 +17,7 @@ namespace KeePass.Sources.SkyDrive
             var name = GetNonConflictName(meta.Title);
 
             _client.Upload(meta.Parent, name, _info.Database,
-                x => uploaded(item, x, name));
+                (id, data) => uploaded(item, data, name));
         }
 
         private static string GetNonConflictName(string name)
@@ -80,10 +80,15 @@ namespace KeePass.Sources.SkyDrive
         {
             var meta = (MetaListItemInfo)item.Tag;
             _client.Upload(meta.Parent, meta.Title,
-                _info.Database, x =>
+                _info.Database, (path, data) =>
                 {
-                    _info.Path = x;
-                    uploaded(item);
+                    _info.Path = data;
+                    _client.GetFileMeta(path, info =>
+                        uploaded(new ListItem
+                        {
+                            Tag = info,
+                            Timestamp = info.Modified,
+                        }));
                 });
         }
 

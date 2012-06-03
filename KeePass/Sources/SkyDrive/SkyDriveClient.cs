@@ -229,7 +229,7 @@ namespace KeePass.Sources.SkyDrive
 
         public void Upload(string folder,
             string name, byte[] content,
-            Action<string> completed)
+            Action<string, string> completed)
         {
             var request = Request("{folder}/files/");
             request.Method = Method.POST;
@@ -246,8 +246,8 @@ namespace KeePass.Sources.SkyDrive
                     return;
 
                 var path = root.GetValue("id");
-                path = GetSyncPath(path);
-                completed(path);
+                var pathData = GetSyncPath(path);
+                completed(path, pathData);
             });
         }
 
