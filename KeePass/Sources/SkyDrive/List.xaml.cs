@@ -38,12 +38,6 @@ namespace KeePass.Sources.SkyDrive
             RefreshList(null);
         }
 
-        private static bool IsSupportedFormat(string name)
-        {
-            return name.EndsWith(".doc",
-                StringComparison.InvariantCultureIgnoreCase);
-        }
-
         private void OnFileDownloaded(MetaListItemInfo item,
             string path, byte[] bytes)
         {
@@ -58,13 +52,7 @@ namespace KeePass.Sources.SkyDrive
                         if (!DatabaseVerifier.Verify(dispatcher, buffer))
                             return;
 
-                        var name = item.Title;
-                        if (IsSupportedFormat(name))
-                        {
-                            name = Path.ChangeExtension(
-                                name, null);
-                        }
-                        name = name.RemoveKdbx();
+                        var name = item.Title.RemoveKdbx();
 
                         var storage = new DatabaseInfo();
                         storage.SetDatabase(buffer, new DatabaseDetails
@@ -155,26 +143,7 @@ namespace KeePass.Sources.SkyDrive
                     RefreshList(item.Path);
                     return;
                 }
-
-                if (!IsSupportedFormat(item.Title))
-                {
-                    var result = MessageBox.Show(
-                        Strings.SkyDrive_Unsupported,
-                        "SkyDrive", MessageBoxButton.OKCancel);
-
-                    if (result != MessageBoxResult.OK)
-                        return;
-
-                    progBusy.IsBusy = true;
-                    var name = item.Title + ".doc";
-
-                    _client.Rename(item.Path, name,
-                        path => _client.Download(path,
-                            OnFileDownloaded));
-
-                    return;
-                }
-
+                
                 progBusy.IsBusy = true;
                 _client.Download(item.Path,
                     OnFileDownloaded);
