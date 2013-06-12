@@ -4,6 +4,16 @@ Support Informationen:
 - Blog: http://7pass.wordpress.com
 - Quelltext: https://github.com/7pass/7pass
 
+Version 3.6:
+ - Removed .doc renaming on SkyDrive.
+ - Upgraded SkyDrive OAuth 2.0.
+ - Limit file size to 10MB.
+ - Updated Box.net WebDAV url.
+ - Fixed folder name not displayed on WebDAV.
+ 
+Version 3.5:
+ - Fixed SkyDrive synchronization
+ 
 Version 3.4:
  - Added SkyDrive support.
  - Removed usage of device ID.
@@ -13,9 +23,3 @@ Version 3.3:
 - Behoben: Globales Passwort wird bei Umschalten der App nicht angezeigt.
 - Behoben: Darstellung der geschützten Felder mit hellen Themes. 
 - Hinzugefügt: Editieren von Zusatzfeldern und Asterisk Support
-
-Version 3.2:
-- Hinzugefügt: Animierte Übergänge bei Navigation.
-- Hinzugefügt: Anpinnen der Datenbank an Startmenü.
-- Hinzugefügt: Verstecken von Passwort, Titel und Benutzername.
-- Fehlerbereinigungen und Verbesserung der Oberfläche.
