@@ -143,7 +143,13 @@ namespace KeePass.Sources.SkyDrive
                     RefreshList(item.Path);
                     return;
                 }
-                
+
+                if (item.Size > 10485760) // 10MB
+                {
+                    MessageBox.Show(Properties.Resources.FileTooLarge);
+                    return;
+                }
+
                 progBusy.IsBusy = true;
                 _client.Download(item.Path,
                     OnFileDownloaded);

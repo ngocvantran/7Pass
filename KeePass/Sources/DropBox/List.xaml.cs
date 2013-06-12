@@ -208,6 +208,12 @@ namespace KeePass.Sources.DropBox
                 return;
             }
 
+            if (meta.Size > 10485760) // 10MB
+            {
+                MessageBox.Show(Properties.Resources.FileTooLarge);
+                return;
+            }
+
             progBusy.IsBusy = true;
 
             var client = DropBoxUtils

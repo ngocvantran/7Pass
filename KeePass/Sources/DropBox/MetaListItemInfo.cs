@@ -6,17 +6,12 @@ using KeePass.Utils;
 
 namespace KeePass.Sources.DropBox
 {
-    internal interface IListItem
-    {
-        bool IsDir { get; }
-        string Path { get; }
-    }
-
     internal class MetaListItemInfo : ListItemInfo, IListItem
     {
         private readonly bool _isDir;
         private readonly string _modified;
         private readonly string _path;
+        private readonly long _size;
 
         public bool IsDir
         {
@@ -33,12 +28,18 @@ namespace KeePass.Sources.DropBox
             get { return _path; }
         }
 
+        public long Size
+        {
+            get { return _size; }
+        }
+
         public MetaListItemInfo(MetaData data)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
 
             _path = data.Path;
+            _size = data.Bytes;
             _isDir = data.Is_Dir;
             _modified = data.Modified;
 

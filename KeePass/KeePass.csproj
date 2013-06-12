@@ -253,6 +253,7 @@
     <Compile Include="Sources\DropBox\DropBoxAuth.xaml.cs">
       <DependentUpon>DropBoxAuth.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sources\DropBox\IListItem.cs" />
     <Compile Include="Sources\IServiceAdapter.cs" />
     <Compile Include="Sources\ListItem.cs" />
     <Compile Include="Sources\ServiceAdapterBase.cs" />
