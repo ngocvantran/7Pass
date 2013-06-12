@@ -10,6 +10,6 @@ namespace KeePass.Utils
         public const string MIXPANEL_TOKEN = "YOUR_MIXPANEL_TOKEN";
         public const string SKYDRIVE_SECRET = "YOUR_SKYDRIVE_SECRET";
         public const string SKYDRIVE_CLIENT_ID = "YOUR_SKYDRIVE_CLIENT_ID";
-        public const string SKYDRIVE_REDIRECT = "https://oauth.live.com/desktop";
+        public const string SKYDRIVE_REDIRECT = "https://login.live.com/oauth20_desktop.srf";
     }
 }

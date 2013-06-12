@@ -118,11 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AuthTokenData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\AuthTokenData.txt;System.String, mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e;Windows-1252</value>
+  </data>
+  <data name="AuthTokenUrl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\AuthTokenUrl.txt;System.String, mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e;Windows-1252</value>
+  </data>
   <data name="AuthUrl" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\..\Resources\AuthUrl.txt;System.String, mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e;utf-8</value>
   </data>
-  <data name="GetAuthCodeUrl" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\Resources\GetAuthCodeUrl.txt;System.String, mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e;utf-8</value>
+  <data name="TokenRefreshData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\TokenRefreshData.txt;System.String, mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e;Windows-1252</value>
   </data>
   <data name="TokenRefreshUrl" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\..\Resources\TokenRefreshUrl.txt;System.String, mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e;utf-8</value>

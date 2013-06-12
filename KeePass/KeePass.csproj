@@ -506,8 +506,10 @@
     <Content Include="Images\up.light.png" />
     <Content Include="Images\uploaded.dark.png" />
     <Content Include="Images\uploaded.light.png" />
-    <None Include="Resources\GetAuthCodeUrl.txt" />
     <None Include="Resources\TokenRefreshUrl.txt" />
+    <None Include="Resources\AuthTokenData.txt" />
+    <None Include="Resources\TokenRefreshData.txt" />
+    <None Include="Resources\AuthTokenUrl.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />

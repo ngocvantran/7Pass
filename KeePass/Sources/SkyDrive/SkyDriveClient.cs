@@ -98,16 +98,21 @@ namespace KeePass.Sources.SkyDrive
         public static void GetToken(
             string code, Action<string> complete)
         {
-            var url = string.Format(
-                Resources.GetAuthCodeUrl,
+            var data = string.Format(
+                Resources.AuthTokenData,
                 ApiKeys.SKYDRIVE_CLIENT_ID,
                 ApiKeys.SKYDRIVE_REDIRECT,
                 ApiKeys.SKYDRIVE_SECRET, code);
 
             var client = new WebClient();
-            client.DownloadStringCompleted +=
+            client.Headers[HttpRequestHeader.ContentType] =
+                "application/x-www-form-urlencoded";
+            
+            client.UploadStringCompleted +=
                 (sender, args) => complete(args.Result);
-            client.DownloadStringAsync(new Uri(url));
+            client.UploadStringAsync(
+                new Uri(Resources.AuthTokenUrl),
+                "POST", data);
         }
 
         public void List(string path, Action<MetaListItemInfo,
@@ -184,20 +189,25 @@ namespace KeePass.Sources.SkyDrive
 
         public void RefreshToken(Action completed)
         {
-            var client = new WebClient();
-            client.DownloadStringCompleted += (sender, args) =>
-            {
-                SetToken(Parse(args.Result));
-                completed();
-            };
-
-            var url = string.Format(
-                Resources.TokenRefreshUrl,
+            var data = string.Format(
+                Resources.TokenRefreshData,
                 ApiKeys.SKYDRIVE_CLIENT_ID,
                 ApiKeys.SKYDRIVE_SECRET,
                 ApiKeys.SKYDRIVE_REDIRECT,
                 _token.refresh_token);
-            client.DownloadStringAsync(new Uri(url));
+
+            var client = new WebClient();
+            client.Headers[HttpRequestHeader.ContentType] =
+                "application/x-www-form-urlencoded";
+
+            client.UploadStringCompleted += (sender, args) =>
+            {
+                SetToken(Parse(args.Result));
+                completed();
+            };
+            client.UploadStringAsync(
+                new Uri(Resources.TokenRefreshUrl),
+                "POST", data);
         }
 
         public void Rename(string path, string name,
@@ -211,7 +221,7 @@ namespace KeePass.Sources.SkyDrive
 
             request.AddHeader("Authorization",
                 "Bearer " + _token.access_token);
-            
+
             request.JsonSerializer = new
                 StupidAssemblyRedirectWorkAround(name);
             request.AddBody(new object());
@@ -282,7 +292,7 @@ namespace KeePass.Sources.SkyDrive
 
             var tokenPar = _client.DefaultParameters
                 .FirstOrDefault(x => x.Name == "token");
-            
+
             if (tokenPar != null)
                 tokenPar.Value = token.access_token;
             else

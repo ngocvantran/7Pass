@@ -12,6 +12,7 @@ namespace KeePass.Sources.SkyDrive
         private readonly string _modified;
         private readonly string _parent;
         private readonly string _path;
+        private readonly int _size;
 
         public bool IsDir
         {
@@ -33,6 +34,11 @@ namespace KeePass.Sources.SkyDrive
             get { return _path; }
         }
 
+        public int Size
+        {
+            get { return _size; }
+        }
+
         public MetaListItemInfo(XElement node)
         {
             if (node == null)
@@ -42,6 +48,7 @@ namespace KeePass.Sources.SkyDrive
             _parent = node.GetValue("parent_id");
             _modified = node.GetValue("updated_time");
             _isDir = node.GetValue("type") == "folder";
+            int.TryParse(node.GetValue("size"), out _size);
 
             Title = node.GetValue("name");
             Notes = GetRelativeTime(_modified);
