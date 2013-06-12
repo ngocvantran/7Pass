@@ -12,8 +12,8 @@ namespace KeePass.Utils
 
         public KeePassPage()
         {
-            SupportedOrientations = SupportedPageOrientation
-                .PortraitOrLandscape;
+            SetTransition();
+            SupportedOrientations = SupportedPageOrientation.PortraitOrLandscape;
         }
 
         protected ProgressIndicator AddIndicator()
@@ -52,7 +52,7 @@ namespace KeePass.Utils
 
             if (!globalPass.ShouldPromptGlobalPass)
             {
-                SetTransition();
+                
                 OnNavigatedTo(false, e);
 
                 return;
