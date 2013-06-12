@@ -63,7 +63,12 @@ namespace KeePass.Sources.WebDav.Api
             {
                 sb.Append(key);
                 sb.Append("=\"");
-                sb.Append(values[key]);
+
+                string value;
+                if (!values.TryGetValue(key, out value))
+                    value = string.Empty;
+
+                sb.Append(value);
                 sb.Append("\", ");
             }
 

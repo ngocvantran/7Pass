@@ -222,16 +222,23 @@ namespace KeePass.Sources.WebDav
                 return;
 
             if (meta.IsDir)
-                NavigateTo(meta.Path);
-            else
             {
-                progBusy.IsBusy = true;
-
-                _client.DownloadAsync(meta.Path, x =>
-                    OnFileDownloaded(x, meta.Path,
-                        meta.Title, meta.Modified),
-                    OnFileDownloadFailed);
+                NavigateTo(meta.Path);
+                return;
             }
+
+            if (meta.Size > 10485760) // 10MB
+            {
+                MessageBox.Show(Properties.Resources.FileTooLarge);
+                return;
+            }
+            
+            progBusy.IsBusy = true;
+
+            _client.DownloadAsync(meta.Path, x =>
+                OnFileDownloaded(x, meta.Path,
+                    meta.Title, meta.Modified),
+                OnFileDownloadFailed);
         }
     }
 }

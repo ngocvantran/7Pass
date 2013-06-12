@@ -27,6 +27,11 @@ namespace KeePass.Sources.WebDav
             get { return _path; }
         }
 
+        public long Size
+        {
+            get { return _item.Size; }
+        }
+
         public MetaListItemInfo(string basePath, ItemInfo item)
         {
             if (basePath == null) throw new ArgumentNullException("basePath");
@@ -59,7 +64,7 @@ namespace KeePass.Sources.WebDav
                         "ddd, dd MMM yyyy HH:mm:ss 'GMT'",
                         CultureInfo.InvariantCulture);
                 }
-                
+
                 return time.ToRelative();
             }
             catch
@@ -72,6 +77,9 @@ namespace KeePass.Sources.WebDav
         {
             try
             {
+                if (item.Path.EndsWith("/"))
+                    return item.Path;
+
                 return System.IO.Path
                     .GetFileName(item.Path);
             }

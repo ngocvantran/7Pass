@@ -58,7 +58,7 @@ namespace KeePass.Sources.WebDav
 
         private void cmdBoxNet_Click(object sender, EventArgs e)
         {
-            txtUrl.Text = "https://www.box.net/dav";
+            txtUrl.Text = "https://dav.box.com/dav";
             txtUser.Focus();
         }
 

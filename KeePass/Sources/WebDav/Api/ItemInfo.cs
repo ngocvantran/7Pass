@@ -8,7 +8,8 @@ namespace KeePass.Sources.WebDav.Api
         /// Gets or sets a value indicating
         /// whether this item is a directory.
         /// </summary>
-        /// <value><c>true</c> if this item
+        /// <value>
+        ///     <c>true</c> if this item
         /// is a directory; otherwise, <c>false</c>.
         /// </value>
         public bool IsDir { get; set; }
@@ -28,5 +29,13 @@ namespace KeePass.Sources.WebDav.Api
         /// The path.
         /// </value>
         public string Path { get; set; }
+
+        /// <summary>
+        /// Gets or sets the file size.
+        /// </summary>
+        /// <value>
+        /// The file size.
+        /// </value>
+        public long Size { get; set; }
     }
 }

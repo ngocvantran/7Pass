@@ -172,26 +172,28 @@ namespace KeePass.Sources.WebDav.Api
                 {
                     foreach (var item in root.Elements(d + "response"))
                     {
-                        var path = item
-                            .Element(d + "href")
-                            .Value;
+                        var path = (string)item.Element(d + "href");
                         path = Uri.UnescapeDataString(path);
 
                         var properties = item
                             .Element(d + "propstat")
                             .Element(d + "prop");
 
-                        var lastModified = properties
-                            .Element(d + "getlastmodified")
-                            .Value;
+                        var lastModified = (string)properties
+                            .Element(d + "getlastmodified");
 
                         var isDir = properties
                             .Element(d + "resourcetype")
                             .Element(d + "collection") != null;
 
+                        var size = 0L;
+                        var sizeElement = item.Element(d + "getcontentlength");
+                        if (sizeElement != null)
+                            size = (long)sizeElement;
 
                         items.Add(new ItemInfo
                         {
+                            Size = size,
                             Path = path,
                             IsDir = isDir,
                             Modified = lastModified,
